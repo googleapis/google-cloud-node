@@ -18,7 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -103,20 +116,41 @@ export class VertexRagDataServiceClient {
    *     const client = new VertexRagDataServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof VertexRagDataServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'aiplatform.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -142,7 +176,7 @@ export class VertexRagDataServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,18 +189,14 @@ export class VertexRagDataServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -277,9 +307,10 @@ export class VertexRagDataServiceClient {
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
-      modelDeploymentMonitoringJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
-      ),
+      modelDeploymentMonitoringJobPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
+        ),
       modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}'
       ),
@@ -316,21 +347,26 @@ export class VertexRagDataServiceClient {
       projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
-      projectLocationFeatureGroupFeaturePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
-      ),
-      projectLocationFeaturestoreEntityTypeFeaturePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
-      ),
-      projectLocationPublisherModelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
-      ),
-      projectLocationReasoningEngineSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}'
-      ),
-      projectLocationReasoningEngineSessionEventPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}/events/{event}'
-      ),
+      projectLocationFeatureGroupFeaturePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
+        ),
+      projectLocationFeaturestoreEntityTypeFeaturePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
+        ),
+      projectLocationPublisherModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
+        ),
+      projectLocationReasoningEngineSessionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}'
+        ),
+      projectLocationReasoningEngineSessionEventPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}/events/{event}'
+        ),
       projectLocationSessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/sessions/{session}'
       ),
@@ -388,10 +424,16 @@ export class VertexRagDataServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listRagCorpora:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'ragCorpora'),
-      listRagFiles:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'ragFiles')
+      listRagCorpora: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'ragCorpora'
+      ),
+      listRagFiles: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'ragFiles'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -400,71 +442,1859 @@ export class VertexRagDataServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/ui/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1beta1/{name=projects/*/locations/*}',}],
-      },{selector: 'google.cloud.location.Locations.ListLocations',get: '/ui/{name=projects/*}/locations',additional_bindings: [{get: '/v1beta1/{name=projects/*}/locations',}],
-      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',body: '*',additional_bindings: [{post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',},{post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',},{post: '/v1beta1/{resource=projects/*/locations/*/models/*}:setIamPolicy',body: '*',},{post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',body: '*',},{post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',body: '*',},{post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',body: '*',},{post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',body: '*',},{post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',},{post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',},{post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',},{post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',},{post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',},{post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',},{post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',},{delete: '/ui/{name=projects/*/locations/*/extensions/*}/operations',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',},{delete: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDeploymentJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/ui/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/ui/{name=projects/*/locations/*/agents/*}/operations',},{get: '/ui/{name=projects/*/locations/*/apps/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',},{get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',},{get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations',},{get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations',},{get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',},{get: '/ui/{name=projects/*/locations/*/extensions/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',},{get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/indexes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',},{get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',},{get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',},{get: '/ui/{name=projects/*/locations/*/models/*}/operations',},{get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',},{get: '/ui/{name=projects/*/locations/*/studies/*}/operations',},{get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',},{get: '/ui/{name=projects/*/locations/*/trainingPipelines/*}/operations',},{get: '/ui/{name=projects/*/locations/*/persistentResources/*}/operations',},{get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/schedules/*}/operations',},{get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',},{get: '/v1beta1/{name=projects/*/locations/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/extensions/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featurestores/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/customJobs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/indexes/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',},{get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}/operations',}],
-      },{selector: 'google.longrunning.Operations.WaitOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:wait',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/ui/{name=projects/*/locations/*}',
+          additional_bindings: [
+            {get: '/v1beta1/{name=projects/*/locations/*}'},
+          ],
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/ui/{name=projects/*}/locations',
+          additional_bindings: [{get: '/v1beta1/{name=projects/*}/locations'}],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',
+          additional_bindings: [
+            {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/ui/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/extensions/*}/operations',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/studies/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+            {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/ui/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/edgeDeploymentJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
+            },
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/ui/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/trainingPipelines/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
+            {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations'},
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/extensions/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/customJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/indexes/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',
+            },
+            {get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations'},
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}/operations',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.WaitOperation',
+          post: '/ui/{name=projects/*/locations/*/operations/*}:wait',
+          additional_bindings: [
+            {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
+            {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createRagCorpusResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.RagCorpus') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.RagCorpus'
+    ) as gax.protobuf.Type;
     const createRagCorpusMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.CreateRagCorpusOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.CreateRagCorpusOperationMetadata'
+    ) as gax.protobuf.Type;
     const updateRagCorpusResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.RagCorpus') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.RagCorpus'
+    ) as gax.protobuf.Type;
     const updateRagCorpusMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.UpdateRagCorpusOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.UpdateRagCorpusOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteRagCorpusResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const deleteRagCorpusMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
     const importRagFilesResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.ImportRagFilesResponse') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.ImportRagFilesResponse'
+    ) as gax.protobuf.Type;
     const importRagFilesMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.ImportRagFilesOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.ImportRagFilesOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteRagFileResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const deleteRagFileMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createRagCorpus: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createRagCorpusResponse.decode.bind(createRagCorpusResponse),
-        createRagCorpusMetadata.decode.bind(createRagCorpusMetadata)),
+        createRagCorpusMetadata.decode.bind(createRagCorpusMetadata)
+      ),
       updateRagCorpus: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateRagCorpusResponse.decode.bind(updateRagCorpusResponse),
-        updateRagCorpusMetadata.decode.bind(updateRagCorpusMetadata)),
+        updateRagCorpusMetadata.decode.bind(updateRagCorpusMetadata)
+      ),
       deleteRagCorpus: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteRagCorpusResponse.decode.bind(deleteRagCorpusResponse),
-        deleteRagCorpusMetadata.decode.bind(deleteRagCorpusMetadata)),
+        deleteRagCorpusMetadata.decode.bind(deleteRagCorpusMetadata)
+      ),
       importRagFiles: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importRagFilesResponse.decode.bind(importRagFilesResponse),
-        importRagFilesMetadata.decode.bind(importRagFilesMetadata)),
+        importRagFilesMetadata.decode.bind(importRagFilesMetadata)
+      ),
       deleteRagFile: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteRagFileResponse.decode.bind(deleteRagFileResponse),
-        deleteRagFileMetadata.decode.bind(deleteRagFileMetadata))
+        deleteRagFileMetadata.decode.bind(deleteRagFileMetadata)
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.aiplatform.v1beta1.VertexRagDataService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.aiplatform.v1beta1.VertexRagDataService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -495,28 +2325,45 @@ export class VertexRagDataServiceClient {
     // Put together the "service stub" for
     // google.cloud.aiplatform.v1beta1.VertexRagDataService.
     this.vertexRagDataServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.aiplatform.v1beta1.VertexRagDataService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.aiplatform.v1beta1.VertexRagDataService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.aiplatform.v1beta1.VertexRagDataService'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.aiplatform.v1beta1
+            .VertexRagDataService,
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const vertexRagDataServiceStubMethods =
-        ['createRagCorpus', 'updateRagCorpus', 'getRagCorpus', 'listRagCorpora', 'deleteRagCorpus', 'uploadRagFile', 'importRagFiles', 'getRagFile', 'listRagFiles', 'deleteRagFile'];
+    const vertexRagDataServiceStubMethods = [
+      'createRagCorpus',
+      'updateRagCorpus',
+      'getRagCorpus',
+      'listRagCorpora',
+      'deleteRagCorpus',
+      'uploadRagFile',
+      'importRagFiles',
+      'getRagFile',
+      'listRagFiles',
+      'deleteRagFile',
+    ];
     for (const methodName of vertexRagDataServiceStubMethods) {
       const callPromise = this.vertexRagDataServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -541,8 +2388,14 @@ export class VertexRagDataServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
     }
     return 'aiplatform.googleapis.com';
   }
@@ -553,8 +2406,14 @@ export class VertexRagDataServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
     }
     return 'aiplatform.googleapis.com';
   }
@@ -585,9 +2444,7 @@ export class VertexRagDataServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -596,8 +2453,9 @@ export class VertexRagDataServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -608,921 +2466,1352 @@ export class VertexRagDataServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets a RagCorpus.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the RagCorpus resource.
- *   Format:
- *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagCorpus|RagCorpus}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.get_rag_corpus.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_GetRagCorpus_async
- */
+  /**
+   * Gets a RagCorpus.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the RagCorpus resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagCorpus|RagCorpus}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.get_rag_corpus.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_GetRagCorpus_async
+   */
   getRagCorpus(
-      request?: protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
-        protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+      protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getRagCorpus(
-      request: protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
-          protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+      | protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getRagCorpus(
-      request: protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
-          protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+      | protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getRagCorpus(
-      request?: protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
-          protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
-          protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
-        protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+      | protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+      protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getRagCorpus request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
-        protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+          | protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRagCorpus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getRagCorpus(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
-        protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getRagCorpus response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .getRagCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+          (
+            | protos.google.cloud.aiplatform.v1beta1.IGetRagCorpusRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRagCorpus response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Upload a file into a RagCorpus.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the RagCorpus resource into which to upload the file.
- *   Format:
- *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
- * @param {google.cloud.aiplatform.v1beta1.RagFile} request.ragFile
- *   Required. The RagFile to upload.
- * @param {google.cloud.aiplatform.v1beta1.UploadRagFileConfig} request.uploadRagFileConfig
- *   Required. The config for the RagFiles to be uploaded into the RagCorpus.
- *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.UploadRagFile|VertexRagDataService.UploadRagFile}.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.UploadRagFileResponse|UploadRagFileResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.upload_rag_file.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_UploadRagFile_async
- */
+  /**
+   * Upload a file into a RagCorpus.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the RagCorpus resource into which to upload the file.
+   *   Format:
+   *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+   * @param {google.cloud.aiplatform.v1beta1.RagFile} request.ragFile
+   *   Required. The RagFile to upload.
+   * @param {google.cloud.aiplatform.v1beta1.UploadRagFileConfig} request.uploadRagFileConfig
+   *   Required. The config for the RagFiles to be uploaded into the RagCorpus.
+   *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.UploadRagFile|VertexRagDataService.UploadRagFile}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.UploadRagFileResponse|UploadRagFileResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.upload_rag_file.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_UploadRagFile_async
+   */
   uploadRagFile(
-      request?: protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
+      protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   uploadRagFile(
-      request: protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
-          protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   uploadRagFile(
-      request: protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
-          protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   uploadRagFile(
-      request?: protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
-          protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
-          protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
+      protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('uploadRagFile request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
+          | protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('uploadRagFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.uploadRagFile(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('uploadRagFile response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .uploadRagFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1beta1.IUploadRagFileResponse,
+          (
+            | protos.google.cloud.aiplatform.v1beta1.IUploadRagFileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('uploadRagFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Gets a RagFile.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the RagFile resource.
- *   Format:
- *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagFile|RagFile}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.get_rag_file.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_GetRagFile_async
- */
+  /**
+   * Gets a RagFile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the RagFile resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagFile|RagFile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.get_rag_file.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_GetRagFile_async
+   */
   getRagFile(
-      request?: protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1beta1.IRagFile,
-        protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IRagFile,
+      protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getRagFile(
-      request: protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1beta1.IRagFile,
-          protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IRagFile,
+      | protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getRagFile(
-      request: protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1beta1.IRagFile,
-          protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IRagFile,
+      | protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getRagFile(
-      request?: protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1beta1.IRagFile,
-          protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1beta1.IRagFile,
-          protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1beta1.IRagFile,
-        protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IRagFile,
+      | protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IRagFile,
+      protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getRagFile request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1beta1.IRagFile,
-        protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRagFile,
+          | protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRagFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getRagFile(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1beta1.IRagFile,
-        protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getRagFile response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .getRagFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1beta1.IRagFile,
+          protos.google.cloud.aiplatform.v1beta1.IGetRagFileRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRagFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
-/**
- * Creates a RagCorpus.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to create the RagCorpus in.
- *   Format: `projects/{project}/locations/{location}`
- * @param {google.cloud.aiplatform.v1beta1.RagCorpus} request.ragCorpus
- *   Required. The RagCorpus to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.create_rag_corpus.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_CreateRagCorpus_async
- */
+  /**
+   * Creates a RagCorpus.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the RagCorpus in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1beta1.RagCorpus} request.ragCorpus
+   *   Required. The RagCorpus to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.create_rag_corpus.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_CreateRagCorpus_async
+   */
   createRagCorpus(
-      request?: protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createRagCorpus(
-      request: protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createRagCorpus(
-      request: protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createRagCorpus(
-      request?: protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+            protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+            protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createRagCorpus response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createRagCorpus request %j', request);
-    return this.innerApiCalls.createRagCorpus(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createRagCorpus response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createRagCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+            protos.google.cloud.aiplatform.v1beta1.ICreateRagCorpusOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createRagCorpus response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
-/**
- * Check the status of the long running operation returned by `createRagCorpus()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.create_rag_corpus.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_CreateRagCorpus_async
- */
-  async checkCreateRagCorpusProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.RagCorpus, protos.google.cloud.aiplatform.v1beta1.CreateRagCorpusOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createRagCorpus()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.create_rag_corpus.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_CreateRagCorpus_async
+   */
+  async checkCreateRagCorpusProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.RagCorpus,
+      protos.google.cloud.aiplatform.v1beta1.CreateRagCorpusOperationMetadata
+    >
+  > {
     this._log.info('createRagCorpus long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createRagCorpus, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.RagCorpus, protos.google.cloud.aiplatform.v1beta1.CreateRagCorpusOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createRagCorpus,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.RagCorpus,
+      protos.google.cloud.aiplatform.v1beta1.CreateRagCorpusOperationMetadata
+    >;
   }
-/**
- * Updates a RagCorpus.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.aiplatform.v1beta1.RagCorpus} request.ragCorpus
- *   Required. The RagCorpus which replaces the resource on the server.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.update_rag_corpus.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_UpdateRagCorpus_async
- */
+  /**
+   * Updates a RagCorpus.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.RagCorpus} request.ragCorpus
+   *   Required. The RagCorpus which replaces the resource on the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.update_rag_corpus.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_UpdateRagCorpus_async
+   */
   updateRagCorpus(
-      request?: protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateRagCorpus(
-      request: protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateRagCorpus(
-      request: protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateRagCorpus(
-      request?: protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+            protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'rag_corpus.name': request.ragCorpus!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'rag_corpus.name': request.ragCorpus!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+            protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateRagCorpus response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateRagCorpus request %j', request);
-    return this.innerApiCalls.updateRagCorpus(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.aiplatform.v1beta1.IRagCorpus, protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateRagCorpus response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateRagCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+            protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRagCorpus response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateRagCorpus()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.update_rag_corpus.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_UpdateRagCorpus_async
- */
-  async checkUpdateRagCorpusProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.RagCorpus, protos.google.cloud.aiplatform.v1beta1.UpdateRagCorpusOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateRagCorpus()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.update_rag_corpus.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_UpdateRagCorpus_async
+   */
+  async checkUpdateRagCorpusProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.RagCorpus,
+      protos.google.cloud.aiplatform.v1beta1.UpdateRagCorpusOperationMetadata
+    >
+  > {
     this._log.info('updateRagCorpus long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateRagCorpus, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.RagCorpus, protos.google.cloud.aiplatform.v1beta1.UpdateRagCorpusOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateRagCorpus,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.RagCorpus,
+      protos.google.cloud.aiplatform.v1beta1.UpdateRagCorpusOperationMetadata
+    >;
   }
-/**
- * Deletes a RagCorpus.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the RagCorpus resource to be deleted.
- *   Format:
- *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
- * @param {boolean} [request.force]
- *   Optional. If set to true, any RagFiles in this RagCorpus will also be
- *   deleted. Otherwise, the request will only work if the RagCorpus has no
- *   RagFiles.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.delete_rag_corpus.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagCorpus_async
- */
+  /**
+   * Deletes a RagCorpus.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the RagCorpus resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any RagFiles in this RagCorpus will also be
+   *   deleted. Otherwise, the request will only work if the RagCorpus has no
+   *   RagFiles.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.delete_rag_corpus.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagCorpus_async
+   */
   deleteRagCorpus(
-      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteRagCorpusRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteRagCorpusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteRagCorpus(
-      request: protos.google.cloud.aiplatform.v1beta1.IDeleteRagCorpusRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteRagCorpusRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteRagCorpus(
-      request: protos.google.cloud.aiplatform.v1beta1.IDeleteRagCorpusRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteRagCorpusRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteRagCorpus(
-      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteRagCorpusRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteRagCorpusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteRagCorpus response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteRagCorpus request %j', request);
-    return this.innerApiCalls.deleteRagCorpus(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteRagCorpus response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteRagCorpus(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRagCorpus response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteRagCorpus()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.delete_rag_corpus.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagCorpus_async
- */
-  async checkDeleteRagCorpusProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteRagCorpus()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.delete_rag_corpus.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagCorpus_async
+   */
+  async checkDeleteRagCorpusProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >
+  > {
     this._log.info('deleteRagCorpus long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteRagCorpus, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteRagCorpus,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >;
   }
-/**
- * Import files from Google Cloud Storage or Google Drive into a RagCorpus.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the RagCorpus resource into which to import files.
- *   Format:
- *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
- * @param {google.cloud.aiplatform.v1beta1.ImportRagFilesConfig} request.importRagFilesConfig
- *   Required. The config for the RagFiles to be synced and imported into the
- *   RagCorpus.
- *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ImportRagFiles|VertexRagDataService.ImportRagFiles}.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.import_rag_files.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_ImportRagFiles_async
- */
+  /**
+   * Import files from Google Cloud Storage or Google Drive into a RagCorpus.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the RagCorpus resource into which to import files.
+   *   Format:
+   *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+   * @param {google.cloud.aiplatform.v1beta1.ImportRagFilesConfig} request.importRagFilesConfig
+   *   Required. The config for the RagFiles to be synced and imported into the
+   *   RagCorpus.
+   *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ImportRagFiles|VertexRagDataService.ImportRagFiles}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.import_rag_files.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_ImportRagFiles_async
+   */
   importRagFiles(
-      request?: protos.google.cloud.aiplatform.v1beta1.IImportRagFilesRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse, protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1beta1.IImportRagFilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   importRagFiles(
-      request: protos.google.cloud.aiplatform.v1beta1.IImportRagFilesRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse, protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IImportRagFilesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   importRagFiles(
-      request: protos.google.cloud.aiplatform.v1beta1.IImportRagFilesRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse, protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IImportRagFilesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   importRagFiles(
-      request?: protos.google.cloud.aiplatform.v1beta1.IImportRagFilesRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse, protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse, protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse, protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.aiplatform.v1beta1.IImportRagFilesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse,
+            protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse,
+        protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse, protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse,
+            protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importRagFiles response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importRagFiles request %j', request);
-    return this.innerApiCalls.importRagFiles(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse, protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('importRagFiles response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .importRagFiles(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IImportRagFilesResponse,
+            protos.google.cloud.aiplatform.v1beta1.IImportRagFilesOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importRagFiles response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
-/**
- * Check the status of the long running operation returned by `importRagFiles()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.import_rag_files.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_ImportRagFiles_async
- */
-  async checkImportRagFilesProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.ImportRagFilesResponse, protos.google.cloud.aiplatform.v1beta1.ImportRagFilesOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `importRagFiles()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.import_rag_files.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_ImportRagFiles_async
+   */
+  async checkImportRagFilesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.ImportRagFilesResponse,
+      protos.google.cloud.aiplatform.v1beta1.ImportRagFilesOperationMetadata
+    >
+  > {
     this._log.info('importRagFiles long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importRagFiles, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.ImportRagFilesResponse, protos.google.cloud.aiplatform.v1beta1.ImportRagFilesOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importRagFiles,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.ImportRagFilesResponse,
+      protos.google.cloud.aiplatform.v1beta1.ImportRagFilesOperationMetadata
+    >;
   }
-/**
- * Deletes a RagFile.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the RagFile resource to be deleted.
- *   Format:
- *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.delete_rag_file.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagFile_async
- */
+  /**
+   * Deletes a RagFile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the RagFile resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.delete_rag_file.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagFile_async
+   */
   deleteRagFile(
-      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteRagFileRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteRagFileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteRagFile(
-      request: protos.google.cloud.aiplatform.v1beta1.IDeleteRagFileRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteRagFileRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteRagFile(
-      request: protos.google.cloud.aiplatform.v1beta1.IDeleteRagFileRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteRagFileRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteRagFile(
-      request?: protos.google.cloud.aiplatform.v1beta1.IDeleteRagFileRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteRagFileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteRagFile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteRagFile request %j', request);
-    return this.innerApiCalls.deleteRagFile(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteRagFile response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteRagFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRagFile response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteRagFile()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.delete_rag_file.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagFile_async
- */
-  async checkDeleteRagFileProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteRagFile()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.delete_rag_file.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_DeleteRagFile_async
+   */
+  async checkDeleteRagFileProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >
+  > {
     this._log.info('deleteRagFile long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteRagFile, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteRagFile,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >;
   }
- /**
- * Lists RagCorpora in a Location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location from which to list the
- *   RagCorpora. Format: `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The standard list page size.
- * @param {string} [request.pageToken]
- *   Optional. The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagCorporaResponse.next_page_token|ListRagCorporaResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagCorpora|VertexRagDataService.ListRagCorpora}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.RagCorpus|RagCorpus}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listRagCorporaAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists RagCorpora in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location from which to list the
+   *   RagCorpora. Format: `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagCorporaResponse.next_page_token|ListRagCorporaResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagCorpora|VertexRagDataService.ListRagCorpora}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.RagCorpus|RagCorpus}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRagCorporaAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRagCorpora(
-      request?: protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1beta1.IRagCorpus[],
-        protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest|null,
-        protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IRagCorpus[],
+      protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse,
+    ]
+  >;
   listRagCorpora(
-      request: protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
-          protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1beta1.IRagCorpus>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IRagCorpus
+    >
+  ): void;
   listRagCorpora(
-      request: protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
-          protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1beta1.IRagCorpus>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IRagCorpus
+    >
+  ): void;
   listRagCorpora(
-      request?: protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
-          protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1beta1.IRagCorpus>,
-      callback?: PaginationCallback<
-          protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
-          protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1beta1.IRagCorpus>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1beta1.IRagCorpus[],
-        protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest|null,
-        protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.IRagCorpus
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IRagCorpus
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IRagCorpus[],
+      protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
-      protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse|null|undefined,
-      protos.google.cloud.aiplatform.v1beta1.IRagCorpus>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
+          | protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.IRagCorpus
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRagCorpora values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1531,59 +3820,62 @@ export class VertexRagDataServiceClient {
     this._log.info('listRagCorpora request %j', request);
     return this.innerApiCalls
       .listRagCorpora(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.aiplatform.v1beta1.IRagCorpus[],
-        protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest|null,
-        protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse
-      ]) => {
-        this._log.info('listRagCorpora values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1beta1.IRagCorpus[],
+          protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest | null,
+          protos.google.cloud.aiplatform.v1beta1.IListRagCorporaResponse,
+        ]) => {
+          this._log.info('listRagCorpora values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
-/**
- * Equivalent to `listRagCorpora`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location from which to list the
- *   RagCorpora. Format: `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The standard list page size.
- * @param {string} [request.pageToken]
- *   Optional. The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagCorporaResponse.next_page_token|ListRagCorporaResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagCorpora|VertexRagDataService.ListRagCorpora}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagCorpus|RagCorpus} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listRagCorporaAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listRagCorpora`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location from which to list the
+   *   RagCorpora. Format: `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagCorporaResponse.next_page_token|ListRagCorporaResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagCorpora|VertexRagDataService.ListRagCorpora}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagCorpus|RagCorpus} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRagCorporaAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRagCorporaStream(
-      request?: protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listRagCorpora'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRagCorpora stream %j', request);
     return this.descriptors.page.listRagCorpora.createStream(
       this.innerApiCalls.listRagCorpora as GaxCall,
@@ -1592,52 +3884,53 @@ export class VertexRagDataServiceClient {
     );
   }
 
-/**
- * Equivalent to `listRagCorpora`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location from which to list the
- *   RagCorpora. Format: `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. The standard list page size.
- * @param {string} [request.pageToken]
- *   Optional. The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagCorporaResponse.next_page_token|ListRagCorporaResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagCorpora|VertexRagDataService.ListRagCorpora}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.aiplatform.v1beta1.RagCorpus|RagCorpus}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.list_rag_corpora.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_ListRagCorpora_async
- */
+  /**
+   * Equivalent to `listRagCorpora`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location from which to list the
+   *   RagCorpora. Format: `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagCorporaResponse.next_page_token|ListRagCorporaResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagCorpora|VertexRagDataService.ListRagCorpora}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1beta1.RagCorpus|RagCorpus}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.list_rag_corpora.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_ListRagCorpora_async
+   */
   listRagCorporaAsync(
-      request?: protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IRagCorpus>{
+    request?: protos.google.cloud.aiplatform.v1beta1.IListRagCorporaRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IRagCorpus> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listRagCorpora'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRagCorpora iterate %j', request);
     return this.descriptors.page.listRagCorpora.asyncIterate(
       this.innerApiCalls['listRagCorpora'] as GaxCall,
@@ -1645,94 +3938,119 @@ export class VertexRagDataServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IRagCorpus>;
   }
- /**
- * Lists RagFiles in a RagCorpus.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the RagCorpus from which to list the
- *   RagFiles. Format:
- *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
- * @param {number} [request.pageSize]
- *   Optional. The standard list page size.
- * @param {string} [request.pageToken]
- *   Optional. The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagFilesResponse.next_page_token|ListRagFilesResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagFiles|VertexRagDataService.ListRagFiles}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.RagFile|RagFile}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listRagFilesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists RagFiles in a RagCorpus.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the RagCorpus from which to list the
+   *   RagFiles. Format:
+   *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagFilesResponse.next_page_token|ListRagFilesResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagFiles|VertexRagDataService.ListRagFiles}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.RagFile|RagFile}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRagFilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRagFiles(
-      request?: protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1beta1.IRagFile[],
-        protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest|null,
-        protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IRagFile[],
+      protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse,
+    ]
+  >;
   listRagFiles(
-      request: protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
-          protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1beta1.IRagFile>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IRagFile
+    >
+  ): void;
   listRagFiles(
-      request: protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
-          protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1beta1.IRagFile>): void;
+    request: protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IRagFile
+    >
+  ): void;
   listRagFiles(
-      request?: protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
-          protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1beta1.IRagFile>,
-      callback?: PaginationCallback<
-          protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
-          protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1beta1.IRagFile>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1beta1.IRagFile[],
-        protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest|null,
-        protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.IRagFile
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IRagFile
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IRagFile[],
+      protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
-      protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse|null|undefined,
-      protos.google.cloud.aiplatform.v1beta1.IRagFile>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
+          | protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.IRagFile
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRagFiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1741,60 +4059,63 @@ export class VertexRagDataServiceClient {
     this._log.info('listRagFiles request %j', request);
     return this.innerApiCalls
       .listRagFiles(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.aiplatform.v1beta1.IRagFile[],
-        protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest|null,
-        protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse
-      ]) => {
-        this._log.info('listRagFiles values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1beta1.IRagFile[],
+          protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest | null,
+          protos.google.cloud.aiplatform.v1beta1.IListRagFilesResponse,
+        ]) => {
+          this._log.info('listRagFiles values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
-/**
- * Equivalent to `listRagFiles`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the RagCorpus from which to list the
- *   RagFiles. Format:
- *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
- * @param {number} [request.pageSize]
- *   Optional. The standard list page size.
- * @param {string} [request.pageToken]
- *   Optional. The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagFilesResponse.next_page_token|ListRagFilesResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagFiles|VertexRagDataService.ListRagFiles}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagFile|RagFile} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listRagFilesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listRagFiles`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the RagCorpus from which to list the
+   *   RagFiles. Format:
+   *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagFilesResponse.next_page_token|ListRagFilesResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagFiles|VertexRagDataService.ListRagFiles}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.RagFile|RagFile} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRagFilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRagFilesStream(
-      request?: protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listRagFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRagFiles stream %j', request);
     return this.descriptors.page.listRagFiles.createStream(
       this.innerApiCalls.listRagFiles as GaxCall,
@@ -1803,53 +4124,54 @@ export class VertexRagDataServiceClient {
     );
   }
 
-/**
- * Equivalent to `listRagFiles`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the RagCorpus from which to list the
- *   RagFiles. Format:
- *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
- * @param {number} [request.pageSize]
- *   Optional. The standard list page size.
- * @param {string} [request.pageToken]
- *   Optional. The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagFilesResponse.next_page_token|ListRagFilesResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagFiles|VertexRagDataService.ListRagFiles}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.aiplatform.v1beta1.RagFile|RagFile}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.list_rag_files.js</caption>
- * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_ListRagFiles_async
- */
+  /**
+   * Equivalent to `listRagFiles`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the RagCorpus from which to list the
+   *   RagFiles. Format:
+   *   `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListRagFilesResponse.next_page_token|ListRagFilesResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.VertexRagDataService.ListRagFiles|VertexRagDataService.ListRagFiles}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1beta1.RagFile|RagFile}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.list_rag_files.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_ListRagFiles_async
+   */
   listRagFilesAsync(
-      request?: protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IRagFile>{
+    request?: protos.google.cloud.aiplatform.v1beta1.IListRagFilesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IRagFile> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listRagFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRagFiles iterate %j', request);
     return this.descriptors.page.listRagFiles.asyncIterate(
       this.innerApiCalls['listRagFiles'] as GaxCall,
@@ -1857,31 +4179,31 @@ export class VertexRagDataServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IRagFile>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -1896,39 +4218,39 @@ export class VertexRagDataServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -1943,40 +4265,40 @@ export class VertexRagDataServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -1991,11 +4313,11 @@ export class VertexRagDataServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2035,7 +4357,7 @@ export class VertexRagDataServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -2073,7 +4395,7 @@ export class VertexRagDataServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2118,20 +4440,20 @@ export class VertexRagDataServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2168,13 +4490,13 @@ export class VertexRagDataServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2208,7 +4530,7 @@ export class VertexRagDataServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2223,20 +4545,20 @@ export class VertexRagDataServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2280,20 +4602,20 @@ export class VertexRagDataServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2311,7 +4633,13 @@ export class VertexRagDataServiceClient {
    * @param {string} annotation
    * @returns {string} Resource name string.
    */
-  annotationPath(project:string,location:string,dataset:string,dataItem:string,annotation:string) {
+  annotationPath(
+    project: string,
+    location: string,
+    dataset: string,
+    dataItem: string,
+    annotation: string
+  ) {
     return this.pathTemplates.annotationPathTemplate.render({
       project: project,
       location: location,
@@ -2329,7 +4657,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).project;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .project;
   }
 
   /**
@@ -2340,7 +4669,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).location;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .location;
   }
 
   /**
@@ -2351,7 +4681,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).dataset;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .dataset;
   }
 
   /**
@@ -2362,7 +4693,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).data_item;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .data_item;
   }
 
   /**
@@ -2373,7 +4705,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the annotation.
    */
   matchAnnotationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).annotation;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .annotation;
   }
 
   /**
@@ -2385,7 +4718,12 @@ export class VertexRagDataServiceClient {
    * @param {string} annotation_spec
    * @returns {string} Resource name string.
    */
-  annotationSpecPath(project:string,location:string,dataset:string,annotationSpec:string) {
+  annotationSpecPath(
+    project: string,
+    location: string,
+    dataset: string,
+    annotationSpec: string
+  ) {
     return this.pathTemplates.annotationSpecPathTemplate.render({
       project: project,
       location: location,
@@ -2402,7 +4740,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).project;
+    return this.pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).project;
   }
 
   /**
@@ -2413,7 +4753,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).location;
+    return this.pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).location;
   }
 
   /**
@@ -2424,7 +4766,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).dataset;
+    return this.pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).dataset;
   }
 
   /**
@@ -2435,7 +4779,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the annotation_spec.
    */
   matchAnnotationSpecFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).annotation_spec;
+    return this.pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).annotation_spec;
   }
 
   /**
@@ -2447,7 +4793,12 @@ export class VertexRagDataServiceClient {
    * @param {string} artifact
    * @returns {string} Resource name string.
    */
-  artifactPath(project:string,location:string,metadataStore:string,artifact:string) {
+  artifactPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    artifact: string
+  ) {
     return this.pathTemplates.artifactPathTemplate.render({
       project: project,
       location: location,
@@ -2486,7 +4837,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromArtifactName(artifactName: string) {
-    return this.pathTemplates.artifactPathTemplate.match(artifactName).metadata_store;
+    return this.pathTemplates.artifactPathTemplate.match(artifactName)
+      .metadata_store;
   }
 
   /**
@@ -2508,7 +4860,11 @@ export class VertexRagDataServiceClient {
    * @param {string} batch_prediction_job
    * @returns {string} Resource name string.
    */
-  batchPredictionJobPath(project:string,location:string,batchPredictionJob:string) {
+  batchPredictionJobPath(
+    project: string,
+    location: string,
+    batchPredictionJob: string
+  ) {
     return this.pathTemplates.batchPredictionJobPathTemplate.render({
       project: project,
       location: location,
@@ -2524,7 +4880,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).project;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(
+      batchPredictionJobName
+    ).project;
   }
 
   /**
@@ -2535,7 +4893,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).location;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(
+      batchPredictionJobName
+    ).location;
   }
 
   /**
@@ -2545,8 +4905,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing BatchPredictionJob resource.
    * @returns {string} A string representing the batch_prediction_job.
    */
-  matchBatchPredictionJobFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).batch_prediction_job;
+  matchBatchPredictionJobFromBatchPredictionJobName(
+    batchPredictionJobName: string
+  ) {
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(
+      batchPredictionJobName
+    ).batch_prediction_job;
   }
 
   /**
@@ -2557,7 +4921,7 @@ export class VertexRagDataServiceClient {
    * @param {string} cached_content
    * @returns {string} Resource name string.
    */
-  cachedContentPath(project:string,location:string,cachedContent:string) {
+  cachedContentPath(project: string, location: string, cachedContent: string) {
     return this.pathTemplates.cachedContentPathTemplate.render({
       project: project,
       location: location,
@@ -2573,7 +4937,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).project;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .project;
   }
 
   /**
@@ -2584,7 +4949,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).location;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .location;
   }
 
   /**
@@ -2595,7 +4961,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the cached_content.
    */
   matchCachedContentFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).cached_content;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .cached_content;
   }
 
   /**
@@ -2607,7 +4974,12 @@ export class VertexRagDataServiceClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  contextPath(project:string,location:string,metadataStore:string,context:string) {
+  contextPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    context: string
+  ) {
     return this.pathTemplates.contextPathTemplate.render({
       project: project,
       location: location,
@@ -2646,7 +5018,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromContextName(contextName: string) {
-    return this.pathTemplates.contextPathTemplate.match(contextName).metadata_store;
+    return this.pathTemplates.contextPathTemplate.match(contextName)
+      .metadata_store;
   }
 
   /**
@@ -2668,7 +5041,7 @@ export class VertexRagDataServiceClient {
    * @param {string} custom_job
    * @returns {string} Resource name string.
    */
-  customJobPath(project:string,location:string,customJob:string) {
+  customJobPath(project: string, location: string, customJob: string) {
     return this.pathTemplates.customJobPathTemplate.render({
       project: project,
       location: location,
@@ -2684,7 +5057,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName).project;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName)
+      .project;
   }
 
   /**
@@ -2695,7 +5069,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName).location;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName)
+      .location;
   }
 
   /**
@@ -2706,7 +5081,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the custom_job.
    */
   matchCustomJobFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName).custom_job;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName)
+      .custom_job;
   }
 
   /**
@@ -2718,7 +5094,12 @@ export class VertexRagDataServiceClient {
    * @param {string} data_item
    * @returns {string} Resource name string.
    */
-  dataItemPath(project:string,location:string,dataset:string,dataItem:string) {
+  dataItemPath(
+    project: string,
+    location: string,
+    dataset: string,
+    dataItem: string
+  ) {
     return this.pathTemplates.dataItemPathTemplate.render({
       project: project,
       location: location,
@@ -2768,7 +5149,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromDataItemName(dataItemName: string) {
-    return this.pathTemplates.dataItemPathTemplate.match(dataItemName).data_item;
+    return this.pathTemplates.dataItemPathTemplate.match(dataItemName)
+      .data_item;
   }
 
   /**
@@ -2779,7 +5161,11 @@ export class VertexRagDataServiceClient {
    * @param {string} data_labeling_job
    * @returns {string} Resource name string.
    */
-  dataLabelingJobPath(project:string,location:string,dataLabelingJob:string) {
+  dataLabelingJobPath(
+    project: string,
+    location: string,
+    dataLabelingJob: string
+  ) {
     return this.pathTemplates.dataLabelingJobPathTemplate.render({
       project: project,
       location: location,
@@ -2795,7 +5181,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).project;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(
+      dataLabelingJobName
+    ).project;
   }
 
   /**
@@ -2806,7 +5194,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).location;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(
+      dataLabelingJobName
+    ).location;
   }
 
   /**
@@ -2817,7 +5207,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the data_labeling_job.
    */
   matchDataLabelingJobFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).data_labeling_job;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(
+      dataLabelingJobName
+    ).data_labeling_job;
   }
 
   /**
@@ -2828,7 +5220,7 @@ export class VertexRagDataServiceClient {
    * @param {string} dataset
    * @returns {string} Resource name string.
    */
-  datasetPath(project:string,location:string,dataset:string) {
+  datasetPath(project: string, location: string, dataset: string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project: project,
       location: location,
@@ -2878,7 +5270,12 @@ export class VertexRagDataServiceClient {
    * @param {string} dataset_version
    * @returns {string} Resource name string.
    */
-  datasetVersionPath(project:string,location:string,dataset:string,datasetVersion:string) {
+  datasetVersionPath(
+    project: string,
+    location: string,
+    dataset: string,
+    datasetVersion: string
+  ) {
     return this.pathTemplates.datasetVersionPathTemplate.render({
       project: project,
       location: location,
@@ -2895,7 +5292,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).project;
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).project;
   }
 
   /**
@@ -2906,7 +5305,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).location;
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).location;
   }
 
   /**
@@ -2917,7 +5318,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).dataset;
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).dataset;
   }
 
   /**
@@ -2928,7 +5331,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the dataset_version.
    */
   matchDatasetVersionFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).dataset_version;
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).dataset_version;
   }
 
   /**
@@ -2939,7 +5344,11 @@ export class VertexRagDataServiceClient {
    * @param {string} deployment_resource_pool
    * @returns {string} Resource name string.
    */
-  deploymentResourcePoolPath(project:string,location:string,deploymentResourcePool:string) {
+  deploymentResourcePoolPath(
+    project: string,
+    location: string,
+    deploymentResourcePool: string
+  ) {
     return this.pathTemplates.deploymentResourcePoolPathTemplate.render({
       project: project,
       location: location,
@@ -2954,8 +5363,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing DeploymentResourcePool resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
-    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).project;
+  matchProjectFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).project;
   }
 
   /**
@@ -2965,8 +5378,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing DeploymentResourcePool resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
-    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).location;
+  matchLocationFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).location;
   }
 
   /**
@@ -2976,8 +5393,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing DeploymentResourcePool resource.
    * @returns {string} A string representing the deployment_resource_pool.
    */
-  matchDeploymentResourcePoolFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
-    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).deployment_resource_pool;
+  matchDeploymentResourcePoolFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).deployment_resource_pool;
   }
 
   /**
@@ -2989,7 +5410,12 @@ export class VertexRagDataServiceClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  entityTypePath(project:string,location:string,featurestore:string,entityType:string) {
+  entityTypePath(
+    project: string,
+    location: string,
+    featurestore: string,
+    entityType: string
+  ) {
     return this.pathTemplates.entityTypePathTemplate.render({
       project: project,
       location: location,
@@ -3006,7 +5432,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).project;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .project;
   }
 
   /**
@@ -3017,7 +5444,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).location;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .location;
   }
 
   /**
@@ -3028,7 +5456,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the featurestore.
    */
   matchFeaturestoreFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).featurestore;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .featurestore;
   }
 
   /**
@@ -3039,7 +5468,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the entity_type.
    */
   matchEntityTypeFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).entity_type;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .entity_type;
   }
 
   /**
@@ -3050,7 +5480,7 @@ export class VertexRagDataServiceClient {
    * @param {string} example_store
    * @returns {string} Resource name string.
    */
-  exampleStorePath(project:string,location:string,exampleStore:string) {
+  exampleStorePath(project: string, location: string, exampleStore: string) {
     return this.pathTemplates.exampleStorePathTemplate.render({
       project: project,
       location: location,
@@ -3066,7 +5496,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExampleStoreName(exampleStoreName: string) {
-    return this.pathTemplates.exampleStorePathTemplate.match(exampleStoreName).project;
+    return this.pathTemplates.exampleStorePathTemplate.match(exampleStoreName)
+      .project;
   }
 
   /**
@@ -3077,7 +5508,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExampleStoreName(exampleStoreName: string) {
-    return this.pathTemplates.exampleStorePathTemplate.match(exampleStoreName).location;
+    return this.pathTemplates.exampleStorePathTemplate.match(exampleStoreName)
+      .location;
   }
 
   /**
@@ -3088,7 +5520,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the example_store.
    */
   matchExampleStoreFromExampleStoreName(exampleStoreName: string) {
-    return this.pathTemplates.exampleStorePathTemplate.match(exampleStoreName).example_store;
+    return this.pathTemplates.exampleStorePathTemplate.match(exampleStoreName)
+      .example_store;
   }
 
   /**
@@ -3100,7 +5533,12 @@ export class VertexRagDataServiceClient {
    * @param {string} execution
    * @returns {string} Resource name string.
    */
-  executionPath(project:string,location:string,metadataStore:string,execution:string) {
+  executionPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    execution: string
+  ) {
     return this.pathTemplates.executionPathTemplate.render({
       project: project,
       location: location,
@@ -3117,7 +5555,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName).project;
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .project;
   }
 
   /**
@@ -3128,7 +5567,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName).location;
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .location;
   }
 
   /**
@@ -3139,7 +5579,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName).metadata_store;
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .metadata_store;
   }
 
   /**
@@ -3150,7 +5591,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the execution.
    */
   matchExecutionFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName).execution;
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .execution;
   }
 
   /**
@@ -3161,7 +5603,7 @@ export class VertexRagDataServiceClient {
    * @param {string} extension
    * @returns {string} Resource name string.
    */
-  extensionPath(project:string,location:string,extension:string) {
+  extensionPath(project: string, location: string, extension: string) {
     return this.pathTemplates.extensionPathTemplate.render({
       project: project,
       location: location,
@@ -3177,7 +5619,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExtensionName(extensionName: string) {
-    return this.pathTemplates.extensionPathTemplate.match(extensionName).project;
+    return this.pathTemplates.extensionPathTemplate.match(extensionName)
+      .project;
   }
 
   /**
@@ -3188,7 +5631,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExtensionName(extensionName: string) {
-    return this.pathTemplates.extensionPathTemplate.match(extensionName).location;
+    return this.pathTemplates.extensionPathTemplate.match(extensionName)
+      .location;
   }
 
   /**
@@ -3199,7 +5643,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the extension.
    */
   matchExtensionFromExtensionName(extensionName: string) {
-    return this.pathTemplates.extensionPathTemplate.match(extensionName).extension;
+    return this.pathTemplates.extensionPathTemplate.match(extensionName)
+      .extension;
   }
 
   /**
@@ -3210,7 +5655,7 @@ export class VertexRagDataServiceClient {
    * @param {string} feature_group
    * @returns {string} Resource name string.
    */
-  featureGroupPath(project:string,location:string,featureGroup:string) {
+  featureGroupPath(project: string, location: string, featureGroup: string) {
     return this.pathTemplates.featureGroupPathTemplate.render({
       project: project,
       location: location,
@@ -3226,7 +5671,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureGroupName(featureGroupName: string) {
-    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName).project;
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
+      .project;
   }
 
   /**
@@ -3237,7 +5683,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureGroupName(featureGroupName: string) {
-    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName).location;
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
+      .location;
   }
 
   /**
@@ -3248,7 +5695,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the feature_group.
    */
   matchFeatureGroupFromFeatureGroupName(featureGroupName: string) {
-    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName).feature_group;
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
+      .feature_group;
   }
 
   /**
@@ -3260,7 +5708,12 @@ export class VertexRagDataServiceClient {
    * @param {string} feature_monitor
    * @returns {string} Resource name string.
    */
-  featureMonitorPath(project:string,location:string,featureGroup:string,featureMonitor:string) {
+  featureMonitorPath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    featureMonitor: string
+  ) {
     return this.pathTemplates.featureMonitorPathTemplate.render({
       project: project,
       location: location,
@@ -3277,7 +5730,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureMonitorName(featureMonitorName: string) {
-    return this.pathTemplates.featureMonitorPathTemplate.match(featureMonitorName).project;
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).project;
   }
 
   /**
@@ -3288,7 +5743,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureMonitorName(featureMonitorName: string) {
-    return this.pathTemplates.featureMonitorPathTemplate.match(featureMonitorName).location;
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).location;
   }
 
   /**
@@ -3299,7 +5756,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the feature_group.
    */
   matchFeatureGroupFromFeatureMonitorName(featureMonitorName: string) {
-    return this.pathTemplates.featureMonitorPathTemplate.match(featureMonitorName).feature_group;
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).feature_group;
   }
 
   /**
@@ -3310,7 +5769,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the feature_monitor.
    */
   matchFeatureMonitorFromFeatureMonitorName(featureMonitorName: string) {
-    return this.pathTemplates.featureMonitorPathTemplate.match(featureMonitorName).feature_monitor;
+    return this.pathTemplates.featureMonitorPathTemplate.match(
+      featureMonitorName
+    ).feature_monitor;
   }
 
   /**
@@ -3323,7 +5784,13 @@ export class VertexRagDataServiceClient {
    * @param {string} feature_monitor_job
    * @returns {string} Resource name string.
    */
-  featureMonitorJobPath(project:string,location:string,featureGroup:string,featureMonitor:string,featureMonitorJob:string) {
+  featureMonitorJobPath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    featureMonitor: string,
+    featureMonitorJob: string
+  ) {
     return this.pathTemplates.featureMonitorJobPathTemplate.render({
       project: project,
       location: location,
@@ -3341,7 +5808,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).project;
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).project;
   }
 
   /**
@@ -3352,7 +5821,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).location;
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).location;
   }
 
   /**
@@ -3363,7 +5834,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the feature_group.
    */
   matchFeatureGroupFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).feature_group;
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_group;
   }
 
   /**
@@ -3374,7 +5847,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the feature_monitor.
    */
   matchFeatureMonitorFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).feature_monitor;
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_monitor;
   }
 
   /**
@@ -3384,8 +5859,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing FeatureMonitorJob resource.
    * @returns {string} A string representing the feature_monitor_job.
    */
-  matchFeatureMonitorJobFromFeatureMonitorJobName(featureMonitorJobName: string) {
-    return this.pathTemplates.featureMonitorJobPathTemplate.match(featureMonitorJobName).feature_monitor_job;
+  matchFeatureMonitorJobFromFeatureMonitorJobName(
+    featureMonitorJobName: string
+  ) {
+    return this.pathTemplates.featureMonitorJobPathTemplate.match(
+      featureMonitorJobName
+    ).feature_monitor_job;
   }
 
   /**
@@ -3396,7 +5875,11 @@ export class VertexRagDataServiceClient {
    * @param {string} feature_online_store
    * @returns {string} Resource name string.
    */
-  featureOnlineStorePath(project:string,location:string,featureOnlineStore:string) {
+  featureOnlineStorePath(
+    project: string,
+    location: string,
+    featureOnlineStore: string
+  ) {
     return this.pathTemplates.featureOnlineStorePathTemplate.render({
       project: project,
       location: location,
@@ -3412,7 +5895,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
-    return this.pathTemplates.featureOnlineStorePathTemplate.match(featureOnlineStoreName).project;
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(
+      featureOnlineStoreName
+    ).project;
   }
 
   /**
@@ -3423,7 +5908,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
-    return this.pathTemplates.featureOnlineStorePathTemplate.match(featureOnlineStoreName).location;
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(
+      featureOnlineStoreName
+    ).location;
   }
 
   /**
@@ -3433,8 +5920,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing FeatureOnlineStore resource.
    * @returns {string} A string representing the feature_online_store.
    */
-  matchFeatureOnlineStoreFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
-    return this.pathTemplates.featureOnlineStorePathTemplate.match(featureOnlineStoreName).feature_online_store;
+  matchFeatureOnlineStoreFromFeatureOnlineStoreName(
+    featureOnlineStoreName: string
+  ) {
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(
+      featureOnlineStoreName
+    ).feature_online_store;
   }
 
   /**
@@ -3446,7 +5937,12 @@ export class VertexRagDataServiceClient {
    * @param {string} feature_view
    * @returns {string} Resource name string.
    */
-  featureViewPath(project:string,location:string,featureOnlineStore:string,featureView:string) {
+  featureViewPath(
+    project: string,
+    location: string,
+    featureOnlineStore: string,
+    featureView: string
+  ) {
     return this.pathTemplates.featureViewPathTemplate.render({
       project: project,
       location: location,
@@ -3463,7 +5959,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).project;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
+      .project;
   }
 
   /**
@@ -3474,7 +5971,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).location;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
+      .location;
   }
 
   /**
@@ -3485,7 +5983,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the feature_online_store.
    */
   matchFeatureOnlineStoreFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).feature_online_store;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
+      .feature_online_store;
   }
 
   /**
@@ -3496,7 +5995,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the feature_view.
    */
   matchFeatureViewFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).feature_view;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
+      .feature_view;
   }
 
   /**
@@ -3508,7 +6008,12 @@ export class VertexRagDataServiceClient {
    * @param {string} feature_view
    * @returns {string} Resource name string.
    */
-  featureViewSyncPath(project:string,location:string,featureOnlineStore:string,featureView:string) {
+  featureViewSyncPath(
+    project: string,
+    location: string,
+    featureOnlineStore: string,
+    featureView: string
+  ) {
     return this.pathTemplates.featureViewSyncPathTemplate.render({
       project: project,
       location: location,
@@ -3525,7 +6030,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).project;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(
+      featureViewSyncName
+    ).project;
   }
 
   /**
@@ -3536,7 +6043,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).location;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(
+      featureViewSyncName
+    ).location;
   }
 
   /**
@@ -3547,7 +6056,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the feature_online_store.
    */
   matchFeatureOnlineStoreFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).feature_online_store;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(
+      featureViewSyncName
+    ).feature_online_store;
   }
 
   /**
@@ -3558,7 +6069,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the feature_view.
    */
   matchFeatureViewFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).feature_view;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(
+      featureViewSyncName
+    ).feature_view;
   }
 
   /**
@@ -3569,7 +6082,7 @@ export class VertexRagDataServiceClient {
    * @param {string} featurestore
    * @returns {string} Resource name string.
    */
-  featurestorePath(project:string,location:string,featurestore:string) {
+  featurestorePath(project: string, location: string, featurestore: string) {
     return this.pathTemplates.featurestorePathTemplate.render({
       project: project,
       location: location,
@@ -3585,7 +6098,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName).project;
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .project;
   }
 
   /**
@@ -3596,7 +6110,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName).location;
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .location;
   }
 
   /**
@@ -3607,7 +6122,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the featurestore.
    */
   matchFeaturestoreFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName).featurestore;
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .featurestore;
   }
 
   /**
@@ -3618,7 +6134,11 @@ export class VertexRagDataServiceClient {
    * @param {string} hyperparameter_tuning_job
    * @returns {string} Resource name string.
    */
-  hyperparameterTuningJobPath(project:string,location:string,hyperparameterTuningJob:string) {
+  hyperparameterTuningJobPath(
+    project: string,
+    location: string,
+    hyperparameterTuningJob: string
+  ) {
     return this.pathTemplates.hyperparameterTuningJobPathTemplate.render({
       project: project,
       location: location,
@@ -3633,8 +6153,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).project;
+  matchProjectFromHyperparameterTuningJobName(
+    hyperparameterTuningJobName: string
+  ) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
+      hyperparameterTuningJobName
+    ).project;
   }
 
   /**
@@ -3644,8 +6168,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).location;
+  matchLocationFromHyperparameterTuningJobName(
+    hyperparameterTuningJobName: string
+  ) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
+      hyperparameterTuningJobName
+    ).location;
   }
 
   /**
@@ -3655,8 +6183,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the hyperparameter_tuning_job.
    */
-  matchHyperparameterTuningJobFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).hyperparameter_tuning_job;
+  matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+    hyperparameterTuningJobName: string
+  ) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
+      hyperparameterTuningJobName
+    ).hyperparameter_tuning_job;
   }
 
   /**
@@ -3667,7 +6199,7 @@ export class VertexRagDataServiceClient {
    * @param {string} index
    * @returns {string} Resource name string.
    */
-  indexPath(project:string,location:string,index:string) {
+  indexPath(project: string, location: string, index: string) {
     return this.pathTemplates.indexPathTemplate.render({
       project: project,
       location: location,
@@ -3716,7 +6248,7 @@ export class VertexRagDataServiceClient {
    * @param {string} index_endpoint
    * @returns {string} Resource name string.
    */
-  indexEndpointPath(project:string,location:string,indexEndpoint:string) {
+  indexEndpointPath(project: string, location: string, indexEndpoint: string) {
     return this.pathTemplates.indexEndpointPathTemplate.render({
       project: project,
       location: location,
@@ -3732,7 +6264,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).project;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .project;
   }
 
   /**
@@ -3743,7 +6276,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).location;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .location;
   }
 
   /**
@@ -3754,7 +6288,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the index_endpoint.
    */
   matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).index_endpoint;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .index_endpoint;
   }
 
   /**
@@ -3764,7 +6299,7 @@ export class VertexRagDataServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3802,7 +6337,12 @@ export class VertexRagDataServiceClient {
    * @param {string} metadata_schema
    * @returns {string} Resource name string.
    */
-  metadataSchemaPath(project:string,location:string,metadataStore:string,metadataSchema:string) {
+  metadataSchemaPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    metadataSchema: string
+  ) {
     return this.pathTemplates.metadataSchemaPathTemplate.render({
       project: project,
       location: location,
@@ -3819,7 +6359,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).project;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).project;
   }
 
   /**
@@ -3830,7 +6372,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).location;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).location;
   }
 
   /**
@@ -3841,7 +6385,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).metadata_store;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).metadata_store;
   }
 
   /**
@@ -3852,7 +6398,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the metadata_schema.
    */
   matchMetadataSchemaFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).metadata_schema;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).metadata_schema;
   }
 
   /**
@@ -3863,7 +6411,7 @@ export class VertexRagDataServiceClient {
    * @param {string} metadata_store
    * @returns {string} Resource name string.
    */
-  metadataStorePath(project:string,location:string,metadataStore:string) {
+  metadataStorePath(project: string, location: string, metadataStore: string) {
     return this.pathTemplates.metadataStorePathTemplate.render({
       project: project,
       location: location,
@@ -3879,7 +6427,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName).project;
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .project;
   }
 
   /**
@@ -3890,7 +6439,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName).location;
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .location;
   }
 
   /**
@@ -3901,7 +6451,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName).metadata_store;
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .metadata_store;
   }
 
   /**
@@ -3912,7 +6463,7 @@ export class VertexRagDataServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project:string,location:string,model:string) {
+  modelPath(project: string, location: string, model: string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -3961,7 +6512,11 @@ export class VertexRagDataServiceClient {
    * @param {string} model_deployment_monitoring_job
    * @returns {string} Resource name string.
    */
-  modelDeploymentMonitoringJobPath(project:string,location:string,modelDeploymentMonitoringJob:string) {
+  modelDeploymentMonitoringJobPath(
+    project: string,
+    location: string,
+    modelDeploymentMonitoringJob: string
+  ) {
     return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render({
       project: project,
       location: location,
@@ -3976,8 +6531,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromModelDeploymentMonitoringJobName(modelDeploymentMonitoringJobName: string) {
-    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(modelDeploymentMonitoringJobName).project;
+  matchProjectFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).project;
   }
 
   /**
@@ -3987,8 +6546,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromModelDeploymentMonitoringJobName(modelDeploymentMonitoringJobName: string) {
-    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(modelDeploymentMonitoringJobName).location;
+  matchLocationFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).location;
   }
 
   /**
@@ -3998,8 +6561,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
    * @returns {string} A string representing the model_deployment_monitoring_job.
    */
-  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(modelDeploymentMonitoringJobName: string) {
-    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(modelDeploymentMonitoringJobName).model_deployment_monitoring_job;
+  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).model_deployment_monitoring_job;
   }
 
   /**
@@ -4011,7 +6578,12 @@ export class VertexRagDataServiceClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  modelEvaluationPath(project:string,location:string,model:string,evaluation:string) {
+  modelEvaluationPath(
+    project: string,
+    location: string,
+    model: string,
+    evaluation: string
+  ) {
     return this.pathTemplates.modelEvaluationPathTemplate.render({
       project: project,
       location: location,
@@ -4028,7 +6600,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).project;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
+      modelEvaluationName
+    ).project;
   }
 
   /**
@@ -4039,7 +6613,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).location;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
+      modelEvaluationName
+    ).location;
   }
 
   /**
@@ -4050,7 +6626,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).model;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
+      modelEvaluationName
+    ).model;
   }
 
   /**
@@ -4061,7 +6639,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).evaluation;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
+      modelEvaluationName
+    ).evaluation;
   }
 
   /**
@@ -4074,7 +6654,13 @@ export class VertexRagDataServiceClient {
    * @param {string} slice
    * @returns {string} Resource name string.
    */
-  modelEvaluationSlicePath(project:string,location:string,model:string,evaluation:string,slice:string) {
+  modelEvaluationSlicePath(
+    project: string,
+    location: string,
+    model: string,
+    evaluation: string,
+    slice: string
+  ) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.render({
       project: project,
       location: location,
@@ -4092,7 +6678,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).project;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).project;
   }
 
   /**
@@ -4103,7 +6691,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).location;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).location;
   }
 
   /**
@@ -4114,7 +6704,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).model;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).model;
   }
 
   /**
@@ -4124,8 +6716,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing ModelEvaluationSlice resource.
    * @returns {string} A string representing the evaluation.
    */
-  matchEvaluationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).evaluation;
+  matchEvaluationFromModelEvaluationSliceName(
+    modelEvaluationSliceName: string
+  ) {
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).evaluation;
   }
 
   /**
@@ -4136,7 +6732,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the slice.
    */
   matchSliceFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).slice;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).slice;
   }
 
   /**
@@ -4147,7 +6745,7 @@ export class VertexRagDataServiceClient {
    * @param {string} model_monitor
    * @returns {string} Resource name string.
    */
-  modelMonitorPath(project:string,location:string,modelMonitor:string) {
+  modelMonitorPath(project: string, location: string, modelMonitor: string) {
     return this.pathTemplates.modelMonitorPathTemplate.render({
       project: project,
       location: location,
@@ -4163,7 +6761,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelMonitorName(modelMonitorName: string) {
-    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName).project;
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
+      .project;
   }
 
   /**
@@ -4174,7 +6773,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelMonitorName(modelMonitorName: string) {
-    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName).location;
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
+      .location;
   }
 
   /**
@@ -4185,7 +6785,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the model_monitor.
    */
   matchModelMonitorFromModelMonitorName(modelMonitorName: string) {
-    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName).model_monitor;
+    return this.pathTemplates.modelMonitorPathTemplate.match(modelMonitorName)
+      .model_monitor;
   }
 
   /**
@@ -4197,7 +6798,12 @@ export class VertexRagDataServiceClient {
    * @param {string} model_monitoring_job
    * @returns {string} Resource name string.
    */
-  modelMonitoringJobPath(project:string,location:string,modelMonitor:string,modelMonitoringJob:string) {
+  modelMonitoringJobPath(
+    project: string,
+    location: string,
+    modelMonitor: string,
+    modelMonitoringJob: string
+  ) {
     return this.pathTemplates.modelMonitoringJobPathTemplate.render({
       project: project,
       location: location,
@@ -4214,7 +6820,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelMonitoringJobName(modelMonitoringJobName: string) {
-    return this.pathTemplates.modelMonitoringJobPathTemplate.match(modelMonitoringJobName).project;
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).project;
   }
 
   /**
@@ -4225,7 +6833,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelMonitoringJobName(modelMonitoringJobName: string) {
-    return this.pathTemplates.modelMonitoringJobPathTemplate.match(modelMonitoringJobName).location;
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).location;
   }
 
   /**
@@ -4236,7 +6846,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the model_monitor.
    */
   matchModelMonitorFromModelMonitoringJobName(modelMonitoringJobName: string) {
-    return this.pathTemplates.modelMonitoringJobPathTemplate.match(modelMonitoringJobName).model_monitor;
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).model_monitor;
   }
 
   /**
@@ -4246,8 +6858,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing ModelMonitoringJob resource.
    * @returns {string} A string representing the model_monitoring_job.
    */
-  matchModelMonitoringJobFromModelMonitoringJobName(modelMonitoringJobName: string) {
-    return this.pathTemplates.modelMonitoringJobPathTemplate.match(modelMonitoringJobName).model_monitoring_job;
+  matchModelMonitoringJobFromModelMonitoringJobName(
+    modelMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelMonitoringJobPathTemplate.match(
+      modelMonitoringJobName
+    ).model_monitoring_job;
   }
 
   /**
@@ -4258,7 +6874,7 @@ export class VertexRagDataServiceClient {
    * @param {string} nas_job
    * @returns {string} Resource name string.
    */
-  nasJobPath(project:string,location:string,nasJob:string) {
+  nasJobPath(project: string, location: string, nasJob: string) {
     return this.pathTemplates.nasJobPathTemplate.render({
       project: project,
       location: location,
@@ -4308,7 +6924,12 @@ export class VertexRagDataServiceClient {
    * @param {string} nas_trial_detail
    * @returns {string} Resource name string.
    */
-  nasTrialDetailPath(project:string,location:string,nasJob:string,nasTrialDetail:string) {
+  nasTrialDetailPath(
+    project: string,
+    location: string,
+    nasJob: string,
+    nasTrialDetail: string
+  ) {
     return this.pathTemplates.nasTrialDetailPathTemplate.render({
       project: project,
       location: location,
@@ -4325,7 +6946,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).project;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).project;
   }
 
   /**
@@ -4336,7 +6959,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).location;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).location;
   }
 
   /**
@@ -4347,7 +6972,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the nas_job.
    */
   matchNasJobFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).nas_job;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).nas_job;
   }
 
   /**
@@ -4358,7 +6985,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the nas_trial_detail.
    */
   matchNasTrialDetailFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).nas_trial_detail;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).nas_trial_detail;
   }
 
   /**
@@ -4369,7 +6998,11 @@ export class VertexRagDataServiceClient {
    * @param {string} notebook_execution_job
    * @returns {string} Resource name string.
    */
-  notebookExecutionJobPath(project:string,location:string,notebookExecutionJob:string) {
+  notebookExecutionJobPath(
+    project: string,
+    location: string,
+    notebookExecutionJob: string
+  ) {
     return this.pathTemplates.notebookExecutionJobPathTemplate.render({
       project: project,
       location: location,
@@ -4385,7 +7018,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNotebookExecutionJobName(notebookExecutionJobName: string) {
-    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).project;
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).project;
   }
 
   /**
@@ -4396,7 +7031,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNotebookExecutionJobName(notebookExecutionJobName: string) {
-    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).location;
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).location;
   }
 
   /**
@@ -4406,8 +7043,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing NotebookExecutionJob resource.
    * @returns {string} A string representing the notebook_execution_job.
    */
-  matchNotebookExecutionJobFromNotebookExecutionJobName(notebookExecutionJobName: string) {
-    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).notebook_execution_job;
+  matchNotebookExecutionJobFromNotebookExecutionJobName(
+    notebookExecutionJobName: string
+  ) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).notebook_execution_job;
   }
 
   /**
@@ -4418,7 +7059,11 @@ export class VertexRagDataServiceClient {
    * @param {string} notebook_runtime
    * @returns {string} Resource name string.
    */
-  notebookRuntimePath(project:string,location:string,notebookRuntime:string) {
+  notebookRuntimePath(
+    project: string,
+    location: string,
+    notebookRuntime: string
+  ) {
     return this.pathTemplates.notebookRuntimePathTemplate.render({
       project: project,
       location: location,
@@ -4434,7 +7079,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNotebookRuntimeName(notebookRuntimeName: string) {
-    return this.pathTemplates.notebookRuntimePathTemplate.match(notebookRuntimeName).project;
+    return this.pathTemplates.notebookRuntimePathTemplate.match(
+      notebookRuntimeName
+    ).project;
   }
 
   /**
@@ -4445,7 +7092,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNotebookRuntimeName(notebookRuntimeName: string) {
-    return this.pathTemplates.notebookRuntimePathTemplate.match(notebookRuntimeName).location;
+    return this.pathTemplates.notebookRuntimePathTemplate.match(
+      notebookRuntimeName
+    ).location;
   }
 
   /**
@@ -4456,7 +7105,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the notebook_runtime.
    */
   matchNotebookRuntimeFromNotebookRuntimeName(notebookRuntimeName: string) {
-    return this.pathTemplates.notebookRuntimePathTemplate.match(notebookRuntimeName).notebook_runtime;
+    return this.pathTemplates.notebookRuntimePathTemplate.match(
+      notebookRuntimeName
+    ).notebook_runtime;
   }
 
   /**
@@ -4467,7 +7118,11 @@ export class VertexRagDataServiceClient {
    * @param {string} notebook_runtime_template
    * @returns {string} Resource name string.
    */
-  notebookRuntimeTemplatePath(project:string,location:string,notebookRuntimeTemplate:string) {
+  notebookRuntimeTemplatePath(
+    project: string,
+    location: string,
+    notebookRuntimeTemplate: string
+  ) {
     return this.pathTemplates.notebookRuntimeTemplatePathTemplate.render({
       project: project,
       location: location,
@@ -4482,8 +7137,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).project;
+  matchProjectFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).project;
   }
 
   /**
@@ -4493,8 +7152,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).location;
+  matchLocationFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).location;
   }
 
   /**
@@ -4504,8 +7167,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the notebook_runtime_template.
    */
-  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).notebook_runtime_template;
+  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).notebook_runtime_template;
   }
 
   /**
@@ -4516,7 +7183,11 @@ export class VertexRagDataServiceClient {
    * @param {string} persistent_resource
    * @returns {string} Resource name string.
    */
-  persistentResourcePath(project:string,location:string,persistentResource:string) {
+  persistentResourcePath(
+    project: string,
+    location: string,
+    persistentResource: string
+  ) {
     return this.pathTemplates.persistentResourcePathTemplate.render({
       project: project,
       location: location,
@@ -4532,7 +7203,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(persistentResourceName).project;
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).project;
   }
 
   /**
@@ -4543,7 +7216,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(persistentResourceName).location;
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).location;
   }
 
   /**
@@ -4553,8 +7228,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing PersistentResource resource.
    * @returns {string} A string representing the persistent_resource.
    */
-  matchPersistentResourceFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(persistentResourceName).persistent_resource;
+  matchPersistentResourceFromPersistentResourceName(
+    persistentResourceName: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).persistent_resource;
   }
 
   /**
@@ -4565,7 +7244,7 @@ export class VertexRagDataServiceClient {
    * @param {string} pipeline_job
    * @returns {string} Resource name string.
    */
-  pipelineJobPath(project:string,location:string,pipelineJob:string) {
+  pipelineJobPath(project: string, location: string, pipelineJob: string) {
     return this.pathTemplates.pipelineJobPathTemplate.render({
       project: project,
       location: location,
@@ -4581,7 +7260,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPipelineJobName(pipelineJobName: string) {
-    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).project;
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .project;
   }
 
   /**
@@ -4592,7 +7272,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPipelineJobName(pipelineJobName: string) {
-    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).location;
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .location;
   }
 
   /**
@@ -4603,7 +7284,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the pipeline_job.
    */
   matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
-    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).pipeline_job;
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .pipeline_job;
   }
 
   /**
@@ -4614,7 +7296,11 @@ export class VertexRagDataServiceClient {
    * @param {string} endpoint
    * @returns {string} Resource name string.
    */
-  projectLocationEndpointPath(project:string,location:string,endpoint:string) {
+  projectLocationEndpointPath(
+    project: string,
+    location: string,
+    endpoint: string
+  ) {
     return this.pathTemplates.projectLocationEndpointPathTemplate.render({
       project: project,
       location: location,
@@ -4629,8 +7315,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_endpoint resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationEndpointName(projectLocationEndpointName: string) {
-    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).project;
+  matchProjectFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).project;
   }
 
   /**
@@ -4640,8 +7330,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_endpoint resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationEndpointName(projectLocationEndpointName: string) {
-    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).location;
+  matchLocationFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).location;
   }
 
   /**
@@ -4651,8 +7345,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_endpoint resource.
    * @returns {string} A string representing the endpoint.
    */
-  matchEndpointFromProjectLocationEndpointName(projectLocationEndpointName: string) {
-    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).endpoint;
+  matchEndpointFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).endpoint;
   }
 
   /**
@@ -4664,13 +7362,20 @@ export class VertexRagDataServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeatureGroupFeaturePath(project:string,location:string,featureGroup:string,feature:string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render({
-      project: project,
-      location: location,
-      feature_group: featureGroup,
-      feature: feature,
-    });
+  projectLocationFeatureGroupFeaturePath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    feature: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        feature_group: featureGroup,
+        feature: feature,
+      }
+    );
   }
 
   /**
@@ -4680,8 +7385,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).project;
+  matchProjectFromProjectLocationFeatureGroupFeatureName(
+    projectLocationFeatureGroupFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
+      projectLocationFeatureGroupFeatureName
+    ).project;
   }
 
   /**
@@ -4691,8 +7400,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).location;
+  matchLocationFromProjectLocationFeatureGroupFeatureName(
+    projectLocationFeatureGroupFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
+      projectLocationFeatureGroupFeatureName
+    ).location;
   }
 
   /**
@@ -4702,8 +7415,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the feature_group.
    */
-  matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature_group;
+  matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(
+    projectLocationFeatureGroupFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
+      projectLocationFeatureGroupFeatureName
+    ).feature_group;
   }
 
   /**
@@ -4713,8 +7430,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature;
+  matchFeatureFromProjectLocationFeatureGroupFeatureName(
+    projectLocationFeatureGroupFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
+      projectLocationFeatureGroupFeatureName
+    ).feature;
   }
 
   /**
@@ -4727,14 +7448,22 @@ export class VertexRagDataServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeaturestoreEntityTypeFeaturePath(project:string,location:string,featurestore:string,entityType:string,feature:string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render({
-      project: project,
-      location: location,
-      featurestore: featurestore,
-      entity_type: entityType,
-      feature: feature,
-    });
+  projectLocationFeaturestoreEntityTypeFeaturePath(
+    project: string,
+    location: string,
+    featurestore: string,
+    entityType: string,
+    feature: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        featurestore: featurestore,
+        entity_type: entityType,
+        feature: feature,
+      }
+    );
   }
 
   /**
@@ -4744,8 +7473,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).project;
+  matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).project;
   }
 
   /**
@@ -4755,8 +7488,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).location;
+  matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).location;
   }
 
   /**
@@ -4766,8 +7503,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the featurestore.
    */
-  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).featurestore;
+  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).featurestore;
   }
 
   /**
@@ -4777,8 +7518,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).entity_type;
+  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).entity_type;
   }
 
   /**
@@ -4788,8 +7533,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).feature;
+  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).feature;
   }
 
   /**
@@ -4801,7 +7550,12 @@ export class VertexRagDataServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  projectLocationPublisherModelPath(project:string,location:string,publisher:string,model:string) {
+  projectLocationPublisherModelPath(
+    project: string,
+    location: string,
+    publisher: string,
+    model: string
+  ) {
     return this.pathTemplates.projectLocationPublisherModelPathTemplate.render({
       project: project,
       location: location,
@@ -4817,8 +7571,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).project;
+  matchProjectFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).project;
   }
 
   /**
@@ -4828,8 +7586,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).location;
+  matchLocationFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).location;
   }
 
   /**
@@ -4839,8 +7601,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the publisher.
    */
-  matchPublisherFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).publisher;
+  matchPublisherFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).publisher;
   }
 
   /**
@@ -4850,8 +7616,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the model.
    */
-  matchModelFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).model;
+  matchModelFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).model;
   }
 
   /**
@@ -4863,13 +7633,20 @@ export class VertexRagDataServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  projectLocationReasoningEngineSessionPath(project:string,location:string,reasoningEngine:string,session:string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.render({
-      project: project,
-      location: location,
-      reasoning_engine: reasoningEngine,
-      session: session,
-    });
+  projectLocationReasoningEngineSessionPath(
+    project: string,
+    location: string,
+    reasoningEngine: string,
+    session: string
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        reasoning_engine: reasoningEngine,
+        session: session,
+      }
+    );
   }
 
   /**
@@ -4879,8 +7656,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_reasoning_engine_session resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).project;
+  matchProjectFromProjectLocationReasoningEngineSessionName(
+    projectLocationReasoningEngineSessionName: string
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(
+      projectLocationReasoningEngineSessionName
+    ).project;
   }
 
   /**
@@ -4890,8 +7671,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_reasoning_engine_session resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).location;
+  matchLocationFromProjectLocationReasoningEngineSessionName(
+    projectLocationReasoningEngineSessionName: string
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(
+      projectLocationReasoningEngineSessionName
+    ).location;
   }
 
   /**
@@ -4901,8 +7686,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_reasoning_engine_session resource.
    * @returns {string} A string representing the reasoning_engine.
    */
-  matchReasoningEngineFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).reasoning_engine;
+  matchReasoningEngineFromProjectLocationReasoningEngineSessionName(
+    projectLocationReasoningEngineSessionName: string
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(
+      projectLocationReasoningEngineSessionName
+    ).reasoning_engine;
   }
 
   /**
@@ -4912,8 +7701,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_reasoning_engine_session resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).session;
+  matchSessionFromProjectLocationReasoningEngineSessionName(
+    projectLocationReasoningEngineSessionName: string
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(
+      projectLocationReasoningEngineSessionName
+    ).session;
   }
 
   /**
@@ -4926,14 +7719,22 @@ export class VertexRagDataServiceClient {
    * @param {string} event
    * @returns {string} Resource name string.
    */
-  projectLocationReasoningEngineSessionEventPath(project:string,location:string,reasoningEngine:string,session:string,event:string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.render({
-      project: project,
-      location: location,
-      reasoning_engine: reasoningEngine,
-      session: session,
-      event: event,
-    });
+  projectLocationReasoningEngineSessionEventPath(
+    project: string,
+    location: string,
+    reasoningEngine: string,
+    session: string,
+    event: string
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        reasoning_engine: reasoningEngine,
+        session: session,
+        event: event,
+      }
+    );
   }
 
   /**
@@ -4943,8 +7744,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).project;
+  matchProjectFromProjectLocationReasoningEngineSessionEventName(
+    projectLocationReasoningEngineSessionEventName: string
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(
+      projectLocationReasoningEngineSessionEventName
+    ).project;
   }
 
   /**
@@ -4954,8 +7759,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).location;
+  matchLocationFromProjectLocationReasoningEngineSessionEventName(
+    projectLocationReasoningEngineSessionEventName: string
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(
+      projectLocationReasoningEngineSessionEventName
+    ).location;
   }
 
   /**
@@ -4965,8 +7774,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
    * @returns {string} A string representing the reasoning_engine.
    */
-  matchReasoningEngineFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).reasoning_engine;
+  matchReasoningEngineFromProjectLocationReasoningEngineSessionEventName(
+    projectLocationReasoningEngineSessionEventName: string
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(
+      projectLocationReasoningEngineSessionEventName
+    ).reasoning_engine;
   }
 
   /**
@@ -4976,8 +7789,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).session;
+  matchSessionFromProjectLocationReasoningEngineSessionEventName(
+    projectLocationReasoningEngineSessionEventName: string
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(
+      projectLocationReasoningEngineSessionEventName
+    ).session;
   }
 
   /**
@@ -4987,8 +7804,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
    * @returns {string} A string representing the event.
    */
-  matchEventFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).event;
+  matchEventFromProjectLocationReasoningEngineSessionEventName(
+    projectLocationReasoningEngineSessionEventName: string
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(
+      projectLocationReasoningEngineSessionEventName
+    ).event;
   }
 
   /**
@@ -4999,7 +7820,11 @@ export class VertexRagDataServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  projectLocationSessionPath(project:string,location:string,session:string) {
+  projectLocationSessionPath(
+    project: string,
+    location: string,
+    session: string
+  ) {
     return this.pathTemplates.projectLocationSessionPathTemplate.render({
       project: project,
       location: location,
@@ -5014,8 +7839,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_session resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSessionName(projectLocationSessionName: string) {
-    return this.pathTemplates.projectLocationSessionPathTemplate.match(projectLocationSessionName).project;
+  matchProjectFromProjectLocationSessionName(
+    projectLocationSessionName: string
+  ) {
+    return this.pathTemplates.projectLocationSessionPathTemplate.match(
+      projectLocationSessionName
+    ).project;
   }
 
   /**
@@ -5025,8 +7854,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_session resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSessionName(projectLocationSessionName: string) {
-    return this.pathTemplates.projectLocationSessionPathTemplate.match(projectLocationSessionName).location;
+  matchLocationFromProjectLocationSessionName(
+    projectLocationSessionName: string
+  ) {
+    return this.pathTemplates.projectLocationSessionPathTemplate.match(
+      projectLocationSessionName
+    ).location;
   }
 
   /**
@@ -5036,8 +7869,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_session resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationSessionName(projectLocationSessionName: string) {
-    return this.pathTemplates.projectLocationSessionPathTemplate.match(projectLocationSessionName).session;
+  matchSessionFromProjectLocationSessionName(
+    projectLocationSessionName: string
+  ) {
+    return this.pathTemplates.projectLocationSessionPathTemplate.match(
+      projectLocationSessionName
+    ).session;
   }
 
   /**
@@ -5049,7 +7886,12 @@ export class VertexRagDataServiceClient {
    * @param {string} event
    * @returns {string} Resource name string.
    */
-  projectLocationSessionEventPath(project:string,location:string,session:string,event:string) {
+  projectLocationSessionEventPath(
+    project: string,
+    location: string,
+    session: string,
+    event: string
+  ) {
     return this.pathTemplates.projectLocationSessionEventPathTemplate.render({
       project: project,
       location: location,
@@ -5065,8 +7907,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_session_event resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
-    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).project;
+  matchProjectFromProjectLocationSessionEventName(
+    projectLocationSessionEventName: string
+  ) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(
+      projectLocationSessionEventName
+    ).project;
   }
 
   /**
@@ -5076,8 +7922,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_session_event resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
-    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).location;
+  matchLocationFromProjectLocationSessionEventName(
+    projectLocationSessionEventName: string
+  ) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(
+      projectLocationSessionEventName
+    ).location;
   }
 
   /**
@@ -5087,8 +7937,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_session_event resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
-    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).session;
+  matchSessionFromProjectLocationSessionEventName(
+    projectLocationSessionEventName: string
+  ) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(
+      projectLocationSessionEventName
+    ).session;
   }
 
   /**
@@ -5098,8 +7952,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing project_location_session_event resource.
    * @returns {string} A string representing the event.
    */
-  matchEventFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
-    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).event;
+  matchEventFromProjectLocationSessionEventName(
+    projectLocationSessionEventName: string
+  ) {
+    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(
+      projectLocationSessionEventName
+    ).event;
   }
 
   /**
@@ -5109,7 +7967,7 @@ export class VertexRagDataServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  publisherModelPath(publisher:string,model:string) {
+  publisherModelPath(publisher: string, model: string) {
     return this.pathTemplates.publisherModelPathTemplate.render({
       publisher: publisher,
       model: model,
@@ -5124,7 +7982,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the publisher.
    */
   matchPublisherFromPublisherModelName(publisherModelName: string) {
-    return this.pathTemplates.publisherModelPathTemplate.match(publisherModelName).publisher;
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).publisher;
   }
 
   /**
@@ -5135,7 +7995,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromPublisherModelName(publisherModelName: string) {
-    return this.pathTemplates.publisherModelPathTemplate.match(publisherModelName).model;
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).model;
   }
 
   /**
@@ -5146,7 +8008,7 @@ export class VertexRagDataServiceClient {
    * @param {string} rag_corpus
    * @returns {string} Resource name string.
    */
-  ragCorpusPath(project:string,location:string,ragCorpus:string) {
+  ragCorpusPath(project: string, location: string, ragCorpus: string) {
     return this.pathTemplates.ragCorpusPathTemplate.render({
       project: project,
       location: location,
@@ -5162,7 +8024,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRagCorpusName(ragCorpusName: string) {
-    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).project;
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .project;
   }
 
   /**
@@ -5173,7 +8036,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRagCorpusName(ragCorpusName: string) {
-    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).location;
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .location;
   }
 
   /**
@@ -5184,7 +8048,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the rag_corpus.
    */
   matchRagCorpusFromRagCorpusName(ragCorpusName: string) {
-    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).rag_corpus;
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .rag_corpus;
   }
 
   /**
@@ -5196,7 +8061,12 @@ export class VertexRagDataServiceClient {
    * @param {string} rag_file
    * @returns {string} Resource name string.
    */
-  ragFilePath(project:string,location:string,ragCorpus:string,ragFile:string) {
+  ragFilePath(
+    project: string,
+    location: string,
+    ragCorpus: string,
+    ragFile: string
+  ) {
     return this.pathTemplates.ragFilePathTemplate.render({
       project: project,
       location: location,
@@ -5257,7 +8127,11 @@ export class VertexRagDataServiceClient {
    * @param {string} reasoning_engine
    * @returns {string} Resource name string.
    */
-  reasoningEnginePath(project:string,location:string,reasoningEngine:string) {
+  reasoningEnginePath(
+    project: string,
+    location: string,
+    reasoningEngine: string
+  ) {
     return this.pathTemplates.reasoningEnginePathTemplate.render({
       project: project,
       location: location,
@@ -5273,7 +8147,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).project;
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).project;
   }
 
   /**
@@ -5284,7 +8160,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).location;
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).location;
   }
 
   /**
@@ -5295,7 +8173,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the reasoning_engine.
    */
   matchReasoningEngineFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).reasoning_engine;
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).reasoning_engine;
   }
 
   /**
@@ -5307,7 +8187,12 @@ export class VertexRagDataServiceClient {
    * @param {string} saved_query
    * @returns {string} Resource name string.
    */
-  savedQueryPath(project:string,location:string,dataset:string,savedQuery:string) {
+  savedQueryPath(
+    project: string,
+    location: string,
+    dataset: string,
+    savedQuery: string
+  ) {
     return this.pathTemplates.savedQueryPathTemplate.render({
       project: project,
       location: location,
@@ -5324,7 +8209,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).project;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
+      .project;
   }
 
   /**
@@ -5335,7 +8221,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).location;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
+      .location;
   }
 
   /**
@@ -5346,7 +8233,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).dataset;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
+      .dataset;
   }
 
   /**
@@ -5357,7 +8245,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the saved_query.
    */
   matchSavedQueryFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).saved_query;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
+      .saved_query;
   }
 
   /**
@@ -5368,7 +8257,7 @@ export class VertexRagDataServiceClient {
    * @param {string} schedule
    * @returns {string} Resource name string.
    */
-  schedulePath(project:string,location:string,schedule:string) {
+  schedulePath(project: string, location: string, schedule: string) {
     return this.pathTemplates.schedulePathTemplate.render({
       project: project,
       location: location,
@@ -5417,7 +8306,11 @@ export class VertexRagDataServiceClient {
    * @param {string} specialist_pool
    * @returns {string} Resource name string.
    */
-  specialistPoolPath(project:string,location:string,specialistPool:string) {
+  specialistPoolPath(
+    project: string,
+    location: string,
+    specialistPool: string
+  ) {
     return this.pathTemplates.specialistPoolPathTemplate.render({
       project: project,
       location: location,
@@ -5433,7 +8326,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).project;
+    return this.pathTemplates.specialistPoolPathTemplate.match(
+      specialistPoolName
+    ).project;
   }
 
   /**
@@ -5444,7 +8339,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).location;
+    return this.pathTemplates.specialistPoolPathTemplate.match(
+      specialistPoolName
+    ).location;
   }
 
   /**
@@ -5455,7 +8352,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the specialist_pool.
    */
   matchSpecialistPoolFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).specialist_pool;
+    return this.pathTemplates.specialistPoolPathTemplate.match(
+      specialistPoolName
+    ).specialist_pool;
   }
 
   /**
@@ -5466,7 +8365,7 @@ export class VertexRagDataServiceClient {
    * @param {string} study
    * @returns {string} Resource name string.
    */
-  studyPath(project:string,location:string,study:string) {
+  studyPath(project: string, location: string, study: string) {
     return this.pathTemplates.studyPathTemplate.render({
       project: project,
       location: location,
@@ -5515,7 +8414,7 @@ export class VertexRagDataServiceClient {
    * @param {string} tensorboard
    * @returns {string} Resource name string.
    */
-  tensorboardPath(project:string,location:string,tensorboard:string) {
+  tensorboardPath(project: string, location: string, tensorboard: string) {
     return this.pathTemplates.tensorboardPathTemplate.render({
       project: project,
       location: location,
@@ -5531,7 +8430,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName).project;
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .project;
   }
 
   /**
@@ -5542,7 +8442,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName).location;
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .location;
   }
 
   /**
@@ -5553,7 +8454,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the tensorboard.
    */
   matchTensorboardFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName).tensorboard;
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .tensorboard;
   }
 
   /**
@@ -5565,7 +8467,12 @@ export class VertexRagDataServiceClient {
    * @param {string} experiment
    * @returns {string} Resource name string.
    */
-  tensorboardExperimentPath(project:string,location:string,tensorboard:string,experiment:string) {
+  tensorboardExperimentPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string
+  ) {
     return this.pathTemplates.tensorboardExperimentPathTemplate.render({
       project: project,
       location: location,
@@ -5582,7 +8489,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardExperimentName(tensorboardExperimentName: string) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).project;
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).project;
   }
 
   /**
@@ -5592,8 +8501,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing TensorboardExperiment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromTensorboardExperimentName(tensorboardExperimentName: string) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).location;
+  matchLocationFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).location;
   }
 
   /**
@@ -5603,8 +8516,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing TensorboardExperiment resource.
    * @returns {string} A string representing the tensorboard.
    */
-  matchTensorboardFromTensorboardExperimentName(tensorboardExperimentName: string) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).tensorboard;
+  matchTensorboardFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).tensorboard;
   }
 
   /**
@@ -5614,8 +8531,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing TensorboardExperiment resource.
    * @returns {string} A string representing the experiment.
    */
-  matchExperimentFromTensorboardExperimentName(tensorboardExperimentName: string) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).experiment;
+  matchExperimentFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).experiment;
   }
 
   /**
@@ -5628,7 +8549,13 @@ export class VertexRagDataServiceClient {
    * @param {string} run
    * @returns {string} Resource name string.
    */
-  tensorboardRunPath(project:string,location:string,tensorboard:string,experiment:string,run:string) {
+  tensorboardRunPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string,
+    run: string
+  ) {
     return this.pathTemplates.tensorboardRunPathTemplate.render({
       project: project,
       location: location,
@@ -5646,7 +8573,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).project;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).project;
   }
 
   /**
@@ -5657,7 +8586,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).location;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).location;
   }
 
   /**
@@ -5668,7 +8599,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the tensorboard.
    */
   matchTensorboardFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).tensorboard;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).tensorboard;
   }
 
   /**
@@ -5679,7 +8612,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the experiment.
    */
   matchExperimentFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).experiment;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).experiment;
   }
 
   /**
@@ -5690,7 +8625,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the run.
    */
   matchRunFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).run;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).run;
   }
 
   /**
@@ -5704,7 +8641,14 @@ export class VertexRagDataServiceClient {
    * @param {string} time_series
    * @returns {string} Resource name string.
    */
-  tensorboardTimeSeriesPath(project:string,location:string,tensorboard:string,experiment:string,run:string,timeSeries:string) {
+  tensorboardTimeSeriesPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string,
+    run: string,
+    timeSeries: string
+  ) {
     return this.pathTemplates.tensorboardTimeSeriesPathTemplate.render({
       project: project,
       location: location,
@@ -5723,7 +8667,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).project;
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).project;
   }
 
   /**
@@ -5733,8 +8679,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).location;
+  matchLocationFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).location;
   }
 
   /**
@@ -5744,8 +8694,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the tensorboard.
    */
-  matchTensorboardFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).tensorboard;
+  matchTensorboardFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).tensorboard;
   }
 
   /**
@@ -5755,8 +8709,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the experiment.
    */
-  matchExperimentFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).experiment;
+  matchExperimentFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).experiment;
   }
 
   /**
@@ -5767,7 +8725,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the run.
    */
   matchRunFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).run;
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).run;
   }
 
   /**
@@ -5777,8 +8737,12 @@ export class VertexRagDataServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the time_series.
    */
-  matchTimeSeriesFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).time_series;
+  matchTimeSeriesFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).time_series;
   }
 
   /**
@@ -5789,7 +8753,11 @@ export class VertexRagDataServiceClient {
    * @param {string} training_pipeline
    * @returns {string} Resource name string.
    */
-  trainingPipelinePath(project:string,location:string,trainingPipeline:string) {
+  trainingPipelinePath(
+    project: string,
+    location: string,
+    trainingPipeline: string
+  ) {
     return this.pathTemplates.trainingPipelinePathTemplate.render({
       project: project,
       location: location,
@@ -5805,7 +8773,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).project;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(
+      trainingPipelineName
+    ).project;
   }
 
   /**
@@ -5816,7 +8786,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).location;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(
+      trainingPipelineName
+    ).location;
   }
 
   /**
@@ -5827,7 +8799,9 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the training_pipeline.
    */
   matchTrainingPipelineFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).training_pipeline;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(
+      trainingPipelineName
+    ).training_pipeline;
   }
 
   /**
@@ -5839,7 +8813,7 @@ export class VertexRagDataServiceClient {
    * @param {string} trial
    * @returns {string} Resource name string.
    */
-  trialPath(project:string,location:string,study:string,trial:string) {
+  trialPath(project: string, location: string, study: string, trial: string) {
     return this.pathTemplates.trialPathTemplate.render({
       project: project,
       location: location,
@@ -5900,7 +8874,7 @@ export class VertexRagDataServiceClient {
    * @param {string} tuning_job
    * @returns {string} Resource name string.
    */
-  tuningJobPath(project:string,location:string,tuningJob:string) {
+  tuningJobPath(project: string, location: string, tuningJob: string) {
     return this.pathTemplates.tuningJobPathTemplate.render({
       project: project,
       location: location,
@@ -5916,7 +8890,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTuningJobName(tuningJobName: string) {
-    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName).project;
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
+      .project;
   }
 
   /**
@@ -5927,7 +8902,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTuningJobName(tuningJobName: string) {
-    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName).location;
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
+      .location;
   }
 
   /**
@@ -5938,7 +8914,8 @@ export class VertexRagDataServiceClient {
    * @returns {string} A string representing the tuning_job.
    */
   matchTuningJobFromTuningJobName(tuningJobName: string) {
-    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName).tuning_job;
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
+      .tuning_job;
   }
 
   /**

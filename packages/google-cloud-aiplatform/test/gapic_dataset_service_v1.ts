@@ -37,7 +37,7 @@ import {
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
 const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json'),
+  require('../protos/protos.json')
 ).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -54,7 +54,7 @@ function generateSampleMessage<T extends object>(instance: T) {
     instance.constructor as typeof protobuf.Message
   ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject,
+    filledObject
   ) as T;
 }
 
@@ -66,7 +66,7 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(
   response?: ResponseType,
-  error?: Error,
+  error?: Error
 ) {
   return error
     ? sinon.stub().callsArgWith(2, error)
@@ -76,7 +76,7 @@ function stubSimpleCallWithCallback<ResponseType>(
 function stubLongRunningCall<ResponseType>(
   response?: ResponseType,
   callError?: Error,
-  lroError?: Error,
+  lroError?: Error
 ) {
   const innerStub = lroError
     ? sinon.stub().rejects(lroError)
@@ -92,7 +92,7 @@ function stubLongRunningCall<ResponseType>(
 function stubLongRunningCallWithCallback<ResponseType>(
   response?: ResponseType,
   callError?: Error,
-  lroError?: Error,
+  lroError?: Error
 ) {
   const innerStub = lroError
     ? sinon.stub().rejects(lroError)
@@ -107,7 +107,7 @@ function stubLongRunningCallWithCallback<ResponseType>(
 
 function stubPageStreamingCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error,
+  error?: Error
 ) {
   const pagingStub = sinon.stub();
   if (responses) {
@@ -145,7 +145,7 @@ function stubPageStreamingCall<ResponseType>(
 
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error,
+  error?: Error
 ) {
   let counter = 0;
   const asyncIterable = {
@@ -384,16 +384,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.GetDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetDatasetRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Dataset(),
+        new protos.google.cloud.aiplatform.v1.Dataset()
       );
       client.innerApiCalls.getDataset = stubSimpleCall(expectedResponse);
       const [response] = await client.getDataset(request);
@@ -415,16 +415,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.GetDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetDatasetRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Dataset(),
+        new protos.google.cloud.aiplatform.v1.Dataset()
       );
       client.innerApiCalls.getDataset =
         stubSimpleCallWithCallback(expectedResponse);
@@ -433,14 +433,14 @@ describe('v1.DatasetServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IDataset | null,
+            result?: protos.google.cloud.aiplatform.v1.IDataset | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -462,18 +462,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.GetDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetDatasetRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataset = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.getDataset(request), expectedError);
       const actualRequest = (
@@ -493,11 +493,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.GetDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetDatasetRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -516,17 +516,17 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest()
       );
       request.dataset ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.UpdateDatasetRequest',
-        ['dataset', 'name'],
+        ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
       const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Dataset(),
+        new protos.google.cloud.aiplatform.v1.Dataset()
       );
       client.innerApiCalls.updateDataset = stubSimpleCall(expectedResponse);
       const [response] = await client.updateDataset(request);
@@ -548,17 +548,17 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest()
       );
       request.dataset ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.UpdateDatasetRequest',
-        ['dataset', 'name'],
+        ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
       const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.Dataset(),
+        new protos.google.cloud.aiplatform.v1.Dataset()
       );
       client.innerApiCalls.updateDataset =
         stubSimpleCallWithCallback(expectedResponse);
@@ -567,14 +567,14 @@ describe('v1.DatasetServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IDataset | null,
+            result?: protos.google.cloud.aiplatform.v1.IDataset | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -596,19 +596,19 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest()
       );
       request.dataset ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.UpdateDatasetRequest',
-        ['dataset', 'name'],
+        ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
       const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataset = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.updateDataset(request), expectedError);
       const actualRequest = (
@@ -628,12 +628,12 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest()
       );
       request.dataset ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.UpdateDatasetRequest',
-        ['dataset', 'name'],
+        ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -652,17 +652,17 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest()
       );
       request.datasetVersion ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest',
-        ['datasetVersion', 'name'],
+        ['datasetVersion', 'name']
       );
       request.datasetVersion.name = defaultValue1;
       const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+        new protos.google.cloud.aiplatform.v1.DatasetVersion()
       );
       client.innerApiCalls.updateDatasetVersion =
         stubSimpleCall(expectedResponse);
@@ -685,17 +685,17 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest()
       );
       request.datasetVersion ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest',
-        ['datasetVersion', 'name'],
+        ['datasetVersion', 'name']
       );
       request.datasetVersion.name = defaultValue1;
       const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+        new protos.google.cloud.aiplatform.v1.DatasetVersion()
       );
       client.innerApiCalls.updateDatasetVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -704,14 +704,14 @@ describe('v1.DatasetServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IDatasetVersion | null,
+            result?: protos.google.cloud.aiplatform.v1.IDatasetVersion | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -733,19 +733,19 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest()
       );
       request.datasetVersion ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest',
-        ['datasetVersion', 'name'],
+        ['datasetVersion', 'name']
       );
       request.datasetVersion.name = defaultValue1;
       const expectedHeaderRequestParams = `dataset_version.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDatasetVersion = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.updateDatasetVersion(request), expectedError);
       const actualRequest = (
@@ -765,12 +765,12 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest()
       );
       request.datasetVersion ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.UpdateDatasetVersionRequest',
-        ['datasetVersion', 'name'],
+        ['datasetVersion', 'name']
       );
       request.datasetVersion.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -789,16 +789,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.GetDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetDatasetVersionRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+        new protos.google.cloud.aiplatform.v1.DatasetVersion()
       );
       client.innerApiCalls.getDatasetVersion = stubSimpleCall(expectedResponse);
       const [response] = await client.getDatasetVersion(request);
@@ -820,16 +820,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.GetDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetDatasetVersionRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+        new protos.google.cloud.aiplatform.v1.DatasetVersion()
       );
       client.innerApiCalls.getDatasetVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -838,14 +838,14 @@ describe('v1.DatasetServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IDatasetVersion | null,
+            result?: protos.google.cloud.aiplatform.v1.IDatasetVersion | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -867,18 +867,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.GetDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetDatasetVersionRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDatasetVersion = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.getDatasetVersion(request), expectedError);
       const actualRequest = (
@@ -898,11 +898,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.GetDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetDatasetVersionRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -921,16 +921,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest(),
+        new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetAnnotationSpecRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.AnnotationSpec(),
+        new protos.google.cloud.aiplatform.v1.AnnotationSpec()
       );
       client.innerApiCalls.getAnnotationSpec = stubSimpleCall(expectedResponse);
       const [response] = await client.getAnnotationSpec(request);
@@ -952,16 +952,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest(),
+        new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetAnnotationSpecRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.AnnotationSpec(),
+        new protos.google.cloud.aiplatform.v1.AnnotationSpec()
       );
       client.innerApiCalls.getAnnotationSpec =
         stubSimpleCallWithCallback(expectedResponse);
@@ -970,14 +970,14 @@ describe('v1.DatasetServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IAnnotationSpec | null,
+            result?: protos.google.cloud.aiplatform.v1.IAnnotationSpec | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -999,18 +999,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest(),
+        new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetAnnotationSpecRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnnotationSpec = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.getAnnotationSpec(request), expectedError);
       const actualRequest = (
@@ -1030,11 +1030,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest(),
+        new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.GetAnnotationSpecRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1053,16 +1053,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateDatasetRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.createDataset =
         stubLongRunningCall(expectedResponse);
@@ -1086,16 +1086,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateDatasetRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.createDataset =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -1107,14 +1107,14 @@ describe('v1.DatasetServiceClient', () => {
             result?: LROperation<
               protos.google.cloud.aiplatform.v1.IDataset,
               protos.google.cloud.aiplatform.v1.ICreateDatasetOperationMetadata
-            > | null,
+            > | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const operation = (await promise) as LROperation<
@@ -1140,18 +1140,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateDatasetRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataset = stubLongRunningCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.createDataset(request), expectedError);
       const actualRequest = (
@@ -1171,11 +1171,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateDatasetRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -1183,7 +1183,7 @@ describe('v1.DatasetServiceClient', () => {
       client.innerApiCalls.createDataset = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError,
+        expectedError
       );
       const [operation] = await client.createDataset(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -1204,7 +1204,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -1212,7 +1212,7 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDatasetProgress(
-        expectedResponse.name,
+        expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -1229,11 +1229,11 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.checkCreateDatasetProgress(''),
-        expectedError,
+        expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -1247,16 +1247,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteDatasetRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.deleteDataset =
         stubLongRunningCall(expectedResponse);
@@ -1280,16 +1280,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteDatasetRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.deleteDataset =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -1301,14 +1301,14 @@ describe('v1.DatasetServiceClient', () => {
             result?: LROperation<
               protos.google.protobuf.IEmpty,
               protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
-            > | null,
+            > | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const operation = (await promise) as LROperation<
@@ -1334,18 +1334,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteDatasetRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataset = stubLongRunningCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.deleteDataset(request), expectedError);
       const actualRequest = (
@@ -1365,11 +1365,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteDatasetRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteDatasetRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -1377,7 +1377,7 @@ describe('v1.DatasetServiceClient', () => {
       client.innerApiCalls.deleteDataset = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError,
+        expectedError
       );
       const [operation] = await client.deleteDataset(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -1398,7 +1398,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -1406,7 +1406,7 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDatasetProgress(
-        expectedResponse.name,
+        expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -1423,11 +1423,11 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.checkDeleteDatasetProgress(''),
-        expectedError,
+        expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -1441,16 +1441,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ImportDataRequest(),
+        new protos.google.cloud.aiplatform.v1.ImportDataRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ImportDataRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.importData = stubLongRunningCall(expectedResponse);
       const [operation] = await client.importData(request);
@@ -1473,16 +1473,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ImportDataRequest(),
+        new protos.google.cloud.aiplatform.v1.ImportDataRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ImportDataRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.importData =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -1494,14 +1494,14 @@ describe('v1.DatasetServiceClient', () => {
             result?: LROperation<
               protos.google.cloud.aiplatform.v1.IImportDataResponse,
               protos.google.cloud.aiplatform.v1.IImportDataOperationMetadata
-            > | null,
+            > | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const operation = (await promise) as LROperation<
@@ -1527,18 +1527,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ImportDataRequest(),
+        new protos.google.cloud.aiplatform.v1.ImportDataRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ImportDataRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importData = stubLongRunningCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.importData(request), expectedError);
       const actualRequest = (
@@ -1558,11 +1558,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ImportDataRequest(),
+        new protos.google.cloud.aiplatform.v1.ImportDataRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ImportDataRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -1570,7 +1570,7 @@ describe('v1.DatasetServiceClient', () => {
       client.innerApiCalls.importData = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError,
+        expectedError
       );
       const [operation] = await client.importData(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -1591,7 +1591,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -1599,7 +1599,7 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportDataProgress(
-        expectedResponse.name,
+        expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -1616,7 +1616,7 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.checkImportDataProgress(''), expectedError);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -1631,16 +1631,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ExportDataRequest(),
+        new protos.google.cloud.aiplatform.v1.ExportDataRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ExportDataRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.exportData = stubLongRunningCall(expectedResponse);
       const [operation] = await client.exportData(request);
@@ -1663,16 +1663,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ExportDataRequest(),
+        new protos.google.cloud.aiplatform.v1.ExportDataRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ExportDataRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.exportData =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -1684,14 +1684,14 @@ describe('v1.DatasetServiceClient', () => {
             result?: LROperation<
               protos.google.cloud.aiplatform.v1.IExportDataResponse,
               protos.google.cloud.aiplatform.v1.IExportDataOperationMetadata
-            > | null,
+            > | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const operation = (await promise) as LROperation<
@@ -1717,18 +1717,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ExportDataRequest(),
+        new protos.google.cloud.aiplatform.v1.ExportDataRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ExportDataRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportData = stubLongRunningCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.exportData(request), expectedError);
       const actualRequest = (
@@ -1748,11 +1748,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ExportDataRequest(),
+        new protos.google.cloud.aiplatform.v1.ExportDataRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ExportDataRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -1760,7 +1760,7 @@ describe('v1.DatasetServiceClient', () => {
       client.innerApiCalls.exportData = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError,
+        expectedError
       );
       const [operation] = await client.exportData(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -1781,7 +1781,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -1789,7 +1789,7 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportDataProgress(
-        expectedResponse.name,
+        expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -1806,7 +1806,7 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.checkExportDataProgress(''), expectedError);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -1821,16 +1821,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateDatasetVersionRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.createDatasetVersion =
         stubLongRunningCall(expectedResponse);
@@ -1854,16 +1854,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateDatasetVersionRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.createDatasetVersion =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -1875,14 +1875,14 @@ describe('v1.DatasetServiceClient', () => {
             result?: LROperation<
               protos.google.cloud.aiplatform.v1.IDatasetVersion,
               protos.google.cloud.aiplatform.v1.ICreateDatasetVersionOperationMetadata
-            > | null,
+            > | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const operation = (await promise) as LROperation<
@@ -1908,18 +1908,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateDatasetVersionRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDatasetVersion = stubLongRunningCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.createDatasetVersion(request), expectedError);
       const actualRequest = (
@@ -1939,11 +1939,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.CreateDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.CreateDatasetVersionRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -1951,7 +1951,7 @@ describe('v1.DatasetServiceClient', () => {
       client.innerApiCalls.createDatasetVersion = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError,
+        expectedError
       );
       const [operation] = await client.createDatasetVersion(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -1972,7 +1972,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -1980,7 +1980,7 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDatasetVersionProgress(
-        expectedResponse.name,
+        expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -1997,11 +1997,11 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.checkCreateDatasetVersionProgress(''),
-        expectedError,
+        expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -2015,16 +2015,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.deleteDatasetVersion =
         stubLongRunningCall(expectedResponse);
@@ -2048,16 +2048,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.deleteDatasetVersion =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -2069,14 +2069,14 @@ describe('v1.DatasetServiceClient', () => {
             result?: LROperation<
               protos.google.protobuf.IEmpty,
               protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
-            > | null,
+            > | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const operation = (await promise) as LROperation<
@@ -2102,18 +2102,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDatasetVersion = stubLongRunningCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.deleteDatasetVersion(request), expectedError);
       const actualRequest = (
@@ -2133,11 +2133,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteDatasetVersionRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -2145,7 +2145,7 @@ describe('v1.DatasetServiceClient', () => {
       client.innerApiCalls.deleteDatasetVersion = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError,
+        expectedError
       );
       const [operation] = await client.deleteDatasetVersion(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -2166,7 +2166,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -2174,7 +2174,7 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDatasetVersionProgress(
-        expectedResponse.name,
+        expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -2191,11 +2191,11 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.checkDeleteDatasetVersionProgress(''),
-        expectedError,
+        expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -2209,16 +2209,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.restoreDatasetVersion =
         stubLongRunningCall(expectedResponse);
@@ -2242,16 +2242,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.restoreDatasetVersion =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -2263,14 +2263,14 @@ describe('v1.DatasetServiceClient', () => {
             result?: LROperation<
               protos.google.cloud.aiplatform.v1.IDatasetVersion,
               protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionOperationMetadata
-            > | null,
+            > | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const operation = (await promise) as LROperation<
@@ -2296,22 +2296,22 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restoreDatasetVersion = stubLongRunningCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.restoreDatasetVersion(request),
-        expectedError,
+        expectedError
       );
       const actualRequest = (
         client.innerApiCalls.restoreDatasetVersion as SinonStub
@@ -2330,11 +2330,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest(),
+        new protos.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.RestoreDatasetVersionRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -2342,7 +2342,7 @@ describe('v1.DatasetServiceClient', () => {
       client.innerApiCalls.restoreDatasetVersion = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError,
+        expectedError
       );
       const [operation] = await client.restoreDatasetVersion(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -2363,7 +2363,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -2371,7 +2371,7 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestoreDatasetVersionProgress(
-        expectedResponse.name,
+        expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -2388,11 +2388,11 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.checkRestoreDatasetVersionProgress(''),
-        expectedError,
+        expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -2406,16 +2406,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteSavedQueryRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteSavedQueryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteSavedQueryRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.deleteSavedQuery =
         stubLongRunningCall(expectedResponse);
@@ -2439,16 +2439,16 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteSavedQueryRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteSavedQueryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteSavedQueryRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
+        new protos.google.longrunning.Operation()
       );
       client.innerApiCalls.deleteSavedQuery =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -2460,14 +2460,14 @@ describe('v1.DatasetServiceClient', () => {
             result?: LROperation<
               protos.google.protobuf.IEmpty,
               protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
-            > | null,
+            > | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const operation = (await promise) as LROperation<
@@ -2493,18 +2493,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteSavedQueryRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteSavedQueryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteSavedQueryRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSavedQuery = stubLongRunningCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.deleteSavedQuery(request), expectedError);
       const actualRequest = (
@@ -2524,11 +2524,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteSavedQueryRequest(),
+        new protos.google.cloud.aiplatform.v1.DeleteSavedQueryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.DeleteSavedQueryRequest',
-        ['name'],
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -2536,7 +2536,7 @@ describe('v1.DatasetServiceClient', () => {
       client.innerApiCalls.deleteSavedQuery = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError,
+        expectedError
       );
       const [operation] = await client.deleteSavedQuery(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -2557,7 +2557,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -2565,7 +2565,7 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSavedQueryProgress(
-        expectedResponse.name,
+        expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -2582,11 +2582,11 @@ describe('v1.DatasetServiceClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.checkDeleteSavedQueryProgress(''),
-        expectedError,
+        expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -2600,11 +2600,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2633,11 +2633,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2653,14 +2653,14 @@ describe('v1.DatasetServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IDataset[] | null,
+            result?: protos.google.cloud.aiplatform.v1.IDataset[] | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -2682,18 +2682,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatasets = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.listDatasets(request), expectedError);
       const actualRequest = (
@@ -2713,11 +2713,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2735,7 +2735,7 @@ describe('v1.DatasetServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.Dataset) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -2749,14 +2749,14 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listDatasets, request),
+          .calledWith(client.innerApiCalls.listDatasets, request)
       );
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2767,18 +2767,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
         undefined,
-        expectedError,
+        expectedError
       );
       const stream = await client.listDatasetsStream(request);
       const promise = new Promise((resolve, reject) => {
@@ -2787,7 +2787,7 @@ describe('v1.DatasetServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.Dataset) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -2800,14 +2800,14 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listDatasets, request),
+          .calledWith(client.innerApiCalls.listDatasets, request)
       );
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2818,11 +2818,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2843,14 +2843,14 @@ describe('v1.DatasetServiceClient', () => {
         (
           client.descriptors.page.listDatasets.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2861,11 +2861,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -2883,14 +2883,14 @@ describe('v1.DatasetServiceClient', () => {
         (
           client.descriptors.page.listDatasets.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2903,23 +2903,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetVersionsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+          new protos.google.cloud.aiplatform.v1.DatasetVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+          new protos.google.cloud.aiplatform.v1.DatasetVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+          new protos.google.cloud.aiplatform.v1.DatasetVersion()
         ),
       ];
       client.innerApiCalls.listDatasetVersions =
@@ -2943,23 +2943,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetVersionsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+          new protos.google.cloud.aiplatform.v1.DatasetVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+          new protos.google.cloud.aiplatform.v1.DatasetVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+          new protos.google.cloud.aiplatform.v1.DatasetVersion()
         ),
       ];
       client.innerApiCalls.listDatasetVersions =
@@ -2969,14 +2969,14 @@ describe('v1.DatasetServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IDatasetVersion[] | null,
+            result?: protos.google.cloud.aiplatform.v1.IDatasetVersion[] | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -2998,18 +2998,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetVersionsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatasetVersions = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.listDatasetVersions(request), expectedError);
       const actualRequest = (
@@ -3029,23 +3029,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetVersionsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+          new protos.google.cloud.aiplatform.v1.DatasetVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+          new protos.google.cloud.aiplatform.v1.DatasetVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+          new protos.google.cloud.aiplatform.v1.DatasetVersion()
         ),
       ];
       client.descriptors.page.listDatasetVersions.createStream =
@@ -3058,7 +3058,7 @@ describe('v1.DatasetServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.DatasetVersion) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -3072,14 +3072,14 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasetVersions.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listDatasetVersions, request),
+          .calledWith(client.innerApiCalls.listDatasetVersions, request)
       );
       assert(
         (client.descriptors.page.listDatasetVersions.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3090,11 +3090,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetVersionsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -3109,7 +3109,7 @@ describe('v1.DatasetServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.DatasetVersion) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -3122,14 +3122,14 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasetVersions.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listDatasetVersions, request),
+          .calledWith(client.innerApiCalls.listDatasetVersions, request)
       );
       assert(
         (client.descriptors.page.listDatasetVersions.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3140,23 +3140,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetVersionsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+          new protos.google.cloud.aiplatform.v1.DatasetVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+          new protos.google.cloud.aiplatform.v1.DatasetVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DatasetVersion(),
+          new protos.google.cloud.aiplatform.v1.DatasetVersion()
         ),
       ];
       client.descriptors.page.listDatasetVersions.asyncIterate =
@@ -3171,14 +3171,14 @@ describe('v1.DatasetServiceClient', () => {
         (
           client.descriptors.page.listDatasetVersions.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listDatasetVersions.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3189,11 +3189,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDatasetVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDatasetVersionsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -3212,14 +3212,14 @@ describe('v1.DatasetServiceClient', () => {
         (
           client.descriptors.page.listDatasetVersions.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listDatasetVersions.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3232,11 +3232,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDataItemsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -3265,11 +3265,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDataItemsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -3285,14 +3285,14 @@ describe('v1.DatasetServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IDataItem[] | null,
+            result?: protos.google.cloud.aiplatform.v1.IDataItem[] | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -3314,18 +3314,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDataItemsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataItems = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.listDataItems(request), expectedError);
       const actualRequest = (
@@ -3345,11 +3345,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDataItemsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -3367,7 +3367,7 @@ describe('v1.DatasetServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.DataItem) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -3381,14 +3381,14 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listDataItems, request),
+          .calledWith(client.innerApiCalls.listDataItems, request)
       );
       assert(
         (client.descriptors.page.listDataItems.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3399,11 +3399,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDataItemsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -3417,7 +3417,7 @@ describe('v1.DatasetServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.DataItem) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -3430,14 +3430,14 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listDataItems, request),
+          .calledWith(client.innerApiCalls.listDataItems, request)
       );
       assert(
         (client.descriptors.page.listDataItems.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3448,11 +3448,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDataItemsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -3473,14 +3473,14 @@ describe('v1.DatasetServiceClient', () => {
         (
           client.descriptors.page.listDataItems.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listDataItems.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3491,11 +3491,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListDataItemsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -3513,14 +3513,14 @@ describe('v1.DatasetServiceClient', () => {
         (
           client.descriptors.page.listDataItems.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listDataItems.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3533,23 +3533,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.SearchDataItemsRequest',
-        ['dataset'],
+        ['dataset']
       );
       request.dataset = defaultValue1;
       const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DataItemView(),
+          new protos.google.cloud.aiplatform.v1.DataItemView()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DataItemView(),
+          new protos.google.cloud.aiplatform.v1.DataItemView()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DataItemView(),
+          new protos.google.cloud.aiplatform.v1.DataItemView()
         ),
       ];
       client.innerApiCalls.searchDataItems = stubSimpleCall(expectedResponse);
@@ -3572,23 +3572,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.SearchDataItemsRequest',
-        ['dataset'],
+        ['dataset']
       );
       request.dataset = defaultValue1;
       const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DataItemView(),
+          new protos.google.cloud.aiplatform.v1.DataItemView()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DataItemView(),
+          new protos.google.cloud.aiplatform.v1.DataItemView()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DataItemView(),
+          new protos.google.cloud.aiplatform.v1.DataItemView()
         ),
       ];
       client.innerApiCalls.searchDataItems =
@@ -3598,14 +3598,14 @@ describe('v1.DatasetServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IDataItemView[] | null,
+            result?: protos.google.cloud.aiplatform.v1.IDataItemView[] | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -3627,18 +3627,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.SearchDataItemsRequest',
-        ['dataset'],
+        ['dataset']
       );
       request.dataset = defaultValue1;
       const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchDataItems = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.searchDataItems(request), expectedError);
       const actualRequest = (
@@ -3658,23 +3658,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.SearchDataItemsRequest',
-        ['dataset'],
+        ['dataset']
       );
       request.dataset = defaultValue1;
       const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DataItemView(),
+          new protos.google.cloud.aiplatform.v1.DataItemView()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DataItemView(),
+          new protos.google.cloud.aiplatform.v1.DataItemView()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DataItemView(),
+          new protos.google.cloud.aiplatform.v1.DataItemView()
         ),
       ];
       client.descriptors.page.searchDataItems.createStream =
@@ -3686,7 +3686,7 @@ describe('v1.DatasetServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.DataItemView) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -3700,14 +3700,14 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataItems.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.searchDataItems, request),
+          .calledWith(client.innerApiCalls.searchDataItems, request)
       );
       assert(
         (client.descriptors.page.searchDataItems.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3718,11 +3718,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.SearchDataItemsRequest',
-        ['dataset'],
+        ['dataset']
       );
       request.dataset = defaultValue1;
       const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
@@ -3736,7 +3736,7 @@ describe('v1.DatasetServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.DataItemView) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -3749,14 +3749,14 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.searchDataItems.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.searchDataItems, request),
+          .calledWith(client.innerApiCalls.searchDataItems, request)
       );
       assert(
         (client.descriptors.page.searchDataItems.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3767,23 +3767,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.SearchDataItemsRequest',
-        ['dataset'],
+        ['dataset']
       );
       request.dataset = defaultValue1;
       const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DataItemView(),
+          new protos.google.cloud.aiplatform.v1.DataItemView()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DataItemView(),
+          new protos.google.cloud.aiplatform.v1.DataItemView()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.DataItemView(),
+          new protos.google.cloud.aiplatform.v1.DataItemView()
         ),
       ];
       client.descriptors.page.searchDataItems.asyncIterate =
@@ -3798,14 +3798,14 @@ describe('v1.DatasetServiceClient', () => {
         (
           client.descriptors.page.searchDataItems.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.searchDataItems.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3816,11 +3816,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest(),
+        new protos.google.cloud.aiplatform.v1.SearchDataItemsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.SearchDataItemsRequest',
-        ['dataset'],
+        ['dataset']
       );
       request.dataset = defaultValue1;
       const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
@@ -3838,14 +3838,14 @@ describe('v1.DatasetServiceClient', () => {
         (
           client.descriptors.page.searchDataItems.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.searchDataItems.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3858,23 +3858,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListSavedQueriesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SavedQuery(),
+          new protos.google.cloud.aiplatform.v1.SavedQuery()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SavedQuery(),
+          new protos.google.cloud.aiplatform.v1.SavedQuery()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SavedQuery(),
+          new protos.google.cloud.aiplatform.v1.SavedQuery()
         ),
       ];
       client.innerApiCalls.listSavedQueries = stubSimpleCall(expectedResponse);
@@ -3897,23 +3897,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListSavedQueriesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SavedQuery(),
+          new protos.google.cloud.aiplatform.v1.SavedQuery()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SavedQuery(),
+          new protos.google.cloud.aiplatform.v1.SavedQuery()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SavedQuery(),
+          new protos.google.cloud.aiplatform.v1.SavedQuery()
         ),
       ];
       client.innerApiCalls.listSavedQueries =
@@ -3923,14 +3923,14 @@ describe('v1.DatasetServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ISavedQuery[] | null,
+            result?: protos.google.cloud.aiplatform.v1.ISavedQuery[] | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -3952,18 +3952,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListSavedQueriesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSavedQueries = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.listSavedQueries(request), expectedError);
       const actualRequest = (
@@ -3983,23 +3983,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListSavedQueriesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SavedQuery(),
+          new protos.google.cloud.aiplatform.v1.SavedQuery()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SavedQuery(),
+          new protos.google.cloud.aiplatform.v1.SavedQuery()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SavedQuery(),
+          new protos.google.cloud.aiplatform.v1.SavedQuery()
         ),
       ];
       client.descriptors.page.listSavedQueries.createStream =
@@ -4011,7 +4011,7 @@ describe('v1.DatasetServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.SavedQuery) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -4025,14 +4025,14 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listSavedQueries.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listSavedQueries, request),
+          .calledWith(client.innerApiCalls.listSavedQueries, request)
       );
       assert(
         (client.descriptors.page.listSavedQueries.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4043,11 +4043,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListSavedQueriesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -4061,7 +4061,7 @@ describe('v1.DatasetServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.SavedQuery) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -4074,14 +4074,14 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listSavedQueries.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listSavedQueries, request),
+          .calledWith(client.innerApiCalls.listSavedQueries, request)
       );
       assert(
         (client.descriptors.page.listSavedQueries.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4092,23 +4092,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListSavedQueriesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SavedQuery(),
+          new protos.google.cloud.aiplatform.v1.SavedQuery()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SavedQuery(),
+          new protos.google.cloud.aiplatform.v1.SavedQuery()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SavedQuery(),
+          new protos.google.cloud.aiplatform.v1.SavedQuery()
         ),
       ];
       client.descriptors.page.listSavedQueries.asyncIterate =
@@ -4123,14 +4123,14 @@ describe('v1.DatasetServiceClient', () => {
         (
           client.descriptors.page.listSavedQueries.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listSavedQueries.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4141,11 +4141,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest(),
+        new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListSavedQueriesRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -4163,14 +4163,14 @@ describe('v1.DatasetServiceClient', () => {
         (
           client.descriptors.page.listSavedQueries.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listSavedQueries.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4183,23 +4183,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListAnnotationsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.Annotation(),
+          new protos.google.cloud.aiplatform.v1.Annotation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.Annotation(),
+          new protos.google.cloud.aiplatform.v1.Annotation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.Annotation(),
+          new protos.google.cloud.aiplatform.v1.Annotation()
         ),
       ];
       client.innerApiCalls.listAnnotations = stubSimpleCall(expectedResponse);
@@ -4222,23 +4222,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListAnnotationsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.Annotation(),
+          new protos.google.cloud.aiplatform.v1.Annotation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.Annotation(),
+          new protos.google.cloud.aiplatform.v1.Annotation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.Annotation(),
+          new protos.google.cloud.aiplatform.v1.Annotation()
         ),
       ];
       client.innerApiCalls.listAnnotations =
@@ -4248,14 +4248,14 @@ describe('v1.DatasetServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.IAnnotation[] | null,
+            result?: protos.google.cloud.aiplatform.v1.IAnnotation[] | null
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          },
+          }
         );
       });
       const response = await promise;
@@ -4277,18 +4277,18 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListAnnotationsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnnotations = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(client.listAnnotations(request), expectedError);
       const actualRequest = (
@@ -4308,23 +4308,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListAnnotationsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.Annotation(),
+          new protos.google.cloud.aiplatform.v1.Annotation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.Annotation(),
+          new protos.google.cloud.aiplatform.v1.Annotation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.Annotation(),
+          new protos.google.cloud.aiplatform.v1.Annotation()
         ),
       ];
       client.descriptors.page.listAnnotations.createStream =
@@ -4336,7 +4336,7 @@ describe('v1.DatasetServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.Annotation) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -4350,14 +4350,14 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listAnnotations.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAnnotations, request),
+          .calledWith(client.innerApiCalls.listAnnotations, request)
       );
       assert(
         (client.descriptors.page.listAnnotations.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4368,11 +4368,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListAnnotationsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -4386,7 +4386,7 @@ describe('v1.DatasetServiceClient', () => {
           'data',
           (response: protos.google.cloud.aiplatform.v1.Annotation) => {
             responses.push(response);
-          },
+          }
         );
         stream.on('end', () => {
           resolve(responses);
@@ -4399,14 +4399,14 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.descriptors.page.listAnnotations.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAnnotations, request),
+          .calledWith(client.innerApiCalls.listAnnotations, request)
       );
       assert(
         (client.descriptors.page.listAnnotations.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4417,23 +4417,23 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListAnnotationsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.Annotation(),
+          new protos.google.cloud.aiplatform.v1.Annotation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.Annotation(),
+          new protos.google.cloud.aiplatform.v1.Annotation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.Annotation(),
+          new protos.google.cloud.aiplatform.v1.Annotation()
         ),
       ];
       client.descriptors.page.listAnnotations.asyncIterate =
@@ -4448,14 +4448,14 @@ describe('v1.DatasetServiceClient', () => {
         (
           client.descriptors.page.listAnnotations.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listAnnotations.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4466,11 +4466,11 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest(),
+        new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.aiplatform.v1.ListAnnotationsRequest',
-        ['parent'],
+        ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
@@ -4488,14 +4488,14 @@ describe('v1.DatasetServiceClient', () => {
         (
           client.descriptors.page.listAnnotations.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (client.descriptors.page.listAnnotations.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4507,7 +4507,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest(),
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -4519,7 +4519,7 @@ describe('v1.DatasetServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy(),
+        new IamProtos.google.iam.v1.Policy()
       );
       client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
       const response = await client.getIamPolicy(request, expectedOptions);
@@ -4527,7 +4527,7 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.iamClient.getIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
     it('invokes getIamPolicy without error using callback', async () => {
@@ -4537,7 +4537,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest(),
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -4549,7 +4549,7 @@ describe('v1.DatasetServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy(),
+        new IamProtos.google.iam.v1.Policy()
       );
       client.iamClient.getIamPolicy = sinon
         .stub()
@@ -4561,14 +4561,14 @@ describe('v1.DatasetServiceClient', () => {
             expectedOptions,
             (
               err?: Error | null,
-              result?: IamProtos.google.iam.v1.Policy | null,
+              result?: IamProtos.google.iam.v1.Policy | null
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            },
+            }
           )
           .catch(err => {
             throw err;
@@ -4585,7 +4585,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest(),
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -4600,12 +4600,12 @@ describe('v1.DatasetServiceClient', () => {
       client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
       await assert.rejects(
         client.getIamPolicy(request, expectedOptions),
-        expectedError,
+        expectedError
       );
       assert(
         (client.iamClient.getIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
   });
@@ -4617,7 +4617,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest(),
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -4629,7 +4629,7 @@ describe('v1.DatasetServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy(),
+        new IamProtos.google.iam.v1.Policy()
       );
       client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
       const response = await client.setIamPolicy(request, expectedOptions);
@@ -4637,7 +4637,7 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.iamClient.setIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
     it('invokes setIamPolicy without error using callback', async () => {
@@ -4647,7 +4647,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest(),
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -4659,7 +4659,7 @@ describe('v1.DatasetServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy(),
+        new IamProtos.google.iam.v1.Policy()
       );
       client.iamClient.setIamPolicy = sinon
         .stub()
@@ -4671,14 +4671,14 @@ describe('v1.DatasetServiceClient', () => {
             expectedOptions,
             (
               err?: Error | null,
-              result?: IamProtos.google.iam.v1.Policy | null,
+              result?: IamProtos.google.iam.v1.Policy | null
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            },
+            }
           )
           .catch(err => {
             throw err;
@@ -4695,7 +4695,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest(),
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -4710,12 +4710,12 @@ describe('v1.DatasetServiceClient', () => {
       client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
       await assert.rejects(
         client.setIamPolicy(request, expectedOptions),
-        expectedError,
+        expectedError
       );
       assert(
         (client.iamClient.setIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
   });
@@ -4727,7 +4727,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest(),
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -4739,18 +4739,18 @@ describe('v1.DatasetServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse(),
+        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
       );
       client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
       const response = await client.testIamPermissions(
         request,
-        expectedOptions,
+        expectedOptions
       );
       assert.deepStrictEqual(response, [expectedResponse]);
       assert(
         (client.iamClient.testIamPermissions as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
     it('invokes testIamPermissions without error using callback', async () => {
@@ -4760,7 +4760,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest(),
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -4772,7 +4772,7 @@ describe('v1.DatasetServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse(),
+        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
       );
       client.iamClient.testIamPermissions = sinon
         .stub()
@@ -4784,14 +4784,14 @@ describe('v1.DatasetServiceClient', () => {
             expectedOptions,
             (
               err?: Error | null,
-              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null,
+              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            },
+            }
           )
           .catch(err => {
             throw err;
@@ -4808,7 +4808,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest(),
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -4822,16 +4822,16 @@ describe('v1.DatasetServiceClient', () => {
       const expectedError = new Error('expected');
       client.iamClient.testIamPermissions = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.testIamPermissions(request, expectedOptions),
-        expectedError,
+        expectedError
       );
       assert(
         (client.iamClient.testIamPermissions as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
   });
@@ -4843,7 +4843,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest(),
+        new LocationProtos.google.cloud.location.GetLocationRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -4855,7 +4855,7 @@ describe('v1.DatasetServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location(),
+        new LocationProtos.google.cloud.location.Location()
       );
       client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
       const response = await client.getLocation(request, expectedOptions);
@@ -4863,7 +4863,7 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.locationsClient.getLocation as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
     it('invokes getLocation without error using callback', async () => {
@@ -4873,7 +4873,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest(),
+        new LocationProtos.google.cloud.location.GetLocationRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -4885,7 +4885,7 @@ describe('v1.DatasetServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location(),
+        new LocationProtos.google.cloud.location.Location()
       );
       client.locationsClient.getLocation = sinon
         .stub()
@@ -4897,14 +4897,14 @@ describe('v1.DatasetServiceClient', () => {
             expectedOptions,
             (
               err?: Error | null,
-              result?: LocationProtos.google.cloud.location.ILocation | null,
+              result?: LocationProtos.google.cloud.location.ILocation | null
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            },
+            }
           )
           .catch(err => {
             throw err;
@@ -4921,7 +4921,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest(),
+        new LocationProtos.google.cloud.location.GetLocationRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -4935,16 +4935,16 @@ describe('v1.DatasetServiceClient', () => {
       const expectedError = new Error('expected');
       client.locationsClient.getLocation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(
         client.getLocation(request, expectedOptions),
-        expectedError,
+        expectedError
       );
       assert(
         (client.locationsClient.getLocation as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined),
+          .calledWith(request, expectedOptions, undefined)
       );
     });
   });
@@ -4956,19 +4956,19 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest(),
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
       const expectedResponse = [
         generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location(),
+          new LocationProtos.google.cloud.location.Location()
         ),
         generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location(),
+          new LocationProtos.google.cloud.location.Location()
         ),
         generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location(),
+          new LocationProtos.google.cloud.location.Location()
         ),
       ];
       client.locationsClient.descriptors.page.listLocations.asyncIterate =
@@ -4984,7 +4984,7 @@ describe('v1.DatasetServiceClient', () => {
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (
@@ -4993,8 +4993,8 @@ describe('v1.DatasetServiceClient', () => {
         )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams,
-          ),
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -5004,7 +5004,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest(),
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -5023,7 +5023,7 @@ describe('v1.DatasetServiceClient', () => {
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
       assert(
         (
@@ -5032,8 +5032,8 @@ describe('v1.DatasetServiceClient', () => {
         )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams,
-          ),
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5045,10 +5045,10 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest(),
+        new operationsProtos.google.longrunning.GetOperationRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const response = await client.getOperation(request);
@@ -5056,7 +5056,7 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.operationsClient.getOperation as SinonStub)
           .getCall(0)
-          .calledWith(request),
+          .calledWith(request)
       );
     });
     it('invokes getOperation without error using callback', async () => {
@@ -5065,10 +5065,10 @@ describe('v1.DatasetServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest(),
+        new operationsProtos.google.longrunning.GetOperationRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
+        new operationsProtos.google.longrunning.Operation()
       );
       client.operationsClient.getOperation = sinon
         .stub()
@@ -5080,14 +5080,14 @@ describe('v1.DatasetServiceClient', () => {
             undefined,
             (
               err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null,
+              result?: operationsProtos.google.longrunning.Operation | null
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            },
+            }
           )
           .catch(err => {
             throw err;
@@ -5103,12 +5103,12 @@ describe('v1.DatasetServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest(),
+        new operationsProtos.google.longrunning.GetOperationRequest()
       );
       const expectedError = new Error('expected');
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(async () => {
         await client.getOperation(request);
@@ -5116,7 +5116,7 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.operationsClient.getOperation as SinonStub)
           .getCall(0)
-          .calledWith(request),
+          .calledWith(request)
       );
     });
   });
@@ -5128,10 +5128,10 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest(),
+        new operationsProtos.google.longrunning.CancelOperationRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty(),
+        new protos.google.protobuf.Empty()
       );
       client.operationsClient.cancelOperation =
         stubSimpleCall(expectedResponse);
@@ -5140,7 +5140,7 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.operationsClient.cancelOperation as SinonStub)
           .getCall(0)
-          .calledWith(request),
+          .calledWith(request)
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
@@ -5149,10 +5149,10 @@ describe('v1.DatasetServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest(),
+        new operationsProtos.google.longrunning.CancelOperationRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty(),
+        new protos.google.protobuf.Empty()
       );
       client.operationsClient.cancelOperation = sinon
         .stub()
@@ -5164,14 +5164,14 @@ describe('v1.DatasetServiceClient', () => {
             undefined,
             (
               err?: Error | null,
-              result?: protos.google.protobuf.Empty | null,
+              result?: protos.google.protobuf.Empty | null
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            },
+            }
           )
           .catch(err => {
             throw err;
@@ -5187,12 +5187,12 @@ describe('v1.DatasetServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest(),
+        new operationsProtos.google.longrunning.CancelOperationRequest()
       );
       const expectedError = new Error('expected');
       client.operationsClient.cancelOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(async () => {
         await client.cancelOperation(request);
@@ -5200,7 +5200,7 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.operationsClient.cancelOperation as SinonStub)
           .getCall(0)
-          .calledWith(request),
+          .calledWith(request)
       );
     });
   });
@@ -5212,10 +5212,10 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty(),
+        new protos.google.protobuf.Empty()
       );
       client.operationsClient.deleteOperation =
         stubSimpleCall(expectedResponse);
@@ -5224,7 +5224,7 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.operationsClient.deleteOperation as SinonStub)
           .getCall(0)
-          .calledWith(request),
+          .calledWith(request)
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
@@ -5233,10 +5233,10 @@ describe('v1.DatasetServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty(),
+        new protos.google.protobuf.Empty()
       );
       client.operationsClient.deleteOperation = sinon
         .stub()
@@ -5248,14 +5248,14 @@ describe('v1.DatasetServiceClient', () => {
             undefined,
             (
               err?: Error | null,
-              result?: protos.google.protobuf.Empty | null,
+              result?: protos.google.protobuf.Empty | null
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            },
+            }
           )
           .catch(err => {
             throw err;
@@ -5271,12 +5271,12 @@ describe('v1.DatasetServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
       const expectedError = new Error('expected');
       client.operationsClient.deleteOperation = stubSimpleCall(
         undefined,
-        expectedError,
+        expectedError
       );
       await assert.rejects(async () => {
         await client.deleteOperation(request);
@@ -5284,7 +5284,7 @@ describe('v1.DatasetServiceClient', () => {
       assert(
         (client.operationsClient.deleteOperation as SinonStub)
           .getCall(0)
-          .calledWith(request),
+          .calledWith(request)
       );
     });
   });
@@ -5295,17 +5295,17 @@ describe('v1.DatasetServiceClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest(),
+        new operationsProtos.google.longrunning.ListOperationsRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse(),
+          new operationsProtos.google.longrunning.ListOperationsResponse()
         ),
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse(),
+          new operationsProtos.google.longrunning.ListOperationsResponse()
         ),
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse(),
+          new operationsProtos.google.longrunning.ListOperationsResponse()
         ),
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
@@ -5322,7 +5322,7 @@ describe('v1.DatasetServiceClient', () => {
           client.operationsClient.descriptor.listOperations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
     });
     it('uses async iteration with listOperations with error', async () => {
@@ -5332,7 +5332,7 @@ describe('v1.DatasetServiceClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest(),
+        new operationsProtos.google.longrunning.ListOperationsRequest()
       );
       const expectedError = new Error('expected');
       client.operationsClient.descriptor.listOperations.asyncIterate =
@@ -5350,7 +5350,7 @@ describe('v1.DatasetServiceClient', () => {
           client.operationsClient.descriptor.listOperations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request,
+        request
       );
     });
   });
@@ -5383,13 +5383,13 @@ describe('v1.DatasetServiceClient', () => {
           'locationValue',
           'datasetValue',
           'dataItemValue',
-          'annotationValue',
+          'annotationValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.annotationPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5399,7 +5399,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.annotationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5409,7 +5409,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.annotationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5419,7 +5419,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.annotationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5429,7 +5429,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.annotationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5439,7 +5439,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.annotationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5469,13 +5469,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'datasetValue',
-          'annotationSpecValue',
+          'annotationSpecValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5486,7 +5486,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5497,7 +5497,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5508,7 +5508,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5519,7 +5519,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5549,13 +5549,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'metadataStoreValue',
-          'artifactValue',
+          'artifactValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.artifactPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5565,7 +5565,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.artifactPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5575,7 +5575,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.artifactPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5586,7 +5586,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.artifactPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5596,7 +5596,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.artifactPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5624,7 +5624,7 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.batchPredictionJobPath(
           'projectValue',
           'locationValue',
-          'batchPredictionJobValue',
+          'batchPredictionJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -5633,7 +5633,7 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5647,7 +5647,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5661,14 +5661,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', async () => {
         const result =
           await client.matchBatchPredictionJobFromBatchPredictionJobName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
@@ -5677,7 +5677,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5705,13 +5705,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.cachedContentPath(
           'projectValue',
           'locationValue',
-          'cachedContentValue',
+          'cachedContentValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.cachedContentPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5721,7 +5721,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5732,7 +5732,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5743,7 +5743,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.cachedContentPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5773,13 +5773,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'metadataStoreValue',
-          'contextValue',
+          'contextValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.contextPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5789,7 +5789,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.contextPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5799,7 +5799,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.contextPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5809,7 +5809,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.contextPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5819,7 +5819,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.contextPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5847,13 +5847,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.customJobPath(
           'projectValue',
           'locationValue',
-          'customJobValue',
+          'customJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.customJobPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5863,7 +5863,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.customJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5873,7 +5873,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.customJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5883,7 +5883,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.customJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5913,13 +5913,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'datasetValue',
-          'dataItemValue',
+          'dataItemValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.dataItemPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -5929,7 +5929,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5939,7 +5939,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5949,7 +5949,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -5959,7 +5959,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.dataItemPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -5987,13 +5987,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.dataLabelingJobPath(
           'projectValue',
           'locationValue',
-          'dataLabelingJobValue',
+          'dataLabelingJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6004,7 +6004,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6015,7 +6015,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6026,7 +6026,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6054,13 +6054,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.datasetPath(
           'projectValue',
           'locationValue',
-          'datasetValue',
+          'datasetValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.datasetPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6070,7 +6070,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.datasetPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6080,7 +6080,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.datasetPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6090,7 +6090,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.datasetPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6120,13 +6120,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'datasetValue',
-          'datasetVersionValue',
+          'datasetVersionValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.datasetVersionPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6137,7 +6137,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6148,7 +6148,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6159,7 +6159,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6170,7 +6170,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.datasetVersionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6198,7 +6198,7 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.deploymentResourcePoolPath(
           'projectValue',
           'locationValue',
-          'deploymentResourcePoolValue',
+          'deploymentResourcePoolValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6207,7 +6207,7 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6221,7 +6221,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6235,14 +6235,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchDeploymentResourcePoolFromDeploymentResourcePoolName', async () => {
         const result =
           await client.matchDeploymentResourcePoolFromDeploymentResourcePoolName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'deploymentResourcePoolValue');
         assert(
@@ -6251,7 +6251,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6281,13 +6281,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'featurestoreValue',
-          'entityTypeValue',
+          'entityTypeValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.entityTypePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6297,7 +6297,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6307,7 +6307,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6318,7 +6318,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6328,7 +6328,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6358,13 +6358,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'metadataStoreValue',
-          'executionValue',
+          'executionValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.executionPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6374,7 +6374,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.executionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6384,7 +6384,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.executionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6395,7 +6395,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.executionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6405,7 +6405,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.executionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6433,13 +6433,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.featureGroupPath(
           'projectValue',
           'locationValue',
-          'featureGroupValue',
+          'featureGroupValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.featureGroupPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6449,7 +6449,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6459,7 +6459,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6470,7 +6470,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featureGroupPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6498,7 +6498,7 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.featureOnlineStorePath(
           'projectValue',
           'locationValue',
-          'featureOnlineStoreValue',
+          'featureOnlineStoreValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6507,7 +6507,7 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6521,7 +6521,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6535,14 +6535,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchFeatureOnlineStoreFromFeatureOnlineStoreName', async () => {
         const result =
           await client.matchFeatureOnlineStoreFromFeatureOnlineStoreName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'featureOnlineStoreValue');
         assert(
@@ -6551,7 +6551,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6581,13 +6581,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'featureOnlineStoreValue',
-          'featureViewValue',
+          'featureViewValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.featureViewPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6597,7 +6597,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6607,7 +6607,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6618,7 +6618,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6629,7 +6629,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6659,13 +6659,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'featureOnlineStoreValue',
-          'featureViewValue',
+          'featureViewValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.featureViewSyncPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6676,7 +6676,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6687,7 +6687,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6698,7 +6698,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6709,7 +6709,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featureViewSyncPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6737,13 +6737,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.featurestorePath(
           'projectValue',
           'locationValue',
-          'featurestoreValue',
+          'featurestoreValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.featurestorePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6753,7 +6753,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6763,7 +6763,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6774,7 +6774,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6802,7 +6802,7 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.hyperparameterTuningJobPath(
           'projectValue',
           'locationValue',
-          'hyperparameterTuningJobValue',
+          'hyperparameterTuningJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -6811,7 +6811,7 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6825,7 +6825,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6839,14 +6839,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', async () => {
         const result =
           await client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
@@ -6855,7 +6855,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6883,13 +6883,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.indexPath(
           'projectValue',
           'locationValue',
-          'indexValue',
+          'indexValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.indexPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6899,7 +6899,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.indexPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6909,7 +6909,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.indexPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6919,7 +6919,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.indexPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -6947,13 +6947,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.indexEndpointPath(
           'projectValue',
           'locationValue',
-          'indexEndpointValue',
+          'indexEndpointValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.indexEndpointPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -6963,7 +6963,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6974,7 +6974,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -6985,7 +6985,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7011,13 +7011,13 @@ describe('v1.DatasetServiceClient', () => {
       it('locationPath', async () => {
         const result = await client.locationPath(
           'projectValue',
-          'locationValue',
+          'locationValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.locationPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7027,7 +7027,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7037,7 +7037,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7067,13 +7067,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'metadataStoreValue',
-          'metadataSchemaValue',
+          'metadataSchemaValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7084,7 +7084,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7095,7 +7095,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7106,7 +7106,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7117,7 +7117,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7145,13 +7145,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.metadataStorePath(
           'projectValue',
           'locationValue',
-          'metadataStoreValue',
+          'metadataStoreValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.metadataStorePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7161,7 +7161,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7172,7 +7172,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7183,7 +7183,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7211,13 +7211,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.modelPath(
           'projectValue',
           'locationValue',
-          'modelValue',
+          'modelValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.modelPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7227,7 +7227,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.modelPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7237,7 +7237,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.modelPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7247,7 +7247,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.modelPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7273,7 +7273,7 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.modelDeploymentMonitoringJobPath(
           'projectValue',
           'locationValue',
-          'modelDeploymentMonitoringJobValue',
+          'modelDeploymentMonitoringJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7282,14 +7282,14 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelDeploymentMonitoringJobName', async () => {
         const result =
           await client.matchProjectFromModelDeploymentMonitoringJobName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'projectValue');
         assert(
@@ -7298,14 +7298,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelDeploymentMonitoringJobName', async () => {
         const result =
           await client.matchLocationFromModelDeploymentMonitoringJobName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -7314,14 +7314,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', async () => {
         const result =
           await client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
         assert(
@@ -7330,7 +7330,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7360,13 +7360,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'modelValue',
-          'evaluationValue',
+          'evaluationValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7377,7 +7377,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7388,7 +7388,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7398,7 +7398,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7409,7 +7409,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7441,7 +7441,7 @@ describe('v1.DatasetServiceClient', () => {
           'locationValue',
           'modelValue',
           'evaluationValue',
-          'sliceValue',
+          'sliceValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7450,7 +7450,7 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7464,7 +7464,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7478,7 +7478,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7492,7 +7492,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7506,7 +7506,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7520,7 +7520,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7548,13 +7548,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.nasJobPath(
           'projectValue',
           'locationValue',
-          'nasJobValue',
+          'nasJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.nasJobPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7564,7 +7564,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7574,7 +7574,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7584,7 +7584,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.nasJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7614,13 +7614,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'nasJobValue',
-          'nasTrialDetailValue',
+          'nasTrialDetailValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.nasTrialDetailPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7631,7 +7631,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7642,7 +7642,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7652,7 +7652,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7663,7 +7663,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.nasTrialDetailPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7691,7 +7691,7 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.notebookExecutionJobPath(
           'projectValue',
           'locationValue',
-          'notebookExecutionJobValue',
+          'notebookExecutionJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7700,7 +7700,7 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7714,7 +7714,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7728,14 +7728,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchNotebookExecutionJobFromNotebookExecutionJobName', async () => {
         const result =
           await client.matchNotebookExecutionJobFromNotebookExecutionJobName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'notebookExecutionJobValue');
         assert(
@@ -7744,7 +7744,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7772,13 +7772,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.notebookRuntimePath(
           'projectValue',
           'locationValue',
-          'notebookRuntimeValue',
+          'notebookRuntimeValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.notebookRuntimePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7789,7 +7789,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7800,7 +7800,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7811,7 +7811,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.notebookRuntimePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7839,7 +7839,7 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.notebookRuntimeTemplatePath(
           'projectValue',
           'locationValue',
-          'notebookRuntimeTemplateValue',
+          'notebookRuntimeTemplateValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7848,7 +7848,7 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7862,7 +7862,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7876,14 +7876,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName', async () => {
         const result =
           await client.matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'notebookRuntimeTemplateValue');
         assert(
@@ -7892,7 +7892,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -7920,7 +7920,7 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.persistentResourcePath(
           'projectValue',
           'locationValue',
-          'persistentResourceValue',
+          'persistentResourceValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -7929,7 +7929,7 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -7943,7 +7943,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -7957,14 +7957,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchPersistentResourceFromPersistentResourceName', async () => {
         const result =
           await client.matchPersistentResourceFromPersistentResourceName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'persistentResourceValue');
         assert(
@@ -7973,7 +7973,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8001,13 +8001,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.pipelineJobPath(
           'projectValue',
           'locationValue',
-          'pipelineJobValue',
+          'pipelineJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.pipelineJobPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -8017,7 +8017,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8027,7 +8027,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8038,7 +8038,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8066,7 +8066,7 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.projectLocationEndpointPath(
           'projectValue',
           'locationValue',
-          'endpointValue',
+          'endpointValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -8075,7 +8075,7 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -8089,7 +8089,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8103,7 +8103,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8117,7 +8117,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8145,7 +8145,7 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'featureGroupValue',
-          'featureValue',
+          'featureValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -8154,14 +8154,14 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationFeatureGroupFeatureName', async () => {
         const result =
           await client.matchProjectFromProjectLocationFeatureGroupFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'projectValue');
         assert(
@@ -8170,14 +8170,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationFeatureGroupFeatureName', async () => {
         const result =
           await client.matchLocationFromProjectLocationFeatureGroupFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -8186,14 +8186,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchFeatureGroupFromProjectLocationFeatureGroupFeatureName', async () => {
         const result =
           await client.matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'featureGroupValue');
         assert(
@@ -8202,14 +8202,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchFeatureFromProjectLocationFeatureGroupFeatureName', async () => {
         const result =
           await client.matchFeatureFromProjectLocationFeatureGroupFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'featureValue');
         assert(
@@ -8218,7 +8218,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8250,7 +8250,7 @@ describe('v1.DatasetServiceClient', () => {
             'locationValue',
             'featurestoreValue',
             'entityTypeValue',
-            'featureValue',
+            'featureValue'
           );
         assert.strictEqual(result, fakePath);
         assert(
@@ -8260,14 +8260,14 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
         const result =
           await client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'projectValue');
         assert(
@@ -8277,14 +8277,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
         const result =
           await client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -8294,14 +8294,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
         const result =
           await client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'featurestoreValue');
         assert(
@@ -8311,14 +8311,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
         const result =
           await client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'entityTypeValue');
         assert(
@@ -8328,14 +8328,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName', async () => {
         const result =
           await client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'featureValue');
         assert(
@@ -8345,7 +8345,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8373,7 +8373,7 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'publisherValue',
-          'modelValue',
+          'modelValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -8382,14 +8382,14 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationPublisherModelName', async () => {
         const result =
           await client.matchProjectFromProjectLocationPublisherModelName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'projectValue');
         assert(
@@ -8398,14 +8398,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationPublisherModelName', async () => {
         const result =
           await client.matchLocationFromProjectLocationPublisherModelName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -8414,14 +8414,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchPublisherFromProjectLocationPublisherModelName', async () => {
         const result =
           await client.matchPublisherFromProjectLocationPublisherModelName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'publisherValue');
         assert(
@@ -8430,14 +8430,14 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
       it('matchModelFromProjectLocationPublisherModelName', async () => {
         const result =
           await client.matchModelFromProjectLocationPublisherModelName(
-            fakePath,
+            fakePath
           );
         assert.strictEqual(result, 'modelValue');
         assert(
@@ -8446,7 +8446,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8472,13 +8472,13 @@ describe('v1.DatasetServiceClient', () => {
       it('publisherModelPath', async () => {
         const result = await client.publisherModelPath(
           'publisherValue',
-          'modelValue',
+          'modelValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.publisherModelPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -8489,7 +8489,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8499,7 +8499,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.publisherModelPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8527,13 +8527,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.ragCorpusPath(
           'projectValue',
           'locationValue',
-          'ragCorpusValue',
+          'ragCorpusValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.ragCorpusPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -8543,7 +8543,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8553,7 +8553,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8563,7 +8563,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8593,13 +8593,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'ragCorpusValue',
-          'ragFileValue',
+          'ragFileValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.ragFilePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -8609,7 +8609,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8619,7 +8619,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8629,7 +8629,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8639,7 +8639,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.ragFilePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8667,13 +8667,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.reasoningEnginePath(
           'projectValue',
           'locationValue',
-          'reasoningEngineValue',
+          'reasoningEngineValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.reasoningEnginePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -8684,7 +8684,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8695,7 +8695,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8706,7 +8706,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8736,13 +8736,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'datasetValue',
-          'savedQueryValue',
+          'savedQueryValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.savedQueryPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -8752,7 +8752,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8762,7 +8762,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8772,7 +8772,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8782,7 +8782,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8810,13 +8810,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.schedulePath(
           'projectValue',
           'locationValue',
-          'scheduleValue',
+          'scheduleValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.schedulePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -8826,7 +8826,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.schedulePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8836,7 +8836,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.schedulePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8846,7 +8846,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.schedulePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8874,13 +8874,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.specialistPoolPath(
           'projectValue',
           'locationValue',
-          'specialistPoolValue',
+          'specialistPoolValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -8891,7 +8891,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8902,7 +8902,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8913,7 +8913,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -8941,13 +8941,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.studyPath(
           'projectValue',
           'locationValue',
-          'studyValue',
+          'studyValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.studyPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -8957,7 +8957,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.studyPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8967,7 +8967,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.studyPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -8977,7 +8977,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.studyPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -9005,13 +9005,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.tensorboardPath(
           'projectValue',
           'locationValue',
-          'tensorboardValue',
+          'tensorboardValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.tensorboardPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -9021,7 +9021,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9031,7 +9031,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9042,7 +9042,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -9072,7 +9072,7 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'tensorboardValue',
-          'experimentValue',
+          'experimentValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -9081,7 +9081,7 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -9095,7 +9095,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9109,7 +9109,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9123,7 +9123,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9137,7 +9137,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -9169,13 +9169,13 @@ describe('v1.DatasetServiceClient', () => {
           'locationValue',
           'tensorboardValue',
           'experimentValue',
-          'runValue',
+          'runValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.tensorboardRunPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -9186,7 +9186,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9197,7 +9197,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9208,7 +9208,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9219,7 +9219,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9229,7 +9229,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -9263,7 +9263,7 @@ describe('v1.DatasetServiceClient', () => {
           'tensorboardValue',
           'experimentValue',
           'runValue',
-          'timeSeriesValue',
+          'timeSeriesValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -9272,7 +9272,7 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -9286,7 +9286,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9300,7 +9300,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9314,7 +9314,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9328,7 +9328,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9342,7 +9342,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9356,7 +9356,7 @@ describe('v1.DatasetServiceClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -9384,7 +9384,7 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.trainingPipelinePath(
           'projectValue',
           'locationValue',
-          'trainingPipelineValue',
+          'trainingPipelineValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -9393,7 +9393,7 @@ describe('v1.DatasetServiceClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -9404,7 +9404,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9415,7 +9415,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9426,7 +9426,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -9456,13 +9456,13 @@ describe('v1.DatasetServiceClient', () => {
           'projectValue',
           'locationValue',
           'studyValue',
-          'trialValue',
+          'trialValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.trialPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -9472,7 +9472,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.trialPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9482,7 +9482,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.trialPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9492,7 +9492,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.trialPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9502,7 +9502,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.trialPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
@@ -9530,13 +9530,13 @@ describe('v1.DatasetServiceClient', () => {
         const result = await client.tuningJobPath(
           'projectValue',
           'locationValue',
-          'tuningJobValue',
+          'tuningJobValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.tuningJobPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters),
+            .calledWith(expectedParameters)
         );
       });
 
@@ -9546,7 +9546,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9556,7 +9556,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
 
@@ -9566,7 +9566,7 @@ describe('v1.DatasetServiceClient', () => {
         assert(
           (client.pathTemplates.tuningJobPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath),
+            .calledWith(fakePath)
         );
       });
     });
