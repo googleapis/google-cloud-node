@@ -11364,14 +11364,17 @@ export class DatasetServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
+    console.log('in close??')
+    console.log(this.datasetServiceStub)
+    console.log(!this._terminated);
     if (this.datasetServiceStub && !this._terminated) {
       return this.datasetServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.iamClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();
