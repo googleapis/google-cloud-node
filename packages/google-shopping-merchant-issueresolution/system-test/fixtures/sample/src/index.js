@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const issueresolution = require('@google-cloud/issueresolution');
 
 function main() {
-  const issueResolutionServiceClient = new issueresolution.IssueResolutionServiceClient();
+  const issueResolutionServiceClient =
+    new issueresolution.IssueResolutionServiceClient();
 }
 
 main();
