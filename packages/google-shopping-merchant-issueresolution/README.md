@@ -86,7 +86,8 @@ npm install @google-cloud/issueresolution
 // const payload = {}
 
 // Imports the Issueresolution library
-const {IssueResolutionServiceClient} = require('@google-cloud/issueresolution').v1beta;
+const {IssueResolutionServiceClient} =
+  require('@google-cloud/issueresolution').v1beta;
 
 // Instantiates a client
 const issueresolutionClient = new IssueResolutionServiceClient();
