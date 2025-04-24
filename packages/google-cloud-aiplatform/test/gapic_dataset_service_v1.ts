@@ -192,9 +192,6 @@ describe('v1.DatasetServiceClient', () => {
       console.log('AFTER API ENDPOINT CALL');
       console.log(apiEndpoint);
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
-      client.close().catch(err => {
-        throw err;
-      });
     });
 
     it('has universeDomain', async () => {
