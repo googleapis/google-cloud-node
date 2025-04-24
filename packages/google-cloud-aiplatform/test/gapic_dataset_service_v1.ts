@@ -167,31 +167,30 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v1.DatasetServiceClient', () => {
-  let googleAuth: GoogleAuth;
-  beforeEach(() => {
-    googleAuth = {
-      getClient: sinon.stub().resolves({
-        getRequestHeaders: sinon
-          .stub()
-          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
-      }),
-    } as unknown as GoogleAuth;
-  });
-  afterEach(() => {
-    sinon.restore();
-  });
+  // let googleAuth: GoogleAuth;
+  // beforeEach(async () => {
+  //   googleAuth = {
+  //     getClient: sinon.stub().resolves({
+  //       getRequestHeaders: sinon
+  //         .stub()
+  //         .resolves({Authorization: 'Bearer SOME_TOKEN'}),
+  //     }),
+  //   } as unknown as GoogleAuth;
+  // });
+  // afterEach(() => {
+  //   sinon.restore();
+  // });
   describe('Common methods', () => {
     it.only('has apiEndpoint', async () => {
       console.log('BEFORE CLIENT CREATION');
-      const client = new datasetserviceModule.v1.DatasetServiceClient({
-        auth: googleAuth,
-      });
+      const client = new datasetserviceModule.v1.DatasetServiceClient();
       console.log('AFTER CLIENT CREATION');
       console.log(client);
       const apiEndpoint = await client.apiEndpoint;
       console.log('AFTER API ENDPOINT CALL');
       console.log(apiEndpoint);
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+      client.close().catch(err => {throw err})
     });
 
     // it('has universeDomain', async () => {
