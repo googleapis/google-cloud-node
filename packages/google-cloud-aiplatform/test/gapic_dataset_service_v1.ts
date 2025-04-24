@@ -190,7 +190,7 @@ describe('v1.DatasetServiceClient', () => {
       console.log('AFTER API ENDPOINT CALL');
       console.log(apiEndpoint);
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
-      await client.close()
+      await client.close();
       console.log(client);
     });
 

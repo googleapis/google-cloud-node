@@ -118,7 +118,7 @@ export class DatasetServiceClient {
    */
   constructor(
     opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback,
+    gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DatasetServiceClient;
@@ -128,7 +128,7 @@ export class DatasetServiceClient {
       opts?.universe_domain !== opts?.universeDomain
     ) {
       throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.',
+        'Please set either universe_domain or universeDomain, but not both.'
       );
     }
     const universeDomainEnvVar =
@@ -192,7 +192,7 @@ export class DatasetServiceClient {
 
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts,
+      opts
     );
 
     // Determine the client header string.
@@ -218,173 +218,173 @@ export class DatasetServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       annotationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/datasets/{dataset}/dataItems/{data_item}/annotations/{annotation}',
+        'projects/{project}/locations/{location}/datasets/{dataset}/dataItems/{data_item}/annotations/{annotation}'
       ),
       annotationSpecPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}',
+        'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
       ),
       artifactPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/artifacts/{artifact}',
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/artifacts/{artifact}'
       ),
       batchPredictionJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}',
+        'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}'
       ),
       cachedContentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/cachedContents/{cached_content}',
+        'projects/{project}/locations/{location}/cachedContents/{cached_content}'
       ),
       contextPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}',
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}'
       ),
       customJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/customJobs/{custom_job}',
+        'projects/{project}/locations/{location}/customJobs/{custom_job}'
       ),
       dataItemPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/datasets/{dataset}/dataItems/{data_item}',
+        'projects/{project}/locations/{location}/datasets/{dataset}/dataItems/{data_item}'
       ),
       dataLabelingJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}',
+        'projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}'
       ),
       datasetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/datasets/{dataset}',
+        'projects/{project}/locations/{location}/datasets/{dataset}'
       ),
       datasetVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}',
+        'projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}'
       ),
       deploymentResourcePoolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}',
+        'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}'
       ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}',
+        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
       executionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}',
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
       ),
       featureGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featureGroups/{feature_group}',
+        'projects/{project}/locations/{location}/featureGroups/{feature_group}'
       ),
       featureOnlineStorePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}',
+        'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}'
       ),
       featureViewPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}',
+        'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}'
       ),
       featureViewSyncPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}/featureViewSyncs/feature_view_sync',
+        'projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}/featureViewSyncs/feature_view_sync'
       ),
       featurestorePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featurestores/{featurestore}',
+        'projects/{project}/locations/{location}/featurestores/{featurestore}'
       ),
       hyperparameterTuningJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}',
+        'projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}'
       ),
       indexPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/indexes/{index}',
+        'projects/{project}/locations/{location}/indexes/{index}'
       ),
       indexEndpointPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}',
+        'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}',
+        'projects/{project}/locations/{location}'
       ),
       metadataSchemaPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/metadataSchemas/{metadata_schema}',
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/metadataSchemas/{metadata_schema}'
       ),
       metadataStorePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataStores/{metadata_store}',
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}'
       ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/models/{model}',
+        'projects/{project}/locations/{location}/models/{model}'
       ),
       modelDeploymentMonitoringJobPathTemplate:
         new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}',
+          'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
         ),
       modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}',
+        'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}'
       ),
       modelEvaluationSlicePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}',
+        'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}'
       ),
       nasJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/nasJobs/{nas_job}',
+        'projects/{project}/locations/{location}/nasJobs/{nas_job}'
       ),
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}',
+        'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
       ),
       notebookExecutionJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/notebookExecutionJobs/{notebook_execution_job}',
+        'projects/{project}/locations/{location}/notebookExecutionJobs/{notebook_execution_job}'
       ),
       notebookRuntimePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/notebookRuntimes/{notebook_runtime}',
+        'projects/{project}/locations/{location}/notebookRuntimes/{notebook_runtime}'
       ),
       notebookRuntimeTemplatePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}',
+        'projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}'
       ),
       persistentResourcePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/persistentResources/{persistent_resource}',
+        'projects/{project}/locations/{location}/persistentResources/{persistent_resource}'
       ),
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}',
+        'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
       projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/endpoints/{endpoint}',
+        'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
       projectLocationFeatureGroupFeaturePathTemplate:
         new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}',
+          'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
         ),
       projectLocationFeaturestoreEntityTypeFeaturePathTemplate:
         new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}',
+          'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
         ),
       projectLocationPublisherModelPathTemplate:
         new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}',
+          'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
         ),
       publisherModelPathTemplate: new this._gaxModule.PathTemplate(
-        'publishers/{publisher}/models/{model}',
+        'publishers/{publisher}/models/{model}'
       ),
       ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}',
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
       ),
       ragFilePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}',
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
       ),
       reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}',
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
       ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}',
+        'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
       ),
       schedulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schedules/{schedule}',
+        'projects/{project}/locations/{location}/schedules/{schedule}'
       ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/specialistPools/{specialist_pool}',
+        'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
       studyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/studies/{study}',
+        'projects/{project}/locations/{location}/studies/{study}'
       ),
       tensorboardPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tensorboards/{tensorboard}',
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}'
       ),
       tensorboardExperimentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}',
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}'
       ),
       tensorboardRunPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}',
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}'
       ),
       tensorboardTimeSeriesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}',
+        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}'
       ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}',
+        'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
       ),
       trialPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/studies/{study}/trials/{trial}',
+        'projects/{project}/locations/{location}/studies/{study}/trials/{trial}'
       ),
       tuningJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tuningJobs/{tuning_job}',
+        'projects/{project}/locations/{location}/tuningJobs/{tuning_job}'
       ),
     };
 
@@ -395,32 +395,32 @@ export class DatasetServiceClient {
       listDatasets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'datasets',
+        'datasets'
       ),
       listDatasetVersions: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'datasetVersions',
+        'datasetVersions'
       ),
       listDataItems: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'dataItems',
+        'dataItems'
       ),
       searchDataItems: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'dataItemViews',
+        'dataItemViews'
       ),
       listSavedQueries: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'savedQueries',
+        'savedQueries'
       ),
       listAnnotations: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'annotations',
+        'annotations'
       ),
     };
 
@@ -2025,98 +2025,96 @@ export class DatasetServiceClient {
       .lro(lroOptions)
       .operationsClient(opts);
     const createDatasetResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.Dataset',
+      '.google.cloud.aiplatform.v1.Dataset'
     ) as gax.protobuf.Type;
     const createDatasetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.CreateDatasetOperationMetadata',
+      '.google.cloud.aiplatform.v1.CreateDatasetOperationMetadata'
     ) as gax.protobuf.Type;
     const deleteDatasetResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty',
+      '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteDatasetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DeleteOperationMetadata',
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
     const importDataResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.ImportDataResponse',
+      '.google.cloud.aiplatform.v1.ImportDataResponse'
     ) as gax.protobuf.Type;
     const importDataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.ImportDataOperationMetadata',
+      '.google.cloud.aiplatform.v1.ImportDataOperationMetadata'
     ) as gax.protobuf.Type;
     const exportDataResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.ExportDataResponse',
+      '.google.cloud.aiplatform.v1.ExportDataResponse'
     ) as gax.protobuf.Type;
     const exportDataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.ExportDataOperationMetadata',
+      '.google.cloud.aiplatform.v1.ExportDataOperationMetadata'
     ) as gax.protobuf.Type;
     const createDatasetVersionResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DatasetVersion',
+      '.google.cloud.aiplatform.v1.DatasetVersion'
     ) as gax.protobuf.Type;
     const createDatasetVersionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.CreateDatasetVersionOperationMetadata',
+      '.google.cloud.aiplatform.v1.CreateDatasetVersionOperationMetadata'
     ) as gax.protobuf.Type;
     const deleteDatasetVersionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty',
+      '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteDatasetVersionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DeleteOperationMetadata',
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
     const restoreDatasetVersionResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DatasetVersion',
+      '.google.cloud.aiplatform.v1.DatasetVersion'
     ) as gax.protobuf.Type;
     const restoreDatasetVersionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.RestoreDatasetVersionOperationMetadata',
+      '.google.cloud.aiplatform.v1.RestoreDatasetVersionOperationMetadata'
     ) as gax.protobuf.Type;
     const deleteSavedQueryResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty',
+      '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteSavedQueryMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DeleteOperationMetadata',
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDataset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createDatasetResponse.decode.bind(createDatasetResponse),
-        createDatasetMetadata.decode.bind(createDatasetMetadata),
+        createDatasetMetadata.decode.bind(createDatasetMetadata)
       ),
       deleteDataset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDatasetResponse.decode.bind(deleteDatasetResponse),
-        deleteDatasetMetadata.decode.bind(deleteDatasetMetadata),
+        deleteDatasetMetadata.decode.bind(deleteDatasetMetadata)
       ),
       importData: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDataResponse.decode.bind(importDataResponse),
-        importDataMetadata.decode.bind(importDataMetadata),
+        importDataMetadata.decode.bind(importDataMetadata)
       ),
       exportData: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportDataResponse.decode.bind(exportDataResponse),
-        exportDataMetadata.decode.bind(exportDataMetadata),
+        exportDataMetadata.decode.bind(exportDataMetadata)
       ),
       createDatasetVersion: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createDatasetVersionResponse.decode.bind(createDatasetVersionResponse),
-        createDatasetVersionMetadata.decode.bind(createDatasetVersionMetadata),
+        createDatasetVersionMetadata.decode.bind(createDatasetVersionMetadata)
       ),
       deleteDatasetVersion: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDatasetVersionResponse.decode.bind(deleteDatasetVersionResponse),
-        deleteDatasetVersionMetadata.decode.bind(deleteDatasetVersionMetadata),
+        deleteDatasetVersionMetadata.decode.bind(deleteDatasetVersionMetadata)
       ),
       restoreDatasetVersion: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         restoreDatasetVersionResponse.decode.bind(
-          restoreDatasetVersionResponse,
+          restoreDatasetVersionResponse
         ),
-        restoreDatasetVersionMetadata.decode.bind(
-          restoreDatasetVersionMetadata,
-        ),
+        restoreDatasetVersionMetadata.decode.bind(restoreDatasetVersionMetadata)
       ),
       deleteSavedQuery: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteSavedQueryResponse.decode.bind(deleteSavedQueryResponse),
-        deleteSavedQueryMetadata.decode.bind(deleteSavedQueryMetadata),
+        deleteSavedQueryMetadata.decode.bind(deleteSavedQueryMetadata)
       ),
     };
 
@@ -2125,7 +2123,7 @@ export class DatasetServiceClient {
       'google.cloud.aiplatform.v1.DatasetService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      {'x-goog-api-client': clientHeader.join(' ')}
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -2159,12 +2157,12 @@ export class DatasetServiceClient {
     this.datasetServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.aiplatform.v1.DatasetService',
+            'google.cloud.aiplatform.v1.DatasetService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.aiplatform.v1.DatasetService,
       this._opts,
-      this._providedCustomServicePath,
+      this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -2202,7 +2200,7 @@ export class DatasetServiceClient {
           },
         (err: Error | null | undefined) => () => {
           throw err;
-        },
+        }
       );
 
       const descriptor =
@@ -2213,7 +2211,7 @@ export class DatasetServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -2234,7 +2232,7 @@ export class DatasetServiceClient {
     ) {
       process.emitWarning(
         'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning',
+        'DeprecationWarning'
       );
     }
     return 'aiplatform.googleapis.com';
@@ -2252,7 +2250,7 @@ export class DatasetServiceClient {
     ) {
       process.emitWarning(
         'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning',
+        'DeprecationWarning'
       );
     }
     return 'aiplatform.googleapis.com';
@@ -2294,7 +2292,7 @@ export class DatasetServiceClient {
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
   getProjectId(
-    callback?: Callback<string, undefined, undefined>,
+    callback?: Callback<string, undefined, undefined>
   ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
@@ -2326,7 +2324,7 @@ export class DatasetServiceClient {
    */
   getDataset(
     request?: protos.google.cloud.aiplatform.v1.IGetDatasetRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDataset,
@@ -2341,7 +2339,7 @@ export class DatasetServiceClient {
       protos.google.cloud.aiplatform.v1.IDataset,
       protos.google.cloud.aiplatform.v1.IGetDatasetRequest | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   getDataset(
     request: protos.google.cloud.aiplatform.v1.IGetDatasetRequest,
@@ -2349,7 +2347,7 @@ export class DatasetServiceClient {
       protos.google.cloud.aiplatform.v1.IDataset,
       protos.google.cloud.aiplatform.v1.IGetDatasetRequest | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   getDataset(
     request?: protos.google.cloud.aiplatform.v1.IGetDatasetRequest,
@@ -2366,7 +2364,7 @@ export class DatasetServiceClient {
       protos.google.cloud.aiplatform.v1.IDataset,
       protos.google.cloud.aiplatform.v1.IGetDatasetRequest | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDataset,
@@ -2417,7 +2415,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('getDataset response %j', response);
           return [response, options, rawResponse];
-        },
+        }
       );
   }
   /**
@@ -2446,7 +2444,7 @@ export class DatasetServiceClient {
    */
   updateDataset(
     request?: protos.google.cloud.aiplatform.v1.IUpdateDatasetRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDataset,
@@ -2463,7 +2461,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   updateDataset(
     request: protos.google.cloud.aiplatform.v1.IUpdateDatasetRequest,
@@ -2473,7 +2471,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   updateDataset(
     request?: protos.google.cloud.aiplatform.v1.IUpdateDatasetRequest,
@@ -2492,7 +2490,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDataset,
@@ -2543,7 +2541,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('updateDataset response %j', response);
           return [response, options, rawResponse];
-        },
+        }
       );
   }
   /**
@@ -2570,7 +2568,7 @@ export class DatasetServiceClient {
    */
   updateDatasetVersion(
     request?: protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDatasetVersion,
@@ -2590,7 +2588,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   updateDatasetVersion(
     request: protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest,
@@ -2600,7 +2598,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   updateDatasetVersion(
     request?: protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest,
@@ -2619,7 +2617,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDatasetVersion,
@@ -2676,7 +2674,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('updateDatasetVersion response %j', response);
           return [response, options, rawResponse];
-        },
+        }
       );
   }
   /**
@@ -2701,7 +2699,7 @@ export class DatasetServiceClient {
    */
   getDatasetVersion(
     request?: protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDatasetVersion,
@@ -2718,7 +2716,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   getDatasetVersion(
     request: protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest,
@@ -2728,7 +2726,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   getDatasetVersion(
     request?: protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest,
@@ -2747,7 +2745,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDatasetVersion,
@@ -2801,7 +2799,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('getDatasetVersion response %j', response);
           return [response, options, rawResponse];
-        },
+        }
       );
   }
   /**
@@ -2826,7 +2824,7 @@ export class DatasetServiceClient {
    */
   getAnnotationSpec(
     request?: protos.google.cloud.aiplatform.v1.IGetAnnotationSpecRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IAnnotationSpec,
@@ -2843,7 +2841,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   getAnnotationSpec(
     request: protos.google.cloud.aiplatform.v1.IGetAnnotationSpecRequest,
@@ -2853,7 +2851,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   getAnnotationSpec(
     request?: protos.google.cloud.aiplatform.v1.IGetAnnotationSpecRequest,
@@ -2872,7 +2870,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IAnnotationSpec,
@@ -2926,7 +2924,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('getAnnotationSpec response %j', response);
           return [response, options, rawResponse];
-        },
+        }
       );
   }
 
@@ -2953,7 +2951,7 @@ export class DatasetServiceClient {
    */
   createDataset(
     request?: protos.google.cloud.aiplatform.v1.ICreateDatasetRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -2974,7 +2972,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   createDataset(
     request: protos.google.cloud.aiplatform.v1.ICreateDatasetRequest,
@@ -2985,7 +2983,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   createDataset(
     request?: protos.google.cloud.aiplatform.v1.ICreateDatasetRequest,
@@ -3006,7 +3004,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       LROperation<
@@ -3064,7 +3062,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('createDataset response %j', rawResponse);
           return [response, rawResponse, _];
-        },
+        }
       );
   }
   /**
@@ -3079,7 +3077,7 @@ export class DatasetServiceClient {
    * region_tag:aiplatform_v1_generated_DatasetService_CreateDataset_async
    */
   async checkCreateDatasetProgress(
-    name: string,
+    name: string
   ): Promise<
     LROperation<
       protos.google.cloud.aiplatform.v1.Dataset,
@@ -3089,13 +3087,13 @@ export class DatasetServiceClient {
     this._log.info('createDataset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        {name}
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createDataset,
-      this._gaxModule.createDefaultBackoffSettings(),
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.Dataset,
@@ -3124,7 +3122,7 @@ export class DatasetServiceClient {
    */
   deleteDataset(
     request?: protos.google.cloud.aiplatform.v1.IDeleteDatasetRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -3145,7 +3143,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   deleteDataset(
     request: protos.google.cloud.aiplatform.v1.IDeleteDatasetRequest,
@@ -3156,7 +3154,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   deleteDataset(
     request?: protos.google.cloud.aiplatform.v1.IDeleteDatasetRequest,
@@ -3177,7 +3175,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       LROperation<
@@ -3235,7 +3233,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('deleteDataset response %j', rawResponse);
           return [response, rawResponse, _];
-        },
+        }
       );
   }
   /**
@@ -3250,7 +3248,7 @@ export class DatasetServiceClient {
    * region_tag:aiplatform_v1_generated_DatasetService_DeleteDataset_async
    */
   async checkDeleteDatasetProgress(
-    name: string,
+    name: string
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
@@ -3260,13 +3258,13 @@ export class DatasetServiceClient {
     this._log.info('deleteDataset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        {name}
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteDataset,
-      this._gaxModule.createDefaultBackoffSettings(),
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3298,7 +3296,7 @@ export class DatasetServiceClient {
    */
   importData(
     request?: protos.google.cloud.aiplatform.v1.IImportDataRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -3319,7 +3317,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   importData(
     request: protos.google.cloud.aiplatform.v1.IImportDataRequest,
@@ -3330,7 +3328,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   importData(
     request?: protos.google.cloud.aiplatform.v1.IImportDataRequest,
@@ -3351,7 +3349,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       LROperation<
@@ -3409,7 +3407,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('importData response %j', rawResponse);
           return [response, rawResponse, _];
-        },
+        }
       );
   }
   /**
@@ -3424,7 +3422,7 @@ export class DatasetServiceClient {
    * region_tag:aiplatform_v1_generated_DatasetService_ImportData_async
    */
   async checkImportDataProgress(
-    name: string,
+    name: string
   ): Promise<
     LROperation<
       protos.google.cloud.aiplatform.v1.ImportDataResponse,
@@ -3434,13 +3432,13 @@ export class DatasetServiceClient {
     this._log.info('importData long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        {name}
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.importData,
-      this._gaxModule.createDefaultBackoffSettings(),
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.ImportDataResponse,
@@ -3471,7 +3469,7 @@ export class DatasetServiceClient {
    */
   exportData(
     request?: protos.google.cloud.aiplatform.v1.IExportDataRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -3492,7 +3490,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   exportData(
     request: protos.google.cloud.aiplatform.v1.IExportDataRequest,
@@ -3503,7 +3501,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   exportData(
     request?: protos.google.cloud.aiplatform.v1.IExportDataRequest,
@@ -3524,7 +3522,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       LROperation<
@@ -3582,7 +3580,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('exportData response %j', rawResponse);
           return [response, rawResponse, _];
-        },
+        }
       );
   }
   /**
@@ -3597,7 +3595,7 @@ export class DatasetServiceClient {
    * region_tag:aiplatform_v1_generated_DatasetService_ExportData_async
    */
   async checkExportDataProgress(
-    name: string,
+    name: string
   ): Promise<
     LROperation<
       protos.google.cloud.aiplatform.v1.ExportDataResponse,
@@ -3607,13 +3605,13 @@ export class DatasetServiceClient {
     this._log.info('exportData long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        {name}
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.exportData,
-      this._gaxModule.createDefaultBackoffSettings(),
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.ExportDataResponse,
@@ -3646,7 +3644,7 @@ export class DatasetServiceClient {
    */
   createDatasetVersion(
     request?: protos.google.cloud.aiplatform.v1.ICreateDatasetVersionRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -3667,7 +3665,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   createDatasetVersion(
     request: protos.google.cloud.aiplatform.v1.ICreateDatasetVersionRequest,
@@ -3678,7 +3676,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   createDatasetVersion(
     request?: protos.google.cloud.aiplatform.v1.ICreateDatasetVersionRequest,
@@ -3699,7 +3697,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       LROperation<
@@ -3757,7 +3755,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('createDatasetVersion response %j', rawResponse);
           return [response, rawResponse, _];
-        },
+        }
       );
   }
   /**
@@ -3772,7 +3770,7 @@ export class DatasetServiceClient {
    * region_tag:aiplatform_v1_generated_DatasetService_CreateDatasetVersion_async
    */
   async checkCreateDatasetVersionProgress(
-    name: string,
+    name: string
   ): Promise<
     LROperation<
       protos.google.cloud.aiplatform.v1.DatasetVersion,
@@ -3782,13 +3780,13 @@ export class DatasetServiceClient {
     this._log.info('createDatasetVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        {name}
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createDatasetVersion,
-      this._gaxModule.createDefaultBackoffSettings(),
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.DatasetVersion,
@@ -3817,7 +3815,7 @@ export class DatasetServiceClient {
    */
   deleteDatasetVersion(
     request?: protos.google.cloud.aiplatform.v1.IDeleteDatasetVersionRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -3838,7 +3836,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   deleteDatasetVersion(
     request: protos.google.cloud.aiplatform.v1.IDeleteDatasetVersionRequest,
@@ -3849,7 +3847,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   deleteDatasetVersion(
     request?: protos.google.cloud.aiplatform.v1.IDeleteDatasetVersionRequest,
@@ -3870,7 +3868,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       LROperation<
@@ -3928,7 +3926,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('deleteDatasetVersion response %j', rawResponse);
           return [response, rawResponse, _];
-        },
+        }
       );
   }
   /**
@@ -3943,7 +3941,7 @@ export class DatasetServiceClient {
    * region_tag:aiplatform_v1_generated_DatasetService_DeleteDatasetVersion_async
    */
   async checkDeleteDatasetVersionProgress(
-    name: string,
+    name: string
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
@@ -3953,13 +3951,13 @@ export class DatasetServiceClient {
     this._log.info('deleteDatasetVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        {name}
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteDatasetVersion,
-      this._gaxModule.createDefaultBackoffSettings(),
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3988,7 +3986,7 @@ export class DatasetServiceClient {
    */
   restoreDatasetVersion(
     request?: protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -4009,7 +4007,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   restoreDatasetVersion(
     request: protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionRequest,
@@ -4020,7 +4018,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   restoreDatasetVersion(
     request?: protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionRequest,
@@ -4041,7 +4039,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       LROperation<
@@ -4099,7 +4097,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('restoreDatasetVersion response %j', rawResponse);
           return [response, rawResponse, _];
-        },
+        }
       );
   }
   /**
@@ -4114,7 +4112,7 @@ export class DatasetServiceClient {
    * region_tag:aiplatform_v1_generated_DatasetService_RestoreDatasetVersion_async
    */
   async checkRestoreDatasetVersionProgress(
-    name: string,
+    name: string
   ): Promise<
     LROperation<
       protos.google.cloud.aiplatform.v1.DatasetVersion,
@@ -4124,13 +4122,13 @@ export class DatasetServiceClient {
     this._log.info('restoreDatasetVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        {name}
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.restoreDatasetVersion,
-      this._gaxModule.createDefaultBackoffSettings(),
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.DatasetVersion,
@@ -4159,7 +4157,7 @@ export class DatasetServiceClient {
    */
   deleteSavedQuery(
     request?: protos.google.cloud.aiplatform.v1.IDeleteSavedQueryRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       LROperation<
@@ -4180,7 +4178,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   deleteSavedQuery(
     request: protos.google.cloud.aiplatform.v1.IDeleteSavedQueryRequest,
@@ -4191,7 +4189,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): void;
   deleteSavedQuery(
     request?: protos.google.cloud.aiplatform.v1.IDeleteSavedQueryRequest,
@@ -4212,7 +4210,7 @@ export class DatasetServiceClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<
     [
       LROperation<
@@ -4270,7 +4268,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('deleteSavedQuery response %j', rawResponse);
           return [response, rawResponse, _];
-        },
+        }
       );
   }
   /**
@@ -4285,7 +4283,7 @@ export class DatasetServiceClient {
    * region_tag:aiplatform_v1_generated_DatasetService_DeleteSavedQuery_async
    */
   async checkDeleteSavedQueryProgress(
-    name: string,
+    name: string
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
@@ -4295,13 +4293,13 @@ export class DatasetServiceClient {
     this._log.info('deleteSavedQuery long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        {name}
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteSavedQuery,
-      this._gaxModule.createDefaultBackoffSettings(),
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -4359,7 +4357,7 @@ export class DatasetServiceClient {
    */
   listDatasets(
     request?: protos.google.cloud.aiplatform.v1.IListDatasetsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDataset[],
@@ -4376,7 +4374,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IDataset
-    >,
+    >
   ): void;
   listDatasets(
     request: protos.google.cloud.aiplatform.v1.IListDatasetsRequest,
@@ -4386,7 +4384,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IDataset
-    >,
+    >
   ): void;
   listDatasets(
     request?: protos.google.cloud.aiplatform.v1.IListDatasetsRequest,
@@ -4405,7 +4403,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IDataset
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDataset[],
@@ -4456,7 +4454,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('listDatasets values %j', response);
           return [response, input, output];
-        },
+        }
       );
   }
 
@@ -4509,7 +4507,7 @@ export class DatasetServiceClient {
    */
   listDatasetsStream(
     request?: protos.google.cloud.aiplatform.v1.IListDatasetsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -4528,7 +4526,7 @@ export class DatasetServiceClient {
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as GaxCall,
       request,
-      callSettings,
+      callSettings
     );
   }
 
@@ -4584,7 +4582,7 @@ export class DatasetServiceClient {
    */
   listDatasetsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListDatasetsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.aiplatform.v1.IDataset> {
     request = request || {};
     options = options || {};
@@ -4603,7 +4601,7 @@ export class DatasetServiceClient {
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
       request as {},
-      callSettings,
+      callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IDataset>;
   }
   /**
@@ -4640,7 +4638,7 @@ export class DatasetServiceClient {
    */
   listDatasetVersions(
     request?: protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDatasetVersion[],
@@ -4657,7 +4655,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IDatasetVersion
-    >,
+    >
   ): void;
   listDatasetVersions(
     request: protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
@@ -4667,7 +4665,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IDatasetVersion
-    >,
+    >
   ): void;
   listDatasetVersions(
     request?: protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
@@ -4686,7 +4684,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IDatasetVersion
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDatasetVersion[],
@@ -4737,7 +4735,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('listDatasetVersions values %j', response);
           return [response, input, output];
-        },
+        }
       );
   }
 
@@ -4773,7 +4771,7 @@ export class DatasetServiceClient {
    */
   listDatasetVersionsStream(
     request?: protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -4792,7 +4790,7 @@ export class DatasetServiceClient {
     return this.descriptors.page.listDatasetVersions.createStream(
       this.innerApiCalls.listDatasetVersions as GaxCall,
       request,
-      callSettings,
+      callSettings
     );
   }
 
@@ -4831,7 +4829,7 @@ export class DatasetServiceClient {
    */
   listDatasetVersionsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.aiplatform.v1.IDatasetVersion> {
     request = request || {};
     options = options || {};
@@ -4850,7 +4848,7 @@ export class DatasetServiceClient {
     return this.descriptors.page.listDatasetVersions.asyncIterate(
       this.innerApiCalls['listDatasetVersions'] as GaxCall,
       request as {},
-      callSettings,
+      callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IDatasetVersion>;
   }
   /**
@@ -4887,7 +4885,7 @@ export class DatasetServiceClient {
    */
   listDataItems(
     request?: protos.google.cloud.aiplatform.v1.IListDataItemsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDataItem[],
@@ -4904,7 +4902,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IDataItem
-    >,
+    >
   ): void;
   listDataItems(
     request: protos.google.cloud.aiplatform.v1.IListDataItemsRequest,
@@ -4914,7 +4912,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IDataItem
-    >,
+    >
   ): void;
   listDataItems(
     request?: protos.google.cloud.aiplatform.v1.IListDataItemsRequest,
@@ -4933,7 +4931,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IDataItem
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDataItem[],
@@ -4984,7 +4982,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('listDataItems values %j', response);
           return [response, input, output];
-        },
+        }
       );
   }
 
@@ -5020,7 +5018,7 @@ export class DatasetServiceClient {
    */
   listDataItemsStream(
     request?: protos.google.cloud.aiplatform.v1.IListDataItemsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -5039,7 +5037,7 @@ export class DatasetServiceClient {
     return this.descriptors.page.listDataItems.createStream(
       this.innerApiCalls.listDataItems as GaxCall,
       request,
-      callSettings,
+      callSettings
     );
   }
 
@@ -5078,7 +5076,7 @@ export class DatasetServiceClient {
    */
   listDataItemsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListDataItemsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.aiplatform.v1.IDataItem> {
     request = request || {};
     options = options || {};
@@ -5097,7 +5095,7 @@ export class DatasetServiceClient {
     return this.descriptors.page.listDataItems.asyncIterate(
       this.innerApiCalls['listDataItems'] as GaxCall,
       request as {},
-      callSettings,
+      callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IDataItem>;
   }
   /**
@@ -5182,7 +5180,7 @@ export class DatasetServiceClient {
    */
   searchDataItems(
     request?: protos.google.cloud.aiplatform.v1.ISearchDataItemsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDataItemView[],
@@ -5199,7 +5197,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IDataItemView
-    >,
+    >
   ): void;
   searchDataItems(
     request: protos.google.cloud.aiplatform.v1.ISearchDataItemsRequest,
@@ -5209,7 +5207,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IDataItemView
-    >,
+    >
   ): void;
   searchDataItems(
     request?: protos.google.cloud.aiplatform.v1.ISearchDataItemsRequest,
@@ -5228,7 +5226,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IDataItemView
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IDataItemView[],
@@ -5279,7 +5277,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('searchDataItems values %j', response);
           return [response, input, output];
-        },
+        }
       );
   }
 
@@ -5363,7 +5361,7 @@ export class DatasetServiceClient {
    */
   searchDataItemsStream(
     request?: protos.google.cloud.aiplatform.v1.ISearchDataItemsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -5382,7 +5380,7 @@ export class DatasetServiceClient {
     return this.descriptors.page.searchDataItems.createStream(
       this.innerApiCalls.searchDataItems as GaxCall,
       request,
-      callSettings,
+      callSettings
     );
   }
 
@@ -5469,7 +5467,7 @@ export class DatasetServiceClient {
    */
   searchDataItemsAsync(
     request?: protos.google.cloud.aiplatform.v1.ISearchDataItemsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.aiplatform.v1.IDataItemView> {
     request = request || {};
     options = options || {};
@@ -5488,7 +5486,7 @@ export class DatasetServiceClient {
     return this.descriptors.page.searchDataItems.asyncIterate(
       this.innerApiCalls['searchDataItems'] as GaxCall,
       request as {},
-      callSettings,
+      callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IDataItemView>;
   }
   /**
@@ -5525,7 +5523,7 @@ export class DatasetServiceClient {
    */
   listSavedQueries(
     request?: protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.ISavedQuery[],
@@ -5542,7 +5540,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.ISavedQuery
-    >,
+    >
   ): void;
   listSavedQueries(
     request: protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
@@ -5552,7 +5550,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.ISavedQuery
-    >,
+    >
   ): void;
   listSavedQueries(
     request?: protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
@@ -5571,7 +5569,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.ISavedQuery
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.ISavedQuery[],
@@ -5622,7 +5620,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('listSavedQueries values %j', response);
           return [response, input, output];
-        },
+        }
       );
   }
 
@@ -5658,7 +5656,7 @@ export class DatasetServiceClient {
    */
   listSavedQueriesStream(
     request?: protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -5677,7 +5675,7 @@ export class DatasetServiceClient {
     return this.descriptors.page.listSavedQueries.createStream(
       this.innerApiCalls.listSavedQueries as GaxCall,
       request,
-      callSettings,
+      callSettings
     );
   }
 
@@ -5716,7 +5714,7 @@ export class DatasetServiceClient {
    */
   listSavedQueriesAsync(
     request?: protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.aiplatform.v1.ISavedQuery> {
     request = request || {};
     options = options || {};
@@ -5735,7 +5733,7 @@ export class DatasetServiceClient {
     return this.descriptors.page.listSavedQueries.asyncIterate(
       this.innerApiCalls['listSavedQueries'] as GaxCall,
       request as {},
-      callSettings,
+      callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.ISavedQuery>;
   }
   /**
@@ -5774,7 +5772,7 @@ export class DatasetServiceClient {
    */
   listAnnotations(
     request?: protos.google.cloud.aiplatform.v1.IListAnnotationsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IAnnotation[],
@@ -5791,7 +5789,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IAnnotation
-    >,
+    >
   ): void;
   listAnnotations(
     request: protos.google.cloud.aiplatform.v1.IListAnnotationsRequest,
@@ -5801,7 +5799,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IAnnotation
-    >,
+    >
   ): void;
   listAnnotations(
     request?: protos.google.cloud.aiplatform.v1.IListAnnotationsRequest,
@@ -5820,7 +5818,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       protos.google.cloud.aiplatform.v1.IAnnotation
-    >,
+    >
   ): Promise<
     [
       protos.google.cloud.aiplatform.v1.IAnnotation[],
@@ -5871,7 +5869,7 @@ export class DatasetServiceClient {
         ]) => {
           this._log.info('listAnnotations values %j', response);
           return [response, input, output];
-        },
+        }
       );
   }
 
@@ -5907,7 +5905,7 @@ export class DatasetServiceClient {
    */
   listAnnotationsStream(
     request?: protos.google.cloud.aiplatform.v1.IListAnnotationsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): Transform {
     request = request || {};
     options = options || {};
@@ -5926,7 +5924,7 @@ export class DatasetServiceClient {
     return this.descriptors.page.listAnnotations.createStream(
       this.innerApiCalls.listAnnotations as GaxCall,
       request,
-      callSettings,
+      callSettings
     );
   }
 
@@ -5965,7 +5963,7 @@ export class DatasetServiceClient {
    */
   listAnnotationsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListAnnotationsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): AsyncIterable<protos.google.cloud.aiplatform.v1.IAnnotation> {
     request = request || {};
     options = options || {};
@@ -5984,7 +5982,7 @@ export class DatasetServiceClient {
     return this.descriptors.page.listAnnotations.asyncIterate(
       this.innerApiCalls['listAnnotations'] as GaxCall,
       request as {},
-      callSettings,
+      callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IAnnotation>;
   }
   /**
@@ -6025,7 +6023,7 @@ export class DatasetServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
@@ -6072,7 +6070,7 @@ export class DatasetServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
@@ -6120,7 +6118,7 @@ export class DatasetServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
@@ -6160,7 +6158,7 @@ export class DatasetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >,
+    >
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
@@ -6198,7 +6196,7 @@ export class DatasetServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions,
+    options?: CallOptions
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -6246,7 +6244,7 @@ export class DatasetServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >,
+    >
   ): Promise<[protos.google.longrunning.Operation]> {
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
@@ -6296,7 +6294,7 @@ export class DatasetServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions,
+    options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -6351,7 +6349,7 @@ export class DatasetServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >,
+    >
   ): Promise<protos.google.protobuf.Empty> {
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
@@ -6408,7 +6406,7 @@ export class DatasetServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >,
+    >
   ): Promise<protos.google.protobuf.Empty> {
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
@@ -6446,7 +6444,7 @@ export class DatasetServiceClient {
     location: string,
     dataset: string,
     dataItem: string,
-    annotation: string,
+    annotation: string
   ) {
     return this.pathTemplates.annotationPathTemplate.render({
       project: project,
@@ -6530,7 +6528,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     dataset: string,
-    annotationSpec: string,
+    annotationSpec: string
   ) {
     return this.pathTemplates.annotationSpecPathTemplate.render({
       project: project,
@@ -6549,7 +6547,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromAnnotationSpecName(annotationSpecName: string) {
     return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName,
+      annotationSpecName
     ).project;
   }
 
@@ -6562,7 +6560,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromAnnotationSpecName(annotationSpecName: string) {
     return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName,
+      annotationSpecName
     ).location;
   }
 
@@ -6575,7 +6573,7 @@ export class DatasetServiceClient {
    */
   matchDatasetFromAnnotationSpecName(annotationSpecName: string) {
     return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName,
+      annotationSpecName
     ).dataset;
   }
 
@@ -6588,7 +6586,7 @@ export class DatasetServiceClient {
    */
   matchAnnotationSpecFromAnnotationSpecName(annotationSpecName: string) {
     return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName,
+      annotationSpecName
     ).annotation_spec;
   }
 
@@ -6605,7 +6603,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     metadataStore: string,
-    artifact: string,
+    artifact: string
   ) {
     return this.pathTemplates.artifactPathTemplate.render({
       project: project,
@@ -6671,7 +6669,7 @@ export class DatasetServiceClient {
   batchPredictionJobPath(
     project: string,
     location: string,
-    batchPredictionJob: string,
+    batchPredictionJob: string
   ) {
     return this.pathTemplates.batchPredictionJobPathTemplate.render({
       project: project,
@@ -6689,7 +6687,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromBatchPredictionJobName(batchPredictionJobName: string) {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName,
+      batchPredictionJobName
     ).project;
   }
 
@@ -6702,7 +6700,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromBatchPredictionJobName(batchPredictionJobName: string) {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName,
+      batchPredictionJobName
     ).location;
   }
 
@@ -6714,10 +6712,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the batch_prediction_job.
    */
   matchBatchPredictionJobFromBatchPredictionJobName(
-    batchPredictionJobName: string,
+    batchPredictionJobName: string
   ) {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName,
+      batchPredictionJobName
     ).batch_prediction_job;
   }
 
@@ -6786,7 +6784,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     metadataStore: string,
-    context: string,
+    context: string
   ) {
     return this.pathTemplates.contextPathTemplate.render({
       project: project,
@@ -6906,7 +6904,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     dataset: string,
-    dataItem: string,
+    dataItem: string
   ) {
     return this.pathTemplates.dataItemPathTemplate.render({
       project: project,
@@ -6972,7 +6970,7 @@ export class DatasetServiceClient {
   dataLabelingJobPath(
     project: string,
     location: string,
-    dataLabelingJob: string,
+    dataLabelingJob: string
   ) {
     return this.pathTemplates.dataLabelingJobPathTemplate.render({
       project: project,
@@ -6990,7 +6988,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromDataLabelingJobName(dataLabelingJobName: string) {
     return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName,
+      dataLabelingJobName
     ).project;
   }
 
@@ -7003,7 +7001,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromDataLabelingJobName(dataLabelingJobName: string) {
     return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName,
+      dataLabelingJobName
     ).location;
   }
 
@@ -7016,7 +7014,7 @@ export class DatasetServiceClient {
    */
   matchDataLabelingJobFromDataLabelingJobName(dataLabelingJobName: string) {
     return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName,
+      dataLabelingJobName
     ).data_labeling_job;
   }
 
@@ -7082,7 +7080,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     dataset: string,
-    datasetVersion: string,
+    datasetVersion: string
   ) {
     return this.pathTemplates.datasetVersionPathTemplate.render({
       project: project,
@@ -7101,7 +7099,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromDatasetVersionName(datasetVersionName: string) {
     return this.pathTemplates.datasetVersionPathTemplate.match(
-      datasetVersionName,
+      datasetVersionName
     ).project;
   }
 
@@ -7114,7 +7112,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromDatasetVersionName(datasetVersionName: string) {
     return this.pathTemplates.datasetVersionPathTemplate.match(
-      datasetVersionName,
+      datasetVersionName
     ).location;
   }
 
@@ -7127,7 +7125,7 @@ export class DatasetServiceClient {
    */
   matchDatasetFromDatasetVersionName(datasetVersionName: string) {
     return this.pathTemplates.datasetVersionPathTemplate.match(
-      datasetVersionName,
+      datasetVersionName
     ).dataset;
   }
 
@@ -7140,7 +7138,7 @@ export class DatasetServiceClient {
    */
   matchDatasetVersionFromDatasetVersionName(datasetVersionName: string) {
     return this.pathTemplates.datasetVersionPathTemplate.match(
-      datasetVersionName,
+      datasetVersionName
     ).dataset_version;
   }
 
@@ -7155,7 +7153,7 @@ export class DatasetServiceClient {
   deploymentResourcePoolPath(
     project: string,
     location: string,
-    deploymentResourcePool: string,
+    deploymentResourcePool: string
   ) {
     return this.pathTemplates.deploymentResourcePoolPathTemplate.render({
       project: project,
@@ -7172,10 +7170,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentResourcePoolName(
-    deploymentResourcePoolName: string,
+    deploymentResourcePoolName: string
   ) {
     return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
-      deploymentResourcePoolName,
+      deploymentResourcePoolName
     ).project;
   }
 
@@ -7187,10 +7185,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentResourcePoolName(
-    deploymentResourcePoolName: string,
+    deploymentResourcePoolName: string
   ) {
     return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
-      deploymentResourcePoolName,
+      deploymentResourcePoolName
     ).location;
   }
 
@@ -7202,10 +7200,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the deployment_resource_pool.
    */
   matchDeploymentResourcePoolFromDeploymentResourcePoolName(
-    deploymentResourcePoolName: string,
+    deploymentResourcePoolName: string
   ) {
     return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
-      deploymentResourcePoolName,
+      deploymentResourcePoolName
     ).deployment_resource_pool;
   }
 
@@ -7222,7 +7220,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     featurestore: string,
-    entityType: string,
+    entityType: string
   ) {
     return this.pathTemplates.entityTypePathTemplate.render({
       project: project,
@@ -7293,7 +7291,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     metadataStore: string,
-    execution: string,
+    execution: string
   ) {
     return this.pathTemplates.executionPathTemplate.render({
       project: project,
@@ -7414,7 +7412,7 @@ export class DatasetServiceClient {
   featureOnlineStorePath(
     project: string,
     location: string,
-    featureOnlineStore: string,
+    featureOnlineStore: string
   ) {
     return this.pathTemplates.featureOnlineStorePathTemplate.render({
       project: project,
@@ -7432,7 +7430,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
     return this.pathTemplates.featureOnlineStorePathTemplate.match(
-      featureOnlineStoreName,
+      featureOnlineStoreName
     ).project;
   }
 
@@ -7445,7 +7443,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
     return this.pathTemplates.featureOnlineStorePathTemplate.match(
-      featureOnlineStoreName,
+      featureOnlineStoreName
     ).location;
   }
 
@@ -7457,10 +7455,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the feature_online_store.
    */
   matchFeatureOnlineStoreFromFeatureOnlineStoreName(
-    featureOnlineStoreName: string,
+    featureOnlineStoreName: string
   ) {
     return this.pathTemplates.featureOnlineStorePathTemplate.match(
-      featureOnlineStoreName,
+      featureOnlineStoreName
     ).feature_online_store;
   }
 
@@ -7477,7 +7475,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     featureOnlineStore: string,
-    featureView: string,
+    featureView: string
   ) {
     return this.pathTemplates.featureViewPathTemplate.render({
       project: project,
@@ -7548,7 +7546,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     featureOnlineStore: string,
-    featureView: string,
+    featureView: string
   ) {
     return this.pathTemplates.featureViewSyncPathTemplate.render({
       project: project,
@@ -7567,7 +7565,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromFeatureViewSyncName(featureViewSyncName: string) {
     return this.pathTemplates.featureViewSyncPathTemplate.match(
-      featureViewSyncName,
+      featureViewSyncName
     ).project;
   }
 
@@ -7580,7 +7578,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromFeatureViewSyncName(featureViewSyncName: string) {
     return this.pathTemplates.featureViewSyncPathTemplate.match(
-      featureViewSyncName,
+      featureViewSyncName
     ).location;
   }
 
@@ -7593,7 +7591,7 @@ export class DatasetServiceClient {
    */
   matchFeatureOnlineStoreFromFeatureViewSyncName(featureViewSyncName: string) {
     return this.pathTemplates.featureViewSyncPathTemplate.match(
-      featureViewSyncName,
+      featureViewSyncName
     ).feature_online_store;
   }
 
@@ -7606,7 +7604,7 @@ export class DatasetServiceClient {
    */
   matchFeatureViewFromFeatureViewSyncName(featureViewSyncName: string) {
     return this.pathTemplates.featureViewSyncPathTemplate.match(
-      featureViewSyncName,
+      featureViewSyncName
     ).feature_view;
   }
 
@@ -7673,7 +7671,7 @@ export class DatasetServiceClient {
   hyperparameterTuningJobPath(
     project: string,
     location: string,
-    hyperparameterTuningJob: string,
+    hyperparameterTuningJob: string
   ) {
     return this.pathTemplates.hyperparameterTuningJobPathTemplate.render({
       project: project,
@@ -7690,10 +7688,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string,
+    hyperparameterTuningJobName: string
   ) {
     return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName,
+      hyperparameterTuningJobName
     ).project;
   }
 
@@ -7705,10 +7703,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string,
+    hyperparameterTuningJobName: string
   ) {
     return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName,
+      hyperparameterTuningJobName
     ).location;
   }
 
@@ -7720,10 +7718,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the hyperparameter_tuning_job.
    */
   matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string,
+    hyperparameterTuningJobName: string
   ) {
     return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName,
+      hyperparameterTuningJobName
     ).hyperparameter_tuning_job;
   }
 
@@ -7877,7 +7875,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     metadataStore: string,
-    metadataSchema: string,
+    metadataSchema: string
   ) {
     return this.pathTemplates.metadataSchemaPathTemplate.render({
       project: project,
@@ -7896,7 +7894,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromMetadataSchemaName(metadataSchemaName: string) {
     return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName,
+      metadataSchemaName
     ).project;
   }
 
@@ -7909,7 +7907,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromMetadataSchemaName(metadataSchemaName: string) {
     return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName,
+      metadataSchemaName
     ).location;
   }
 
@@ -7922,7 +7920,7 @@ export class DatasetServiceClient {
    */
   matchMetadataStoreFromMetadataSchemaName(metadataSchemaName: string) {
     return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName,
+      metadataSchemaName
     ).metadata_store;
   }
 
@@ -7935,7 +7933,7 @@ export class DatasetServiceClient {
    */
   matchMetadataSchemaFromMetadataSchemaName(metadataSchemaName: string) {
     return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName,
+      metadataSchemaName
     ).metadata_schema;
   }
 
@@ -8051,7 +8049,7 @@ export class DatasetServiceClient {
   modelDeploymentMonitoringJobPath(
     project: string,
     location: string,
-    modelDeploymentMonitoringJob: string,
+    modelDeploymentMonitoringJob: string
   ) {
     return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render({
       project: project,
@@ -8068,10 +8066,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelDeploymentMonitoringJobName(
-    modelDeploymentMonitoringJobName: string,
+    modelDeploymentMonitoringJobName: string
   ) {
     return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
-      modelDeploymentMonitoringJobName,
+      modelDeploymentMonitoringJobName
     ).project;
   }
 
@@ -8083,10 +8081,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelDeploymentMonitoringJobName(
-    modelDeploymentMonitoringJobName: string,
+    modelDeploymentMonitoringJobName: string
   ) {
     return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
-      modelDeploymentMonitoringJobName,
+      modelDeploymentMonitoringJobName
     ).location;
   }
 
@@ -8098,10 +8096,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the model_deployment_monitoring_job.
    */
   matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
-    modelDeploymentMonitoringJobName: string,
+    modelDeploymentMonitoringJobName: string
   ) {
     return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
-      modelDeploymentMonitoringJobName,
+      modelDeploymentMonitoringJobName
     ).model_deployment_monitoring_job;
   }
 
@@ -8118,7 +8116,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     model: string,
-    evaluation: string,
+    evaluation: string
   ) {
     return this.pathTemplates.modelEvaluationPathTemplate.render({
       project: project,
@@ -8137,7 +8135,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromModelEvaluationName(modelEvaluationName: string) {
     return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName,
+      modelEvaluationName
     ).project;
   }
 
@@ -8150,7 +8148,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromModelEvaluationName(modelEvaluationName: string) {
     return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName,
+      modelEvaluationName
     ).location;
   }
 
@@ -8163,7 +8161,7 @@ export class DatasetServiceClient {
    */
   matchModelFromModelEvaluationName(modelEvaluationName: string) {
     return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName,
+      modelEvaluationName
     ).model;
   }
 
@@ -8176,7 +8174,7 @@ export class DatasetServiceClient {
    */
   matchEvaluationFromModelEvaluationName(modelEvaluationName: string) {
     return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName,
+      modelEvaluationName
     ).evaluation;
   }
 
@@ -8195,7 +8193,7 @@ export class DatasetServiceClient {
     location: string,
     model: string,
     evaluation: string,
-    slice: string,
+    slice: string
   ) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.render({
       project: project,
@@ -8215,7 +8213,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName,
+      modelEvaluationSliceName
     ).project;
   }
 
@@ -8228,7 +8226,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName,
+      modelEvaluationSliceName
     ).location;
   }
 
@@ -8241,7 +8239,7 @@ export class DatasetServiceClient {
    */
   matchModelFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName,
+      modelEvaluationSliceName
     ).model;
   }
 
@@ -8253,10 +8251,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromModelEvaluationSliceName(
-    modelEvaluationSliceName: string,
+    modelEvaluationSliceName: string
   ) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName,
+      modelEvaluationSliceName
     ).evaluation;
   }
 
@@ -8269,7 +8267,7 @@ export class DatasetServiceClient {
    */
   matchSliceFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName,
+      modelEvaluationSliceName
     ).slice;
   }
 
@@ -8335,7 +8333,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     nasJob: string,
-    nasTrialDetail: string,
+    nasTrialDetail: string
   ) {
     return this.pathTemplates.nasTrialDetailPathTemplate.render({
       project: project,
@@ -8354,7 +8352,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromNasTrialDetailName(nasTrialDetailName: string) {
     return this.pathTemplates.nasTrialDetailPathTemplate.match(
-      nasTrialDetailName,
+      nasTrialDetailName
     ).project;
   }
 
@@ -8367,7 +8365,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromNasTrialDetailName(nasTrialDetailName: string) {
     return this.pathTemplates.nasTrialDetailPathTemplate.match(
-      nasTrialDetailName,
+      nasTrialDetailName
     ).location;
   }
 
@@ -8380,7 +8378,7 @@ export class DatasetServiceClient {
    */
   matchNasJobFromNasTrialDetailName(nasTrialDetailName: string) {
     return this.pathTemplates.nasTrialDetailPathTemplate.match(
-      nasTrialDetailName,
+      nasTrialDetailName
     ).nas_job;
   }
 
@@ -8393,7 +8391,7 @@ export class DatasetServiceClient {
    */
   matchNasTrialDetailFromNasTrialDetailName(nasTrialDetailName: string) {
     return this.pathTemplates.nasTrialDetailPathTemplate.match(
-      nasTrialDetailName,
+      nasTrialDetailName
     ).nas_trial_detail;
   }
 
@@ -8408,7 +8406,7 @@ export class DatasetServiceClient {
   notebookExecutionJobPath(
     project: string,
     location: string,
-    notebookExecutionJob: string,
+    notebookExecutionJob: string
   ) {
     return this.pathTemplates.notebookExecutionJobPathTemplate.render({
       project: project,
@@ -8426,7 +8424,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromNotebookExecutionJobName(notebookExecutionJobName: string) {
     return this.pathTemplates.notebookExecutionJobPathTemplate.match(
-      notebookExecutionJobName,
+      notebookExecutionJobName
     ).project;
   }
 
@@ -8439,7 +8437,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromNotebookExecutionJobName(notebookExecutionJobName: string) {
     return this.pathTemplates.notebookExecutionJobPathTemplate.match(
-      notebookExecutionJobName,
+      notebookExecutionJobName
     ).location;
   }
 
@@ -8451,10 +8449,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the notebook_execution_job.
    */
   matchNotebookExecutionJobFromNotebookExecutionJobName(
-    notebookExecutionJobName: string,
+    notebookExecutionJobName: string
   ) {
     return this.pathTemplates.notebookExecutionJobPathTemplate.match(
-      notebookExecutionJobName,
+      notebookExecutionJobName
     ).notebook_execution_job;
   }
 
@@ -8469,7 +8467,7 @@ export class DatasetServiceClient {
   notebookRuntimePath(
     project: string,
     location: string,
-    notebookRuntime: string,
+    notebookRuntime: string
   ) {
     return this.pathTemplates.notebookRuntimePathTemplate.render({
       project: project,
@@ -8487,7 +8485,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromNotebookRuntimeName(notebookRuntimeName: string) {
     return this.pathTemplates.notebookRuntimePathTemplate.match(
-      notebookRuntimeName,
+      notebookRuntimeName
     ).project;
   }
 
@@ -8500,7 +8498,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromNotebookRuntimeName(notebookRuntimeName: string) {
     return this.pathTemplates.notebookRuntimePathTemplate.match(
-      notebookRuntimeName,
+      notebookRuntimeName
     ).location;
   }
 
@@ -8513,7 +8511,7 @@ export class DatasetServiceClient {
    */
   matchNotebookRuntimeFromNotebookRuntimeName(notebookRuntimeName: string) {
     return this.pathTemplates.notebookRuntimePathTemplate.match(
-      notebookRuntimeName,
+      notebookRuntimeName
     ).notebook_runtime;
   }
 
@@ -8528,7 +8526,7 @@ export class DatasetServiceClient {
   notebookRuntimeTemplatePath(
     project: string,
     location: string,
-    notebookRuntimeTemplate: string,
+    notebookRuntimeTemplate: string
   ) {
     return this.pathTemplates.notebookRuntimeTemplatePathTemplate.render({
       project: project,
@@ -8545,10 +8543,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNotebookRuntimeTemplateName(
-    notebookRuntimeTemplateName: string,
+    notebookRuntimeTemplateName: string
   ) {
     return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
-      notebookRuntimeTemplateName,
+      notebookRuntimeTemplateName
     ).project;
   }
 
@@ -8560,10 +8558,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNotebookRuntimeTemplateName(
-    notebookRuntimeTemplateName: string,
+    notebookRuntimeTemplateName: string
   ) {
     return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
-      notebookRuntimeTemplateName,
+      notebookRuntimeTemplateName
     ).location;
   }
 
@@ -8575,10 +8573,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the notebook_runtime_template.
    */
   matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
-    notebookRuntimeTemplateName: string,
+    notebookRuntimeTemplateName: string
   ) {
     return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
-      notebookRuntimeTemplateName,
+      notebookRuntimeTemplateName
     ).notebook_runtime_template;
   }
 
@@ -8593,7 +8591,7 @@ export class DatasetServiceClient {
   persistentResourcePath(
     project: string,
     location: string,
-    persistentResource: string,
+    persistentResource: string
   ) {
     return this.pathTemplates.persistentResourcePathTemplate.render({
       project: project,
@@ -8611,7 +8609,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromPersistentResourceName(persistentResourceName: string) {
     return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName,
+      persistentResourceName
     ).project;
   }
 
@@ -8624,7 +8622,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromPersistentResourceName(persistentResourceName: string) {
     return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName,
+      persistentResourceName
     ).location;
   }
 
@@ -8636,10 +8634,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the persistent_resource.
    */
   matchPersistentResourceFromPersistentResourceName(
-    persistentResourceName: string,
+    persistentResourceName: string
   ) {
     return this.pathTemplates.persistentResourcePathTemplate.match(
-      persistentResourceName,
+      persistentResourceName
     ).persistent_resource;
   }
 
@@ -8706,7 +8704,7 @@ export class DatasetServiceClient {
   projectLocationEndpointPath(
     project: string,
     location: string,
-    endpoint: string,
+    endpoint: string
   ) {
     return this.pathTemplates.projectLocationEndpointPathTemplate.render({
       project: project,
@@ -8723,10 +8721,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationEndpointName(
-    projectLocationEndpointName: string,
+    projectLocationEndpointName: string
   ) {
     return this.pathTemplates.projectLocationEndpointPathTemplate.match(
-      projectLocationEndpointName,
+      projectLocationEndpointName
     ).project;
   }
 
@@ -8738,10 +8736,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationEndpointName(
-    projectLocationEndpointName: string,
+    projectLocationEndpointName: string
   ) {
     return this.pathTemplates.projectLocationEndpointPathTemplate.match(
-      projectLocationEndpointName,
+      projectLocationEndpointName
     ).location;
   }
 
@@ -8753,10 +8751,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the endpoint.
    */
   matchEndpointFromProjectLocationEndpointName(
-    projectLocationEndpointName: string,
+    projectLocationEndpointName: string
   ) {
     return this.pathTemplates.projectLocationEndpointPathTemplate.match(
-      projectLocationEndpointName,
+      projectLocationEndpointName
     ).endpoint;
   }
 
@@ -8773,7 +8771,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     featureGroup: string,
-    feature: string,
+    feature: string
   ) {
     return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render(
       {
@@ -8781,7 +8779,7 @@ export class DatasetServiceClient {
         location: location,
         feature_group: featureGroup,
         feature: feature,
-      },
+      }
     );
   }
 
@@ -8793,10 +8791,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationFeatureGroupFeatureName(
-    projectLocationFeatureGroupFeatureName: string,
+    projectLocationFeatureGroupFeatureName: string
   ) {
     return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
-      projectLocationFeatureGroupFeatureName,
+      projectLocationFeatureGroupFeatureName
     ).project;
   }
 
@@ -8808,10 +8806,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationFeatureGroupFeatureName(
-    projectLocationFeatureGroupFeatureName: string,
+    projectLocationFeatureGroupFeatureName: string
   ) {
     return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
-      projectLocationFeatureGroupFeatureName,
+      projectLocationFeatureGroupFeatureName
     ).location;
   }
 
@@ -8823,10 +8821,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the feature_group.
    */
   matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(
-    projectLocationFeatureGroupFeatureName: string,
+    projectLocationFeatureGroupFeatureName: string
   ) {
     return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
-      projectLocationFeatureGroupFeatureName,
+      projectLocationFeatureGroupFeatureName
     ).feature_group;
   }
 
@@ -8838,10 +8836,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the feature.
    */
   matchFeatureFromProjectLocationFeatureGroupFeatureName(
-    projectLocationFeatureGroupFeatureName: string,
+    projectLocationFeatureGroupFeatureName: string
   ) {
     return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
-      projectLocationFeatureGroupFeatureName,
+      projectLocationFeatureGroupFeatureName
     ).feature;
   }
 
@@ -8860,7 +8858,7 @@ export class DatasetServiceClient {
     location: string,
     featurestore: string,
     entityType: string,
-    feature: string,
+    feature: string
   ) {
     return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render(
       {
@@ -8869,7 +8867,7 @@ export class DatasetServiceClient {
         featurestore: featurestore,
         entity_type: entityType,
         feature: feature,
-      },
+      }
     );
   }
 
@@ -8881,10 +8879,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string,
+    projectLocationFeaturestoreEntityTypeFeatureName: string
   ) {
     return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName,
+      projectLocationFeaturestoreEntityTypeFeatureName
     ).project;
   }
 
@@ -8896,10 +8894,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string,
+    projectLocationFeaturestoreEntityTypeFeatureName: string
   ) {
     return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName,
+      projectLocationFeaturestoreEntityTypeFeatureName
     ).location;
   }
 
@@ -8911,10 +8909,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the featurestore.
    */
   matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string,
+    projectLocationFeaturestoreEntityTypeFeatureName: string
   ) {
     return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName,
+      projectLocationFeaturestoreEntityTypeFeatureName
     ).featurestore;
   }
 
@@ -8926,10 +8924,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the entity_type.
    */
   matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string,
+    projectLocationFeaturestoreEntityTypeFeatureName: string
   ) {
     return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName,
+      projectLocationFeaturestoreEntityTypeFeatureName
     ).entity_type;
   }
 
@@ -8941,10 +8939,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the feature.
    */
   matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(
-    projectLocationFeaturestoreEntityTypeFeatureName: string,
+    projectLocationFeaturestoreEntityTypeFeatureName: string
   ) {
     return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
-      projectLocationFeaturestoreEntityTypeFeatureName,
+      projectLocationFeaturestoreEntityTypeFeatureName
     ).feature;
   }
 
@@ -8961,7 +8959,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     publisher: string,
-    model: string,
+    model: string
   ) {
     return this.pathTemplates.projectLocationPublisherModelPathTemplate.render({
       project: project,
@@ -8979,10 +8977,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationPublisherModelName(
-    projectLocationPublisherModelName: string,
+    projectLocationPublisherModelName: string
   ) {
     return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
-      projectLocationPublisherModelName,
+      projectLocationPublisherModelName
     ).project;
   }
 
@@ -8994,10 +8992,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationPublisherModelName(
-    projectLocationPublisherModelName: string,
+    projectLocationPublisherModelName: string
   ) {
     return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
-      projectLocationPublisherModelName,
+      projectLocationPublisherModelName
     ).location;
   }
 
@@ -9009,10 +9007,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the publisher.
    */
   matchPublisherFromProjectLocationPublisherModelName(
-    projectLocationPublisherModelName: string,
+    projectLocationPublisherModelName: string
   ) {
     return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
-      projectLocationPublisherModelName,
+      projectLocationPublisherModelName
     ).publisher;
   }
 
@@ -9024,10 +9022,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromProjectLocationPublisherModelName(
-    projectLocationPublisherModelName: string,
+    projectLocationPublisherModelName: string
   ) {
     return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
-      projectLocationPublisherModelName,
+      projectLocationPublisherModelName
     ).model;
   }
 
@@ -9054,7 +9052,7 @@ export class DatasetServiceClient {
    */
   matchPublisherFromPublisherModelName(publisherModelName: string) {
     return this.pathTemplates.publisherModelPathTemplate.match(
-      publisherModelName,
+      publisherModelName
     ).publisher;
   }
 
@@ -9067,7 +9065,7 @@ export class DatasetServiceClient {
    */
   matchModelFromPublisherModelName(publisherModelName: string) {
     return this.pathTemplates.publisherModelPathTemplate.match(
-      publisherModelName,
+      publisherModelName
     ).model;
   }
 
@@ -9136,7 +9134,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     ragCorpus: string,
-    ragFile: string,
+    ragFile: string
   ) {
     return this.pathTemplates.ragFilePathTemplate.render({
       project: project,
@@ -9201,7 +9199,7 @@ export class DatasetServiceClient {
   reasoningEnginePath(
     project: string,
     location: string,
-    reasoningEngine: string,
+    reasoningEngine: string
   ) {
     return this.pathTemplates.reasoningEnginePathTemplate.render({
       project: project,
@@ -9219,7 +9217,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromReasoningEngineName(reasoningEngineName: string) {
     return this.pathTemplates.reasoningEnginePathTemplate.match(
-      reasoningEngineName,
+      reasoningEngineName
     ).project;
   }
 
@@ -9232,7 +9230,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromReasoningEngineName(reasoningEngineName: string) {
     return this.pathTemplates.reasoningEnginePathTemplate.match(
-      reasoningEngineName,
+      reasoningEngineName
     ).location;
   }
 
@@ -9245,7 +9243,7 @@ export class DatasetServiceClient {
    */
   matchReasoningEngineFromReasoningEngineName(reasoningEngineName: string) {
     return this.pathTemplates.reasoningEnginePathTemplate.match(
-      reasoningEngineName,
+      reasoningEngineName
     ).reasoning_engine;
   }
 
@@ -9262,7 +9260,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     dataset: string,
-    savedQuery: string,
+    savedQuery: string
   ) {
     return this.pathTemplates.savedQueryPathTemplate.render({
       project: project,
@@ -9380,7 +9378,7 @@ export class DatasetServiceClient {
   specialistPoolPath(
     project: string,
     location: string,
-    specialistPool: string,
+    specialistPool: string
   ) {
     return this.pathTemplates.specialistPoolPathTemplate.render({
       project: project,
@@ -9398,7 +9396,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromSpecialistPoolName(specialistPoolName: string) {
     return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName,
+      specialistPoolName
     ).project;
   }
 
@@ -9411,7 +9409,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromSpecialistPoolName(specialistPoolName: string) {
     return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName,
+      specialistPoolName
     ).location;
   }
 
@@ -9424,7 +9422,7 @@ export class DatasetServiceClient {
    */
   matchSpecialistPoolFromSpecialistPoolName(specialistPoolName: string) {
     return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName,
+      specialistPoolName
     ).specialist_pool;
   }
 
@@ -9542,7 +9540,7 @@ export class DatasetServiceClient {
     project: string,
     location: string,
     tensorboard: string,
-    experiment: string,
+    experiment: string
   ) {
     return this.pathTemplates.tensorboardExperimentPathTemplate.render({
       project: project,
@@ -9561,7 +9559,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromTensorboardExperimentName(tensorboardExperimentName: string) {
     return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName,
+      tensorboardExperimentName
     ).project;
   }
 
@@ -9573,10 +9571,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTensorboardExperimentName(
-    tensorboardExperimentName: string,
+    tensorboardExperimentName: string
   ) {
     return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName,
+      tensorboardExperimentName
     ).location;
   }
 
@@ -9588,10 +9586,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the tensorboard.
    */
   matchTensorboardFromTensorboardExperimentName(
-    tensorboardExperimentName: string,
+    tensorboardExperimentName: string
   ) {
     return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName,
+      tensorboardExperimentName
     ).tensorboard;
   }
 
@@ -9603,10 +9601,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the experiment.
    */
   matchExperimentFromTensorboardExperimentName(
-    tensorboardExperimentName: string,
+    tensorboardExperimentName: string
   ) {
     return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName,
+      tensorboardExperimentName
     ).experiment;
   }
 
@@ -9625,7 +9623,7 @@ export class DatasetServiceClient {
     location: string,
     tensorboard: string,
     experiment: string,
-    run: string,
+    run: string
   ) {
     return this.pathTemplates.tensorboardRunPathTemplate.render({
       project: project,
@@ -9645,7 +9643,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromTensorboardRunName(tensorboardRunName: string) {
     return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName,
+      tensorboardRunName
     ).project;
   }
 
@@ -9658,7 +9656,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromTensorboardRunName(tensorboardRunName: string) {
     return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName,
+      tensorboardRunName
     ).location;
   }
 
@@ -9671,7 +9669,7 @@ export class DatasetServiceClient {
    */
   matchTensorboardFromTensorboardRunName(tensorboardRunName: string) {
     return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName,
+      tensorboardRunName
     ).tensorboard;
   }
 
@@ -9684,7 +9682,7 @@ export class DatasetServiceClient {
    */
   matchExperimentFromTensorboardRunName(tensorboardRunName: string) {
     return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName,
+      tensorboardRunName
     ).experiment;
   }
 
@@ -9697,7 +9695,7 @@ export class DatasetServiceClient {
    */
   matchRunFromTensorboardRunName(tensorboardRunName: string) {
     return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName,
+      tensorboardRunName
     ).run;
   }
 
@@ -9718,7 +9716,7 @@ export class DatasetServiceClient {
     tensorboard: string,
     experiment: string,
     run: string,
-    timeSeries: string,
+    timeSeries: string
   ) {
     return this.pathTemplates.tensorboardTimeSeriesPathTemplate.render({
       project: project,
@@ -9739,7 +9737,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
     return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName,
+      tensorboardTimeSeriesName
     ).project;
   }
 
@@ -9751,10 +9749,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string,
+    tensorboardTimeSeriesName: string
   ) {
     return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName,
+      tensorboardTimeSeriesName
     ).location;
   }
 
@@ -9766,10 +9764,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the tensorboard.
    */
   matchTensorboardFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string,
+    tensorboardTimeSeriesName: string
   ) {
     return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName,
+      tensorboardTimeSeriesName
     ).tensorboard;
   }
 
@@ -9781,10 +9779,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the experiment.
    */
   matchExperimentFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string,
+    tensorboardTimeSeriesName: string
   ) {
     return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName,
+      tensorboardTimeSeriesName
     ).experiment;
   }
 
@@ -9797,7 +9795,7 @@ export class DatasetServiceClient {
    */
   matchRunFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
     return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName,
+      tensorboardTimeSeriesName
     ).run;
   }
 
@@ -9809,10 +9807,10 @@ export class DatasetServiceClient {
    * @returns {string} A string representing the time_series.
    */
   matchTimeSeriesFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string,
+    tensorboardTimeSeriesName: string
   ) {
     return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName,
+      tensorboardTimeSeriesName
     ).time_series;
   }
 
@@ -9827,7 +9825,7 @@ export class DatasetServiceClient {
   trainingPipelinePath(
     project: string,
     location: string,
-    trainingPipeline: string,
+    trainingPipeline: string
   ) {
     return this.pathTemplates.trainingPipelinePathTemplate.render({
       project: project,
@@ -9845,7 +9843,7 @@ export class DatasetServiceClient {
    */
   matchProjectFromTrainingPipelineName(trainingPipelineName: string) {
     return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName,
+      trainingPipelineName
     ).project;
   }
 
@@ -9858,7 +9856,7 @@ export class DatasetServiceClient {
    */
   matchLocationFromTrainingPipelineName(trainingPipelineName: string) {
     return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName,
+      trainingPipelineName
     ).location;
   }
 
@@ -9871,7 +9869,7 @@ export class DatasetServiceClient {
    */
   matchTrainingPipelineFromTrainingPipelineName(trainingPipelineName: string) {
     return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName,
+      trainingPipelineName
     ).training_pipeline;
   }
 
