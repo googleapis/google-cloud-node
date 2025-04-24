@@ -185,12 +185,13 @@ describe('v1.DatasetServiceClient', () => {
       console.log('BEFORE CLIENT CREATION');
       const client = new datasetserviceModule.v1.DatasetServiceClient();
       console.log('AFTER CLIENT CREATION');
-      console.log(client);
+      // console.log(client);
       const apiEndpoint = await client.apiEndpoint;
       console.log('AFTER API ENDPOINT CALL');
       console.log(apiEndpoint);
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
-      client.close().catch(err => {throw err})
+      client.close().catch(err => {throw err});
+      console.log(client);
     });
 
     // it('has universeDomain', async () => {
