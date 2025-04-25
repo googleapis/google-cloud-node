@@ -3101,6 +3101,13 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "thinkingConfig": {
+                          "type": "ThinkingConfig",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3168,6 +3175,25 @@
                                     "proto3_optional": true
                                   }
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "ThinkingConfig": {
+                          "oneofs": {
+                            "_thinkingBudget": {
+                              "oneof": [
+                                "thinkingBudget"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "thinkingBudget": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
