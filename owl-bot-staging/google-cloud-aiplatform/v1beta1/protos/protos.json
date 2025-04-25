@@ -3754,6 +3754,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "thinkingConfig": {
+                          "type": "ThinkingConfig",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "modelConfig": {
                           "type": "ModelConfig",
                           "id": 27,
@@ -3827,6 +3834,25 @@
                                     "proto3_optional": true
                                   }
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "ThinkingConfig": {
+                          "oneofs": {
+                            "_thinkingBudget": {
+                              "oneof": [
+                                "thinkingBudget"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "thinkingBudget": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
