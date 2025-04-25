@@ -39290,6 +39290,9 @@ export namespace google {
                         /** LayoutConfig returnBoundingBoxes */
                         returnBoundingBoxes?: (boolean|null);
 
+                        /** LayoutConfig enableImageAnnotation */
+                        enableImageAnnotation?: (boolean|null);
+
                         /** LayoutConfig enableLlmLayoutParsing */
                         enableLlmLayoutParsing?: (boolean|null);
                     }
@@ -39311,6 +39314,9 @@ export namespace google {
 
                         /** LayoutConfig returnBoundingBoxes. */
                         public returnBoundingBoxes: boolean;
+
+                        /** LayoutConfig enableImageAnnotation. */
+                        public enableImageAnnotation: boolean;
 
                         /** LayoutConfig enableLlmLayoutParsing. */
                         public enableLlmLayoutParsing: boolean;
