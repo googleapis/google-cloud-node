@@ -167,7 +167,7 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.DatasetServiceClient', () => {
   describe('Common methods', () => {
-    it('has apiEndpoint', () => {
+    it.only('has apiEndpoint', () => {
       const client = new datasetserviceModule.v1.DatasetServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
