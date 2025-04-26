@@ -258,9 +258,14 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
         throw err;
       });
       assert(client.messagesV1Beta3Stub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -269,9 +274,14 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.messagesV1Beta3Stub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
