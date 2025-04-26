@@ -13234,7 +13234,8 @@
                             "filterAction",
                             "twowaySynonymsAction",
                             "forceReturnFacetAction",
-                            "removeFacetAction"
+                            "removeFacetAction",
+                            "pinAction"
                           ]
                         }
                       },
@@ -13278,6 +13279,10 @@
                         "removeFacetAction": {
                           "type": "RemoveFacetAction",
                           "id": 13
+                        },
+                        "pinAction": {
+                          "type": "PinAction",
+                          "id": 14
                         },
                         "condition": {
                           "type": "Condition",
@@ -13418,6 +13423,18 @@
                               "rule": "repeated",
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "PinAction": {
+                          "fields": {
+                            "pinMap": {
+                              "keyType": "int64",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             }
                           }
                         }
@@ -13649,23 +13666,57 @@
                       "fields": {
                         "placeId": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "priceInfo": {
                           "type": "PriceInfo",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "attributes": {
                           "keyType": "string",
                           "type": "CustomAttribute",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "fulfillmentTypes": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PinControlMetadata": {
+                      "fields": {
+                        "allMatchedPins": {
+                          "keyType": "int64",
+                          "type": "ProductPins",
+                          "id": 1
+                        },
+                        "droppedPins": {
+                          "keyType": "int64",
+                          "type": "ProductPins",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ProductPins": {
+                          "fields": {
+                            "productId": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -15299,6 +15350,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 43,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "placeId": {
+                          "type": "string",
+                          "id": 46,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -15602,6 +15674,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 12
+                        },
+                        "pinControlMetadata": {
+                          "type": "PinControlMetadata",
+                          "id": 22
                         },
                         "invalidConditionBoostSpecs": {
                           "rule": "repeated",
@@ -18217,12 +18293,18 @@
                           "requestType": "CollectUserEventRequest",
                           "responseType": "google.api.HttpBody",
                           "options": {
-                            "(google.api.http).get": "/v2beta/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect"
+                            "(google.api.http).get": "/v2beta/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                            "(google.api.http).additional_bindings.post": "/v2beta/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                            "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2beta/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect"
+                                "get": "/v2beta/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                                "additional_bindings": {
+                                  "post": "/v2beta/{parent=projects/*/locations/*/catalogs/*}/userEvents:collect",
+                                  "body": "*"
+                                }
                               }
                             }
                           ]
