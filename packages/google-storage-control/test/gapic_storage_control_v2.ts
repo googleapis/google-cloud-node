@@ -288,9 +288,14 @@ describe('v2.StorageControlClient', () => {
         throw err;
       });
       assert(client.storageControlStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -299,9 +304,14 @@ describe('v2.StorageControlClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.storageControlStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -467,7 +477,9 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createFolder(request), expectedError);
     });
   });
@@ -603,7 +615,9 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteFolder(request), expectedError);
     });
   });
@@ -736,7 +750,9 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getFolder(request), expectedError);
     });
   });
@@ -872,7 +888,9 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getStorageLayout(request), expectedError);
     });
   });
@@ -1006,7 +1024,9 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createManagedFolder(request), expectedError);
     });
   });
@@ -1143,7 +1163,9 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteManagedFolder(request), expectedError);
     });
   });
@@ -1279,7 +1301,9 @@ describe('v2.StorageControlClient', () => {
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getManagedFolder(request), expectedError);
     });
   });
@@ -2138,20 +2162,24 @@ describe('v2.StorageControlClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -2218,20 +2246,24 @@ describe('v2.StorageControlClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -2298,20 +2330,24 @@ describe('v2.StorageControlClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
