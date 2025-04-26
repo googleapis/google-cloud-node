@@ -254,9 +254,14 @@ describe('v1.RecommenderClient', () => {
         throw err;
       });
       assert(client.recommenderStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -265,9 +270,14 @@ describe('v1.RecommenderClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.recommenderStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -430,7 +440,9 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getInsight(request), expectedError);
     });
   });
@@ -561,7 +573,9 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.markInsightAccepted(request), expectedError);
     });
   });
@@ -691,7 +705,9 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRecommendation(request), expectedError);
     });
   });
@@ -825,7 +841,9 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.markRecommendationDismissed(request),
         expectedError
@@ -962,7 +980,9 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.markRecommendationClaimed(request),
         expectedError
@@ -1099,7 +1119,9 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.markRecommendationSucceeded(request),
         expectedError
@@ -1236,7 +1258,9 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.markRecommendationFailed(request),
         expectedError
@@ -1370,7 +1394,9 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRecommenderConfig(request), expectedError);
     });
   });
@@ -1508,7 +1534,9 @@ describe('v1.RecommenderClient', () => {
       );
       request.recommenderConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateRecommenderConfig(request),
         expectedError
@@ -1642,7 +1670,9 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getInsightTypeConfig(request), expectedError);
     });
   });
@@ -1780,7 +1810,9 @@ describe('v1.RecommenderClient', () => {
       );
       request.insightTypeConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateInsightTypeConfig(request),
         expectedError
