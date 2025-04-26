@@ -208,7 +208,7 @@ describe('v1.PredictionServiceClient', () => {
             assert(client.predictionServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -219,7 +219,7 @@ describe('v1.PredictionServiceClient', () => {
             assert.strictEqual(client.predictionServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -358,7 +358,7 @@ describe('v1.PredictionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.PredictRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.predict(request), expectedError);
         });
     });
@@ -466,7 +466,7 @@ describe('v1.PredictionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.RawPredictRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.rawPredict(request), expectedError);
         });
     });
@@ -574,7 +574,7 @@ describe('v1.PredictionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DirectPredictRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.directPredict(request), expectedError);
         });
     });
@@ -682,7 +682,7 @@ describe('v1.PredictionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DirectRawPredictRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.directRawPredict(request), expectedError);
         });
     });
@@ -790,7 +790,7 @@ describe('v1.PredictionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ExplainRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.explain(request), expectedError);
         });
     });
@@ -898,7 +898,7 @@ describe('v1.PredictionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GenerateContentRequest', ['model']);
             request.model = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.generateContent(request), expectedError);
         });
     });
@@ -1023,7 +1023,7 @@ describe('v1.PredictionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StreamRawPredictRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             const stream = client.streamRawPredict(request, {retryRequestOptions: {noResponseRetries: 0}});
             const promise = new Promise((resolve, reject) => {
                 stream.on('data', (response: protos.google.api.HttpBody) => {
@@ -1163,7 +1163,7 @@ describe('v1.PredictionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StreamingPredictRequest', ['endpoint']);
             request.endpoint = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             const stream = client.serverStreamingPredict(request, {retryRequestOptions: {noResponseRetries: 0}});
             const promise = new Promise((resolve, reject) => {
                 stream.on('data', (response: protos.google.cloud.aiplatform.v1.StreamingPredictResponse) => {
@@ -1303,7 +1303,7 @@ describe('v1.PredictionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GenerateContentRequest', ['model']);
             request.model = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             const stream = client.streamGenerateContent(request, {retryRequestOptions: {noResponseRetries: 0}});
             const promise = new Promise((resolve, reject) => {
                 stream.on('data', (response: protos.google.cloud.aiplatform.v1.GenerateContentResponse) => {
@@ -1638,7 +1638,7 @@ describe('v1.PredictionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1730,7 +1730,7 @@ describe('v1.PredictionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1822,7 +1822,7 @@ describe('v1.PredictionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

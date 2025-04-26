@@ -228,7 +228,7 @@ describe('v1.ModelServiceClient', () => {
             assert(client.modelServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -239,7 +239,7 @@ describe('v1.ModelServiceClient', () => {
             assert.strictEqual(client.modelServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -378,7 +378,7 @@ describe('v1.ModelServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetModelRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getModel(request), expectedError);
         });
     });
@@ -490,7 +490,7 @@ describe('v1.ModelServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateModelRequest', ['model', 'name']);
             request.model.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.updateModel(request), expectedError);
         });
     });
@@ -598,7 +598,7 @@ describe('v1.ModelServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.MergeVersionAliasesRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.mergeVersionAliases(request), expectedError);
         });
     });
@@ -706,7 +706,7 @@ describe('v1.ModelServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ImportModelEvaluationRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.importModelEvaluation(request), expectedError);
         });
     });
@@ -814,7 +814,7 @@ describe('v1.ModelServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.batchImportModelEvaluationSlices(request), expectedError);
         });
     });
@@ -922,7 +922,7 @@ describe('v1.ModelServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.BatchImportEvaluatedAnnotationsRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.batchImportEvaluatedAnnotations(request), expectedError);
         });
     });
@@ -1030,7 +1030,7 @@ describe('v1.ModelServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetModelEvaluationRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getModelEvaluation(request), expectedError);
         });
     });
@@ -1138,7 +1138,7 @@ describe('v1.ModelServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetModelEvaluationSliceRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getModelEvaluationSlice(request), expectedError);
         });
     });
@@ -3351,7 +3351,7 @@ describe('v1.ModelServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -3443,7 +3443,7 @@ describe('v1.ModelServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -3535,7 +3535,7 @@ describe('v1.ModelServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -3778,7 +3778,7 @@ describe('v1.ModelServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -3845,7 +3845,7 @@ describe('v1.ModelServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -3912,7 +3912,7 @@ describe('v1.ModelServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

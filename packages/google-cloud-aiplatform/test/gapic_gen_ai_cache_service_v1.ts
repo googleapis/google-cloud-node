@@ -212,7 +212,7 @@ describe('v1.GenAiCacheServiceClient', () => {
             assert(client.genAiCacheServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -223,7 +223,7 @@ describe('v1.GenAiCacheServiceClient', () => {
             assert.strictEqual(client.genAiCacheServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -362,7 +362,7 @@ describe('v1.GenAiCacheServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateCachedContentRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.createCachedContent(request), expectedError);
         });
     });
@@ -470,7 +470,7 @@ describe('v1.GenAiCacheServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetCachedContentRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getCachedContent(request), expectedError);
         });
     });
@@ -582,7 +582,7 @@ describe('v1.GenAiCacheServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateCachedContentRequest', ['cachedContent', 'name']);
             request.cachedContent.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.updateCachedContent(request), expectedError);
         });
     });
@@ -690,7 +690,7 @@ describe('v1.GenAiCacheServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteCachedContentRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.deleteCachedContent(request), expectedError);
         });
     });
@@ -999,7 +999,7 @@ describe('v1.GenAiCacheServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1091,7 +1091,7 @@ describe('v1.GenAiCacheServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1183,7 +1183,7 @@ describe('v1.GenAiCacheServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

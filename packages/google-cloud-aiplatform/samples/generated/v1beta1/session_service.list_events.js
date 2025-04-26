@@ -37,6 +37,7 @@ function main(parent) {
   /**
    *  Optional. The maximum number of events to return. The service may return
    *  fewer than this value. If unspecified, at most 100 events will be returned.
+   *  These events are ordered by timestamp in ascending order.
    */
   // const pageSize = 1234
   /**

@@ -2103,6 +2103,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "checkpoints": {
+                          "rule": "repeated",
+                          "type": "Checkpoint",
+                          "id": 57,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2529,6 +2537,22 @@
                               "id": 2
                             }
                           }
+                        }
+                      }
+                    },
+                    "Checkpoint": {
+                      "fields": {
+                        "checkpointId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "epoch": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "step": {
+                          "type": "int64",
+                          "id": 3
                         }
                       }
                     },
@@ -3074,6 +3098,13 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "thinkingConfig": {
+                          "type": "ThinkingConfig",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3141,6 +3172,25 @@
                                     "proto3_optional": true
                                   }
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "ThinkingConfig": {
+                          "oneofs": {
+                            "_thinkingBudget": {
+                              "oneof": [
+                                "thinkingBudget"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "thinkingBudget": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -40060,6 +40110,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "thinkingConfig": {
+                          "type": "ThinkingConfig",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "modelConfig": {
                           "type": "ModelConfig",
                           "id": 27,
@@ -40133,6 +40190,25 @@
                                     "proto3_optional": true
                                   }
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "ThinkingConfig": {
+                          "oneofs": {
+                            "_thinkingBudget": {
+                              "oneof": [
+                                "thinkingBudget"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "thinkingBudget": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -77300,7 +77376,7 @@
                           "type": "bool",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "deprecated": true
                           }
                         },
                         "escalate": {
@@ -77313,6 +77389,13 @@
                         "requestedAuthConfigs": {
                           "type": "google.protobuf.Struct",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "transferAgent": {
+                          "type": "string",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -77329,10 +77412,8 @@
                           "requestType": "CreateSessionRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/sessions",
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/sessions",
                             "(google.api.http).body": "session",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/sessions",
-                            "(google.api.http).additional_bindings.body": "session",
                             "(google.api.method_signature)": "parent,session",
                             "(google.longrunning.operation_info).response_type": "Session",
                             "(google.longrunning.operation_info).metadata_type": "CreateSessionOperationMetadata"
@@ -77340,12 +77421,8 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v1beta1/{parent=projects/*/locations/*}/sessions",
-                                "body": "session",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/sessions",
-                                  "body": "session"
-                                }
+                                "post": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/sessions",
+                                "body": "session"
                               }
                             },
                             {
@@ -77363,17 +77440,13 @@
                           "requestType": "GetSessionRequest",
                           "responseType": "Session",
                           "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/sessions/*}",
-                            "(google.api.http).additional_bindings.get": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}",
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta1/{name=projects/*/locations/*/sessions/*}",
-                                "additional_bindings": {
-                                  "get": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}"
-                                }
+                                "get": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}"
                               }
                             },
                             {
@@ -77385,17 +77458,13 @@
                           "requestType": "ListSessionsRequest",
                           "responseType": "ListSessionsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/sessions",
-                            "(google.api.http).additional_bindings.get": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/sessions",
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/sessions",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta1/{parent=projects/*/locations/*}/sessions",
-                                "additional_bindings": {
-                                  "get": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/sessions"
-                                }
+                                "get": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/sessions"
                               }
                             },
                             {
@@ -77407,21 +77476,15 @@
                           "requestType": "UpdateSessionRequest",
                           "responseType": "Session",
                           "options": {
-                            "(google.api.http).patch": "/v1beta1/{session.name=projects/*/locations/*/sessions/*}",
+                            "(google.api.http).patch": "/v1beta1/{session.name=projects/*/locations/*/reasoningEngines/*/sessions/*}",
                             "(google.api.http).body": "session",
-                            "(google.api.http).additional_bindings.patch": "/v1beta1/{session.name=projects/*/locations/*/reasoningEngines/*/sessions/*}",
-                            "(google.api.http).additional_bindings.body": "session",
                             "(google.api.method_signature)": "session,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "patch": "/v1beta1/{session.name=projects/*/locations/*/sessions/*}",
-                                "body": "session",
-                                "additional_bindings": {
-                                  "patch": "/v1beta1/{session.name=projects/*/locations/*/reasoningEngines/*/sessions/*}",
-                                  "body": "session"
-                                }
+                                "patch": "/v1beta1/{session.name=projects/*/locations/*/reasoningEngines/*/sessions/*}",
+                                "body": "session"
                               }
                             },
                             {
@@ -77433,8 +77496,7 @@
                           "requestType": "DeleteSessionRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/sessions/*}",
-                            "(google.api.http).additional_bindings.delete": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}",
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
@@ -77442,10 +77504,7 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1beta1/{name=projects/*/locations/*/sessions/*}",
-                                "additional_bindings": {
-                                  "delete": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}"
-                                }
+                                "delete": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}"
                               }
                             },
                             {
@@ -77464,16 +77523,12 @@
                           "responseType": "ListEventsResponse",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*/sessions/*}/events",
-                            "(google.api.http).additional_bindings.get": "/v1beta1/{parent=projects/*/locations/*/sessions/*}/events",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*/sessions/*}/events",
-                                "additional_bindings": {
-                                  "get": "/v1beta1/{parent=projects/*/locations/*/sessions/*}/events"
-                                }
+                                "get": "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*/sessions/*}/events"
                               }
                             },
                             {

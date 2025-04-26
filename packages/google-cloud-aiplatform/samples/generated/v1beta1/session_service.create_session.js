@@ -30,7 +30,7 @@ function main(parent, session) {
    */
   /**
    *  Required. The resource name of the location to create the session in.
-   *  Format: `projects/{project}/locations/{location}` or
+   *  Format:
    *  `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
    */
   // const parent = 'abc123'

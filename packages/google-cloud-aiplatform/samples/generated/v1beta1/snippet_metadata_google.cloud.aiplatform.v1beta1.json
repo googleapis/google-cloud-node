@@ -14867,7 +14867,7 @@
             "regionTag": "aiplatform_v1beta1_generated_SessionService_CreateSession_async",
             "title": "DatasetService createSession Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a new [Session][google.cloud.aiplatform.v1beta1.Session] in a given project and location.",
+            "description": " Creates a new [Session][google.cloud.aiplatform.v1beta1.Session].",
             "canonical": true,
             "file": "session_service.create_session.js",
             "language": "JAVASCRIPT",
@@ -14951,7 +14951,7 @@
             "regionTag": "aiplatform_v1beta1_generated_SessionService_ListSessions_async",
             "title": "DatasetService listSessions Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists [Sessions][google.cloud.aiplatform.v1beta1.Session] in a given project and location.",
+            "description": " Lists [Sessions][google.cloud.aiplatform.v1beta1.Session] in a given reasoning engine.",
             "canonical": true,
             "file": "session_service.list_sessions.js",
             "language": "JAVASCRIPT",
@@ -15058,7 +15058,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 57,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],
@@ -15098,7 +15098,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],

@@ -31,7 +31,6 @@ function main(name) {
   /**
    *  Required. The resource name of the session.
    *  Format:
-   *  `projects/{project}/locations/{location}/sessions/{session}` or
    *  `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}`
    */
   // const name = 'abc123'

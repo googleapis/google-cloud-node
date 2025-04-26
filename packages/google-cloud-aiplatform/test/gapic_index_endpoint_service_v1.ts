@@ -228,7 +228,7 @@ describe('v1.IndexEndpointServiceClient', () => {
             assert(client.indexEndpointServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -239,7 +239,7 @@ describe('v1.IndexEndpointServiceClient', () => {
             assert.strictEqual(client.indexEndpointServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -378,7 +378,7 @@ describe('v1.IndexEndpointServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetIndexEndpointRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getIndexEndpoint(request), expectedError);
         });
     });
@@ -490,7 +490,7 @@ describe('v1.IndexEndpointServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateIndexEndpointRequest', ['indexEndpoint', 'name']);
             request.indexEndpoint.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.updateIndexEndpoint(request), expectedError);
         });
     });
@@ -1569,7 +1569,7 @@ describe('v1.IndexEndpointServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1661,7 +1661,7 @@ describe('v1.IndexEndpointServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1753,7 +1753,7 @@ describe('v1.IndexEndpointServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1996,7 +1996,7 @@ describe('v1.IndexEndpointServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2063,7 +2063,7 @@ describe('v1.IndexEndpointServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2130,7 +2130,7 @@ describe('v1.IndexEndpointServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

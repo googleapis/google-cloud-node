@@ -185,7 +185,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
             assert(client.extensionExecutionServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -196,7 +196,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
             assert.strictEqual(client.extensionExecutionServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -335,7 +335,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.executeExtension(request), expectedError);
         });
     });
@@ -443,7 +443,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryExtensionRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.queryExtension(request), expectedError);
         });
     });
@@ -507,7 +507,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -599,7 +599,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -691,7 +691,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -3154,222 +3154,6 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
             });
         });
 
-        describe('projectLocationReasoningEngineSession', async () => {
-            const fakePath = "/rendered/path/projectLocationReasoningEngineSession";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                reasoning_engine: "reasoningEngineValue",
-                session: "sessionValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationReasoningEngineSessionPath', () => {
-                const result = client.projectLocationReasoningEngineSessionPath("projectValue", "locationValue", "reasoningEngineValue", "sessionValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationReasoningEngineSessionName', () => {
-                const result = client.matchProjectFromProjectLocationReasoningEngineSessionName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationReasoningEngineSessionName', () => {
-                const result = client.matchLocationFromProjectLocationReasoningEngineSessionName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReasoningEngineFromProjectLocationReasoningEngineSessionName', () => {
-                const result = client.matchReasoningEngineFromProjectLocationReasoningEngineSessionName(fakePath);
-                assert.strictEqual(result, "reasoningEngineValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSessionFromProjectLocationReasoningEngineSessionName', () => {
-                const result = client.matchSessionFromProjectLocationReasoningEngineSessionName(fakePath);
-                assert.strictEqual(result, "sessionValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationReasoningEngineSessionEvent', async () => {
-            const fakePath = "/rendered/path/projectLocationReasoningEngineSessionEvent";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                reasoning_engine: "reasoningEngineValue",
-                session: "sessionValue",
-                event: "eventValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationReasoningEngineSessionEventPath', () => {
-                const result = client.projectLocationReasoningEngineSessionEventPath("projectValue", "locationValue", "reasoningEngineValue", "sessionValue", "eventValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationReasoningEngineSessionEventName', () => {
-                const result = client.matchProjectFromProjectLocationReasoningEngineSessionEventName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationReasoningEngineSessionEventName', () => {
-                const result = client.matchLocationFromProjectLocationReasoningEngineSessionEventName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReasoningEngineFromProjectLocationReasoningEngineSessionEventName', () => {
-                const result = client.matchReasoningEngineFromProjectLocationReasoningEngineSessionEventName(fakePath);
-                assert.strictEqual(result, "reasoningEngineValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSessionFromProjectLocationReasoningEngineSessionEventName', () => {
-                const result = client.matchSessionFromProjectLocationReasoningEngineSessionEventName(fakePath);
-                assert.strictEqual(result, "sessionValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEventFromProjectLocationReasoningEngineSessionEventName', () => {
-                const result = client.matchEventFromProjectLocationReasoningEngineSessionEventName(fakePath);
-                assert.strictEqual(result, "eventValue");
-                assert((client.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationSession', async () => {
-            const fakePath = "/rendered/path/projectLocationSession";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                session: "sessionValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationSessionPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationSessionPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationSessionPath', () => {
-                const result = client.projectLocationSessionPath("projectValue", "locationValue", "sessionValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationSessionPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationSessionName', () => {
-                const result = client.matchProjectFromProjectLocationSessionName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationSessionName', () => {
-                const result = client.matchLocationFromProjectLocationSessionName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSessionFromProjectLocationSessionName', () => {
-                const result = client.matchSessionFromProjectLocationSessionName(fakePath);
-                assert.strictEqual(result, "sessionValue");
-                assert((client.pathTemplates.projectLocationSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationSessionEvent', async () => {
-            const fakePath = "/rendered/path/projectLocationSessionEvent";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                session: "sessionValue",
-                event: "eventValue",
-            };
-            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationSessionEventPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationSessionEventPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationSessionEventPath', () => {
-                const result = client.projectLocationSessionEventPath("projectValue", "locationValue", "sessionValue", "eventValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationSessionEventPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationSessionEventName', () => {
-                const result = client.matchProjectFromProjectLocationSessionEventName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationSessionEventName', () => {
-                const result = client.matchLocationFromProjectLocationSessionEventName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchSessionFromProjectLocationSessionEventName', () => {
-                const result = client.matchSessionFromProjectLocationSessionEventName(fakePath);
-                assert.strictEqual(result, "sessionValue");
-                assert((client.pathTemplates.projectLocationSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchEventFromProjectLocationSessionEventName', () => {
-                const result = client.matchEventFromProjectLocationSessionEventName(fakePath);
-                assert.strictEqual(result, "eventValue");
-                assert((client.pathTemplates.projectLocationSessionEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
         describe('publisherModel', async () => {
             const fakePath = "/rendered/path/publisherModel";
             const expectedParameters = {
@@ -3688,6 +3472,122 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
                 const result = client.matchScheduleFromScheduleName(fakePath);
                 assert.strictEqual(result, "scheduleValue");
                 assert((client.pathTemplates.schedulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('session', async () => {
+            const fakePath = "/rendered/path/session";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reasoning_engine: "reasoningEngineValue",
+                session: "sessionValue",
+            };
+            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sessionPath', () => {
+                const result = client.sessionPath("projectValue", "locationValue", "reasoningEngineValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSessionName', () => {
+                const result = client.matchProjectFromSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSessionName', () => {
+                const result = client.matchLocationFromSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReasoningEngineFromSessionName', () => {
+                const result = client.matchReasoningEngineFromSessionName(fakePath);
+                assert.strictEqual(result, "reasoningEngineValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromSessionName', () => {
+                const result = client.matchSessionFromSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sessionEvent', async () => {
+            const fakePath = "/rendered/path/sessionEvent";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reasoning_engine: "reasoningEngineValue",
+                session: "sessionValue",
+                event: "eventValue",
+            };
+            const client = new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sessionEventPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sessionEventPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sessionEventPath', () => {
+                const result = client.sessionEventPath("projectValue", "locationValue", "reasoningEngineValue", "sessionValue", "eventValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sessionEventPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSessionEventName', () => {
+                const result = client.matchProjectFromSessionEventName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSessionEventName', () => {
+                const result = client.matchLocationFromSessionEventName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReasoningEngineFromSessionEventName', () => {
+                const result = client.matchReasoningEngineFromSessionEventName(fakePath);
+                assert.strictEqual(result, "reasoningEngineValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromSessionEventName', () => {
+                const result = client.matchSessionFromSessionEventName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEventFromSessionEventName', () => {
+                const result = client.matchEventFromSessionEventName(fakePath);
+                assert.strictEqual(result, "eventValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

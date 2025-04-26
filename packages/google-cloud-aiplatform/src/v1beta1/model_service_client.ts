@@ -325,18 +325,6 @@ export class ModelServiceClient {
       projectLocationPublisherModelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
       ),
-      projectLocationReasoningEngineSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}'
-      ),
-      projectLocationReasoningEngineSessionEventPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}/events/{event}'
-      ),
-      projectLocationSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sessions/{session}'
-      ),
-      projectLocationSessionEventPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sessions/{session}/events/{event}'
-      ),
       publisherModelPathTemplate: new this._gaxModule.PathTemplate(
         'publishers/{publisher}/models/{model}'
       ),
@@ -357,6 +345,12 @@ export class ModelServiceClient {
       ),
       schedulePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/schedules/{schedule}'
+      ),
+      sessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}'
+      ),
+      sessionEventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}/events/{event}'
       ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
@@ -6328,254 +6322,6 @@ export class ModelServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationReasoningEngineSession resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} reasoning_engine
-   * @param {string} session
-   * @returns {string} Resource name string.
-   */
-  projectLocationReasoningEngineSessionPath(project:string,location:string,reasoningEngine:string,session:string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.render({
-      project: project,
-      location: location,
-      reasoning_engine: reasoningEngine,
-      session: session,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationReasoningEngineSession resource.
-   *
-   * @param {string} projectLocationReasoningEngineSessionName
-   *   A fully-qualified path representing project_location_reasoning_engine_session resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationReasoningEngineSession resource.
-   *
-   * @param {string} projectLocationReasoningEngineSessionName
-   *   A fully-qualified path representing project_location_reasoning_engine_session resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).location;
-  }
-
-  /**
-   * Parse the reasoning_engine from ProjectLocationReasoningEngineSession resource.
-   *
-   * @param {string} projectLocationReasoningEngineSessionName
-   *   A fully-qualified path representing project_location_reasoning_engine_session resource.
-   * @returns {string} A string representing the reasoning_engine.
-   */
-  matchReasoningEngineFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).reasoning_engine;
-  }
-
-  /**
-   * Parse the session from ProjectLocationReasoningEngineSession resource.
-   *
-   * @param {string} projectLocationReasoningEngineSessionName
-   *   A fully-qualified path representing project_location_reasoning_engine_session resource.
-   * @returns {string} A string representing the session.
-   */
-  matchSessionFromProjectLocationReasoningEngineSessionName(projectLocationReasoningEngineSessionName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionPathTemplate.match(projectLocationReasoningEngineSessionName).session;
-  }
-
-  /**
-   * Return a fully-qualified projectLocationReasoningEngineSessionEvent resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} reasoning_engine
-   * @param {string} session
-   * @param {string} event
-   * @returns {string} Resource name string.
-   */
-  projectLocationReasoningEngineSessionEventPath(project:string,location:string,reasoningEngine:string,session:string,event:string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.render({
-      project: project,
-      location: location,
-      reasoning_engine: reasoningEngine,
-      session: session,
-      event: event,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationReasoningEngineSessionEvent resource.
-   *
-   * @param {string} projectLocationReasoningEngineSessionEventName
-   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationReasoningEngineSessionEvent resource.
-   *
-   * @param {string} projectLocationReasoningEngineSessionEventName
-   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).location;
-  }
-
-  /**
-   * Parse the reasoning_engine from ProjectLocationReasoningEngineSessionEvent resource.
-   *
-   * @param {string} projectLocationReasoningEngineSessionEventName
-   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
-   * @returns {string} A string representing the reasoning_engine.
-   */
-  matchReasoningEngineFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).reasoning_engine;
-  }
-
-  /**
-   * Parse the session from ProjectLocationReasoningEngineSessionEvent resource.
-   *
-   * @param {string} projectLocationReasoningEngineSessionEventName
-   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
-   * @returns {string} A string representing the session.
-   */
-  matchSessionFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).session;
-  }
-
-  /**
-   * Parse the event from ProjectLocationReasoningEngineSessionEvent resource.
-   *
-   * @param {string} projectLocationReasoningEngineSessionEventName
-   *   A fully-qualified path representing project_location_reasoning_engine_session_event resource.
-   * @returns {string} A string representing the event.
-   */
-  matchEventFromProjectLocationReasoningEngineSessionEventName(projectLocationReasoningEngineSessionEventName: string) {
-    return this.pathTemplates.projectLocationReasoningEngineSessionEventPathTemplate.match(projectLocationReasoningEngineSessionEventName).event;
-  }
-
-  /**
-   * Return a fully-qualified projectLocationSession resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} session
-   * @returns {string} Resource name string.
-   */
-  projectLocationSessionPath(project:string,location:string,session:string) {
-    return this.pathTemplates.projectLocationSessionPathTemplate.render({
-      project: project,
-      location: location,
-      session: session,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationSession resource.
-   *
-   * @param {string} projectLocationSessionName
-   *   A fully-qualified path representing project_location_session resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationSessionName(projectLocationSessionName: string) {
-    return this.pathTemplates.projectLocationSessionPathTemplate.match(projectLocationSessionName).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationSession resource.
-   *
-   * @param {string} projectLocationSessionName
-   *   A fully-qualified path representing project_location_session resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationSessionName(projectLocationSessionName: string) {
-    return this.pathTemplates.projectLocationSessionPathTemplate.match(projectLocationSessionName).location;
-  }
-
-  /**
-   * Parse the session from ProjectLocationSession resource.
-   *
-   * @param {string} projectLocationSessionName
-   *   A fully-qualified path representing project_location_session resource.
-   * @returns {string} A string representing the session.
-   */
-  matchSessionFromProjectLocationSessionName(projectLocationSessionName: string) {
-    return this.pathTemplates.projectLocationSessionPathTemplate.match(projectLocationSessionName).session;
-  }
-
-  /**
-   * Return a fully-qualified projectLocationSessionEvent resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} session
-   * @param {string} event
-   * @returns {string} Resource name string.
-   */
-  projectLocationSessionEventPath(project:string,location:string,session:string,event:string) {
-    return this.pathTemplates.projectLocationSessionEventPathTemplate.render({
-      project: project,
-      location: location,
-      session: session,
-      event: event,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationSessionEvent resource.
-   *
-   * @param {string} projectLocationSessionEventName
-   *   A fully-qualified path representing project_location_session_event resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
-    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationSessionEvent resource.
-   *
-   * @param {string} projectLocationSessionEventName
-   *   A fully-qualified path representing project_location_session_event resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
-    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).location;
-  }
-
-  /**
-   * Parse the session from ProjectLocationSessionEvent resource.
-   *
-   * @param {string} projectLocationSessionEventName
-   *   A fully-qualified path representing project_location_session_event resource.
-   * @returns {string} A string representing the session.
-   */
-  matchSessionFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
-    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).session;
-  }
-
-  /**
-   * Parse the event from ProjectLocationSessionEvent resource.
-   *
-   * @param {string} projectLocationSessionEventName
-   *   A fully-qualified path representing project_location_session_event resource.
-   * @returns {string} A string representing the event.
-   */
-  matchEventFromProjectLocationSessionEventName(projectLocationSessionEventName: string) {
-    return this.pathTemplates.projectLocationSessionEventPathTemplate.match(projectLocationSessionEventName).event;
-  }
-
-  /**
    * Return a fully-qualified publisherModel resource name string.
    *
    * @param {string} publisher
@@ -6916,6 +6662,143 @@ export class ModelServiceClient {
    */
   matchScheduleFromScheduleName(scheduleName: string) {
     return this.pathTemplates.schedulePathTemplate.match(scheduleName).schedule;
+  }
+
+  /**
+   * Return a fully-qualified session resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  sessionPath(project:string,location:string,reasoningEngine:string,session:string) {
+    return this.pathTemplates.sessionPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).project;
+  }
+
+  /**
+   * Parse the location from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).reasoning_engine;
+  }
+
+  /**
+   * Parse the session from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).session;
+  }
+
+  /**
+   * Return a fully-qualified sessionEvent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} session
+   * @param {string} event
+   * @returns {string} Resource name string.
+   */
+  sessionEventPath(project:string,location:string,reasoningEngine:string,session:string,event:string) {
+    return this.pathTemplates.sessionEventPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      session: session,
+      event: event,
+    });
+  }
+
+  /**
+   * Parse the project from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).project;
+  }
+
+  /**
+   * Parse the location from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).reasoning_engine;
+  }
+
+  /**
+   * Parse the session from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).session;
+  }
+
+  /**
+   * Parse the event from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the event.
+   */
+  matchEventFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).event;
   }
 
   /**
@@ -7462,9 +7345,9 @@ export class ModelServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.iamClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

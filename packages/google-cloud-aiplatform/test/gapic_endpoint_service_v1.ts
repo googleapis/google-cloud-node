@@ -228,7 +228,7 @@ describe('v1.EndpointServiceClient', () => {
             assert(client.endpointServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -239,7 +239,7 @@ describe('v1.EndpointServiceClient', () => {
             assert.strictEqual(client.endpointServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -378,7 +378,7 @@ describe('v1.EndpointServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetEndpointRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getEndpoint(request), expectedError);
         });
     });
@@ -490,7 +490,7 @@ describe('v1.EndpointServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateEndpointRequest', ['endpoint', 'name']);
             request.endpoint.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.updateEndpoint(request), expectedError);
         });
     });
@@ -1727,7 +1727,7 @@ describe('v1.EndpointServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1819,7 +1819,7 @@ describe('v1.EndpointServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1911,7 +1911,7 @@ describe('v1.EndpointServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2154,7 +2154,7 @@ describe('v1.EndpointServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2221,7 +2221,7 @@ describe('v1.EndpointServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2288,7 +2288,7 @@ describe('v1.EndpointServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

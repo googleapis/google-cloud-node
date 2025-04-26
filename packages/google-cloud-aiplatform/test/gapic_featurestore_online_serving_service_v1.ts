@@ -199,7 +199,7 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
             assert(client.featurestoreOnlineServingServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -210,7 +210,7 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
             assert.strictEqual(client.featurestoreOnlineServingServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -349,7 +349,7 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ReadFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.readFeatureValues(request), expectedError);
         });
     });
@@ -457,7 +457,7 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.WriteFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.writeFeatureValues(request), expectedError);
         });
     });
@@ -582,7 +582,7 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StreamingReadFeatureValuesRequest', ['entityType']);
             request.entityType = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             const stream = client.streamingReadFeatureValues(request, {retryRequestOptions: {noResponseRetries: 0}});
             const promise = new Promise((resolve, reject) => {
                 stream.on('data', (response: protos.google.cloud.aiplatform.v1.ReadFeatureValuesResponse) => {
@@ -661,7 +661,7 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -753,7 +753,7 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -845,7 +845,7 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

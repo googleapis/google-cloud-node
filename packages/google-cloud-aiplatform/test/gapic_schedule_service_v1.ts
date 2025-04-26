@@ -228,7 +228,7 @@ describe('v1.ScheduleServiceClient', () => {
             assert(client.scheduleServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -239,7 +239,7 @@ describe('v1.ScheduleServiceClient', () => {
             assert.strictEqual(client.scheduleServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -378,7 +378,7 @@ describe('v1.ScheduleServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateScheduleRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.createSchedule(request), expectedError);
         });
     });
@@ -486,7 +486,7 @@ describe('v1.ScheduleServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetScheduleRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getSchedule(request), expectedError);
         });
     });
@@ -594,7 +594,7 @@ describe('v1.ScheduleServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.PauseScheduleRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.pauseSchedule(request), expectedError);
         });
     });
@@ -702,7 +702,7 @@ describe('v1.ScheduleServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ResumeScheduleRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.resumeSchedule(request), expectedError);
         });
     });
@@ -814,7 +814,7 @@ describe('v1.ScheduleServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateScheduleRequest', ['schedule', 'name']);
             request.schedule.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.updateSchedule(request), expectedError);
         });
     });
@@ -1277,7 +1277,7 @@ describe('v1.ScheduleServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1369,7 +1369,7 @@ describe('v1.ScheduleServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1461,7 +1461,7 @@ describe('v1.ScheduleServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1704,7 +1704,7 @@ describe('v1.ScheduleServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1771,7 +1771,7 @@ describe('v1.ScheduleServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1838,7 +1838,7 @@ describe('v1.ScheduleServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
