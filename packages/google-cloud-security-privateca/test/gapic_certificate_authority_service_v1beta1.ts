@@ -307,9 +307,14 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
         throw err;
       });
       assert(client.certificateAuthorityServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -321,9 +326,14 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
           }
         );
       assert.strictEqual(client.certificateAuthorityServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -504,7 +514,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createCertificate(request), expectedError);
     });
   });
@@ -646,7 +658,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCertificate(request), expectedError);
     });
   });
@@ -788,7 +802,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.revokeCertificate(request), expectedError);
     });
   });
@@ -934,7 +950,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       );
       request.certificate.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateCertificate(request), expectedError);
     });
   });
@@ -1080,7 +1098,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.fetchCertificateAuthorityCsr(request),
         expectedError
@@ -1229,7 +1249,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getCertificateAuthority(request),
         expectedError
@@ -1378,7 +1400,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getCertificateRevocationList(request),
         expectedError
@@ -1523,7 +1547,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getReusableConfig(request), expectedError);
     });
   });

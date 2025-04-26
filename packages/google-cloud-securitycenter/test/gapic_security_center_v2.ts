@@ -291,9 +291,14 @@ describe('v2.SecurityCenterClient', () => {
         throw err;
       });
       assert(client.securityCenterStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -302,9 +307,14 @@ describe('v2.SecurityCenterClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.securityCenterStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -471,7 +481,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.batchCreateResourceValueConfigs(request),
         expectedError
@@ -605,7 +617,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createBigQueryExport(request), expectedError);
     });
   });
@@ -735,7 +749,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createFinding(request), expectedError);
     });
   });
@@ -869,7 +885,9 @@ describe('v2.SecurityCenterClient', () => {
       // path template: folders/*/locations/{location=*}
       request.parent = 'folders/value/locations/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createMuteConfig(request), expectedError);
     });
   });
@@ -1003,7 +1021,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createNotificationConfig(request),
         expectedError
@@ -1136,7 +1156,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createSource(request), expectedError);
     });
   });
@@ -1267,7 +1289,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteBigQueryExport(request), expectedError);
     });
   });
@@ -1401,7 +1425,9 @@ describe('v2.SecurityCenterClient', () => {
       // path template: folders/*/locations/{location=*}/muteConfigs/*
       request.name = 'folders/value/locations/value/muteConfigs/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteMuteConfig(request), expectedError);
     });
   });
@@ -1535,7 +1561,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteNotificationConfig(request),
         expectedError
@@ -1672,7 +1700,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteResourceValueConfig(request),
         expectedError
@@ -1805,7 +1835,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getBigQueryExport(request), expectedError);
     });
   });
@@ -1935,7 +1967,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSimulation(request), expectedError);
     });
   });
@@ -2065,7 +2099,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getValuedResource(request), expectedError);
     });
   });
@@ -2195,7 +2231,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -2329,7 +2367,9 @@ describe('v2.SecurityCenterClient', () => {
       // path template: folders/*/locations/{location=*}/muteConfigs/*
       request.name = 'folders/value/locations/value/muteConfigs/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getMuteConfig(request), expectedError);
     });
   });
@@ -2463,7 +2503,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getNotificationConfig(request),
         expectedError
@@ -2600,7 +2642,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getResourceValueConfig(request),
         expectedError
@@ -2730,7 +2774,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSource(request), expectedError);
     });
   });
@@ -2860,7 +2906,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setFindingState(request), expectedError);
     });
   });
@@ -2990,7 +3038,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -3117,7 +3167,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setMute(request), expectedError);
     });
   });
@@ -3248,7 +3300,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
@@ -3383,7 +3437,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.bigQueryExport.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateBigQueryExport(request), expectedError);
     });
   });
@@ -3518,7 +3574,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.externalSystem.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateExternalSystem(request), expectedError);
     });
   });
@@ -3652,7 +3710,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.finding.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateFinding(request), expectedError);
     });
   });
@@ -3810,7 +3870,9 @@ describe('v2.SecurityCenterClient', () => {
       request.muteConfig.name =
         'folders/value/locations/value/muteConfigs/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateMuteConfig(request), expectedError);
     });
   });
@@ -3948,7 +4010,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.notificationConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateNotificationConfig(request),
         expectedError
@@ -4089,7 +4153,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.resourceValueConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateResourceValueConfig(request),
         expectedError
@@ -4227,7 +4293,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.securityMarks.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateSecurityMarks(request), expectedError);
     });
   });
@@ -4361,7 +4429,9 @@ describe('v2.SecurityCenterClient', () => {
       );
       request.source.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateSource(request), expectedError);
     });
   });
@@ -7636,20 +7706,24 @@ describe('v2.SecurityCenterClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -7716,20 +7790,24 @@ describe('v2.SecurityCenterClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -7796,20 +7874,24 @@ describe('v2.SecurityCenterClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);

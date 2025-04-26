@@ -218,9 +218,14 @@ describe('v1beta4.SqlFlagsServiceClient', () => {
         throw err;
       });
       assert(client.sqlFlagsServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -229,9 +234,14 @@ describe('v1beta4.SqlFlagsServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.sqlFlagsServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -343,7 +353,9 @@ describe('v1beta4.SqlFlagsServiceClient', () => {
         new protos.google.cloud.sql.v1beta4.SqlFlagsListRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.list(request), expectedError);
     });
   });

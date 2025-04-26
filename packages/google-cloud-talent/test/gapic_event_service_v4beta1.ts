@@ -193,9 +193,14 @@ describe('v4beta1.EventServiceClient', () => {
         throw err;
       });
       assert(client.eventServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -204,9 +209,14 @@ describe('v4beta1.EventServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.eventServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -369,7 +379,9 @@ describe('v4beta1.EventServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createClientEvent(request), expectedError);
     });
   });
