@@ -206,9 +206,14 @@ describe('v1beta.TermsOfServiceServiceClient', () => {
         throw err;
       });
       assert(client.termsOfServiceServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -218,9 +223,14 @@ describe('v1beta.TermsOfServiceServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.termsOfServiceServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -389,7 +399,9 @@ describe('v1beta.TermsOfServiceServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTermsOfService(request), expectedError);
     });
   });
@@ -480,7 +492,9 @@ describe('v1beta.TermsOfServiceServiceClient', () => {
         new protos.google.shopping.merchant.accounts.v1beta.RetrieveLatestTermsOfServiceRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.retrieveLatestTermsOfService(request),
         expectedError
@@ -618,7 +632,9 @@ describe('v1beta.TermsOfServiceServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.acceptTermsOfService(request), expectedError);
     });
   });
