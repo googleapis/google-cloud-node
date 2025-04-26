@@ -230,9 +230,14 @@ describe('v1beta.GenerativeServiceClient', () => {
         throw err;
       });
       assert(client.generativeServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -243,9 +248,14 @@ describe('v1beta.GenerativeServiceClient', () => {
         }
       );
       assert.strictEqual(client.generativeServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -420,7 +430,9 @@ describe('v1beta.GenerativeServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.generateContent(request), expectedError);
     });
   });
@@ -558,7 +570,9 @@ describe('v1beta.GenerativeServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.generateAnswer(request), expectedError);
     });
   });
@@ -696,7 +710,9 @@ describe('v1beta.GenerativeServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.embedContent(request), expectedError);
     });
   });
@@ -835,7 +851,9 @@ describe('v1beta.GenerativeServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchEmbedContents(request), expectedError);
     });
   });
@@ -973,7 +991,9 @@ describe('v1beta.GenerativeServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.countTokens(request), expectedError);
     });
   });
@@ -1140,7 +1160,9 @@ describe('v1beta.GenerativeServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       const stream = client.streamGenerateContent(request, {
         retryRequestOptions: {noResponseRetries: 0},
       });

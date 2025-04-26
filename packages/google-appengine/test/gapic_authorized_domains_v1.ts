@@ -257,9 +257,14 @@ describe('v1.AuthorizedDomainsClient', () => {
         throw err;
       });
       assert(client.authorizedDomainsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -268,9 +273,14 @@ describe('v1.AuthorizedDomainsClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.authorizedDomainsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {

@@ -254,9 +254,14 @@ describe('v1.CloudQuotasClient', () => {
         throw err;
       });
       assert(client.cloudQuotasStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -265,9 +270,14 @@ describe('v1.CloudQuotasClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudQuotasStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -430,7 +440,9 @@ describe('v1.CloudQuotasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getQuotaInfo(request), expectedError);
     });
   });
@@ -561,7 +573,9 @@ describe('v1.CloudQuotasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getQuotaPreference(request), expectedError);
     });
   });
@@ -695,7 +709,9 @@ describe('v1.CloudQuotasClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createQuotaPreference(request),
         expectedError
@@ -836,7 +852,9 @@ describe('v1.CloudQuotasClient', () => {
       );
       request.quotaPreference.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateQuotaPreference(request),
         expectedError

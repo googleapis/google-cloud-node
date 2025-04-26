@@ -254,9 +254,14 @@ describe('v1.ChatServiceClient', () => {
         throw err;
       });
       assert(client.chatServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -265,9 +270,14 @@ describe('v1.ChatServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.chatServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -430,7 +440,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createMessage(request), expectedError);
     });
   });
@@ -560,7 +572,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getMembership(request), expectedError);
     });
   });
@@ -690,7 +704,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getMessage(request), expectedError);
     });
   });
@@ -824,7 +840,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.message.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateMessage(request), expectedError);
     });
   });
@@ -954,7 +972,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteMessage(request), expectedError);
     });
   });
@@ -1084,7 +1104,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAttachment(request), expectedError);
     });
   });
@@ -1214,7 +1236,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.uploadAttachment(request), expectedError);
     });
   });
@@ -1341,7 +1365,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSpace(request), expectedError);
     });
   });
@@ -1424,7 +1450,9 @@ describe('v1.ChatServiceClient', () => {
         new protos.google.chat.v1.CreateSpaceRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createSpace(request), expectedError);
     });
   });
@@ -1507,7 +1535,9 @@ describe('v1.ChatServiceClient', () => {
         new protos.google.chat.v1.SetUpSpaceRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setUpSpace(request), expectedError);
     });
   });
@@ -1641,7 +1671,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.space.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateSpace(request), expectedError);
     });
   });
@@ -1771,7 +1803,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteSpace(request), expectedError);
     });
   });
@@ -1902,7 +1936,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.completeImportSpace(request), expectedError);
     });
   });
@@ -1985,7 +2021,9 @@ describe('v1.ChatServiceClient', () => {
         new protos.google.chat.v1.FindDirectMessageRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.findDirectMessage(request), expectedError);
     });
   });
@@ -2115,7 +2153,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createMembership(request), expectedError);
     });
   });
@@ -2249,7 +2289,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.membership.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateMembership(request), expectedError);
     });
   });
@@ -2379,7 +2421,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteMembership(request), expectedError);
     });
   });
@@ -2509,7 +2553,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createReaction(request), expectedError);
     });
   });
@@ -2639,7 +2685,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteReaction(request), expectedError);
     });
   });
@@ -2769,7 +2817,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSpaceReadState(request), expectedError);
     });
   });
@@ -2904,7 +2954,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.spaceReadState.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateSpaceReadState(request), expectedError);
     });
   });
@@ -3035,7 +3087,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getThreadReadState(request), expectedError);
     });
   });
@@ -3165,7 +3219,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSpaceEvent(request), expectedError);
     });
   });
@@ -3299,7 +3355,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getSpaceNotificationSetting(request),
         expectedError
@@ -3440,7 +3498,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.spaceNotificationSetting.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateSpaceNotificationSetting(request),
         expectedError

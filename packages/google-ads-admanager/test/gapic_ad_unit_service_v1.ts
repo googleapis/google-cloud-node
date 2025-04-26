@@ -269,9 +269,14 @@ describe('v1.AdUnitServiceClient', () => {
         throw err;
       });
       assert(client.adUnitServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -280,9 +285,14 @@ describe('v1.AdUnitServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.adUnitServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -442,7 +452,9 @@ describe('v1.AdUnitServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAdUnit(request), expectedError);
     });
   });
