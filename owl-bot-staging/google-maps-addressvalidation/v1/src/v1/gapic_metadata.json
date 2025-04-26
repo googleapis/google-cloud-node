@@ -1,0 +1,43 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.maps.addressvalidation.v1",
+  "libraryPackage": "@googlemaps/addressvalidation",
+  "services": {
+    "AddressValidation": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AddressValidationClient",
+          "rpcs": {
+            "ValidateAddress": {
+              "methods": [
+                "validateAddress"
+              ]
+            },
+            "ProvideValidationFeedback": {
+              "methods": [
+                "provideValidationFeedback"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AddressValidationClient",
+          "rpcs": {
+            "ValidateAddress": {
+              "methods": [
+                "validateAddress"
+              ]
+            },
+            "ProvideValidationFeedback": {
+              "methods": [
+                "provideValidationFeedback"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
