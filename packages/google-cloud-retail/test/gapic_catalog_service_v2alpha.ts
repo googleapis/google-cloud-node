@@ -257,9 +257,14 @@ describe('v2alpha.CatalogServiceClient', () => {
         throw err;
       });
       assert(client.catalogServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -268,9 +273,14 @@ describe('v2alpha.CatalogServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.catalogServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -437,7 +447,9 @@ describe('v2alpha.CatalogServiceClient', () => {
       );
       request.catalog.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateCatalog(request), expectedError);
     });
   });
@@ -567,7 +579,9 @@ describe('v2alpha.CatalogServiceClient', () => {
       );
       request.catalog = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setDefaultBranch(request), expectedError);
     });
   });
@@ -697,7 +711,9 @@ describe('v2alpha.CatalogServiceClient', () => {
       );
       request.catalog = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDefaultBranch(request), expectedError);
     });
   });
@@ -828,7 +844,9 @@ describe('v2alpha.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCompletionConfig(request), expectedError);
     });
   });
@@ -966,7 +984,9 @@ describe('v2alpha.CatalogServiceClient', () => {
       );
       request.completionConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateCompletionConfig(request),
         expectedError
@@ -1100,7 +1120,9 @@ describe('v2alpha.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAttributesConfig(request), expectedError);
     });
   });
@@ -1238,7 +1260,9 @@ describe('v2alpha.CatalogServiceClient', () => {
       );
       request.attributesConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateAttributesConfig(request),
         expectedError
@@ -1372,7 +1396,9 @@ describe('v2alpha.CatalogServiceClient', () => {
       );
       request.attributesConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addCatalogAttribute(request), expectedError);
     });
   });
@@ -1506,7 +1532,9 @@ describe('v2alpha.CatalogServiceClient', () => {
       );
       request.attributesConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.removeCatalogAttribute(request),
         expectedError
@@ -1643,7 +1671,9 @@ describe('v2alpha.CatalogServiceClient', () => {
       );
       request.attributesConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.batchRemoveCatalogAttributes(request),
         expectedError
@@ -1780,7 +1810,9 @@ describe('v2alpha.CatalogServiceClient', () => {
       );
       request.attributesConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.replaceCatalogAttribute(request),
         expectedError
@@ -2325,20 +2357,24 @@ describe('v2alpha.CatalogServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -2405,20 +2441,24 @@ describe('v2alpha.CatalogServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -2485,20 +2525,24 @@ describe('v2alpha.CatalogServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
