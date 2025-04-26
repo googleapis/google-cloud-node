@@ -267,9 +267,14 @@ describe('v2beta3.CloudTasksClient', () => {
         throw err;
       });
       assert(client.cloudTasksStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -278,9 +283,14 @@ describe('v2beta3.CloudTasksClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudTasksStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -440,7 +450,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getQueue(request), expectedError);
     });
   });
@@ -570,7 +582,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createQueue(request), expectedError);
     });
   });
@@ -704,7 +718,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.queue.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateQueue(request), expectedError);
     });
   });
@@ -834,7 +850,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteQueue(request), expectedError);
     });
   });
@@ -964,7 +982,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.purgeQueue(request), expectedError);
     });
   });
@@ -1094,7 +1114,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.pauseQueue(request), expectedError);
     });
   });
@@ -1224,7 +1246,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.resumeQueue(request), expectedError);
     });
   });
@@ -1354,7 +1378,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -1484,7 +1510,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -1615,7 +1643,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
@@ -1742,7 +1772,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTask(request), expectedError);
     });
   });
@@ -1872,7 +1904,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createTask(request), expectedError);
     });
   });
@@ -2002,7 +2036,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteTask(request), expectedError);
     });
   });
@@ -2129,7 +2165,9 @@ describe('v2beta3.CloudTasksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.runTask(request), expectedError);
     });
   });
