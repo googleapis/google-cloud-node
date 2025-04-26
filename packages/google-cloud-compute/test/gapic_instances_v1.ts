@@ -267,9 +267,14 @@ describe('v1.InstancesClient', () => {
         throw err;
       });
       assert(client.instancesStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -278,9 +283,14 @@ describe('v1.InstancesClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.instancesStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -483,7 +493,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addAccessConfig(request), expectedError);
     });
   });
@@ -654,7 +666,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addResourcePolicies(request), expectedError);
     });
   });
@@ -824,7 +838,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.attachDisk(request), expectedError);
     });
   });
@@ -974,7 +990,9 @@ describe('v1.InstancesClient', () => {
       );
       request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.bulkInsert(request), expectedError);
     });
   });
@@ -1141,7 +1159,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -1312,7 +1332,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteAccessConfig(request), expectedError);
     });
   });
@@ -1482,7 +1504,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.detachDisk(request), expectedError);
     });
   });
@@ -1645,7 +1669,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -1819,7 +1845,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getEffectiveFirewalls(request),
         expectedError
@@ -1993,7 +2021,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getGuestAttributes(request), expectedError);
     });
   });
@@ -2163,7 +2193,9 @@ describe('v1.InstancesClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -2333,7 +2365,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getScreenshot(request), expectedError);
     });
   });
@@ -2504,7 +2538,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSerialPortOutput(request), expectedError);
     });
   });
@@ -2678,7 +2714,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getShieldedInstanceIdentity(request),
         expectedError
@@ -2828,7 +2866,9 @@ describe('v1.InstancesClient', () => {
       );
       request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -2999,7 +3039,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.performMaintenance(request), expectedError);
     });
   });
@@ -3173,7 +3215,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.removeResourcePolicies(request),
         expectedError
@@ -3347,7 +3391,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.reportHostAsFaulty(request), expectedError);
     });
   });
@@ -3510,7 +3556,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.reset(request), expectedError);
     });
   });
@@ -3677,7 +3725,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.resume(request), expectedError);
     });
   });
@@ -3851,7 +3901,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.sendDiagnosticInterrupt(request),
         expectedError
@@ -4028,7 +4080,9 @@ describe('v1.InstancesClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.setDeletionProtection(request),
         expectedError
@@ -4201,7 +4255,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setDiskAutoDelete(request), expectedError);
     });
   });
@@ -4371,7 +4427,9 @@ describe('v1.InstancesClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -4538,7 +4596,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setLabels(request), expectedError);
     });
   });
@@ -4709,7 +4769,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setMachineResources(request), expectedError);
     });
   });
@@ -4879,7 +4941,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setMachineType(request), expectedError);
     });
   });
@@ -5049,7 +5113,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setMetadata(request), expectedError);
     });
   });
@@ -5219,7 +5285,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setMinCpuPlatform(request), expectedError);
     });
   });
@@ -5386,7 +5454,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setName(request), expectedError);
     });
   });
@@ -5556,7 +5626,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setScheduling(request), expectedError);
     });
   });
@@ -5726,7 +5798,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setSecurityPolicy(request), expectedError);
     });
   });
@@ -5896,7 +5970,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setServiceAccount(request), expectedError);
     });
   });
@@ -6071,7 +6147,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.setShieldedInstanceIntegrityPolicy(request),
         expectedError
@@ -6241,7 +6319,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setTags(request), expectedError);
     });
   });
@@ -6415,7 +6495,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.simulateMaintenanceEvent(request),
         expectedError
@@ -6581,7 +6663,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.start(request), expectedError);
     });
   });
@@ -6755,7 +6839,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.startWithEncryptionKey(request),
         expectedError
@@ -6921,7 +7007,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.stop(request), expectedError);
     });
   });
@@ -7088,7 +7176,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.suspend(request), expectedError);
     });
   });
@@ -7259,7 +7349,9 @@ describe('v1.InstancesClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
@@ -7426,7 +7518,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.update(request), expectedError);
     });
   });
@@ -7597,7 +7691,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateAccessConfig(request), expectedError);
     });
   });
@@ -7768,7 +7864,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDisplayDevice(request), expectedError);
     });
   });
@@ -7942,7 +8040,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateNetworkInterface(request),
         expectedError
@@ -8119,7 +8219,9 @@ describe('v1.InstancesClient', () => {
       );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateShieldedInstanceConfig(request),
         expectedError

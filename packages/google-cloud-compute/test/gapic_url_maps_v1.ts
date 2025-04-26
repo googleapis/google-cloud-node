@@ -267,9 +267,14 @@ describe('v1.UrlMapsClient', () => {
         throw err;
       });
       assert(client.urlMapsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -278,9 +283,14 @@ describe('v1.UrlMapsClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.urlMapsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -460,7 +470,9 @@ describe('v1.UrlMapsClient', () => {
       );
       request.urlMap = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -603,7 +615,9 @@ describe('v1.UrlMapsClient', () => {
       );
       request.urlMap = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -730,7 +744,9 @@ describe('v1.UrlMapsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -880,7 +896,9 @@ describe('v1.UrlMapsClient', () => {
       );
       request.urlMap = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.invalidateCache(request), expectedError);
     });
   });
@@ -1023,7 +1041,9 @@ describe('v1.UrlMapsClient', () => {
       );
       request.urlMap = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.patch(request), expectedError);
     });
   });
@@ -1170,7 +1190,9 @@ describe('v1.UrlMapsClient', () => {
       );
       request.urlMap = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.update(request), expectedError);
     });
   });
@@ -1317,7 +1339,9 @@ describe('v1.UrlMapsClient', () => {
       );
       request.urlMap = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.validate(request), expectedError);
     });
   });

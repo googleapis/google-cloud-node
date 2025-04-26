@@ -267,9 +267,14 @@ describe('v1.NodeGroupsClient', () => {
         throw err;
       });
       assert(client.nodeGroupsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -278,9 +283,14 @@ describe('v1.NodeGroupsClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.nodeGroupsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -480,7 +490,9 @@ describe('v1.NodeGroupsClient', () => {
       );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addNodes(request), expectedError);
     });
   });
@@ -647,7 +659,9 @@ describe('v1.NodeGroupsClient', () => {
       );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -817,7 +831,9 @@ describe('v1.NodeGroupsClient', () => {
       );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteNodes(request), expectedError);
     });
   });
@@ -980,7 +996,9 @@ describe('v1.NodeGroupsClient', () => {
       );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -1150,7 +1168,9 @@ describe('v1.NodeGroupsClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -1297,7 +1317,9 @@ describe('v1.NodeGroupsClient', () => {
       );
       request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -1460,7 +1482,9 @@ describe('v1.NodeGroupsClient', () => {
       );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.patch(request), expectedError);
     });
   });
@@ -1631,7 +1655,9 @@ describe('v1.NodeGroupsClient', () => {
       );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.performMaintenance(request), expectedError);
     });
   });
@@ -1801,7 +1827,9 @@ describe('v1.NodeGroupsClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -1971,7 +1999,9 @@ describe('v1.NodeGroupsClient', () => {
       );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setNodeTemplate(request), expectedError);
     });
   });
@@ -2145,7 +2175,9 @@ describe('v1.NodeGroupsClient', () => {
       );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.simulateMaintenanceEvent(request),
         expectedError
@@ -2319,7 +2351,9 @@ describe('v1.NodeGroupsClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });

@@ -267,9 +267,14 @@ describe('v1.RegionDisksClient', () => {
         throw err;
       });
       assert(client.regionDisksStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -278,9 +283,14 @@ describe('v1.RegionDisksClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.regionDisksStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -484,7 +494,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addResourcePolicies(request), expectedError);
     });
   });
@@ -634,7 +646,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.bulkInsert(request), expectedError);
     });
   });
@@ -804,7 +818,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createSnapshot(request), expectedError);
     });
   });
@@ -971,7 +987,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -1134,7 +1152,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -1304,7 +1324,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -1451,7 +1473,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -1625,7 +1649,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.removeResourcePolicies(request),
         expectedError
@@ -1795,7 +1821,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.resize(request), expectedError);
     });
   });
@@ -1965,7 +1993,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -2132,7 +2162,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setLabels(request), expectedError);
     });
   });
@@ -2306,7 +2338,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.startAsyncReplication(request),
         expectedError
@@ -2480,7 +2514,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.stopAsyncReplication(request), expectedError);
     });
   });
@@ -2634,7 +2670,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.stopGroupAsyncReplication(request),
         expectedError
@@ -2808,7 +2846,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
@@ -2975,7 +3015,9 @@ describe('v1.RegionDisksClient', () => {
       );
       request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.update(request), expectedError);
     });
   });

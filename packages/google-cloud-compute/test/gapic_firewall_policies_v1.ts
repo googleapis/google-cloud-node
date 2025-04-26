@@ -269,9 +269,14 @@ describe('v1.FirewallPoliciesClient', () => {
         throw err;
       });
       assert(client.firewallPoliciesStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -280,9 +285,14 @@ describe('v1.FirewallPoliciesClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.firewallPoliciesStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -445,7 +455,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addAssociation(request), expectedError);
     });
   });
@@ -572,7 +584,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addRule(request), expectedError);
     });
   });
@@ -702,7 +716,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.cloneRules(request), expectedError);
     });
   });
@@ -829,7 +845,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -952,7 +970,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -1082,7 +1102,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAssociation(request), expectedError);
     });
   });
@@ -1212,7 +1234,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -1339,7 +1363,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRule(request), expectedError);
     });
   });
@@ -1419,7 +1445,9 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertFirewallPolicyRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -1502,7 +1530,9 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListAssociationsFirewallPolicyRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listAssociations(request), expectedError);
     });
   });
@@ -1625,7 +1655,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.move(request), expectedError);
     });
   });
@@ -1748,7 +1780,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.patch(request), expectedError);
     });
   });
@@ -1875,7 +1909,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.patchRule(request), expectedError);
     });
   });
@@ -2005,7 +2041,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.removeAssociation(request), expectedError);
     });
   });
@@ -2135,7 +2173,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.removeRule(request), expectedError);
     });
   });
@@ -2265,7 +2305,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -2396,7 +2438,9 @@ describe('v1.FirewallPoliciesClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });

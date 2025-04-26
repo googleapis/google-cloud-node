@@ -254,9 +254,14 @@ describe('v1beta1.DataformClient', () => {
         throw err;
       });
       assert(client.dataformStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -265,9 +270,14 @@ describe('v1beta1.DataformClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataformStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -430,7 +440,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRepository(request), expectedError);
     });
   });
@@ -560,7 +572,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createRepository(request), expectedError);
     });
   });
@@ -694,7 +708,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.repository.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateRepository(request), expectedError);
     });
   });
@@ -824,7 +840,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteRepository(request), expectedError);
     });
   });
@@ -958,7 +976,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.commitRepositoryChanges(request),
         expectedError
@@ -1092,7 +1112,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.readRepositoryFile(request), expectedError);
     });
   });
@@ -1227,7 +1249,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.computeRepositoryAccessTokenStatus(request),
         expectedError
@@ -1361,7 +1385,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.fetchRemoteBranches(request), expectedError);
     });
   });
@@ -1491,7 +1517,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getWorkspace(request), expectedError);
     });
   });
@@ -1621,7 +1649,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createWorkspace(request), expectedError);
     });
   });
@@ -1751,7 +1781,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteWorkspace(request), expectedError);
     });
   });
@@ -1882,7 +1914,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.installNpmPackages(request), expectedError);
     });
   });
@@ -2012,7 +2046,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.pullGitCommits(request), expectedError);
     });
   });
@@ -2142,7 +2178,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.pushGitCommits(request), expectedError);
     });
   });
@@ -2273,7 +2311,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.fetchFileGitStatuses(request), expectedError);
     });
   });
@@ -2404,7 +2444,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.fetchGitAheadBehind(request), expectedError);
     });
   });
@@ -2538,7 +2580,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.commitWorkspaceChanges(request),
         expectedError
@@ -2675,7 +2719,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.resetWorkspaceChanges(request),
         expectedError
@@ -2808,7 +2854,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.fetchFileDiff(request), expectedError);
     });
   });
@@ -2938,7 +2986,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.makeDirectory(request), expectedError);
     });
   });
@@ -3068,7 +3118,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.removeDirectory(request), expectedError);
     });
   });
@@ -3198,7 +3250,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.moveDirectory(request), expectedError);
     });
   });
@@ -3325,7 +3379,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.readFile(request), expectedError);
     });
   });
@@ -3455,7 +3511,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.removeFile(request), expectedError);
     });
   });
@@ -3582,7 +3640,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.moveFile(request), expectedError);
     });
   });
@@ -3709,7 +3769,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.writeFile(request), expectedError);
     });
   });
@@ -3839,7 +3901,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getReleaseConfig(request), expectedError);
     });
   });
@@ -3970,7 +4034,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createReleaseConfig(request), expectedError);
     });
   });
@@ -4105,7 +4171,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.releaseConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateReleaseConfig(request), expectedError);
     });
   });
@@ -4236,7 +4304,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteReleaseConfig(request), expectedError);
     });
   });
@@ -4367,7 +4437,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCompilationResult(request), expectedError);
     });
   });
@@ -4501,7 +4573,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createCompilationResult(request),
         expectedError
@@ -4634,7 +4708,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getWorkflowConfig(request), expectedError);
     });
   });
@@ -4765,7 +4841,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createWorkflowConfig(request), expectedError);
     });
   });
@@ -4900,7 +4978,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.workflowConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateWorkflowConfig(request), expectedError);
     });
   });
@@ -5031,7 +5111,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteWorkflowConfig(request), expectedError);
     });
   });
@@ -5165,7 +5247,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getWorkflowInvocation(request),
         expectedError
@@ -5302,7 +5386,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createWorkflowInvocation(request),
         expectedError
@@ -5439,7 +5525,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteWorkflowInvocation(request),
         expectedError
@@ -5576,7 +5664,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.cancelWorkflowInvocation(request),
         expectedError
@@ -5706,7 +5796,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getConfig(request), expectedError);
     });
   });
@@ -5840,7 +5932,9 @@ describe('v1beta1.DataformClient', () => {
       );
       request.config.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateConfig(request), expectedError);
     });
   });
@@ -10067,20 +10161,24 @@ describe('v1beta1.DataformClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .getIamPolicy(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.Policy | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -10173,20 +10271,24 @@ describe('v1beta1.DataformClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .setIamPolicy(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.Policy | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -10282,20 +10384,24 @@ describe('v1beta1.DataformClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .testIamPermissions(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);

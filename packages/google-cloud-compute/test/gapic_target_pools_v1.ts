@@ -267,9 +267,14 @@ describe('v1.TargetPoolsClient', () => {
         throw err;
       });
       assert(client.targetPoolsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -278,9 +283,14 @@ describe('v1.TargetPoolsClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.targetPoolsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -483,7 +493,9 @@ describe('v1.TargetPoolsClient', () => {
       );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addHealthCheck(request), expectedError);
     });
   });
@@ -653,7 +665,9 @@ describe('v1.TargetPoolsClient', () => {
       );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addInstance(request), expectedError);
     });
   });
@@ -820,7 +834,9 @@ describe('v1.TargetPoolsClient', () => {
       );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -983,7 +999,9 @@ describe('v1.TargetPoolsClient', () => {
       );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -1150,7 +1168,9 @@ describe('v1.TargetPoolsClient', () => {
       );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getHealth(request), expectedError);
     });
   });
@@ -1297,7 +1317,9 @@ describe('v1.TargetPoolsClient', () => {
       );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -1467,7 +1489,9 @@ describe('v1.TargetPoolsClient', () => {
       );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.removeHealthCheck(request), expectedError);
     });
   });
@@ -1637,7 +1661,9 @@ describe('v1.TargetPoolsClient', () => {
       );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.removeInstance(request), expectedError);
     });
   });
@@ -1804,7 +1830,9 @@ describe('v1.TargetPoolsClient', () => {
       );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setBackup(request), expectedError);
     });
   });
@@ -1974,7 +2002,9 @@ describe('v1.TargetPoolsClient', () => {
       );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setSecurityPolicy(request), expectedError);
     });
   });

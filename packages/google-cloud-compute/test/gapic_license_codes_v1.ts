@@ -206,9 +206,14 @@ describe('v1.LicenseCodesClient', () => {
         throw err;
       });
       assert(client.licenseCodesStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -217,9 +222,14 @@ describe('v1.LicenseCodesClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.licenseCodesStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -395,7 +405,9 @@ describe('v1.LicenseCodesClient', () => {
       );
       request.licenseCode = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -546,7 +558,9 @@ describe('v1.LicenseCodesClient', () => {
       );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
