@@ -1,0 +1,145 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.commerce.consumer.procurement.v1",
+  "libraryPackage": "@google-cloud/procurement",
+  "services": {
+    "ConsumerProcurementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConsumerProcurementServiceClient",
+          "rpcs": {
+            "GetOrder": {
+              "methods": [
+                "getOrder"
+              ]
+            },
+            "PlaceOrder": {
+              "methods": [
+                "placeOrder"
+              ]
+            },
+            "ModifyOrder": {
+              "methods": [
+                "modifyOrder"
+              ]
+            },
+            "CancelOrder": {
+              "methods": [
+                "cancelOrder"
+              ]
+            },
+            "ListOrders": {
+              "methods": [
+                "listOrders",
+                "listOrdersStream",
+                "listOrdersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConsumerProcurementServiceClient",
+          "rpcs": {
+            "GetOrder": {
+              "methods": [
+                "getOrder"
+              ]
+            },
+            "PlaceOrder": {
+              "methods": [
+                "placeOrder"
+              ]
+            },
+            "ModifyOrder": {
+              "methods": [
+                "modifyOrder"
+              ]
+            },
+            "CancelOrder": {
+              "methods": [
+                "cancelOrder"
+              ]
+            },
+            "ListOrders": {
+              "methods": [
+                "listOrders",
+                "listOrdersStream",
+                "listOrdersAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LicenseManagementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LicenseManagementServiceClient",
+          "rpcs": {
+            "GetLicensePool": {
+              "methods": [
+                "getLicensePool"
+              ]
+            },
+            "UpdateLicensePool": {
+              "methods": [
+                "updateLicensePool"
+              ]
+            },
+            "Assign": {
+              "methods": [
+                "assign"
+              ]
+            },
+            "Unassign": {
+              "methods": [
+                "unassign"
+              ]
+            },
+            "EnumerateLicensedUsers": {
+              "methods": [
+                "enumerateLicensedUsers",
+                "enumerateLicensedUsersStream",
+                "enumerateLicensedUsersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LicenseManagementServiceClient",
+          "rpcs": {
+            "GetLicensePool": {
+              "methods": [
+                "getLicensePool"
+              ]
+            },
+            "UpdateLicensePool": {
+              "methods": [
+                "updateLicensePool"
+              ]
+            },
+            "Assign": {
+              "methods": [
+                "assign"
+              ]
+            },
+            "Unassign": {
+              "methods": [
+                "unassign"
+              ]
+            },
+            "EnumerateLicensedUsers": {
+              "methods": [
+                "enumerateLicensedUsers",
+                "enumerateLicensedUsersStream",
+                "enumerateLicensedUsersAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
