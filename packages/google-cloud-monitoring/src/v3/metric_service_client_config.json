@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -31,22 +34,22 @@
       "methods": {
         "ListMonitoredResourceDescriptors": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "GetMonitoredResourceDescriptor": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "ListMetricDescriptors": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "GetMetricDescriptor": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "CreateMetricDescriptor": {
@@ -56,16 +59,20 @@
         },
         "DeleteMetricDescriptor": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "ListTimeSeries": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "timeout_millis": 90000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "CreateTimeSeries": {
           "timeout_millis": 12000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateServiceTimeSeries": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

@@ -13,6 +13,8 @@
   "../../protos/google/monitoring/v3/query_service.proto",
   "../../protos/google/monitoring/v3/service.proto",
   "../../protos/google/monitoring/v3/service_service.proto",
+  "../../protos/google/monitoring/v3/snooze.proto",
+  "../../protos/google/monitoring/v3/snooze_service.proto",
   "../../protos/google/monitoring/v3/span_context.proto",
   "../../protos/google/monitoring/v3/uptime.proto",
   "../../protos/google/monitoring/v3/uptime_service.proto"

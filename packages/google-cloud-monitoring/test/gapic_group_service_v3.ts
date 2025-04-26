@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,6 +26,21 @@ import * as groupserviceModule from '../src';
 import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
+
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -113,84 +128,193 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v3.GroupServiceClient', () => {
-  it('has servicePath', () => {
-    const servicePath = groupserviceModule.v3.GroupServiceClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint = groupserviceModule.v3.GroupServiceClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = groupserviceModule.v3.GroupServiceClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new groupserviceModule.v3.GroupServiceClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new groupserviceModule.v3.GroupServiceClient({
-      fallback: true,
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client = new groupserviceModule.v3.GroupServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'monitoring.googleapis.com');
     });
-    assert(client);
-  });
 
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new groupserviceModule.v3.GroupServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('has universeDomain', () => {
+      const client = new groupserviceModule.v3.GroupServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
     });
-    assert.strictEqual(client.groupServiceStub, undefined);
-    await client.initialize();
-    assert(client.groupServiceStub);
-  });
 
-  it('has close method', () => {
-    const client = new groupserviceModule.v3.GroupServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-    client.close();
-  });
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          groupserviceModule.v3.GroupServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'monitoring.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new groupserviceModule.v3.GroupServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          groupserviceModule.v3.GroupServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'monitoring.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'monitoring.example.com');
     });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new groupserviceModule.v3.GroupServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'monitoring.example.com');
     });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new groupserviceModule.v3.GroupServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'monitoring.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new groupserviceModule.v3.GroupServiceClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'monitoring.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new groupserviceModule.v3.GroupServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has port', () => {
+      const port = groupserviceModule.v3.GroupServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
+
+    it('should create a client with no option', () => {
+      const client = new groupserviceModule.v3.GroupServiceClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        fallback: true,
+      });
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.groupServiceStub, undefined);
+      await client.initialize();
+      assert(client.groupServiceStub);
+    });
+
+    it('has close method for the initialized client', done => {
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize().catch(err => {
+        throw err;
+      });
+      assert(client.groupServiceStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
+    });
+
+    it('has close method for the non-initialized client', done => {
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.groupServiceStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('getGroup', () => {
@@ -199,30 +323,30 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.Group()
       );
       client.innerApiCalls.getGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.getGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGroup without error using callback', async () => {
@@ -230,19 +354,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.Group()
       );
@@ -265,11 +386,14 @@ describe('v3.GroupServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGroup with error', async () => {
@@ -277,27 +401,48 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGroup = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.getGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.getGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGroup with closed client', async () => {
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.GetGroupRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getGroup(request), expectedError);
     });
   });
 
@@ -307,30 +452,30 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.CreateGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.Group()
       );
       client.innerApiCalls.createGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.createGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGroup without error using callback', async () => {
@@ -338,19 +483,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.CreateGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.Group()
       );
@@ -373,11 +515,14 @@ describe('v3.GroupServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGroup with error', async () => {
@@ -385,30 +530,51 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.CreateGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGroup = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.createGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGroup with closed client', async () => {
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.CreateGroupRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.CreateGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createGroup(request), expectedError);
     });
   });
 
@@ -418,31 +584,31 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateGroupRequest()
       );
-      request.group = {};
-      request.group.name = '';
-      const expectedHeaderRequestParams = 'group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.group ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.UpdateGroupRequest',
+        ['group', 'name']
+      );
+      request.group.name = defaultValue1;
+      const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.Group()
       );
       client.innerApiCalls.updateGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.updateGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGroup without error using callback', async () => {
@@ -450,20 +616,17 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateGroupRequest()
       );
-      request.group = {};
-      request.group.name = '';
-      const expectedHeaderRequestParams = 'group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.group ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.UpdateGroupRequest',
+        ['group', 'name']
+      );
+      request.group.name = defaultValue1;
+      const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.Group()
       );
@@ -486,11 +649,14 @@ describe('v3.GroupServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGroup with error', async () => {
@@ -498,31 +664,53 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateGroupRequest()
       );
-      request.group = {};
-      request.group.name = '';
-      const expectedHeaderRequestParams = 'group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.group ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.UpdateGroupRequest',
+        ['group', 'name']
+      );
+      request.group.name = defaultValue1;
+      const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGroup = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateGroup with closed client', async () => {
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.UpdateGroupRequest()
       );
+      request.group ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.UpdateGroupRequest',
+        ['group', 'name']
+      );
+      request.group.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updateGroup(request), expectedError);
     });
   });
 
@@ -532,30 +720,30 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.DeleteGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGroup without error using callback', async () => {
@@ -563,19 +751,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.DeleteGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -598,11 +783,14 @@ describe('v3.GroupServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGroup with error', async () => {
@@ -610,30 +798,51 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.DeleteGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGroup = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGroup with closed client', async () => {
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.DeleteGroupRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.DeleteGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.deleteGroup(request), expectedError);
     });
   });
 
@@ -643,19 +852,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
@@ -664,11 +870,14 @@ describe('v3.GroupServiceClient', () => {
       client.innerApiCalls.listGroups = stubSimpleCall(expectedResponse);
       const [response] = await client.listGroups(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGroups as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGroups without error using callback', async () => {
@@ -676,19 +885,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
@@ -713,11 +919,14 @@ describe('v3.GroupServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGroups as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGroups with error', async () => {
@@ -725,30 +934,30 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGroups = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listGroups(request), expectedError);
-      assert(
-        (client.innerApiCalls.listGroups as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGroupsStream without error', async () => {
@@ -756,12 +965,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
@@ -789,11 +1002,12 @@ describe('v3.GroupServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGroups, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listGroups.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -802,12 +1016,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGroups.createStream = stubPageStreamingCall(
         undefined,
@@ -832,11 +1050,12 @@ describe('v3.GroupServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGroups, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listGroups.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -845,12 +1064,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
         generateSampleMessage(new protos.google.monitoring.v3.Group()),
@@ -870,11 +1093,12 @@ describe('v3.GroupServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listGroups.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -883,12 +1107,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGroups.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -907,11 +1135,12 @@ describe('v3.GroupServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listGroups.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -922,19 +1151,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupMembersRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupMembersRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.MonitoredResource()),
         generateSampleMessage(new protos.google.api.MonitoredResource()),
@@ -943,11 +1169,14 @@ describe('v3.GroupServiceClient', () => {
       client.innerApiCalls.listGroupMembers = stubSimpleCall(expectedResponse);
       const [response] = await client.listGroupMembers(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGroupMembers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGroupMembers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGroupMembers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGroupMembers without error using callback', async () => {
@@ -955,19 +1184,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupMembersRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupMembersRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.MonitoredResource()),
         generateSampleMessage(new protos.google.api.MonitoredResource()),
@@ -992,11 +1218,14 @@ describe('v3.GroupServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGroupMembers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGroupMembers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGroupMembers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGroupMembers with error', async () => {
@@ -1004,30 +1233,30 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupMembersRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupMembersRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGroupMembers = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listGroupMembers(request), expectedError);
-      assert(
-        (client.innerApiCalls.listGroupMembers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGroupMembers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGroupMembers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGroupMembersStream without error', async () => {
@@ -1035,12 +1264,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupMembersRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupMembersRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.MonitoredResource()),
         generateSampleMessage(new protos.google.api.MonitoredResource()),
@@ -1068,11 +1301,12 @@ describe('v3.GroupServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGroupMembers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listGroupMembers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGroupMembers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1081,12 +1315,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupMembersRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupMembersRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGroupMembers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1109,11 +1347,12 @@ describe('v3.GroupServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGroupMembers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listGroupMembers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGroupMembers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1122,12 +1361,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupMembersRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupMembersRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.MonitoredResource()),
         generateSampleMessage(new protos.google.api.MonitoredResource()),
@@ -1147,11 +1390,12 @@ describe('v3.GroupServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listGroupMembers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGroupMembers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1160,12 +1404,16 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListGroupMembersRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListGroupMembersRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGroupMembers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1182,17 +1430,18 @@ describe('v3.GroupServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listGroupMembers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGroupMembers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
 
   describe('Path templates', () => {
-    describe('folderAlertPolicy', () => {
+    describe('folderAlertPolicy', async () => {
       const fakePath = '/rendered/path/folderAlertPolicy';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1202,7 +1451,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderAlertPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1254,7 +1503,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('folderAlertPolicyCondition', () => {
+    describe('folderAlertPolicyCondition', async () => {
       const fakePath = '/rendered/path/folderAlertPolicyCondition';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1265,7 +1514,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderAlertPolicyConditionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1333,7 +1582,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('folderChannelDescriptor', () => {
+    describe('folderChannelDescriptor', async () => {
       const fakePath = '/rendered/path/folderChannelDescriptor';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1343,7 +1592,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderChannelDescriptorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1398,7 +1647,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('folderGroup', () => {
+    describe('folderGroup', async () => {
       const fakePath = '/rendered/path/folderGroup';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1408,7 +1657,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1447,7 +1696,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('folderNotificationChannel', () => {
+    describe('folderNotificationChannel', async () => {
       const fakePath = '/rendered/path/folderNotificationChannel';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1457,7 +1706,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderNotificationChannelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1512,7 +1761,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('folderService', () => {
+    describe('folderService', async () => {
       const fakePath = '/rendered/path/folderService';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1522,7 +1771,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1561,7 +1810,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('folderServiceServiceLevelObjective', () => {
+    describe('folderServiceServiceLevelObjective', async () => {
       const fakePath = '/rendered/path/folderServiceServiceLevelObjective';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1572,7 +1821,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match =
@@ -1644,7 +1893,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('folderUptimeCheckConfig', () => {
+    describe('folderUptimeCheckConfig', async () => {
       const fakePath = '/rendered/path/folderUptimeCheckConfig';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1654,7 +1903,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderUptimeCheckConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1709,7 +1958,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('organizationAlertPolicy', () => {
+    describe('organizationAlertPolicy', async () => {
       const fakePath = '/rendered/path/organizationAlertPolicy';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1719,7 +1968,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationAlertPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1772,7 +2021,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('organizationAlertPolicyCondition', () => {
+    describe('organizationAlertPolicyCondition', async () => {
       const fakePath = '/rendered/path/organizationAlertPolicyCondition';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1783,7 +2032,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationAlertPolicyConditionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationAlertPolicyConditionPathTemplate.match =
@@ -1855,7 +2104,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('organizationChannelDescriptor', () => {
+    describe('organizationChannelDescriptor', async () => {
       const fakePath = '/rendered/path/organizationChannelDescriptor';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1865,7 +2114,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationChannelDescriptorPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationChannelDescriptorPathTemplate.match =
@@ -1920,7 +2169,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('organizationGroup', () => {
+    describe('organizationGroup', async () => {
       const fakePath = '/rendered/path/organizationGroup';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1930,7 +2179,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1982,7 +2231,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('organizationNotificationChannel', () => {
+    describe('organizationNotificationChannel', async () => {
       const fakePath = '/rendered/path/organizationNotificationChannel';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1992,7 +2241,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationNotificationChannelPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationNotificationChannelPathTemplate.match =
@@ -2047,7 +2296,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('organizationService', () => {
+    describe('organizationService', async () => {
       const fakePath = '/rendered/path/organizationService';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2057,7 +2306,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2109,7 +2358,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('organizationServiceServiceLevelObjective', () => {
+    describe('organizationServiceServiceLevelObjective', async () => {
       const fakePath =
         '/rendered/path/organizationServiceServiceLevelObjective';
       const expectedParameters = {
@@ -2121,7 +2370,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match =
@@ -2197,7 +2446,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('organizationUptimeCheckConfig', () => {
+    describe('organizationUptimeCheckConfig', async () => {
       const fakePath = '/rendered/path/organizationUptimeCheckConfig';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2207,7 +2456,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationUptimeCheckConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationUptimeCheckConfigPathTemplate.match =
@@ -2262,7 +2511,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2271,7 +2520,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2300,7 +2549,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('projectAlertPolicy', () => {
+    describe('projectAlertPolicy', async () => {
       const fakePath = '/rendered/path/projectAlertPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -2310,7 +2559,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAlertPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2362,7 +2611,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('projectAlertPolicyCondition', () => {
+    describe('projectAlertPolicyCondition', async () => {
       const fakePath = '/rendered/path/projectAlertPolicyCondition';
       const expectedParameters = {
         project: 'projectValue',
@@ -2373,7 +2622,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAlertPolicyConditionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectAlertPolicyConditionPathTemplate.match = sinon
@@ -2440,7 +2689,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('projectChannelDescriptor', () => {
+    describe('projectChannelDescriptor', async () => {
       const fakePath = '/rendered/path/projectChannelDescriptor';
       const expectedParameters = {
         project: 'projectValue',
@@ -2450,7 +2699,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectChannelDescriptorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2505,7 +2754,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('projectGroup', () => {
+    describe('projectGroup', async () => {
       const fakePath = '/rendered/path/projectGroup';
       const expectedParameters = {
         project: 'projectValue',
@@ -2515,7 +2764,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2554,7 +2803,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('projectNotificationChannel', () => {
+    describe('projectNotificationChannel', async () => {
       const fakePath = '/rendered/path/projectNotificationChannel';
       const expectedParameters = {
         project: 'projectValue',
@@ -2564,7 +2813,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectNotificationChannelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2619,7 +2868,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('projectService', () => {
+    describe('projectService', async () => {
       const fakePath = '/rendered/path/projectService';
       const expectedParameters = {
         project: 'projectValue',
@@ -2629,7 +2878,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2671,7 +2920,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('projectServiceServiceLevelObjective', () => {
+    describe('projectServiceServiceLevelObjective', async () => {
       const fakePath = '/rendered/path/projectServiceServiceLevelObjective';
       const expectedParameters = {
         project: 'projectValue',
@@ -2682,7 +2931,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match =
@@ -2754,7 +3003,7 @@ describe('v3.GroupServiceClient', () => {
       });
     });
 
-    describe('projectUptimeCheckConfig', () => {
+    describe('projectUptimeCheckConfig', async () => {
       const fakePath = '/rendered/path/projectUptimeCheckConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -2764,7 +3013,7 @@ describe('v3.GroupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectUptimeCheckConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2813,6 +3062,55 @@ describe('v3.GroupServiceClient', () => {
             client.pathTemplates.projectUptimeCheckConfigPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('snooze', async () => {
+      const fakePath = '/rendered/path/snooze';
+      const expectedParameters = {
+        project: 'projectValue',
+        snooze: 'snoozeValue',
+      };
+      const client = new groupserviceModule.v3.GroupServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.snoozePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.snoozePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('snoozePath', () => {
+        const result = client.snoozePath('projectValue', 'snoozeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.snoozePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSnoozeName', () => {
+        const result = client.matchProjectFromSnoozeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.snoozePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSnoozeFromSnoozeName', () => {
+        const result = client.matchSnoozeFromSnoozeName(fakePath);
+        assert.strictEqual(result, 'snoozeValue');
+        assert(
+          (client.pathTemplates.snoozePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
