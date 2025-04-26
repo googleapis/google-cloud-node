@@ -267,9 +267,14 @@ describe('v1.ApiHubClient', () => {
         throw err;
       });
       assert(client.apiHubStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -278,9 +283,14 @@ describe('v1.ApiHubClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.apiHubStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -440,7 +450,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createApi(request), expectedError);
     });
   });
@@ -567,7 +579,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getApi(request), expectedError);
     });
   });
@@ -698,7 +712,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.api.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateApi(request), expectedError);
     });
   });
@@ -825,7 +841,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteApi(request), expectedError);
     });
   });
@@ -955,7 +973,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createVersion(request), expectedError);
     });
   });
@@ -1085,7 +1105,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getVersion(request), expectedError);
     });
   });
@@ -1219,7 +1241,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.version.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateVersion(request), expectedError);
     });
   });
@@ -1349,7 +1373,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteVersion(request), expectedError);
     });
   });
@@ -1479,7 +1505,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createSpec(request), expectedError);
     });
   });
@@ -1606,7 +1634,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSpec(request), expectedError);
     });
   });
@@ -1736,7 +1766,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSpecContents(request), expectedError);
     });
   });
@@ -1870,7 +1902,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.spec.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateSpec(request), expectedError);
     });
   });
@@ -2000,7 +2034,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteSpec(request), expectedError);
     });
   });
@@ -2130,7 +2166,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getApiOperation(request), expectedError);
     });
   });
@@ -2260,7 +2298,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDefinition(request), expectedError);
     });
   });
@@ -2390,7 +2430,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDeployment(request), expectedError);
     });
   });
@@ -2520,7 +2562,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDeployment(request), expectedError);
     });
   });
@@ -2654,7 +2698,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.deployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDeployment(request), expectedError);
     });
   });
@@ -2784,7 +2830,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteDeployment(request), expectedError);
     });
   });
@@ -2914,7 +2962,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createAttribute(request), expectedError);
     });
   });
@@ -3044,7 +3094,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAttribute(request), expectedError);
     });
   });
@@ -3178,7 +3230,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.attribute.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateAttribute(request), expectedError);
     });
   });
@@ -3308,7 +3362,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteAttribute(request), expectedError);
     });
   });
@@ -3438,7 +3494,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createExternalApi(request), expectedError);
     });
   });
@@ -3568,7 +3626,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getExternalApi(request), expectedError);
     });
   });
@@ -3702,7 +3762,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.externalApi.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateExternalApi(request), expectedError);
     });
   });
@@ -3832,7 +3894,9 @@ describe('v1.ApiHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteExternalApi(request), expectedError);
     });
   });
