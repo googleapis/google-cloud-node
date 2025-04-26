@@ -228,7 +228,7 @@ describe('v1.PipelineServiceClient', () => {
             assert(client.pipelineServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -239,7 +239,7 @@ describe('v1.PipelineServiceClient', () => {
             assert.strictEqual(client.pipelineServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -378,7 +378,7 @@ describe('v1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.createTrainingPipeline(request), expectedError);
         });
     });
@@ -486,7 +486,7 @@ describe('v1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTrainingPipelineRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getTrainingPipeline(request), expectedError);
         });
     });
@@ -594,7 +594,7 @@ describe('v1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.cancelTrainingPipeline(request), expectedError);
         });
     });
@@ -702,7 +702,7 @@ describe('v1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreatePipelineJobRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.createPipelineJob(request), expectedError);
         });
     });
@@ -810,7 +810,7 @@ describe('v1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetPipelineJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getPipelineJob(request), expectedError);
         });
     });
@@ -918,7 +918,7 @@ describe('v1.PipelineServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CancelPipelineJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.cancelPipelineJob(request), expectedError);
         });
     });
@@ -2088,7 +2088,7 @@ describe('v1.PipelineServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2180,7 +2180,7 @@ describe('v1.PipelineServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2272,7 +2272,7 @@ describe('v1.PipelineServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2515,7 +2515,7 @@ describe('v1.PipelineServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2582,7 +2582,7 @@ describe('v1.PipelineServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2649,7 +2649,7 @@ describe('v1.PipelineServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

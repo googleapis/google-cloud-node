@@ -185,7 +185,7 @@ describe('v1beta1.VertexRagServiceClient', () => {
             assert(client.vertexRagServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -196,7 +196,7 @@ describe('v1beta1.VertexRagServiceClient', () => {
             assert.strictEqual(client.vertexRagServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -335,7 +335,7 @@ describe('v1beta1.VertexRagServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.RetrieveContextsRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.retrieveContexts(request), expectedError);
         });
     });
@@ -443,7 +443,7 @@ describe('v1beta1.VertexRagServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AugmentPromptRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.augmentPrompt(request), expectedError);
         });
     });
@@ -551,7 +551,7 @@ describe('v1beta1.VertexRagServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CorroborateContentRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.corroborateContent(request), expectedError);
         });
     });
@@ -615,7 +615,7 @@ describe('v1beta1.VertexRagServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -707,7 +707,7 @@ describe('v1beta1.VertexRagServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -799,7 +799,7 @@ describe('v1beta1.VertexRagServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

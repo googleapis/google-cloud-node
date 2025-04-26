@@ -228,7 +228,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
             assert(client.vertexRagDataServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -239,7 +239,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
             assert.strictEqual(client.vertexRagDataServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -378,7 +378,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetRagCorpusRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getRagCorpus(request), expectedError);
         });
     });
@@ -486,7 +486,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UploadRagFileRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.uploadRagFile(request), expectedError);
         });
     });
@@ -594,7 +594,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetRagFileRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getRagFile(request), expectedError);
         });
     });
@@ -702,7 +702,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetRagEngineConfigRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getRagEngineConfig(request), expectedError);
         });
     });
@@ -2188,7 +2188,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2280,7 +2280,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2372,7 +2372,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2615,7 +2615,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2682,7 +2682,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2749,7 +2749,7 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

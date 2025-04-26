@@ -185,7 +185,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
             assert(client.extensionExecutionServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -196,7 +196,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
             assert.strictEqual(client.extensionExecutionServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -335,7 +335,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.executeExtension(request), expectedError);
         });
     });
@@ -443,7 +443,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryExtensionRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.queryExtension(request), expectedError);
         });
     });
@@ -507,7 +507,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -599,7 +599,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -691,7 +691,7 @@ describe('v1beta1.ExtensionExecutionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

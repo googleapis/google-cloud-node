@@ -228,7 +228,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             assert(client.metadataServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -239,7 +239,7 @@ describe('v1beta1.MetadataServiceClient', () => {
             assert.strictEqual(client.metadataServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -378,7 +378,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetMetadataStoreRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getMetadataStore(request), expectedError);
         });
     });
@@ -486,7 +486,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateArtifactRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.createArtifact(request), expectedError);
         });
     });
@@ -594,7 +594,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetArtifactRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getArtifact(request), expectedError);
         });
     });
@@ -706,7 +706,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateArtifactRequest', ['artifact', 'name']);
             request.artifact.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.updateArtifact(request), expectedError);
         });
     });
@@ -814,7 +814,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateContextRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.createContext(request), expectedError);
         });
     });
@@ -922,7 +922,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetContextRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getContext(request), expectedError);
         });
     });
@@ -1034,7 +1034,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateContextRequest', ['context', 'name']);
             request.context.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.updateContext(request), expectedError);
         });
     });
@@ -1142,7 +1142,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddContextArtifactsAndExecutionsRequest', ['context']);
             request.context = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.addContextArtifactsAndExecutions(request), expectedError);
         });
     });
@@ -1250,7 +1250,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddContextChildrenRequest', ['context']);
             request.context = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.addContextChildren(request), expectedError);
         });
     });
@@ -1358,7 +1358,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.RemoveContextChildrenRequest', ['context']);
             request.context = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.removeContextChildren(request), expectedError);
         });
     });
@@ -1466,7 +1466,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryContextLineageSubgraphRequest', ['context']);
             request.context = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.queryContextLineageSubgraph(request), expectedError);
         });
     });
@@ -1574,7 +1574,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateExecutionRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.createExecution(request), expectedError);
         });
     });
@@ -1682,7 +1682,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetExecutionRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getExecution(request), expectedError);
         });
     });
@@ -1794,7 +1794,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateExecutionRequest', ['execution', 'name']);
             request.execution.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.updateExecution(request), expectedError);
         });
     });
@@ -1902,7 +1902,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AddExecutionEventsRequest', ['execution']);
             request.execution = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.addExecutionEvents(request), expectedError);
         });
     });
@@ -2010,7 +2010,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryExecutionInputsAndOutputsRequest', ['execution']);
             request.execution = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.queryExecutionInputsAndOutputs(request), expectedError);
         });
     });
@@ -2118,7 +2118,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.CreateMetadataSchemaRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.createMetadataSchema(request), expectedError);
         });
     });
@@ -2226,7 +2226,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetMetadataSchemaRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getMetadataSchema(request), expectedError);
         });
     });
@@ -2334,7 +2334,7 @@ describe('v1beta1.MetadataServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryArtifactLineageSubgraphRequest', ['artifact']);
             request.artifact = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.queryArtifactLineageSubgraph(request), expectedError);
         });
     });
@@ -4855,7 +4855,7 @@ describe('v1beta1.MetadataServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -4947,7 +4947,7 @@ describe('v1beta1.MetadataServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -5039,7 +5039,7 @@ describe('v1beta1.MetadataServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -5282,7 +5282,7 @@ describe('v1beta1.MetadataServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -5349,7 +5349,7 @@ describe('v1beta1.MetadataServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -5416,7 +5416,7 @@ describe('v1beta1.MetadataServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

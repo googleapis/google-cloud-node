@@ -199,7 +199,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
             assert(client.reasoningEngineExecutionServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -210,7 +210,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
             assert.strictEqual(client.reasoningEngineExecutionServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -349,7 +349,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.QueryReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.queryReasoningEngine(request), expectedError);
         });
     });
@@ -474,7 +474,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.StreamQueryReasoningEngineRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             const stream = client.streamQueryReasoningEngine(request, {retryRequestOptions: {noResponseRetries: 0}});
             const promise = new Promise((resolve, reject) => {
                 stream.on('data', (response: protos.google.api.HttpBody) => {
@@ -553,7 +553,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -645,7 +645,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -737,7 +737,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

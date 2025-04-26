@@ -228,7 +228,7 @@ describe('v1.NotebookServiceClient', () => {
             assert(client.notebookServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -239,7 +239,7 @@ describe('v1.NotebookServiceClient', () => {
             assert.strictEqual(client.notebookServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -378,7 +378,7 @@ describe('v1.NotebookServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNotebookRuntimeTemplateRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getNotebookRuntimeTemplate(request), expectedError);
         });
     });
@@ -490,7 +490,7 @@ describe('v1.NotebookServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.UpdateNotebookRuntimeTemplateRequest', ['notebookRuntimeTemplate', 'name']);
             request.notebookRuntimeTemplate.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.updateNotebookRuntimeTemplate(request), expectedError);
         });
     });
@@ -598,7 +598,7 @@ describe('v1.NotebookServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNotebookRuntimeRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getNotebookRuntime(request), expectedError);
         });
     });
@@ -706,7 +706,7 @@ describe('v1.NotebookServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetNotebookExecutionJobRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getNotebookExecutionJob(request), expectedError);
         });
     });
@@ -2891,7 +2891,7 @@ describe('v1.NotebookServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2983,7 +2983,7 @@ describe('v1.NotebookServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -3075,7 +3075,7 @@ describe('v1.NotebookServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -3318,7 +3318,7 @@ describe('v1.NotebookServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -3385,7 +3385,7 @@ describe('v1.NotebookServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -3452,7 +3452,7 @@ describe('v1.NotebookServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

@@ -228,7 +228,7 @@ describe('v1.VizierServiceClient', () => {
             assert(client.vizierServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -239,7 +239,7 @@ describe('v1.VizierServiceClient', () => {
             assert.strictEqual(client.vizierServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -378,7 +378,7 @@ describe('v1.VizierServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateStudyRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.createStudy(request), expectedError);
         });
     });
@@ -486,7 +486,7 @@ describe('v1.VizierServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetStudyRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getStudy(request), expectedError);
         });
     });
@@ -594,7 +594,7 @@ describe('v1.VizierServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteStudyRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.deleteStudy(request), expectedError);
         });
     });
@@ -702,7 +702,7 @@ describe('v1.VizierServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.LookupStudyRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.lookupStudy(request), expectedError);
         });
     });
@@ -810,7 +810,7 @@ describe('v1.VizierServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CreateTrialRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.createTrial(request), expectedError);
         });
     });
@@ -918,7 +918,7 @@ describe('v1.VizierServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.GetTrialRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getTrial(request), expectedError);
         });
     });
@@ -1026,7 +1026,7 @@ describe('v1.VizierServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.AddTrialMeasurementRequest', ['trialName']);
             request.trialName = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.addTrialMeasurement(request), expectedError);
         });
     });
@@ -1134,7 +1134,7 @@ describe('v1.VizierServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.CompleteTrialRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.completeTrial(request), expectedError);
         });
     });
@@ -1242,7 +1242,7 @@ describe('v1.VizierServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.DeleteTrialRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.deleteTrial(request), expectedError);
         });
     });
@@ -1350,7 +1350,7 @@ describe('v1.VizierServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.StopTrialRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.stopTrial(request), expectedError);
         });
     });
@@ -1458,7 +1458,7 @@ describe('v1.VizierServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1.ListOptimalTrialsRequest', ['parent']);
             request.parent = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.listOptimalTrials(request), expectedError);
         });
     });
@@ -2320,7 +2320,7 @@ describe('v1.VizierServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2412,7 +2412,7 @@ describe('v1.VizierServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2504,7 +2504,7 @@ describe('v1.VizierServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2747,7 +2747,7 @@ describe('v1.VizierServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2814,7 +2814,7 @@ describe('v1.VizierServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2881,7 +2881,7 @@ describe('v1.VizierServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);

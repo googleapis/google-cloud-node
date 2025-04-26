@@ -228,7 +228,7 @@ describe('v1beta1.SessionServiceClient', () => {
             assert(client.sessionServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -239,7 +239,7 @@ describe('v1beta1.SessionServiceClient', () => {
             assert.strictEqual(client.sessionServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -378,7 +378,7 @@ describe('v1beta1.SessionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.GetSessionRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getSession(request), expectedError);
         });
     });
@@ -490,7 +490,7 @@ describe('v1beta1.SessionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.UpdateSessionRequest', ['session', 'name']);
             request.session.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.updateSession(request), expectedError);
         });
     });
@@ -598,7 +598,7 @@ describe('v1beta1.SessionServiceClient', () => {
               getTypeDefaultValue('.google.cloud.aiplatform.v1beta1.AppendEventRequest', ['name']);
             request.name = defaultValue1;
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.appendEvent(request), expectedError);
         });
     });
@@ -1460,7 +1460,7 @@ describe('v1beta1.SessionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1552,7 +1552,7 @@ describe('v1beta1.SessionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1644,7 +1644,7 @@ describe('v1beta1.SessionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1887,7 +1887,7 @@ describe('v1beta1.SessionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -1954,7 +1954,7 @@ describe('v1beta1.SessionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
@@ -2021,7 +2021,7 @@ describe('v1beta1.SessionServiceClient', () => {
                         } else {
                             resolve(result);
                         }
-                    });
+                    }).catch(err => {throw err});
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
