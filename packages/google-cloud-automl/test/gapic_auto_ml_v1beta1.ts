@@ -286,9 +286,14 @@ describe('v1beta1.AutoMlClient', () => {
         throw err;
       });
       assert(client.autoMlStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -297,9 +302,14 @@ describe('v1beta1.AutoMlClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.autoMlStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -462,7 +472,9 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDataset(request), expectedError);
     });
   });
@@ -592,7 +604,9 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDataset(request), expectedError);
     });
   });
@@ -726,7 +740,9 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.dataset.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDataset(request), expectedError);
     });
   });
@@ -856,7 +872,9 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAnnotationSpec(request), expectedError);
     });
   });
@@ -986,7 +1004,9 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTableSpec(request), expectedError);
     });
   });
@@ -1120,7 +1140,9 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.tableSpec.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateTableSpec(request), expectedError);
     });
   });
@@ -1250,7 +1272,9 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getColumnSpec(request), expectedError);
     });
   });
@@ -1384,7 +1408,9 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.columnSpec.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateColumnSpec(request), expectedError);
     });
   });
@@ -1511,7 +1537,9 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getModel(request), expectedError);
     });
   });
@@ -1642,7 +1670,9 @@ describe('v1beta1.AutoMlClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getModelEvaluation(request), expectedError);
     });
   });

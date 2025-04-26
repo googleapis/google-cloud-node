@@ -269,9 +269,14 @@ describe('v1beta1.DataPolicyServiceClient', () => {
         throw err;
       });
       assert(client.dataPolicyServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -281,9 +286,14 @@ describe('v1beta1.DataPolicyServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataPolicyServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -452,7 +462,9 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDataPolicy(request), expectedError);
     });
   });
@@ -590,7 +602,9 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       );
       request.dataPolicy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDataPolicy(request), expectedError);
     });
   });
@@ -724,7 +738,9 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteDataPolicy(request), expectedError);
     });
   });
@@ -858,7 +874,9 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDataPolicy(request), expectedError);
     });
   });
@@ -992,7 +1010,9 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -1126,7 +1146,9 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -1261,7 +1283,9 @@ describe('v1beta1.DataPolicyServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });

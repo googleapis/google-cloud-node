@@ -259,9 +259,14 @@ describe('v2.MigrationServiceClient', () => {
         throw err;
       });
       assert(client.migrationServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -270,9 +275,14 @@ describe('v2.MigrationServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.migrationServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -439,7 +449,9 @@ describe('v2.MigrationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createMigrationWorkflow(request),
         expectedError
@@ -573,7 +585,9 @@ describe('v2.MigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getMigrationWorkflow(request), expectedError);
     });
   });
@@ -707,7 +721,9 @@ describe('v2.MigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteMigrationWorkflow(request),
         expectedError
@@ -844,7 +860,9 @@ describe('v2.MigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.startMigrationWorkflow(request),
         expectedError
@@ -978,7 +996,9 @@ describe('v2.MigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getMigrationSubtask(request), expectedError);
     });
   });

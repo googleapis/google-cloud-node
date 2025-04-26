@@ -261,9 +261,14 @@ describe('v1.ReservationServiceClient', () => {
         throw err;
       });
       assert(client.reservationServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -272,9 +277,14 @@ describe('v1.ReservationServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.reservationServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -437,7 +447,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createReservation(request), expectedError);
     });
   });
@@ -567,7 +579,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getReservation(request), expectedError);
     });
   });
@@ -697,7 +711,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteReservation(request), expectedError);
     });
   });
@@ -831,7 +847,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.reservation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateReservation(request), expectedError);
     });
   });
@@ -962,7 +980,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.failoverReservation(request), expectedError);
     });
   });
@@ -1096,7 +1116,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createCapacityCommitment(request),
         expectedError
@@ -1233,7 +1255,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getCapacityCommitment(request),
         expectedError
@@ -1370,7 +1394,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteCapacityCommitment(request),
         expectedError
@@ -1511,7 +1537,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.capacityCommitment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateCapacityCommitment(request),
         expectedError
@@ -1648,7 +1676,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.splitCapacityCommitment(request),
         expectedError
@@ -1785,7 +1815,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.mergeCapacityCommitments(request),
         expectedError
@@ -1918,7 +1950,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createAssignment(request), expectedError);
     });
   });
@@ -2048,7 +2082,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteAssignment(request), expectedError);
     });
   });
@@ -2178,7 +2214,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.moveAssignment(request), expectedError);
     });
   });
@@ -2312,7 +2350,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.assignment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateAssignment(request), expectedError);
     });
   });
@@ -2442,7 +2482,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getBiReservation(request), expectedError);
     });
   });
@@ -2577,7 +2619,9 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.biReservation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateBiReservation(request), expectedError);
     });
   });

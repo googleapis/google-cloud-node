@@ -259,9 +259,14 @@ describe('v1.BudgetServiceClient', () => {
         throw err;
       });
       assert(client.budgetServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -270,9 +275,14 @@ describe('v1.BudgetServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.budgetServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -435,7 +445,9 @@ describe('v1.BudgetServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createBudget(request), expectedError);
     });
   });
@@ -569,7 +581,9 @@ describe('v1.BudgetServiceClient', () => {
       );
       request.budget.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateBudget(request), expectedError);
     });
   });
@@ -696,7 +710,9 @@ describe('v1.BudgetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getBudget(request), expectedError);
     });
   });
@@ -826,7 +842,9 @@ describe('v1.BudgetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteBudget(request), expectedError);
     });
   });
