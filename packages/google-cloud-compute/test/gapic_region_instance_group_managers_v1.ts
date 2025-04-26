@@ -288,9 +288,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         throw err;
       });
       assert(client.regionInstanceGroupManagersStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -302,9 +307,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
           }
         );
       assert.strictEqual(client.regionInstanceGroupManagersStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -525,7 +535,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.abandonInstances(request), expectedError);
     });
   });
@@ -711,7 +723,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.applyUpdatesToInstances(request),
         expectedError
@@ -896,7 +910,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createInstances(request), expectedError);
     });
   });
@@ -1075,7 +1091,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -1257,7 +1275,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteInstances(request), expectedError);
     });
   });
@@ -1443,7 +1463,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deletePerInstanceConfigs(request),
         expectedError
@@ -1621,7 +1643,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -1780,7 +1804,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -1955,7 +1981,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.patch(request), expectedError);
     });
   });
@@ -2141,7 +2169,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.patchPerInstanceConfigs(request),
         expectedError
@@ -2326,7 +2356,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.recreateInstances(request), expectedError);
     });
   });
@@ -2505,7 +2537,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.resize(request), expectedError);
     });
   });
@@ -2687,7 +2721,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.resumeInstances(request), expectedError);
     });
   });
@@ -2870,7 +2906,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setInstanceTemplate(request), expectedError);
     });
   });
@@ -3052,7 +3090,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setTargetPools(request), expectedError);
     });
   });
@@ -3234,7 +3274,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.startInstances(request), expectedError);
     });
   });
@@ -3416,7 +3458,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.stopInstances(request), expectedError);
     });
   });
@@ -3598,7 +3642,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.suspendInstances(request), expectedError);
     });
   });
@@ -3784,7 +3830,9 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updatePerInstanceConfigs(request),
         expectedError

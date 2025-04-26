@@ -280,9 +280,14 @@ describe('v1.RegionInstanceGroupsClient', () => {
         throw err;
       });
       assert(client.regionInstanceGroupsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -292,9 +297,14 @@ describe('v1.RegionInstanceGroupsClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.regionInstanceGroupsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -496,7 +506,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
       );
       request.instanceGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -670,7 +682,9 @@ describe('v1.RegionInstanceGroupsClient', () => {
       );
       request.instanceGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setNamedPorts(request), expectedError);
     });
   });

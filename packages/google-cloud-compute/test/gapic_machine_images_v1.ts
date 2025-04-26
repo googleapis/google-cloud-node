@@ -269,9 +269,14 @@ describe('v1.MachineImagesClient', () => {
         throw err;
       });
       assert(client.machineImagesStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -280,9 +285,14 @@ describe('v1.MachineImagesClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.machineImagesStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -462,7 +472,9 @@ describe('v1.MachineImagesClient', () => {
       );
       request.machineImage = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -605,7 +617,9 @@ describe('v1.MachineImagesClient', () => {
       );
       request.machineImage = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -755,7 +769,9 @@ describe('v1.MachineImagesClient', () => {
       );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -882,7 +898,9 @@ describe('v1.MachineImagesClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -1032,7 +1050,9 @@ describe('v1.MachineImagesClient', () => {
       );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -1179,7 +1199,9 @@ describe('v1.MachineImagesClient', () => {
       );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setLabels(request), expectedError);
     });
   });
@@ -1330,7 +1352,9 @@ describe('v1.MachineImagesClient', () => {
       );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });

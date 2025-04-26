@@ -206,9 +206,14 @@ describe('v1.RegionInstancesClient', () => {
         throw err;
       });
       assert(client.regionInstancesStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -217,9 +222,14 @@ describe('v1.RegionInstancesClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.regionInstancesStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -402,7 +412,9 @@ describe('v1.RegionInstancesClient', () => {
       );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.bulkInsert(request), expectedError);
     });
   });

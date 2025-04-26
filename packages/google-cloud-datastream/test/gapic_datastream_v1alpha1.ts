@@ -288,9 +288,14 @@ describe('v1alpha1.DatastreamClient', () => {
         throw err;
       });
       assert(client.datastreamStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -299,9 +304,14 @@ describe('v1alpha1.DatastreamClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.datastreamStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -465,7 +475,9 @@ describe('v1alpha1.DatastreamClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getConnectionProfile(request), expectedError);
     });
   });
@@ -599,7 +611,9 @@ describe('v1alpha1.DatastreamClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.discoverConnectionProfile(request),
         expectedError
@@ -729,7 +743,9 @@ describe('v1alpha1.DatastreamClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getStream(request), expectedError);
     });
   });
@@ -860,7 +876,9 @@ describe('v1alpha1.DatastreamClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPrivateConnection(request), expectedError);
     });
   });
@@ -987,7 +1005,9 @@ describe('v1alpha1.DatastreamClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRoute(request), expectedError);
     });
   });

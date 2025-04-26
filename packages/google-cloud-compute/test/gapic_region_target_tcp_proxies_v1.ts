@@ -282,9 +282,14 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         throw err;
       });
       assert(client.regionTargetTcpProxiesStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -294,9 +299,14 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.regionTargetTcpProxiesStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -502,7 +512,9 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       );
       request.targetTcpProxy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -669,7 +681,9 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       );
       request.targetTcpProxy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -820,7 +834,9 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });

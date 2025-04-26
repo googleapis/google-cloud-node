@@ -288,9 +288,14 @@ describe('v1beta1.DataFusionClient', () => {
         throw err;
       });
       assert(client.dataFusionStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -299,9 +304,14 @@ describe('v1beta1.DataFusionClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataFusionStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -464,7 +474,9 @@ describe('v1beta1.DataFusionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getInstance(request), expectedError);
     });
   });
@@ -594,7 +606,9 @@ describe('v1beta1.DataFusionClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.removeIamPolicy(request), expectedError);
     });
   });
@@ -724,7 +738,9 @@ describe('v1beta1.DataFusionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addDnsPeering(request), expectedError);
     });
   });
@@ -854,7 +870,9 @@ describe('v1beta1.DataFusionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.removeDnsPeering(request), expectedError);
     });
   });
