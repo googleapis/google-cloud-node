@@ -33,20 +33,20 @@ import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v3/query_service_client_config.json`.
+ * `src/v3/snooze_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './query_service_client_config.json';
+import * as gapicConfig from './snooze_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The QueryService API is used to manage time series data in Cloud
- *  Monitoring. Time series data is a collection of data points that describes
- *  the time-varying values of a metric.
+ *  The SnoozeService API is used to temporarily prevent an alert policy from
+ *  generating alerts. A Snooze is a description of the criteria under which one
+ *  or more alert policies should not fire alerts for the specified duration.
  * @class
  * @memberof v3
  */
-export class QueryServiceClient {
+export class SnoozeServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -68,10 +68,10 @@ export class QueryServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  queryServiceStub?: Promise<{[name: string]: Function}>;
+  snoozeServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of QueryServiceClient.
+   * Construct an instance of SnoozeServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -106,7 +106,7 @@ export class QueryServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new QueryServiceClient({fallback: true}, gax);
+   *     const client = new SnoozeServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -114,7 +114,7 @@ export class QueryServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof QueryServiceClient;
+    const staticMembers = this.constructor as typeof SnoozeServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -258,6 +258,9 @@ export class QueryServiceClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
         ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
       projectAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/alertPolicies/{alert_policy}'
       ),
@@ -292,16 +295,16 @@ export class QueryServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      queryTimeSeries: new this._gaxModule.PageDescriptor(
+      listSnoozes: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'timeSeriesData'
+        'snoozes'
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.monitoring.v3.QueryService',
+      'google.monitoring.v3.SnoozeService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -329,28 +332,33 @@ export class QueryServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.queryServiceStub) {
-      return this.queryServiceStub;
+    if (this.snoozeServiceStub) {
+      return this.snoozeServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.monitoring.v3.QueryService.
-    this.queryServiceStub = this._gaxGrpc.createStub(
+    // google.monitoring.v3.SnoozeService.
+    this.snoozeServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.monitoring.v3.QueryService'
+            'google.monitoring.v3.SnoozeService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.monitoring.v3.QueryService,
+          (this._protos as any).google.monitoring.v3.SnoozeService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const queryServiceStubMethods = ['queryTimeSeries'];
-    for (const methodName of queryServiceStubMethods) {
-      const callPromise = this.queryServiceStub.then(
+    const snoozeServiceStubMethods = [
+      'createSnooze',
+      'listSnoozes',
+      'getSnooze',
+      'updateSnooze',
+    ];
+    for (const methodName of snoozeServiceStubMethods) {
+      const callPromise = this.snoozeServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -375,7 +383,7 @@ export class QueryServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.queryServiceStub;
+    return this.snoozeServiceStub;
   }
 
   /**
@@ -466,92 +474,187 @@ export class QueryServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-
   /**
-   * Queries time series by using Monitoring Query Language (MQL). We recommend
-   * using PromQL instead of MQL. For more information about the status of MQL,
-   * see the [MQL deprecation
-   * notice](https://cloud.google.com/stackdriver/docs/deprecations/mql).
+   * Creates a `Snooze` that will prevent alerts, which match the provided
+   * criteria, from being opened. The `Snooze` applies for a specific time
+   * interval.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) in which
+   *   a `Snooze` should be created. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {google.monitoring.v3.Snooze} request.snooze
+   *   Required. The `Snooze` to create. Omit the `name` field, as it will be
+   *   filled in by the API.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Snooze|Snooze}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/snooze_service.create_snooze.js</caption>
+   * region_tag:monitoring_v3_generated_SnoozeService_CreateSnooze_async
+   */
+  createSnooze(
+    request?: protos.google.monitoring.v3.ICreateSnoozeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.ICreateSnoozeRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createSnooze(
+    request: protos.google.monitoring.v3.ICreateSnoozeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.ICreateSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSnooze(
+    request: protos.google.monitoring.v3.ICreateSnoozeRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.ICreateSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSnooze(
+    request?: protos.google.monitoring.v3.ICreateSnoozeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.ICreateSnoozeRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.ICreateSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.ICreateSnoozeRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createSnooze request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.ICreateSnoozeRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSnooze response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSnooze(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.ICreateSnoozeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSnooze response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Retrieves a `Snooze` by `name`.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The
-   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
-   *   to execute the request. The format is:
+   *   Required. The ID of the `Snooze` to retrieve. The format is:
    *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.query
-   *   Required. The query in the [Monitoring Query
-   *   Language](https://cloud.google.com/monitoring/mql/reference) format.
-   *   The default time zone is in UTC.
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of time_series_data to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
+   *       projects/[PROJECT_ID_OR_NUMBER]/snoozes/[SNOOZE_ID]
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.monitoring.v3.TimeSeriesData|TimeSeriesData}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `queryTimeSeriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Snooze|Snooze}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @deprecated QueryTimeSeries is deprecated and may be removed in a future version.
+   * @example <caption>include:samples/generated/v3/snooze_service.get_snooze.js</caption>
+   * region_tag:monitoring_v3_generated_SnoozeService_GetSnooze_async
    */
-  queryTimeSeries(
-    request?: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+  getSnooze(
+    request?: protos.google.monitoring.v3.IGetSnoozeRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.monitoring.v3.ITimeSeriesData[],
-      protos.google.monitoring.v3.IQueryTimeSeriesRequest | null,
-      protos.google.monitoring.v3.IQueryTimeSeriesResponse,
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IGetSnoozeRequest | undefined,
+      {} | undefined,
     ]
   >;
-  queryTimeSeries(
-    request: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+  getSnooze(
+    request: protos.google.monitoring.v3.IGetSnoozeRequest,
     options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-      protos.google.monitoring.v3.IQueryTimeSeriesResponse | null | undefined,
-      protos.google.monitoring.v3.ITimeSeriesData
+    callback: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IGetSnoozeRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
-  queryTimeSeries(
-    request: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-      protos.google.monitoring.v3.IQueryTimeSeriesResponse | null | undefined,
-      protos.google.monitoring.v3.ITimeSeriesData
+  getSnooze(
+    request: protos.google.monitoring.v3.IGetSnoozeRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IGetSnoozeRequest | null | undefined,
+      {} | null | undefined
     >
   ): void;
-  queryTimeSeries(
-    request?: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+  getSnooze(
+    request?: protos.google.monitoring.v3.IGetSnoozeRequest,
     optionsOrCallback?:
       | CallOptions
-      | PaginationCallback<
-          protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-          | protos.google.monitoring.v3.IQueryTimeSeriesResponse
-          | null
-          | undefined,
-          protos.google.monitoring.v3.ITimeSeriesData
+      | Callback<
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.IGetSnoozeRequest | null | undefined,
+          {} | null | undefined
         >,
-    callback?: PaginationCallback<
-      protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-      protos.google.monitoring.v3.IQueryTimeSeriesResponse | null | undefined,
-      protos.google.monitoring.v3.ITimeSeriesData
+    callback?: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IGetSnoozeRequest | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.monitoring.v3.ITimeSeriesData[],
-      protos.google.monitoring.v3.IQueryTimeSeriesRequest | null,
-      protos.google.monitoring.v3.IQueryTimeSeriesResponse,
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IGetSnoozeRequest | undefined,
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -572,74 +675,345 @@ export class QueryServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this.warn(
-      'DEP$QueryService-$QueryTimeSeries',
-      'QueryTimeSeries is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
+    this._log.info('getSnooze request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.IGetSnoozeRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSnooze response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSnooze(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.IGetSnoozeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSnooze response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Updates a `Snooze`, identified by its `name`, with the parameters in the
+   * given `Snooze` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.monitoring.v3.Snooze} request.snooze
+   *   Required. The `Snooze` to update. Must have the name field present.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The fields to update.
+   *
+   *   For each field listed in `update_mask`:
+   *
+   *     * If the `Snooze` object supplied in the `UpdateSnoozeRequest` has a
+   *       value for that field, the value of the field in the existing `Snooze`
+   *       will be set to the value of the field in the supplied `Snooze`.
+   *     * If the field does not have a value in the supplied `Snooze`, the field
+   *       in the existing `Snooze` is set to its default value.
+   *
+   *   Fields not listed retain their existing value.
+   *
+   *   The following are the field names that are accepted in `update_mask`:
+   *
+   *     * `display_name`
+   *     * `interval.start_time`
+   *     * `interval.end_time`
+   *
+   *   That said, the start time and end time of the `Snooze` determines which
+   *   fields can legally be updated. Before attempting an update, users should
+   *   consult the documentation for `UpdateSnoozeRequest`, which talks about
+   *   which fields can be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Snooze|Snooze}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/snooze_service.update_snooze.js</caption>
+   * region_tag:monitoring_v3_generated_SnoozeService_UpdateSnooze_async
+   */
+  updateSnooze(
+    request?: protos.google.monitoring.v3.IUpdateSnoozeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IUpdateSnoozeRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateSnooze(
+    request: protos.google.monitoring.v3.IUpdateSnoozeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IUpdateSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSnooze(
+    request: protos.google.monitoring.v3.IUpdateSnoozeRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IUpdateSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSnooze(
+    request?: protos.google.monitoring.v3.IUpdateSnoozeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.IUpdateSnoozeRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IUpdateSnoozeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze,
+      protos.google.monitoring.v3.IUpdateSnoozeRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'snooze.name': request.snooze!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateSnooze request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.IUpdateSnoozeRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSnooze response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSnooze(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.ISnooze,
+          protos.google.monitoring.v3.IUpdateSnoozeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSnooze response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+
+  /**
+   * Lists the `Snooze`s associated with a project. Can optionally pass in
+   * `filter`, which specifies predicates to match `Snooze`s.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+   *   `Snooze`s should be listed. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {string} [request.filter]
+   *   Optional. Optional filter to restrict results to the given criteria. The
+   *   following fields are supported.
+   *
+   *     * `interval.start_time`
+   *     * `interval.end_time`
+   *
+   *   For example:
+   *
+   *       interval.start_time > "2022-03-11T00:00:00-08:00" AND
+   *           interval.end_time < "2022-03-12T00:00:00-08:00"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return for a single query. The
+   *   server may further constrain the maximum number of results returned in a
+   *   single page. The value should be in the range [1, 1000]. If the value given
+   *   is outside this range, the server will decide the number of results to be
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous call to
+   *   `ListSnoozesRequest` to get the next page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.monitoring.v3.Snooze|Snooze}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSnoozesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSnoozes(
+    request?: protos.google.monitoring.v3.IListSnoozesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze[],
+      protos.google.monitoring.v3.IListSnoozesRequest | null,
+      protos.google.monitoring.v3.IListSnoozesResponse,
+    ]
+  >;
+  listSnoozes(
+    request: protos.google.monitoring.v3.IListSnoozesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListSnoozesRequest,
+      protos.google.monitoring.v3.IListSnoozesResponse | null | undefined,
+      protos.google.monitoring.v3.ISnooze
+    >
+  ): void;
+  listSnoozes(
+    request: protos.google.monitoring.v3.IListSnoozesRequest,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListSnoozesRequest,
+      protos.google.monitoring.v3.IListSnoozesResponse | null | undefined,
+      protos.google.monitoring.v3.ISnooze
+    >
+  ): void;
+  listSnoozes(
+    request?: protos.google.monitoring.v3.IListSnoozesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListSnoozesRequest,
+          protos.google.monitoring.v3.IListSnoozesResponse | null | undefined,
+          protos.google.monitoring.v3.ISnooze
+        >,
+    callback?: PaginationCallback<
+      protos.google.monitoring.v3.IListSnoozesRequest,
+      protos.google.monitoring.v3.IListSnoozesResponse | null | undefined,
+      protos.google.monitoring.v3.ISnooze
+    >
+  ): Promise<
+    [
+      protos.google.monitoring.v3.ISnooze[],
+      protos.google.monitoring.v3.IListSnoozesRequest | null,
+      protos.google.monitoring.v3.IListSnoozesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
-          protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-          | protos.google.monitoring.v3.IQueryTimeSeriesResponse
-          | null
-          | undefined,
-          protos.google.monitoring.v3.ITimeSeriesData
+          protos.google.monitoring.v3.IListSnoozesRequest,
+          protos.google.monitoring.v3.IListSnoozesResponse | null | undefined,
+          protos.google.monitoring.v3.ISnooze
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('queryTimeSeries values %j', values);
+          this._log.info('listSnoozes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('queryTimeSeries request %j', request);
+    this._log.info('listSnoozes request %j', request);
     return this.innerApiCalls
-      .queryTimeSeries(request, options, wrappedCallback)
+      .listSnoozes(request, options, wrappedCallback)
       ?.then(
         ([response, input, output]: [
-          protos.google.monitoring.v3.ITimeSeriesData[],
-          protos.google.monitoring.v3.IQueryTimeSeriesRequest | null,
-          protos.google.monitoring.v3.IQueryTimeSeriesResponse,
+          protos.google.monitoring.v3.ISnooze[],
+          protos.google.monitoring.v3.IListSnoozesRequest | null,
+          protos.google.monitoring.v3.IListSnoozesResponse,
         ]) => {
-          this._log.info('queryTimeSeries values %j', response);
+          this._log.info('listSnoozes values %j', response);
           return [response, input, output];
         }
       );
   }
 
   /**
-   * Equivalent to `queryTimeSeries`, but returns a NodeJS Stream object.
+   * Equivalent to `listSnoozes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
+   * @param {string} request.parent
    *   Required. The
-   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
-   *   to execute the request. The format is:
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+   *   `Snooze`s should be listed. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.query
-   *   Required. The query in the [Monitoring Query
-   *   Language](https://cloud.google.com/monitoring/mql/reference) format.
-   *   The default time zone is in UTC.
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of time_series_data to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
+   * @param {string} [request.filter]
+   *   Optional. Optional filter to restrict results to the given criteria. The
+   *   following fields are supported.
+   *
+   *     * `interval.start_time`
+   *     * `interval.end_time`
+   *
+   *   For example:
+   *
+   *       interval.start_time > "2022-03-11T00:00:00-08:00" AND
+   *           interval.end_time < "2022-03-12T00:00:00-08:00"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return for a single query. The
+   *   server may further constrain the maximum number of results returned in a
+   *   single page. The value should be in the range [1, 1000]. If the value given
+   *   is outside this range, the server will decide the number of results to be
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous call to
+   *   `ListSnoozesRequest` to get the next page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.monitoring.v3.TimeSeriesData|TimeSeriesData} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.monitoring.v3.Snooze|Snooze} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `queryTimeSeriesAsync()`
+   *   We recommend using `listSnoozesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @deprecated QueryTimeSeries is deprecated and may be removed in a future version.
    */
-  queryTimeSeriesStream(
-    request?: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+  listSnoozesStream(
+    request?: protos.google.monitoring.v3.IListSnoozesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -648,89 +1022,88 @@ export class QueryServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
+        parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['queryTimeSeries'];
+    const defaultCallSettings = this._defaults['listSnoozes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this.warn(
-      'DEP$QueryService-$QueryTimeSeries',
-      'QueryTimeSeries is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
-    this._log.info('queryTimeSeries stream %j', request);
-    return this.descriptors.page.queryTimeSeries.createStream(
-      this.innerApiCalls.queryTimeSeries as GaxCall,
+    this._log.info('listSnoozes stream %j', request);
+    return this.descriptors.page.listSnoozes.createStream(
+      this.innerApiCalls.listSnoozes as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `queryTimeSeries`, but returns an iterable object.
+   * Equivalent to `listSnoozes`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
+   * @param {string} request.parent
    *   Required. The
-   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
-   *   to execute the request. The format is:
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+   *   `Snooze`s should be listed. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.query
-   *   Required. The query in the [Monitoring Query
-   *   Language](https://cloud.google.com/monitoring/mql/reference) format.
-   *   The default time zone is in UTC.
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of time_series_data to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
+   * @param {string} [request.filter]
+   *   Optional. Optional filter to restrict results to the given criteria. The
+   *   following fields are supported.
+   *
+   *     * `interval.start_time`
+   *     * `interval.end_time`
+   *
+   *   For example:
+   *
+   *       interval.start_time > "2022-03-11T00:00:00-08:00" AND
+   *           interval.end_time < "2022-03-12T00:00:00-08:00"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return for a single query. The
+   *   server may further constrain the maximum number of results returned in a
+   *   single page. The value should be in the range [1, 1000]. If the value given
+   *   is outside this range, the server will decide the number of results to be
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` from a previous call to
+   *   `ListSnoozesRequest` to get the next page of results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.monitoring.v3.TimeSeriesData|TimeSeriesData}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.monitoring.v3.Snooze|Snooze}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/query_service.query_time_series.js</caption>
-   * region_tag:monitoring_v3_generated_QueryService_QueryTimeSeries_async
-   * @deprecated QueryTimeSeries is deprecated and may be removed in a future version.
+   * @example <caption>include:samples/generated/v3/snooze_service.list_snoozes.js</caption>
+   * region_tag:monitoring_v3_generated_SnoozeService_ListSnoozes_async
    */
-  queryTimeSeriesAsync(
-    request?: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+  listSnoozesAsync(
+    request?: protos.google.monitoring.v3.IListSnoozesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.monitoring.v3.ITimeSeriesData> {
+  ): AsyncIterable<protos.google.monitoring.v3.ISnooze> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
+        parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['queryTimeSeries'];
+    const defaultCallSettings = this._defaults['listSnoozes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this.warn(
-      'DEP$QueryService-$QueryTimeSeries',
-      'QueryTimeSeries is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
-    this._log.info('queryTimeSeries iterate %j', request);
-    return this.descriptors.page.queryTimeSeries.asyncIterate(
-      this.innerApiCalls['queryTimeSeries'] as GaxCall,
+    this._log.info('listSnoozes iterate %j', request);
+    return this.descriptors.page.listSnoozes.asyncIterate(
+      this.innerApiCalls['listSnoozes'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.monitoring.v3.ITimeSeriesData>;
+    ) as AsyncIterable<protos.google.monitoring.v3.ISnooze>;
   }
   // --------------------
   // -- Path templates --
@@ -1520,6 +1893,29 @@ export class QueryServiceClient {
   }
 
   /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
    * Return a fully-qualified projectAlertPolicy resource name string.
    *
    * @param {string} project
@@ -1944,8 +2340,8 @@ export class QueryServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.queryServiceStub && !this._terminated) {
-      return this.queryServiceStub.then(stub => {
+    if (this.snoozeServiceStub && !this._terminated) {
+      return this.snoozeServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

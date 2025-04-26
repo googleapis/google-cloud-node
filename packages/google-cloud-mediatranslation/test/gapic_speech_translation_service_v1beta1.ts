@@ -216,9 +216,14 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
         throw err;
       });
       assert(client.speechTranslationServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -230,9 +235,14 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
           }
         );
       assert.strictEqual(client.speechTranslationServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {

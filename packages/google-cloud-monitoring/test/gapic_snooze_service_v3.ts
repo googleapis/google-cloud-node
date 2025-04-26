@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as uptimecheckserviceModule from '../src';
+import * as snoozeserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -127,16 +127,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v3.UptimeCheckServiceClient', () => {
+describe('v3.SnoozeServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient();
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'monitoring.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient();
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -148,7 +148,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          uptimecheckserviceModule.v3.UptimeCheckServiceClient.servicePath;
+          snoozeserviceModule.v3.SnoozeServiceClient.servicePath;
         assert.strictEqual(servicePath, 'monitoring.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -157,14 +157,14 @@ describe('v3.UptimeCheckServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          uptimecheckserviceModule.v3.UptimeCheckServiceClient.apiEndpoint;
+          snoozeserviceModule.v3.SnoozeServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'monitoring.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         universeDomain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -172,7 +172,7 @@ describe('v3.UptimeCheckServiceClient', () => {
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         universe_domain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -184,8 +184,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new uptimecheckserviceModule.v3.UptimeCheckServiceClient();
+          const client = new snoozeserviceModule.v3.SnoozeServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'monitoring.example.com');
           if (saved) {
@@ -198,10 +197,9 @@ describe('v3.UptimeCheckServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-              universeDomain: 'configured.example.com',
-            });
+          const client = new snoozeserviceModule.v3.SnoozeServiceClient({
+            universeDomain: 'configured.example.com',
+          });
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'monitoring.configured.example.com');
           if (saved) {
@@ -214,7 +212,7 @@ describe('v3.UptimeCheckServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        new snoozeserviceModule.v3.SnoozeServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -222,42 +220,42 @@ describe('v3.UptimeCheckServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = uptimecheckserviceModule.v3.UptimeCheckServiceClient.port;
+      const port = snoozeserviceModule.v3.SnoozeServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient();
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.uptimeCheckServiceStub, undefined);
+      assert.strictEqual(client.snoozeServiceStub, undefined);
       await client.initialize();
-      assert(client.uptimeCheckServiceStub);
+      assert(client.snoozeServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize().catch(err => {
         throw err;
       });
-      assert(client.uptimeCheckServiceStub);
+      assert(client.snoozeServiceStub);
       client
         .close()
         .then(() => {
@@ -269,11 +267,11 @@ describe('v3.UptimeCheckServiceClient', () => {
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      assert.strictEqual(client.uptimeCheckServiceStub, undefined);
+      assert.strictEqual(client.snoozeServiceStub, undefined);
       client
         .close()
         .then(() => {
@@ -286,7 +284,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -298,7 +296,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -319,198 +317,64 @@ describe('v3.UptimeCheckServiceClient', () => {
     });
   });
 
-  describe('getUptimeCheckConfig', () => {
-    it('invokes getUptimeCheckConfig without error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+  describe('createSnooze', () => {
+    it('invokes createSnooze without error', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.GetUptimeCheckConfigRequest()
+        new protos.google.monitoring.v3.CreateSnoozeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.GetUptimeCheckConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.monitoring.v3.UptimeCheckConfig()
-      );
-      client.innerApiCalls.getUptimeCheckConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getUptimeCheckConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getUptimeCheckConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getUptimeCheckConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getUptimeCheckConfig without error using callback', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.GetUptimeCheckConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.GetUptimeCheckConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.monitoring.v3.UptimeCheckConfig()
-      );
-      client.innerApiCalls.getUptimeCheckConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getUptimeCheckConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.monitoring.v3.IUptimeCheckConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getUptimeCheckConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getUptimeCheckConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getUptimeCheckConfig with error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.GetUptimeCheckConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.GetUptimeCheckConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getUptimeCheckConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getUptimeCheckConfig(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getUptimeCheckConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getUptimeCheckConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getUptimeCheckConfig with closed client', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.GetUptimeCheckConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.GetUptimeCheckConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getUptimeCheckConfig(request), expectedError);
-    });
-  });
-
-  describe('createUptimeCheckConfig', () => {
-    it('invokes createUptimeCheckConfig without error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateUptimeCheckConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateUptimeCheckConfigRequest',
+        '.google.monitoring.v3.CreateSnoozeRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.monitoring.v3.UptimeCheckConfig()
+        new protos.google.monitoring.v3.Snooze()
       );
-      client.innerApiCalls.createUptimeCheckConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createUptimeCheckConfig(request);
+      client.innerApiCalls.createSnooze = stubSimpleCall(expectedResponse);
+      const [response] = await client.createSnooze(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createUptimeCheckConfig as SinonStub
+        client.innerApiCalls.createSnooze as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createUptimeCheckConfig as SinonStub
+        client.innerApiCalls.createSnooze as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createUptimeCheckConfig without error using callback', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes createSnooze without error using callback', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateUptimeCheckConfigRequest()
+        new protos.google.monitoring.v3.CreateSnoozeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateUptimeCheckConfigRequest',
+        '.google.monitoring.v3.CreateSnoozeRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.monitoring.v3.UptimeCheckConfig()
+        new protos.google.monitoring.v3.Snooze()
       );
-      client.innerApiCalls.createUptimeCheckConfig =
+      client.innerApiCalls.createSnooze =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createUptimeCheckConfig(
+        client.createSnooze(
           request,
           (
             err?: Error | null,
-            result?: protos.google.monitoring.v3.IUptimeCheckConfig | null
+            result?: protos.google.monitoring.v3.ISnooze | null
           ) => {
             if (err) {
               reject(err);
@@ -523,60 +387,57 @@ describe('v3.UptimeCheckServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createUptimeCheckConfig as SinonStub
+        client.innerApiCalls.createSnooze as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createUptimeCheckConfig as SinonStub
+        client.innerApiCalls.createSnooze as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createUptimeCheckConfig with error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes createSnooze with error', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateUptimeCheckConfigRequest()
+        new protos.google.monitoring.v3.CreateSnoozeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateUptimeCheckConfigRequest',
+        '.google.monitoring.v3.CreateSnoozeRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.createUptimeCheckConfig = stubSimpleCall(
+      client.innerApiCalls.createSnooze = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.createUptimeCheckConfig(request),
-        expectedError
-      );
+      await assert.rejects(client.createSnooze(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.createUptimeCheckConfig as SinonStub
+        client.innerApiCalls.createSnooze as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createUptimeCheckConfig as SinonStub
+        client.innerApiCalls.createSnooze as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createUptimeCheckConfig with closed client', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes createSnooze with closed client', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.CreateUptimeCheckConfigRequest()
+        new protos.google.monitoring.v3.CreateSnoozeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.CreateUptimeCheckConfigRequest',
+        '.google.monitoring.v3.CreateSnoozeRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -584,74 +445,68 @@ describe('v3.UptimeCheckServiceClient', () => {
       client.close().catch(err => {
         throw err;
       });
-      await assert.rejects(
-        client.createUptimeCheckConfig(request),
-        expectedError
-      );
+      await assert.rejects(client.createSnooze(request), expectedError);
     });
   });
 
-  describe('updateUptimeCheckConfig', () => {
-    it('invokes updateUptimeCheckConfig without error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+  describe('getSnooze', () => {
+    it('invokes getSnooze without error', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.UpdateUptimeCheckConfigRequest()
+        new protos.google.monitoring.v3.GetSnoozeRequest()
       );
-      request.uptimeCheckConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.UpdateUptimeCheckConfigRequest',
-        ['uptimeCheckConfig', 'name']
+        '.google.monitoring.v3.GetSnoozeRequest',
+        ['name']
       );
-      request.uptimeCheckConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `uptime_check_config.name=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.monitoring.v3.UptimeCheckConfig()
+        new protos.google.monitoring.v3.Snooze()
       );
-      client.innerApiCalls.updateUptimeCheckConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateUptimeCheckConfig(request);
+      client.innerApiCalls.getSnooze = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSnooze(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateUptimeCheckConfig as SinonStub
+        client.innerApiCalls.getSnooze as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateUptimeCheckConfig as SinonStub
+        client.innerApiCalls.getSnooze as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateUptimeCheckConfig without error using callback', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes getSnooze without error using callback', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.UpdateUptimeCheckConfigRequest()
+        new protos.google.monitoring.v3.GetSnoozeRequest()
       );
-      request.uptimeCheckConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.UpdateUptimeCheckConfigRequest',
-        ['uptimeCheckConfig', 'name']
+        '.google.monitoring.v3.GetSnoozeRequest',
+        ['name']
       );
-      request.uptimeCheckConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `uptime_check_config.name=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.monitoring.v3.UptimeCheckConfig()
+        new protos.google.monitoring.v3.Snooze()
       );
-      client.innerApiCalls.updateUptimeCheckConfig =
+      client.innerApiCalls.getSnooze =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.updateUptimeCheckConfig(
+        client.getSnooze(
           request,
           (
             err?: Error | null,
-            result?: protos.google.monitoring.v3.IUptimeCheckConfig | null
+            result?: protos.google.monitoring.v3.ISnooze | null
           ) => {
             if (err) {
               reject(err);
@@ -664,135 +519,125 @@ describe('v3.UptimeCheckServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateUptimeCheckConfig as SinonStub
+        client.innerApiCalls.getSnooze as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateUptimeCheckConfig as SinonStub
+        client.innerApiCalls.getSnooze as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateUptimeCheckConfig with error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes getSnooze with error', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.UpdateUptimeCheckConfigRequest()
+        new protos.google.monitoring.v3.GetSnoozeRequest()
       );
-      request.uptimeCheckConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.UpdateUptimeCheckConfigRequest',
-        ['uptimeCheckConfig', 'name']
+        '.google.monitoring.v3.GetSnoozeRequest',
+        ['name']
       );
-      request.uptimeCheckConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `uptime_check_config.name=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateUptimeCheckConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateUptimeCheckConfig(request),
-        expectedError
-      );
+      client.innerApiCalls.getSnooze = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getSnooze(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.updateUptimeCheckConfig as SinonStub
+        client.innerApiCalls.getSnooze as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateUptimeCheckConfig as SinonStub
+        client.innerApiCalls.getSnooze as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateUptimeCheckConfig with closed client', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes getSnooze with closed client', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.UpdateUptimeCheckConfigRequest()
+        new protos.google.monitoring.v3.GetSnoozeRequest()
       );
-      request.uptimeCheckConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.UpdateUptimeCheckConfigRequest',
-        ['uptimeCheckConfig', 'name']
+        '.google.monitoring.v3.GetSnoozeRequest',
+        ['name']
       );
-      request.uptimeCheckConfig.name = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close().catch(err => {
         throw err;
       });
-      await assert.rejects(
-        client.updateUptimeCheckConfig(request),
-        expectedError
-      );
+      await assert.rejects(client.getSnooze(request), expectedError);
     });
   });
 
-  describe('deleteUptimeCheckConfig', () => {
-    it('invokes deleteUptimeCheckConfig without error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+  describe('updateSnooze', () => {
+    it('invokes updateSnooze without error', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.DeleteUptimeCheckConfigRequest()
+        new protos.google.monitoring.v3.UpdateSnoozeRequest()
       );
+      request.snooze ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.DeleteUptimeCheckConfigRequest',
-        ['name']
+        '.google.monitoring.v3.UpdateSnoozeRequest',
+        ['snooze', 'name']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      request.snooze.name = defaultValue1;
+      const expectedHeaderRequestParams = `snooze.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.monitoring.v3.Snooze()
       );
-      client.innerApiCalls.deleteUptimeCheckConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteUptimeCheckConfig(request);
+      client.innerApiCalls.updateSnooze = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSnooze(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteUptimeCheckConfig as SinonStub
+        client.innerApiCalls.updateSnooze as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteUptimeCheckConfig as SinonStub
+        client.innerApiCalls.updateSnooze as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteUptimeCheckConfig without error using callback', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes updateSnooze without error using callback', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.DeleteUptimeCheckConfigRequest()
+        new protos.google.monitoring.v3.UpdateSnoozeRequest()
       );
+      request.snooze ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.DeleteUptimeCheckConfigRequest',
-        ['name']
+        '.google.monitoring.v3.UpdateSnoozeRequest',
+        ['snooze', 'name']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      request.snooze.name = defaultValue1;
+      const expectedHeaderRequestParams = `snooze.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.monitoring.v3.Snooze()
       );
-      client.innerApiCalls.deleteUptimeCheckConfig =
+      client.innerApiCalls.updateSnooze =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteUptimeCheckConfig(
+        client.updateSnooze(
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
+            result?: protos.google.monitoring.v3.ISnooze | null
           ) => {
             if (err) {
               reject(err);
@@ -805,149 +650,132 @@ describe('v3.UptimeCheckServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteUptimeCheckConfig as SinonStub
+        client.innerApiCalls.updateSnooze as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteUptimeCheckConfig as SinonStub
+        client.innerApiCalls.updateSnooze as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteUptimeCheckConfig with error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes updateSnooze with error', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.DeleteUptimeCheckConfigRequest()
+        new protos.google.monitoring.v3.UpdateSnoozeRequest()
       );
+      request.snooze ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.DeleteUptimeCheckConfigRequest',
-        ['name']
+        '.google.monitoring.v3.UpdateSnoozeRequest',
+        ['snooze', 'name']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      request.snooze.name = defaultValue1;
+      const expectedHeaderRequestParams = `snooze.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteUptimeCheckConfig = stubSimpleCall(
+      client.innerApiCalls.updateSnooze = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.deleteUptimeCheckConfig(request),
-        expectedError
-      );
+      await assert.rejects(client.updateSnooze(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.deleteUptimeCheckConfig as SinonStub
+        client.innerApiCalls.updateSnooze as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteUptimeCheckConfig as SinonStub
+        client.innerApiCalls.updateSnooze as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteUptimeCheckConfig with closed client', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes updateSnooze with closed client', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.DeleteUptimeCheckConfigRequest()
+        new protos.google.monitoring.v3.UpdateSnoozeRequest()
       );
+      request.snooze ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.DeleteUptimeCheckConfigRequest',
-        ['name']
+        '.google.monitoring.v3.UpdateSnoozeRequest',
+        ['snooze', 'name']
       );
-      request.name = defaultValue1;
+      request.snooze.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close().catch(err => {
         throw err;
       });
-      await assert.rejects(
-        client.deleteUptimeCheckConfig(request),
-        expectedError
-      );
+      await assert.rejects(client.updateSnooze(request), expectedError);
     });
   });
 
-  describe('listUptimeCheckConfigs', () => {
-    it('invokes listUptimeCheckConfigs without error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+  describe('listSnoozes', () => {
+    it('invokes listSnoozes without error', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
+        new protos.google.monitoring.v3.ListSnoozesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
+        '.google.monitoring.v3.ListSnoozesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.monitoring.v3.UptimeCheckConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.monitoring.v3.UptimeCheckConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.monitoring.v3.UptimeCheckConfig()
-        ),
+        generateSampleMessage(new protos.google.monitoring.v3.Snooze()),
+        generateSampleMessage(new protos.google.monitoring.v3.Snooze()),
+        generateSampleMessage(new protos.google.monitoring.v3.Snooze()),
       ];
-      client.innerApiCalls.listUptimeCheckConfigs =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listUptimeCheckConfigs(request);
+      client.innerApiCalls.listSnoozes = stubSimpleCall(expectedResponse);
+      const [response] = await client.listSnoozes(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listUptimeCheckConfigs as SinonStub
+        client.innerApiCalls.listSnoozes as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listUptimeCheckConfigs as SinonStub
+        client.innerApiCalls.listSnoozes as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listUptimeCheckConfigs without error using callback', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes listSnoozes without error using callback', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
+        new protos.google.monitoring.v3.ListSnoozesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
+        '.google.monitoring.v3.ListSnoozesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.monitoring.v3.UptimeCheckConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.monitoring.v3.UptimeCheckConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.monitoring.v3.UptimeCheckConfig()
-        ),
+        generateSampleMessage(new protos.google.monitoring.v3.Snooze()),
+        generateSampleMessage(new protos.google.monitoring.v3.Snooze()),
+        generateSampleMessage(new protos.google.monitoring.v3.Snooze()),
       ];
-      client.innerApiCalls.listUptimeCheckConfigs =
+      client.innerApiCalls.listSnoozes =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listUptimeCheckConfigs(
+        client.listSnoozes(
           request,
           (
             err?: Error | null,
-            result?: protos.google.monitoring.v3.IUptimeCheckConfig[] | null
+            result?: protos.google.monitoring.v3.ISnooze[] | null
           ) => {
             if (err) {
               reject(err);
@@ -960,86 +788,74 @@ describe('v3.UptimeCheckServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listUptimeCheckConfigs as SinonStub
+        client.innerApiCalls.listSnoozes as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listUptimeCheckConfigs as SinonStub
+        client.innerApiCalls.listSnoozes as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listUptimeCheckConfigs with error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes listSnoozes with error', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
+        new protos.google.monitoring.v3.ListSnoozesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
+        '.google.monitoring.v3.ListSnoozesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listUptimeCheckConfigs = stubSimpleCall(
+      client.innerApiCalls.listSnoozes = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.listUptimeCheckConfigs(request),
-        expectedError
-      );
+      await assert.rejects(client.listSnoozes(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.listUptimeCheckConfigs as SinonStub
+        client.innerApiCalls.listSnoozes as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listUptimeCheckConfigs as SinonStub
+        client.innerApiCalls.listSnoozes as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listUptimeCheckConfigsStream without error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes listSnoozesStream without error', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
+        new protos.google.monitoring.v3.ListSnoozesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
+        '.google.monitoring.v3.ListSnoozesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.monitoring.v3.UptimeCheckConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.monitoring.v3.UptimeCheckConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.monitoring.v3.UptimeCheckConfig()
-        ),
+        generateSampleMessage(new protos.google.monitoring.v3.Snooze()),
+        generateSampleMessage(new protos.google.monitoring.v3.Snooze()),
+        generateSampleMessage(new protos.google.monitoring.v3.Snooze()),
       ];
-      client.descriptors.page.listUptimeCheckConfigs.createStream =
+      client.descriptors.page.listSnoozes.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listUptimeCheckConfigsStream(request);
+      const stream = client.listSnoozesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.monitoring.v3.UptimeCheckConfig[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.monitoring.v3.UptimeCheckConfig) => {
-            responses.push(response);
-          }
-        );
+        const responses: protos.google.monitoring.v3.Snooze[] = [];
+        stream.on('data', (response: protos.google.monitoring.v3.Snooze) => {
+          responses.push(response);
+        });
         stream.on('end', () => {
           resolve(responses);
         });
@@ -1050,313 +866,45 @@ describe('v3.UptimeCheckServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (
-          client.descriptors.page.listUptimeCheckConfigs
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listSnoozes.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listUptimeCheckConfigs, request)
+          .calledWith(client.innerApiCalls.listSnoozes, request)
       );
       assert(
-        (
-          client.descriptors.page.listUptimeCheckConfigs
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listSnoozes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
-    it('invokes listUptimeCheckConfigsStream with error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('invokes listSnoozesStream with error', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
+        new protos.google.monitoring.v3.ListSnoozesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
+        '.google.monitoring.v3.ListSnoozesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listUptimeCheckConfigs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listUptimeCheckConfigsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.monitoring.v3.UptimeCheckConfig[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.monitoring.v3.UptimeCheckConfig) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listUptimeCheckConfigs
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listUptimeCheckConfigs, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listUptimeCheckConfigs
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listUptimeCheckConfigs without error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.monitoring.v3.UptimeCheckConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.monitoring.v3.UptimeCheckConfig()
-        ),
-        generateSampleMessage(
-          new protos.google.monitoring.v3.UptimeCheckConfig()
-        ),
-      ];
-      client.descriptors.page.listUptimeCheckConfigs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.monitoring.v3.IUptimeCheckConfig[] = [];
-      const iterable = client.listUptimeCheckConfigsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listUptimeCheckConfigs
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listUptimeCheckConfigs
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listUptimeCheckConfigs with error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listUptimeCheckConfigs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listUptimeCheckConfigsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.monitoring.v3.IUptimeCheckConfig[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listUptimeCheckConfigs
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listUptimeCheckConfigs
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('listUptimeCheckIps', () => {
-    it('invokes listUptimeCheckIps without error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
-        generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
-        generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
-      ];
-      client.innerApiCalls.listUptimeCheckIps =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listUptimeCheckIps(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes listUptimeCheckIps without error using callback', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
-        generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
-        generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
-      ];
-      client.innerApiCalls.listUptimeCheckIps =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listUptimeCheckIps(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.monitoring.v3.IUptimeCheckIp[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes listUptimeCheckIps with error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listUptimeCheckIps = stubSimpleCall(
+      client.descriptors.page.listSnoozes.createStream = stubPageStreamingCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.listUptimeCheckIps(request), expectedError);
-    });
-
-    it('invokes listUptimeCheckIpsStream without error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
-        generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
-        generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
-      ];
-      client.descriptors.page.listUptimeCheckIps.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listUptimeCheckIpsStream(request);
+      const stream = client.listSnoozesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.monitoring.v3.UptimeCheckIp[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.monitoring.v3.UptimeCheckIp) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        const responses: protos.google.monitoring.v3.Snooze[] = [];
+        stream.on('data', (response: protos.google.monitoring.v3.Snooze) => {
+          responses.push(response);
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listUptimeCheckIps.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listUptimeCheckIps, request)
-      );
-    });
-
-    it('invokes listUptimeCheckIpsStream with error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.listUptimeCheckIps.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listUptimeCheckIpsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.monitoring.v3.UptimeCheckIp[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.monitoring.v3.UptimeCheckIp) => {
-            responses.push(response);
-          }
-        );
         stream.on('end', () => {
           resolve(responses);
         });
@@ -1366,66 +914,101 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listUptimeCheckIps.createStream as SinonStub)
+        (client.descriptors.page.listSnoozes.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listUptimeCheckIps, request)
+          .calledWith(client.innerApiCalls.listSnoozes, request)
+      );
+      assert(
+        (client.descriptors.page.listSnoozes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
-    it('uses async iteration with listUptimeCheckIps without error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('uses async iteration with listSnoozes without error', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
+        new protos.google.monitoring.v3.ListSnoozesRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListSnoozesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
-        generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
-        generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
+        generateSampleMessage(new protos.google.monitoring.v3.Snooze()),
+        generateSampleMessage(new protos.google.monitoring.v3.Snooze()),
+        generateSampleMessage(new protos.google.monitoring.v3.Snooze()),
       ];
-      client.descriptors.page.listUptimeCheckIps.asyncIterate =
+      client.descriptors.page.listSnoozes.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.monitoring.v3.IUptimeCheckIp[] = [];
-      const iterable = client.listUptimeCheckIpsAsync(request);
+      const responses: protos.google.monitoring.v3.ISnooze[] = [];
+      const iterable = client.listSnoozesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listUptimeCheckIps.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listSnoozes.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
         request
+      );
+      assert(
+        (client.descriptors.page.listSnoozes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
-    it('uses async iteration with listUptimeCheckIps with error', async () => {
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+    it('uses async iteration with listSnoozes with error', async () => {
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
+        new protos.google.monitoring.v3.ListSnoozesRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListSnoozesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listUptimeCheckIps.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listUptimeCheckIpsAsync(request);
+      client.descriptors.page.listSnoozes.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listSnoozesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.monitoring.v3.IUptimeCheckIp[] = [];
+        const responses: protos.google.monitoring.v3.ISnooze[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listUptimeCheckIps.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listSnoozes.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
         request
+      );
+      assert(
+        (client.descriptors.page.listSnoozes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -1437,7 +1020,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         folder: 'folderValue',
         alert_policy: 'alertPolicyValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1500,7 +1083,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         alert_policy: 'alertPolicyValue',
         condition: 'conditionValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1578,7 +1161,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         folder: 'folderValue',
         channel_descriptor: 'channelDescriptorValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1643,7 +1226,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         folder: 'folderValue',
         group: 'groupValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1692,7 +1275,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         folder: 'folderValue',
         notification_channel: 'notificationChannelValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1757,7 +1340,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         folder: 'folderValue',
         service: 'serviceValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1807,7 +1390,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         service: 'serviceValue',
         service_level_objective: 'serviceLevelObjectiveValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1889,7 +1472,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         folder: 'folderValue',
         uptime_check_config: 'uptimeCheckConfigValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1954,7 +1537,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         organization: 'organizationValue',
         alert_policy: 'alertPolicyValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2018,7 +1601,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         alert_policy: 'alertPolicyValue',
         condition: 'conditionValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2100,7 +1683,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         organization: 'organizationValue',
         channel_descriptor: 'channelDescriptorValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2165,7 +1748,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         organization: 'organizationValue',
         group: 'groupValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2227,7 +1810,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         organization: 'organizationValue',
         notification_channel: 'notificationChannelValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2292,7 +1875,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         organization: 'organizationValue',
         service: 'serviceValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2356,7 +1939,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         service: 'serviceValue',
         service_level_objective: 'serviceLevelObjectiveValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2442,7 +2025,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         organization: 'organizationValue',
         uptime_check_config: 'uptimeCheckConfigValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2506,7 +2089,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2545,7 +2128,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         project: 'projectValue',
         alert_policy: 'alertPolicyValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2608,7 +2191,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         alert_policy: 'alertPolicyValue',
         condition: 'conditionValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2685,7 +2268,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         project: 'projectValue',
         channel_descriptor: 'channelDescriptorValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2750,7 +2333,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         project: 'projectValue',
         group: 'groupValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2799,7 +2382,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         project: 'projectValue',
         notification_channel: 'notificationChannelValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2864,7 +2447,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         project: 'projectValue',
         service: 'serviceValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2917,7 +2500,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         service: 'serviceValue',
         service_level_objective: 'serviceLevelObjectiveValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2999,7 +2582,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         project: 'projectValue',
         uptime_check_config: 'uptimeCheckConfigValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3064,7 +2647,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         project: 'projectValue',
         snooze: 'snoozeValue',
       };
-      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+      const client = new snoozeserviceModule.v3.SnoozeServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
