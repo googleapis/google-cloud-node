@@ -3311,6 +3311,11 @@
                       }
                     },
                     "HarmCategory": {
+                      "valuesOptions": {
+                        "HARM_CATEGORY_CIVIC_INTEGRITY": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "HARM_CATEGORY_UNSPECIFIED": 0,
                         "HARM_CATEGORY_HATE_SPEECH": 1,
