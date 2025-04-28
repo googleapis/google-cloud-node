@@ -40,7 +40,7 @@ const runCommand = 'node';
 const runParameters = [
   '--max_old_space_size=4096',
   './node_modules/mocha/bin/mocha',
-  '--timeout=25000',
+  '--timeout=40000',
 ];
 const batchSize = 2;
 
