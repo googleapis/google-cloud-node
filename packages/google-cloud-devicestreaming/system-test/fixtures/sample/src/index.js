@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const DirectAccessServiceClient = v1.DirectAccessServiceClient;
-type DirectAccessServiceClient = v1.DirectAccessServiceClient;
-export {v1, DirectAccessServiceClient};
-export default {v1, DirectAccessServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const devicestreaming = require('@google-cloud/devicestreaming');
+
+function main() {
+  const directAccessServiceClient =
+    new devicestreaming.DirectAccessServiceClient();
+}
+
+main();
