@@ -76,7 +76,7 @@ function listenForErrors(subscriptionNameOrId, timeout) {
 
 function main(
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  timeout = 10
+  timeout = 10,
 ) {
   timeout = Number(timeout);
   listenForErrors(subscriptionNameOrId, timeout);

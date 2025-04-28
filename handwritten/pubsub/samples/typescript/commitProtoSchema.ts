@@ -65,7 +65,7 @@ async function commitProtoSchema(schemaNameOrId: string, protoFile: string) {
 
 function main(
   schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
-  protoFile = 'path/to/a/proto/schema/file/(.proto)/formatted/in/protcol/buffers'
+  protoFile = 'path/to/a/proto/schema/file/(.proto)/formatted/in/protcol/buffers',
 ) {
   commitProtoSchema(schemaNameOrId, protoFile).catch(err => {
     console.error(err.message);

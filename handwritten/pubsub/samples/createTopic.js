@@ -48,7 +48,7 @@ async function createTopic(topicNameOrId) {
 }
 // [END pubsub_create_topic]
 
-async function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
+function main(topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID') {
   createTopic(topicNameOrId).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

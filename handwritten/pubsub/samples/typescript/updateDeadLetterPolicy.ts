@@ -40,7 +40,7 @@ const pubSubClient = new PubSub();
 
 async function updateDeadLetterPolicy(
   topicNameOrId: string,
-  subscriptionNameOrId: string
+  subscriptionNameOrId: string,
 ) {
   const metadata: SubscriptionMetadata = {
     deadLetterPolicy: {
@@ -60,7 +60,7 @@ async function updateDeadLetterPolicy(
 
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
 ) {
   updateDeadLetterPolicy(topicNameOrId, subscriptionNameOrId).catch(err => {
     console.error(err.message);

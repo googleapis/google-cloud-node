@@ -56,7 +56,7 @@ async function rollbackSchema(schemaNameOrId: string, revisionId: string) {
 
 function main(
   schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
-  revisionId = 'YOUR_REVISION_ID'
+  revisionId = 'YOUR_REVISION_ID',
 ) {
   rollbackSchema(schemaNameOrId, revisionId).catch(err => {
     console.error(err.message);

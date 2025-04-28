@@ -44,7 +44,7 @@ const pubSubClient = new PubSub();
 async function subscribeWithFlowControlSettings(
   subscriptionNameOrId: string,
   maxInProgress: number,
-  timeout: number
+  timeout: number,
 ) {
   const subscriberOptions: SubscriberOptions = {
     flowControl: {
@@ -56,11 +56,11 @@ async function subscribeWithFlowControlSettings(
   // Note that flow control settings are not persistent across subscribers.
   const subscription = pubSubClient.subscription(
     subscriptionNameOrId,
-    subscriberOptions
+    subscriberOptions,
   );
 
   console.log(
-    `Subscriber to subscription ${subscription.name} is ready to receive messages at a controlled volume of ${maxInProgress} messages.`
+    `Subscriber to subscription ${subscription.name} is ready to receive messages at a controlled volume of ${maxInProgress} messages.`,
   );
 
   const messageHandler = (message: Message) => {
@@ -75,8 +75,8 @@ async function subscribeWithFlowControlSettings(
   subscription.on('message', messageHandler);
 
   // Wait a while for the subscription to run. (Part of the sample only.)
-  setTimeout(() => {
-    subscription.close();
+  setTimeout(async () => {
+    await subscription.close();
   }, timeout * 1000);
 }
 // [END pubsub_subscriber_flow_settings]
@@ -84,7 +84,7 @@ async function subscribeWithFlowControlSettings(
 function main(
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
   maxInProgress = 1,
-  timeout = 10
+  timeout = 10,
 ) {
   maxInProgress = Number(maxInProgress);
   timeout = Number(timeout);
@@ -92,7 +92,7 @@ function main(
   subscribeWithFlowControlSettings(
     subscriptionNameOrId,
     maxInProgress,
-    timeout
+    timeout,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

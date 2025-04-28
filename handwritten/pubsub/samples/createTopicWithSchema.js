@@ -46,7 +46,7 @@ const pubSubClient = new PubSub();
 async function createTopicWithSchema(
   topicNameOrId,
   schemaNameOrId,
-  encodingType
+  encodingType,
 ) {
   // Get the fully qualified schema name.
   const schema = pubSubClient.schema(schemaNameOrId);
@@ -68,13 +68,13 @@ async function createTopicWithSchema(
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
-  encodingType = 'BINARY'
+  encodingType = 'BINARY',
 ) {
   createTopicWithSchema(topicNameOrId, schemaNameOrId, encodingType).catch(
     err => {
       console.error(err.message);
       process.exitCode = 1;
-    }
+    },
   );
 }
 

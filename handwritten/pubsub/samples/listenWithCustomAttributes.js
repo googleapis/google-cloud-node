@@ -51,7 +51,7 @@ async function listenWithCustomAttributes(subscriptionNameOrId, timeout) {
     console.log(
       `Received message: id ${message.id}, data ${
         message.data
-      }, attributes: ${JSON.stringify(message.attributes)}`
+      }, attributes: ${JSON.stringify(message.attributes)}`,
     );
 
     // "Ack" (acknowledge receipt of) the message
@@ -66,9 +66,9 @@ async function listenWithCustomAttributes(subscriptionNameOrId, timeout) {
 }
 // [END pubsub_subscriber_async_pull_custom_attributes]
 
-async function main(
+function main(
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  timeout = 60
+  timeout = 60,
 ) {
   timeout = Number(timeout);
   listenWithCustomAttributes(subscriptionNameOrId, timeout).catch(err => {

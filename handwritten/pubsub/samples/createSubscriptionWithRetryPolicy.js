@@ -43,7 +43,7 @@ const pubSubClient = new PubSub();
 
 async function createSubscriptionWithRetryPolicy(
   topicNameOrId,
-  subscriptionNameOrId
+  subscriptionNameOrId,
 ) {
   // Creates a new subscription
   await pubSubClient
@@ -59,19 +59,19 @@ async function createSubscriptionWithRetryPolicy(
       },
     });
   console.log(
-    `Created subscription ${subscriptionNameOrId} with retry policy.`
+    `Created subscription ${subscriptionNameOrId} with retry policy.`,
   );
 }
 
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
 ) {
   createSubscriptionWithRetryPolicy(topicNameOrId, subscriptionNameOrId).catch(
     err => {
       console.error(err.message);
       process.exitCode = 1;
-    }
+    },
   );
 }
 

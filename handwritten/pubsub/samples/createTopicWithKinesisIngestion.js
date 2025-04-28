@@ -50,7 +50,7 @@ async function createTopicWithKinesisIngestion(
   awsRoleArn,
   gcpServiceAccount,
   streamArn,
-  consumerArn
+  consumerArn,
 ) {
   // Creates a new topic with Kinesis ingestion.
   await pubSubClient.createTopic({
@@ -73,14 +73,14 @@ function main(
   roleArn = 'arn:aws:iam:...',
   gcpServiceAccount = 'ingestion-account@...',
   streamArn = 'arn:aws:kinesis:...',
-  consumerArn = 'arn:aws:kinesis:...'
+  consumerArn = 'arn:aws:kinesis:...',
 ) {
   createTopicWithKinesisIngestion(
     topicNameOrId,
     roleArn,
     gcpServiceAccount,
     streamArn,
-    consumerArn
+    consumerArn,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

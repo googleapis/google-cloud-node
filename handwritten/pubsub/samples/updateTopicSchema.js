@@ -46,7 +46,7 @@ const pubSubClient = new PubSub();
 async function updateTopicSchema(
   topicNameOrId,
   firstRevisionId,
-  lastRevisionId
+  lastRevisionId,
 ) {
   const metadata = {
     schemaSettings: {
@@ -64,13 +64,13 @@ async function updateTopicSchema(
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   firstRevisionId = 'YOUR_REVISION_ID',
-  lastRevisionId = 'YOUR_REVISION_ID'
+  lastRevisionId = 'YOUR_REVISION_ID',
 ) {
   updateTopicSchema(topicNameOrId, firstRevisionId, lastRevisionId).catch(
     err => {
       console.error(err.message);
       process.exitCode = 1;
-    }
+    },
   );
 }
 

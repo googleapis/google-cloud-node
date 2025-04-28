@@ -49,7 +49,7 @@ interface ProvinceObject {
 
 async function listenForAvroRecordsWithRevisions(
   subscriptionNameOrId: string,
-  timeout: number
+  timeout: number,
 ) {
   // References an existing subscription
   const subscription = pubSubClient.subscription(subscriptionNameOrId);
@@ -105,7 +105,7 @@ async function listenForAvroRecordsWithRevisions(
     console.log(`\tData: ${JSON.stringify(result, null, 4)}`);
     console.log(`\tAttributes: ${message.attributes}`);
     console.log(
-      `\tProvince ${result?.name} is abbreviated as ${result?.post_abbr}`
+      `\tProvince ${result?.name} is abbreviated as ${result?.post_abbr}`,
     );
     messageCount += 1;
 
@@ -125,7 +125,7 @@ async function listenForAvroRecordsWithRevisions(
 
 function main(
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  timeout = 60
+  timeout = 60,
 ) {
   timeout = Number(timeout);
 
@@ -133,7 +133,7 @@ function main(
     err => {
       console.error(err.message);
       process.exitCode = 1;
-    }
+    },
   );
 }
 

@@ -48,7 +48,7 @@ async function createCloudStorageSubscription(
   bucket: string,
   filenamePrefix: string,
   filenameSuffix: string,
-  maxDuration: number
+  maxDuration: number,
 ) {
   const options: CreateSubscriptionOptions = {
     cloudStorageConfig: {
@@ -66,7 +66,7 @@ async function createCloudStorageSubscription(
     .createSubscription(subscriptionName, options);
 
   console.log(
-    `Created subscription ${subscriptionName} with a cloud storage configuration.`
+    `Created subscription ${subscriptionName} with a cloud storage configuration.`,
   );
 }
 // [END pubsub_create_cloud_storage_subscription]
@@ -77,7 +77,7 @@ function main(
   bucket = 'YOUR_BUCKET_NAME',
   filenamePrefix = 'YOUR_FILENAME_PREFIX',
   filenameSuffix = 'YOUR_FILENAME_SUFFIX',
-  maxDuration = 60
+  maxDuration = 60,
 ) {
   createCloudStorageSubscription(
     topicName,
@@ -85,7 +85,7 @@ function main(
     bucket,
     filenamePrefix,
     filenameSuffix,
-    maxDuration
+    maxDuration,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

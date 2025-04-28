@@ -40,7 +40,7 @@ const pubSubClient = new PubSub();
 
 async function deleteSchemaRevision(
   schemaNameOrId: string,
-  revisionId: string
+  revisionId: string,
 ) {
   // Get the fully qualified schema name.
   const schema = pubSubClient.schema(schemaNameOrId);
@@ -58,7 +58,7 @@ async function deleteSchemaRevision(
 
 function main(
   schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
-  revisionId = 'YOUR_REVISION_ID'
+  revisionId = 'YOUR_REVISION_ID',
 ) {
   deleteSchemaRevision(schemaNameOrId, revisionId).catch(err => {
     console.error(err.message);

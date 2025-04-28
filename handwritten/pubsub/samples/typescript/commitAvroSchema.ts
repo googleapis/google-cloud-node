@@ -65,7 +65,7 @@ async function commitAvroSchema(schemaNameOrId: string, avscFile: string) {
 
 function main(
   schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
-  avscFile = 'path/to/an/avro/schema/file/(.avsc)/formatted/in/json'
+  avscFile = 'path/to/an/avro/schema/file/(.avsc)/formatted/in/json',
 ) {
   commitAvroSchema(schemaNameOrId, avscFile).catch(err => {
     console.error(err.message);

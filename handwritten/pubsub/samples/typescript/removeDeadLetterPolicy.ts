@@ -40,7 +40,7 @@ const pubSubClient = new PubSub();
 
 async function removeDeadLetterPolicy(
   topicNameOrId: string,
-  subscriptionNameOrId: string
+  subscriptionNameOrId: string,
 ) {
   const metadata: SubscriptionMetadata = {
     deadLetterPolicy: null,
@@ -52,14 +52,14 @@ async function removeDeadLetterPolicy(
     .setMetadata(metadata);
 
   console.log(
-    `Removed dead letter topic from ${subscriptionNameOrId} subscription.`
+    `Removed dead letter topic from ${subscriptionNameOrId} subscription.`,
   );
 }
 // [END pubsub_dead_letter_remove]
 
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
 ) {
   removeDeadLetterPolicy(topicNameOrId, subscriptionNameOrId).catch(err => {
     console.error(err.message);

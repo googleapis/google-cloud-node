@@ -42,7 +42,7 @@ async function detachSubscription(subscriptionNameOrId: string) {
   const sub = pubSubClient.subscription(subscriptionNameOrId);
   const [detached] = await sub.detached();
   console.log(
-    `Subscription ${subscriptionNameOrId} 'before' detached status: ${detached}`
+    `Subscription ${subscriptionNameOrId} 'before' detached status: ${detached}`,
   );
 
   await pubSubClient.detachSubscription(subscriptionNameOrId);
@@ -50,7 +50,7 @@ async function detachSubscription(subscriptionNameOrId: string) {
 
   const [updatedDetached] = await sub.detached();
   console.log(
-    `Subscription ${subscriptionNameOrId} 'after' detached status: ${updatedDetached}`
+    `Subscription ${subscriptionNameOrId} 'after' detached status: ${updatedDetached}`,
   );
 }
 // [END pubsub_detach_subscription]

@@ -46,7 +46,7 @@ const pubSubClient = new PubSub();
 async function createSubscriptionWithFilter(
   topicNameOrId,
   subscriptionNameOrId,
-  filterString
+  filterString,
 ) {
   // Creates a new subscription
   await pubSubClient
@@ -55,7 +55,7 @@ async function createSubscriptionWithFilter(
       filter: filterString,
     });
   console.log(
-    `Created subscription ${subscriptionNameOrId} with filter ${filterString}.`
+    `Created subscription ${subscriptionNameOrId} with filter ${filterString}.`,
   );
 }
 // [END pubsub_create_subscription_with_filter]
@@ -63,12 +63,12 @@ async function createSubscriptionWithFilter(
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  filterString = 'YOUR_FILTER_STRING'
+  filterString = 'YOUR_FILTER_STRING',
 ) {
   createSubscriptionWithFilter(
     topicNameOrId,
     subscriptionNameOrId,
-    filterString
+    filterString,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

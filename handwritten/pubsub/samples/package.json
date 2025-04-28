@@ -9,7 +9,7 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-pubsub",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=18"
   },
   "scripts": {
     "test": "mocha build/system-test --timeout 600000",
@@ -18,7 +18,10 @@
     "sampletsc": "cd typescript && tsc -p . && cd ..",
     "compile": "npm run tsc && npm run sampletsc",
     "clean": "gts clean && rm -rf build/",
-    "precompile": "npm run clean"
+    "precompile": "npm run clean",
+    "pretypeless": "npx eslint --fix typescript/*.ts",
+    "typeless": "npx typeless-sample-bot --outputpath . --targets typescript --recursive",
+    "posttypeless": "npx eslint --fix *.js"
   },
   "dependencies": {
     "@google-cloud/opentelemetry-cloud-trace-exporter": "^2.0.0",
@@ -35,6 +38,7 @@
   },
   "devDependencies": {
     "@google-cloud/bigquery": "^7.0.0",
+    "@google-cloud/typeless-sample-bot": "^3.0.0",
     "@types/chai": "^4.2.16",
     "chai": "^4.2.0",
     "gts": "^5.0.0",

@@ -51,7 +51,7 @@ async function publishMessage(topicNameOrId: string, data: string) {
     console.log(`Message ${messageId} published.`);
   } catch (error) {
     console.error(
-      `Received error while publishing: ${(error as Error).message}`
+      `Received error while publishing: ${(error as Error).message}`,
     );
     process.exitCode = 1;
   }
@@ -61,7 +61,7 @@ async function publishMessage(topicNameOrId: string, data: string) {
 
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  data = JSON.stringify({foo: 'bar'})
+  data = JSON.stringify({foo: 'bar'}),
 ) {
   publishMessage(topicNameOrId, data).catch(err => {
     console.error(err.message);

@@ -43,7 +43,7 @@ const pubSubClient = new PubSub();
 async function resumePublish(
   topicNameOrId: string,
   data: string,
-  orderingKey: string
+  orderingKey: string,
 ) {
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
@@ -80,7 +80,7 @@ async function resumePublish(
 async function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   data = JSON.stringify({foo: 'bar'}),
-  orderingKey = 'key1'
+  orderingKey = 'key1',
 ) {
   return await resumePublish(topicNameOrId, data, orderingKey).catch(err => {
     console.error(err.message);

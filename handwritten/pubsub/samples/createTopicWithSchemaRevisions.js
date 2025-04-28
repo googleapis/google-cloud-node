@@ -50,7 +50,7 @@ async function createTopicWithSchemaRevisions(
   schemaNameOrId,
   encodingType,
   firstRevisionId,
-  lastRevisionId
+  lastRevisionId,
 ) {
   // Get the fully qualified schema name.
   const schema = pubSubClient.schema(schemaNameOrId);
@@ -76,14 +76,14 @@ function main(
   schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
   encodingType = 'BINARY',
   firstRevisionId = 'YOUR_REVISION_ID',
-  lastRevisionId = 'YOUR_REVISION_ID'
+  lastRevisionId = 'YOUR_REVISION_ID',
 ) {
   createTopicWithSchemaRevisions(
     topicNameOrId,
     schemaNameOrId,
     encodingType,
     firstRevisionId,
-    lastRevisionId
+    lastRevisionId,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

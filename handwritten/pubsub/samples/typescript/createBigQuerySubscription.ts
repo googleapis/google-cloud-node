@@ -42,7 +42,7 @@ const pubSubClient = new PubSub();
 async function createBigQuerySubscription(
   topicNameOrId: string,
   subscriptionNameOrId: string,
-  bigqueryTableId: string
+  bigqueryTableId: string,
 ) {
   const options: CreateSubscriptionOptions = {
     bigqueryConfig: {
@@ -62,12 +62,12 @@ async function createBigQuerySubscription(
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  bigqueryTableId = 'YOUR_TABLE_ID'
+  bigqueryTableId = 'YOUR_TABLE_ID',
 ) {
   createBigQuerySubscription(
     topicNameOrId,
     subscriptionNameOrId,
-    bigqueryTableId
+    bigqueryTableId,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

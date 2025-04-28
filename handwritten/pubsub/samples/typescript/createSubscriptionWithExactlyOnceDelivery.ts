@@ -40,7 +40,7 @@ const pubSubClient = new PubSub();
 
 async function createSubscriptionWithExactlyOnceDelivery(
   topicNameOrId: string,
-  subscriptionNameOrId: string
+  subscriptionNameOrId: string,
 ) {
   // Creates a new subscription
   await pubSubClient
@@ -49,21 +49,21 @@ async function createSubscriptionWithExactlyOnceDelivery(
       enableExactlyOnceDelivery: true,
     });
   console.log(
-    `Created subscription ${subscriptionNameOrId} with exactly-once delivery.`
+    `Created subscription ${subscriptionNameOrId} with exactly-once delivery.`,
   );
   console.log(
-    'To process messages, remember to check the return value of ackWithResponse().'
+    'To process messages, remember to check the return value of ackWithResponse().',
   );
 }
 // [END pubsub_create_subscription_with_exactly_once_delivery]
 
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
 ) {
   createSubscriptionWithExactlyOnceDelivery(
     topicNameOrId,
-    subscriptionNameOrId
+    subscriptionNameOrId,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

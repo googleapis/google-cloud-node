@@ -46,7 +46,7 @@ const pubSubClient = new PubSub();
 async function createSubscriptionWithDeadLetterPolicy(
   topicNameOrId,
   subscriptionNameOrId,
-  deadLetterTopicNameOrId
+  deadLetterTopicNameOrId,
 ) {
   // Creates a new subscription
   const options = {
@@ -59,10 +59,10 @@ async function createSubscriptionWithDeadLetterPolicy(
     .topic(topicNameOrId)
     .createSubscription(subscriptionNameOrId, options);
   console.log(
-    `Created subscription ${subscriptionNameOrId} with dead letter topic ${deadLetterTopicNameOrId}.`
+    `Created subscription ${subscriptionNameOrId} with dead letter topic ${deadLetterTopicNameOrId}.`,
   );
   console.log(
-    'To process dead letter messages, remember to add a subscription to your dead letter topic.'
+    'To process dead letter messages, remember to add a subscription to your dead letter topic.',
   );
 }
 // [END pubsub_dead_letter_create_subscription]
@@ -70,12 +70,12 @@ async function createSubscriptionWithDeadLetterPolicy(
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  deadLetterTopicNameOrId = 'YOUR_DEAD_LETTER_TOPIC_NAME_OR_ID'
+  deadLetterTopicNameOrId = 'YOUR_DEAD_LETTER_TOPIC_NAME_OR_ID',
 ) {
   createSubscriptionWithDeadLetterPolicy(
     topicNameOrId,
     subscriptionNameOrId,
-    deadLetterTopicNameOrId
+    deadLetterTopicNameOrId,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

@@ -53,7 +53,7 @@ async function createSubscription(topicNameOrId, subscriptionNameOrId) {
 
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
 ) {
   createSubscription(topicNameOrId, subscriptionNameOrId).catch(err => {
     console.error(err.message);

@@ -67,7 +67,7 @@ function optimisticSubscribe(subscriptionNameOrId, topicNameOrId, timeout) {
       console.log('Subscription not found, creating it');
       await pubSubClient.createSubscription(
         topicNameOrId,
-        subscriptionNameOrId
+        subscriptionNameOrId,
       );
 
       // Refresh our subscriber object and re-attach the message handler.
@@ -92,7 +92,7 @@ function optimisticSubscribe(subscriptionNameOrId, topicNameOrId, timeout) {
 function main(
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  timeout = 60
+  timeout = 60,
 ) {
   timeout = Number(timeout);
   optimisticSubscribe(subscriptionNameOrId, topicNameOrId, timeout);

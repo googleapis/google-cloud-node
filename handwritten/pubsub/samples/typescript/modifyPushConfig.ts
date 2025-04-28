@@ -40,7 +40,7 @@ const pubSubClient = new PubSub();
 
 async function modifyPushConfig(
   topicNameOrId: string,
-  subscriptionNameOrId: string
+  subscriptionNameOrId: string,
 ) {
   const options: CreateSubscriptionOptions = {
     // Set to an HTTPS endpoint of your choice. If necessary, register
@@ -58,7 +58,7 @@ async function modifyPushConfig(
 
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
 ) {
   modifyPushConfig(topicNameOrId, subscriptionNameOrId).catch(err => {
     console.error(err.message);

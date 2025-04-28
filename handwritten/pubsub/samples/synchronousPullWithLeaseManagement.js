@@ -29,7 +29,7 @@
 
 function main(
   projectId = 'YOUR_PROJECT_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
 ) {
   // [START pubsub_subscriber_sync_pull_with_lease]
   /**
@@ -113,7 +113,7 @@ function main(
         await subClient.modifyAckDeadline(modifyAckRequest);
 
         console.log(
-          `Reset ack deadline for "${message.message.data}" for ${newAckDeadlineSeconds}s.`
+          `Reset ack deadline for "${message.message.data}" for ${newAckDeadlineSeconds}s.`,
         );
       }
     }

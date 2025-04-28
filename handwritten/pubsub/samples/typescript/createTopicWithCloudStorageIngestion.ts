@@ -48,7 +48,7 @@ async function createTopicWithCloudStorageIngestion(
   inputFormat: string,
   textDelimiter: string,
   matchGlob: string,
-  minimumObjectCreateTime: string
+  minimumObjectCreateTime: string,
 ) {
   const minimumDate = Date.parse(minimumObjectCreateTime);
   const topicMetadata: TopicMetadata = {
@@ -96,7 +96,7 @@ function main(
   inputFormat = 'text',
   textDelimiter = '\n',
   matchGlob = '**.txt',
-  minimumObjectCreateTime = 'YYYY-MM-DDThh:mm:ssZ'
+  minimumObjectCreateTime = 'YYYY-MM-DDThh:mm:ssZ',
 ) {
   createTopicWithCloudStorageIngestion(
     topicNameOrId,
@@ -104,7 +104,7 @@ function main(
     inputFormat,
     textDelimiter,
     matchGlob,
-    minimumObjectCreateTime
+    minimumObjectCreateTime,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

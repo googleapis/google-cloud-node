@@ -46,7 +46,7 @@ const pubSubClient = new PubSub();
 async function createPushSubscription(
   pushEndpoint,
   topicNameOrId,
-  subscriptionNameOrId
+  subscriptionNameOrId,
 ) {
   const options = {
     pushConfig: {
@@ -66,12 +66,12 @@ async function createPushSubscription(
 function main(
   pushEndpoint = 'YOUR_ENDPOINT_URL',
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
 ) {
   createPushSubscription(
     pushEndpoint,
     topicNameOrId,
-    subscriptionNameOrId
+    subscriptionNameOrId,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

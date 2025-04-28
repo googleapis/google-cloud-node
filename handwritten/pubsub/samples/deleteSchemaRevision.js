@@ -59,7 +59,7 @@ async function deleteSchemaRevision(schemaNameOrId, revisionId) {
 
 function main(
   schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
-  revisionId = 'YOUR_REVISION_ID'
+  revisionId = 'YOUR_REVISION_ID',
 ) {
   deleteSchemaRevision(schemaNameOrId, revisionId).catch(err => {
     console.error(err.message);

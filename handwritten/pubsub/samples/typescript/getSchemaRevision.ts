@@ -49,14 +49,14 @@ async function getSchemaRevision(schemaNameOrId: string, revisionId: string) {
   });
 
   console.log(
-    `Schema ${name}@${revisionId} info: ${JSON.stringify(schemaInfo, null, 4)}.`
+    `Schema ${name}@${revisionId} info: ${JSON.stringify(schemaInfo, null, 4)}.`,
   );
 }
 // [END pubsub_get_schema_revision]
 
 function main(
   schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
-  revisionId = 'YOUR_REVISION_ID'
+  revisionId = 'YOUR_REVISION_ID',
 ) {
   getSchemaRevision(schemaNameOrId, revisionId).catch(err => {
     console.error(err.message);

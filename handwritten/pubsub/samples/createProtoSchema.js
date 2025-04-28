@@ -49,7 +49,7 @@ async function createProtoSchema(schemaNameOrId, protoFile) {
   const schema = await pubSubClient.createSchema(
     schemaNameOrId,
     SchemaTypes.ProtocolBuffer,
-    definition
+    definition,
   );
 
   const fullName = await schema.getName();
@@ -59,7 +59,7 @@ async function createProtoSchema(schemaNameOrId, protoFile) {
 
 function main(
   schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
-  protoFile = 'path/to/a/proto/schema/file/(.proto)/formatted/in/protcol/buffers'
+  protoFile = 'path/to/a/proto/schema/file/(.proto)/formatted/in/protcol/buffers',
 ) {
   createProtoSchema(schemaNameOrId, protoFile).catch(err => {
     console.error(err.message);

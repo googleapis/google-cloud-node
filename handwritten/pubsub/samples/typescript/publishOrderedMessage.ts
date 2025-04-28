@@ -49,7 +49,7 @@ const pubSubClient = new PubSub({
 async function publishOrderedMessage(
   topicNameOrId: string,
   data: string,
-  orderingKey: string
+  orderingKey: string,
 ) {
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
@@ -80,12 +80,12 @@ async function publishOrderedMessage(
 }
 // [END pubsub_publish_with_ordering_keys]
 
-async function main(
+function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   data = JSON.stringify({foo: 'bar'}),
-  orderingKey = 'key1'
+  orderingKey = 'key1',
 ) {
-  await publishOrderedMessage(topicNameOrId, data, orderingKey).catch(err => {
+  publishOrderedMessage(topicNameOrId, data, orderingKey).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

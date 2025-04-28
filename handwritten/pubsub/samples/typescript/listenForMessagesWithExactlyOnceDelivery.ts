@@ -42,7 +42,7 @@ const pubSubClient = new PubSub({
 
 async function listenForMessagesWithExactlyOnceDelivery(
   subscriptionNameOrId: string,
-  timeout: number
+  timeout: number,
 ) {
   // References an existing subscription
   const subscription = pubSubClient.subscription(subscriptionNameOrId);
@@ -71,7 +71,7 @@ async function listenForMessagesWithExactlyOnceDelivery(
       // is only for permanent failures; transient errors are retried automatically.
       const ackError = e as AckError;
       console.log(
-        `Ack for message ${message.id} failed with error: ${ackError.errorCode}`
+        `Ack for message ${message.id} failed with error: ${ackError.errorCode}`,
       );
     }
   };
@@ -88,11 +88,11 @@ async function listenForMessagesWithExactlyOnceDelivery(
 
 function main(
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  timeout = 60
+  timeout = 60,
 ) {
   listenForMessagesWithExactlyOnceDelivery(
     subscriptionNameOrId,
-    Number(timeout)
+    Number(timeout),
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

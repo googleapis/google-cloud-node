@@ -70,7 +70,7 @@ function listenForMessages(subscriptionNameOrId: string, timeout: number) {
 
 function main(
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
-  timeout = 60
+  timeout = 60,
 ) {
   timeout = Number(timeout);
   listenForMessages(subscriptionNameOrId, timeout);

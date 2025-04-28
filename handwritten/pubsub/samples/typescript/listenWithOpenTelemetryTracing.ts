@@ -111,7 +111,7 @@ async function subscriptionListen(subscriptionNameOrId: string) {
       subscriber.removeAllListeners();
       await shutdown();
       r();
-    }, SUBSCRIBER_TIMEOUT * 1000)
+    }, SUBSCRIBER_TIMEOUT * 1000),
   );
 }
 // [END pubsub_subscribe_otel_tracing]

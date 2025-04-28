@@ -52,7 +52,7 @@ async function createTopicWithConfluentCloudIngestion(
   clusterId,
   confluentTopic,
   identityPoolId,
-  gcpServiceAccount
+  gcpServiceAccount,
 ) {
   // Creates a new topic with Confluent Cloud ingestion.
   await pubSubClient.createTopic({
@@ -77,7 +77,7 @@ function main(
   clusterId = 'YOUR_CLUSTER_ID',
   confluentTopic = 'YOUR_CONFLUENT_TOPIC',
   identityPoolId = 'pool-ID',
-  gcpServiceAccount = 'ingestion-account@...'
+  gcpServiceAccount = 'ingestion-account@...',
 ) {
   createTopicWithConfluentCloudIngestion(
     topicNameOrId,
@@ -85,7 +85,7 @@ function main(
     clusterId,
     confluentTopic,
     identityPoolId,
-    gcpServiceAccount
+    gcpServiceAccount,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

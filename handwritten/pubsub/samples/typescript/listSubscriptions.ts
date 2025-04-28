@@ -37,7 +37,7 @@ async function listSubscriptions() {
   const [subscriptions] = await pubSubClient.getSubscriptions();
   console.log('Subscriptions:');
   subscriptions.forEach((subscription: Subscription) =>
-    console.log(subscription.name)
+    console.log(subscription.name),
   );
 }
 // [END pubsub_list_subscriptions]

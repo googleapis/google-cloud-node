@@ -86,7 +86,7 @@ async function synchronousPull(projectId, subscriptionNameOrId) {
 
 function main(
   projectId = 'YOUR_PROJECT_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
 ) {
   synchronousPull(projectId, subscriptionNameOrId).catch(err => {
     console.error(err.message);

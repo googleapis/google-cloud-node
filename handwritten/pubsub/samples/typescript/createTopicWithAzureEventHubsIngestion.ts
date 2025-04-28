@@ -52,7 +52,7 @@ async function createTopicWithAzureEventHubsIngestion(
   clientId: string,
   tenantId: string,
   subscriptionId: string,
-  gcpServiceAccount: string
+  gcpServiceAccount: string,
 ) {
   // Creates a new topic with Azure Event Hubs ingestion.
   await pubSubClient.createTopic({
@@ -70,7 +70,7 @@ async function createTopicWithAzureEventHubsIngestion(
     },
   });
   console.log(
-    `Topic ${topicNameOrId} created with Azure Event Hubs ingestion.`
+    `Topic ${topicNameOrId} created with Azure Event Hubs ingestion.`,
   );
 }
 // [END pubsub_create_topic_with_azure_event_hubs_ingestion]
@@ -83,7 +83,7 @@ function main(
   clientId = 'YOUR_CLIENT_ID',
   tenantId = 'YOUR_TENANT_ID',
   subscriptionId = 'YOUR_SUBSCRIPTION_ID',
-  gcpServiceAccount = 'ingestion-account@...'
+  gcpServiceAccount = 'ingestion-account@...',
 ) {
   createTopicWithAzureEventHubsIngestion(
     topicNameOrId,
@@ -93,7 +93,7 @@ function main(
     clientId,
     tenantId,
     subscriptionId,
-    gcpServiceAccount
+    gcpServiceAccount,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

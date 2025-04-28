@@ -44,7 +44,7 @@ const pubSubClient = new PubSub();
 
 async function createSubscriptionWithOrdering(
   topicNameOrId,
-  subscriptionNameOrId
+  subscriptionNameOrId,
 ) {
   // Creates a new subscription
   await pubSubClient
@@ -53,23 +53,23 @@ async function createSubscriptionWithOrdering(
       enableMessageOrdering: true,
     });
   console.log(
-    `Created subscription ${subscriptionNameOrId} with ordering enabled.`
+    `Created subscription ${subscriptionNameOrId} with ordering enabled.`,
   );
   console.log(
-    'To process messages in order, remember to add an ordering key to your messages.'
+    'To process messages in order, remember to add an ordering key to your messages.',
   );
 }
 // [END pubsub_enable_subscription_ordering]
 
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
 ) {
   createSubscriptionWithOrdering(topicNameOrId, subscriptionNameOrId).catch(
     err => {
       console.error(err.message);
       process.exitCode = 1;
-    }
+    },
   );
 }
 

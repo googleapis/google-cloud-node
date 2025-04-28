@@ -41,7 +41,7 @@ const subClient = new v1.SubscriberClient();
 
 async function synchronousPullWithDeliveryAttempts(
   projectId: string,
-  subscriptionNameOrId: string
+  subscriptionNameOrId: string,
 ) {
   // The low level API client requires a name only.
   const formattedSubscription =
@@ -83,13 +83,13 @@ async function synchronousPullWithDeliveryAttempts(
 
 function main(
   projectId = 'YOUR_PROJECT_ID',
-  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
+  subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
 ) {
   synchronousPullWithDeliveryAttempts(projectId, subscriptionNameOrId).catch(
     err => {
       console.error(err.message);
       process.exitCode = 1;
-    }
+    },
   );
 }
 

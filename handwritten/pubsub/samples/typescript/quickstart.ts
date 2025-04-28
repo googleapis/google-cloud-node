@@ -26,7 +26,7 @@ import {PubSub} from '@google-cloud/pubsub';
 async function quickstart(
   projectId = 'your-project-id', // Your Google Cloud Platform project ID
   topicNameOrId = 'my-topic', // Name for the new topic to create
-  subscriptionName = 'my-sub' // Name for the new subscription to create
+  subscriptionName = 'my-sub', // Name for the new subscription to create
 ) {
   // Instantiates a client
   const pubsub = new PubSub({projectId});
@@ -51,12 +51,11 @@ async function quickstart(
   });
 
   // Send a message to the topic
-  topic.publishMessage({data: Buffer.from('Test message!')});
+  await topic.publishMessage({data: Buffer.from('Test message!')});
 }
 // [END pubsub_quickstart_create_topic]
 
-process.on('unhandledRejection', err => {
-  console.error((err as Error).message);
+quickstart(...process.argv.slice(2)).catch(err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
-quickstart(...process.argv.slice(2));

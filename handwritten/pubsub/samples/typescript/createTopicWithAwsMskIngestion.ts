@@ -46,7 +46,7 @@ async function createTopicWithAwsMskIngestion(
   clusterArn: string,
   mskTopic: string,
   awsRoleArn: string,
-  gcpServiceAccount: string
+  gcpServiceAccount: string,
 ) {
   // Creates a new topic with AWS MSK ingestion.
   await pubSubClient.createTopic({
@@ -69,14 +69,14 @@ function main(
   clusterArn = 'arn:aws:kafka:...',
   mskTopic = 'YOUR_MSK_TOPIC',
   roleArn = 'arn:aws:iam:...',
-  gcpServiceAccount = 'ingestion-account@...'
+  gcpServiceAccount = 'ingestion-account@...',
 ) {
   createTopicWithAwsMskIngestion(
     topicNameOrId,
     clusterArn,
     mskTopic,
     roleArn,
-    gcpServiceAccount
+    gcpServiceAccount,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

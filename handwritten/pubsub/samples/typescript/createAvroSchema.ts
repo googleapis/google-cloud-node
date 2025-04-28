@@ -45,7 +45,7 @@ async function createAvroSchema(schemaNameOrId: string, avscFile: string) {
   const schema = await pubSubClient.createSchema(
     schemaNameOrId,
     SchemaTypes.Avro,
-    definition
+    definition,
   );
 
   const name = await schema.getName();
@@ -55,7 +55,7 @@ async function createAvroSchema(schemaNameOrId: string, avscFile: string) {
 
 function main(
   schemaNameOrId = 'YOUR_SCHEMA_NAME_OR_ID',
-  avscFile = 'path/to/an/avro/schema/file/(.avsc)/formatted/in/json'
+  avscFile = 'path/to/an/avro/schema/file/(.avsc)/formatted/in/json',
 ) {
   createAvroSchema(schemaNameOrId, avscFile).catch(err => {
     console.error(err.message);

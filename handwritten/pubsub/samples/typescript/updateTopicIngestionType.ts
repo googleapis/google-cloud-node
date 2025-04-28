@@ -46,7 +46,7 @@ async function updateTopicIngestionType(
   awsRoleArn: string,
   gcpServiceAccount: string,
   streamArn: string,
-  consumerArn: string
+  consumerArn: string,
 ) {
   const metadata: TopicMetadata = {
     ingestionDataSourceSettings: {
@@ -70,14 +70,14 @@ function main(
   roleArn = 'arn:aws:iam:...',
   gcpServiceAccount = 'ingestion-account@...',
   streamArn = 'arn:aws:kinesis:...',
-  consumerArn = 'arn:aws:kinesis:...'
+  consumerArn = 'arn:aws:kinesis:...',
 ) {
   updateTopicIngestionType(
     topicNameOrId,
     roleArn,
     gcpServiceAccount,
     streamArn,
-    consumerArn
+    consumerArn,
   ).catch(err => {
     console.error(err.message);
     process.exitCode = 1;

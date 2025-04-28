@@ -98,7 +98,7 @@ async function publishWithRetrySettings(topicNameOrId: string, data: string) {
 
 function main(
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
-  data = JSON.stringify({foo: 'bar'})
+  data = JSON.stringify({foo: 'bar'}),
 ) {
   publishWithRetrySettings(topicNameOrId, data).catch(err => {
     console.error(err.message);

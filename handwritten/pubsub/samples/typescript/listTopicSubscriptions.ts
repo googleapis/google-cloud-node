@@ -45,7 +45,7 @@ async function listTopicSubscriptions(topicNameOrId: string) {
 
   console.log(`Subscriptions for ${topicNameOrId}:`);
   subscriptions.forEach((subscription: Subscription) =>
-    console.log(subscription.name)
+    console.log(subscription.name),
   );
 }
 // [END pubsub_list_topic_subscriptions]
