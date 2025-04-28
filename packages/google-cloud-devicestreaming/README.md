@@ -82,7 +82,8 @@ npm install @google-cloud/devicestreaming
 // const filter = 'abc123'
 
 // Imports the Devicestreaming library
-const {DirectAccessServiceClient} = require('@google-cloud/devicestreaming').v1;
+const {DirectAccessServiceClient} =
+  require('@google-cloud/devicestreaming').v1;
 
 // Instantiates a client
 const devicestreamingClient = new DirectAccessServiceClient();
@@ -96,7 +97,7 @@ async function callListDeviceSessions() {
   // Run request
   const iterable = devicestreamingClient.listDeviceSessionsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
