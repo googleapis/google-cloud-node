@@ -39293,8 +39293,14 @@ export namespace google {
                         /** LayoutConfig enableImageAnnotation */
                         enableImageAnnotation?: (boolean|null);
 
+                        /** LayoutConfig enableImageExtraction */
+                        enableImageExtraction?: (boolean|null);
+
                         /** LayoutConfig enableLlmLayoutParsing */
                         enableLlmLayoutParsing?: (boolean|null);
+
+                        /** LayoutConfig enableTableAnnotation */
+                        enableTableAnnotation?: (boolean|null);
                     }
 
                     /** Represents a LayoutConfig. */
@@ -39318,8 +39324,14 @@ export namespace google {
                         /** LayoutConfig enableImageAnnotation. */
                         public enableImageAnnotation: boolean;
 
+                        /** LayoutConfig enableImageExtraction. */
+                        public enableImageExtraction: boolean;
+
                         /** LayoutConfig enableLlmLayoutParsing. */
                         public enableLlmLayoutParsing: boolean;
+
+                        /** LayoutConfig enableTableAnnotation. */
+                        public enableTableAnnotation: boolean;
 
                         /**
                          * Creates a new LayoutConfig instance using the specified properties.
