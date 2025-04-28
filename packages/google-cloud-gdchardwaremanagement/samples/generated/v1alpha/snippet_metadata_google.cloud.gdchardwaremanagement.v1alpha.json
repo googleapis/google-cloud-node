@@ -1653,8 +1653,8 @@
             "language": "JAVASCRIPT",
             "segments": [
                 {
-                    "start": 25,
-                    "end": 70,
+                    "start": 54,
+                    "end": 81,
                     "type": "FULL"
                 }
             ],
@@ -1678,6 +1678,14 @@
                     {
                         "name": "provisioning_state_signal",
                         "type": ".google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal"
+                    },
+                    {
+                        "name": "step",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "details",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
