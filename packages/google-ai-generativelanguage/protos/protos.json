@@ -84,6 +84,16 @@
                         }
                       }
                     },
+                    "Modality": {
+                      "values": {
+                        "MODALITY_UNSPECIFIED": 0,
+                        "TEXT": 1,
+                        "IMAGE": 2,
+                        "VIDEO": 3,
+                        "AUDIO": 4,
+                        "DOCUMENT": 5
+                      }
+                    },
                     "Content": {
                       "fields": {
                         "parts": {
@@ -132,6 +142,18 @@
                         }
                       }
                     },
+                    "ModalityTokenCount": {
+                      "fields": {
+                        "modality": {
+                          "type": "Modality",
+                          "id": 1
+                        },
+                        "tokenCount": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
                     "GenerativeService": {
                       "options": {
                         "(google.api.default_host)": "generativelanguage.googleapis.com"
@@ -143,7 +165,7 @@
                           "options": {
                             "(google.api.http).post": "/v1/{model=models/*}:generateContent",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1/{model=tunedModels/*}:generateContent",
+                            "(google.api.http).additional_bindings.post": "/v1/{model=dynamic/*}:generateContent",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "model,contents"
                           },
@@ -152,10 +174,16 @@
                               "(google.api.http)": {
                                 "post": "/v1/{model=models/*}:generateContent",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1/{model=tunedModels/*}:generateContent",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{model=tunedModels/*}:generateContent",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{model=dynamic/*}:generateContent",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -170,7 +198,7 @@
                           "options": {
                             "(google.api.http).post": "/v1/{model=models/*}:streamGenerateContent",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1/{model=tunedModels/*}:streamGenerateContent",
+                            "(google.api.http).additional_bindings.post": "/v1/{model=dynamic/*}:streamGenerateContent",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "model,contents"
                           },
@@ -179,10 +207,16 @@
                               "(google.api.http)": {
                                 "post": "/v1/{model=models/*}:streamGenerateContent",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1/{model=tunedModels/*}:streamGenerateContent",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{model=tunedModels/*}:streamGenerateContent",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{model=dynamic/*}:streamGenerateContent",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -261,7 +295,8 @@
                         "CLASSIFICATION": 4,
                         "CLUSTERING": 5,
                         "QUESTION_ANSWERING": 6,
-                        "FACT_VERIFICATION": 7
+                        "FACT_VERIFICATION": 7,
+                        "CODE_RETRIEVAL_QUERY": 8
                       }
                     },
                     "GenerateContentRequest": {
@@ -334,6 +369,11 @@
                             "topK"
                           ]
                         },
+                        "_seed": {
+                          "oneof": [
+                            "seed"
+                          ]
+                        },
                         "_presencePenalty": {
                           "oneof": [
                             "presencePenalty"
@@ -404,6 +444,14 @@
                         "topK": {
                           "type": "int32",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "seed": {
+                          "type": "int32",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -516,9 +564,55 @@
                               "type": "int32",
                               "id": 2
                             },
+                            "toolUsePromptTokenCount": {
+                              "type": "int32",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "thoughtsTokenCount": {
+                              "type": "int32",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
                             "totalTokenCount": {
                               "type": "int32",
                               "id": 3
+                            },
+                            "promptTokensDetails": {
+                              "rule": "repeated",
+                              "type": "ModalityTokenCount",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "cacheTokensDetails": {
+                              "rule": "repeated",
+                              "type": "ModalityTokenCount",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "candidatesTokensDetails": {
+                              "rule": "repeated",
+                              "type": "ModalityTokenCount",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "toolUsePromptTokensDetails": {
+                              "rule": "repeated",
+                              "type": "ModalityTokenCount",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
@@ -1008,6 +1102,22 @@
                         "totalTokens": {
                           "type": "int32",
                           "id": 1
+                        },
+                        "promptTokensDetails": {
+                          "rule": "repeated",
+                          "type": "ModalityTokenCount",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cacheTokensDetails": {
+                          "rule": "repeated",
+                          "type": "ModalityTokenCount",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },

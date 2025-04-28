@@ -250,6 +250,16 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Modality enum. */
+                enum Modality {
+                    MODALITY_UNSPECIFIED = 0,
+                    TEXT = 1,
+                    IMAGE = 2,
+                    VIDEO = 3,
+                    AUDIO = 4,
+                    DOCUMENT = 5
+                }
+
                 /** Properties of a Content. */
                 interface IContent {
 
@@ -562,6 +572,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ModalityTokenCount. */
+                interface IModalityTokenCount {
+
+                    /** ModalityTokenCount modality */
+                    modality?: (google.ai.generativelanguage.v1.Modality|keyof typeof google.ai.generativelanguage.v1.Modality|null);
+
+                    /** ModalityTokenCount tokenCount */
+                    tokenCount?: (number|null);
+                }
+
+                /** Represents a ModalityTokenCount. */
+                class ModalityTokenCount implements IModalityTokenCount {
+
+                    /**
+                     * Constructs a new ModalityTokenCount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1.IModalityTokenCount);
+
+                    /** ModalityTokenCount modality. */
+                    public modality: (google.ai.generativelanguage.v1.Modality|keyof typeof google.ai.generativelanguage.v1.Modality);
+
+                    /** ModalityTokenCount tokenCount. */
+                    public tokenCount: number;
+
+                    /**
+                     * Creates a new ModalityTokenCount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ModalityTokenCount instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1.IModalityTokenCount): google.ai.generativelanguage.v1.ModalityTokenCount;
+
+                    /**
+                     * Encodes the specified ModalityTokenCount message. Does not implicitly {@link google.ai.generativelanguage.v1.ModalityTokenCount.verify|verify} messages.
+                     * @param message ModalityTokenCount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1.IModalityTokenCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ModalityTokenCount message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.ModalityTokenCount.verify|verify} messages.
+                     * @param message ModalityTokenCount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1.IModalityTokenCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ModalityTokenCount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ModalityTokenCount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1.ModalityTokenCount;
+
+                    /**
+                     * Decodes a ModalityTokenCount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ModalityTokenCount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1.ModalityTokenCount;
+
+                    /**
+                     * Verifies a ModalityTokenCount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ModalityTokenCount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ModalityTokenCount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1.ModalityTokenCount;
+
+                    /**
+                     * Creates a plain object from a ModalityTokenCount message. Also converts values to other types if specified.
+                     * @param message ModalityTokenCount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1.ModalityTokenCount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ModalityTokenCount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ModalityTokenCount
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a GenerativeService */
                 class GenerativeService extends $protobuf.rpc.Service {
 
@@ -700,7 +813,8 @@ export namespace google {
                     CLASSIFICATION = 4,
                     CLUSTERING = 5,
                     QUESTION_ANSWERING = 6,
-                    FACT_VERIFICATION = 7
+                    FACT_VERIFICATION = 7,
+                    CODE_RETRIEVAL_QUERY = 8
                 }
 
                 /** Properties of a GenerateContentRequest. */
@@ -842,6 +956,9 @@ export namespace google {
                     /** GenerationConfig topK */
                     topK?: (number|null);
 
+                    /** GenerationConfig seed */
+                    seed?: (number|null);
+
                     /** GenerationConfig presencePenalty */
                     presencePenalty?: (number|null);
 
@@ -885,6 +1002,9 @@ export namespace google {
                     /** GenerationConfig topK. */
                     public topK?: (number|null);
 
+                    /** GenerationConfig seed. */
+                    public seed?: (number|null);
+
                     /** GenerationConfig presencePenalty. */
                     public presencePenalty?: (number|null);
 
@@ -914,6 +1034,9 @@ export namespace google {
 
                     /** GenerationConfig _topK. */
                     public _topK?: "topK";
+
+                    /** GenerationConfig _seed. */
+                    public _seed?: "seed";
 
                     /** GenerationConfig _presencePenalty. */
                     public _presencePenalty?: "presencePenalty";
@@ -1250,8 +1373,26 @@ export namespace google {
                         /** UsageMetadata candidatesTokenCount */
                         candidatesTokenCount?: (number|null);
 
+                        /** UsageMetadata toolUsePromptTokenCount */
+                        toolUsePromptTokenCount?: (number|null);
+
+                        /** UsageMetadata thoughtsTokenCount */
+                        thoughtsTokenCount?: (number|null);
+
                         /** UsageMetadata totalTokenCount */
                         totalTokenCount?: (number|null);
+
+                        /** UsageMetadata promptTokensDetails */
+                        promptTokensDetails?: (google.ai.generativelanguage.v1.IModalityTokenCount[]|null);
+
+                        /** UsageMetadata cacheTokensDetails */
+                        cacheTokensDetails?: (google.ai.generativelanguage.v1.IModalityTokenCount[]|null);
+
+                        /** UsageMetadata candidatesTokensDetails */
+                        candidatesTokensDetails?: (google.ai.generativelanguage.v1.IModalityTokenCount[]|null);
+
+                        /** UsageMetadata toolUsePromptTokensDetails */
+                        toolUsePromptTokensDetails?: (google.ai.generativelanguage.v1.IModalityTokenCount[]|null);
                     }
 
                     /** Represents a UsageMetadata. */
@@ -1269,8 +1410,26 @@ export namespace google {
                         /** UsageMetadata candidatesTokenCount. */
                         public candidatesTokenCount: number;
 
+                        /** UsageMetadata toolUsePromptTokenCount. */
+                        public toolUsePromptTokenCount: number;
+
+                        /** UsageMetadata thoughtsTokenCount. */
+                        public thoughtsTokenCount: number;
+
                         /** UsageMetadata totalTokenCount. */
                         public totalTokenCount: number;
+
+                        /** UsageMetadata promptTokensDetails. */
+                        public promptTokensDetails: google.ai.generativelanguage.v1.IModalityTokenCount[];
+
+                        /** UsageMetadata cacheTokensDetails. */
+                        public cacheTokensDetails: google.ai.generativelanguage.v1.IModalityTokenCount[];
+
+                        /** UsageMetadata candidatesTokensDetails. */
+                        public candidatesTokensDetails: google.ai.generativelanguage.v1.IModalityTokenCount[];
+
+                        /** UsageMetadata toolUsePromptTokensDetails. */
+                        public toolUsePromptTokensDetails: google.ai.generativelanguage.v1.IModalityTokenCount[];
 
                         /**
                          * Creates a new UsageMetadata instance using the specified properties.
@@ -3243,6 +3402,12 @@ export namespace google {
 
                     /** CountTokensResponse totalTokens */
                     totalTokens?: (number|null);
+
+                    /** CountTokensResponse promptTokensDetails */
+                    promptTokensDetails?: (google.ai.generativelanguage.v1.IModalityTokenCount[]|null);
+
+                    /** CountTokensResponse cacheTokensDetails */
+                    cacheTokensDetails?: (google.ai.generativelanguage.v1.IModalityTokenCount[]|null);
                 }
 
                 /** Represents a CountTokensResponse. */
@@ -3256,6 +3421,12 @@ export namespace google {
 
                     /** CountTokensResponse totalTokens. */
                     public totalTokens: number;
+
+                    /** CountTokensResponse promptTokensDetails. */
+                    public promptTokensDetails: google.ai.generativelanguage.v1.IModalityTokenCount[];
+
+                    /** CountTokensResponse cacheTokensDetails. */
+                    public cacheTokensDetails: google.ai.generativelanguage.v1.IModalityTokenCount[];
 
                     /**
                      * Creates a new CountTokensResponse instance using the specified properties.
