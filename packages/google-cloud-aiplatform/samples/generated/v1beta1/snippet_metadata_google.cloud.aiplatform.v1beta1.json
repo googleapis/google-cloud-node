@@ -966,7 +966,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 83,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],
@@ -1002,6 +1002,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "gemini_request_read_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.GeminiRequestReadConfig"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -1030,7 +1034,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 66,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -1050,6 +1054,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "gemini_request_read_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.GeminiRequestReadConfig"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

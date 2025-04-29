@@ -44,6 +44,10 @@ function main(name) {
    *  `projects/{project}/locations/{location}/datasets/{dataset}`
    */
   // const name = 'abc123'
+  /**
+   *  Optional. The read config for the dataset.
+   */
+  // const geminiRequestReadConfig = {}
 
   // Imports the Aiplatform library
   const {DatasetServiceClient} = require('@google-cloud/aiplatform').v1beta1;

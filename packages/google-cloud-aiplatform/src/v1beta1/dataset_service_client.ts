@@ -2025,6 +2025,8 @@ export class DatasetServiceClient {
  *   Required. The name of the Dataset resource. Used only for MULTIMODAL
  *   datasets. Format:
  *   `projects/{project}/locations/{location}/datasets/{dataset}`
+ * @param {google.cloud.aiplatform.v1beta1.GeminiRequestReadConfig} [request.geminiRequestReadConfig]
+ *   Optional. The Gemini request read config for the dataset.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -2141,6 +2143,8 @@ export class DatasetServiceClient {
  *   Required. The name of the Dataset resource (used only for MULTIMODAL
  *   datasets). Format:
  *   `projects/{project}/locations/{location}/datasets/{dataset}`
+ * @param {google.cloud.aiplatform.v1beta1.GeminiRequestReadConfig} [request.geminiRequestReadConfig]
+ *   Optional. The read config for the dataset.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
