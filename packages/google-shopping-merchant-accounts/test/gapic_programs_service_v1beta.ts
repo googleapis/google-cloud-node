@@ -257,9 +257,14 @@ describe('v1beta.ProgramsServiceClient', () => {
         throw err;
       });
       assert(client.programsServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -268,9 +273,14 @@ describe('v1beta.ProgramsServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.programsServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -433,7 +443,9 @@ describe('v1beta.ProgramsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getProgram(request), expectedError);
     });
   });
@@ -563,7 +575,9 @@ describe('v1beta.ProgramsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.enableProgram(request), expectedError);
     });
   });
@@ -693,7 +707,9 @@ describe('v1beta.ProgramsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.disableProgram(request), expectedError);
     });
   });
