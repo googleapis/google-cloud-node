@@ -212,7 +212,7 @@ describe('v1.DeliveryServiceClient', () => {
             assert(client.deliveryServiceStub);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
@@ -223,7 +223,7 @@ describe('v1.DeliveryServiceClient', () => {
             assert.strictEqual(client.deliveryServiceStub, undefined);
             client.close().then(() => {
                 done();
-            });
+            }).catch(err => {throw err});
         });
 
         it('has getProjectId method', async () => {
@@ -358,7 +358,7 @@ describe('v1.DeliveryServiceClient', () => {
             // path template: {provider_id=providers/*}
             request.parent = 'providers/value';
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.createDeliveryVehicle(request), expectedError);
         });
     });
@@ -462,7 +462,7 @@ describe('v1.DeliveryServiceClient', () => {
             // path template: {provider_id=providers/*}
             request.name = 'providers/value';
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getDeliveryVehicle(request), expectedError);
         });
     });
@@ -566,7 +566,7 @@ describe('v1.DeliveryServiceClient', () => {
             // path template: {provider_id=providers/*}
             request.name = 'providers/value';
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.deleteDeliveryVehicle(request), expectedError);
         });
     });
@@ -674,7 +674,7 @@ describe('v1.DeliveryServiceClient', () => {
             // path template: {provider_id=providers/*}
             request.deliveryVehicle.name = 'providers/value';
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.updateDeliveryVehicle(request), expectedError);
         });
     });
@@ -778,7 +778,7 @@ describe('v1.DeliveryServiceClient', () => {
             // path template: {provider_id=providers/*}
             request.parent = 'providers/value';
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.batchCreateTasks(request), expectedError);
         });
     });
@@ -882,7 +882,7 @@ describe('v1.DeliveryServiceClient', () => {
             // path template: {provider_id=providers/*}
             request.parent = 'providers/value';
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.createTask(request), expectedError);
         });
     });
@@ -986,7 +986,7 @@ describe('v1.DeliveryServiceClient', () => {
             // path template: {provider_id=providers/*}
             request.name = 'providers/value';
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getTask(request), expectedError);
         });
     });
@@ -1090,7 +1090,7 @@ describe('v1.DeliveryServiceClient', () => {
             // path template: {provider_id=providers/*}
             request.name = 'providers/value';
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.deleteTask(request), expectedError);
         });
     });
@@ -1198,7 +1198,7 @@ describe('v1.DeliveryServiceClient', () => {
             // path template: {provider_id=providers/*}
             request.task.name = 'providers/value';
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.updateTask(request), expectedError);
         });
     });
@@ -1302,7 +1302,7 @@ describe('v1.DeliveryServiceClient', () => {
             // path template: {provider_id=providers/*}
             request.name = 'providers/value';
             const expectedError = new Error('The client has already been closed.');
-            client.close();
+            client.close().catch(err => {throw err});
             await assert.rejects(client.getTaskTrackingInfo(request), expectedError);
         });
     });

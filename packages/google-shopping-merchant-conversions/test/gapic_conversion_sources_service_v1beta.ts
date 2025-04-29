@@ -275,9 +275,14 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
         throw err;
       });
       assert(client.conversionSourcesServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -289,9 +294,14 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
           }
         );
       assert.strictEqual(client.conversionSourcesServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -476,7 +486,9 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createConversionSource(request),
         expectedError
@@ -629,7 +641,9 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
       );
       request.conversionSource.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateConversionSource(request),
         expectedError
@@ -778,7 +792,9 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteConversionSource(request),
         expectedError
@@ -927,7 +943,9 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.undeleteConversionSource(request),
         expectedError
@@ -1073,7 +1091,9 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getConversionSource(request), expectedError);
     });
   });
