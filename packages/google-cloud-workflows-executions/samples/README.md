@@ -50,7 +50,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Executions.cancel_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1/executions.cancel_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/executions.cancel_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1/executions.cancel_execution.js,samples/README.md)
 
@@ -67,7 +67,7 @@ __Usage:__
 
 ### Executions.create_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1/executions.create_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/executions.create_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1/executions.create_execution.js,samples/README.md)
 
@@ -84,7 +84,7 @@ __Usage:__
 
 ### Executions.get_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1/executions.get_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/executions.get_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1/executions.get_execution.js,samples/README.md)
 
@@ -101,7 +101,7 @@ __Usage:__
 
 ### Executions.list_executions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1/executions.list_executions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/executions.list_executions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1/executions.list_executions.js,samples/README.md)
 
@@ -118,7 +118,7 @@ __Usage:__
 
 ### Workflows.create_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1/workflows.create_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/workflows.create_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1/workflows.create_workflow.js,samples/README.md)
 
@@ -135,7 +135,7 @@ __Usage:__
 
 ### Workflows.delete_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1/workflows.delete_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/workflows.delete_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1/workflows.delete_workflow.js,samples/README.md)
 
@@ -152,7 +152,7 @@ __Usage:__
 
 ### Workflows.get_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1/workflows.get_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/workflows.get_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1/workflows.get_workflow.js,samples/README.md)
 
@@ -169,7 +169,7 @@ __Usage:__
 
 ### Workflows.list_workflow_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1/workflows.list_workflow_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/workflows.list_workflow_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1/workflows.list_workflow_revisions.js,samples/README.md)
 
@@ -186,7 +186,7 @@ __Usage:__
 
 ### Workflows.list_workflows
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1/workflows.list_workflows.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/workflows.list_workflows.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1/workflows.list_workflows.js,samples/README.md)
 
@@ -203,7 +203,7 @@ __Usage:__
 
 ### Workflows.update_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1/workflows.update_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1/workflows.update_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1/workflows.update_workflow.js,samples/README.md)
 
@@ -220,7 +220,7 @@ __Usage:__
 
 ### Executions.cancel_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.cancel_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.cancel_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.cancel_execution.js,samples/README.md)
 
@@ -237,7 +237,7 @@ __Usage:__
 
 ### Executions.create_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.create_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.create_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.create_execution.js,samples/README.md)
 
@@ -254,7 +254,7 @@ __Usage:__
 
 ### Executions.get_execution
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.get_execution.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.get_execution.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.get_execution.js,samples/README.md)
 
@@ -271,7 +271,7 @@ __Usage:__
 
 ### Executions.list_executions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.list_executions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.list_executions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1beta/executions.list_executions.js,samples/README.md)
 
@@ -288,7 +288,7 @@ __Usage:__
 
 ### Workflows.create_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.create_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.create_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.create_workflow.js,samples/README.md)
 
@@ -305,7 +305,7 @@ __Usage:__
 
 ### Workflows.delete_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.delete_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.delete_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.delete_workflow.js,samples/README.md)
 
@@ -322,7 +322,7 @@ __Usage:__
 
 ### Workflows.get_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.get_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.get_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.get_workflow.js,samples/README.md)
 
@@ -339,7 +339,7 @@ __Usage:__
 
 ### Workflows.list_workflows
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.list_workflows.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.list_workflows.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.list_workflows.js,samples/README.md)
 
@@ -356,7 +356,7 @@ __Usage:__
 
 ### Workflows.update_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.update_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.update_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/generated/v1beta/workflows.update_workflow.js,samples/README.md)
 
@@ -373,7 +373,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-workflows-executions/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workflows-executions/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-workflows-executions/samples/quickstart.js,samples/README.md)
 
