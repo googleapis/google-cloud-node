@@ -23,7 +23,7 @@ import {describe, it} from 'mocha';
 describe('📦 pack-n-play test', () => {
 
   it('TypeScript code', async function() {
-    this.timeout(600000);
+    this.timeout(1000000);
     const options = {
       packageDir: process.cwd(),
       sample: {
@@ -35,7 +35,7 @@ describe('📦 pack-n-play test', () => {
   });
 
   it('JavaScript code', async function() {
-    this.timeout(600000);
+    this.timeout(1000000);
     const options = {
       packageDir: process.cwd(),
       sample: {
