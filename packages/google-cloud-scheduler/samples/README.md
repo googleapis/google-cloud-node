@@ -47,7 +47,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Cloud_scheduler.create_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.create_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.create_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.create_job.js,samples/README.md)
 
@@ -64,7 +64,7 @@ __Usage:__
 
 ### Cloud_scheduler.delete_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.delete_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.delete_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.delete_job.js,samples/README.md)
 
@@ -81,7 +81,7 @@ __Usage:__
 
 ### Cloud_scheduler.get_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.get_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.get_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.get_job.js,samples/README.md)
 
@@ -98,7 +98,7 @@ __Usage:__
 
 ### Cloud_scheduler.list_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.list_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.list_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.list_jobs.js,samples/README.md)
 
@@ -115,7 +115,7 @@ __Usage:__
 
 ### Cloud_scheduler.pause_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.pause_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.pause_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.pause_job.js,samples/README.md)
 
@@ -132,7 +132,7 @@ __Usage:__
 
 ### Cloud_scheduler.resume_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.resume_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.resume_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.resume_job.js,samples/README.md)
 
@@ -149,7 +149,7 @@ __Usage:__
 
 ### Cloud_scheduler.run_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.run_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.run_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.run_job.js,samples/README.md)
 
@@ -166,7 +166,7 @@ __Usage:__
 
 ### Cloud_scheduler.update_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.update_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.update_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.update_job.js,samples/README.md)
 
@@ -183,7 +183,7 @@ __Usage:__
 
 ### Cloud_scheduler.create_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.create_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.create_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.create_job.js,samples/README.md)
 
@@ -200,7 +200,7 @@ __Usage:__
 
 ### Cloud_scheduler.delete_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.delete_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.delete_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.delete_job.js,samples/README.md)
 
@@ -217,7 +217,7 @@ __Usage:__
 
 ### Cloud_scheduler.get_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.get_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.get_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.get_job.js,samples/README.md)
 
@@ -234,7 +234,7 @@ __Usage:__
 
 ### Cloud_scheduler.list_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.list_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.list_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.list_jobs.js,samples/README.md)
 
@@ -251,7 +251,7 @@ __Usage:__
 
 ### Cloud_scheduler.pause_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.pause_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.pause_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.pause_job.js,samples/README.md)
 
@@ -268,7 +268,7 @@ __Usage:__
 
 ### Cloud_scheduler.resume_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.resume_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.resume_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.resume_job.js,samples/README.md)
 
@@ -285,7 +285,7 @@ __Usage:__
 
 ### Cloud_scheduler.run_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.run_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.run_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.run_job.js,samples/README.md)
 
@@ -302,7 +302,7 @@ __Usage:__
 
 ### Cloud_scheduler.update_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.update_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.update_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.update_job.js,samples/README.md)
 
@@ -319,7 +319,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-scheduler/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-scheduler/samples/quickstart.js,samples/README.md)
 
