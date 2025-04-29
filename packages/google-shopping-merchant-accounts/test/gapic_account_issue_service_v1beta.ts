@@ -269,9 +269,14 @@ describe('v1beta.AccountIssueServiceClient', () => {
         throw err;
       });
       assert(client.accountIssueServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -281,9 +286,14 @@ describe('v1beta.AccountIssueServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.accountIssueServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {

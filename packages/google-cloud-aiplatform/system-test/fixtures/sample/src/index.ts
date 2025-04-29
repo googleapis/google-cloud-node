@@ -16,48 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  DatasetServiceClient,
-  DeploymentResourcePoolServiceClient,
-  EndpointServiceClient,
-  EvaluationServiceClient,
-  FeatureOnlineStoreAdminServiceClient,
-  FeatureOnlineStoreServiceClient,
-  FeatureRegistryServiceClient,
-  FeaturestoreOnlineServingServiceClient,
-  FeaturestoreServiceClient,
-  GenAiCacheServiceClient,
-  GenAiTuningServiceClient,
-  IndexEndpointServiceClient,
-  IndexServiceClient,
-  JobServiceClient,
-  LlmUtilityServiceClient,
-  MatchServiceClient,
-  MetadataServiceClient,
-  MigrationServiceClient,
-  ModelGardenServiceClient,
-  ModelServiceClient,
-  NotebookServiceClient,
-  PersistentResourceServiceClient,
-  PipelineServiceClient,
-  PredictionServiceClient,
-  ReasoningEngineExecutionServiceClient,
-  ReasoningEngineServiceClient,
-  ScheduleServiceClient,
-  SpecialistPoolServiceClient,
-  TensorboardServiceClient,
-  VertexRagDataServiceClient,
-  VertexRagServiceClient,
-  VizierServiceClient,
-} from '@google-cloud/aiplatform';
+import {DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, EvaluationServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, GenAiCacheServiceClient, GenAiTuningServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ReasoningEngineExecutionServiceClient, ReasoningEngineServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VertexRagDataServiceClient, VertexRagServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
 
 // check that the client class type name can be used
 function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
   client.close();
 }
-function doStuffWithDeploymentResourcePoolServiceClient(
-  client: DeploymentResourcePoolServiceClient
-) {
+function doStuffWithDeploymentResourcePoolServiceClient(client: DeploymentResourcePoolServiceClient) {
   client.close();
 }
 function doStuffWithEndpointServiceClient(client: EndpointServiceClient) {
@@ -66,29 +31,19 @@ function doStuffWithEndpointServiceClient(client: EndpointServiceClient) {
 function doStuffWithEvaluationServiceClient(client: EvaluationServiceClient) {
   client.close();
 }
-function doStuffWithFeatureOnlineStoreAdminServiceClient(
-  client: FeatureOnlineStoreAdminServiceClient
-) {
+function doStuffWithFeatureOnlineStoreAdminServiceClient(client: FeatureOnlineStoreAdminServiceClient) {
   client.close();
 }
-function doStuffWithFeatureOnlineStoreServiceClient(
-  client: FeatureOnlineStoreServiceClient
-) {
+function doStuffWithFeatureOnlineStoreServiceClient(client: FeatureOnlineStoreServiceClient) {
   client.close();
 }
-function doStuffWithFeatureRegistryServiceClient(
-  client: FeatureRegistryServiceClient
-) {
+function doStuffWithFeatureRegistryServiceClient(client: FeatureRegistryServiceClient) {
   client.close();
 }
-function doStuffWithFeaturestoreOnlineServingServiceClient(
-  client: FeaturestoreOnlineServingServiceClient
-) {
+function doStuffWithFeaturestoreOnlineServingServiceClient(client: FeaturestoreOnlineServingServiceClient) {
   client.close();
 }
-function doStuffWithFeaturestoreServiceClient(
-  client: FeaturestoreServiceClient
-) {
+function doStuffWithFeaturestoreServiceClient(client: FeaturestoreServiceClient) {
   client.close();
 }
 function doStuffWithGenAiCacheServiceClient(client: GenAiCacheServiceClient) {
@@ -97,9 +52,7 @@ function doStuffWithGenAiCacheServiceClient(client: GenAiCacheServiceClient) {
 function doStuffWithGenAiTuningServiceClient(client: GenAiTuningServiceClient) {
   client.close();
 }
-function doStuffWithIndexEndpointServiceClient(
-  client: IndexEndpointServiceClient
-) {
+function doStuffWithIndexEndpointServiceClient(client: IndexEndpointServiceClient) {
   client.close();
 }
 function doStuffWithIndexServiceClient(client: IndexServiceClient) {
@@ -129,9 +82,7 @@ function doStuffWithModelServiceClient(client: ModelServiceClient) {
 function doStuffWithNotebookServiceClient(client: NotebookServiceClient) {
   client.close();
 }
-function doStuffWithPersistentResourceServiceClient(
-  client: PersistentResourceServiceClient
-) {
+function doStuffWithPersistentResourceServiceClient(client: PersistentResourceServiceClient) {
   client.close();
 }
 function doStuffWithPipelineServiceClient(client: PipelineServiceClient) {
@@ -140,30 +91,22 @@ function doStuffWithPipelineServiceClient(client: PipelineServiceClient) {
 function doStuffWithPredictionServiceClient(client: PredictionServiceClient) {
   client.close();
 }
-function doStuffWithReasoningEngineExecutionServiceClient(
-  client: ReasoningEngineExecutionServiceClient
-) {
+function doStuffWithReasoningEngineExecutionServiceClient(client: ReasoningEngineExecutionServiceClient) {
   client.close();
 }
-function doStuffWithReasoningEngineServiceClient(
-  client: ReasoningEngineServiceClient
-) {
+function doStuffWithReasoningEngineServiceClient(client: ReasoningEngineServiceClient) {
   client.close();
 }
 function doStuffWithScheduleServiceClient(client: ScheduleServiceClient) {
   client.close();
 }
-function doStuffWithSpecialistPoolServiceClient(
-  client: SpecialistPoolServiceClient
-) {
+function doStuffWithSpecialistPoolServiceClient(client: SpecialistPoolServiceClient) {
   client.close();
 }
 function doStuffWithTensorboardServiceClient(client: TensorboardServiceClient) {
   client.close();
 }
-function doStuffWithVertexRagDataServiceClient(
-  client: VertexRagDataServiceClient
-) {
+function doStuffWithVertexRagDataServiceClient(client: VertexRagDataServiceClient) {
   client.close();
 }
 function doStuffWithVertexRagServiceClient(client: VertexRagServiceClient) {
@@ -178,11 +121,8 @@ function main() {
   const datasetServiceClient = new DatasetServiceClient();
   doStuffWithDatasetServiceClient(datasetServiceClient);
   // check that the client instance can be created
-  const deploymentResourcePoolServiceClient =
-    new DeploymentResourcePoolServiceClient();
-  doStuffWithDeploymentResourcePoolServiceClient(
-    deploymentResourcePoolServiceClient
-  );
+  const deploymentResourcePoolServiceClient = new DeploymentResourcePoolServiceClient();
+  doStuffWithDeploymentResourcePoolServiceClient(deploymentResourcePoolServiceClient);
   // check that the client instance can be created
   const endpointServiceClient = new EndpointServiceClient();
   doStuffWithEndpointServiceClient(endpointServiceClient);
@@ -190,11 +130,8 @@ function main() {
   const evaluationServiceClient = new EvaluationServiceClient();
   doStuffWithEvaluationServiceClient(evaluationServiceClient);
   // check that the client instance can be created
-  const featureOnlineStoreAdminServiceClient =
-    new FeatureOnlineStoreAdminServiceClient();
-  doStuffWithFeatureOnlineStoreAdminServiceClient(
-    featureOnlineStoreAdminServiceClient
-  );
+  const featureOnlineStoreAdminServiceClient = new FeatureOnlineStoreAdminServiceClient();
+  doStuffWithFeatureOnlineStoreAdminServiceClient(featureOnlineStoreAdminServiceClient);
   // check that the client instance can be created
   const featureOnlineStoreServiceClient = new FeatureOnlineStoreServiceClient();
   doStuffWithFeatureOnlineStoreServiceClient(featureOnlineStoreServiceClient);
@@ -202,11 +139,8 @@ function main() {
   const featureRegistryServiceClient = new FeatureRegistryServiceClient();
   doStuffWithFeatureRegistryServiceClient(featureRegistryServiceClient);
   // check that the client instance can be created
-  const featurestoreOnlineServingServiceClient =
-    new FeaturestoreOnlineServingServiceClient();
-  doStuffWithFeaturestoreOnlineServingServiceClient(
-    featurestoreOnlineServingServiceClient
-  );
+  const featurestoreOnlineServingServiceClient = new FeaturestoreOnlineServingServiceClient();
+  doStuffWithFeaturestoreOnlineServingServiceClient(featurestoreOnlineServingServiceClient);
   // check that the client instance can be created
   const featurestoreServiceClient = new FeaturestoreServiceClient();
   doStuffWithFeaturestoreServiceClient(featurestoreServiceClient);
@@ -256,11 +190,8 @@ function main() {
   const predictionServiceClient = new PredictionServiceClient();
   doStuffWithPredictionServiceClient(predictionServiceClient);
   // check that the client instance can be created
-  const reasoningEngineExecutionServiceClient =
-    new ReasoningEngineExecutionServiceClient();
-  doStuffWithReasoningEngineExecutionServiceClient(
-    reasoningEngineExecutionServiceClient
-  );
+  const reasoningEngineExecutionServiceClient = new ReasoningEngineExecutionServiceClient();
+  doStuffWithReasoningEngineExecutionServiceClient(reasoningEngineExecutionServiceClient);
   // check that the client instance can be created
   const reasoningEngineServiceClient = new ReasoningEngineServiceClient();
   doStuffWithReasoningEngineServiceClient(reasoningEngineServiceClient);

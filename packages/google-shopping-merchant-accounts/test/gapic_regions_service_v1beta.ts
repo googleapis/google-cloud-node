@@ -256,9 +256,14 @@ describe('v1beta.RegionsServiceClient', () => {
         throw err;
       });
       assert(client.regionsServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -267,9 +272,14 @@ describe('v1beta.RegionsServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.regionsServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -429,7 +439,9 @@ describe('v1beta.RegionsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRegion(request), expectedError);
     });
   });
@@ -559,7 +571,9 @@ describe('v1beta.RegionsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createRegion(request), expectedError);
     });
   });
@@ -693,7 +707,9 @@ describe('v1beta.RegionsServiceClient', () => {
       );
       request.region.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateRegion(request), expectedError);
     });
   });
@@ -823,7 +839,9 @@ describe('v1beta.RegionsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteRegion(request), expectedError);
     });
   });
