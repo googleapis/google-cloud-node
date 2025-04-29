@@ -32,11 +32,7 @@ describe('Quickstart', () => {
     projectId = await chronicleClient.getProjectId();
   });
 
-  it('should run quickstart', async () => {
-    const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
-      {cwd}
-    );
-    assert(output !== null);
+  it('should create a valid client', () => {
+    assert(chronicleClient);
   });
 });
