@@ -264,9 +264,14 @@ describe('v1alpha.RetrieverServiceClient', () => {
         throw err;
       });
       assert(client.retrieverServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -275,9 +280,14 @@ describe('v1alpha.RetrieverServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.retrieverServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -393,7 +403,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
         new protos.google.ai.generativelanguage.v1alpha.CreateCorpusRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createCorpus(request), expectedError);
     });
   });
@@ -520,7 +532,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCorpus(request), expectedError);
     });
   });
@@ -654,7 +668,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.corpus.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateCorpus(request), expectedError);
     });
   });
@@ -784,7 +800,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteCorpus(request), expectedError);
     });
   });
@@ -914,7 +932,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.queryCorpus(request), expectedError);
     });
   });
@@ -1044,7 +1064,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDocument(request), expectedError);
     });
   });
@@ -1174,7 +1196,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDocument(request), expectedError);
     });
   });
@@ -1308,7 +1332,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.document.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDocument(request), expectedError);
     });
   });
@@ -1438,7 +1464,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteDocument(request), expectedError);
     });
   });
@@ -1568,7 +1596,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.queryDocument(request), expectedError);
     });
   });
@@ -1698,7 +1728,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createChunk(request), expectedError);
     });
   });
@@ -1828,7 +1860,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchCreateChunks(request), expectedError);
     });
   });
@@ -1955,7 +1989,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getChunk(request), expectedError);
     });
   });
@@ -2089,7 +2125,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.chunk.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateChunk(request), expectedError);
     });
   });
@@ -2219,7 +2257,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchUpdateChunks(request), expectedError);
     });
   });
@@ -2349,7 +2389,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteChunk(request), expectedError);
     });
   });
@@ -2479,7 +2521,9 @@ describe('v1alpha.RetrieverServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchDeleteChunks(request), expectedError);
     });
   });

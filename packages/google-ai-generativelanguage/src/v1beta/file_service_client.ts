@@ -290,6 +290,7 @@ export class FileServiceClient {
       'listFiles',
       'getFile',
       'deleteFile',
+      'downloadFile',
     ];
     for (const methodName of fileServiceStubMethods) {
       const callPromise = this.fileServiceStub.then(
@@ -761,6 +762,134 @@ export class FileServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('deleteFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Download the `File`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `File` to download.
+   *   Example: `files/abc-123`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.DownloadFileResponse|DownloadFileResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/file_service.download_file.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_FileService_DownloadFile_async
+   */
+  downloadFile(
+    request?: protos.google.ai.generativelanguage.v1beta.IDownloadFileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.IDownloadFileResponse,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IDownloadFileRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  downloadFile(
+    request: protos.google.ai.generativelanguage.v1beta.IDownloadFileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.IDownloadFileResponse,
+      | protos.google.ai.generativelanguage.v1beta.IDownloadFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  downloadFile(
+    request: protos.google.ai.generativelanguage.v1beta.IDownloadFileRequest,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.IDownloadFileResponse,
+      | protos.google.ai.generativelanguage.v1beta.IDownloadFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  downloadFile(
+    request?: protos.google.ai.generativelanguage.v1beta.IDownloadFileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IDownloadFileResponse,
+          | protos.google.ai.generativelanguage.v1beta.IDownloadFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ai.generativelanguage.v1beta.IDownloadFileResponse,
+      | protos.google.ai.generativelanguage.v1beta.IDownloadFileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.IDownloadFileResponse,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IDownloadFileRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('downloadFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IDownloadFileResponse,
+          | protos.google.ai.generativelanguage.v1beta.IDownloadFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('downloadFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .downloadFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IDownloadFileResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IDownloadFileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('downloadFile response %j', response);
           return [response, options, rawResponse];
         }
       );
