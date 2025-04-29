@@ -37,7 +37,11 @@ function spawnp(command: string, parameters: string[]) {
 
 const testDir = join('.', 'build', 'test');
 const runCommand = 'node';
-const runParameters = ['./node_modules/mocha/bin/mocha'];
+const runParameters = [
+  '--max_old_space_size=4096',
+  './node_modules/mocha/bin/mocha',
+  '--timeout=100000',
+];
 const batchSize = 2;
 
 async function runBatch(batch: string[]) {
