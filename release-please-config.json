@@ -198,7 +198,8 @@
     "packages/google-cloud-parametermanager": {},
     "packages/google-cloud-modelarmor": {},
     "packages/google-maps-areainsights": {},
-    "packages/google-cloud-financialservices": {}
+    "packages/google-cloud-financialservices": {},
+    "packages/google-cloud-chronicle": {}
   },
   "plugins": [
     {
