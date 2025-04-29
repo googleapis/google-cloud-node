@@ -29,11 +29,13 @@ function main(model, destination) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the PublisherModel resource.
+   *  Required. The model to deploy.
    *  Format:
-   *  `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
-   *  `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`
-   *  or Hugging Face model ID like `google/gemma-2-2b-it`.
+   *  1. `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
+   *  `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`.
+   *  2. Hugging Face model ID like `google/gemma-2-2b-it`.
+   *  3. Custom model Google Cloud Storage URI like `gs://bucket`.
+   *  4. Custom model zip file like `https://example.com/a.zip`.
    */
   // const model = 'abc123'
   /**
