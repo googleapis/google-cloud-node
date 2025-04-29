@@ -257,9 +257,14 @@ describe('v1beta.AccountsServiceClient', () => {
         throw err;
       });
       assert(client.accountsServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -268,9 +273,14 @@ describe('v1beta.AccountsServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.accountsServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -433,7 +443,9 @@ describe('v1beta.AccountsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAccount(request), expectedError);
     });
   });
@@ -520,7 +532,9 @@ describe('v1beta.AccountsServiceClient', () => {
         new protos.google.shopping.merchant.accounts.v1beta.CreateAndConfigureAccountRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createAndConfigureAccount(request),
         expectedError
@@ -653,7 +667,9 @@ describe('v1beta.AccountsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteAccount(request), expectedError);
     });
   });
@@ -787,7 +803,9 @@ describe('v1beta.AccountsServiceClient', () => {
       );
       request.account.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateAccount(request), expectedError);
     });
   });
