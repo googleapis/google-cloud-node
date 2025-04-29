@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -26,39 +26,43 @@ import {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import * as path from 'path';
-
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v3/uptime_check_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './uptime_check_service_client_config.json';
-
 const version = require('../../../package.json').version;
 
 /**
  *  The UptimeCheckService API is used to manage (list, create, delete, edit)
- *  Uptime check configurations in the Stackdriver Monitoring product. An Uptime
+ *  Uptime check configurations in the Cloud Monitoring product. An Uptime
  *  check is a piece of configuration that determines which resources and
  *  services to monitor for availability. These configurations can also be
- *  configured interactively by navigating to the [Cloud Console]
- *  (http://console.cloud.google.com), selecting the appropriate project,
- *  clicking on "Monitoring" on the left-hand side to navigate to Stackdriver,
- *  and then clicking on "Uptime".
+ *  configured interactively by navigating to the [Cloud console]
+ *  (https://console.cloud.google.com), selecting the appropriate project,
+ *  clicking on "Monitoring" on the left-hand side to navigate to Cloud
+ *  Monitoring, and then clicking on "Uptime".
  * @class
  * @memberof v3
  */
 export class UptimeCheckServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
+  private _log = logging.log('monitoring');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -66,6 +70,7 @@ export class UptimeCheckServiceClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   uptimeCheckServiceStub?: Promise<{[name: string]: Function}>;
@@ -75,7 +80,7 @@ export class UptimeCheckServiceClient {
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
-   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
    * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
@@ -92,23 +97,53 @@ export class UptimeCheckServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
-   *     In fallback mode, a special browser-compatible transport implementation is used
-   *     instead of gRPC transport. In browser context (if the `window` object is defined)
-   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
-   *     if you need to override this behavior.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new UptimeCheckServiceClient({fallback: true}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof UptimeCheckServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'monitoring.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     const fallback =
@@ -116,13 +151,21 @@ export class UptimeCheckServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -133,41 +176,34 @@ export class UptimeCheckServiceClient {
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = this._servicePath;
+
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
-
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
@@ -255,6 +291,9 @@ export class UptimeCheckServiceClient {
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
       ),
+      snoozePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/snoozes/{snooze}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -285,6 +324,9 @@ export class UptimeCheckServiceClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -313,7 +355,8 @@ export class UptimeCheckServiceClient {
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.monitoring.v3.UptimeCheckService,
-      this._opts
+      this._opts,
+      this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -345,7 +388,8 @@ export class UptimeCheckServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -356,19 +400,50 @@ export class UptimeCheckServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'monitoring.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'monitoring.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -411,8 +486,26 @@ export class UptimeCheckServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets a single Uptime check configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Uptime check configuration to retrieve. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.UptimeCheckConfig|UptimeCheckConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/uptime_check_service.get_uptime_check_config.js</caption>
+   * region_tag:monitoring_v3_generated_UptimeCheckService_GetUptimeCheckConfig_async
+   */
   getUptimeCheckConfig(
-    request: protos.google.monitoring.v3.IGetUptimeCheckConfigRequest,
+    request?: protos.google.monitoring.v3.IGetUptimeCheckConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -442,27 +535,8 @@ export class UptimeCheckServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a single Uptime check configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The Uptime check configuration to retrieve. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getUptimeCheckConfig(request);
-   */
   getUptimeCheckConfig(
-    request: protos.google.monitoring.v3.IGetUptimeCheckConfigRequest,
+    request?: protos.google.monitoring.v3.IGetUptimeCheckConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -498,14 +572,64 @@ export class UptimeCheckServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getUptimeCheckConfig(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getUptimeCheckConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IUptimeCheckConfig,
+          | protos.google.monitoring.v3.IGetUptimeCheckConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getUptimeCheckConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getUptimeCheckConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IUptimeCheckConfig,
+          protos.google.monitoring.v3.IGetUptimeCheckConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getUptimeCheckConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Creates a new Uptime check configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) in which
+   *   to create the Uptime check. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {google.monitoring.v3.UptimeCheckConfig} request.uptimeCheckConfig
+   *   Required. The new Uptime check configuration.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.UptimeCheckConfig|UptimeCheckConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/uptime_check_service.create_uptime_check_config.js</caption>
+   * region_tag:monitoring_v3_generated_UptimeCheckService_CreateUptimeCheckConfig_async
+   */
   createUptimeCheckConfig(
-    request: protos.google.monitoring.v3.ICreateUptimeCheckConfigRequest,
+    request?: protos.google.monitoring.v3.ICreateUptimeCheckConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -535,29 +659,8 @@ export class UptimeCheckServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new Uptime check configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project in which to create the Uptime check. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {google.monitoring.v3.UptimeCheckConfig} request.uptimeCheckConfig
-   *   Required. The new Uptime check configuration.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createUptimeCheckConfig(request);
-   */
   createUptimeCheckConfig(
-    request: protos.google.monitoring.v3.ICreateUptimeCheckConfigRequest,
+    request?: protos.google.monitoring.v3.ICreateUptimeCheckConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -593,18 +696,79 @@ export class UptimeCheckServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createUptimeCheckConfig(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createUptimeCheckConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IUptimeCheckConfig,
+          | protos.google.monitoring.v3.ICreateUptimeCheckConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createUptimeCheckConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createUptimeCheckConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IUptimeCheckConfig,
+          (
+            | protos.google.monitoring.v3.ICreateUptimeCheckConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createUptimeCheckConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Updates an Uptime check configuration. You can either replace the entire
+   * configuration with a new one or replace only certain fields in the current
+   * configuration by specifying the fields to be updated via `updateMask`.
+   * Returns the updated configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Optional. If present, only the listed fields in the current Uptime check
+   *   configuration are updated with values from the new configuration. If this
+   *   field is empty, then the current configuration is completely replaced with
+   *   the new configuration.
+   * @param {google.monitoring.v3.UptimeCheckConfig} request.uptimeCheckConfig
+   *   Required. If an `updateMask` has been specified, this field gives
+   *   the values for the set of fields mentioned in the `updateMask`. If an
+   *   `updateMask` has not been given, this Uptime check configuration replaces
+   *   the current configuration. If a field is mentioned in `updateMask` but
+   *   the corresponding field is omitted in this partial Uptime check
+   *   configuration, it has the effect of deleting/clearing the field from the
+   *   configuration on the server.
+   *
+   *   The following fields can be updated: `display_name`,
+   *   `http_check`, `tcp_check`, `timeout`, `content_matchers`, and
+   *   `selected_regions`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.UptimeCheckConfig|UptimeCheckConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/uptime_check_service.update_uptime_check_config.js</caption>
+   * region_tag:monitoring_v3_generated_UptimeCheckService_UpdateUptimeCheckConfig_async
+   */
   updateUptimeCheckConfig(
-    request: protos.google.monitoring.v3.IUpdateUptimeCheckConfigRequest,
+    request?: protos.google.monitoring.v3.IUpdateUptimeCheckConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -634,43 +798,8 @@ export class UptimeCheckServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates an Uptime check configuration. You can either replace the entire
-   * configuration with a new one or replace only certain fields in the current
-   * configuration by specifying the fields to be updated via `updateMask`.
-   * Returns the updated configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Optional. If present, only the listed fields in the current Uptime check
-   *   configuration are updated with values from the new configuration. If this
-   *   field is empty, then the current configuration is completely replaced with
-   *   the new configuration.
-   * @param {google.monitoring.v3.UptimeCheckConfig} request.uptimeCheckConfig
-   *   Required. If an `updateMask` has been specified, this field gives
-   *   the values for the set of fields mentioned in the `updateMask`. If an
-   *   `updateMask` has not been given, this Uptime check configuration replaces
-   *   the current configuration. If a field is mentioned in `updateMask` but
-   *   the corresonding field is omitted in this partial Uptime check
-   *   configuration, it has the effect of deleting/clearing the field from the
-   *   configuration on the server.
-   *
-   *   The following fields can be updated: `display_name`,
-   *   `http_check`, `tcp_check`, `timeout`, `content_matchers`, and
-   *   `selected_regions`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateUptimeCheckConfig(request);
-   */
   updateUptimeCheckConfig(
-    request: protos.google.monitoring.v3.IUpdateUptimeCheckConfigRequest,
+    request?: protos.google.monitoring.v3.IUpdateUptimeCheckConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -706,18 +835,65 @@ export class UptimeCheckServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'uptime_check_config.name': request.uptimeCheckConfig!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'uptime_check_config.name': request.uptimeCheckConfig!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateUptimeCheckConfig(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateUptimeCheckConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IUptimeCheckConfig,
+          | protos.google.monitoring.v3.IUpdateUptimeCheckConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateUptimeCheckConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateUptimeCheckConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IUptimeCheckConfig,
+          (
+            | protos.google.monitoring.v3.IUpdateUptimeCheckConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateUptimeCheckConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
+  /**
+   * Deletes an Uptime check configuration. Note that this method will fail
+   * if the Uptime check configuration is referenced by an alert policy or
+   * other dependent configs that would be rendered invalid by the deletion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Uptime check configuration to delete. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/uptime_check_service.delete_uptime_check_config.js</caption>
+   * region_tag:monitoring_v3_generated_UptimeCheckService_DeleteUptimeCheckConfig_async
+   */
   deleteUptimeCheckConfig(
-    request: protos.google.monitoring.v3.IDeleteUptimeCheckConfigRequest,
+    request?: protos.google.monitoring.v3.IDeleteUptimeCheckConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -747,29 +923,8 @@ export class UptimeCheckServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes an Uptime check configuration. Note that this method will fail
-   * if the Uptime check configuration is referenced by an alert policy or
-   * other dependent configs that would be rendered invalid by the deletion.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The Uptime check configuration to delete. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteUptimeCheckConfig(request);
-   */
   deleteUptimeCheckConfig(
-    request: protos.google.monitoring.v3.IDeleteUptimeCheckConfigRequest,
+    request?: protos.google.monitoring.v3.IDeleteUptimeCheckConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -805,19 +960,85 @@ export class UptimeCheckServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteUptimeCheckConfig(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteUptimeCheckConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.monitoring.v3.IDeleteUptimeCheckConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteUptimeCheckConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteUptimeCheckConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.monitoring.v3.IDeleteUptimeCheckConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteUptimeCheckConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
+  /**
+   * Lists the existing valid Uptime check configurations for the project
+   * (leaving out any invalid configurations).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+   *   Uptime check configurations are listed. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {string} request.filter
+   *   If provided, this field specifies the criteria that must be met by
+   *   uptime checks to be included in the response.
+   *
+   *   For more details, see [Filtering
+   *   syntax](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering#filter_syntax).
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. The server
+   *   may further constrain the maximum number of results returned in a single
+   *   page. If the page_size is <=0, the server will decide the number of results
+   *   to be returned.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return more results from the previous method call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.monitoring.v3.UptimeCheckConfig|UptimeCheckConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listUptimeCheckConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listUptimeCheckConfigs(
-    request: protos.google.monitoring.v3.IListUptimeCheckConfigsRequest,
+    request?: protos.google.monitoring.v3.IListUptimeCheckConfigsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -847,40 +1068,8 @@ export class UptimeCheckServiceClient {
       protos.google.monitoring.v3.IUptimeCheckConfig
     >
   ): void;
-  /**
-   * Lists the existing valid Uptime check configurations for the project
-   * (leaving out any invalid configurations).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project whose Uptime check configurations are listed. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. The server
-   *   may further constrain the maximum number of results returned in a single
-   *   page. If the page_size is <=0, the server will decide the number of results
-   *   to be returned.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return more results from the previous method call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listUptimeCheckConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listUptimeCheckConfigs(
-    request: protos.google.monitoring.v3.IListUptimeCheckConfigsRequest,
+    request?: protos.google.monitoring.v3.IListUptimeCheckConfigsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -916,25 +1105,57 @@ export class UptimeCheckServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listUptimeCheckConfigs(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListUptimeCheckConfigsRequest,
+          | protos.google.monitoring.v3.IListUptimeCheckConfigsResponse
+          | null
+          | undefined,
+          protos.google.monitoring.v3.IUptimeCheckConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUptimeCheckConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUptimeCheckConfigs request %j', request);
+    return this.innerApiCalls
+      .listUptimeCheckConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.monitoring.v3.IUptimeCheckConfig[],
+          protos.google.monitoring.v3.IListUptimeCheckConfigsRequest | null,
+          protos.google.monitoring.v3.IListUptimeCheckConfigsResponse,
+        ]) => {
+          this._log.info('listUptimeCheckConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listUptimeCheckConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project whose Uptime check configurations are listed. The format is:
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+   *   Uptime check configurations are listed. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {string} request.filter
+   *   If provided, this field specifies the criteria that must be met by
+   *   uptime checks to be included in the response.
+   *
+   *   For more details, see [Filtering
+   *   syntax](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering#filter_syntax).
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. The server
    *   may further constrain the maximum number of results returned in a single
@@ -947,13 +1168,12 @@ export class UptimeCheckServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.monitoring.v3.UptimeCheckConfig|UptimeCheckConfig} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listUptimeCheckConfigsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listUptimeCheckConfigsStream(
@@ -965,13 +1185,17 @@ export class UptimeCheckServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings = this._defaults['listUptimeCheckConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listUptimeCheckConfigs stream %j', request);
     return this.descriptors.page.listUptimeCheckConfigs.createStream(
-      this.innerApiCalls.listUptimeCheckConfigs as gax.GaxCall,
+      this.innerApiCalls.listUptimeCheckConfigs as GaxCall,
       request,
       callSettings
     );
@@ -984,9 +1208,17 @@ export class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project whose Uptime check configurations are listed. The format is:
+   *   Required. The
+   *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+   *   Uptime check configurations are listed. The format is:
    *
    *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {string} request.filter
+   *   If provided, this field specifies the criteria that must be met by
+   *   uptime checks to be included in the response.
+   *
+   *   For more details, see [Filtering
+   *   syntax](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering#filter_syntax).
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. The server
    *   may further constrain the maximum number of results returned in a single
@@ -999,18 +1231,14 @@ export class UptimeCheckServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.monitoring.v3.UptimeCheckConfig|UptimeCheckConfig}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example
-   * const iterable = client.listUptimeCheckConfigsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/uptime_check_service.list_uptime_check_configs.js</caption>
+   * region_tag:monitoring_v3_generated_UptimeCheckService_ListUptimeCheckConfigs_async
    */
   listUptimeCheckConfigsAsync(
     request?: protos.google.monitoring.v3.IListUptimeCheckConfigsRequest,
@@ -1021,20 +1249,51 @@ export class UptimeCheckServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    const defaultCallSettings = this._defaults['listUptimeCheckConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listUptimeCheckConfigs iterate %j', request);
     return this.descriptors.page.listUptimeCheckConfigs.asyncIterate(
       this.innerApiCalls['listUptimeCheckConfigs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.IUptimeCheckConfig>;
   }
+  /**
+   * Returns the list of IP addresses that checkers run from.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. The server
+   *   may further constrain the maximum number of results returned in a single
+   *   page. If the page_size is <=0, the server will decide the number of results
+   *   to be returned.
+   *   NOTE: this field is not yet implemented
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return more results from the previous method call.
+   *   NOTE: this field is not yet implemented
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.monitoring.v3.UptimeCheckIp|UptimeCheckIp}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listUptimeCheckIpsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listUptimeCheckIps(
-    request: protos.google.monitoring.v3.IListUptimeCheckIpsRequest,
+    request?: protos.google.monitoring.v3.IListUptimeCheckIpsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1064,37 +1323,8 @@ export class UptimeCheckServiceClient {
       protos.google.monitoring.v3.IUptimeCheckIp
     >
   ): void;
-  /**
-   * Returns the list of IP addresses that checkers run from
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. The server
-   *   may further constrain the maximum number of results returned in a single
-   *   page. If the page_size is <=0, the server will decide the number of results
-   *   to be returned.
-   *   NOTE: this field is not yet implemented
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return more results from the previous method call.
-   *   NOTE: this field is not yet implemented
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [UptimeCheckIp]{@link google.monitoring.v3.UptimeCheckIp}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listUptimeCheckIpsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listUptimeCheckIps(
-    request: protos.google.monitoring.v3.IListUptimeCheckIpsRequest,
+    request?: protos.google.monitoring.v3.IListUptimeCheckIpsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1127,12 +1357,42 @@ export class UptimeCheckServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
-    this.initialize();
-    return this.innerApiCalls.listUptimeCheckIps(request, options, callback);
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListUptimeCheckIpsRequest,
+          | protos.google.monitoring.v3.IListUptimeCheckIpsResponse
+          | null
+          | undefined,
+          protos.google.monitoring.v3.IUptimeCheckIp
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUptimeCheckIps values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUptimeCheckIps request %j', request);
+    return this.innerApiCalls
+      .listUptimeCheckIps(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.monitoring.v3.IUptimeCheckIp[],
+          protos.google.monitoring.v3.IListUptimeCheckIpsRequest | null,
+          protos.google.monitoring.v3.IListUptimeCheckIpsResponse,
+        ]) => {
+          this._log.info('listUptimeCheckIps values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listUptimeCheckIps`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} request.pageSize
@@ -1149,13 +1409,12 @@ export class UptimeCheckServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [UptimeCheckIp]{@link google.monitoring.v3.UptimeCheckIp} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.monitoring.v3.UptimeCheckIp|UptimeCheckIp} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listUptimeCheckIpsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listUptimeCheckIpsStream(
@@ -1164,10 +1423,16 @@ export class UptimeCheckServiceClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listUptimeCheckIps'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listUptimeCheckIps stream %j', request);
     return this.descriptors.page.listUptimeCheckIps.createStream(
-      this.innerApiCalls.listUptimeCheckIps as gax.GaxCall,
+      this.innerApiCalls.listUptimeCheckIps as GaxCall,
       request,
       callSettings
     );
@@ -1193,18 +1458,14 @@ export class UptimeCheckServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [UptimeCheckIp]{@link google.monitoring.v3.UptimeCheckIp}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.monitoring.v3.UptimeCheckIp|UptimeCheckIp}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example
-   * const iterable = client.listUptimeCheckIpsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/uptime_check_service.list_uptime_check_ips.js</caption>
+   * region_tag:monitoring_v3_generated_UptimeCheckService_ListUptimeCheckIps_async
    */
   listUptimeCheckIpsAsync(
     request?: protos.google.monitoring.v3.IListUptimeCheckIpsRequest,
@@ -1212,12 +1473,17 @@ export class UptimeCheckServiceClient {
   ): AsyncIterable<protos.google.monitoring.v3.IUptimeCheckIp> {
     request = request || {};
     options = options || {};
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listUptimeCheckIps'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listUptimeCheckIps iterate %j', request);
     return this.descriptors.page.listUptimeCheckIps.asyncIterate(
       this.innerApiCalls['listUptimeCheckIps'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.IUptimeCheckIp>;
   }
@@ -2414,15 +2680,51 @@ export class UptimeCheckServiceClient {
   }
 
   /**
+   * Return a fully-qualified snooze resource name string.
+   *
+   * @param {string} project
+   * @param {string} snooze
+   * @returns {string} Resource name string.
+   */
+  snoozePath(project: string, snooze: string) {
+    return this.pathTemplates.snoozePathTemplate.render({
+      project: project,
+      snooze: snooze,
+    });
+  }
+
+  /**
+   * Parse the project from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).project;
+  }
+
+  /**
+   * Parse the snooze from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the snooze.
+   */
+  matchSnoozeFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).snooze;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.uptimeCheckServiceStub!.then(stub => {
+    if (this.uptimeCheckServiceStub && !this._terminated) {
+      return this.uptimeCheckServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

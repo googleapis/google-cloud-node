@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,6 +26,21 @@ import * as uptimecheckserviceModule from '../src';
 import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
+
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -113,86 +128,195 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v3.UptimeCheckServiceClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      uptimecheckserviceModule.v3.UptimeCheckServiceClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      uptimecheckserviceModule.v3.UptimeCheckServiceClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = uptimecheckserviceModule.v3.UptimeCheckServiceClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-      fallback: true,
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'monitoring.googleapis.com');
     });
-    assert(client);
-  });
 
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('has universeDomain', () => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
     });
-    assert.strictEqual(client.uptimeCheckServiceStub, undefined);
-    await client.initialize();
-    assert(client.uptimeCheckServiceStub);
-  });
 
-  it('has close method', () => {
-    const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-    client.close();
-  });
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          uptimecheckserviceModule.v3.UptimeCheckServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'monitoring.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          uptimecheckserviceModule.v3.UptimeCheckServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'monitoring.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'monitoring.example.com');
     });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'monitoring.example.com');
     });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new uptimecheckserviceModule.v3.UptimeCheckServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'monitoring.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'monitoring.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has port', () => {
+      const port = uptimecheckserviceModule.v3.UptimeCheckServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
+
+    it('should create a client with no option', () => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        fallback: true,
+      });
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.uptimeCheckServiceStub, undefined);
+      await client.initialize();
+      assert(client.uptimeCheckServiceStub);
+    });
+
+    it('has close method for the initialized client', done => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize().catch(err => {
+        throw err;
+      });
+      assert(client.uptimeCheckServiceStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
+    });
+
+    it('has close method for the non-initialized client', done => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.uptimeCheckServiceStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('getUptimeCheckConfig', () => {
@@ -201,19 +325,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetUptimeCheckConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetUptimeCheckConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.UptimeCheckConfig()
       );
@@ -221,11 +342,14 @@ describe('v3.UptimeCheckServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getUptimeCheckConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getUptimeCheckConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getUptimeCheckConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUptimeCheckConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getUptimeCheckConfig without error using callback', async () => {
@@ -233,19 +357,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetUptimeCheckConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetUptimeCheckConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.UptimeCheckConfig()
       );
@@ -268,11 +389,14 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getUptimeCheckConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getUptimeCheckConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUptimeCheckConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getUptimeCheckConfig with error', async () => {
@@ -280,30 +404,51 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.GetUptimeCheckConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetUptimeCheckConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getUptimeCheckConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getUptimeCheckConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.getUptimeCheckConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.getUptimeCheckConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUptimeCheckConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getUptimeCheckConfig with closed client', async () => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.GetUptimeCheckConfigRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.GetUptimeCheckConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getUptimeCheckConfig(request), expectedError);
     });
   });
 
@@ -313,19 +458,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateUptimeCheckConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.CreateUptimeCheckConfigRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.UptimeCheckConfig()
       );
@@ -333,11 +475,14 @@ describe('v3.UptimeCheckServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createUptimeCheckConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createUptimeCheckConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createUptimeCheckConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUptimeCheckConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createUptimeCheckConfig without error using callback', async () => {
@@ -345,19 +490,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateUptimeCheckConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.CreateUptimeCheckConfigRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.UptimeCheckConfig()
       );
@@ -380,11 +522,14 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createUptimeCheckConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createUptimeCheckConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUptimeCheckConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createUptimeCheckConfig with error', async () => {
@@ -392,19 +537,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.CreateUptimeCheckConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.CreateUptimeCheckConfigRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createUptimeCheckConfig = stubSimpleCall(
         undefined,
@@ -414,10 +556,37 @@ describe('v3.UptimeCheckServiceClient', () => {
         client.createUptimeCheckConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createUptimeCheckConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.createUptimeCheckConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUptimeCheckConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createUptimeCheckConfig with closed client', async () => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.CreateUptimeCheckConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.CreateUptimeCheckConfigRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.createUptimeCheckConfig(request),
+        expectedError
       );
     });
   });
@@ -428,20 +597,17 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateUptimeCheckConfigRequest()
       );
-      request.uptimeCheckConfig = {};
-      request.uptimeCheckConfig.name = '';
-      const expectedHeaderRequestParams = 'uptime_check_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.uptimeCheckConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.UpdateUptimeCheckConfigRequest',
+        ['uptimeCheckConfig', 'name']
+      );
+      request.uptimeCheckConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `uptime_check_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.UptimeCheckConfig()
       );
@@ -449,11 +615,14 @@ describe('v3.UptimeCheckServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateUptimeCheckConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateUptimeCheckConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateUptimeCheckConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUptimeCheckConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateUptimeCheckConfig without error using callback', async () => {
@@ -461,20 +630,17 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateUptimeCheckConfigRequest()
       );
-      request.uptimeCheckConfig = {};
-      request.uptimeCheckConfig.name = '';
-      const expectedHeaderRequestParams = 'uptime_check_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.uptimeCheckConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.UpdateUptimeCheckConfigRequest',
+        ['uptimeCheckConfig', 'name']
+      );
+      request.uptimeCheckConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `uptime_check_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.monitoring.v3.UptimeCheckConfig()
       );
@@ -497,11 +663,14 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateUptimeCheckConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateUptimeCheckConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUptimeCheckConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateUptimeCheckConfig with error', async () => {
@@ -509,20 +678,17 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.UpdateUptimeCheckConfigRequest()
       );
-      request.uptimeCheckConfig = {};
-      request.uptimeCheckConfig.name = '';
-      const expectedHeaderRequestParams = 'uptime_check_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.uptimeCheckConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.UpdateUptimeCheckConfigRequest',
+        ['uptimeCheckConfig', 'name']
+      );
+      request.uptimeCheckConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `uptime_check_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateUptimeCheckConfig = stubSimpleCall(
         undefined,
@@ -532,10 +698,38 @@ describe('v3.UptimeCheckServiceClient', () => {
         client.updateUptimeCheckConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateUptimeCheckConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.updateUptimeCheckConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUptimeCheckConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateUptimeCheckConfig with closed client', async () => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.UpdateUptimeCheckConfigRequest()
+      );
+      request.uptimeCheckConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.UpdateUptimeCheckConfigRequest',
+        ['uptimeCheckConfig', 'name']
+      );
+      request.uptimeCheckConfig.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateUptimeCheckConfig(request),
+        expectedError
       );
     });
   });
@@ -546,19 +740,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteUptimeCheckConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.DeleteUptimeCheckConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -566,11 +757,14 @@ describe('v3.UptimeCheckServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteUptimeCheckConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteUptimeCheckConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteUptimeCheckConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUptimeCheckConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteUptimeCheckConfig without error using callback', async () => {
@@ -578,19 +772,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteUptimeCheckConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.DeleteUptimeCheckConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -613,11 +804,14 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteUptimeCheckConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteUptimeCheckConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUptimeCheckConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteUptimeCheckConfig with error', async () => {
@@ -625,19 +819,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.DeleteUptimeCheckConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.DeleteUptimeCheckConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteUptimeCheckConfig = stubSimpleCall(
         undefined,
@@ -647,10 +838,37 @@ describe('v3.UptimeCheckServiceClient', () => {
         client.deleteUptimeCheckConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteUptimeCheckConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      const actualRequest = (
+        client.innerApiCalls.deleteUptimeCheckConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUptimeCheckConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteUptimeCheckConfig with closed client', async () => {
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.monitoring.v3.DeleteUptimeCheckConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.DeleteUptimeCheckConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.deleteUptimeCheckConfig(request),
+        expectedError
       );
     });
   });
@@ -661,19 +879,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.v3.UptimeCheckConfig()
@@ -689,11 +904,14 @@ describe('v3.UptimeCheckServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listUptimeCheckConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listUptimeCheckConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listUptimeCheckConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUptimeCheckConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listUptimeCheckConfigs without error using callback', async () => {
@@ -701,19 +919,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.v3.UptimeCheckConfig()
@@ -744,11 +959,14 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listUptimeCheckConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listUptimeCheckConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUptimeCheckConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listUptimeCheckConfigs with error', async () => {
@@ -756,19 +974,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listUptimeCheckConfigs = stubSimpleCall(
         undefined,
@@ -778,11 +993,14 @@ describe('v3.UptimeCheckServiceClient', () => {
         client.listUptimeCheckConfigs(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listUptimeCheckConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listUptimeCheckConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUptimeCheckConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listUptimeCheckConfigsStream without error', async () => {
@@ -790,12 +1008,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.v3.UptimeCheckConfig()
@@ -835,12 +1057,15 @@ describe('v3.UptimeCheckServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listUptimeCheckConfigs, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listUptimeCheckConfigs
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -849,12 +1074,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUptimeCheckConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -883,12 +1112,15 @@ describe('v3.UptimeCheckServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listUptimeCheckConfigs, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listUptimeCheckConfigs
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -897,12 +1129,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.monitoring.v3.UptimeCheckConfig()
@@ -929,12 +1165,15 @@ describe('v3.UptimeCheckServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listUptimeCheckConfigs
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -943,12 +1182,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.v3.ListUptimeCheckConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUptimeCheckConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -966,12 +1209,15 @@ describe('v3.UptimeCheckServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listUptimeCheckConfigs
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -982,11 +1228,10 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
       );
-      const expectedOptions = {};
       const expectedResponse = [
         generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
         generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
@@ -996,11 +1241,6 @@ describe('v3.UptimeCheckServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listUptimeCheckIps(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listUptimeCheckIps as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listUptimeCheckIps without error using callback', async () => {
@@ -1008,11 +1248,10 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
       );
-      const expectedOptions = {};
       const expectedResponse = [
         generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
         generateSampleMessage(new protos.google.monitoring.v3.UptimeCheckIp()),
@@ -1037,11 +1276,6 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listUptimeCheckIps as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes listUptimeCheckIps with error', async () => {
@@ -1049,22 +1283,16 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
       );
-      const expectedOptions = {};
       const expectedError = new Error('expected');
       client.innerApiCalls.listUptimeCheckIps = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listUptimeCheckIps(request), expectedError);
-      assert(
-        (client.innerApiCalls.listUptimeCheckIps as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listUptimeCheckIpsStream without error', async () => {
@@ -1072,7 +1300,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
       );
@@ -1113,7 +1341,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
       );
@@ -1149,7 +1377,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
       );
@@ -1179,7 +1407,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.monitoring.v3.ListUptimeCheckIpsRequest()
       );
@@ -1203,7 +1431,7 @@ describe('v3.UptimeCheckServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folderAlertPolicy', () => {
+    describe('folderAlertPolicy', async () => {
       const fakePath = '/rendered/path/folderAlertPolicy';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1213,7 +1441,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderAlertPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1265,7 +1493,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('folderAlertPolicyCondition', () => {
+    describe('folderAlertPolicyCondition', async () => {
       const fakePath = '/rendered/path/folderAlertPolicyCondition';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1276,7 +1504,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderAlertPolicyConditionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1344,7 +1572,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('folderChannelDescriptor', () => {
+    describe('folderChannelDescriptor', async () => {
       const fakePath = '/rendered/path/folderChannelDescriptor';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1354,7 +1582,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderChannelDescriptorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1409,7 +1637,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('folderGroup', () => {
+    describe('folderGroup', async () => {
       const fakePath = '/rendered/path/folderGroup';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1419,7 +1647,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1458,7 +1686,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('folderNotificationChannel', () => {
+    describe('folderNotificationChannel', async () => {
       const fakePath = '/rendered/path/folderNotificationChannel';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1468,7 +1696,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderNotificationChannelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1523,7 +1751,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('folderService', () => {
+    describe('folderService', async () => {
       const fakePath = '/rendered/path/folderService';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1533,7 +1761,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1572,7 +1800,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('folderServiceServiceLevelObjective', () => {
+    describe('folderServiceServiceLevelObjective', async () => {
       const fakePath = '/rendered/path/folderServiceServiceLevelObjective';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1583,7 +1811,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match =
@@ -1655,7 +1883,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('folderUptimeCheckConfig', () => {
+    describe('folderUptimeCheckConfig', async () => {
       const fakePath = '/rendered/path/folderUptimeCheckConfig';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1665,7 +1893,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderUptimeCheckConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1720,7 +1948,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('organizationAlertPolicy', () => {
+    describe('organizationAlertPolicy', async () => {
       const fakePath = '/rendered/path/organizationAlertPolicy';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1730,7 +1958,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationAlertPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1783,7 +2011,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('organizationAlertPolicyCondition', () => {
+    describe('organizationAlertPolicyCondition', async () => {
       const fakePath = '/rendered/path/organizationAlertPolicyCondition';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1794,7 +2022,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationAlertPolicyConditionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationAlertPolicyConditionPathTemplate.match =
@@ -1866,7 +2094,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('organizationChannelDescriptor', () => {
+    describe('organizationChannelDescriptor', async () => {
       const fakePath = '/rendered/path/organizationChannelDescriptor';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1876,7 +2104,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationChannelDescriptorPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationChannelDescriptorPathTemplate.match =
@@ -1931,7 +2159,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('organizationGroup', () => {
+    describe('organizationGroup', async () => {
       const fakePath = '/rendered/path/organizationGroup';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1941,7 +2169,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1993,7 +2221,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('organizationNotificationChannel', () => {
+    describe('organizationNotificationChannel', async () => {
       const fakePath = '/rendered/path/organizationNotificationChannel';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2003,7 +2231,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationNotificationChannelPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationNotificationChannelPathTemplate.match =
@@ -2058,7 +2286,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('organizationService', () => {
+    describe('organizationService', async () => {
       const fakePath = '/rendered/path/organizationService';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2068,7 +2296,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2120,7 +2348,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('organizationServiceServiceLevelObjective', () => {
+    describe('organizationServiceServiceLevelObjective', async () => {
       const fakePath =
         '/rendered/path/organizationServiceServiceLevelObjective';
       const expectedParameters = {
@@ -2132,7 +2360,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match =
@@ -2208,7 +2436,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('organizationUptimeCheckConfig', () => {
+    describe('organizationUptimeCheckConfig', async () => {
       const fakePath = '/rendered/path/organizationUptimeCheckConfig';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2218,7 +2446,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationUptimeCheckConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationUptimeCheckConfigPathTemplate.match =
@@ -2273,7 +2501,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2282,7 +2510,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2311,7 +2539,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('projectAlertPolicy', () => {
+    describe('projectAlertPolicy', async () => {
       const fakePath = '/rendered/path/projectAlertPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -2321,7 +2549,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAlertPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2373,7 +2601,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('projectAlertPolicyCondition', () => {
+    describe('projectAlertPolicyCondition', async () => {
       const fakePath = '/rendered/path/projectAlertPolicyCondition';
       const expectedParameters = {
         project: 'projectValue',
@@ -2384,7 +2612,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAlertPolicyConditionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectAlertPolicyConditionPathTemplate.match = sinon
@@ -2451,7 +2679,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('projectChannelDescriptor', () => {
+    describe('projectChannelDescriptor', async () => {
       const fakePath = '/rendered/path/projectChannelDescriptor';
       const expectedParameters = {
         project: 'projectValue',
@@ -2461,7 +2689,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectChannelDescriptorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2516,7 +2744,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('projectGroup', () => {
+    describe('projectGroup', async () => {
       const fakePath = '/rendered/path/projectGroup';
       const expectedParameters = {
         project: 'projectValue',
@@ -2526,7 +2754,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2565,7 +2793,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('projectNotificationChannel', () => {
+    describe('projectNotificationChannel', async () => {
       const fakePath = '/rendered/path/projectNotificationChannel';
       const expectedParameters = {
         project: 'projectValue',
@@ -2575,7 +2803,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectNotificationChannelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2630,7 +2858,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('projectService', () => {
+    describe('projectService', async () => {
       const fakePath = '/rendered/path/projectService';
       const expectedParameters = {
         project: 'projectValue',
@@ -2640,7 +2868,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2682,7 +2910,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('projectServiceServiceLevelObjective', () => {
+    describe('projectServiceServiceLevelObjective', async () => {
       const fakePath = '/rendered/path/projectServiceServiceLevelObjective';
       const expectedParameters = {
         project: 'projectValue',
@@ -2693,7 +2921,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match =
@@ -2765,7 +2993,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       });
     });
 
-    describe('projectUptimeCheckConfig', () => {
+    describe('projectUptimeCheckConfig', async () => {
       const fakePath = '/rendered/path/projectUptimeCheckConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -2775,7 +3003,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectUptimeCheckConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2824,6 +3052,55 @@ describe('v3.UptimeCheckServiceClient', () => {
             client.pathTemplates.projectUptimeCheckConfigPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('snooze', async () => {
+      const fakePath = '/rendered/path/snooze';
+      const expectedParameters = {
+        project: 'projectValue',
+        snooze: 'snoozeValue',
+      };
+      const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.snoozePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.snoozePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('snoozePath', () => {
+        const result = client.snoozePath('projectValue', 'snoozeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.snoozePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSnoozeName', () => {
+        const result = client.matchProjectFromSnoozeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.snoozePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSnoozeFromSnoozeName', () => {
+        const result = client.matchSnoozeFromSnoozeName(fakePath);
+        assert.strictEqual(result, 'snoozeValue');
+        assert(
+          (client.pathTemplates.snoozePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
