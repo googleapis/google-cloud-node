@@ -41,8 +41,8 @@ function main(model, content) {
    */
   // const content = {}
   /**
-   *  Optional. Optional task type for which the embeddings will be used. Can
-   *  only be set for `models/embedding-001`.
+   *  Optional. Optional task type for which the embeddings will be used. Not
+   *  supported on earlier models (`models/embedding-001`).
    */
   // const taskType = {}
   /**
