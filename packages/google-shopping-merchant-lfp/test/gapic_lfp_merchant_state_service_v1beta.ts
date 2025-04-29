@@ -206,9 +206,14 @@ describe('v1beta.LfpMerchantStateServiceClient', () => {
         throw err;
       });
       assert(client.lfpMerchantStateServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -218,9 +223,14 @@ describe('v1beta.LfpMerchantStateServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.lfpMerchantStateServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -390,7 +400,9 @@ describe('v1beta.LfpMerchantStateServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getLfpMerchantState(request), expectedError);
     });
   });
