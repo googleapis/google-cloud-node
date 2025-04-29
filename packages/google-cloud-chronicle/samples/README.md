@@ -63,7 +63,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Data_access_control_service.create_data_access_label
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.create_data_access_label.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.create_data_access_label.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.create_data_access_label.js,samples/README.md)
 
@@ -80,7 +80,7 @@ __Usage:__
 
 ### Data_access_control_service.create_data_access_scope
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.create_data_access_scope.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.create_data_access_scope.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.create_data_access_scope.js,samples/README.md)
 
@@ -97,7 +97,7 @@ __Usage:__
 
 ### Data_access_control_service.delete_data_access_label
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.delete_data_access_label.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.delete_data_access_label.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.delete_data_access_label.js,samples/README.md)
 
@@ -114,7 +114,7 @@ __Usage:__
 
 ### Data_access_control_service.delete_data_access_scope
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.delete_data_access_scope.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.delete_data_access_scope.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.delete_data_access_scope.js,samples/README.md)
 
@@ -131,7 +131,7 @@ __Usage:__
 
 ### Data_access_control_service.get_data_access_label
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.get_data_access_label.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.get_data_access_label.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.get_data_access_label.js,samples/README.md)
 
@@ -148,7 +148,7 @@ __Usage:__
 
 ### Data_access_control_service.get_data_access_scope
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.get_data_access_scope.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.get_data_access_scope.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.get_data_access_scope.js,samples/README.md)
 
@@ -165,7 +165,7 @@ __Usage:__
 
 ### Data_access_control_service.list_data_access_labels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.list_data_access_labels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.list_data_access_labels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.list_data_access_labels.js,samples/README.md)
 
@@ -182,7 +182,7 @@ __Usage:__
 
 ### Data_access_control_service.list_data_access_scopes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.list_data_access_scopes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.list_data_access_scopes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.list_data_access_scopes.js,samples/README.md)
 
@@ -199,7 +199,7 @@ __Usage:__
 
 ### Data_access_control_service.update_data_access_label
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.update_data_access_label.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.update_data_access_label.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.update_data_access_label.js,samples/README.md)
 
@@ -216,7 +216,7 @@ __Usage:__
 
 ### Data_access_control_service.update_data_access_scope
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.update_data_access_scope.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.update_data_access_scope.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/data_access_control_service.update_data_access_scope.js,samples/README.md)
 
@@ -233,7 +233,7 @@ __Usage:__
 
 ### Entity_service.create_watchlist
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/entity_service.create_watchlist.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/entity_service.create_watchlist.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/entity_service.create_watchlist.js,samples/README.md)
 
@@ -250,7 +250,7 @@ __Usage:__
 
 ### Entity_service.delete_watchlist
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/entity_service.delete_watchlist.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/entity_service.delete_watchlist.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/entity_service.delete_watchlist.js,samples/README.md)
 
@@ -267,7 +267,7 @@ __Usage:__
 
 ### Entity_service.get_watchlist
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/entity_service.get_watchlist.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/entity_service.get_watchlist.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/entity_service.get_watchlist.js,samples/README.md)
 
@@ -284,7 +284,7 @@ __Usage:__
 
 ### Entity_service.list_watchlists
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/entity_service.list_watchlists.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/entity_service.list_watchlists.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/entity_service.list_watchlists.js,samples/README.md)
 
@@ -301,7 +301,7 @@ __Usage:__
 
 ### Entity_service.update_watchlist
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/entity_service.update_watchlist.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/entity_service.update_watchlist.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/entity_service.update_watchlist.js,samples/README.md)
 
@@ -318,7 +318,7 @@ __Usage:__
 
 ### Instance_service.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/instance_service.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/instance_service.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/instance_service.get_instance.js,samples/README.md)
 
@@ -335,7 +335,7 @@ __Usage:__
 
 ### Reference_list_service.create_reference_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.create_reference_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.create_reference_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.create_reference_list.js,samples/README.md)
 
@@ -352,7 +352,7 @@ __Usage:__
 
 ### Reference_list_service.get_reference_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.get_reference_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.get_reference_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.get_reference_list.js,samples/README.md)
 
@@ -369,7 +369,7 @@ __Usage:__
 
 ### Reference_list_service.list_reference_lists
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.list_reference_lists.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.list_reference_lists.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.list_reference_lists.js,samples/README.md)
 
@@ -386,7 +386,7 @@ __Usage:__
 
 ### Reference_list_service.update_reference_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.update_reference_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.update_reference_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/reference_list_service.update_reference_list.js,samples/README.md)
 
@@ -403,7 +403,7 @@ __Usage:__
 
 ### Rule_service.create_retrohunt
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.create_retrohunt.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/rule_service.create_retrohunt.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/rule_service.create_retrohunt.js,samples/README.md)
 
@@ -420,7 +420,7 @@ __Usage:__
 
 ### Rule_service.create_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.create_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/rule_service.create_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/rule_service.create_rule.js,samples/README.md)
 
@@ -437,7 +437,7 @@ __Usage:__
 
 ### Rule_service.delete_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.delete_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/rule_service.delete_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/rule_service.delete_rule.js,samples/README.md)
 
@@ -454,7 +454,7 @@ __Usage:__
 
 ### Rule_service.get_retrohunt
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.get_retrohunt.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/rule_service.get_retrohunt.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/rule_service.get_retrohunt.js,samples/README.md)
 
@@ -471,7 +471,7 @@ __Usage:__
 
 ### Rule_service.get_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.get_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/rule_service.get_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/rule_service.get_rule.js,samples/README.md)
 
@@ -488,7 +488,7 @@ __Usage:__
 
 ### Rule_service.get_rule_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.get_rule_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/rule_service.get_rule_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/rule_service.get_rule_deployment.js,samples/README.md)
 
@@ -505,7 +505,7 @@ __Usage:__
 
 ### Rule_service.list_retrohunts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_retrohunts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_retrohunts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_retrohunts.js,samples/README.md)
 
@@ -522,7 +522,7 @@ __Usage:__
 
 ### Rule_service.list_rule_deployments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_rule_deployments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_rule_deployments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_rule_deployments.js,samples/README.md)
 
@@ -539,7 +539,7 @@ __Usage:__
 
 ### Rule_service.list_rule_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_rule_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_rule_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_rule_revisions.js,samples/README.md)
 
@@ -556,7 +556,7 @@ __Usage:__
 
 ### Rule_service.list_rules
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_rules.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_rules.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_rules.js,samples/README.md)
 
@@ -573,7 +573,7 @@ __Usage:__
 
 ### Rule_service.update_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.update_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/rule_service.update_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/rule_service.update_rule.js,samples/README.md)
 
@@ -590,7 +590,7 @@ __Usage:__
 
 ### Rule_service.update_rule_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.update_rule_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/generated/v1/rule_service.update_rule_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/generated/v1/rule_service.update_rule_deployment.js,samples/README.md)
 
@@ -607,7 +607,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-chronicle/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-chronicle/samples/quickstart.js,samples/README.md)
 
