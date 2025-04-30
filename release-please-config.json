@@ -200,7 +200,8 @@
     "packages/google-maps-areainsights": {},
     "packages/google-cloud-financialservices": {},
     "packages/google-cloud-chronicle": {},
-    "packages/google-cloud-devicestreaming": {}
+    "packages/google-cloud-devicestreaming": {},
+    "packages/google-shopping-merchant-issueresolution": {}
   },
   "plugins": [
     {
