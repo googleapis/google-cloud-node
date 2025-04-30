@@ -1,5 +1,28 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/filestore-v4.0.1...filestore-v5.0.0) (2025-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [filestore] add PromoteReplica API ([#6116](https://github.com/googleapis/google-cloud-node/issues/6116)) ([9f33d6a](https://github.com/googleapis/google-cloud-node/commit/9f33d6a030b696d8f42d11054e5896955b3d0720))
+* [Many APIs] add request/response debug logging to gapics ([afcb5c0](https://github.com/googleapis/google-cloud-node/commit/afcb5c07e82bc8349b9677766cd880f69a97f77f))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+* [Many APIs] finalize fixing typings for headers in generator ([#6013](https://github.com/googleapis/google-cloud-node/issues/6013)) ([cd3a2d4](https://github.com/googleapis/google-cloud-node/commit/cd3a2d44fc7a9b3798346162ba19df1c748fba58))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/filestore-v4.0.0...filestore-v4.0.1) (2025-03-21)
 
 

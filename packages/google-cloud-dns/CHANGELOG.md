@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/dns-v5.1.0...dns-v5.2.0) (2025-04-30)
+
+
+### Features
+
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
+
+### Bug Fixes
+
+* Update outdated types for DNS ([#6238](https://github.com/googleapis/google-cloud-node/issues/6238)) ([96aa3d8](https://github.com/googleapis/google-cloud-node/commit/96aa3d809b7cfff6410ce89b177ba3fbc6a607da))
+* Update Record typings ([7aa1c72](https://github.com/googleapis/google-cloud-node/commit/7aa1c72d37b636a6fde876758701a9b37c7a609c))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/dns-v5.0.0...dns-v5.1.0) (2025-03-19)
 
 

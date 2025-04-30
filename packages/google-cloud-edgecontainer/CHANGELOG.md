@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/edgecontainer-v0.6.1...edgecontainer-v0.7.0) (2025-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [edgecontainer] add storage schema to local control plane config ([#5775](https://github.com/googleapis/google-cloud-node/issues/5775)) ([5f913f7](https://github.com/googleapis/google-cloud-node/commit/5f913f729b267fca3d8fbd562d84bb945c74674f))
+* [Many APIs] add request/response debug logging to gapics ([afcb5c0](https://github.com/googleapis/google-cloud-node/commit/afcb5c07e82bc8349b9677766cd880f69a97f77f))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/edgecontainer-v0.6.0...edgecontainer-v0.6.1) (2025-03-21)
 
 

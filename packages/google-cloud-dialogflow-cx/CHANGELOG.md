@@ -1,5 +1,29 @@
 # Changelog
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.0.1...dialogflow-cx-v6.0.0) (2025-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [dialogflow-cx] add options of client_certificate_settings, bigquery_export_settings, bearer_token_config and boost_control_spec; add support of ALAW encoding ([#5787](https://github.com/googleapis/google-cloud-node/issues/5787)) ([49e8cd1](https://github.com/googleapis/google-cloud-node/commit/49e8cd12925813a6f45d75f3a3e422dad061ef6d))
+* [dialogflow-cx] added support for handlers ([#6055](https://github.com/googleapis/google-cloud-node/issues/6055)) ([3773a8c](https://github.com/googleapis/google-cloud-node/commit/3773a8c5ba59f9899c43e74ebcf8e5c31402b284))
+* [dialogflow-cx] Change client_secret in OAuthConfig from required to optional ([#6119](https://github.com/googleapis/google-cloud-node/issues/6119)) ([3f75a90](https://github.com/googleapis/google-cloud-node/commit/3f75a90d8f57ea6d896936fb2605db3268069fb9))
+* [dialogflow-cx] exposed Zone Separation & Zone Isolation status of an agent ([#6062](https://github.com/googleapis/google-cloud-node/issues/6062)) ([9b7a778](https://github.com/googleapis/google-cloud-node/commit/9b7a778e7c9019e58818e20faf5f0cfcb9b3c10d))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.0.0...dialogflow-cx-v5.0.1) (2025-03-21)
 
 

@@ -4,6 +4,36 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.0.1...dialogflow-v8.0.0) (2025-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [dialogflow] add Model Armor API ([#5952](https://github.com/googleapis/google-cloud-node/issues/5952)) ([d765c81](https://github.com/googleapis/google-cloud-node/commit/d765c81cca8ce084f5a9505e717962e8ed649dfd))
+* [dialogflow] add new fields for delivering intermediate transcriptions through PubSub ([#5881](https://github.com/googleapis/google-cloud-node/issues/5881)) ([7c8a115](https://github.com/googleapis/google-cloud-node/commit/7c8a115c88865b3aadfa649b3b2a89207d5502c2))
+* [dialogflow] Add new RPC IngestContextReferences, GenerateSuggestions ([#6111](https://github.com/googleapis/google-cloud-node/issues/6111)) ([9129d93](https://github.com/googleapis/google-cloud-node/commit/9129d93549847996346f7842ea0a650d5cc493fc))
+* [dialogflow] add options of query_source, search_config, end_user_metadata and exact_search ([#5789](https://github.com/googleapis/google-cloud-node/issues/5789)) ([25a2241](https://github.com/googleapis/google-cloud-node/commit/25a2241eac52e8e501d81021f227387a08197ad1))
+* [dialogflow] add options of query_source, search_config, end_user_metadata and exact_search ([#5813](https://github.com/googleapis/google-cloud-node/issues/5813)) ([b0358c6](https://github.com/googleapis/google-cloud-node/commit/b0358c61fa5a644681d922a4de1de405d0fddc28))
+* [dialogflow] created new boolean fields in conversation dataset for zone isolation and zone separation compliance status ([#5710](https://github.com/googleapis/google-cloud-node/issues/5710)) ([fd737ec](https://github.com/googleapis/google-cloud-node/commit/fd737ecc5e6681fbd97d7a20e39cbbdb4ec0595a))
+* [dialogflow] created new boolean fields in conversation model for zone isolation and zone separation compliance status ([#5693](https://github.com/googleapis/google-cloud-node/issues/5693)) ([0d37602](https://github.com/googleapis/google-cloud-node/commit/0d37602ddd7aa47895a44838e01e4476ce91d1cf))
+* [dialogflow] make TrainingPhrase name field output-only ([#5861](https://github.com/googleapis/google-cloud-node/issues/5861)) ([7238530](https://github.com/googleapis/google-cloud-node/commit/72385303b7b0d8f3f5462d05c490f0200415fc20))
+* [dialogflow] properly mark TrainingPhrase name field output-only ([#5862](https://github.com/googleapis/google-cloud-node/issues/5862)) ([522c389](https://github.com/googleapis/google-cloud-node/commit/522c389d50d175c26afcbe513e98824eb9e190e9))
+* [Many APIs] add request/response debug logging to gapics ([afcb5c0](https://github.com/googleapis/google-cloud-node/commit/afcb5c07e82bc8349b9677766cd880f69a97f77f))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.0.0...dialogflow-v7.0.1) (2025-03-21)
 
 

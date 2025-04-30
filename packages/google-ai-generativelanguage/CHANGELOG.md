@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v3.1.0...generativelanguage-v3.2.0) (2025-04-30)
+
+
+### Features
+
+* [generativelanguage] add CODE_RETRIEVAL_QUERY embedding task type ([#6307](https://github.com/googleapis/google-cloud-node/issues/6307)) ([484c6e0](https://github.com/googleapis/google-cloud-node/commit/484c6e0934fa16c4d500fb9d441dbf8c9f441015))
+* [generativelanguage] add support for live API (https://togithub.com/googleapis/go-genai/issues/275) ([484c6e0](https://github.com/googleapis/google-cloud-node/commit/484c6e0934fa16c4d500fb9d441dbf8c9f441015))
+* Add CODE_RETRIEVAL_QUERY embedding task type ([484c6e0](https://github.com/googleapis/google-cloud-node/commit/484c6e0934fa16c4d500fb9d441dbf8c9f441015))
+* Add language_code to speech config ([484c6e0](https://github.com/googleapis/google-cloud-node/commit/484c6e0934fa16c4d500fb9d441dbf8c9f441015))
+* Add minimum, maximum, any_of, property_ordering, default and null type to Schema ([484c6e0](https://github.com/googleapis/google-cloud-node/commit/484c6e0934fa16c4d500fb9d441dbf8c9f441015))
+* Add seed to GenerationConfig ([484c6e0](https://github.com/googleapis/google-cloud-node/commit/484c6e0934fa16c4d500fb9d441dbf8c9f441015))
+* Add support for ModalityTokenCounts in UsageMetadata responses ([484c6e0](https://github.com/googleapis/google-cloud-node/commit/484c6e0934fa16c4d500fb9d441dbf8c9f441015))
+* Add support for ModalityTokenCounts in UsageMetadata responses ([484c6e0](https://github.com/googleapis/google-cloud-node/commit/484c6e0934fa16c4d500fb9d441dbf8c9f441015))
+* Add support for Veo: PredictLongRunning and generated/downloadable files ([484c6e0](https://github.com/googleapis/google-cloud-node/commit/484c6e0934fa16c4d500fb9d441dbf8c9f441015))
+* Add ThinkingConfig, MediaResolution, and seed to GenerationConfig ([484c6e0](https://github.com/googleapis/google-cloud-node/commit/484c6e0934fa16c4d500fb9d441dbf8c9f441015))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v3.0.0...generativelanguage-v3.1.0) (2025-03-19)
 
 

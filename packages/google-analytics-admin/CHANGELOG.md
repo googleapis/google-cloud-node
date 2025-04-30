@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/admin-v8.1.0...admin-v8.2.0) (2025-04-30)
+
+
+### Features
+
+* [analytics-admin] add the `CreateReportingDataAnnotation` method ([#6266](https://github.com/googleapis/google-cloud-node/issues/6266)) ([4309d7e](https://github.com/googleapis/google-cloud-node/commit/4309d7ee462728f082ae3e6fe6d2a0ceca7e2ebc))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/admin-v8.0.0...admin-v8.1.0) (2025-03-19)
 
 
