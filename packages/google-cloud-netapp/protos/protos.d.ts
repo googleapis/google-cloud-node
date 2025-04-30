@@ -938,6 +938,12 @@ export namespace google {
 
                     /** Backup satisfiesPzi */
                     satisfiesPzi?: (boolean|null);
+
+                    /** Backup volumeRegion */
+                    volumeRegion?: (string|null);
+
+                    /** Backup backupRegion */
+                    backupRegion?: (string|null);
                 }
 
                 /** Represents a Backup. */
@@ -984,6 +990,12 @@ export namespace google {
 
                     /** Backup satisfiesPzi. */
                     public satisfiesPzi: boolean;
+
+                    /** Backup volumeRegion. */
+                    public volumeRegion: string;
+
+                    /** Backup backupRegion. */
+                    public backupRegion: string;
 
                     /** Backup _sourceSnapshot. */
                     public _sourceSnapshot?: "sourceSnapshot";
@@ -2558,6 +2570,21 @@ export namespace google {
 
                     /** BackupVault labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** BackupVault backupVaultType */
+                    backupVaultType?: (google.cloud.netapp.v1.BackupVault.BackupVaultType|keyof typeof google.cloud.netapp.v1.BackupVault.BackupVaultType|null);
+
+                    /** BackupVault sourceRegion */
+                    sourceRegion?: (string|null);
+
+                    /** BackupVault backupRegion */
+                    backupRegion?: (string|null);
+
+                    /** BackupVault sourceBackupVault */
+                    sourceBackupVault?: (string|null);
+
+                    /** BackupVault destinationBackupVault */
+                    destinationBackupVault?: (string|null);
                 }
 
                 /** Represents a BackupVault. */
@@ -2583,6 +2610,21 @@ export namespace google {
 
                     /** BackupVault labels. */
                     public labels: { [k: string]: string };
+
+                    /** BackupVault backupVaultType. */
+                    public backupVaultType: (google.cloud.netapp.v1.BackupVault.BackupVaultType|keyof typeof google.cloud.netapp.v1.BackupVault.BackupVaultType);
+
+                    /** BackupVault sourceRegion. */
+                    public sourceRegion: string;
+
+                    /** BackupVault backupRegion. */
+                    public backupRegion: string;
+
+                    /** BackupVault sourceBackupVault. */
+                    public sourceBackupVault: string;
+
+                    /** BackupVault destinationBackupVault. */
+                    public destinationBackupVault: string;
 
                     /**
                      * Creates a new BackupVault instance using the specified properties.
@@ -2672,6 +2714,13 @@ export namespace google {
                         DELETING = 3,
                         ERROR = 4,
                         UPDATING = 5
+                    }
+
+                    /** BackupVaultType enum. */
+                    enum BackupVaultType {
+                        BACKUP_VAULT_TYPE_UNSPECIFIED = 0,
+                        IN_REGION = 1,
+                        CROSS_REGION = 2
                     }
                 }
 
@@ -14010,9 +14059,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
-
-            /** Publishing restReferenceDocumentationUri */
-            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -14053,9 +14099,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
-
-            /** Publishing restReferenceDocumentationUri. */
-            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -18121,9 +18164,6 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
-
-            /** ServiceOptions .google.api.apiVersion */
-            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -18375,7 +18415,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|Buffer|string|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -18406,7 +18446,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|Buffer|string);
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -19745,7 +19785,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|Buffer|string|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -19761,7 +19801,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|Buffer|string);
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.
