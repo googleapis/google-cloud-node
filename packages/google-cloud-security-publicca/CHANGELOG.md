@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/publicca-v2.0.1...publicca-v2.1.0) (2025-04-30)
+
+
+### Features
+
+* [security] added protos for publicca v1alpha1 ([#6255](https://github.com/googleapis/google-cloud-node/issues/6255)) ([273ff46](https://github.com/googleapis/google-cloud-node/commit/273ff46e1e2ba9a8aec91d1b68d9b6e26875d629))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/publicca-v2.0.0...publicca-v2.0.1) (2025-03-19)
 
 

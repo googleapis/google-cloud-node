@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.0.1...artifact-registry-v4.1.0) (2025-04-30)
+
+
+### Features
+
+* [artifactregistry] add the GoModule and KfpArtifact resources ([#6231](https://github.com/googleapis/google-cloud-node/issues/6231)) ([7b8b452](https://github.com/googleapis/google-cloud-node/commit/7b8b4529fbdcfd0286c13754df7121a73e5054c8))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.0.0...artifact-registry-v4.0.1) (2025-03-19)
 
 

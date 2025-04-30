@@ -4,6 +4,30 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v6.0.1...recaptcha-enterprise-v7.0.0) (2025-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [recaptchaenterprise] A new enum `Challenge` is added ([#5807](https://github.com/googleapis/google-cloud-node/issues/5807)) ([9cfcf1f](https://github.com/googleapis/google-cloud-node/commit/9cfcf1fead76fdaa16f22737f33859c52945481e))
+* [recaptchaenterprise] add request/response debug logging to gapics, update templates to gax 5  ([9010372](https://github.com/googleapis/google-cloud-node/commit/9010372cacb146904e56bc919e0c54e6a7b8b678))
+* [recaptchaenterprise] support for ListIpOverrides and RemoveIpOverride ([#5777](https://github.com/googleapis/google-cloud-node/issues/5777)) ([ae63b6a](https://github.com/googleapis/google-cloud-node/commit/ae63b6a3f18b20f27b43a9f21f26f69af95b2461))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6187](https://github.com/googleapis/google-cloud-node/issues/6187)) ([b33692d](https://github.com/googleapis/google-cloud-node/commit/b33692d64bd42b99f37d0f919f2b0c06a673ab7f))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v6.0.0...recaptcha-enterprise-v6.0.1) (2025-03-21)
 
 

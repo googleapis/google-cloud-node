@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/css-v0.8.1...css-v0.9.0) (2025-04-30)
+
+
+### Features
+
+* [css] Introduce QuotaService for CSS API ([#6249](https://github.com/googleapis/google-cloud-node/issues/6249)) ([5dc6342](https://github.com/googleapis/google-cloud-node/commit/5dc634291b5ae5f427479d718bf0b961ca5f0ad8))
+
 ## [0.8.1](https://github.com/googleapis/google-cloud-node/compare/css-v0.8.0...css-v0.8.1) (2025-03-19)
 
 

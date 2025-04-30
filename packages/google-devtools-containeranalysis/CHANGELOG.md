@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.1.0...containeranalysis-v6.2.0) (2025-04-30)
+
+
+### Features
+
+* [containeranalysis] add ExportSBOM API method for v1 ([#6210](https://github.com/googleapis/google-cloud-node/issues/6210)) ([c02b122](https://github.com/googleapis/google-cloud-node/commit/c02b1222a127a8229ae1da81e07fc2ba386dfd11))
+* [containeranalysis] add new location-specific bindings ([#6222](https://github.com/googleapis/google-cloud-node/issues/6222)) ([6c8ef35](https://github.com/googleapis/google-cloud-node/commit/6c8ef3521ba94048741a9c33c4a66506bd057812))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.0.0...containeranalysis-v6.1.0) (2025-03-19)
 
 

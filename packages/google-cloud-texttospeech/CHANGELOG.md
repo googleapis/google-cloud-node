@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v6.0.1...text-to-speech-v6.1.0) (2025-04-30)
+
+
+### Features
+
+* [texttospeech] Support HD voice custom pronunciations ([#6229](https://github.com/googleapis/google-cloud-node/issues/6229)) ([f1f9df8](https://github.com/googleapis/google-cloud-node/commit/f1f9df81259237c77433621f449c7d4325c658d8))
+
 ## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v6.0.0...text-to-speech-v6.0.1) (2025-03-19)
 
 
