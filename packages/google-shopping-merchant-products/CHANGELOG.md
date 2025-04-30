@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.3.0...products-v0.4.0) (2025-04-30)
+
+
+### Features
+
+* [merchantapi] A new field `automated_discounts` is added to message `google.shopping.merchant.products.v1beta.Product` ([#6248](https://github.com/googleapis/google-cloud-node/issues/6248)) ([1171975](https://github.com/googleapis/google-cloud-node/commit/11719759a25e96b3c2d424e44789c4872dfbcd44))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.2.0...products-v0.3.0) (2025-03-19)
 
 

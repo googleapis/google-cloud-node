@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/privilegedaccessmanager-v0.3.1...privilegedaccessmanager-v0.4.0) (2025-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics ([b99c5f8](https://github.com/googleapis/google-cloud-node/commit/b99c5f8269a8401c72e9c913971c7e90467209e2))
+* [privilegedaccessmanager] republish docs ([#5810](https://github.com/googleapis/google-cloud-node/issues/5810)) ([864ebd1](https://github.com/googleapis/google-cloud-node/commit/864ebd10f82a0406a8432fe839b78255fde6d2f9))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6187](https://github.com/googleapis/google-cloud-node/issues/6187)) ([b33692d](https://github.com/googleapis/google-cloud-node/commit/b33692d64bd42b99f37d0f919f2b0c06a673ab7f))
+* [Many APIs] finalize fixing typings for headers in generator ([#6018](https://github.com/googleapis/google-cloud-node/issues/6018)) ([9dc5856](https://github.com/googleapis/google-cloud-node/commit/9dc585661489f51bb7a85b39519fd8b11dfffc5b))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/privilegedaccessmanager-v0.3.0...privilegedaccessmanager-v0.3.1) (2025-03-21)
 
 

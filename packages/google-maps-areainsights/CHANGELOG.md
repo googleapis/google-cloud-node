@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/areainsights-v0.2.1...areainsights-v0.3.0) (2025-04-30)
+
+
+### Features
+
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/areainsights-v0.2.0...areainsights-v0.2.1) (2025-03-19)
 
 

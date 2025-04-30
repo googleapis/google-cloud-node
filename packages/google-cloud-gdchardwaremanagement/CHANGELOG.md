@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.5.1...gdchardwaremanagement-v0.6.0) (2025-04-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [gdchardwaremanagement] accept status updates in the SignalZoneState method ([#6284](https://github.com/googleapis/google-cloud-node/issues/6284)) ([e4a4e69](https://github.com/googleapis/google-cloud-node/commit/e4a4e69982e49e751828d7a7f21dad4c335b95ca))
+* [gdchardwaremanagement] add a DeleteSite method ([#5767](https://github.com/googleapis/google-cloud-node/issues/5767)) ([55c77b9](https://github.com/googleapis/google-cloud-node/commit/55c77b9d386e49a6fd3c6767a771b31b116e945a))
+* [gdchardwaremanagement] add an order type field to distinguish a fulfillment request from a sales inquiry ([#5685](https://github.com/googleapis/google-cloud-node/issues/5685)) ([ba7cd86](https://github.com/googleapis/google-cloud-node/commit/ba7cd868aba5d60d8871449302212db526e31dfc))
+* [gdchardwaremanagement] add DNS address, Kubernetes primary VLAN ID, and provisioning state to the Zone resource ([#5805](https://github.com/googleapis/google-cloud-node/issues/5805)) ([b288d9f](https://github.com/googleapis/google-cloud-node/commit/b288d9f4448e1305151a8f734afd8f1233d8c5bb))
+* [Many APIs] add request/response debug logging to gapics ([afcb5c0](https://github.com/googleapis/google-cloud-node/commit/afcb5c07e82bc8349b9677766cd880f69a97f77f))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+* [Many APIs] finalize fixing typings for headers in generator ([#6013](https://github.com/googleapis/google-cloud-node/issues/6013)) ([cd3a2d4](https://github.com/googleapis/google-cloud-node/commit/cd3a2d44fc7a9b3798346162ba19df1c748fba58))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.5.0...gdchardwaremanagement-v0.5.1) (2025-03-21)
 
 
