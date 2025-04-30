@@ -19,14 +19,19 @@
 import {OrderTrackingSignalsServiceClient} from '@google-cloud/ordertracking';
 
 // check that the client class type name can be used
-function doStuffWithOrderTrackingSignalsServiceClient(client: OrderTrackingSignalsServiceClient) {
+function doStuffWithOrderTrackingSignalsServiceClient(
+  client: OrderTrackingSignalsServiceClient
+) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const orderTrackingSignalsServiceClient = new OrderTrackingSignalsServiceClient();
-  doStuffWithOrderTrackingSignalsServiceClient(orderTrackingSignalsServiceClient);
+  const orderTrackingSignalsServiceClient =
+    new OrderTrackingSignalsServiceClient();
+  doStuffWithOrderTrackingSignalsServiceClient(
+    orderTrackingSignalsServiceClient
+  );
 }
 
 main();
