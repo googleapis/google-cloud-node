@@ -1,0 +1,293 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.dataflow.v1beta3",
+  "libraryPackage": "@google-cloud/dataflow",
+  "services": {
+    "FlexTemplatesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FlexTemplatesServiceClient",
+          "rpcs": {
+            "LaunchFlexTemplate": {
+              "methods": [
+                "launchFlexTemplate"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FlexTemplatesServiceClient",
+          "rpcs": {
+            "LaunchFlexTemplate": {
+              "methods": [
+                "launchFlexTemplate"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "JobsV1Beta3": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "JobsV1Beta3Client",
+          "rpcs": {
+            "CreateJob": {
+              "methods": [
+                "createJob"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "getJob"
+              ]
+            },
+            "UpdateJob": {
+              "methods": [
+                "updateJob"
+              ]
+            },
+            "CheckActiveJobs": {
+              "methods": [
+                "checkActiveJobs"
+              ]
+            },
+            "SnapshotJob": {
+              "methods": [
+                "snapshotJob"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "listJobs",
+                "listJobsStream",
+                "listJobsAsync"
+              ]
+            },
+            "AggregatedListJobs": {
+              "methods": [
+                "aggregatedListJobs",
+                "aggregatedListJobsStream",
+                "aggregatedListJobsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "JobsV1Beta3Client",
+          "rpcs": {
+            "CreateJob": {
+              "methods": [
+                "createJob"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "getJob"
+              ]
+            },
+            "UpdateJob": {
+              "methods": [
+                "updateJob"
+              ]
+            },
+            "CheckActiveJobs": {
+              "methods": [
+                "checkActiveJobs"
+              ]
+            },
+            "SnapshotJob": {
+              "methods": [
+                "snapshotJob"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "listJobs",
+                "listJobsStream",
+                "listJobsAsync"
+              ]
+            },
+            "AggregatedListJobs": {
+              "methods": [
+                "aggregatedListJobs",
+                "aggregatedListJobsStream",
+                "aggregatedListJobsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MessagesV1Beta3": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MessagesV1Beta3Client",
+          "rpcs": {
+            "ListJobMessages": {
+              "methods": [
+                "listJobMessages",
+                "listJobMessagesStream",
+                "listJobMessagesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MessagesV1Beta3Client",
+          "rpcs": {
+            "ListJobMessages": {
+              "methods": [
+                "listJobMessages",
+                "listJobMessagesStream",
+                "listJobMessagesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MetricsV1Beta3": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MetricsV1Beta3Client",
+          "rpcs": {
+            "GetJobMetrics": {
+              "methods": [
+                "getJobMetrics"
+              ]
+            },
+            "GetJobExecutionDetails": {
+              "methods": [
+                "getJobExecutionDetails",
+                "getJobExecutionDetailsStream",
+                "getJobExecutionDetailsAsync"
+              ]
+            },
+            "GetStageExecutionDetails": {
+              "methods": [
+                "getStageExecutionDetails",
+                "getStageExecutionDetailsStream",
+                "getStageExecutionDetailsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MetricsV1Beta3Client",
+          "rpcs": {
+            "GetJobMetrics": {
+              "methods": [
+                "getJobMetrics"
+              ]
+            },
+            "GetJobExecutionDetails": {
+              "methods": [
+                "getJobExecutionDetails",
+                "getJobExecutionDetailsStream",
+                "getJobExecutionDetailsAsync"
+              ]
+            },
+            "GetStageExecutionDetails": {
+              "methods": [
+                "getStageExecutionDetails",
+                "getStageExecutionDetailsStream",
+                "getStageExecutionDetailsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SnapshotsV1Beta3": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SnapshotsV1Beta3Client",
+          "rpcs": {
+            "GetSnapshot": {
+              "methods": [
+                "getSnapshot"
+              ]
+            },
+            "DeleteSnapshot": {
+              "methods": [
+                "deleteSnapshot"
+              ]
+            },
+            "ListSnapshots": {
+              "methods": [
+                "listSnapshots"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SnapshotsV1Beta3Client",
+          "rpcs": {
+            "GetSnapshot": {
+              "methods": [
+                "getSnapshot"
+              ]
+            },
+            "DeleteSnapshot": {
+              "methods": [
+                "deleteSnapshot"
+              ]
+            },
+            "ListSnapshots": {
+              "methods": [
+                "listSnapshots"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TemplatesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TemplatesServiceClient",
+          "rpcs": {
+            "CreateJobFromTemplate": {
+              "methods": [
+                "createJobFromTemplate"
+              ]
+            },
+            "LaunchTemplate": {
+              "methods": [
+                "launchTemplate"
+              ]
+            },
+            "GetTemplate": {
+              "methods": [
+                "getTemplate"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TemplatesServiceClient",
+          "rpcs": {
+            "CreateJobFromTemplate": {
+              "methods": [
+                "createJobFromTemplate"
+              ]
+            },
+            "LaunchTemplate": {
+              "methods": [
+                "launchTemplate"
+              ]
+            },
+            "GetTemplate": {
+              "methods": [
+                "getTemplate"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
