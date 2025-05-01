@@ -1,5 +1,29 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v4.0.1...datastream-v5.0.0) (2025-05-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [datastream] A new field `secret_manager_stored_password` is added to multiple messages ([#6218](https://github.com/googleapis/google-cloud-node/issues/6218)) ([f530220](https://github.com/googleapis/google-cloud-node/commit/f5302204749b6f3a6c4831f920b1a03386d5531a))
+* [datastream] A new field `ssl_config` is added to message `.google.cloud.datastream.v1.PostgresqlProfile` ([#5972](https://github.com/googleapis/google-cloud-node/issues/5972)) ([96d1783](https://github.com/googleapis/google-cloud-node/commit/96d17834fa6cc727d4d79d082a3d457d7f70e295))
+* [datastream] A new method `RunStream` is added to service `Datastream` ([#5834](https://github.com/googleapis/google-cloud-node/issues/5834)) ([ca4db62](https://github.com/googleapis/google-cloud-node/commit/ca4db6283b23e8f99bdffb0ed4ea76005ee62f9e))
+* [Many APIs] add request/response debug logging to gapics ([e7409c8](https://github.com/googleapis/google-cloud-node/commit/e7409c87febcf33359a2d36ae4551f502b8a2f93))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/datastream-v4.0.0...datastream-v4.0.1) (2025-03-21)
 
 
