@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/policysimulator",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Policy Simulator API client for Node.js",
   "repository": {
     "type": "git",
