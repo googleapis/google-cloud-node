@@ -1,5 +1,32 @@
 # Changelog
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v5.0.1...deploy-v6.0.0) (2025-05-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [deploy] A new field `dns_endpoint` is added to message `.google.cloud.deploy.v1.GkeCluster` ([#5849](https://github.com/googleapis/google-cloud-node/issues/5849)) ([9320175](https://github.com/googleapis/google-cloud-node/commit/932017559e975fbab4c0ce13fcc808e08425c117))
+* [deploy] A new field `timed_promote_release_rule` is added to message `.google.cloud.deploy.v1.AutomationRule` ([#5806](https://github.com/googleapis/google-cloud-node/issues/5806)) ([0e61aec](https://github.com/googleapis/google-cloud-node/commit/0e61aecf4629e76bc05609c35b9911681f012d24))
+* [deploy] Add resource definition for Revision ([#6233](https://github.com/googleapis/google-cloud-node/issues/6233)) ([14b4580](https://github.com/googleapis/google-cloud-node/commit/14b458002aab5692c5cdaff37059ed5b657014ab))
+* [deploy] added new fields for the Automation Repair rule ([#5774](https://github.com/googleapis/google-cloud-node/issues/5774)) ([099d1b3](https://github.com/googleapis/google-cloud-node/commit/099d1b3ff7d6e8e43ab79f5d62c344c269eb806f))
+* [deploy] added support for deploy policies ([#5717](https://github.com/googleapis/google-cloud-node/issues/5717)) ([8d51ea3](https://github.com/googleapis/google-cloud-node/commit/8d51ea34e6efd1e88e0394b8e8d9dadf1a37c406))
+* [Many APIs] add request/response debug logging to gapics ([e7409c8](https://github.com/googleapis/google-cloud-node/commit/e7409c87febcf33359a2d36ae4551f502b8a2f93))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/deploy-v5.0.0...deploy-v5.0.1) (2025-03-21)
 
 
