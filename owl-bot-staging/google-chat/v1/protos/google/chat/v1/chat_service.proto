@@ -1,0 +1,855 @@
+// Copyright 2025 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package google.chat.v1;
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/chat/v1/attachment.proto";
+import "google/chat/v1/membership.proto";
+import "google/chat/v1/message.proto";
+import "google/chat/v1/reaction.proto";
+import "google/chat/v1/space.proto";
+import "google/chat/v1/space_event.proto";
+import "google/chat/v1/space_notification_setting.proto";
+import "google/chat/v1/space_read_state.proto";
+import "google/chat/v1/space_setup.proto";
+import "google/chat/v1/thread_read_state.proto";
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Google.Apps.Chat.V1";
+option go_package = "cloud.google.com/go/chat/apiv1/chatpb;chatpb";
+option java_multiple_files = true;
+option java_outer_classname = "ChatServiceProto";
+option java_package = "com.google.chat.v1";
+option objc_class_prefix = "DYNAPIProto";
+option php_namespace = "Google\\Apps\\Chat\\V1";
+option ruby_package = "Google::Apps::Chat::V1";
+
+// Enables developers to build Chat apps and
+// integrations on Google Chat Platform.
+service ChatService {
+  option (google.api.default_host) = "chat.googleapis.com";
+  option (google.api.oauth_scopes) =
+      "https://www.googleapis.com/auth/chat.admin.delete,"
+      "https://www.googleapis.com/auth/chat.admin.memberships,"
+      "https://www.googleapis.com/auth/chat.admin.memberships.readonly,"
+      "https://www.googleapis.com/auth/chat.admin.spaces,"
+      "https://www.googleapis.com/auth/chat.admin.spaces.readonly,"
+      "https://www.googleapis.com/auth/chat.bot,"
+      "https://www.googleapis.com/auth/chat.customemojis,"
+      "https://www.googleapis.com/auth/chat.customemojis.readonly,"
+      "https://www.googleapis.com/auth/chat.delete,"
+      "https://www.googleapis.com/auth/chat.import,"
+      "https://www.googleapis.com/auth/chat.memberships,"
+      "https://www.googleapis.com/auth/chat.memberships.app,"
+      "https://www.googleapis.com/auth/chat.memberships.readonly,"
+      "https://www.googleapis.com/auth/chat.messages,"
+      "https://www.googleapis.com/auth/chat.messages.create,"
+      "https://www.googleapis.com/auth/chat.messages.reactions,"
+      "https://www.googleapis.com/auth/chat.messages.reactions.create,"
+      "https://www.googleapis.com/auth/chat.messages.reactions.readonly,"
+      "https://www.googleapis.com/auth/chat.messages.readonly,"
+      "https://www.googleapis.com/auth/chat.spaces,"
+      "https://www.googleapis.com/auth/chat.spaces.create,"
+      "https://www.googleapis.com/auth/chat.spaces.readonly,"
+      "https://www.googleapis.com/auth/chat.users.readstate,"
+      "https://www.googleapis.com/auth/chat.users.readstate.readonly,"
+      "https://www.googleapis.com/auth/chat.users.spacesettings";
+
+  // Creates a message in a Google Chat space. For an example, see [Send a
+  // message](https://developers.google.com/workspace/chat/create-messages).
+  //
+  // The `create()` method requires either [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  // or [app
+  // authentication](https://developers.google.com/workspace/chat/authorize-import).
+  // Chat attributes the message sender differently depending on the type of
+  // authentication that you use in your request.
+  //
+  // The following image shows how Chat attributes a message when you use app
+  // authentication. Chat displays the Chat app as the message
+  // sender. The content of the message can contain text (`text`), cards
+  // (`cardsV2`), and accessory widgets (`accessoryWidgets`).
+  //
+  // ![Message sent with app
+  // authentication](https://developers.google.com/workspace/chat/images/message-app-auth.svg)
+  //
+  // The following image shows how Chat attributes a message when you use user
+  // authentication. Chat displays the user as the message sender and attributes
+  // the Chat app to the message by displaying its name. The content of message
+  // can only contain text (`text`).
+  //
+  // ![Message sent with user
+  // authentication](https://developers.google.com/workspace/chat/images/message-user-auth.svg)
+  //
+  // The maximum message size, including the message contents, is 32,000 bytes.
+  //
+  // For
+  // [webhook](https://developers.google.com/workspace/chat/quickstart/webhooks)
+  // requests, the response doesn't contain the full message. The response only
+  // populates the `name` and `thread.name` fields in addition to the
+  // information that was in the request.
+  rpc CreateMessage(CreateMessageRequest) returns (Message) {
+    option (google.api.http) = {
+      post: "/v1/{parent=spaces/*}/messages"
+      body: "message"
+    };
+    option (google.api.method_signature) = "parent,message,message_id";
+  }
+
+  // Lists messages in a space that the caller is a member of, including
+  // messages from blocked members and spaces. If you list messages from a
+  // space with no messages, the response is an empty object. When using a
+  // REST/HTTP interface, the response contains an empty JSON object, `{}`.
+  // For an example, see
+  // [List
+  // messages](https://developers.google.com/workspace/chat/api/guides/v1/messages/list).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc ListMessages(ListMessagesRequest) returns (ListMessagesResponse) {
+    option (google.api.http) = {
+      get: "/v1/{parent=spaces/*}/messages"
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Lists memberships in a space. For an example, see [List users and Google
+  // Chat apps in a
+  // space](https://developers.google.com/workspace/chat/list-members). Listing
+  // memberships with [app
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  // lists memberships in spaces that the Chat app has
+  // access to, but excludes Chat app memberships,
+  // including its own. Listing memberships with
+  // [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  // lists memberships in spaces that the authenticated user has access to.
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  // You can authenticate and authorize this method with administrator
+  // privileges by setting the `use_admin_access` field in the request.
+  rpc ListMemberships(ListMembershipsRequest)
+      returns (ListMembershipsResponse) {
+    option (google.api.http) = {
+      get: "/v1/{parent=spaces/*}/members"
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Returns details about a membership. For an example, see
+  // [Get details about a user's or Google Chat app's
+  // membership](https://developers.google.com/workspace/chat/get-members).
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  // You can authenticate and authorize this method with administrator
+  // privileges by setting the `use_admin_access` field in the request.
+  rpc GetMembership(GetMembershipRequest) returns (Membership) {
+    option (google.api.http) = {
+      get: "/v1/{name=spaces/*/members/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Returns details about a message.
+  // For an example, see [Get details about a
+  // message](https://developers.google.com/workspace/chat/get-messages).
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  //
+  // Note: Might return a message from a blocked member or space.
+  rpc GetMessage(GetMessageRequest) returns (Message) {
+    option (google.api.http) = {
+      get: "/v1/{name=spaces/*/messages/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Updates a message. There's a difference between the `patch` and `update`
+  // methods. The `patch`
+  // method uses a `patch` request while the `update` method uses a `put`
+  // request. We recommend using the `patch` method. For an example, see
+  // [Update a
+  // message](https://developers.google.com/workspace/chat/update-messages).
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  //
+  // When using app authentication, requests can only update messages
+  // created by the calling Chat app.
+  rpc UpdateMessage(UpdateMessageRequest) returns (Message) {
+    option (google.api.http) = {
+      put: "/v1/{message.name=spaces/*/messages/*}"
+      body: "message"
+      additional_bindings {
+        patch: "/v1/{message.name=spaces/*/messages/*}"
+        body: "message"
+      }
+    };
+    option (google.api.method_signature) = "message,update_mask";
+  }
+
+  // Deletes a message.
+  // For an example, see [Delete a
+  // message](https://developers.google.com/workspace/chat/delete-messages).
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  //
+  // When using app authentication, requests can only delete messages
+  // created by the calling Chat app.
+  rpc DeleteMessage(DeleteMessageRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{name=spaces/*/messages/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Gets the metadata of a message attachment. The attachment data is fetched
+  // using the [media
+  // API](https://developers.google.com/workspace/chat/api/reference/rest/v1/media/download).
+  // For an example, see
+  // [Get metadata about a message
+  // attachment](https://developers.google.com/workspace/chat/get-media-attachments).
+  // Requires [app
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
+  rpc GetAttachment(GetAttachmentRequest) returns (Attachment) {
+    option (google.api.http) = {
+      get: "/v1/{name=spaces/*/messages/*/attachments/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Uploads an attachment. For an example, see
+  // [Upload media as a file
+  // attachment](https://developers.google.com/workspace/chat/upload-media-attachments).
+  //
+  // Requires user
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  //
+  // You can upload attachments up to 200 MB. Certain file types aren't
+  // supported. For details, see [File types blocked by Google
+  // Chat](https://support.google.com/chat/answer/7651457?&co=GENIE.Platform%3DDesktop#File%20types%20blocked%20in%20Google%20Chat).
+  rpc UploadAttachment(UploadAttachmentRequest)
+      returns (UploadAttachmentResponse) {
+    option (google.api.http) = {
+      post: "/v1/{parent=spaces/*}/attachments:upload"
+      body: "*"
+    };
+  }
+
+  // Lists spaces the caller is a member of. Group chats and DMs aren't listed
+  // until the first message is sent. For an example, see
+  // [List
+  // spaces](https://developers.google.com/workspace/chat/list-spaces).
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  //
+  // To list all named spaces by Google Workspace organization, use the
+  // [`spaces.search()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/search)
+  // method using Workspace administrator privileges instead.
+  rpc ListSpaces(ListSpacesRequest) returns (ListSpacesResponse) {
+    option (google.api.http) = {
+      get: "/v1/spaces"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // Returns a list of spaces in a Google Workspace organization based on an
+  // administrator's search.
+  //
+  // Requires [user
+  // authentication with administrator
+  // privileges](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user#admin-privileges).
+  // In the request, set `use_admin_access` to `true`.
+  rpc SearchSpaces(SearchSpacesRequest) returns (SearchSpacesResponse) {
+    option (google.api.http) = {
+      get: "/v1/spaces:search"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // Returns details about a space. For an example, see
+  // [Get details about a
+  // space](https://developers.google.com/workspace/chat/get-spaces).
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  // You can authenticate and authorize this method with administrator
+  // privileges by setting the `use_admin_access` field in the request.
+  rpc GetSpace(GetSpaceRequest) returns (Space) {
+    option (google.api.http) = {
+      get: "/v1/{name=spaces/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Creates a space with no members. Can be used to create a named space, or a
+  // group chat in `Import mode`. For an example, see [Create a
+  // space](https://developers.google.com/workspace/chat/create-spaces).
+  //
+  //  If you receive the error message `ALREADY_EXISTS` when creating
+  //  a space, try a different `displayName`. An existing space within
+  //  the Google Workspace organization might already use this display name.
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  // with [administrator approval](https://support.google.com/a?p=chat-app-auth)
+  // in [Developer Preview](https://developers.google.com/workspace/preview)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  //
+  // When authenticating as an app, the `space.customer` field must be set in
+  // the request.
+  rpc CreateSpace(CreateSpaceRequest) returns (Space) {
+    option (google.api.http) = {
+      post: "/v1/spaces"
+      body: "space"
+    };
+    option (google.api.method_signature) = "space";
+  }
+
+  // Creates a space and adds specified users to it. The calling user is
+  // automatically added to the space, and shouldn't be specified as a
+  // membership in the request. For an example, see
+  // [Set up a space with initial
+  // members](https://developers.google.com/workspace/chat/set-up-spaces).
+  //
+  // To specify the human members to add, add memberships with the appropriate
+  // `membership.member.name`. To add a human user, use `users/{user}`, where
+  // `{user}` can be the email address for the user. For users in the same
+  // Workspace organization `{user}` can also be the `id` for the person from
+  // the People API, or the `id` for the user in the Directory API. For example,
+  // if the People API Person profile ID for `user@example.com` is `123456789`,
+  // you can add the user to the space by setting the `membership.member.name`
+  // to `users/user@example.com` or `users/123456789`.
+  //
+  // To specify the Google groups to add, add memberships with the
+  // appropriate `membership.group_member.name`. To add or invite a Google
+  // group, use `groups/{group}`, where `{group}` is the `id` for the group from
+  // the Cloud Identity Groups API. For example, you can use [Cloud Identity
+  // Groups lookup
+  // API](https://cloud.google.com/identity/docs/reference/rest/v1/groups/lookup)
+  // to retrieve the ID `123456789` for group email `group@example.com`, then
+  // you can add the group to the space by setting the
+  // `membership.group_member.name` to `groups/123456789`. Group email is not
+  // supported, and Google groups can only be added as members in named spaces.
+  //
+  // For a named space or group chat, if the caller blocks, or is blocked
+  // by some members, or doesn't have permission to add some members, then
+  // those members aren't added to the created space.
+  //
+  // To create a direct message (DM) between the calling user and another human
+  // user, specify exactly one membership to represent the human user. If
+  // one user blocks the other, the request fails and the DM isn't created.
+  //
+  // To create a DM between the calling user and the calling app, set
+  // `Space.singleUserBotDm` to `true` and don't specify any memberships. You
+  // can only use this method to set up a DM with the calling app. To add the
+  // calling app as a member of a space or an existing DM between two human
+  // users, see
+  // [Invite or add a user or app to a
+  // space](https://developers.google.com/workspace/chat/create-members).
+  //
+  // If a DM already exists between two users, even when one user blocks the
+  // other at the time a request is made, then the existing DM is returned.
+  //
+  // Spaces with threaded replies aren't supported. If you receive the error
+  // message `ALREADY_EXISTS` when setting up a space, try a different
+  // `displayName`. An existing space within the Google Workspace organization
+  // might already use this display name.
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc SetUpSpace(SetUpSpaceRequest) returns (Space) {
+    option (google.api.http) = {
+      post: "/v1/spaces:setup"
+      body: "*"
+    };
+  }
+
+  // Updates a space. For an example, see
+  // [Update a
+  // space](https://developers.google.com/workspace/chat/update-spaces).
+  //
+  // If you're updating the `displayName` field and receive the error message
+  // `ALREADY_EXISTS`, try a different display name.. An existing space within
+  // the Google Workspace organization might already use this display name.
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  // with [administrator approval](https://support.google.com/a?p=chat-app-auth)
+  // in [Developer Preview](https://developers.google.com/workspace/preview)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  // You can authenticate and authorize this method with administrator
+  // privileges by setting the `use_admin_access` field in the request.
+  rpc UpdateSpace(UpdateSpaceRequest) returns (Space) {
+    option (google.api.http) = {
+      patch: "/v1/{space.name=spaces/*}"
+      body: "space"
+    };
+    option (google.api.method_signature) = "space,update_mask";
+  }
+
+  // Deletes a named space. Always performs a cascading delete, which means
+  // that the space's child resources—like messages posted in the space and
+  // memberships in the space—are also deleted. For an example, see
+  // [Delete a
+  // space](https://developers.google.com/workspace/chat/delete-spaces).
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  // with [administrator approval](https://support.google.com/a?p=chat-app-auth)
+  // in [Developer Preview](https://developers.google.com/workspace/preview)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  // You can authenticate and authorize this method with administrator
+  // privileges by setting the `use_admin_access` field in the request.
+  rpc DeleteSpace(DeleteSpaceRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{name=spaces/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Completes the
+  // [import process](https://developers.google.com/workspace/chat/import-data)
+  // for the specified space and makes it visible to users.
+  //
+  // Requires [app
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  // and domain-wide delegation. For more information, see [Authorize Google
+  // Chat apps to import
+  // data](https://developers.google.com/workspace/chat/authorize-import).
+  rpc CompleteImportSpace(CompleteImportSpaceRequest)
+      returns (CompleteImportSpaceResponse) {
+    option (google.api.http) = {
+      post: "/v1/{name=spaces/*}:completeImport"
+      body: "*"
+    };
+  }
+
+  // Returns the existing direct message with the specified user. If no direct
+  // message space is found, returns a `404 NOT_FOUND` error. For an example,
+  // see
+  // [Find a direct message](/chat/api/guides/v1/spaces/find-direct-message).
+  //
+  // With [app
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app),
+  // returns the direct message space between the specified user and the calling
+  // Chat app.
+  //
+  // With [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
+  // returns the direct message space between the specified user and the
+  // authenticated user.
+  //
+  // // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  rpc FindDirectMessage(FindDirectMessageRequest) returns (Space) {
+    option (google.api.http) = {
+      get: "/v1/spaces:findDirectMessage"
+    };
+  }
+
+  // Creates a membership for the calling Chat app, a user, or a Google Group.
+  // Creating memberships for other Chat apps isn't supported.
+  // When creating a membership, if the specified member has their auto-accept
+  // policy turned off, then they're invited, and must accept the space
+  // invitation before joining. Otherwise, creating a membership adds the member
+  // directly to the specified space.
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  // with [administrator approval](https://support.google.com/a?p=chat-app-auth)
+  // in [Developer Preview](https://developers.google.com/workspace/preview)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  // You can authenticate and authorize this method with administrator
+  // privileges by setting the `use_admin_access` field in the request.
+  //
+  // For example usage, see:
+  //
+  // - [Invite or add a user to a
+  // space](https://developers.google.com/workspace/chat/create-members#create-user-membership).
+  //
+  // - [Invite or add a Google Group to a
+  // space](https://developers.google.com/workspace/chat/create-members#create-group-membership).
+  //
+  // - [Add the Chat app to a
+  // space](https://developers.google.com/workspace/chat/create-members#create-membership-calling-api).
+  rpc CreateMembership(CreateMembershipRequest) returns (Membership) {
+    option (google.api.http) = {
+      post: "/v1/{parent=spaces/*}/members"
+      body: "membership"
+    };
+    option (google.api.method_signature) = "parent,membership";
+  }
+
+  // Updates a membership. For an example, see [Update a user's membership in
+  // a space](https://developers.google.com/workspace/chat/update-members).
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  // with [administrator approval](https://support.google.com/a?p=chat-app-auth)
+  // in [Developer Preview](https://developers.google.com/workspace/preview)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  // You can authenticate and authorize this method with administrator
+  // privileges by setting the `use_admin_access` field in the request.
+  rpc UpdateMembership(UpdateMembershipRequest) returns (Membership) {
+    option (google.api.http) = {
+      patch: "/v1/{membership.name=spaces/*/members/*}"
+      body: "membership"
+    };
+    option (google.api.method_signature) = "membership,update_mask";
+  }
+
+  // Deletes a membership. For an example, see
+  // [Remove a user or a Google Chat app from a
+  // space](https://developers.google.com/workspace/chat/delete-members).
+  //
+  // Supports the following types of
+  // [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+  //
+  // - [App
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  // with [administrator approval](https://support.google.com/a?p=chat-app-auth)
+  // in [Developer Preview](https://developers.google.com/workspace/preview)
+  //
+  // - [User
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+  // You can authenticate and authorize this method with administrator
+  // privileges by setting the `use_admin_access` field in the request.
+  rpc DeleteMembership(DeleteMembershipRequest) returns (Membership) {
+    option (google.api.http) = {
+      delete: "/v1/{name=spaces/*/members/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Creates a reaction and adds it to a message. For an example, see
+  // [Add a reaction to a
+  // message](https://developers.google.com/workspace/chat/create-reactions).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc CreateReaction(CreateReactionRequest) returns (Reaction) {
+    option (google.api.http) = {
+      post: "/v1/{parent=spaces/*/messages/*}/reactions"
+      body: "reaction"
+    };
+    option (google.api.method_signature) = "parent,reaction";
+  }
+
+  // Lists reactions to a message. For an example, see
+  // [List reactions for a
+  // message](https://developers.google.com/workspace/chat/list-reactions).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc ListReactions(ListReactionsRequest) returns (ListReactionsResponse) {
+    option (google.api.http) = {
+      get: "/v1/{parent=spaces/*/messages/*}/reactions"
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Deletes a reaction to a message. For an example, see
+  // [Delete a
+  // reaction](https://developers.google.com/workspace/chat/delete-reactions).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc DeleteReaction(DeleteReactionRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{name=spaces/*/messages/*/reactions/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Creates a custom emoji.
+  //
+  // Custom emojis are only available for Google Workspace accounts, and the
+  // administrator must turn custom emojis on for the organization. For more
+  // information, see [Learn about custom emojis in Google
+  // Chat](https://support.google.com/chat/answer/12800149) and
+  // [Manage custom emoji
+  // permissions](https://support.google.com/a/answer/12850085).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc CreateCustomEmoji(CreateCustomEmojiRequest) returns (CustomEmoji) {
+    option (google.api.http) = {
+      post: "/v1/customEmojis"
+      body: "custom_emoji"
+    };
+    option (google.api.method_signature) = "custom_emoji";
+  }
+
+  // Returns details about a custom emoji.
+  //
+  // Custom emojis are only available for Google Workspace accounts, and the
+  // administrator must turn custom emojis on for the organization. For more
+  // information, see [Learn about custom emojis in Google
+  // Chat](https://support.google.com/chat/answer/12800149) and
+  // [Manage custom emoji
+  // permissions](https://support.google.com/a/answer/12850085).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc GetCustomEmoji(GetCustomEmojiRequest) returns (CustomEmoji) {
+    option (google.api.http) = {
+      get: "/v1/{name=customEmojis/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Lists custom emojis visible to the authenticated user.
+  //
+  // Custom emojis are only available for Google Workspace accounts, and the
+  // administrator must turn custom emojis on for the organization. For more
+  // information, see [Learn about custom emojis in Google
+  // Chat](https://support.google.com/chat/answer/12800149) and
+  // [Manage custom emoji
+  // permissions](https://support.google.com/a/answer/12850085).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc ListCustomEmojis(ListCustomEmojisRequest)
+      returns (ListCustomEmojisResponse) {
+    option (google.api.http) = {
+      get: "/v1/customEmojis"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // Deletes a custom emoji. By default, users can only delete custom emoji they
+  // created. [Emoji managers](https://support.google.com/a/answer/12850085)
+  // assigned by the administrator can delete any custom emoji in the
+  // organization. See [Learn about custom emojis in Google
+  // Chat](https://support.google.com/chat/answer/12800149).
+  //
+  // Custom emojis are only available for Google Workspace accounts, and the
+  // administrator must turn custom emojis on for the organization. For more
+  // information, see [Learn about custom emojis in Google
+  // Chat](https://support.google.com/chat/answer/12800149) and
+  // [Manage custom emoji
+  // permissions](https://support.google.com/a/answer/12850085).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc DeleteCustomEmoji(DeleteCustomEmojiRequest)
+      returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{name=customEmojis/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Returns details about a user's read state within a space, used to identify
+  // read and unread messages. For an example, see [Get details about a user's
+  // space read
+  // state](https://developers.google.com/workspace/chat/get-space-read-state).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc GetSpaceReadState(GetSpaceReadStateRequest) returns (SpaceReadState) {
+    option (google.api.http) = {
+      get: "/v1/{name=users/*/spaces/*/spaceReadState}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Updates a user's read state within a space, used to identify read and
+  // unread messages. For an example, see [Update a user's space read
+  // state](https://developers.google.com/workspace/chat/update-space-read-state).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc UpdateSpaceReadState(UpdateSpaceReadStateRequest)
+      returns (SpaceReadState) {
+    option (google.api.http) = {
+      patch: "/v1/{space_read_state.name=users/*/spaces/*/spaceReadState}"
+      body: "space_read_state"
+    };
+    option (google.api.method_signature) = "space_read_state,update_mask";
+  }
+
+  // Returns details about a user's read state within a thread, used to identify
+  // read and unread messages. For an example, see [Get details about a user's
+  // thread read
+  // state](https://developers.google.com/workspace/chat/get-thread-read-state).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc GetThreadReadState(GetThreadReadStateRequest) returns (ThreadReadState) {
+    option (google.api.http) = {
+      get: "/v1/{name=users/*/spaces/*/threads/*/threadReadState}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Returns an event from a Google Chat space. The [event
+  // payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload)
+  // contains the most recent version of the resource that changed. For example,
+  // if you request an event about a new message but the message was later
+  // updated, the server returns the updated `Message` resource in the event
+  // payload.
+  //
+  // Note: The `permissionSettings` field is not returned in the Space
+  // object of the Space event data for this request.
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  // To get an event, the authenticated user must be a member of the space.
+  //
+  // For an example, see [Get details about an
+  // event from a Google Chat
+  // space](https://developers.google.com/workspace/chat/get-space-event).
+  rpc GetSpaceEvent(GetSpaceEventRequest) returns (SpaceEvent) {
+    option (google.api.http) = {
+      get: "/v1/{name=spaces/*/spaceEvents/*}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Lists events from a Google Chat space. For each event, the
+  // [payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload)
+  // contains the most recent version of the Chat resource. For example, if you
+  // list events about new space members, the server returns `Membership`
+  // resources that contain the latest membership details. If new members were
+  // removed during the requested period, the event payload contains an empty
+  // `Membership` resource.
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  // To list events, the authenticated user must be a member of the space.
+  //
+  // For an example, see [List events from a Google Chat
+  // space](https://developers.google.com/workspace/chat/list-space-events).
+  rpc ListSpaceEvents(ListSpaceEventsRequest)
+      returns (ListSpaceEventsResponse) {
+    option (google.api.http) = {
+      get: "/v1/{parent=spaces/*}/spaceEvents"
+    };
+    option (google.api.method_signature) = "parent,filter";
+  }
+
+  // Gets the space notification setting. For an example, see [Get the
+  // caller's space notification
+  // setting](https://developers.google.com/workspace/chat/get-space-notification-setting).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc GetSpaceNotificationSetting(GetSpaceNotificationSettingRequest)
+      returns (SpaceNotificationSetting) {
+    option (google.api.http) = {
+      get: "/v1/{name=users/*/spaces/*/spaceNotificationSetting}"
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Updates the space notification setting. For an example, see [Update
+  // the caller's space notification
+  // setting](https://developers.google.com/workspace/chat/update-space-notification-setting).
+  //
+  // Requires [user
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+  rpc UpdateSpaceNotificationSetting(UpdateSpaceNotificationSettingRequest)
+      returns (SpaceNotificationSetting) {
+    option (google.api.http) = {
+      patch: "/v1/{space_notification_setting.name=users/*/spaces/*/spaceNotificationSetting}"
+      body: "space_notification_setting"
+    };
+    option (google.api.method_signature) =
+        "space_notification_setting,update_mask";
+  }
+}
