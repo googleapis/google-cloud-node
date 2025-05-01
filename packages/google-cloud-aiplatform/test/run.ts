@@ -42,7 +42,7 @@ const runParameters = [
   './node_modules/mocha/bin/mocha',
   '--timeout=100000',
 ];
-const batchSize = 2;
+const batchSize = 8;
 
 async function runBatch(batch: string[]) {
   const parameters = [...runParameters, ...batch];
