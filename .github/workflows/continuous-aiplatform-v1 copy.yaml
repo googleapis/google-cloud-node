@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-name: continuous
+name: continuous-aiplatform-v1
 jobs:
   units:
     runs-on: ubuntu-latest

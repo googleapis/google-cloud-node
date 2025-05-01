@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-name: continuous
+name: continuous-aiplatform-v1beta1
 jobs:
   units:
     runs-on: ubuntu-latest
@@ -21,3 +21,4 @@ jobs:
           BUILD_TYPE: continuous
           TEST_TYPE: units
           IS_AI_PLATFORM: true
+          IS_V1: false

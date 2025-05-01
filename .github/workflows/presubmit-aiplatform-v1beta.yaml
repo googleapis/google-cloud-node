@@ -1,6 +1,6 @@
 on:
   pull_request:
-name: presubmit
+name: presubmit-aiplatform-v1beta1
 jobs:
   units:
     runs-on: ubuntu-latest
