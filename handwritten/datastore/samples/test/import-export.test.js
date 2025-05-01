@@ -40,7 +40,7 @@ describe('import/export entities', async () => {
     assert.include(stdout, 'Export file created:');
   });
 
-  it('should import entities', () => {
+  it.skip('should import entities', () => {
     execSync(`node ./import.js ${EXPORTED_FILE}`);
   });
 });

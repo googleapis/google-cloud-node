@@ -171,7 +171,7 @@ class Transaction extends DatastoreRequest {
   commit(gaxOptions: CallOptions, callback: CommitCallback): void;
   commit(
     gaxOptionsOrCallback?: CallOptions | CommitCallback,
-    cb?: CommitCallback
+    cb?: CommitCallback,
   ): void | Promise<CommitResponse> {
     const callback =
       typeof gaxOptionsOrCallback === 'function'
@@ -189,9 +189,9 @@ class Transaction extends DatastoreRequest {
     this.#withBeginTransaction(
       gaxOptions,
       () => {
-        this.#runCommit(gaxOptions, callback);
+        void this.#runCommit(gaxOptions, callback);
       },
-      callback
+      callback,
     );
   }
 
@@ -266,12 +266,12 @@ class Transaction extends DatastoreRequest {
   createQuery(namespace: string, kind: string[]): Query;
   createQuery(
     namespaceOrKind?: string | string[],
-    kind?: string | string[]
+    kind?: string | string[],
   ): Query {
     return this.datastore.createQuery.call(
       this,
       namespaceOrKind as string,
-      kind as string[]
+      kind as string[],
     );
   }
 
@@ -344,18 +344,18 @@ class Transaction extends DatastoreRequest {
    */
   get(
     keys: entity.Key | entity.Key[],
-    options?: CreateReadStreamOptions
+    options?: CreateReadStreamOptions,
   ): Promise<GetResponse>;
   get(keys: entity.Key | entity.Key[], callback: GetCallback): void;
   get(
     keys: entity.Key | entity.Key[],
     options: CreateReadStreamOptions,
-    callback: GetCallback
+    callback: GetCallback,
   ): void;
   get(
     keys: entity.Key | entity.Key[],
     optionsOrCallback?: CreateReadStreamOptions | GetCallback,
-    cb?: GetCallback
+    cb?: GetCallback,
   ): void | Promise<GetResponse> {
     const options =
       typeof optionsOrCallback === 'object' && optionsOrCallback
@@ -432,7 +432,7 @@ class Transaction extends DatastoreRequest {
   rollback(gaxOptions: CallOptions, callback: RollbackCallback): void;
   rollback(
     gaxOptionsOrCallback?: CallOptions | RollbackCallback,
-    cb?: RollbackCallback
+    cb?: RollbackCallback,
   ): void | Promise<RollbackResponse> {
     const gaxOptions =
       typeof gaxOptionsOrCallback === 'object' ? gaxOptionsOrCallback : {};
@@ -457,7 +457,7 @@ class Transaction extends DatastoreRequest {
         this.skipCommit = true;
         this.state = TransactionState.EXPIRED;
         callback(err || null, resp);
-      }
+      },
     );
   }
 
@@ -518,19 +518,19 @@ class Transaction extends DatastoreRequest {
   run(options: RunOptions, callback: RunCallback): void;
   run(
     optionsOrCallback?: RunOptions | RunCallback,
-    cb?: RunCallback
+    cb?: RunCallback,
   ): void | Promise<RunResponse> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     const callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
-    this.#mutex.runExclusive(async () => {
+    void this.#mutex.runExclusive(async () => {
       if (this.state === TransactionState.NOT_STARTED) {
         const runResults = await this.#beginTransactionAsync(options);
         this.#processBeginResults(runResults, callback);
       } else {
         process.emitWarning(
-          'run has already been called and should not be called again.'
+          'run has already been called and should not be called again.',
         );
         callback(null, this, {transaction: this.id});
       }
@@ -548,7 +548,7 @@ class Transaction extends DatastoreRequest {
    */
   #runCommit(
     gaxOptions: CallOptions,
-    callback: CommitCallback
+    callback: CommitCallback,
   ): void | Promise<CommitResponse> {
     if (this.skipCommit) {
       setImmediate(callback);
@@ -600,7 +600,7 @@ class Transaction extends DatastoreRequest {
           acc.push(entityObject);
         } else {
           lastEntityObject.args = lastEntityObject.args.concat(
-            entityObject.args
+            entityObject.args,
           );
         }
 
@@ -616,7 +616,7 @@ class Transaction extends DatastoreRequest {
           const method = modifiedEntity.method;
           const args = modifiedEntity.args.reverse();
           Datastore.prototype[method].call(this, args, () => {});
-        }
+        },
       );
 
     // Take the `req` array built previously, and merge them into one request to
@@ -626,7 +626,7 @@ class Transaction extends DatastoreRequest {
         .map((x: {mutations: google.datastore.v1.Mutation}) => x.mutations)
         .reduce(
           (a: {concat: (arg0: Entity) => void}, b: Entity) => a.concat(b),
-          []
+          [],
         ),
     };
 
@@ -656,10 +656,10 @@ class Transaction extends DatastoreRequest {
         this.requestCallbacks_.forEach(
           (cb: (arg0: null, arg1: Entity) => void) => {
             cb(null, resp);
-          }
+          },
         );
         callback(null, resp);
-      }
+      },
     );
   }
 
@@ -674,7 +674,7 @@ class Transaction extends DatastoreRequest {
    **/
   #processBeginResults(
     runResults: BeginAsyncResponse,
-    callback: RunCallback
+    callback: RunCallback,
   ): void {
     const err = runResults.err;
     const resp = runResults.resp;
@@ -696,7 +696,7 @@ class Transaction extends DatastoreRequest {
    *
    **/
   async #beginTransactionAsync(
-    options: RunOptions
+    options: RunOptions,
   ): Promise<BeginAsyncResponse> {
     return new Promise((resolve: (value: BeginAsyncResponse) => void) => {
       const reqOpts = {
@@ -715,7 +715,7 @@ class Transaction extends DatastoreRequest {
             err,
             resp,
           });
-        }
+        },
       );
     });
   }
@@ -734,18 +734,18 @@ class Transaction extends DatastoreRequest {
    **/
   runAggregationQuery(
     query: AggregateQuery,
-    options?: RunQueryOptions
+    options?: RunQueryOptions,
   ): Promise<RunQueryResponse>;
   runAggregationQuery(
     query: AggregateQuery,
     options: RunQueryOptions,
-    callback: RequestCallback
+    callback: RequestCallback,
   ): void;
   runAggregationQuery(query: AggregateQuery, callback: RequestCallback): void;
   runAggregationQuery(
     query: AggregateQuery,
     optionsOrCallback?: RunQueryOptions | RequestCallback,
-    cb?: RequestCallback
+    cb?: RequestCallback,
   ): void | Promise<RunQueryResponse> {
     const options =
       typeof optionsOrCallback === 'object' && optionsOrCallback
@@ -774,13 +774,13 @@ class Transaction extends DatastoreRequest {
   runQuery(
     query: Query,
     options: RunQueryOptions,
-    callback: RunQueryCallback
+    callback: RunQueryCallback,
   ): void;
   runQuery(query: Query, callback: RunQueryCallback): void;
   runQuery(
     query: Query,
     optionsOrCallback?: RunQueryOptions | RunQueryCallback,
-    cb?: RunQueryCallback
+    cb?: RunQueryCallback,
   ): void | Promise<RunQueryResponse> {
     const options =
       typeof optionsOrCallback === 'object' && optionsOrCallback
@@ -1008,7 +1008,7 @@ class Transaction extends DatastoreRequest {
   #withBeginTransaction<T extends any[]>(
     gaxOptions: CallOptions | undefined,
     fn: () => void,
-    callback: (...args: [Error | null, ...T] | [Error | null]) => void
+    callback: (...args: [Error | null, ...T] | [Error | null]) => void,
   ): void {
     (async () => {
       if (this.state === TransactionState.NOT_STARTED) {
@@ -1035,7 +1035,9 @@ class Transaction extends DatastoreRequest {
         }
       }
       return fn();
-    })();
+    })().catch(err => {
+      throw err;
+    });
   }
 
   /*
@@ -1060,7 +1062,9 @@ class Transaction extends DatastoreRequest {
       } else {
         fn();
       }
-    })();
+    })().catch(err => {
+      throw err;
+    });
   }
 }
 
@@ -1077,7 +1081,7 @@ export interface RunCallback {
   (
     error: Error | null,
     transaction: Transaction | null,
-    response?: google.datastore.v1.IBeginTransactionResponse
+    response?: google.datastore.v1.IBeginTransactionResponse,
   ): void;
 }
 export interface RollbackCallback {

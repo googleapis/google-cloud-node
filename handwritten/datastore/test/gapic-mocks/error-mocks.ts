@@ -56,7 +56,7 @@ export function getCallbackExpectingError(done: mocha.Done, message: string) {
 export function errorOnGapicCall(
   datastore: Datastore,
   clientName: string,
-  done: mocha.Done
+  done: mocha.Done,
 ) {
   const dataClient = datastore.clients_.get(clientName);
   if (dataClient) {

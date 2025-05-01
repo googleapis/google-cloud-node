@@ -18,7 +18,7 @@ import * as extend from 'extend';
 import * as is from 'is';
 import {Query, QueryProto, IntegerTypeCastOptions} from './query';
 import {PathType} from '.';
-import {protobuf as Protobuf} from 'google-gax';
+import * as Protobuf from 'protobufjs';
 import * as path from 'path';
 import {google} from '../protos/protos';
 import {and, PropertyFilter} from './filter';
@@ -136,7 +136,7 @@ export namespace entity {
     private _entityPropertyName: string | undefined;
     constructor(
       value: number | string | ValueProto,
-      typeCastOptions?: IntegerTypeCastOptions
+      typeCastOptions?: IntegerTypeCastOptions,
     ) {
       super(typeof value === 'object' ? value.integerValue : value);
       this._entityPropertyName =
@@ -158,7 +158,7 @@ export namespace entity {
         this.typeCastFunction = typeCastOptions.integerTypeCastFunction;
         if (typeof typeCastOptions.integerTypeCastFunction !== 'function') {
           throw new Error(
-            'integerTypeCastFunction is not a function or was not provided.'
+            'integerTypeCastFunction is not a function or was not provided.',
           );
         }
 
@@ -440,7 +440,7 @@ export namespace entity {
 
       if (this.parent) {
         serializedKey.path = this.parent.serialized.path.concat(
-          serializedKey.path
+          serializedKey.path,
         );
       }
 
@@ -479,7 +479,7 @@ export namespace entity {
           '{\n' +
           '  integerTypeCastFunction: provide <your_custom_function>\n' +
           '  properties: optionally specify property name(s) to be custom casted\n' +
-          '}\n'
+          '}\n',
       );
     }
     return num;
@@ -527,7 +527,7 @@ export namespace entity {
    */
   export function decodeValueProto(
     valueProto: ValueProto,
-    wrapNumbers?: boolean | IntegerTypeCastOptions
+    wrapNumbers?: boolean | IntegerTypeCastOptions,
   ) {
     const valueType = valueProto.valueType!;
     const value = valueProto[valueType];
@@ -536,7 +536,7 @@ export namespace entity {
       case 'arrayValue': {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return value.values.map((val: any) =>
-          entity.decodeValueProto(val, wrapNumbers)
+          entity.decodeValueProto(val, wrapNumbers),
         );
       }
 
@@ -617,7 +617,7 @@ export namespace entity {
               "the value for '" +
               property +
               "' property is outside of bounds of a JavaScript Number.\n" +
-              "Use 'Datastore.int(<integer_value_as_string>)' to preserve accuracy during the upload."
+              "Use 'Datastore.int(<integer_value_as_string>)' to preserve accuracy during the upload.",
           );
         }
         value = new entity.Int(value);
@@ -730,7 +730,7 @@ export namespace entity {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   export function entityFromEntityProto(
     entityProto: EntityProto,
-    wrapNumbers?: boolean | IntegerTypeCastOptions
+    wrapNumbers?: boolean | IntegerTypeCastOptions,
   ) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const entityObject: any = {};
@@ -789,7 +789,7 @@ export namespace entity {
           return encoded;
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        {} as any
+        {} as any,
       ),
     };
 
@@ -808,7 +808,7 @@ export namespace entity {
    */
   export function addExcludeFromIndexes(
     excludeFromIndexes: string[] | undefined,
-    entityProto: EntityProto
+    entityProto: EntityProto,
   ): EntityProto {
     if (excludeFromIndexes && excludeFromIndexes.length > 0) {
       excludeFromIndexes.forEach((excludePath: string) => {
@@ -889,14 +889,14 @@ export namespace entity {
             // (including entity values at their roots):
             excludePathFromEntity(
               value,
-              remainderPath // === ''
+              remainderPath, // === ''
             );
           } else {
             // Path traversal continues at value.entityValue,
             // if it is an entity, or must end at value.
             excludePathFromEntity(
               value.entityValue || value,
-              remainderPath // !== ''
+              remainderPath, // !== ''
             );
           }
         });
@@ -977,7 +977,7 @@ export namespace entity {
    */
   export function formatArray(
     results: ResponseResult[],
-    wrapNumbers?: boolean | IntegerTypeCastOptions
+    wrapNumbers?: boolean | IntegerTypeCastOptions,
   ) {
     return results.map(result => {
       const ent = entity.entityFromEntityProto(result.entity!, wrapNumbers);
@@ -998,7 +998,7 @@ export namespace entity {
   export function findLargeProperties_(
     entities: Entities,
     path: string,
-    properties: string[] = []
+    properties: string[] = [],
   ) {
     const MAX_DATASTORE_VALUE_LENGTH = 1500;
     if (Array.isArray(entities)) {
@@ -1011,7 +1011,7 @@ export namespace entity {
         findLargeProperties_(
           entities[key],
           path.concat(`${path ? '.' : ''}${key}`),
-          properties
+          properties,
         );
       }
     } else if (
@@ -1259,7 +1259,7 @@ export namespace entity {
     if (query.filters.length > 0 || query.entityFilters.length > 0) {
       // Convert all legacy filters into new property filter objects
       const filters = query.filters.map(
-        filter => new PropertyFilter(filter.name, filter.op, filter.val)
+        filter => new PropertyFilter(filter.name, filter.op, filter.val),
       );
       const entityFilters = query.entityFilters;
       const allFilters = entityFilters.concat(filters);
@@ -1299,7 +1299,7 @@ export namespace entity {
     loadProtos_() {
       const root = new Protobuf.Root();
       const loadedRoot = root.loadSync(
-        path.join(__dirname, '..', 'protos', 'app_engine_key.proto')
+        path.join(__dirname, '..', 'protos', 'app_engine_key.proto'),
       );
       loadedRoot.resolveAll();
       return loadedRoot.nested;
@@ -1321,7 +1321,7 @@ export namespace entity {
     legacyEncode(
       projectId: string,
       key: entity.Key,
-      locationPrefix?: string
+      locationPrefix?: string,
     ): string {
       const elements: {}[] = [];
       let currentKey = key;

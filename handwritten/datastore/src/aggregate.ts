@@ -113,7 +113,7 @@ class AggregateQuery {
    */
   run(
     optionsOrCallback?: RunQueryOptions | RequestCallback,
-    cb?: RequestCallback
+    cb?: RequestCallback,
   ): void | Promise<RunQueryResponse> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -233,7 +233,7 @@ abstract class PropertyAggregateField extends AggregateField {
     return Object.assign(
       {operator: this.operator},
       this.alias_ ? {alias: this.alias_} : null,
-      {[this.operator]: aggregation}
+      {[this.operator]: aggregation},
     );
   }
 }

@@ -81,9 +81,9 @@ describe('buildEntityProto', () => {
         }
         assert.deepStrictEqual(
           buildEntityProto(test.entityObject),
-          test.expectedProto
+          test.expectedProto,
         );
       });
-    }
+    },
   );
 });

@@ -91,12 +91,12 @@ class Query {
   constructor(
     scope?: Datastore | Transaction,
     namespace?: string | null,
-    kinds?: string[]
+    kinds?: string[],
   );
   constructor(
     scope?: Datastore | Transaction,
     namespaceOrKinds?: string | string[] | null,
-    kinds?: string[]
+    kinds?: string[],
   ) {
     let namespace = namespaceOrKinds as string | null;
     if (!kinds) {
@@ -212,22 +212,22 @@ class Query {
   filter(filter: EntityFilter): Query;
   filter<T extends string>(
     property: T,
-    value: AllowedFilterValueType<T>
+    value: AllowedFilterValueType<T>,
   ): Query;
   filter<T extends string>(
     property: T,
     operator: Operator,
-    value: AllowedFilterValueType<T>
+    value: AllowedFilterValueType<T>,
   ): Query;
   filter<T extends string>(
     propertyOrFilter: T | EntityFilter,
     operatorOrValue?: Operator | AllowedFilterValueType<T>,
-    value?: AllowedFilterValueType<T>
+    value?: AllowedFilterValueType<T>,
   ): Query {
     if (arguments.length > 1) {
       gaxInstance.warn(
         'filter',
-        'Providing Filter objects like Composite Filter or Property Filter is recommended when using .filter'
+        'Providing Filter objects like Composite Filter or Property Filter is recommended when using .filter',
       );
     }
     switch (arguments.length) {
@@ -524,7 +524,7 @@ class Query {
   run(callback: RunQueryCallback): void;
   run(
     optionsOrCallback?: RunQueryOptions | RunQueryCallback,
-    cb?: RunQueryCallback
+    cb?: RunQueryCallback,
   ): void | Promise<RunQueryResponse> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};

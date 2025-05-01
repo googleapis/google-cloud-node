@@ -21,7 +21,7 @@ const GAX_PROTOS_DIR = resolve(
   // @ts-ignore
   // eslint-disable-next-line n/no-extraneous-require
   dirname(require.resolve('google-gax')),
-  '../protos'
+  '../protos',
 );
 
 const grpc = require('@grpc/grpc-js');
@@ -42,7 +42,7 @@ const descriptor = grpc.loadPackageDefinition(packageDefinition);
  */
 function grpcEndpoint(
   call: {},
-  callback: (arg1: string | null, arg2: {}) => {}
+  callback: (arg1: string | null, arg2: {}) => {},
 ) {
   // SET A BREAKPOINT HERE AND EXPLORE `call` TO SEE THE REQUEST.
   callback(null, {message: 'Hello'});
@@ -62,6 +62,6 @@ export function startServer(cb: () => void) {
     () => {
       console.log('server started');
       cb();
-    }
+    },
   );
 }

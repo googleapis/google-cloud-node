@@ -531,7 +531,7 @@ describe('Commit', () => {
            * strings replaced.
            */
           function replaceLongStrings(
-            input?: google.datastore.v1.IMutation[] | null
+            input?: google.datastore.v1.IMutation[] | null,
           ) {
             const stringifiedInput = JSON.stringify(input);
             const replacedInput = stringifiedInput
@@ -553,8 +553,8 @@ describe('Commit', () => {
                 options: CallOptions,
                 callback: (
                   err?: unknown,
-                  res?: protos.google.datastore.v1.ICommitResponse
-                ) => void
+                  res?: protos.google.datastore.v1.ICommitResponse,
+                ) => void,
               ) => {
                 try {
                   const actual = replaceLongStrings(request.mutations);
@@ -578,7 +578,7 @@ describe('Commit', () => {
             excludeLargeProperties: test.excludeLargeProperties,
           });
         });
-      }
+      },
     );
   });
 });

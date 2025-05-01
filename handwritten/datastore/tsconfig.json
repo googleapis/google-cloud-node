@@ -14,6 +14,10 @@
     "src/**/*.ts",
     "test/*.ts",
     "test/**/*.ts",
-    "system-test/*.ts"
+    "system-test/*.ts",
+    "mock-server/datastore-server.ts",
+    "src/v1/datastore_client_config.json",
+    "protos/protos.json",
+    "src/v1/datastore_admin_client_config.json"
   ]
 }

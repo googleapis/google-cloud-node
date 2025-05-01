@@ -113,7 +113,7 @@ describe('Request', () => {
       assert.notStrictEqual(preparedEntityObject.data.nested, obj.data.nested);
       assert.deepStrictEqual(
         preparedEntityObject,
-        expectedPreparedEntityObject
+        expectedPreparedEntityObject,
       );
     });
 
@@ -123,7 +123,7 @@ describe('Request', () => {
       const entityObject: any = {data: true};
       entityObject[entity.KEY_SYMBOL] = key;
       const preparedEntityObject = Request.prepareEntityObject_(
-        entityObject
+        entityObject,
       ) as Any;
       assert.strictEqual(preparedEntityObject.key, key);
       assert.strictEqual(preparedEntityObject.data.data, entityObject.data);
@@ -218,7 +218,7 @@ describe('Request', () => {
             assert.strictEqual(keys, null);
             assert.strictEqual(resp, API_RESPONSE);
             done();
-          }
+          },
         );
       });
     });
@@ -251,7 +251,7 @@ describe('Request', () => {
             assert.deepStrictEqual(keys, [key]);
             assert.strictEqual(resp, API_RESPONSE);
             done();
-          }
+          },
         );
       });
     });
@@ -284,7 +284,7 @@ describe('Request', () => {
         assert.strictEqual(config.method, 'lookup');
         assert.deepStrictEqual(
           config.reqOpts!.keys[0],
-          entity.keyToKeyProto(key)
+          entity.keyToKeyProto(key),
         );
         done();
       };
@@ -390,7 +390,7 @@ describe('Request', () => {
           .on('error', (err: Error) => {
             assert.deepStrictEqual(
               err,
-              outOfBoundsError({integerValue: largeInt, propertyName})
+              outOfBoundsError({integerValue: largeInt, propertyName}),
             );
             setImmediate(() => {
               assert.strictEqual(stream.destroyed, true);
@@ -637,7 +637,7 @@ describe('Request', () => {
           assert.ifError(err);
           assert.deepStrictEqual(resp, apiResponse);
           done();
-        }
+        },
       );
     });
 
@@ -786,7 +786,7 @@ describe('Request', () => {
               request.createReadStream.getCall(0).args[1];
             assert.strictEqual(
               typeof createReadStreamOptions.wrapNumbers,
-              'boolean'
+              'boolean',
             );
             done();
           });
@@ -808,14 +808,14 @@ describe('Request', () => {
                 request.createReadStream.getCall(0).args[1];
               assert.strictEqual(
                 createReadStreamOptions.wrapNumbers,
-                integerTypeCastOptions
+                integerTypeCastOptions,
               );
               assert.deepStrictEqual(
                 createReadStreamOptions.wrapNumbers,
-                integerTypeCastOptions
+                integerTypeCastOptions,
               );
               done();
-            }
+            },
           );
         });
       });
@@ -876,7 +876,7 @@ describe('Request', () => {
         assert.strictEqual(config.reqOpts!.query, queryProto);
         assert.strictEqual(
           config.reqOpts!.partitionId!.namespaceId,
-          query.namespace
+          query.namespace,
         );
         assert.strictEqual(config.gaxOpts, undefined);
 
@@ -988,7 +988,7 @@ describe('Request', () => {
           .on('error', (err: Error) => {
             assert.deepStrictEqual(
               err,
-              outOfBoundsError({integerValue: largeInt, propertyName})
+              outOfBoundsError({integerValue: largeInt, propertyName}),
             );
             setImmediate(() => {
               assert.strictEqual(stream.destroyed, true);
@@ -1122,7 +1122,7 @@ describe('Request', () => {
         sandbox.stub(entity, 'formatArray').callsFake(array => {
           assert.strictEqual(
             array,
-            entityResultsPerApiCall[timesRequestCalled]
+            entityResultsPerApiCall[timesRequestCalled],
           );
           return entityResultsPerApiCall[timesRequestCalled];
         });
@@ -1151,7 +1151,7 @@ describe('Request', () => {
         FakeQuery.prototype.start = function (endCursor) {
           assert.strictEqual(
             endCursor,
-            apiResponse.batch.endCursor.toString('base64')
+            apiResponse.batch.endCursor.toString('base64'),
           );
           startCalled = true;
           return this;
@@ -1168,7 +1168,7 @@ describe('Request', () => {
           if (timesRequestCalled === 1) {
             assert.strictEqual(
               limit_,
-              entityResultsPerApiCall[1].length - query.limitVal
+              entityResultsPerApiCall[1].length - query.limitVal,
             );
           } else {
             // Should restore the original limit.
@@ -1340,7 +1340,7 @@ describe('Request', () => {
             assert.strictEqual(spy.args[0], query);
             assert.strictEqual(spy.args[1], options);
             done();
-          }
+          },
         );
       });
 
@@ -1380,14 +1380,14 @@ describe('Request', () => {
               const runQueryOptions = request.runQueryStream.getCall(0).args[1];
               assert.strictEqual(
                 runQueryOptions.wrapNumbers,
-                integerTypeCastOptions
+                integerTypeCastOptions,
               );
               assert.deepStrictEqual(
                 runQueryOptions.wrapNumbers,
-                integerTypeCastOptions
+                integerTypeCastOptions,
               );
               done();
-            }
+            },
           );
         });
       });
@@ -1494,7 +1494,7 @@ describe('Request', () => {
       transaction.save = (modifiedData: PrepareEntityObjectResponse) => {
         assert.deepStrictEqual(
           modifiedData.data,
-          Object.assign({}, entityObject, updatedEntityObject)
+          Object.assign({}, entityObject, updatedEntityObject),
         );
       };
 
@@ -1517,7 +1517,7 @@ describe('Request', () => {
         transaction.modifiedEntities_.forEach((entity, index) => {
           assert.deepStrictEqual(
             entity.args[0].data,
-            Object.assign({}, entityObject, updatedEntityObject[index])
+            Object.assign({}, entityObject, updatedEntityObject[index]),
           );
         });
         return [{}] as CommitResponse;
@@ -1528,7 +1528,7 @@ describe('Request', () => {
           {key, data: updatedEntityObject[0]},
           {key, data: updatedEntityObject[1]},
         ],
-        done
+        done,
       );
     });
 
@@ -1725,7 +1725,7 @@ describe('Request', () => {
           (err: Error, requestFn: Function) => {
             assert.ifError(err);
             requestFn();
-          }
+          },
         );
       });
     });
@@ -1755,7 +1755,7 @@ describe('Request', () => {
           (err: Error, requestFn: Function) => {
             assert.ifError(err);
             requestFn();
-          }
+          },
         );
       });
 
@@ -1776,7 +1776,7 @@ describe('Request', () => {
           (err: Error, requestFn: Function) => {
             assert.ifError(err);
             requestFn();
-          }
+          },
         );
       });
 
@@ -1790,7 +1790,7 @@ describe('Request', () => {
           lookup(reqOpts: RequestOptions) {
             assert.strictEqual(
               reqOpts.readOptions!.transaction,
-              TRANSACTION_ID
+              TRANSACTION_ID,
             );
             done();
           },
@@ -1801,7 +1801,7 @@ describe('Request', () => {
           (err: Error, requestFn: Function) => {
             assert.ifError(err);
             requestFn();
-          }
+          },
         );
       });
 
@@ -1815,7 +1815,7 @@ describe('Request', () => {
           runQuery(reqOpts: RequestOptions) {
             assert.strictEqual(
               reqOpts.readOptions!.transaction,
-              TRANSACTION_ID
+              TRANSACTION_ID,
             );
             done();
           },
@@ -1826,7 +1826,7 @@ describe('Request', () => {
           (err: Error, requestFn: Function) => {
             assert.ifError(err);
             requestFn();
-          }
+          },
         );
       });
 

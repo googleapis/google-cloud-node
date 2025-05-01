@@ -48,7 +48,7 @@ export function buildEntityProto(entityObject: Entity) {
 
         return acc;
       },
-      {}
+      {},
     );
     // This code adds excludeFromIndexes in the right places
     addExcludeFromIndexes(entityObject.excludeFromIndexes, entityProto);

@@ -25,7 +25,7 @@ describe('Run Query', () => {
   // This function is used for doing assertion checks.
   // The idea is to check that the right request gets passed to the commit function in the Gapic layer.
   function setRunQueryComparison(
-    compareFn: (request: protos.google.datastore.v1.IRunQueryRequest) => void
+    compareFn: (request: protos.google.datastore.v1.IRunQueryRequest) => void,
   ) {
     const dataClient = datastore.clients_.get(clientName);
     if (dataClient) {
@@ -34,8 +34,8 @@ describe('Run Query', () => {
         options: any,
         callback: (
           err?: unknown,
-          res?: protos.google.datastore.v1.IRunQueryResponse
-        ) => void
+          res?: protos.google.datastore.v1.IRunQueryResponse,
+        ) => void,
       ) => {
         try {
           compareFn(request);
@@ -72,7 +72,7 @@ describe('Run Query', () => {
           },
           projectId: 'project-id',
         });
-      }
+      },
     );
     const transaction = datastore.transaction();
     const query = datastore.createQuery('Task');

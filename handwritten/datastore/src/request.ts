@@ -92,7 +92,7 @@ function decodeStruct(structValue: google.protobuf.IStruct): JSONValue {
 function getInfoFromStats(
   resp:
     | protos.google.datastore.v1.IRunQueryResponse
-    | protos.google.datastore.v1.IRunAggregationQueryResponse
+    | protos.google.datastore.v1.IRunAggregationQueryResponse,
 ): RunQueryInfo {
   // Decode struct values stored in planSummary and executionStats
   const explainMetrics: ExplainMetrics = {};
@@ -105,7 +105,7 @@ function getInfoFromStats(
     Object.assign(explainMetrics, {
       planSummary: {
         indexesUsed: resp.explainMetrics.planSummary.indexesUsed.map(
-          (index: google.protobuf.IStruct) => decodeStruct(index)
+          (index: google.protobuf.IStruct) => decodeStruct(index),
         ),
       },
     });
@@ -329,17 +329,17 @@ class DatastoreRequest {
    */
   allocateIds(
     key: entity.Key,
-    options: AllocateIdsOptions | number
+    options: AllocateIdsOptions | number,
   ): Promise<AllocateIdsResponse>;
   allocateIds(
     key: entity.Key,
     options: AllocateIdsOptions | number,
-    callback: AllocateIdsCallback
+    callback: AllocateIdsCallback,
   ): void;
   allocateIds(
     key: entity.Key,
     options: AllocateIdsOptions | number,
-    callback?: AllocateIdsCallback
+    callback?: AllocateIdsCallback,
   ): void | Promise<AllocateIdsResponse> {
     if (entity.isKeyComplete(key)) {
       throw new Error('An incomplete key should be provided.');
@@ -362,7 +362,7 @@ class DatastoreRequest {
         }
         const keys = arrify(resp!.keys!).map(entity.keyFromKeyProto);
         callback!(null, keys, resp!);
-      }
+      },
     );
   }
 
@@ -404,7 +404,7 @@ class DatastoreRequest {
    */
   createReadStream(
     keys: Entities,
-    options: CreateReadStreamOptions = {}
+    options: CreateReadStreamOptions = {},
   ): Transform {
     keys = arrify(keys).map(entity.keyToKeyProto);
     if (keys.length === 0) {
@@ -435,7 +435,7 @@ class DatastoreRequest {
           try {
             entities = entity.formatArray(
               resp!.found! as ResponseResult[],
-              options.wrapNumbers
+              options.wrapNumbers,
             );
           } catch (err) {
             stream.destroy(err);
@@ -445,19 +445,23 @@ class DatastoreRequest {
             .map(entity.keyFromKeyProto)
             .map(entity.keyToKeyProto);
 
-          split(entities, stream).then(streamEnded => {
-            if (streamEnded) {
-              return;
-            }
+          split(entities, stream)
+            .then(streamEnded => {
+              if (streamEnded) {
+                return;
+              }
 
-            if (nextKeys.length > 0) {
-              makeRequest(nextKeys);
-              return;
-            }
+              if (nextKeys.length > 0) {
+                makeRequest(nextKeys);
+                return;
+              }
 
-            stream.push(null);
-          });
-        }
+              stream.push(null);
+            })
+            .catch(err => {
+              throw err;
+            });
+        },
       );
     };
 
@@ -523,12 +527,12 @@ class DatastoreRequest {
   delete(
     keys: Entities,
     gaxOptions: CallOptions,
-    callback: DeleteCallback
+    callback: DeleteCallback,
   ): void;
   delete(
     keys: entity.Key | entity.Key[],
     gaxOptionsOrCallback?: CallOptions | DeleteCallback,
-    cb?: DeleteCallback
+    cb?: DeleteCallback,
   ): void | Promise<DeleteResponse> {
     const gaxOptions =
       typeof gaxOptionsOrCallback === 'object' ? gaxOptionsOrCallback : {};
@@ -556,7 +560,7 @@ class DatastoreRequest {
         reqOpts,
         gaxOpts: gaxOptions,
       },
-      callback
+      callback,
     );
   }
 
@@ -655,18 +659,18 @@ class DatastoreRequest {
    */
   get(
     keys: entity.Key | entity.Key[],
-    options?: CreateReadStreamOptions
+    options?: CreateReadStreamOptions,
   ): Promise<GetResponse>;
   get(keys: entity.Key | entity.Key[], callback: GetCallback): void;
   get(
     keys: entity.Key | entity.Key[],
     options: CreateReadStreamOptions,
-    callback: GetCallback
+    callback: GetCallback,
   ): void;
   get(
     keys: entity.Key | entity.Key[],
     optionsOrCallback?: CreateReadStreamOptions | GetCallback,
-    cb?: GetCallback
+    cb?: GetCallback,
   ): void | Promise<GetResponse> {
     const options =
       typeof optionsOrCallback === 'object' && optionsOrCallback
@@ -682,7 +686,7 @@ class DatastoreRequest {
           concat((results: Entity[]) => {
             const isSingleLookup = !Array.isArray(keys);
             callback(null, isSingleLookup ? results[0] : results);
-          })
+          }),
         );
     } catch (err: any) {
       callback(err);
@@ -722,21 +726,21 @@ class DatastoreRequest {
    **/
   runAggregationQuery(
     query: AggregateQuery,
-    options?: RunQueryOptions
+    options?: RunQueryOptions,
   ): Promise<RunQueryResponse>;
   runAggregationQuery(
     query: AggregateQuery,
     options: RunQueryOptions,
-    callback: RunAggregationQueryCallback
+    callback: RunAggregationQueryCallback,
   ): void;
   runAggregationQuery(
     query: AggregateQuery,
-    callback: RunAggregationQueryCallback
+    callback: RunAggregationQueryCallback,
   ): void;
   runAggregationQuery(
     query: AggregateQuery,
     optionsOrCallback?: RunQueryOptions | RunAggregationQueryCallback,
-    cb?: RequestCallback
+    cb?: RequestCallback,
   ): void | Promise<RunQueryResponse> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -790,7 +794,7 @@ class DatastoreRequest {
           const results = res.batch.aggregationResults;
           const finalResults = results
             .map(
-              (aggregationResult: any) => aggregationResult.aggregateProperties
+              (aggregationResult: any) => aggregationResult.aggregateProperties,
             )
             .map((aggregateProperties: any) =>
               Object.fromEntries(
@@ -798,15 +802,15 @@ class DatastoreRequest {
                   Object.keys(aggregateProperties).map(key => [
                     key,
                     entity.decodeValueProto(aggregateProperties[key]),
-                  ])
-                )
-              )
+                  ]),
+                ),
+              ),
             );
           callback(err, finalResults, info);
         } else {
           callback(err, [], info);
         }
-      }
+      },
     );
   }
 
@@ -913,13 +917,13 @@ class DatastoreRequest {
   runQuery(
     query: Query,
     options: RunQueryOptions,
-    callback: RunQueryCallback
+    callback: RunQueryCallback,
   ): void;
   runQuery(query: Query, callback: RunQueryCallback): void;
   runQuery(
     query: Query,
     optionsOrCallback?: RunQueryOptions | RunQueryCallback,
-    cb?: RunQueryCallback
+    cb?: RunQueryCallback,
   ): void | Promise<RunQueryResponse> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -937,7 +941,7 @@ class DatastoreRequest {
         .pipe(
           concat((results: Entity[]) => {
             callback(null, results, info);
-          })
+          }),
         );
     } catch (err: any) {
       callback(err);
@@ -1005,7 +1009,7 @@ class DatastoreRequest {
           reqOpts,
           gaxOpts: options.gaxOptions,
         },
-        onResultSet
+        onResultSet,
       );
     };
 
@@ -1037,7 +1041,7 @@ class DatastoreRequest {
         try {
           entities = entity.formatArray(
             resp.batch.entityResults,
-            options.wrapNumbers
+            options.wrapNumbers,
           );
         } catch (err) {
           stream.destroy(err);
@@ -1046,29 +1050,35 @@ class DatastoreRequest {
       }
 
       // Emit each result right away, then get the rest if necessary.
-      split(entities, stream).then(streamEnded => {
-        if (streamEnded) {
-          return;
-        }
+      split(entities, stream)
+        .then(streamEnded => {
+          if (streamEnded) {
+            return;
+          }
 
-        if (resp.batch.moreResults !== 'NOT_FINISHED') {
-          stream.emit('info', info);
-          stream.push(null);
-          return;
-        }
+          if (resp.batch.moreResults !== 'NOT_FINISHED') {
+            stream.emit('info', info);
+            stream.push(null);
+            return;
+          }
 
-        // The query is "NOT_FINISHED". Get the rest of the results.
-        const offset = query.offsetVal === -1 ? 0 : query.offsetVal;
+          // The query is "NOT_FINISHED". Get the rest of the results.
+          const offset = query.offsetVal === -1 ? 0 : query.offsetVal;
 
-        query.start(info.endCursor!).offset(offset - resp.batch.skippedResults);
+          query
+            .start(info.endCursor!)
+            .offset(offset - resp.batch.skippedResults);
 
-        const limit = query.limitVal;
-        if (limit && limit > -1) {
-          query.limit(limit - resp.batch.entityResults.length);
-        }
+          const limit = query.limitVal;
+          if (limit && limit > -1) {
+            query.limit(limit - resp.batch.entityResults.length);
+          }
 
-        makeRequest(query);
-      });
+          makeRequest(query);
+        })
+        .catch(err => {
+          throw err;
+        });
     };
 
     const stream = streamEvents(new Transform({objectMode: true}));
@@ -1084,7 +1094,7 @@ class DatastoreRequest {
    * @param {RunQueryStreamOptions} [options] The RunQueryStream options configuration
    */
   private getRequestOptions(
-    options: RunQueryStreamOptions
+    options: RunQueryStreamOptions,
   ): SharedQueryOptions {
     const sharedQueryOpts = {} as SharedQueryOptions;
     if (isTransaction(this)) {
@@ -1094,7 +1104,7 @@ class DatastoreRequest {
         }
         sharedQueryOpts.readOptions.newTransaction = getTransactionRequest(
           this,
-          {}
+          {},
         );
         sharedQueryOpts.readOptions.consistencyType = 'newTransaction';
       }
@@ -1127,7 +1137,7 @@ class DatastoreRequest {
    */
   private getQueryOptions(
     query: Query,
-    options: RunQueryStreamOptions = {}
+    options: RunQueryStreamOptions = {},
   ): SharedQueryOptions {
     const sharedQueryOpts = this.getRequestOptions(options);
     if (options.explainOptions) {
@@ -1168,7 +1178,7 @@ class DatastoreRequest {
   merge(entities: Entities, callback: SaveCallback): void;
   merge(
     entities: Entities,
-    callback?: SaveCallback
+    callback?: SaveCallback,
   ): void | Promise<CommitResponse> {
     const transaction = this.datastore.transaction();
     transaction.run(async (err: any) => {
@@ -1192,7 +1202,7 @@ class DatastoreRequest {
             obj.method = 'upsert';
             obj.data = Object.assign({}, data, obj.data);
             transaction.save(obj);
-          })
+          }),
         );
 
         const [response] = await transaction.commit();
@@ -1267,7 +1277,7 @@ class DatastoreRequest {
       if (!datastore.clients_.has(clientName)) {
         datastore.clients_.set(
           clientName,
-          new gapic.v1[clientName](datastore.options)
+          new gapic.v1[clientName](datastore.options),
         );
       }
       const gaxClient = datastore.clients_.get(clientName);
@@ -1363,7 +1373,7 @@ function isTransaction(request: DatastoreRequest): request is Transaction {
  */
 function throwOnTransactionErrors(
   request: DatastoreRequest,
-  options: SharedQueryOptions
+  options: SharedQueryOptions,
 ) {
   const isTransaction = request.id ? true : false;
   if (
@@ -1388,7 +1398,7 @@ function throwOnTransactionErrors(
  */
 export function getTransactionRequest(
   transaction: Transaction,
-  options: RunOptions
+  options: RunOptions,
 ): TransactionRequestOptions {
   // If transactionOptions are provide then they will be used.
   // Otherwise, options passed into this function are used and when absent
@@ -1422,7 +1432,7 @@ export interface AllocateIdsCallback {
   (
     a: Error | null,
     b: entity.Key[] | null,
-    c: google.datastore.v1.IAllocateIdsResponse
+    c: google.datastore.v1.IAllocateIdsResponse,
   ): void;
 }
 export interface AllocateIdsOptions {
@@ -1451,7 +1461,7 @@ export interface RequestCallback {
   (
     a?: Error | null,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    b?: any
+    b?: any,
   ): void;
 }
 export interface RunAggregationQueryCallback {
@@ -1459,7 +1469,7 @@ export interface RunAggregationQueryCallback {
     a?: Error | null,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     b?: any,
-    c?: RunQueryInfo
+    c?: RunQueryInfo,
   ): void;
 }
 export interface RequestConfig {

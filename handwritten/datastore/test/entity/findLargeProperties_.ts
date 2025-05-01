@@ -160,6 +160,6 @@ describe('findLargeProperties_', () => {
         const output = findLargeProperties_(test.entities, '', []);
         assert.deepStrictEqual(output, test.expectedOutput);
       });
-    }
+    },
   );
 });

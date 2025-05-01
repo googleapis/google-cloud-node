@@ -100,7 +100,7 @@ export class PropertyFilter<T extends string>
   constructor(
     public name: T,
     public op: Operator,
-    public val: AllowedFilterValueType<T>
+    public val: AllowedFilterValueType<T>,
   ) {
     super();
   }
