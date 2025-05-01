@@ -83,7 +83,7 @@ RETVAL=0
 tests_with_credentials="packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
 
 # Need to create a separate workflow for aiplatform since its tests are so big
-if [ -n "${IS_AI_PLATFORM}" ];
+if [ -n "${IS_AI_PLATFORM}" ]; then
     should_test=false
     if [ -n "${GIT_DIFF_ARG}" ]; then
     echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} packages/google-cloud-aiplatform'"
@@ -91,6 +91,7 @@ if [ -n "${IS_AI_PLATFORM}" ];
     git diff --quiet ${GIT_DIFF_ARG} packages/google-cloud-aiplatform
     changed=$?
     set -e
+    fi
     if [[ "${changed}" -eq 0 ]]; then
         echo "no change detected in ${d}, skipping"
     else
@@ -103,24 +104,20 @@ if [ -n "${IS_AI_PLATFORM}" ];
         fi
     fi
     if [ "${should_test}" = true ]; then
-        echo "running test in ${d}"
-        pushd ${d}
+        echo "running test in packages/google-cloud-aiplatform"
+        pushd packages/google-cloud-aiplatform
         # Temporarily allow failure.
         set +e
         ${test_script}
         ret=$?
         set -e
-        if [ ${ret} -ne 0 ]; then
-            RETVAL=${ret}
-            # Since there are so many APIs, we should exit early if there's an error
-            break
-        fi
+        RETVAL=${ret}
         popd
     fi
 else
-    for subdir in ${subdirs[@]}; do
+    for subdir in "${subdirs[@]}"; do
         for d in `ls -d ${subdir}/*/`; do
-            if ["${d}" =~ "packages/google-cloud-aiplatform"]; then
+            if [ "${d}" == "packages/google-cloud-aiplatform" ]; then
                 continue
             fi
             should_test=false
