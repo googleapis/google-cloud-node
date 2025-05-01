@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -2822,13 +2825,67 @@
                   }
                 },
                 "CustomEmoji": {
+                  "options": {
+                    "(google.api.resource).type": "chat.googleapis.com/CustomEmoji",
+                    "(google.api.resource).pattern": "customEmojis/{custom_emoji}",
+                    "(google.api.resource).plural": "customEmojis",
+                    "(google.api.resource).singular": "customEmoji"
+                  },
                   "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
+                    },
                     "uid": {
                       "type": "string",
                       "id": 1,
                       "options": {
                         "(google.api.field_info).format": "UUID4",
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "emojiName": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "IMMUTABLE"
+                      }
+                    },
+                    "temporaryImageUri": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "payload": {
+                      "type": "CustomEmojiPayload",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "CustomEmojiPayload": {
+                      "fields": {
+                        "fileContent": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filename": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
                       }
                     }
                   }
@@ -2936,6 +2993,82 @@
                     }
                   }
                 },
+                "CreateCustomEmojiRequest": {
+                  "fields": {
+                    "customEmoji": {
+                      "type": "CustomEmoji",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "GetCustomEmojiRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/CustomEmoji"
+                      }
+                    }
+                  }
+                },
+                "ListCustomEmojisRequest": {
+                  "fields": {
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ListCustomEmojisResponse": {
+                  "fields": {
+                    "customEmojis": {
+                      "rule": "repeated",
+                      "type": "CustomEmoji",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "UNORDERED_LIST"
+                      }
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "DeleteCustomEmojiRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/CustomEmoji"
+                      }
+                    }
+                  }
+                },
                 "User": {
                   "fields": {
                     "name": {
@@ -2978,7 +3111,7 @@
                 "ChatService": {
                   "options": {
                     "(google.api.default_host)": "chat.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.admin.delete,https://www.googleapis.com/auth/chat.admin.memberships,https://www.googleapis.com/auth/chat.admin.memberships.readonly,https://www.googleapis.com/auth/chat.admin.spaces,https://www.googleapis.com/auth/chat.admin.spaces.readonly,https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly,https://www.googleapis.com/auth/chat.users.spacesettings"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.admin.delete,https://www.googleapis.com/auth/chat.admin.memberships,https://www.googleapis.com/auth/chat.admin.memberships.readonly,https://www.googleapis.com/auth/chat.admin.spaces,https://www.googleapis.com/auth/chat.admin.spaces.readonly,https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.customemojis,https://www.googleapis.com/auth/chat.customemojis.readonly,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly,https://www.googleapis.com/auth/chat.users.spacesettings"
                   },
                   "methods": {
                     "CreateMessage": {
@@ -3416,6 +3549,80 @@
                         {
                           "(google.api.http)": {
                             "delete": "/v1/{name=spaces/*/messages/*/reactions/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "CreateCustomEmoji": {
+                      "requestType": "CreateCustomEmojiRequest",
+                      "responseType": "CustomEmoji",
+                      "options": {
+                        "(google.api.http).post": "/v1/customEmojis",
+                        "(google.api.http).body": "custom_emoji",
+                        "(google.api.method_signature)": "custom_emoji"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/customEmojis",
+                            "body": "custom_emoji"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "custom_emoji"
+                        }
+                      ]
+                    },
+                    "GetCustomEmoji": {
+                      "requestType": "GetCustomEmojiRequest",
+                      "responseType": "CustomEmoji",
+                      "options": {
+                        "(google.api.http).get": "/v1/{name=customEmojis/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/{name=customEmojis/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "ListCustomEmojis": {
+                      "requestType": "ListCustomEmojisRequest",
+                      "responseType": "ListCustomEmojisResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1/customEmojis",
+                        "(google.api.method_signature)": ""
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/customEmojis"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": ""
+                        }
+                      ]
+                    },
+                    "DeleteCustomEmoji": {
+                      "requestType": "DeleteCustomEmojiRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v1/{name=customEmojis/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v1/{name=customEmojis/*}"
                           }
                         },
                         {
