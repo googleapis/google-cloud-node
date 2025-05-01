@@ -165,9 +165,9 @@ describe('extendExcludeFromIndexes', () => {
         extendExcludeFromIndexes(entityObject);
         assert.deepStrictEqual(
           entityObject.excludeFromIndexes,
-          test.expectedOutput
+          test.expectedOutput,
         );
       });
-    }
+    },
   );
 });

@@ -491,7 +491,7 @@ class Metadata extends TestHelper {
           and([
             new PropertyFilter('__key__', '>=', startKey),
             new PropertyFilter('__key__', '<', endKey),
-          ])
+          ]),
         );
 
       const [entities] = await datastore.runQuery(query);
@@ -616,7 +616,7 @@ class Query extends TestHelper {
         and([
           new PropertyFilter('done', '=', false),
           new PropertyFilter('priority', '>=', 4),
-        ])
+        ]),
       )
       .order('priority', {
         descending: true,
@@ -684,7 +684,7 @@ class Query extends TestHelper {
         and([
           new PropertyFilter('done', '=', false),
           new PropertyFilter('priority', '=', 4),
-        ])
+        ]),
       );
     // [END datastore_composite_filter]
 
@@ -698,7 +698,7 @@ class Query extends TestHelper {
     const query = datastore
       .createQuery('Task')
       .filter(
-        new PropertyFilter('__key__', '>', datastore.key(['Task', 'someTask']))
+        new PropertyFilter('__key__', '>', datastore.key(['Task', 'someTask'])),
       );
     // [END datastore_key_filter]
 
@@ -814,7 +814,7 @@ class Query extends TestHelper {
         and([
           new PropertyFilter('tag', '>', 'learn'),
           new PropertyFilter('tag', '<', 'math'),
-        ])
+        ]),
       );
     // [END datastore_array_value_inequality_range]
 
@@ -831,7 +831,7 @@ class Query extends TestHelper {
         and([
           new PropertyFilter('tag', '=', 'fun'),
           new PropertyFilter('tag', '=', 'programming'),
-        ])
+        ]),
       );
     // [END datastore_array_value_equality]
 
@@ -848,7 +848,7 @@ class Query extends TestHelper {
         and([
           new PropertyFilter('created', '>', new Date('1990-01-01T00:00:00z')),
           new PropertyFilter('created', '<', new Date('2000-12-31T23:59:59z')),
-        ])
+        ]),
       );
     // [END datastore_inequality_range]
 
@@ -865,7 +865,7 @@ class Query extends TestHelper {
         and([
           new PropertyFilter('priority', '>', 3),
           new PropertyFilter('created', '>', new Date('1990-01-01T00:00:00z')),
-        ])
+        ]),
       );
     // [END datastore_inequality_invalid]
 
@@ -884,7 +884,7 @@ class Query extends TestHelper {
           new PropertyFilter('done', '=', false),
           new PropertyFilter('created', '>', new Date('1990-01-01T00:00:00z')),
           new PropertyFilter('created', '<', new Date('2000-12-31T23:59:59z')),
-        ])
+        ]),
       );
     // [END datastore_equal_and_inequality_range]
 
@@ -1071,11 +1071,11 @@ class Transaction extends TestHelper {
       datastore = datastoreMock;
       assert.strictEqual(
         accounts[0].balance,
-        originalBalance - amountToTransfer
+        originalBalance - amountToTransfer,
       );
       assert.strictEqual(
         accounts[1].balance,
-        originalBalance + amountToTransfer
+        originalBalance + amountToTransfer,
       );
     } catch (err) {
       datastore = datastoreMock;
@@ -1201,7 +1201,7 @@ class Transaction extends TestHelper {
         // Restore `datastore` to the mock API.
         datastore = datastoreMock;
         return Promise.reject(err);
-      }
+      },
     );
   }
 }

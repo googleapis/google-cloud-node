@@ -59,7 +59,7 @@ class FakeDatastoreClient extends DatastoreClient {
       protos.google.datastore.v1.ILookupResponse,
       protos.google.datastore.v1.ILookupRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.datastore.v1.ILookupResponse,
@@ -97,7 +97,7 @@ describe('Client Initialization Testing', () => {
     function compareRequest(
       request: DatastoreRequest,
       expectedFallback: Fallback,
-      done: mocha.Done
+      done: mocha.Done,
     ) {
       try {
         const client = request.datastore.clients_.get(clientName);
@@ -138,7 +138,7 @@ describe('Client Initialization Testing', () => {
             // The CI environment can't fetch project id so the function that
             // fetches the project id needs to be mocked out.
             request.datastore.auth.getProjectId = (
-              callback: (err: any, projectId: string) => void
+              callback: (err: any, projectId: string) => void,
             ) => {
               callback(null, 'some-project-id');
             };
@@ -149,7 +149,7 @@ describe('Client Initialization Testing', () => {
               {client: clientName, method: 'lookup'},
               () => {
                 compareRequest(request, testParameters.expectedFallback, done);
-              }
+              },
             );
           });
           it('should set the rest parameter in the data client when calling request_', done => {
@@ -159,7 +159,7 @@ describe('Client Initialization Testing', () => {
             });
           });
         });
-      }
+      },
     );
   });
 });

@@ -37,15 +37,15 @@ export function extendExcludeFromIndexes(entityObject: Entity) {
           entityObject.excludeFromIndexes = entity.findLargeProperties_(
             data.value,
             data.name.toString(),
-            entityObject.excludeFromIndexes
+            entityObject.excludeFromIndexes,
           );
-        }
+        },
       );
     } else {
       entityObject.excludeFromIndexes = entity.findLargeProperties_(
         entityObject.data,
         '',
-        entityObject.excludeFromIndexes
+        entityObject.excludeFromIndexes,
       );
     }
   }

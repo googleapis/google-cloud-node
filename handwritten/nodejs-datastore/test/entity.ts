@@ -40,7 +40,7 @@ export function outOfBoundsError(opts: {
       '{\n' +
       '  integerTypeCastFunction: provide <your_custom_function>\n' +
       '  properties: optionally specify property name(s) to be custom casted\n' +
-      '}\n'
+      '}\n',
   );
 }
 
@@ -127,7 +127,7 @@ describe('entity', () => {
         it('should throw if integerTypeCastOptions is provided but integerTypeCastFunction is not', () => {
           assert.throws(
             () => new testEntity.Int(valueProto, {}).valueOf(),
-            /integerTypeCastFunction is not a function or was not provided\./
+            /integerTypeCastFunction is not a function or was not provided\./,
           );
         });
 
@@ -163,7 +163,7 @@ describe('entity', () => {
             () => {
               new testEntity.Int(largeIntegerValue).valueOf();
             },
-            outOfBoundsError({integerValue: largeIntegerValue})
+            outOfBoundsError({integerValue: largeIntegerValue}),
           );
 
           // should throw when string is passed
@@ -171,7 +171,7 @@ describe('entity', () => {
             () => {
               new testEntity.Int(smallIntegerValue.toString()).valueOf();
             },
-            outOfBoundsError({integerValue: smallIntegerValue})
+            outOfBoundsError({integerValue: smallIntegerValue}),
           );
         });
 
@@ -187,7 +187,7 @@ describe('entity', () => {
             () => {
               new testEntity.Int(valueProto);
             },
-            new RegExp(`Integer value ${largeIntegerValue} is out of bounds.`)
+            new RegExp(`Integer value ${largeIntegerValue} is out of bounds.`),
           );
         });
       });
@@ -199,7 +199,7 @@ describe('entity', () => {
               new testEntity.Int(valueProto, {
                 integerTypeCastFunction: {},
               }).valueOf(),
-            /integerTypeCastFunction is not a function or was not provided\./
+            /integerTypeCastFunction is not a function or was not provided\./,
           );
         });
 
@@ -459,7 +459,7 @@ describe('entity', () => {
 
         assert.deepStrictEqual(
           testEntity.decodeValueProto(valueProto),
-          expectedValue
+          expectedValue,
         );
       });
 
@@ -467,7 +467,7 @@ describe('entity', () => {
         const decodeValueProto = testEntity.decodeValueProto;
         testEntity.decodeValueProto = (
           valueProto: {},
-          wrapNumbers?: boolean | {}
+          wrapNumbers?: boolean | {},
         ) => {
           assert.strictEqual(wrapNumbers, undefined);
 
@@ -486,7 +486,7 @@ describe('entity', () => {
         let run = false;
         testEntity.decodeValueProto = (
           valueProto: {},
-          wrapNumbers?: boolean | {}
+          wrapNumbers?: boolean | {},
         ) => {
           if (!run) {
             run = true;
@@ -500,14 +500,14 @@ describe('entity', () => {
 
         assert.deepStrictEqual(
           testEntity.decodeValueProto(valueProto, wrapNumbersBoolean),
-          expectedValue
+          expectedValue,
         );
 
         // reset the run flag.
         run = false;
         assert.deepStrictEqual(
           testEntity.decodeValueProto(valueProto, wrapNumbersObject),
-          expectedValue
+          expectedValue,
         );
       });
     });
@@ -528,7 +528,7 @@ describe('entity', () => {
 
         assert.strictEqual(
           testEntity.decodeValueProto(valueProto),
-          expectedValue
+          expectedValue,
         );
       });
 
@@ -542,7 +542,7 @@ describe('entity', () => {
 
         testEntity.entityFromEntityProto = (
           entityProto: {},
-          wrapNumbers?: boolean | {}
+          wrapNumbers?: boolean | {},
         ) => {
           assert.strictEqual(wrapNumbers, undefined);
           assert.strictEqual(entityProto, expectedValue);
@@ -551,7 +551,7 @@ describe('entity', () => {
 
         assert.strictEqual(
           testEntity.decodeValueProto(valueProto),
-          expectedValue
+          expectedValue,
         );
       });
 
@@ -567,7 +567,7 @@ describe('entity', () => {
 
         testEntity.entityFromEntityProto = (
           entityProto: {},
-          wrapNumbers?: boolean | {}
+          wrapNumbers?: boolean | {},
         ) => {
           // verify that `wrapNumbers`param is passed (boolean or object)
           assert.ok(wrapNumbers);
@@ -577,12 +577,12 @@ describe('entity', () => {
 
         assert.strictEqual(
           testEntity.decodeValueProto(valueProto, wrapNumbersBoolean),
-          expectedValue
+          expectedValue,
         );
 
         assert.strictEqual(
           testEntity.decodeValueProto(valueProto, wrapNumbersObject),
-          expectedValue
+          expectedValue,
         );
       });
     });
@@ -597,7 +597,7 @@ describe('entity', () => {
         it('should not wrap ints by default', () => {
           assert.strictEqual(
             typeof testEntity.decodeValueProto(valueProto),
-            'number'
+            'number',
           );
         });
 
@@ -653,7 +653,7 @@ describe('entity', () => {
 
           assert.strictEqual(
             testEntity.decodeValueProto(valueProto, wrapNumbers),
-            takeFirstTen(Number.MAX_SAFE_INTEGER)
+            takeFirstTen(Number.MAX_SAFE_INTEGER),
           );
           assert.strictEqual(takeFirstTen.called, true);
         });
@@ -671,9 +671,9 @@ describe('entity', () => {
                 .valueOf(),
             (err: Error) => {
               return new RegExp(
-                `integerTypeCastFunction threw an error:\n\n  - ${errorMessage}`
+                `integerTypeCastFunction threw an error:\n\n  - ${errorMessage}`,
               ).test(err.message);
-            }
+            },
           );
         });
       });
@@ -689,7 +689,7 @@ describe('entity', () => {
 
       assert.deepStrictEqual(
         testEntity.decodeValueProto(valueProto),
-        expectedValue
+        expectedValue,
       );
     });
 
@@ -715,7 +715,7 @@ describe('entity', () => {
 
       assert.strictEqual(
         testEntity.decodeValueProto(valueProto),
-        expectedValue
+        expectedValue,
       );
     });
 
@@ -734,7 +734,7 @@ describe('entity', () => {
 
       assert.strictEqual(
         testEntity.decodeValueProto(valueProto),
-        expectedValue
+        expectedValue,
       );
     });
 
@@ -756,7 +756,7 @@ describe('entity', () => {
 
       assert.deepStrictEqual(
         testEntity.decodeValueProto(valueProto),
-        expectedValue
+        expectedValue,
       );
     });
 
@@ -770,7 +770,7 @@ describe('entity', () => {
 
       assert.strictEqual(
         testEntity.decodeValueProto(valueProto),
-        expectedValue
+        expectedValue,
       );
     });
   });
@@ -1035,7 +1035,7 @@ describe('entity', () => {
 
       assert.deepStrictEqual(
         testEntity.entityFromEntityProto(entityProto),
-        expectedEntity
+        expectedEntity,
       );
     });
 
@@ -1106,14 +1106,14 @@ describe('entity', () => {
 
       assert.deepStrictEqual(
         testEntity.entityToEntityProto(entityObject),
-        expectedEntityProto
+        expectedEntityProto,
       );
     });
 
     it('should respect excludeFromIndexes', () => {
       assert.deepStrictEqual(
         testEntity.entityToEntityProto(entityObject),
-        expectedEntityProto
+        expectedEntityProto,
       );
     });
 
@@ -1155,7 +1155,7 @@ describe('entity', () => {
 
       assert.deepStrictEqual(
         testEntity.entityToEntityProto(entityObject),
-        expectedEntityProto
+        expectedEntityProto,
       );
     });
   });
@@ -1355,7 +1355,7 @@ describe('entity', () => {
         assert.strictEqual((e as Error).name, 'InvalidKey');
         assert.strictEqual(
           (e as Error).message,
-          'Ancestor keys require an id or name.'
+          'Ancestor keys require an id or name.',
         );
         done();
       }
@@ -1439,7 +1439,7 @@ describe('entity', () => {
         assert.strictEqual((e as Error).name, 'InvalidKey');
         assert.strictEqual(
           (e as Error).message,
-          'A key should contain at least a kind.'
+          'A key should contain at least a kind.',
         );
         done();
       }
@@ -1457,7 +1457,7 @@ describe('entity', () => {
         assert.strictEqual((e as Error).name, 'InvalidKey');
         assert.strictEqual(
           (e as Error).message,
-          'Ancestor keys require an id or name.'
+          'Ancestor keys require an id or name.',
         );
         done();
       }
@@ -1618,12 +1618,12 @@ describe('entity', () => {
         .filter(
           new PropertyFilter('__key__', 'IN', [
             new entity.Key({path: ['Kind1', 'key1']}),
-          ])
+          ]),
         );
 
       assert.deepStrictEqual(
         testEntity.queryToQueryProto(query),
-        keyWithInQuery
+        keyWithInQuery,
       );
     });
 
@@ -1661,7 +1661,7 @@ describe('entity', () => {
           and([
             new PropertyFilter('name', '=', 'John'),
             new PropertyFilter('__key__', 'HAS_ANCESTOR', ancestorKey),
-          ])
+          ]),
         )
         .start('start')
         .end('end')
@@ -1705,7 +1705,7 @@ describe('entity', () => {
 
         assert.strictEqual(
           urlSafeKey.convertToBase64_(buffer),
-          'SGVsbG8gV29ybGQ'
+          'SGVsbG8gV29ybGQ',
         );
       });
     });
@@ -1714,7 +1714,7 @@ describe('entity', () => {
       it('should convert encoded url safe key to buffer', () => {
         assert.deepStrictEqual(
           urlSafeKey.convertToBuffer_('aGVsbG8gd29ybGQgZnJvbSBkYXRhc3RvcmU'),
-          Buffer.from('hello world from datastore')
+          Buffer.from('hello world from datastore'),
         );
       });
     });
@@ -1732,7 +1732,7 @@ describe('entity', () => {
           'ahFzfmdyYXNzLWNsdW1wLTQ3OXIVCxIEVGFzayILc2FtcGxldGFzazEMogECTlM';
         assert.strictEqual(
           urlSafeKey.legacyEncode(PROJECT_ID, key, LOCATION_PREFIX),
-          encodedKey
+          encodedKey,
         );
       });
 
@@ -1747,7 +1747,7 @@ describe('entity', () => {
           'ag9ncmFzcy1jbHVtcC00NzlyFQsSBFRhc2siC3NhbXBsZXRhc2sxDA';
         assert.strictEqual(
           urlSafeKey.legacyEncode(PROJECT_ID, key),
-          encodedKey
+          encodedKey,
         );
       });
 
@@ -1761,7 +1761,7 @@ describe('entity', () => {
         const encodedKey = 'ag9ncmFzcy1jbHVtcC00NzlyEQsSBFRhc2sYgICA3NWunAoM';
         assert.strictEqual(
           urlSafeKey.legacyEncode(PROJECT_ID, key),
-          encodedKey
+          encodedKey,
         );
       });
 
@@ -1775,7 +1775,7 @@ describe('entity', () => {
         const encodedKey = 'ag9ncmFzcy1jbHVtcC00NzlyEQsSBFRhc2sYgICA3NWunAoM';
         assert.strictEqual(
           urlSafeKey.legacyEncode(PROJECT_ID, key),
-          encodedKey
+          encodedKey,
         );
       });
 
@@ -1788,7 +1788,7 @@ describe('entity', () => {
           'ahFzfmdyYXNzLWNsdW1wLTQ3OXIqCxIEVGFzayILc2FtcGxldGFzazEMCxIEVGFzayILc2FtcGxldGFzazIM';
         assert.strictEqual(
           urlSafeKey.legacyEncode(PROJECT_ID, key, LOCATION_PREFIX),
-          encodedKey
+          encodedKey,
         );
       });
     });

@@ -37,7 +37,7 @@ async function main() {
         or([
           new PropertyFilter('description', '=', 'Buy milk'),
           new PropertyFilter('description', '=', 'Feed cats'),
-        ])
+        ]),
       );
 
     const [entities] = await datastore.runQuery(query);

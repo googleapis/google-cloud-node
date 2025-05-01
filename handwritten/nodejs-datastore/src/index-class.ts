@@ -22,7 +22,7 @@ export interface GenericIndexCallback<T> {
   (
     err?: ServiceError | null,
     index?: Index | null,
-    apiResponse?: T | null
+    apiResponse?: T | null,
   ): void;
 }
 
@@ -31,7 +31,7 @@ export type GetIndexResponse = [Index, IIndex];
 
 export type IndexGetMetadataCallback = (
   err?: ServiceError | null,
-  metadata?: IIndex | null
+  metadata?: IIndex | null,
 ) => void;
 export type IndexGetMetadataResponse = [IIndex];
 
@@ -51,7 +51,7 @@ export type GetIndexesCallback = (
   err?: ServiceError | null,
   indexes?: Index[],
   nextQuery?: GetIndexesOptions,
-  apiResponse?: google.datastore.admin.v1.IListIndexesResponse
+  apiResponse?: google.datastore.admin.v1.IListIndexesResponse,
 ) => void;
 
 export type IIndex = google.datastore.admin.v1.IIndex;
@@ -93,7 +93,7 @@ export class Index {
   get(gaxOptions: CallOptions, callback: GetIndexCallback): void;
   get(
     gaxOptionsOrCallback?: CallOptions | GetIndexCallback,
-    cb?: GetIndexCallback
+    cb?: GetIndexCallback,
   ): void | Promise<GetIndexResponse> {
     const gaxOpts =
       typeof gaxOptionsOrCallback === 'object' ? gaxOptionsOrCallback : {};
@@ -118,11 +118,11 @@ export class Index {
   getMetadata(callback: IndexGetMetadataCallback): void;
   getMetadata(
     gaxOptions: CallOptions,
-    callback: IndexGetMetadataCallback
+    callback: IndexGetMetadataCallback,
   ): void;
   getMetadata(
     gaxOptionsOrCallback?: CallOptions | IndexGetMetadataCallback,
-    cb?: IndexGetMetadataCallback
+    cb?: IndexGetMetadataCallback,
   ): void | Promise<IndexGetMetadataResponse> {
     const gaxOpts =
       typeof gaxOptionsOrCallback === 'object' ? gaxOptionsOrCallback : {};
@@ -143,7 +143,7 @@ export class Index {
           this.metadata = resp;
         }
         callback(err as ServiceError, resp);
-      }
+      },
     );
   }
 

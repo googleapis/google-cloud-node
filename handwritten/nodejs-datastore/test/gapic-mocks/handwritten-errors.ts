@@ -60,7 +60,7 @@ describe('HandwrittenLayerErrors', () => {
             transaction.runQuery(
               query,
               testParameters.options,
-              getCallbackExpectingError(done, testParameters.expectedError)
+              getCallbackExpectingError(done, testParameters.expectedError),
             );
           });
           it('should error when runQueryStream is used', done => {
@@ -85,7 +85,7 @@ describe('HandwrittenLayerErrors', () => {
             transaction.runAggregationQuery(
               aggregate,
               testParameters.options,
-              getCallbackExpectingError(done, testParameters.expectedError)
+              getCallbackExpectingError(done, testParameters.expectedError),
             );
           });
           it('should error when get is used', done => {
@@ -95,7 +95,7 @@ describe('HandwrittenLayerErrors', () => {
             transaction.get(
               keys,
               testParameters.options,
-              getCallbackExpectingError(done, testParameters.expectedError)
+              getCallbackExpectingError(done, testParameters.expectedError),
             );
           });
           it('should error when createReadStream is used', done => {
@@ -111,7 +111,7 @@ describe('HandwrittenLayerErrors', () => {
             }
           });
         });
-      }
+      },
     );
   });
 });

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ describe('📦 pack-n-play test', () => {
       sample: {
         description: 'TypeScript user can use the type definitions',
         ts: readFileSync(
-          './system-test/fixtures/sample/src/index.ts'
+          './system-test/fixtures/sample/src/index.ts',
         ).toString(),
       },
     };
@@ -42,7 +42,7 @@ describe('📦 pack-n-play test', () => {
       sample: {
         description: 'JavaScript user can use the library',
         ts: readFileSync(
-          './system-test/fixtures/sample/src/index.js'
+          './system-test/fixtures/sample/src/index.js',
         ).toString(),
       },
     };

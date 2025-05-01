@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -101,6 +102,8 @@ export class DatastoreAdminClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('datastore-admin');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -135,7 +138,7 @@ export class DatastoreAdminClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -154,7 +157,7 @@ export class DatastoreAdminClient {
    */
   constructor(
     opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
+    gaxInstance?: typeof gax | typeof gax.fallback,
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DatastoreAdminClient;
@@ -164,7 +167,7 @@ export class DatastoreAdminClient {
       opts?.universe_domain !== opts?.universeDomain
     ) {
       throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
+        'Please set either universe_domain or universeDomain, but not both.',
       );
     }
     const universeDomainEnvVar =
@@ -250,7 +253,7 @@ export class DatastoreAdminClient {
       listIndexes: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'indexes'
+        'indexes',
       ),
     };
 
@@ -287,50 +290,50 @@ export class DatastoreAdminClient {
       .lro(lroOptions)
       .operationsClient(opts);
     const exportEntitiesResponse = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.ExportEntitiesResponse'
+      '.google.datastore.admin.v1.ExportEntitiesResponse',
     ) as gax.protobuf.Type;
     const exportEntitiesMetadata = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.ExportEntitiesMetadata'
+      '.google.datastore.admin.v1.ExportEntitiesMetadata',
     ) as gax.protobuf.Type;
     const importEntitiesResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
+      '.google.protobuf.Empty',
     ) as gax.protobuf.Type;
     const importEntitiesMetadata = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.ImportEntitiesMetadata'
+      '.google.datastore.admin.v1.ImportEntitiesMetadata',
     ) as gax.protobuf.Type;
     const createIndexResponse = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.Index'
+      '.google.datastore.admin.v1.Index',
     ) as gax.protobuf.Type;
     const createIndexMetadata = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.IndexOperationMetadata'
+      '.google.datastore.admin.v1.IndexOperationMetadata',
     ) as gax.protobuf.Type;
     const deleteIndexResponse = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.Index'
+      '.google.datastore.admin.v1.Index',
     ) as gax.protobuf.Type;
     const deleteIndexMetadata = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.IndexOperationMetadata'
+      '.google.datastore.admin.v1.IndexOperationMetadata',
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       exportEntities: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportEntitiesResponse.decode.bind(exportEntitiesResponse),
-        exportEntitiesMetadata.decode.bind(exportEntitiesMetadata)
+        exportEntitiesMetadata.decode.bind(exportEntitiesMetadata),
       ),
       importEntities: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importEntitiesResponse.decode.bind(importEntitiesResponse),
-        importEntitiesMetadata.decode.bind(importEntitiesMetadata)
+        importEntitiesMetadata.decode.bind(importEntitiesMetadata),
       ),
       createIndex: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createIndexResponse.decode.bind(createIndexResponse),
-        createIndexMetadata.decode.bind(createIndexMetadata)
+        createIndexMetadata.decode.bind(createIndexMetadata),
       ),
       deleteIndex: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteIndexResponse.decode.bind(deleteIndexResponse),
-        deleteIndexMetadata.decode.bind(deleteIndexMetadata)
+        deleteIndexMetadata.decode.bind(deleteIndexMetadata),
       ),
     };
 
@@ -339,7 +342,7 @@ export class DatastoreAdminClient {
       'google.datastore.admin.v1.DatastoreAdmin',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -373,12 +376,12 @@ export class DatastoreAdminClient {
     this.datastoreAdminStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.datastore.admin.v1.DatastoreAdmin'
+            'google.datastore.admin.v1.DatastoreAdmin',
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.datastore.admin.v1.DatastoreAdmin,
       this._opts,
-      this._providedCustomServicePath
+      this._providedCustomServicePath,
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -403,7 +406,7 @@ export class DatastoreAdminClient {
           },
         (err: Error | null | undefined) => () => {
           throw err;
-        }
+        },
       );
 
       const descriptor =
@@ -414,7 +417,7 @@ export class DatastoreAdminClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -435,7 +438,7 @@ export class DatastoreAdminClient {
     ) {
       process.emitWarning(
         'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
+        'DeprecationWarning',
       );
     }
     return 'datastore.googleapis.com';
@@ -453,7 +456,7 @@ export class DatastoreAdminClient {
     ) {
       process.emitWarning(
         'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
+        'DeprecationWarning',
       );
     }
     return 'datastore.googleapis.com';
@@ -498,7 +501,7 @@ export class DatastoreAdminClient {
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
   getProjectId(
-    callback?: Callback<string, undefined, undefined>
+    callback?: Callback<string, undefined, undefined>,
   ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
@@ -530,7 +533,7 @@ export class DatastoreAdminClient {
    */
   getIndex(
     request?: protos.google.datastore.admin.v1.IGetIndexRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.datastore.admin.v1.IIndex,
@@ -545,7 +548,7 @@ export class DatastoreAdminClient {
       protos.google.datastore.admin.v1.IIndex,
       protos.google.datastore.admin.v1.IGetIndexRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getIndex(
     request: protos.google.datastore.admin.v1.IGetIndexRequest,
@@ -553,7 +556,7 @@ export class DatastoreAdminClient {
       protos.google.datastore.admin.v1.IIndex,
       protos.google.datastore.admin.v1.IGetIndexRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getIndex(
     request?: protos.google.datastore.admin.v1.IGetIndexRequest,
@@ -568,7 +571,7 @@ export class DatastoreAdminClient {
       protos.google.datastore.admin.v1.IIndex,
       protos.google.datastore.admin.v1.IGetIndexRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.datastore.admin.v1.IIndex,
@@ -592,8 +595,34 @@ export class DatastoreAdminClient {
         project_id: request.projectId ?? '',
         index_id: request.indexId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getIndex(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getIndex request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.datastore.admin.v1.IIndex,
+          protos.google.datastore.admin.v1.IGetIndexRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIndex response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIndex(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.datastore.admin.v1.IIndex,
+          protos.google.datastore.admin.v1.IGetIndexRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIndex response %j', response);
+          return [response, options, rawResponse];
+        },
+      );
   }
 
   /**
@@ -646,7 +675,7 @@ export class DatastoreAdminClient {
    */
   exportEntities(
     request?: protos.google.datastore.admin.v1.IExportEntitiesRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       LROperation<
@@ -667,7 +696,7 @@ export class DatastoreAdminClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   exportEntities(
     request: protos.google.datastore.admin.v1.IExportEntitiesRequest,
@@ -678,7 +707,7 @@ export class DatastoreAdminClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   exportEntities(
     request?: protos.google.datastore.admin.v1.IExportEntitiesRequest,
@@ -699,7 +728,7 @@ export class DatastoreAdminClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       LROperation<
@@ -725,8 +754,40 @@ export class DatastoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.exportEntities(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.datastore.admin.v1.IExportEntitiesResponse,
+            protos.google.datastore.admin.v1.IExportEntitiesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportEntities response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportEntities request %j', request);
+    return this.innerApiCalls
+      .exportEntities(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.datastore.admin.v1.IExportEntitiesResponse,
+            protos.google.datastore.admin.v1.IExportEntitiesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportEntities response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportEntities()`.
@@ -740,22 +801,23 @@ export class DatastoreAdminClient {
    * region_tag:datastore_v1_generated_DatastoreAdmin_ExportEntities_async
    */
   async checkExportEntitiesProgress(
-    name: string
+    name: string,
   ): Promise<
     LROperation<
       protos.google.datastore.admin.v1.ExportEntitiesResponse,
       protos.google.datastore.admin.v1.ExportEntitiesMetadata
     >
   > {
+    this._log.info('exportEntities long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.exportEntities,
-      this._gaxModule.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
       protos.google.datastore.admin.v1.ExportEntitiesResponse,
@@ -808,7 +870,7 @@ export class DatastoreAdminClient {
    */
   importEntities(
     request?: protos.google.datastore.admin.v1.IImportEntitiesRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       LROperation<
@@ -829,7 +891,7 @@ export class DatastoreAdminClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   importEntities(
     request: protos.google.datastore.admin.v1.IImportEntitiesRequest,
@@ -840,7 +902,7 @@ export class DatastoreAdminClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   importEntities(
     request?: protos.google.datastore.admin.v1.IImportEntitiesRequest,
@@ -861,7 +923,7 @@ export class DatastoreAdminClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       LROperation<
@@ -887,8 +949,40 @@ export class DatastoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.importEntities(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.datastore.admin.v1.IImportEntitiesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importEntities response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importEntities request %j', request);
+    return this.innerApiCalls
+      .importEntities(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.datastore.admin.v1.IImportEntitiesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importEntities response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
   /**
    * Check the status of the long running operation returned by `importEntities()`.
@@ -902,22 +996,23 @@ export class DatastoreAdminClient {
    * region_tag:datastore_v1_generated_DatastoreAdmin_ImportEntities_async
    */
   async checkImportEntitiesProgress(
-    name: string
+    name: string,
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
       protos.google.datastore.admin.v1.ImportEntitiesMetadata
     >
   > {
+    this._log.info('importEntities long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.importEntities,
-      this._gaxModule.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -960,7 +1055,7 @@ export class DatastoreAdminClient {
    */
   createIndex(
     request?: protos.google.datastore.admin.v1.ICreateIndexRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       LROperation<
@@ -981,7 +1076,7 @@ export class DatastoreAdminClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   createIndex(
     request: protos.google.datastore.admin.v1.ICreateIndexRequest,
@@ -992,7 +1087,7 @@ export class DatastoreAdminClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   createIndex(
     request?: protos.google.datastore.admin.v1.ICreateIndexRequest,
@@ -1013,7 +1108,7 @@ export class DatastoreAdminClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       LROperation<
@@ -1039,8 +1134,40 @@ export class DatastoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createIndex(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.datastore.admin.v1.IIndex,
+            protos.google.datastore.admin.v1.IIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createIndex response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createIndex request %j', request);
+    return this.innerApiCalls
+      .createIndex(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.datastore.admin.v1.IIndex,
+            protos.google.datastore.admin.v1.IIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createIndex response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
   /**
    * Check the status of the long running operation returned by `createIndex()`.
@@ -1054,22 +1181,23 @@ export class DatastoreAdminClient {
    * region_tag:datastore_v1_generated_DatastoreAdmin_CreateIndex_async
    */
   async checkCreateIndexProgress(
-    name: string
+    name: string,
   ): Promise<
     LROperation<
       protos.google.datastore.admin.v1.Index,
       protos.google.datastore.admin.v1.IndexOperationMetadata
     >
   > {
+    this._log.info('createIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createIndex,
-      this._gaxModule.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
       protos.google.datastore.admin.v1.Index,
@@ -1108,7 +1236,7 @@ export class DatastoreAdminClient {
    */
   deleteIndex(
     request?: protos.google.datastore.admin.v1.IDeleteIndexRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       LROperation<
@@ -1129,7 +1257,7 @@ export class DatastoreAdminClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   deleteIndex(
     request: protos.google.datastore.admin.v1.IDeleteIndexRequest,
@@ -1140,7 +1268,7 @@ export class DatastoreAdminClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   deleteIndex(
     request?: protos.google.datastore.admin.v1.IDeleteIndexRequest,
@@ -1161,7 +1289,7 @@ export class DatastoreAdminClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       LROperation<
@@ -1188,8 +1316,40 @@ export class DatastoreAdminClient {
         project_id: request.projectId ?? '',
         index_id: request.indexId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteIndex(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.datastore.admin.v1.IIndex,
+            protos.google.datastore.admin.v1.IIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteIndex response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteIndex request %j', request);
+    return this.innerApiCalls
+      .deleteIndex(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.datastore.admin.v1.IIndex,
+            protos.google.datastore.admin.v1.IIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteIndex response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteIndex()`.
@@ -1203,22 +1363,23 @@ export class DatastoreAdminClient {
    * region_tag:datastore_v1_generated_DatastoreAdmin_DeleteIndex_async
    */
   async checkDeleteIndexProgress(
-    name: string
+    name: string,
   ): Promise<
     LROperation<
       protos.google.datastore.admin.v1.Index,
       protos.google.datastore.admin.v1.IndexOperationMetadata
     >
   > {
+    this._log.info('deleteIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteIndex,
-      this._gaxModule.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
       protos.google.datastore.admin.v1.Index,
@@ -1254,7 +1415,7 @@ export class DatastoreAdminClient {
    */
   listIndexes(
     request?: protos.google.datastore.admin.v1.IListIndexesRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.datastore.admin.v1.IIndex[],
@@ -1269,7 +1430,7 @@ export class DatastoreAdminClient {
       protos.google.datastore.admin.v1.IListIndexesRequest,
       protos.google.datastore.admin.v1.IListIndexesResponse | null | undefined,
       protos.google.datastore.admin.v1.IIndex
-    >
+    >,
   ): void;
   listIndexes(
     request: protos.google.datastore.admin.v1.IListIndexesRequest,
@@ -1277,7 +1438,7 @@ export class DatastoreAdminClient {
       protos.google.datastore.admin.v1.IListIndexesRequest,
       protos.google.datastore.admin.v1.IListIndexesResponse | null | undefined,
       protos.google.datastore.admin.v1.IIndex
-    >
+    >,
   ): void;
   listIndexes(
     request?: protos.google.datastore.admin.v1.IListIndexesRequest,
@@ -1294,7 +1455,7 @@ export class DatastoreAdminClient {
       protos.google.datastore.admin.v1.IListIndexesRequest,
       protos.google.datastore.admin.v1.IListIndexesResponse | null | undefined,
       protos.google.datastore.admin.v1.IIndex
-    >
+    >,
   ): Promise<
     [
       protos.google.datastore.admin.v1.IIndex[],
@@ -1317,12 +1478,40 @@ export class DatastoreAdminClient {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listIndexes(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.datastore.admin.v1.IListIndexesRequest,
+          | protos.google.datastore.admin.v1.IListIndexesResponse
+          | null
+          | undefined,
+          protos.google.datastore.admin.v1.IIndex
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listIndexes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listIndexes request %j', request);
+    return this.innerApiCalls
+      .listIndexes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.datastore.admin.v1.IIndex[],
+          protos.google.datastore.admin.v1.IListIndexesRequest | null,
+          protos.google.datastore.admin.v1.IListIndexesResponse,
+        ]) => {
+          this._log.info('listIndexes values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listIndexes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
@@ -1346,7 +1535,7 @@ export class DatastoreAdminClient {
    */
   listIndexesStream(
     request?: protos.google.datastore.admin.v1.IListIndexesRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Transform {
     request = request || {};
     options = options || {};
@@ -1358,11 +1547,14 @@ export class DatastoreAdminClient {
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listIndexes stream %j', request);
     return this.descriptors.page.listIndexes.createStream(
       this.innerApiCalls.listIndexes as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
@@ -1394,7 +1586,7 @@ export class DatastoreAdminClient {
    */
   listIndexesAsync(
     request?: protos.google.datastore.admin.v1.IListIndexesRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<protos.google.datastore.admin.v1.IIndex> {
     request = request || {};
     options = options || {};
@@ -1406,11 +1598,14 @@ export class DatastoreAdminClient {
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listIndexes iterate %j', request);
     return this.descriptors.page.listIndexes.asyncIterate(
       this.innerApiCalls['listIndexes'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.datastore.admin.v1.IIndex>;
   }
   /**
@@ -1445,7 +1640,7 @@ export class DatastoreAdminClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1456,8 +1651,22 @@ export class DatastoreAdminClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1492,8 +1701,15 @@ export class DatastoreAdminClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options?: gax.CallOptions,
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1529,19 +1745,33 @@ export class DatastoreAdminClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1572,7 +1802,7 @@ export class DatastoreAdminClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1583,8 +1813,22 @@ export class DatastoreAdminClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1597,6 +1841,7 @@ export class DatastoreAdminClient {
   close(): Promise<void> {
     if (this.datastoreAdminStub && !this._terminated) {
       return this.datastoreAdminStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

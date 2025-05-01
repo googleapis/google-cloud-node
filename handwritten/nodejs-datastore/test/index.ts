@@ -188,7 +188,7 @@ async.each(
           '../src/utils/entity/buildEntityProto.js',
           {
             '../../entity.js': {entity: fakeEntity},
-          }
+          },
         );
         Datastore = proxyquire('../src', {
           './entity.js': {entity: fakeEntity},
@@ -266,7 +266,7 @@ async.each(
         it('should set the default base URL', () => {
           assert.strictEqual(
             datastore.defaultBaseUrl_,
-            'datastore.googleapis.com'
+            'datastore.googleapis.com',
           );
         });
 
@@ -306,8 +306,8 @@ async.each(
                 port: 443,
                 projectId: undefined,
               },
-              options
-            )
+              options,
+            ),
           );
         });
 
@@ -374,7 +374,7 @@ async.each(
                 });
                 assert.strictEqual(
                   datastore.options.sslCreds,
-                  fakeInsecureCreds
+                  fakeInsecureCreds,
                 );
               });
             });
@@ -428,7 +428,7 @@ async.each(
                 });
                 assert.strictEqual(
                   datastore.options.sslCreds,
-                  fakeInsecureCreds
+                  fakeInsecureCreds,
                 );
               });
             });
@@ -456,7 +456,7 @@ async.each(
                 });
                 assert.strictEqual(
                   datastore.options.sslCreds,
-                  fakeInsecureCreds
+                  fakeInsecureCreds,
                 );
               });
             });
@@ -623,14 +623,14 @@ async.each(
         it('should expose a MORE_RESULTS_AFTER_CURSOR helper', () => {
           assert.strictEqual(
             Datastore.MORE_RESULTS_AFTER_CURSOR,
-            'MORE_RESULTS_AFTER_CURSOR'
+            'MORE_RESULTS_AFTER_CURSOR',
           );
         });
 
         it('should also be on the prototype', () => {
           assert.strictEqual(
             datastore.MORE_RESULTS_AFTER_CURSOR,
-            Datastore.MORE_RESULTS_AFTER_CURSOR
+            Datastore.MORE_RESULTS_AFTER_CURSOR,
           );
         });
       });
@@ -639,14 +639,14 @@ async.each(
         it('should expose a MORE_RESULTS_AFTER_LIMIT helper', () => {
           assert.strictEqual(
             Datastore.MORE_RESULTS_AFTER_LIMIT,
-            'MORE_RESULTS_AFTER_LIMIT'
+            'MORE_RESULTS_AFTER_LIMIT',
           );
         });
 
         it('should also be on the prototype', () => {
           assert.strictEqual(
             datastore.MORE_RESULTS_AFTER_LIMIT,
-            Datastore.MORE_RESULTS_AFTER_LIMIT
+            Datastore.MORE_RESULTS_AFTER_LIMIT,
           );
         });
       });
@@ -659,7 +659,7 @@ async.each(
         it('should also be on the prototype', () => {
           assert.strictEqual(
             datastore.NO_MORE_RESULTS,
-            Datastore.NO_MORE_RESULTS
+            Datastore.NO_MORE_RESULTS,
           );
         });
       });
@@ -704,7 +704,7 @@ async.each(
           datastore.request_ = (config: any) => {
             assert.strictEqual(
               config.reqOpts.outputUrlPrefix,
-              `gs://${bucket}`
+              `gs://${bucket}`,
             );
             done();
           };
@@ -731,7 +731,7 @@ async.each(
           datastore.request_ = (config: any) => {
             assert.strictEqual(
               config.reqOpts.outputUrlPrefix,
-              `gs://${bucket.name}`
+              `gs://${bucket.name}`,
             );
             done();
           };
@@ -752,7 +752,7 @@ async.each(
                 bucket: 'bucket',
                 outputUrlPrefix: 'output-url-prefix',
               },
-              assert.ifError
+              assert.ifError,
             );
           }, /Both `bucket` and `outputUrlPrefix` were provided\./);
         });
@@ -778,7 +778,7 @@ async.each(
                 kinds: ['kind1', 'kind2'],
                 entityFilter: {},
               },
-              assert.ifError
+              assert.ifError,
             );
           }, /Both `entityFilter` and `kinds` were provided\./);
         });
@@ -791,7 +791,7 @@ async.each(
           datastore.request_ = (config: any) => {
             assert.deepStrictEqual(
               config.reqOpts.entityFilter.namespaceIds,
-              namespaces
+              namespaces,
             );
             done();
           };
@@ -807,7 +807,7 @@ async.each(
                 namespaces: ['ns1', 'ns2'],
                 entityFilter: {},
               },
-              assert.ifError
+              assert.ifError,
             );
           }, /Both `entityFilter` and `namespaces` were provided\./);
         });
@@ -906,11 +906,11 @@ async.each(
           datastore.request_ = (config: any) => {
             assert.strictEqual(
               config.reqOpts.pageSize,
-              options.gaxOptions.pageSize
+              options.gaxOptions.pageSize,
             );
             assert.strictEqual(
               config.reqOpts.pageToken,
-              options.gaxOptions.pageToken
+              options.gaxOptions.pageToken,
             );
             done();
           };
@@ -981,7 +981,7 @@ async.each(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           datastore.request_ = (config: any) => {
             assert(
-              Object.keys(options.gaxOptions).every(k => !config.reqOpts[k])
+              Object.keys(options.gaxOptions).every(k => !config.reqOpts[k]),
             );
             done();
           };
@@ -998,7 +998,7 @@ async.each(
           datastore.request_ = (config: any) => {
             assert.strictEqual(
               config.gaxOpts.autoPaginate,
-              options.autoPaginate
+              options.autoPaginate,
             );
             done();
           };
@@ -1039,7 +1039,7 @@ async.each(
               assert.strictEqual(nextQuery, null);
               assert.strictEqual(apiResp, apiResponse);
               done();
-            }
+            },
           );
         });
 
@@ -1082,7 +1082,7 @@ async.each(
               assert.ifError(err);
               assert.deepStrictEqual(_nextQuery, nextQuery);
               done();
-            }
+            },
           );
         });
       });
@@ -1158,7 +1158,7 @@ async.each(
                 file: 'file',
                 inputUrl: 'gs://file',
               },
-              assert.ifError
+              assert.ifError,
             );
           }, /Both `file` and `inputUrl` were provided\./);
         });
@@ -1194,7 +1194,7 @@ async.each(
           datastore.request_ = (config: any) => {
             assert.strictEqual(
               config.reqOpts.inputUrl,
-              `gs://${file.bucket.name}/${file.name}`
+              `gs://${file.bucket.name}/${file.name}`,
             );
             done();
           };
@@ -1229,7 +1229,7 @@ async.each(
                 kinds: ['kind1', 'kind2'],
                 entityFilter: {},
               },
-              assert.ifError
+              assert.ifError,
             );
           }, /Both `entityFilter` and `kinds` were provided\./);
         });
@@ -1242,7 +1242,7 @@ async.each(
           datastore.request_ = (config: any) => {
             assert.deepStrictEqual(
               config.reqOpts.entityFilter.namespaceIds,
-              namespaces
+              namespaces,
             );
             done();
           };
@@ -1258,7 +1258,7 @@ async.each(
                 namespaces: ['ns1', 'ns2'],
                 entityFilter: {},
               },
-              assert.ifError
+              assert.ifError,
             );
           }, /Both `entityFilter` and `namespaces` were provided\./);
         });
@@ -1476,7 +1476,7 @@ async.each(
               {key, data: {k: 'v'}},
               {key, data: {k: 'v'}},
             ],
-            done
+            done,
           );
         });
 
@@ -1508,7 +1508,7 @@ async.each(
           datastore.request_ = (config: RequestConfig, callback: Function) => {
             assert.deepStrictEqual(
               config.reqOpts!.mutations![0].upsert!.properties,
-              expectedProperties
+              expectedProperties,
             );
             callback();
           };
@@ -1540,7 +1540,7 @@ async.each(
               data: {},
             },
             gaxOptions,
-            assert.ifError
+            assert.ifError,
           );
         });
 
@@ -1561,12 +1561,12 @@ async.each(
               },
               () => {
                 done('Should not reach callback');
-              }
+              },
             );
           } catch (err: unknown) {
             assert.strictEqual(
               (err as {message: string}).message,
-              'Unsupported field value, undefined, was provided.'
+              'Unsupported field value, undefined, was provided.',
             );
             done();
             return;
@@ -1591,14 +1591,14 @@ async.each(
               },
               () => {
                 done('Should not reach callback');
-              }
+              },
             );
           } catch (err: unknown) {
             assert(
               [
                 "Cannot read properties of null (reading 'toString')", // Later Node versions
                 "Cannot read property 'toString' of null", // Node 14
-              ].includes((err as {message: string}).message)
+              ].includes((err as {message: string}).message),
             );
             done();
             return;
@@ -1655,7 +1655,7 @@ async.each(
               {key, method: 'update', data: {k2: 'v2'}},
               {key, method: 'upsert', data: {k3: 'v3'}},
             ],
-            done
+            done,
           );
         });
 
@@ -1669,7 +1669,7 @@ async.each(
                   k: 'v',
                 },
               },
-              assert.ifError
+              assert.ifError,
             );
           }, /Method auto_insert_id not recognized/);
         });
@@ -1712,7 +1712,7 @@ async.each(
               assert.ifError(err);
               assert.strictEqual(mockCommitResponse, apiResponse);
               done();
-            }
+            },
           );
         });
 
@@ -1736,7 +1736,7 @@ async.each(
                 },
               ],
             },
-            assert.ifError
+            assert.ifError,
           );
         });
 
@@ -1763,7 +1763,7 @@ async.each(
                 },
               ],
             },
-            assert.ifError
+            assert.ifError,
           );
         });
 
@@ -1837,7 +1837,7 @@ async.each(
               data,
               excludeFromIndexes: ['.*'],
             },
-            assert.ifError
+            assert.ifError,
           );
         });
 
@@ -1919,7 +1919,7 @@ async.each(
                 'metadata.longStringArray[].*',
               ],
             },
-            assert.ifError
+            assert.ifError,
           );
         });
 
@@ -1946,7 +1946,7 @@ async.each(
                 },
               ],
             },
-            assert.ifError
+            assert.ifError,
           );
         });
 
@@ -2009,12 +2009,12 @@ async.each(
             assert.strictEqual(
               (config.reqOpts!.mutations![0].upsert! as Entity)
                 .excludeLargeProperties,
-              true
+              true,
             );
             assert.deepStrictEqual(
               (config.reqOpts!.mutations![0].upsert! as Entity)
                 .excludeFromIndexes,
-              excludeFromIndexes
+              excludeFromIndexes,
             );
             done();
           };
@@ -2025,7 +2025,7 @@ async.each(
               data,
               excludeLargeProperties: true,
             },
-            assert.ifError
+            assert.ifError,
           );
         });
 
@@ -2046,7 +2046,7 @@ async.each(
             assert.deepStrictEqual(
               config.reqOpts!.mutations![0].upsert!.properties!.name
                 .excludeFromIndexes,
-              true
+              true,
             );
             done();
           };
@@ -2057,7 +2057,7 @@ async.each(
               data,
               excludeLargeProperties: true,
             },
-            assert.ifError
+            assert.ifError,
           );
         });
 
@@ -2109,7 +2109,7 @@ async.each(
               assert.strictEqual(keyProtos[1], response.mutationResults[1].key);
 
               done();
-            }
+            },
           );
         });
 
@@ -2129,7 +2129,7 @@ async.each(
 
             assert.strictEqual(
               typeof datastore.requestCallbacks_[0],
-              'function'
+              'function',
             );
             assert.strictEqual(typeof datastore.requests_[0], 'object');
           });
@@ -2349,7 +2349,7 @@ async.each(
             (err: Error | null | undefined, urlSafeKey: string) => {
               assert.ifError(err);
               assert.strictEqual(urlSafeKey, base64EndocdedUrlSafeKey);
-            }
+            },
           );
         });
 
@@ -2370,7 +2370,7 @@ async.each(
             (err: Error | null | undefined, urlSafeKey: string) => {
               assert.ifError(err);
               assert.strictEqual(urlSafeKey, base64EndocdedUrlSafeKey);
-            }
+            },
           );
         });
 
@@ -2385,7 +2385,7 @@ async.each(
             (err: Error | null | undefined, urlSafeKey: string) => {
               assert.strictEqual(err, error);
               assert.strictEqual(urlSafeKey, undefined);
-            }
+            },
           );
         });
       });
@@ -2495,7 +2495,7 @@ async.each(
                   // Mock out the request function to compare config passed into it.
                   datastore.request_ = (
                     config: RequestConfig,
-                    callback: RequestCallback
+                    callback: RequestCallback,
                   ) => {
                     try {
                       assert.deepStrictEqual(config, expectedConfig);
@@ -2510,13 +2510,13 @@ async.each(
                   const key = datastore.key(['Post', 'Post1']);
                   const entities = Object.assign(
                     {key},
-                    onSaveTest.entitiesWithoutKey
+                    onSaveTest.entitiesWithoutKey,
                   );
                   const results = await datastore.save(entities);
                   assert.deepStrictEqual(results, ['some-data']);
                 }
               });
-            }
+            },
           );
         });
       });
@@ -2529,7 +2529,7 @@ async.each(
           });
           assert.strictEqual(
             otherDatastore.getDatabaseId(),
-            SECOND_DATABASE_ID
+            SECOND_DATABASE_ID,
           );
         });
       });
@@ -2661,13 +2661,13 @@ async.each(
                 // Mock out the request function to compare config passed into it.
                 datastore.request_ = (
                   config: RequestConfig,
-                  callback: RequestCallback
+                  callback: RequestCallback,
                 ) => {
                   assert.deepStrictEqual(config.client, 'DatastoreClient');
                   assert.deepStrictEqual(config.method, 'runQuery');
                   assert.deepStrictEqual(
                     config.reqOpts?.explainOptions,
-                    modeOptions.expectedExplainOptions
+                    modeOptions.expectedExplainOptions,
                   );
                   callback(
                     null,
@@ -2678,8 +2678,8 @@ async.each(
                           moreResults: 'NO_MORE_RESULTS',
                         },
                       },
-                      modeOptions.explainMetrics
-                    )
+                      modeOptions.explainMetrics,
+                    ),
                   );
                 };
                 const ancestor = datastore.key(['Book', 'GoT']);
@@ -2688,28 +2688,28 @@ async.each(
                   .hasAncestor(ancestor);
                 const [entities, info] = await datastore.runQuery(
                   q,
-                  modeOptions.options
+                  modeOptions.options,
                 );
                 assert.deepStrictEqual(entities, []);
                 assert.deepStrictEqual(
                   info,
                   Object.assign(
                     {moreResults: 'NO_MORE_RESULTS'},
-                    modeOptions.expectedInfo
-                  )
+                    modeOptions.expectedInfo,
+                  ),
                 );
               });
               it('should provide correct request/response data for runAggregationQuery', async () => {
                 // Mock out the request function to compare config passed into it.
                 datastore.request_ = (
                   config: RequestConfig,
-                  callback: RequestCallback
+                  callback: RequestCallback,
                 ) => {
                   assert.deepStrictEqual(config.client, 'DatastoreClient');
                   assert.deepStrictEqual(config.method, 'runAggregationQuery');
                   assert.deepStrictEqual(
                     config.reqOpts?.explainOptions,
-                    modeOptions.expectedExplainOptions
+                    modeOptions.expectedExplainOptions,
                   );
                   callback(
                     null,
@@ -2720,8 +2720,8 @@ async.each(
                           moreResults: 'NO_MORE_RESULTS',
                         },
                       },
-                      modeOptions.explainMetrics
-                    )
+                      modeOptions.explainMetrics,
+                    ),
                   );
                 };
                 const ancestor = datastore.key(['Book', 'GoT']);
@@ -2733,15 +2733,15 @@ async.each(
                   .addAggregation(AggregateField.sum('appearances'));
                 const [entities, info] = await datastore.runAggregationQuery(
                   aggregate,
-                  modeOptions.options
+                  modeOptions.options,
                 );
                 assert.deepStrictEqual(entities, []);
                 assert.deepStrictEqual(info, modeOptions.expectedInfo);
               });
             });
-          }
+          },
         );
       });
     });
-  }
+  },
 );

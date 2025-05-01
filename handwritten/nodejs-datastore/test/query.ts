@@ -86,7 +86,7 @@ describe('Query', () => {
             {
               alias: 'alias1',
               count: {},
-            }
+            },
           );
         });
         it('should produce the right proto with a sum aggregation', () => {
@@ -100,7 +100,7 @@ describe('Query', () => {
                   name: 'property1',
                 },
               },
-            }
+            },
           );
         });
         it('should produce the right proto with an average aggregation', () => {
@@ -114,7 +114,7 @@ describe('Query', () => {
                 },
               },
               operator: 'avg',
-            }
+            },
           );
         });
       });
@@ -126,21 +126,21 @@ describe('Query', () => {
 
         function compareAggregations(
           aggregateQuery: AggregateQuery,
-          aggregateFields: AggregateField[]
+          aggregateFields: AggregateField[],
         ) {
           const addAggregationsAggregate = generateAggregateQuery();
           addAggregationsAggregate.addAggregations(aggregateFields);
           const addAggregationAggregate = generateAggregateQuery();
           aggregateFields.forEach(aggregateField =>
-            addAggregationAggregate.addAggregation(aggregateField)
+            addAggregationAggregate.addAggregation(aggregateField),
           );
           assert.deepStrictEqual(
             aggregateQuery.aggregations,
-            addAggregationsAggregate.aggregations
+            addAggregationsAggregate.aggregations,
           );
           assert.deepStrictEqual(
             aggregateQuery.aggregations,
-            addAggregationAggregate.aggregations
+            addAggregationAggregate.aggregations,
           );
           assert.deepStrictEqual(aggregateQuery.aggregations, aggregateFields);
         }
@@ -149,8 +149,8 @@ describe('Query', () => {
             compareAggregations(
               generateAggregateQuery().count('total1').count('total2'),
               ['total1', 'total2'].map(alias =>
-                AggregateField.count().alias(alias)
-              )
+                AggregateField.count().alias(alias),
+              ),
             );
           });
           it('should compare equivalent sum aggregation queries', () => {
@@ -161,7 +161,7 @@ describe('Query', () => {
               [
                 AggregateField.sum('property1').alias('alias1'),
                 AggregateField.sum('property2').alias('alias2'),
-              ]
+              ],
             );
           });
           it('should compare equivalent average aggregation queries', () => {
@@ -172,7 +172,7 @@ describe('Query', () => {
               [
                 AggregateField.average('property1').alias('alias1'),
                 AggregateField.average('property2').alias('alias2'),
-              ]
+              ],
             );
           });
         });
@@ -180,13 +180,16 @@ describe('Query', () => {
           it('should compare equivalent count aggregation queries', () => {
             compareAggregations(
               generateAggregateQuery().count().count(),
-              ['total1', 'total2'].map(() => AggregateField.count())
+              ['total1', 'total2'].map(() => AggregateField.count()),
             );
           });
           it('should compare equivalent sum aggregation queries', () => {
             compareAggregations(
               generateAggregateQuery().sum('property1').sum('property2'),
-              [AggregateField.sum('property1'), AggregateField.sum('property2')]
+              [
+                AggregateField.sum('property1'),
+                AggregateField.sum('property2'),
+              ],
             );
           });
           it('should compare equivalent average aggregation queries', () => {
@@ -197,7 +200,7 @@ describe('Query', () => {
               [
                 AggregateField.average('property1'),
                 AggregateField.average('property2'),
-              ]
+              ],
             );
           });
         });
@@ -210,7 +213,7 @@ describe('Query', () => {
       const onWarning = (warning: {message: unknown}) => {
         assert.strictEqual(
           warning.message,
-          'Providing Filter objects like Composite Filter or Property Filter is recommended when using .filter'
+          'Providing Filter objects like Composite Filter or Property Filter is recommended when using .filter',
         );
         process.removeListener('warning', onWarning);
         done();
@@ -294,7 +297,7 @@ describe('Query', () => {
       const query = new Query(['kind1']).filter(
         'count',
         '       <        ',
-        123
+        123,
       );
 
       assert.strictEqual(query.filters[0].op, '<');
@@ -331,7 +334,7 @@ describe('Query', () => {
     it('should support filter with Filter', () => {
       const now = new Date();
       const query = new Query(['kind1']).filter(
-        new PropertyFilter('date', '<=', now)
+        new PropertyFilter('date', '<=', now),
       );
       const filter = query.entityFilters[0];
 
@@ -345,7 +348,7 @@ describe('Query', () => {
         or([
           new PropertyFilter('date', '<=', now),
           new PropertyFilter('name', '=', 'Stephen'),
-        ])
+        ]),
       );
       const filter = query.entityFilters[0];
       assert.strictEqual(filter.op, 'OR');
@@ -362,11 +365,11 @@ describe('Query', () => {
     it('should accept null as value', () => {
       assert.strictEqual(
         new Query(['kind1']).filter('status', null).filters.pop()?.val,
-        null
+        null,
       );
       assert.strictEqual(
         new Query(['kind1']).filter('status', '=', null).filters.pop()?.val,
-        null
+        null,
       );
     });
   });
@@ -603,14 +606,14 @@ describe('Query', () => {
       dataClient['commit'] = (
         request: any,
         options: any,
-        callback: (err?: unknown) => void
+        callback: (err?: unknown) => void,
       ) => {
         try {
           assert.strictEqual(request.databaseId, SECOND_DATABASE_ID);
           assert.strictEqual(request.projectId, projectId);
           assert.strictEqual(
             options.headers['google-cloud-resource-prefix'],
-            `projects/${projectId}`
+            `projects/${projectId}`,
           );
         } catch (e) {
           callback(e);

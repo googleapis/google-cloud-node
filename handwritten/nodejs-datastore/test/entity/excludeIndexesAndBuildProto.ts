@@ -44,13 +44,13 @@ describe('excludeIndexesAndBuildProto', () => {
         if (entityProtoSubset.stringValue === longString) {
           if (entityProtoSubset.excludeFromIndexes !== true) {
             assert.fail(
-              `The entity proto at ${path} should excludeFromIndexes`
+              `The entity proto at ${path} should excludeFromIndexes`,
             );
           }
         } else {
           if (entityProtoSubset.excludeFromIndexes === true) {
             assert.fail(
-              `The entity proto at ${path} should not excludeFromIndexes`
+              `The entity proto at ${path} should not excludeFromIndexes`,
             );
           }
         }
@@ -82,7 +82,7 @@ describe('excludeIndexesAndBuildProto', () => {
             },
           },
         },
-        ''
+        '',
       );
     });
     it('should not throw an assertion error for long strings in the top level', () => {
@@ -99,7 +99,7 @@ describe('excludeIndexesAndBuildProto', () => {
             },
           },
         },
-        ''
+        '',
       );
     });
     it('should throw an assertion error for a missing excludeFromIndexes: true', () => {
@@ -116,13 +116,13 @@ describe('excludeIndexesAndBuildProto', () => {
               },
             },
           },
-          ''
+          '',
         );
         assert.fail('checkEntityProto should have failed');
       } catch (e) {
         assert.strictEqual(
           (e as ServiceError).message,
-          'The entity proto at .properties.name should excludeFromIndexes'
+          'The entity proto at .properties.name should excludeFromIndexes',
         );
       }
     });
@@ -141,13 +141,13 @@ describe('excludeIndexesAndBuildProto', () => {
               },
             },
           },
-          ''
+          '',
         );
         assert.fail('checkEntityProto should have failed');
       } catch (e) {
         assert.strictEqual(
           (e as ServiceError).message,
-          'The entity proto at .properties.name should not excludeFromIndexes'
+          'The entity proto at .properties.name should not excludeFromIndexes',
         );
       }
     });
@@ -181,13 +181,13 @@ describe('excludeIndexesAndBuildProto', () => {
               },
             },
           },
-          ''
+          '',
         );
         assert.fail('checkEntityProto should have failed');
       } catch (e) {
         assert.strictEqual(
           (e as ServiceError).message,
-          'The entity proto at .properties.name.arrayValue.values.[1].entityValue.properties.metadata should not excludeFromIndexes'
+          'The entity proto at .properties.name.arrayValue.values.[1].entityValue.properties.metadata should not excludeFromIndexes',
         );
       }
     });
@@ -262,7 +262,7 @@ describe('excludeIndexesAndBuildProto', () => {
    */
   function getGeneratedTestComponents(
     baseElement: {},
-    baseTestName: string
+    baseTestName: string,
   ): GeneratedTestCase[] {
     const maxDepth = 5;
     const generatedTestCasesByDepth: GeneratedTestCase[][] = [
@@ -315,7 +315,7 @@ describe('excludeIndexesAndBuildProto', () => {
         value: longString,
         otherProperty: longString,
       },
-      'with long string properties and path '
+      'with long string properties and path ',
     ),
     getGeneratedTestComponents(
       {
@@ -323,7 +323,7 @@ describe('excludeIndexesAndBuildProto', () => {
         value: 'short value',
         otherProperty: longString,
       },
-      'with long name property and path '
+      'with long name property and path ',
     ),
   ]
     .flat()
@@ -375,6 +375,6 @@ describe('excludeIndexesAndBuildProto', () => {
         const entityProto = buildEntityProto(entityObject);
         checkEntityProto(entityProto, '');
       });
-    }
+    },
   );
 });

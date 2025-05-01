@@ -197,12 +197,12 @@ async.each(
           // This is useful for tests that need to know when the mocked function is called.
           callBackSignaler: (
             callbackReached: GapicFunctionName,
-            request?: RequestType
+            request?: RequestType,
           ) => void = () => {};
 
           constructor(
             err: Error | null = null,
-            resp: google.datastore.v1.IBeginTransactionResponse = testRunResp
+            resp: google.datastore.v1.IBeginTransactionResponse = testRunResp,
           ) {
             const namespace = 'run-without-mock';
             const projectId = 'project-id';
@@ -223,7 +223,7 @@ async.each(
             // Datastore Gapic clients haven't been initialized yet, so we initialize them here.
             datastore.clients_.set(
               dataClientName,
-              new gapic.v1[dataClientName](options)
+              new gapic.v1[dataClientName](options),
             );
             const dataClient = datastore.clients_.get(dataClientName);
             // Mock begin transaction
@@ -241,13 +241,13 @@ async.each(
                   | null
                   | undefined,
                   {} | null | undefined
-                >
+                >,
               ) => {
                 // Calls a user provided function that will receive this string
                 // Usually used to track when this code was reached relative to other code
                 this.callBackSignaler(
                   GapicFunctionName.BEGIN_TRANSACTION,
-                  request
+                  request,
                 );
                 callback(err, resp);
               };
@@ -262,7 +262,7 @@ async.each(
           mockGapicFunction<ResponseType>(
             functionName: GapicFunctionName,
             response: ResponseType,
-            error: Error | null
+            error: Error | null,
           ) {
             const dataClient = this.dataClient;
             // Check here that function hasn't been mocked out already
@@ -286,7 +286,7 @@ async.each(
                   ResponseType,
                   RequestType | null | undefined,
                   {} | null | undefined
-                >
+                >,
               ) => {
                 this.callBackSignaler(functionName, request);
                 callback(error, response);
@@ -327,7 +327,7 @@ async.each(
           beforeEach(async () => {
             transactionWrapper = new MockedTransactionWrapper(
               new Error(testErrorMessage),
-              undefined
+              undefined,
             );
           });
           it('should send back the error when awaiting a promise', async () => {
@@ -341,7 +341,7 @@ async.each(
           it('should send back the error when using a callback', done => {
             const commitCallback: CommitCallback = (
               error: Error | null | undefined,
-              response?: google.datastore.v1.ICommitResponse
+              response?: google.datastore.v1.ICommitResponse,
             ) => {
               try {
                 assert(error);
@@ -382,7 +382,7 @@ async.each(
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.COMMIT,
                 testCommitResp,
-                new Error(testErrorMessage)
+                new Error(testErrorMessage),
               );
             });
 
@@ -398,7 +398,7 @@ async.each(
             it('should send back the error when using a callback', done => {
               const commitCallback: CommitCallback = (
                 error: Error | null | undefined,
-                response?: google.datastore.v1.ICommitResponse
+                response?: google.datastore.v1.ICommitResponse,
               ) => {
                 try {
                   assert(error);
@@ -419,7 +419,7 @@ async.each(
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.COMMIT,
                 testCommitResp,
-                null
+                null,
               );
             });
             it('should send back the response when awaiting a promise', async () => {
@@ -431,7 +431,7 @@ async.each(
             it('should send back the response when using a callback', done => {
               const commitCallback: CommitCallback = (
                 error: Error | null | undefined,
-                response?: google.datastore.v1.ICommitResponse
+                response?: google.datastore.v1.ICommitResponse,
               ) => {
                 try {
                   assert.strictEqual(error, null);
@@ -489,7 +489,7 @@ async.each(
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.RUN_AGGREGATION_QUERY,
                 runAggregationQueryResp,
-                new Error(testErrorMessage)
+                new Error(testErrorMessage),
               );
             });
 
@@ -505,7 +505,7 @@ async.each(
             it('should send back the error when using a callback', done => {
               const runAggregateQueryCallback: RequestCallback = (
                 error: Error | null | undefined,
-                response?: unknown
+                response?: unknown,
               ) => {
                 try {
                   assert(error);
@@ -519,7 +519,7 @@ async.each(
               transaction.run(() => {
                 transaction.runAggregationQuery(
                   aggregate,
-                  runAggregateQueryCallback
+                  runAggregateQueryCallback,
                 );
               });
             });
@@ -529,7 +529,7 @@ async.each(
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.RUN_AGGREGATION_QUERY,
                 runAggregationQueryResp,
-                null
+                null,
               );
             });
             it('should send back the response when awaiting a promise', async () => {
@@ -539,13 +539,13 @@ async.each(
               const [runAggregateQueryResults] = allResults;
               assert.deepStrictEqual(
                 runAggregateQueryResults,
-                runAggregationQueryUserResp
+                runAggregationQueryUserResp,
               );
             });
             it('should send back the response when using a callback', done => {
               const runAggregateQueryCallback: CommitCallback = (
                 error: Error | null | undefined,
-                response?: unknown
+                response?: unknown,
               ) => {
                 try {
                   assert.strictEqual(error, null);
@@ -558,7 +558,7 @@ async.each(
               transaction.run(() => {
                 transaction.runAggregationQuery(
                   aggregate,
-                  runAggregateQueryCallback
+                  runAggregateQueryCallback,
                 );
               });
             });
@@ -594,7 +594,7 @@ async.each(
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.RUN_QUERY,
                 runQueryResp,
-                new Error(testErrorMessage)
+                new Error(testErrorMessage),
               );
             });
 
@@ -611,7 +611,7 @@ async.each(
               const callback: RunQueryCallback = (
                 error: Error | null | undefined,
                 entities?: Entity[],
-                info?: RunQueryInfo
+                info?: RunQueryInfo,
               ) => {
                 try {
                   assert(error);
@@ -633,7 +633,7 @@ async.each(
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.RUN_QUERY,
                 runQueryResp,
-                null
+                null,
               );
             });
             it('should send back the response when awaiting a promise', async () => {
@@ -646,7 +646,7 @@ async.each(
               const callback: RunQueryCallback = (
                 error: Error | null | undefined,
                 entities?: Entity[],
-                info?: RunQueryInfo
+                info?: RunQueryInfo,
               ) => {
                 try {
                   assert.strictEqual(error, null);
@@ -711,7 +711,7 @@ async.each(
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.LOOKUP,
                 getResp,
-                new Error(testErrorMessage)
+                new Error(testErrorMessage),
               );
             });
 
@@ -727,7 +727,7 @@ async.each(
             it('should send back the error when using a callback', done => {
               const callback: GetCallback = (
                 err?: Error | null,
-                entity?: Entities
+                entity?: Entities,
               ) => {
                 try {
                   assert(err);
@@ -748,7 +748,7 @@ async.each(
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.LOOKUP,
                 getResp,
-                null
+                null,
               );
             });
             it('should send back the response when awaiting a promise', async () => {
@@ -760,7 +760,7 @@ async.each(
             it('should send back the response when using a callback', done => {
               const callback: GetCallback = (
                 err?: Error | null,
-                entity?: Entities
+                entity?: Entities,
               ) => {
                 try {
                   const result = entity[transactionWrapper.datastore.KEY];
@@ -938,12 +938,12 @@ async.each(
                 try {
                   assert.deepStrictEqual(
                     this.eventOrder,
-                    this.expectedEventOrder
+                    this.expectedEventOrder,
                   );
                   if (this.expectedRequests) {
                     assert.deepStrictEqual(
                       this.requests,
-                      this.expectedRequests
+                      this.expectedRequests,
                     );
                   }
                   this.#done();
@@ -960,14 +960,14 @@ async.each(
               expectedRequests?: {
                 call: GapicFunctionName;
                 request?: RequestType;
-              }[]
+              }[],
             ) {
               this.expectedEventOrder = expectedOrder;
               this.expectedRequests = expectedRequests;
               this.#done = done;
               transactionWrapper.callBackSignaler = (
                 call: GapicFunctionName,
-                request?: RequestType
+                request?: RequestType,
               ) => {
                 try {
                   this.requests.push({call, request});
@@ -1003,7 +1003,7 @@ async.each(
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.COMMIT,
                 testCommitResp,
-                null
+                null,
               );
             });
 
@@ -1017,7 +1017,7 @@ async.each(
                   UserCodeEvent.RUN_CALLBACK,
                   GapicFunctionName.COMMIT,
                   UserCodeEvent.COMMIT_CALLBACK,
-                ]
+                ],
               );
               transaction.run(tester.push(UserCodeEvent.RUN_CALLBACK));
               transaction.commit(tester.push(UserCodeEvent.COMMIT_CALLBACK));
@@ -1032,7 +1032,7 @@ async.each(
                   GapicFunctionName.BEGIN_TRANSACTION,
                   GapicFunctionName.COMMIT,
                   UserCodeEvent.COMMIT_CALLBACK,
-                ]
+                ],
               );
               transaction.commit(tester.push(UserCodeEvent.COMMIT_CALLBACK));
               tester.push(UserCodeEvent.CUSTOM_EVENT)();
@@ -1046,7 +1046,7 @@ async.each(
                   GapicFunctionName.BEGIN_TRANSACTION,
                   UserCodeEvent.RUN_CALLBACK,
                   UserCodeEvent.RUN_CALLBACK,
-                ]
+                ],
               );
               transaction.run(tester.push(UserCodeEvent.RUN_CALLBACK));
               transaction.run(tester.push(UserCodeEvent.RUN_CALLBACK));
@@ -1062,7 +1062,7 @@ async.each(
                   UserCodeEvent.RUN_CALLBACK,
                   GapicFunctionName.COMMIT,
                   UserCodeEvent.COMMIT_CALLBACK,
-                ]
+                ],
               );
               transaction.commit(tester.push(UserCodeEvent.COMMIT_CALLBACK));
               transaction.run(tester.push(UserCodeEvent.RUN_CALLBACK));
@@ -1076,22 +1076,22 @@ async.each(
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.COMMIT,
                 testCommitResp,
-                null
+                null,
               );
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.LOOKUP,
                 testLookupResp,
-                null
+                null,
               );
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.RUN_QUERY,
                 testRunQueryResp,
-                null
+                null,
               );
               transactionWrapper.mockGapicFunction(
                 GapicFunctionName.RUN_AGGREGATION_QUERY,
                 testRunAggregationQueryResp,
-                null
+                null,
               );
             });
             const beginTransactionRequest = {
@@ -1181,7 +1181,7 @@ async.each(
                     GapicFunctionName.COMMIT,
                     UserCodeEvent.COMMIT_CALLBACK,
                   ],
-                  expectedRequests
+                  expectedRequests,
                 );
                 transaction.save({
                   key,
@@ -1199,7 +1199,7 @@ async.each(
                     GapicFunctionName.COMMIT,
                     UserCodeEvent.COMMIT_CALLBACK,
                   ],
-                  expectedRequests
+                  expectedRequests,
                 );
                 transaction.save({
                   key,
@@ -1241,7 +1241,7 @@ async.each(
                     UserCodeEvent.GET_CALLBACK,
                     UserCodeEvent.GET_CALLBACK,
                   ],
-                  expectedRequests
+                  expectedRequests,
                 );
                 transaction.get(key, tester.push(UserCodeEvent.GET_CALLBACK));
                 transaction.get(key, tester.push(UserCodeEvent.GET_CALLBACK));
@@ -1283,7 +1283,7 @@ async.each(
                     UserCodeEvent.GET_CALLBACK,
                     UserCodeEvent.GET_CALLBACK,
                   ],
-                  expectedRequests
+                  expectedRequests,
                 );
                 transaction.run(tester.push(UserCodeEvent.RUN_CALLBACK));
                 transaction.get(key, tester.push(UserCodeEvent.GET_CALLBACK));
@@ -1385,22 +1385,22 @@ async.each(
             transactionWrapper.mockGapicFunction(
               GapicFunctionName.RUN_AGGREGATION_QUERY,
               runAggregationQueryResp,
-              null
+              null,
             );
             transactionWrapper.mockGapicFunction(
               GapicFunctionName.LOOKUP,
               getResp,
-              null
+              null,
             );
             transactionWrapper.mockGapicFunction(
               GapicFunctionName.RUN_QUERY,
               runQueryResp,
-              null
+              null,
             );
             transactionWrapper.mockGapicFunction(
               GapicFunctionName.COMMIT,
               testCommitResp,
-              null
+              null,
             );
           });
           describe('lookup, lookup, put, commit', () => {
@@ -1410,13 +1410,13 @@ async.each(
               // It ensures the data that reaches the gapic layer is correct.
               transactionWrapper.callBackSignaler = (
                 callbackReached: GapicFunctionName,
-                request?: RequestType
+                request?: RequestType,
               ) => {
                 try {
                   switch (callbackReached) {
                     case GapicFunctionName.BEGIN_TRANSACTION:
                       throw Error(
-                        'BeginTransaction should not have been called'
+                        'BeginTransaction should not have been called',
                       );
                     case GapicFunctionName.LOOKUP: {
                       const lookupRequest =
@@ -1444,25 +1444,25 @@ async.each(
                         request as protos.google.datastore.v1.ICommitRequest;
                       assert.deepStrictEqual(
                         commitRequest.mode,
-                        'TRANSACTIONAL'
+                        'TRANSACTIONAL',
                       );
                       assert.deepStrictEqual(
                         commitRequest.transaction,
-                        testRunResp.transaction
+                        testRunResp.transaction,
                       );
                       done();
                       break;
                     }
                     default:
                       throw Error(
-                        'A gapic function was called that should not have been called'
+                        'A gapic function was called that should not have been called',
                       );
                   }
                 } catch (err: any) {
                   done(err);
                 }
               };
-              (async () => {
+              void (async () => {
                 try {
                   transaction = transactionWrapper.transaction;
                   await transaction.get(key);
@@ -1480,7 +1480,7 @@ async.each(
               // It ensures the data that reaches the gapic layer is correct.
               transactionWrapper.callBackSignaler = (
                 callbackReached: GapicFunctionName,
-                request?: RequestType
+                request?: RequestType,
               ) => {
                 try {
                   switch (callbackReached) {
@@ -1504,11 +1504,11 @@ async.each(
                         request as protos.google.datastore.v1.ICommitRequest;
                       assert.deepStrictEqual(
                         commitRequest.mode,
-                        'TRANSACTIONAL'
+                        'TRANSACTIONAL',
                       );
                       assert.deepStrictEqual(
                         commitRequest.transaction,
-                        testRunResp.transaction
+                        testRunResp.transaction,
                       );
                       assert.strictEqual(beginCount, 1);
                       done();
@@ -1516,14 +1516,14 @@ async.each(
                     }
                     default:
                       throw Error(
-                        'A gapic function was called that should not have been called'
+                        'A gapic function was called that should not have been called',
                       );
                   }
                 } catch (err: any) {
                   done(err);
                 }
               };
-              (async () => {
+              void (async () => {
                 try {
                   transaction = transactionWrapper.transaction;
                   await transaction.run();
@@ -1543,13 +1543,13 @@ async.each(
               // It ensures the data that reaches the gapic layer is correct.
               transactionWrapper.callBackSignaler = (
                 callbackReached: GapicFunctionName,
-                request?: RequestType
+                request?: RequestType,
               ) => {
                 try {
                   switch (callbackReached) {
                     case GapicFunctionName.BEGIN_TRANSACTION:
                       throw Error(
-                        'BeginTransaction should not have been called'
+                        'BeginTransaction should not have been called',
                       );
                     case GapicFunctionName.LOOKUP: {
                       const lookupRequest =
@@ -1573,25 +1573,25 @@ async.each(
                         request as protos.google.datastore.v1.ICommitRequest;
                       assert.deepStrictEqual(
                         commitRequest.mode,
-                        'TRANSACTIONAL'
+                        'TRANSACTIONAL',
                       );
                       assert.deepStrictEqual(
                         commitRequest.transaction,
-                        testRunResp.transaction
+                        testRunResp.transaction,
                       );
                       done();
                       break;
                     }
                     default:
                       throw Error(
-                        'A gapic function was called that should not have been called'
+                        'A gapic function was called that should not have been called',
                       );
                   }
                 } catch (err: any) {
                   done(err);
                 }
               };
-              (async () => {
+              void (async () => {
                 try {
                   transaction = transactionWrapper.transaction;
                   const query =
@@ -1611,7 +1611,7 @@ async.each(
               // It ensures the data that reaches the gapic layer is correct.
               transactionWrapper.callBackSignaler = (
                 callbackReached: GapicFunctionName,
-                request?: RequestType
+                request?: RequestType,
               ) => {
                 try {
                   switch (callbackReached) {
@@ -1643,11 +1643,11 @@ async.each(
                         request as protos.google.datastore.v1.ICommitRequest;
                       assert.deepStrictEqual(
                         commitRequest.mode,
-                        'TRANSACTIONAL'
+                        'TRANSACTIONAL',
                       );
                       assert.deepStrictEqual(
                         commitRequest.transaction,
-                        testRunResp.transaction
+                        testRunResp.transaction,
                       );
                       assert.strictEqual(beginCount, 1);
                       done();
@@ -1655,14 +1655,14 @@ async.each(
                     }
                     default:
                       throw Error(
-                        'A gapic function was called that should not have been called'
+                        'A gapic function was called that should not have been called',
                       );
                   }
                 } catch (err: any) {
                   done(err);
                 }
               };
-              (async () => {
+              void (async () => {
                 try {
                   transaction = transactionWrapper.transaction;
                   await transaction.run();
@@ -1684,13 +1684,13 @@ async.each(
               // It ensures the data that reaches the gapic layer is correct.
               transactionWrapper.callBackSignaler = (
                 callbackReached: GapicFunctionName,
-                request?: RequestType
+                request?: RequestType,
               ) => {
                 try {
                   switch (callbackReached) {
                     case GapicFunctionName.BEGIN_TRANSACTION:
                       throw Error(
-                        'BeginTransaction should not have been called'
+                        'BeginTransaction should not have been called',
                       );
                     case GapicFunctionName.LOOKUP: {
                       const lookupRequest =
@@ -1708,7 +1708,7 @@ async.each(
                         {
                           newTransaction: {},
                           consistencyType: 'newTransaction',
-                        }
+                        },
                       );
                       break;
                     }
@@ -1717,25 +1717,25 @@ async.each(
                         request as protos.google.datastore.v1.ICommitRequest;
                       assert.deepStrictEqual(
                         commitRequest.mode,
-                        'TRANSACTIONAL'
+                        'TRANSACTIONAL',
                       );
                       assert.deepStrictEqual(
                         commitRequest.transaction,
-                        testRunResp.transaction
+                        testRunResp.transaction,
                       );
                       done();
                       break;
                     }
                     default:
                       throw Error(
-                        'A gapic function was called that should not have been called'
+                        'A gapic function was called that should not have been called',
                       );
                   }
                 } catch (err: any) {
                   done(err);
                 }
               };
-              (async () => {
+              void (async () => {
                 try {
                   transaction = transactionWrapper.transaction;
                   const query =
@@ -1758,7 +1758,7 @@ async.each(
               // It ensures the data that reaches the gapic layer is correct.
               transactionWrapper.callBackSignaler = (
                 callbackReached: GapicFunctionName,
-                request?: RequestType
+                request?: RequestType,
               ) => {
                 try {
                   switch (callbackReached) {
@@ -1784,7 +1784,7 @@ async.each(
                         runAggregationQueryRequest.readOptions,
                         {
                           transaction: testRunResp.transaction,
-                        }
+                        },
                       );
                       break;
                     }
@@ -1793,11 +1793,11 @@ async.each(
                         request as protos.google.datastore.v1.ICommitRequest;
                       assert.deepStrictEqual(
                         commitRequest.mode,
-                        'TRANSACTIONAL'
+                        'TRANSACTIONAL',
                       );
                       assert.deepStrictEqual(
                         commitRequest.transaction,
-                        testRunResp.transaction
+                        testRunResp.transaction,
                       );
                       assert.strictEqual(beginCount, 1);
                       done();
@@ -1805,14 +1805,14 @@ async.each(
                     }
                     default:
                       throw Error(
-                        'A gapic function was called that should not have been called'
+                        'A gapic function was called that should not have been called',
                       );
                   }
                 } catch (err: any) {
                   done(err);
                 }
               };
-              (async () => {
+              void (async () => {
                 try {
                   transaction = transactionWrapper.transaction;
                   await transaction.run();
@@ -1837,13 +1837,13 @@ async.each(
               // It ensures the data that reaches the gapic layer is correct.
               transactionWrapper.callBackSignaler = (
                 callbackReached: GapicFunctionName,
-                request?: RequestType
+                request?: RequestType,
               ) => {
                 try {
                   switch (callbackReached) {
                     case GapicFunctionName.BEGIN_TRANSACTION:
                       throw Error(
-                        'BeginTransaction should not have been called'
+                        'BeginTransaction should not have been called',
                       );
                     case GapicFunctionName.LOOKUP: {
                       const lookupRequest =
@@ -1859,25 +1859,25 @@ async.each(
                         request as protos.google.datastore.v1.ICommitRequest;
                       assert.deepStrictEqual(
                         commitRequest.mode,
-                        'TRANSACTIONAL'
+                        'TRANSACTIONAL',
                       );
                       assert.deepStrictEqual(
                         commitRequest.transaction,
-                        testRunResp.transaction
+                        testRunResp.transaction,
                       );
                       done();
                       break;
                     }
                     default:
                       throw Error(
-                        'A gapic function was called that should not have been called'
+                        'A gapic function was called that should not have been called',
                       );
                   }
                 } catch (err: any) {
                   done(err);
                 }
               };
-              (async () => {
+              void (async () => {
                 try {
                   transaction = transactionWrapper.transaction;
                   transaction.save({key, data: ''});
@@ -1895,7 +1895,7 @@ async.each(
               // It ensures the data that reaches the gapic layer is correct.
               transactionWrapper.callBackSignaler = (
                 callbackReached: GapicFunctionName,
-                request?: RequestType
+                request?: RequestType,
               ) => {
                 try {
                   switch (callbackReached) {
@@ -1919,11 +1919,11 @@ async.each(
                         request as protos.google.datastore.v1.ICommitRequest;
                       assert.deepStrictEqual(
                         commitRequest.mode,
-                        'TRANSACTIONAL'
+                        'TRANSACTIONAL',
                       );
                       assert.deepStrictEqual(
                         commitRequest.transaction,
-                        testRunResp.transaction
+                        testRunResp.transaction,
                       );
                       assert.strictEqual(beginCount, 1);
                       done();
@@ -1931,14 +1931,14 @@ async.each(
                     }
                     default:
                       throw Error(
-                        'A gapic function was called that should not have been called'
+                        'A gapic function was called that should not have been called',
                       );
                   }
                 } catch (err: any) {
                   done(err);
                 }
               };
-              (async () => {
+              void (async () => {
                 try {
                   transaction = transactionWrapper.transaction;
                   await transaction.run();
@@ -1959,7 +1959,7 @@ async.each(
               // It ensures the data that reaches the gapic layer is correct.
               transactionWrapper.callBackSignaler = (
                 callbackReached: GapicFunctionName,
-                request?: RequestType
+                request?: RequestType,
               ) => {
                 try {
                   switch (callbackReached) {
@@ -1975,11 +1975,11 @@ async.each(
                         request as protos.google.datastore.v1.ICommitRequest;
                       assert.deepStrictEqual(
                         commitRequest.mode,
-                        'TRANSACTIONAL'
+                        'TRANSACTIONAL',
                       );
                       assert.deepStrictEqual(
                         commitRequest.transaction,
-                        testRunResp.transaction
+                        testRunResp.transaction,
                       );
                       assert.strictEqual(beginCount, 1);
                       done();
@@ -1987,14 +1987,14 @@ async.each(
                     }
                     default:
                       throw Error(
-                        'A gapic function was called that should not have been called'
+                        'A gapic function was called that should not have been called',
                       );
                   }
                 } catch (err: any) {
                   done(err);
                 }
               };
-              (async () => {
+              void (async () => {
                 try {
                   transaction = transactionWrapper.transaction;
                   transaction.save({key, data: ''});
@@ -2010,7 +2010,7 @@ async.each(
               let beginCount = 0;
               transactionWrapper.callBackSignaler = (
                 callbackReached: GapicFunctionName,
-                request?: RequestType
+                request?: RequestType,
               ) => {
                 try {
                   switch (callbackReached) {
@@ -2034,11 +2034,11 @@ async.each(
                         request as protos.google.datastore.v1.ICommitRequest;
                       assert.deepStrictEqual(
                         commitRequest.mode,
-                        'TRANSACTIONAL'
+                        'TRANSACTIONAL',
                       );
                       assert.deepStrictEqual(
                         commitRequest.transaction,
-                        testRunResp.transaction
+                        testRunResp.transaction,
                       );
                       assert.strictEqual(beginCount, 1);
                       done();
@@ -2046,14 +2046,14 @@ async.each(
                     }
                     default:
                       throw Error(
-                        'A gapic function was called that should not have been called'
+                        'A gapic function was called that should not have been called',
                       );
                   }
                 } catch (err: any) {
                   done(err);
                 }
               };
-              (async () => {
+              void (async () => {
                 try {
                   transaction = transactionWrapper.transaction;
                   await transaction.run();
@@ -2097,7 +2097,7 @@ async.each(
           // Datastore Gapic clients haven't been initialized yet, so we initialize them here.
           datastore.clients_.set(
             dataClientName,
-            new gapic.v1[dataClientName](options)
+            new gapic.v1[dataClientName](options),
           );
           dataClient = datastore.clients_.get(dataClientName);
           if (dataClient && dataClient.beginTransaction) {
@@ -2124,7 +2124,7 @@ async.each(
                 | null
                 | undefined,
                 {} | null | undefined
-              >
+              >,
             ) => {
               callback(err, testRunResp);
             };
@@ -2150,7 +2150,7 @@ async.each(
             const runCallback: RunCallback = (
               error: Error | null,
               transaction: Transaction | null,
-              response?: google.datastore.v1.IBeginTransactionResponse
+              response?: google.datastore.v1.IBeginTransactionResponse,
             ) => {
               try {
                 assert(error);
@@ -2180,7 +2180,7 @@ async.each(
             const runCallback: RunCallback = (
               error: Error | null,
               transaction: Transaction | null,
-              response?: google.datastore.v1.IBeginTransactionResponse
+              response?: google.datastore.v1.IBeginTransactionResponse,
             ) => {
               try {
                 assert.strictEqual(error, null);
@@ -2208,7 +2208,7 @@ async.each(
               done();
             });
           };
-          transaction.run();
+          void transaction.run();
         });
 
         afterEach(() => {
@@ -2222,7 +2222,7 @@ async.each(
             assert.deepStrictEqual(config.gaxOpts, {});
             done();
           };
-          transaction.commit();
+          void transaction.commit();
         });
 
         it('should accept gaxOptions', done => {
@@ -2233,7 +2233,7 @@ async.each(
             done();
           };
 
-          transaction.commit(gaxOptions);
+          void transaction.commit(gaxOptions);
         });
 
         it('should skip the commit', done => {
@@ -2311,7 +2311,7 @@ async.each(
 
           transaction.request_ = () => {};
 
-          transaction.commit();
+          void transaction.commit();
 
           assert.strictEqual(deleteStub.calledOnce, true);
           assert.strictEqual(saveStub.calledOnce, true);
@@ -2339,7 +2339,7 @@ async.each(
 
           transaction.request_ = () => {};
 
-          transaction.commit();
+          void transaction.commit();
           assert.strictEqual(deleteSpy.notCalled, true);
           assert.strictEqual(saveStub.calledOnce, true);
         });
@@ -2357,7 +2357,7 @@ async.each(
 
           transaction.request_ = () => {};
 
-          transaction.commit();
+          void transaction.commit();
         });
 
         it('should send the built request object', done => {
@@ -2377,7 +2377,7 @@ async.each(
             done();
           };
 
-          transaction.commit();
+          void transaction.commit();
         });
 
         it('should execute the queued callbacks', () => {
@@ -2397,7 +2397,7 @@ async.each(
             cb();
           };
 
-          transaction.commit();
+          void transaction.commit();
 
           assert(cb1Called);
           assert(cb2Called);
@@ -2496,7 +2496,7 @@ async.each(
           // the rollback function to reach request_.
           transaction.request_ = (
             config: RequestConfig,
-            callback: RequestCallback
+            callback: RequestCallback,
           ) => {
             callback(null, {transaction: Buffer.from(TRANSACTION_ID)});
           };
@@ -2512,7 +2512,7 @@ async.each(
             assert.deepStrictEqual(config.gaxOpts, {});
             done();
           };
-          transaction.rollback();
+          void transaction.rollback();
         });
 
         it('should allow setting gaxOptions', done => {
@@ -2523,7 +2523,7 @@ async.each(
             done();
           };
 
-          transaction.rollback(gaxOptions);
+          void transaction.rollback(gaxOptions);
         });
 
         it('should pass error to callback', done => {
@@ -2591,7 +2591,7 @@ async.each(
             done();
           };
 
-          transaction.run({gaxOptions});
+          void transaction.run({gaxOptions});
         });
 
         describe('options.readOnly', () => {
@@ -2603,7 +2603,7 @@ async.each(
             transaction.request_ = (config: Any) => {
               assert.deepStrictEqual(
                 config.reqOpts.transactionOptions.readOnly,
-                {}
+                {},
               );
               done();
             };
@@ -2617,7 +2617,7 @@ async.each(
             transaction.request_ = config => {
               assert.deepStrictEqual(
                 config.reqOpts!.transactionOptions!.readOnly,
-                {}
+                {},
               );
               done();
             };
@@ -2637,7 +2637,7 @@ async.each(
                 config.reqOpts!.transactionOptions!.readWrite,
                 {
                   previousTransaction: options.transactionId,
-                }
+                },
               );
               done();
             };
@@ -2653,7 +2653,7 @@ async.each(
                 config.reqOpts!.transactionOptions!.readWrite,
                 {
                   previousTransaction: transaction.id,
-                }
+                },
               );
               done();
             };
@@ -2749,7 +2749,7 @@ async.each(
           transaction.save(entities);
           assert.strictEqual(
             transaction.modifiedEntities_.length,
-            entities.length
+            entities.length,
           );
           transaction.modifiedEntities_.forEach((queuedEntity: Entity) => {
             assert.strictEqual(queuedEntity.method, 'save');
@@ -2855,7 +2855,7 @@ async.each(
         });
       });
     });
-  }
+  },
 );
 
 describe('getTransactionRequest', () => {
