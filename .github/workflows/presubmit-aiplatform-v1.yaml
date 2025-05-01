@@ -1,0 +1,24 @@
+on:
+  pull_request:
+name: presubmit
+jobs:
+  units:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 300
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ^7.0.0
+      - run: node --version
+      - run: ci/run_conditional_tests.sh
+        name: Run unit tests
+        env:
+          BUILD_TYPE: presubmit
+          TEST_TYPE: units
+          IS_AI_PLATFORM: true
+          IS_V1: true

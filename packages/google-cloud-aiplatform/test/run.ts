@@ -50,12 +50,14 @@ async function runBatch(batch: string[]) {
   await spawnp(runCommand, parameters);
 }
 
-async function main() {
+async function main(runV1orV1beta1) {
   const files = await readdirp(testDir);
-  const jsFiles = files.filter(fn => fn.match(/^gapic_.*\.js$/));
+  const jsV1Files = files.filter(fn => fn.match(/^gapic_.*\.v1.js$/));
+  const jsV1Beta1Files = files.filter(fn => fn.match(/^gapic_.*\.v1beta1.js$/))
 
+  const filesToRun = runV1orV1beta1 === true ? jsV1Files : runV1orV1beta1 === false ? jsV1Beta1Files : jsV1Files.concat(jsV1Beta1Files);
   const batch: string[] = [];
-  for (const file of jsFiles) {
+  for (const file of filesToRun) {
     batch.push(join(testDir, file));
     if (batch.length >= batchSize) {
       await runBatch(batch);
@@ -69,6 +71,6 @@ async function main() {
   }
 }
 
-main().catch(() => {
+main(process.env.IS_V1).catch(() => {
   process.exitCode = 1;
 });
