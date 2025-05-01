@@ -205,6 +205,9 @@ export class StorageControlClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      anywhereCachePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}'
+      ),
       bucketPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/buckets/{bucket}'
       ),
@@ -236,6 +239,11 @@ export class StorageControlClient {
         'nextPageToken',
         'managedFolders'
       ),
+      listAnywhereCaches: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'anywhereCaches'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -259,12 +267,34 @@ export class StorageControlClient {
     const renameFolderMetadata = protoFilesRoot.lookup(
       '.google.storage.control.v2.RenameFolderMetadata'
     ) as gax.protobuf.Type;
+    const createAnywhereCacheResponse = protoFilesRoot.lookup(
+      '.google.storage.control.v2.AnywhereCache'
+    ) as gax.protobuf.Type;
+    const createAnywhereCacheMetadata = protoFilesRoot.lookup(
+      '.google.storage.control.v2.CreateAnywhereCacheMetadata'
+    ) as gax.protobuf.Type;
+    const updateAnywhereCacheResponse = protoFilesRoot.lookup(
+      '.google.storage.control.v2.AnywhereCache'
+    ) as gax.protobuf.Type;
+    const updateAnywhereCacheMetadata = protoFilesRoot.lookup(
+      '.google.storage.control.v2.UpdateAnywhereCacheMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       renameFolder: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         renameFolderResponse.decode.bind(renameFolderResponse),
         renameFolderMetadata.decode.bind(renameFolderMetadata)
+      ),
+      createAnywhereCache: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createAnywhereCacheResponse.decode.bind(createAnywhereCacheResponse),
+        createAnywhereCacheMetadata.decode.bind(createAnywhereCacheMetadata)
+      ),
+      updateAnywhereCache: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateAnywhereCacheResponse.decode.bind(updateAnywhereCacheResponse),
+        updateAnywhereCacheMetadata.decode.bind(updateAnywhereCacheMetadata)
       ),
     };
 
@@ -328,6 +358,13 @@ export class StorageControlClient {
       'deleteManagedFolder',
       'getManagedFolder',
       'listManagedFolders',
+      'createAnywhereCache',
+      'updateAnywhereCache',
+      'disableAnywhereCache',
+      'pauseAnywhereCache',
+      'resumeAnywhereCache',
+      'getAnywhereCache',
+      'listAnywhereCaches',
     ];
     for (const methodName of storageControlStubMethods) {
       const callPromise = this.storageControlStub.then(
@@ -1441,6 +1478,565 @@ export class StorageControlClient {
         }
       );
   }
+  /**
+   * Disables an Anywhere Cache instance. A disabled instance is read-only. The
+   * disablement could be revoked by calling ResumeAnywhereCache. The cache
+   * instance will be deleted automatically if it remains in the disabled state
+   * for at least one hour.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name field in the request should be:
+   *   `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.AnywhereCache|AnywhereCache}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.disable_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DisableAnywhereCache_async
+   */
+  disableAnywhereCache(
+    request?: protos.google.storage.control.v2.IDisableAnywhereCacheRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache,
+      protos.google.storage.control.v2.IDisableAnywhereCacheRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  disableAnywhereCache(
+    request: protos.google.storage.control.v2.IDisableAnywhereCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IDisableAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  disableAnywhereCache(
+    request: protos.google.storage.control.v2.IDisableAnywhereCacheRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IDisableAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  disableAnywhereCache(
+    request?: protos.google.storage.control.v2.IDisableAnywhereCacheRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IAnywhereCache,
+          | protos.google.storage.control.v2.IDisableAnywhereCacheRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IDisableAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache,
+      protos.google.storage.control.v2.IDisableAnywhereCacheRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('disableAnywhereCache request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IAnywhereCache,
+          | protos.google.storage.control.v2.IDisableAnywhereCacheRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('disableAnywhereCache response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .disableAnywhereCache(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IAnywhereCache,
+          (
+            | protos.google.storage.control.v2.IDisableAnywhereCacheRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('disableAnywhereCache response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Pauses an Anywhere Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name field in the request should be:
+   *   `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.AnywhereCache|AnywhereCache}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.pause_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_PauseAnywhereCache_async
+   */
+  pauseAnywhereCache(
+    request?: protos.google.storage.control.v2.IPauseAnywhereCacheRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache,
+      protos.google.storage.control.v2.IPauseAnywhereCacheRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  pauseAnywhereCache(
+    request: protos.google.storage.control.v2.IPauseAnywhereCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IPauseAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pauseAnywhereCache(
+    request: protos.google.storage.control.v2.IPauseAnywhereCacheRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IPauseAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pauseAnywhereCache(
+    request?: protos.google.storage.control.v2.IPauseAnywhereCacheRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IAnywhereCache,
+          | protos.google.storage.control.v2.IPauseAnywhereCacheRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IPauseAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache,
+      protos.google.storage.control.v2.IPauseAnywhereCacheRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('pauseAnywhereCache request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IAnywhereCache,
+          | protos.google.storage.control.v2.IPauseAnywhereCacheRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('pauseAnywhereCache response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .pauseAnywhereCache(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IAnywhereCache,
+          (
+            | protos.google.storage.control.v2.IPauseAnywhereCacheRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('pauseAnywhereCache response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Resumes a disabled or paused Anywhere Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name field in the request should be:
+   *   `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.AnywhereCache|AnywhereCache}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.resume_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_ResumeAnywhereCache_async
+   */
+  resumeAnywhereCache(
+    request?: protos.google.storage.control.v2.IResumeAnywhereCacheRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache,
+      protos.google.storage.control.v2.IResumeAnywhereCacheRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  resumeAnywhereCache(
+    request: protos.google.storage.control.v2.IResumeAnywhereCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IResumeAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeAnywhereCache(
+    request: protos.google.storage.control.v2.IResumeAnywhereCacheRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IResumeAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeAnywhereCache(
+    request?: protos.google.storage.control.v2.IResumeAnywhereCacheRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IAnywhereCache,
+          | protos.google.storage.control.v2.IResumeAnywhereCacheRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IResumeAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache,
+      protos.google.storage.control.v2.IResumeAnywhereCacheRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('resumeAnywhereCache request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IAnywhereCache,
+          | protos.google.storage.control.v2.IResumeAnywhereCacheRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resumeAnywhereCache response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resumeAnywhereCache(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IAnywhereCache,
+          (
+            | protos.google.storage.control.v2.IResumeAnywhereCacheRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('resumeAnywhereCache response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Gets an Anywhere Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name field in the request should be:
+   *   `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.AnywhereCache|AnywhereCache}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetAnywhereCache_async
+   */
+  getAnywhereCache(
+    request?: protos.google.storage.control.v2.IGetAnywhereCacheRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache,
+      protos.google.storage.control.v2.IGetAnywhereCacheRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getAnywhereCache(
+    request: protos.google.storage.control.v2.IGetAnywhereCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IGetAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAnywhereCache(
+    request: protos.google.storage.control.v2.IGetAnywhereCacheRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IGetAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAnywhereCache(
+    request?: protos.google.storage.control.v2.IGetAnywhereCacheRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IAnywhereCache,
+          | protos.google.storage.control.v2.IGetAnywhereCacheRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IAnywhereCache,
+      | protos.google.storage.control.v2.IGetAnywhereCacheRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache,
+      protos.google.storage.control.v2.IGetAnywhereCacheRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAnywhereCache request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IAnywhereCache,
+          | protos.google.storage.control.v2.IGetAnywhereCacheRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAnywhereCache response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAnywhereCache(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IAnywhereCache,
+          protos.google.storage.control.v2.IGetAnywhereCacheRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAnywhereCache response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
 
   /**
    * Renames a source folder to a destination folder. This operation is only
@@ -1639,6 +2235,395 @@ export class StorageControlClient {
     return decodeOperation as LROperation<
       protos.google.storage.control.v2.Folder,
       protos.google.storage.control.v2.RenameFolderMetadata
+    >;
+  }
+  /**
+   * Creates an Anywhere Cache instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The bucket to which this cache belongs.
+   *   Format: `projects/{project}/buckets/{bucket}`
+   * @param {google.storage.control.v2.AnywhereCache} request.anywhereCache
+   *   Required. Properties of the Anywhere Cache instance being created.
+   *   The parent bucket name is specified in the `parent` field. Server uses the
+   *   default value of `ttl` or `admission_policy` if not specified in
+   *   request.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.create_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_CreateAnywhereCache_async
+   */
+  createAnywhereCache(
+    request?: protos.google.storage.control.v2.ICreateAnywhereCacheRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createAnywhereCache(
+    request: protos.google.storage.control.v2.ICreateAnywhereCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAnywhereCache(
+    request: protos.google.storage.control.v2.ICreateAnywhereCacheRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAnywhereCache(
+    request?: protos.google.storage.control.v2.ICreateAnywhereCacheRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.storage.control.v2.IAnywhereCache,
+            protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.storage.control.v2.IAnywhereCache,
+            protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAnywhereCache response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAnywhereCache request %j', request);
+    return this.innerApiCalls
+      .createAnywhereCache(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.storage.control.v2.IAnywhereCache,
+            protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAnywhereCache response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createAnywhereCache()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.create_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_CreateAnywhereCache_async
+   */
+  async checkCreateAnywhereCacheProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.storage.control.v2.AnywhereCache,
+      protos.google.storage.control.v2.CreateAnywhereCacheMetadata
+    >
+  > {
+    this._log.info('createAnywhereCache long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createAnywhereCache,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.storage.control.v2.AnywhereCache,
+      protos.google.storage.control.v2.CreateAnywhereCacheMetadata
+    >;
+  }
+  /**
+   * Updates an Anywhere Cache instance. Mutable fields include `ttl` and
+   * `admission_policy`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.control.v2.AnywhereCache} request.anywhereCache
+   *   Required. The Anywhere Cache instance to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. List of fields to be updated. Mutable fields of AnywhereCache
+   *   include `ttl` and `admission_policy`.
+   *
+   *   To specify ALL fields, specify a single field with the value `*`. Note: We
+   *   recommend against doing this. If a new field is introduced at a later time,
+   *   an older client updating with the `*` may accidentally reset the new
+   *   field's value.
+   *
+   *   Not specifying any fields is an error.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted. This request is only
+   *   idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateAnywhereCache_async
+   */
+  updateAnywhereCache(
+    request?: protos.google.storage.control.v2.IUpdateAnywhereCacheRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateAnywhereCache(
+    request: protos.google.storage.control.v2.IUpdateAnywhereCacheRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAnywhereCache(
+    request: protos.google.storage.control.v2.IUpdateAnywhereCacheRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAnywhereCache(
+    request?: protos.google.storage.control.v2.IUpdateAnywhereCacheRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.storage.control.v2.IAnywhereCache,
+            protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.storage.control.v2.IAnywhereCache,
+        protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.anywhereCache?.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.storage.control.v2.IAnywhereCache,
+            protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAnywhereCache response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAnywhereCache request %j', request);
+    return this.innerApiCalls
+      .updateAnywhereCache(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.storage.control.v2.IAnywhereCache,
+            protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAnywhereCache response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateAnywhereCache()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_anywhere_cache.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateAnywhereCache_async
+   */
+  async checkUpdateAnywhereCacheProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.storage.control.v2.AnywhereCache,
+      protos.google.storage.control.v2.UpdateAnywhereCacheMetadata
+    >
+  > {
+    this._log.info('updateAnywhereCache long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateAnywhereCache,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.storage.control.v2.AnywhereCache,
+      protos.google.storage.control.v2.UpdateAnywhereCacheMetadata
     >;
   }
   /**
@@ -2233,6 +3218,277 @@ export class StorageControlClient {
     ) as AsyncIterable<protos.google.storage.control.v2.IManagedFolder>;
   }
   /**
+   * Lists Anywhere Cache instances for a given bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The bucket to which this cache belongs.
+   * @param {number} request.pageSize
+   *   Maximum number of caches to return in a single response.
+   *   The service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} request.pageToken
+   *   A previously-returned page token representing part of the larger set of
+   *   results to view.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.storage.control.v2.AnywhereCache|AnywhereCache}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAnywhereCachesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAnywhereCaches(
+    request?: protos.google.storage.control.v2.IListAnywhereCachesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache[],
+      protos.google.storage.control.v2.IListAnywhereCachesRequest | null,
+      protos.google.storage.control.v2.IListAnywhereCachesResponse,
+    ]
+  >;
+  listAnywhereCaches(
+    request: protos.google.storage.control.v2.IListAnywhereCachesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListAnywhereCachesRequest,
+      | protos.google.storage.control.v2.IListAnywhereCachesResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IAnywhereCache
+    >
+  ): void;
+  listAnywhereCaches(
+    request: protos.google.storage.control.v2.IListAnywhereCachesRequest,
+    callback: PaginationCallback<
+      protos.google.storage.control.v2.IListAnywhereCachesRequest,
+      | protos.google.storage.control.v2.IListAnywhereCachesResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IAnywhereCache
+    >
+  ): void;
+  listAnywhereCaches(
+    request?: protos.google.storage.control.v2.IListAnywhereCachesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.storage.control.v2.IListAnywhereCachesRequest,
+          | protos.google.storage.control.v2.IListAnywhereCachesResponse
+          | null
+          | undefined,
+          protos.google.storage.control.v2.IAnywhereCache
+        >,
+    callback?: PaginationCallback<
+      protos.google.storage.control.v2.IListAnywhereCachesRequest,
+      | protos.google.storage.control.v2.IListAnywhereCachesResponse
+      | null
+      | undefined,
+      protos.google.storage.control.v2.IAnywhereCache
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IAnywhereCache[],
+      protos.google.storage.control.v2.IListAnywhereCachesRequest | null,
+      protos.google.storage.control.v2.IListAnywhereCachesResponse,
+    ]
+  > | void {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.storage.control.v2.IListAnywhereCachesRequest,
+          | protos.google.storage.control.v2.IListAnywhereCachesResponse
+          | null
+          | undefined,
+          protos.google.storage.control.v2.IAnywhereCache
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAnywhereCaches values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAnywhereCaches request %j', request);
+    return this.innerApiCalls
+      .listAnywhereCaches(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.storage.control.v2.IAnywhereCache[],
+          protos.google.storage.control.v2.IListAnywhereCachesRequest | null,
+          protos.google.storage.control.v2.IListAnywhereCachesResponse,
+        ]) => {
+          this._log.info('listAnywhereCaches values %j', response);
+          return [response, input, output];
+        }
+      );
+  }
+
+  /**
+   * Equivalent to `listAnywhereCaches`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The bucket to which this cache belongs.
+   * @param {number} request.pageSize
+   *   Maximum number of caches to return in a single response.
+   *   The service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} request.pageToken
+   *   A previously-returned page token representing part of the larger set of
+   *   results to view.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.storage.control.v2.AnywhereCache|AnywhereCache} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAnywhereCachesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAnywhereCachesStream(
+    request?: protos.google.storage.control.v2.IListAnywhereCachesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    const defaultCallSettings = this._defaults['listAnywhereCaches'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAnywhereCaches stream %j', request);
+    return this.descriptors.page.listAnywhereCaches.createStream(
+      this.innerApiCalls.listAnywhereCaches as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAnywhereCaches`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The bucket to which this cache belongs.
+   * @param {number} request.pageSize
+   *   Maximum number of caches to return in a single response.
+   *   The service will use this parameter or 1,000 items, whichever is smaller.
+   * @param {string} request.pageToken
+   *   A previously-returned page token representing part of the larger set of
+   *   results to view.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.storage.control.v2.AnywhereCache|AnywhereCache}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.list_anywhere_caches.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_ListAnywhereCaches_async
+   */
+  listAnywhereCachesAsync(
+    request?: protos.google.storage.control.v2.IListAnywhereCachesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.storage.control.v2.IAnywhereCache> {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.parent;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    const defaultCallSettings = this._defaults['listAnywhereCaches'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAnywhereCaches iterate %j', request);
+    return this.descriptors.page.listAnywhereCaches.asyncIterate(
+      this.innerApiCalls['listAnywhereCaches'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.storage.control.v2.IAnywhereCache>;
+  }
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2461,6 +3717,58 @@ export class StorageControlClient {
   // --------------------
 
   /**
+   * Return a fully-qualified anywhereCache resource name string.
+   *
+   * @param {string} project
+   * @param {string} bucket
+   * @param {string} anywhere_cache
+   * @returns {string} Resource name string.
+   */
+  anywhereCachePath(project: string, bucket: string, anywhereCache: string) {
+    return this.pathTemplates.anywhereCachePathTemplate.render({
+      project: project,
+      bucket: bucket,
+      anywhere_cache: anywhereCache,
+    });
+  }
+
+  /**
+   * Parse the project from AnywhereCache resource.
+   *
+   * @param {string} anywhereCacheName
+   *   A fully-qualified path representing AnywhereCache resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAnywhereCacheName(anywhereCacheName: string) {
+    return this.pathTemplates.anywhereCachePathTemplate.match(anywhereCacheName)
+      .project;
+  }
+
+  /**
+   * Parse the bucket from AnywhereCache resource.
+   *
+   * @param {string} anywhereCacheName
+   *   A fully-qualified path representing AnywhereCache resource.
+   * @returns {string} A string representing the bucket.
+   */
+  matchBucketFromAnywhereCacheName(anywhereCacheName: string) {
+    return this.pathTemplates.anywhereCachePathTemplate.match(anywhereCacheName)
+      .bucket;
+  }
+
+  /**
+   * Parse the anywhere_cache from AnywhereCache resource.
+   *
+   * @param {string} anywhereCacheName
+   *   A fully-qualified path representing AnywhereCache resource.
+   * @returns {string} A string representing the anywhere_cache.
+   */
+  matchAnywhereCacheFromAnywhereCacheName(anywhereCacheName: string) {
+    return this.pathTemplates.anywhereCachePathTemplate.match(anywhereCacheName)
+      .anywhere_cache;
+  }
+
+  /**
    * Return a fully-qualified bucket resource name string.
    *
    * @param {string} project
@@ -2670,7 +3978,7 @@ export class StorageControlClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();
