@@ -428,6 +428,237 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|createAnywhereCache}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef CreateAnywhereCacheCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateAnywhereCache.
+                         * @function createAnywhereCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.ICreateAnywhereCacheRequest} request CreateAnywhereCacheRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.CreateAnywhereCacheCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.createAnywhereCache = function createAnywhereCache(request, callback) {
+                            return this.rpcCall(createAnywhereCache, $root.google.storage.control.v2.CreateAnywhereCacheRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateAnywhereCache" });
+    
+                        /**
+                         * Calls CreateAnywhereCache.
+                         * @function createAnywhereCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.ICreateAnywhereCacheRequest} request CreateAnywhereCacheRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|updateAnywhereCache}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef UpdateAnywhereCacheCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateAnywhereCache.
+                         * @function updateAnywhereCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IUpdateAnywhereCacheRequest} request UpdateAnywhereCacheRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.UpdateAnywhereCacheCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.updateAnywhereCache = function updateAnywhereCache(request, callback) {
+                            return this.rpcCall(updateAnywhereCache, $root.google.storage.control.v2.UpdateAnywhereCacheRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateAnywhereCache" });
+    
+                        /**
+                         * Calls UpdateAnywhereCache.
+                         * @function updateAnywhereCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IUpdateAnywhereCacheRequest} request UpdateAnywhereCacheRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|disableAnywhereCache}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef DisableAnywhereCacheCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.AnywhereCache} [response] AnywhereCache
+                         */
+    
+                        /**
+                         * Calls DisableAnywhereCache.
+                         * @function disableAnywhereCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IDisableAnywhereCacheRequest} request DisableAnywhereCacheRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.DisableAnywhereCacheCallback} callback Node-style callback called with the error, if any, and AnywhereCache
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.disableAnywhereCache = function disableAnywhereCache(request, callback) {
+                            return this.rpcCall(disableAnywhereCache, $root.google.storage.control.v2.DisableAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
+                        }, "name", { value: "DisableAnywhereCache" });
+    
+                        /**
+                         * Calls DisableAnywhereCache.
+                         * @function disableAnywhereCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IDisableAnywhereCacheRequest} request DisableAnywhereCacheRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.AnywhereCache>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|pauseAnywhereCache}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef PauseAnywhereCacheCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.AnywhereCache} [response] AnywhereCache
+                         */
+    
+                        /**
+                         * Calls PauseAnywhereCache.
+                         * @function pauseAnywhereCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IPauseAnywhereCacheRequest} request PauseAnywhereCacheRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.PauseAnywhereCacheCallback} callback Node-style callback called with the error, if any, and AnywhereCache
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.pauseAnywhereCache = function pauseAnywhereCache(request, callback) {
+                            return this.rpcCall(pauseAnywhereCache, $root.google.storage.control.v2.PauseAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
+                        }, "name", { value: "PauseAnywhereCache" });
+    
+                        /**
+                         * Calls PauseAnywhereCache.
+                         * @function pauseAnywhereCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IPauseAnywhereCacheRequest} request PauseAnywhereCacheRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.AnywhereCache>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|resumeAnywhereCache}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef ResumeAnywhereCacheCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.AnywhereCache} [response] AnywhereCache
+                         */
+    
+                        /**
+                         * Calls ResumeAnywhereCache.
+                         * @function resumeAnywhereCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IResumeAnywhereCacheRequest} request ResumeAnywhereCacheRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.ResumeAnywhereCacheCallback} callback Node-style callback called with the error, if any, and AnywhereCache
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.resumeAnywhereCache = function resumeAnywhereCache(request, callback) {
+                            return this.rpcCall(resumeAnywhereCache, $root.google.storage.control.v2.ResumeAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
+                        }, "name", { value: "ResumeAnywhereCache" });
+    
+                        /**
+                         * Calls ResumeAnywhereCache.
+                         * @function resumeAnywhereCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IResumeAnywhereCacheRequest} request ResumeAnywhereCacheRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.AnywhereCache>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|getAnywhereCache}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef GetAnywhereCacheCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.AnywhereCache} [response] AnywhereCache
+                         */
+    
+                        /**
+                         * Calls GetAnywhereCache.
+                         * @function getAnywhereCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IGetAnywhereCacheRequest} request GetAnywhereCacheRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.GetAnywhereCacheCallback} callback Node-style callback called with the error, if any, and AnywhereCache
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.getAnywhereCache = function getAnywhereCache(request, callback) {
+                            return this.rpcCall(getAnywhereCache, $root.google.storage.control.v2.GetAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
+                        }, "name", { value: "GetAnywhereCache" });
+    
+                        /**
+                         * Calls GetAnywhereCache.
+                         * @function getAnywhereCache
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IGetAnywhereCacheRequest} request GetAnywhereCacheRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.AnywhereCache>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|listAnywhereCaches}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef ListAnywhereCachesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.storage.control.v2.ListAnywhereCachesResponse} [response] ListAnywhereCachesResponse
+                         */
+    
+                        /**
+                         * Calls ListAnywhereCaches.
+                         * @function listAnywhereCaches
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IListAnywhereCachesRequest} request ListAnywhereCachesRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.ListAnywhereCachesCallback} callback Node-style callback called with the error, if any, and ListAnywhereCachesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.listAnywhereCaches = function listAnywhereCaches(request, callback) {
+                            return this.rpcCall(listAnywhereCaches, $root.google.storage.control.v2.ListAnywhereCachesRequest, $root.google.storage.control.v2.ListAnywhereCachesResponse, request, callback);
+                        }, "name", { value: "ListAnywhereCaches" });
+    
+                        /**
+                         * Calls ListAnywhereCaches.
+                         * @function listAnywhereCaches
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IListAnywhereCachesRequest} request ListAnywhereCachesRequest message or plain object
+                         * @returns {Promise<google.storage.control.v2.ListAnywhereCachesResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return StorageControl;
                     })();
     
@@ -6238,6 +6469,3070 @@
                         };
     
                         return ListManagedFoldersResponse;
+                    })();
+    
+                    v2.CreateAnywhereCacheMetadata = (function() {
+    
+                        /**
+                         * Properties of a CreateAnywhereCacheMetadata.
+                         * @memberof google.storage.control.v2
+                         * @interface ICreateAnywhereCacheMetadata
+                         * @property {google.storage.control.v2.ICommonLongRunningOperationMetadata|null} [commonMetadata] CreateAnywhereCacheMetadata commonMetadata
+                         * @property {string|null} [anywhereCacheId] CreateAnywhereCacheMetadata anywhereCacheId
+                         * @property {string|null} [zone] CreateAnywhereCacheMetadata zone
+                         * @property {google.protobuf.IDuration|null} [ttl] CreateAnywhereCacheMetadata ttl
+                         * @property {string|null} [admissionPolicy] CreateAnywhereCacheMetadata admissionPolicy
+                         */
+    
+                        /**
+                         * Constructs a new CreateAnywhereCacheMetadata.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a CreateAnywhereCacheMetadata.
+                         * @implements ICreateAnywhereCacheMetadata
+                         * @constructor
+                         * @param {google.storage.control.v2.ICreateAnywhereCacheMetadata=} [properties] Properties to set
+                         */
+                        function CreateAnywhereCacheMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateAnywhereCacheMetadata commonMetadata.
+                         * @member {google.storage.control.v2.ICommonLongRunningOperationMetadata|null|undefined} commonMetadata
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        CreateAnywhereCacheMetadata.prototype.commonMetadata = null;
+    
+                        /**
+                         * CreateAnywhereCacheMetadata anywhereCacheId.
+                         * @member {string|null|undefined} anywhereCacheId
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        CreateAnywhereCacheMetadata.prototype.anywhereCacheId = null;
+    
+                        /**
+                         * CreateAnywhereCacheMetadata zone.
+                         * @member {string|null|undefined} zone
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        CreateAnywhereCacheMetadata.prototype.zone = null;
+    
+                        /**
+                         * CreateAnywhereCacheMetadata ttl.
+                         * @member {google.protobuf.IDuration|null|undefined} ttl
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        CreateAnywhereCacheMetadata.prototype.ttl = null;
+    
+                        /**
+                         * CreateAnywhereCacheMetadata admissionPolicy.
+                         * @member {string|null|undefined} admissionPolicy
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        CreateAnywhereCacheMetadata.prototype.admissionPolicy = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * CreateAnywhereCacheMetadata _anywhereCacheId.
+                         * @member {"anywhereCacheId"|undefined} _anywhereCacheId
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(CreateAnywhereCacheMetadata.prototype, "_anywhereCacheId", {
+                            get: $util.oneOfGetter($oneOfFields = ["anywhereCacheId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * CreateAnywhereCacheMetadata _zone.
+                         * @member {"zone"|undefined} _zone
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(CreateAnywhereCacheMetadata.prototype, "_zone", {
+                            get: $util.oneOfGetter($oneOfFields = ["zone"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * CreateAnywhereCacheMetadata _ttl.
+                         * @member {"ttl"|undefined} _ttl
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(CreateAnywhereCacheMetadata.prototype, "_ttl", {
+                            get: $util.oneOfGetter($oneOfFields = ["ttl"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * CreateAnywhereCacheMetadata _admissionPolicy.
+                         * @member {"admissionPolicy"|undefined} _admissionPolicy
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(CreateAnywhereCacheMetadata.prototype, "_admissionPolicy", {
+                            get: $util.oneOfGetter($oneOfFields = ["admissionPolicy"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CreateAnywhereCacheMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.ICreateAnywhereCacheMetadata=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.CreateAnywhereCacheMetadata} CreateAnywhereCacheMetadata instance
+                         */
+                        CreateAnywhereCacheMetadata.create = function create(properties) {
+                            return new CreateAnywhereCacheMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAnywhereCacheMetadata message. Does not implicitly {@link google.storage.control.v2.CreateAnywhereCacheMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.ICreateAnywhereCacheMetadata} message CreateAnywhereCacheMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAnywhereCacheMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
+                                $root.google.storage.control.v2.CommonLongRunningOperationMetadata.encode(message.commonMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.anywhereCacheId != null && Object.hasOwnProperty.call(message, "anywhereCacheId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.anywhereCacheId);
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
+                                $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.admissionPolicy);
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.zone);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAnywhereCacheMetadata message, length delimited. Does not implicitly {@link google.storage.control.v2.CreateAnywhereCacheMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.ICreateAnywhereCacheMetadata} message CreateAnywhereCacheMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAnywhereCacheMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateAnywhereCacheMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.CreateAnywhereCacheMetadata} CreateAnywhereCacheMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAnywhereCacheMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.CreateAnywhereCacheMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.anywhereCacheId = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.zone = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.admissionPolicy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateAnywhereCacheMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.CreateAnywhereCacheMetadata} CreateAnywhereCacheMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAnywhereCacheMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateAnywhereCacheMetadata message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateAnywhereCacheMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata")) {
+                                var error = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.verify(message.commonMetadata);
+                                if (error)
+                                    return "commonMetadata." + error;
+                            }
+                            if (message.anywhereCacheId != null && message.hasOwnProperty("anywhereCacheId")) {
+                                properties._anywhereCacheId = 1;
+                                if (!$util.isString(message.anywhereCacheId))
+                                    return "anywhereCacheId: string expected";
+                            }
+                            if (message.zone != null && message.hasOwnProperty("zone")) {
+                                properties._zone = 1;
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
+                            }
+                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                properties._ttl = 1;
+                                {
+                                    var error = $root.google.protobuf.Duration.verify(message.ttl);
+                                    if (error)
+                                        return "ttl." + error;
+                                }
+                            }
+                            if (message.admissionPolicy != null && message.hasOwnProperty("admissionPolicy")) {
+                                properties._admissionPolicy = 1;
+                                if (!$util.isString(message.admissionPolicy))
+                                    return "admissionPolicy: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateAnywhereCacheMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.CreateAnywhereCacheMetadata} CreateAnywhereCacheMetadata
+                         */
+                        CreateAnywhereCacheMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.CreateAnywhereCacheMetadata)
+                                return object;
+                            var message = new $root.google.storage.control.v2.CreateAnywhereCacheMetadata();
+                            if (object.commonMetadata != null) {
+                                if (typeof object.commonMetadata !== "object")
+                                    throw TypeError(".google.storage.control.v2.CreateAnywhereCacheMetadata.commonMetadata: object expected");
+                                message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.fromObject(object.commonMetadata);
+                            }
+                            if (object.anywhereCacheId != null)
+                                message.anywhereCacheId = String(object.anywhereCacheId);
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
+                            if (object.ttl != null) {
+                                if (typeof object.ttl !== "object")
+                                    throw TypeError(".google.storage.control.v2.CreateAnywhereCacheMetadata.ttl: object expected");
+                                message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
+                            }
+                            if (object.admissionPolicy != null)
+                                message.admissionPolicy = String(object.admissionPolicy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateAnywhereCacheMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.CreateAnywhereCacheMetadata} message CreateAnywhereCacheMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateAnywhereCacheMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.commonMetadata = null;
+                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata"))
+                                object.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.toObject(message.commonMetadata, options);
+                            if (message.anywhereCacheId != null && message.hasOwnProperty("anywhereCacheId")) {
+                                object.anywhereCacheId = message.anywhereCacheId;
+                                if (options.oneofs)
+                                    object._anywhereCacheId = "anywhereCacheId";
+                            }
+                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options);
+                                if (options.oneofs)
+                                    object._ttl = "ttl";
+                            }
+                            if (message.admissionPolicy != null && message.hasOwnProperty("admissionPolicy")) {
+                                object.admissionPolicy = message.admissionPolicy;
+                                if (options.oneofs)
+                                    object._admissionPolicy = "admissionPolicy";
+                            }
+                            if (message.zone != null && message.hasOwnProperty("zone")) {
+                                object.zone = message.zone;
+                                if (options.oneofs)
+                                    object._zone = "zone";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateAnywhereCacheMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateAnywhereCacheMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateAnywhereCacheMetadata
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateAnywhereCacheMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.CreateAnywhereCacheMetadata";
+                        };
+    
+                        return CreateAnywhereCacheMetadata;
+                    })();
+    
+                    v2.UpdateAnywhereCacheMetadata = (function() {
+    
+                        /**
+                         * Properties of an UpdateAnywhereCacheMetadata.
+                         * @memberof google.storage.control.v2
+                         * @interface IUpdateAnywhereCacheMetadata
+                         * @property {google.storage.control.v2.ICommonLongRunningOperationMetadata|null} [commonMetadata] UpdateAnywhereCacheMetadata commonMetadata
+                         * @property {string|null} [anywhereCacheId] UpdateAnywhereCacheMetadata anywhereCacheId
+                         * @property {string|null} [zone] UpdateAnywhereCacheMetadata zone
+                         * @property {google.protobuf.IDuration|null} [ttl] UpdateAnywhereCacheMetadata ttl
+                         * @property {string|null} [admissionPolicy] UpdateAnywhereCacheMetadata admissionPolicy
+                         */
+    
+                        /**
+                         * Constructs a new UpdateAnywhereCacheMetadata.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents an UpdateAnywhereCacheMetadata.
+                         * @implements IUpdateAnywhereCacheMetadata
+                         * @constructor
+                         * @param {google.storage.control.v2.IUpdateAnywhereCacheMetadata=} [properties] Properties to set
+                         */
+                        function UpdateAnywhereCacheMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateAnywhereCacheMetadata commonMetadata.
+                         * @member {google.storage.control.v2.ICommonLongRunningOperationMetadata|null|undefined} commonMetadata
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        UpdateAnywhereCacheMetadata.prototype.commonMetadata = null;
+    
+                        /**
+                         * UpdateAnywhereCacheMetadata anywhereCacheId.
+                         * @member {string|null|undefined} anywhereCacheId
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        UpdateAnywhereCacheMetadata.prototype.anywhereCacheId = null;
+    
+                        /**
+                         * UpdateAnywhereCacheMetadata zone.
+                         * @member {string|null|undefined} zone
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        UpdateAnywhereCacheMetadata.prototype.zone = null;
+    
+                        /**
+                         * UpdateAnywhereCacheMetadata ttl.
+                         * @member {google.protobuf.IDuration|null|undefined} ttl
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        UpdateAnywhereCacheMetadata.prototype.ttl = null;
+    
+                        /**
+                         * UpdateAnywhereCacheMetadata admissionPolicy.
+                         * @member {string|null|undefined} admissionPolicy
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        UpdateAnywhereCacheMetadata.prototype.admissionPolicy = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * UpdateAnywhereCacheMetadata _anywhereCacheId.
+                         * @member {"anywhereCacheId"|undefined} _anywhereCacheId
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(UpdateAnywhereCacheMetadata.prototype, "_anywhereCacheId", {
+                            get: $util.oneOfGetter($oneOfFields = ["anywhereCacheId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * UpdateAnywhereCacheMetadata _zone.
+                         * @member {"zone"|undefined} _zone
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(UpdateAnywhereCacheMetadata.prototype, "_zone", {
+                            get: $util.oneOfGetter($oneOfFields = ["zone"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * UpdateAnywhereCacheMetadata _ttl.
+                         * @member {"ttl"|undefined} _ttl
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(UpdateAnywhereCacheMetadata.prototype, "_ttl", {
+                            get: $util.oneOfGetter($oneOfFields = ["ttl"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * UpdateAnywhereCacheMetadata _admissionPolicy.
+                         * @member {"admissionPolicy"|undefined} _admissionPolicy
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(UpdateAnywhereCacheMetadata.prototype, "_admissionPolicy", {
+                            get: $util.oneOfGetter($oneOfFields = ["admissionPolicy"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new UpdateAnywhereCacheMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateAnywhereCacheMetadata=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.UpdateAnywhereCacheMetadata} UpdateAnywhereCacheMetadata instance
+                         */
+                        UpdateAnywhereCacheMetadata.create = function create(properties) {
+                            return new UpdateAnywhereCacheMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAnywhereCacheMetadata message. Does not implicitly {@link google.storage.control.v2.UpdateAnywhereCacheMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateAnywhereCacheMetadata} message UpdateAnywhereCacheMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAnywhereCacheMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
+                                $root.google.storage.control.v2.CommonLongRunningOperationMetadata.encode(message.commonMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.anywhereCacheId != null && Object.hasOwnProperty.call(message, "anywhereCacheId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.anywhereCacheId);
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
+                                $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.admissionPolicy);
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.zone);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAnywhereCacheMetadata message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateAnywhereCacheMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateAnywhereCacheMetadata} message UpdateAnywhereCacheMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAnywhereCacheMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateAnywhereCacheMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.UpdateAnywhereCacheMetadata} UpdateAnywhereCacheMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAnywhereCacheMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.UpdateAnywhereCacheMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.anywhereCacheId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.zone = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.admissionPolicy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateAnywhereCacheMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.UpdateAnywhereCacheMetadata} UpdateAnywhereCacheMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAnywhereCacheMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateAnywhereCacheMetadata message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateAnywhereCacheMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata")) {
+                                var error = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.verify(message.commonMetadata);
+                                if (error)
+                                    return "commonMetadata." + error;
+                            }
+                            if (message.anywhereCacheId != null && message.hasOwnProperty("anywhereCacheId")) {
+                                properties._anywhereCacheId = 1;
+                                if (!$util.isString(message.anywhereCacheId))
+                                    return "anywhereCacheId: string expected";
+                            }
+                            if (message.zone != null && message.hasOwnProperty("zone")) {
+                                properties._zone = 1;
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
+                            }
+                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                properties._ttl = 1;
+                                {
+                                    var error = $root.google.protobuf.Duration.verify(message.ttl);
+                                    if (error)
+                                        return "ttl." + error;
+                                }
+                            }
+                            if (message.admissionPolicy != null && message.hasOwnProperty("admissionPolicy")) {
+                                properties._admissionPolicy = 1;
+                                if (!$util.isString(message.admissionPolicy))
+                                    return "admissionPolicy: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateAnywhereCacheMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.UpdateAnywhereCacheMetadata} UpdateAnywhereCacheMetadata
+                         */
+                        UpdateAnywhereCacheMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.UpdateAnywhereCacheMetadata)
+                                return object;
+                            var message = new $root.google.storage.control.v2.UpdateAnywhereCacheMetadata();
+                            if (object.commonMetadata != null) {
+                                if (typeof object.commonMetadata !== "object")
+                                    throw TypeError(".google.storage.control.v2.UpdateAnywhereCacheMetadata.commonMetadata: object expected");
+                                message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.fromObject(object.commonMetadata);
+                            }
+                            if (object.anywhereCacheId != null)
+                                message.anywhereCacheId = String(object.anywhereCacheId);
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
+                            if (object.ttl != null) {
+                                if (typeof object.ttl !== "object")
+                                    throw TypeError(".google.storage.control.v2.UpdateAnywhereCacheMetadata.ttl: object expected");
+                                message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
+                            }
+                            if (object.admissionPolicy != null)
+                                message.admissionPolicy = String(object.admissionPolicy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateAnywhereCacheMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @static
+                         * @param {google.storage.control.v2.UpdateAnywhereCacheMetadata} message UpdateAnywhereCacheMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateAnywhereCacheMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.commonMetadata = null;
+                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata"))
+                                object.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.toObject(message.commonMetadata, options);
+                            if (message.anywhereCacheId != null && message.hasOwnProperty("anywhereCacheId")) {
+                                object.anywhereCacheId = message.anywhereCacheId;
+                                if (options.oneofs)
+                                    object._anywhereCacheId = "anywhereCacheId";
+                            }
+                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options);
+                                if (options.oneofs)
+                                    object._ttl = "ttl";
+                            }
+                            if (message.admissionPolicy != null && message.hasOwnProperty("admissionPolicy")) {
+                                object.admissionPolicy = message.admissionPolicy;
+                                if (options.oneofs)
+                                    object._admissionPolicy = "admissionPolicy";
+                            }
+                            if (message.zone != null && message.hasOwnProperty("zone")) {
+                                object.zone = message.zone;
+                                if (options.oneofs)
+                                    object._zone = "zone";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateAnywhereCacheMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateAnywhereCacheMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateAnywhereCacheMetadata
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateAnywhereCacheMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.UpdateAnywhereCacheMetadata";
+                        };
+    
+                        return UpdateAnywhereCacheMetadata;
+                    })();
+    
+                    v2.AnywhereCache = (function() {
+    
+                        /**
+                         * Properties of an AnywhereCache.
+                         * @memberof google.storage.control.v2
+                         * @interface IAnywhereCache
+                         * @property {string|null} [name] AnywhereCache name
+                         * @property {string|null} [zone] AnywhereCache zone
+                         * @property {google.protobuf.IDuration|null} [ttl] AnywhereCache ttl
+                         * @property {string|null} [admissionPolicy] AnywhereCache admissionPolicy
+                         * @property {string|null} [state] AnywhereCache state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AnywhereCache createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AnywhereCache updateTime
+                         * @property {boolean|null} [pendingUpdate] AnywhereCache pendingUpdate
+                         */
+    
+                        /**
+                         * Constructs a new AnywhereCache.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents an AnywhereCache.
+                         * @implements IAnywhereCache
+                         * @constructor
+                         * @param {google.storage.control.v2.IAnywhereCache=} [properties] Properties to set
+                         */
+                        function AnywhereCache(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AnywhereCache name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @instance
+                         */
+                        AnywhereCache.prototype.name = "";
+    
+                        /**
+                         * AnywhereCache zone.
+                         * @member {string} zone
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @instance
+                         */
+                        AnywhereCache.prototype.zone = "";
+    
+                        /**
+                         * AnywhereCache ttl.
+                         * @member {google.protobuf.IDuration|null|undefined} ttl
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @instance
+                         */
+                        AnywhereCache.prototype.ttl = null;
+    
+                        /**
+                         * AnywhereCache admissionPolicy.
+                         * @member {string} admissionPolicy
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @instance
+                         */
+                        AnywhereCache.prototype.admissionPolicy = "";
+    
+                        /**
+                         * AnywhereCache state.
+                         * @member {string} state
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @instance
+                         */
+                        AnywhereCache.prototype.state = "";
+    
+                        /**
+                         * AnywhereCache createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @instance
+                         */
+                        AnywhereCache.prototype.createTime = null;
+    
+                        /**
+                         * AnywhereCache updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @instance
+                         */
+                        AnywhereCache.prototype.updateTime = null;
+    
+                        /**
+                         * AnywhereCache pendingUpdate.
+                         * @member {boolean} pendingUpdate
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @instance
+                         */
+                        AnywhereCache.prototype.pendingUpdate = false;
+    
+                        /**
+                         * Creates a new AnywhereCache instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @static
+                         * @param {google.storage.control.v2.IAnywhereCache=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.AnywhereCache} AnywhereCache instance
+                         */
+                        AnywhereCache.create = function create(properties) {
+                            return new AnywhereCache(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AnywhereCache message. Does not implicitly {@link google.storage.control.v2.AnywhereCache.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @static
+                         * @param {google.storage.control.v2.IAnywhereCache} message AnywhereCache message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AnywhereCache.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
+                                $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.state);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.pendingUpdate != null && Object.hasOwnProperty.call(message, "pendingUpdate"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.pendingUpdate);
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.admissionPolicy);
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.zone);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AnywhereCache message, length delimited. Does not implicitly {@link google.storage.control.v2.AnywhereCache.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @static
+                         * @param {google.storage.control.v2.IAnywhereCache} message AnywhereCache message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AnywhereCache.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AnywhereCache message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.AnywhereCache} AnywhereCache
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AnywhereCache.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.AnywhereCache();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.zone = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.admissionPolicy = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.state = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.pendingUpdate = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AnywhereCache message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.AnywhereCache} AnywhereCache
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AnywhereCache.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AnywhereCache message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AnywhereCache.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.zone != null && message.hasOwnProperty("zone"))
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
+                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                var error = $root.google.protobuf.Duration.verify(message.ttl);
+                                if (error)
+                                    return "ttl." + error;
+                            }
+                            if (message.admissionPolicy != null && message.hasOwnProperty("admissionPolicy"))
+                                if (!$util.isString(message.admissionPolicy))
+                                    return "admissionPolicy: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                if (!$util.isString(message.state))
+                                    return "state: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.pendingUpdate != null && message.hasOwnProperty("pendingUpdate"))
+                                if (typeof message.pendingUpdate !== "boolean")
+                                    return "pendingUpdate: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AnywhereCache message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.AnywhereCache} AnywhereCache
+                         */
+                        AnywhereCache.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.AnywhereCache)
+                                return object;
+                            var message = new $root.google.storage.control.v2.AnywhereCache();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
+                            if (object.ttl != null) {
+                                if (typeof object.ttl !== "object")
+                                    throw TypeError(".google.storage.control.v2.AnywhereCache.ttl: object expected");
+                                message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
+                            }
+                            if (object.admissionPolicy != null)
+                                message.admissionPolicy = String(object.admissionPolicy);
+                            if (object.state != null)
+                                message.state = String(object.state);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.storage.control.v2.AnywhereCache.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.storage.control.v2.AnywhereCache.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.pendingUpdate != null)
+                                message.pendingUpdate = Boolean(object.pendingUpdate);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AnywhereCache message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @static
+                         * @param {google.storage.control.v2.AnywhereCache} message AnywhereCache
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AnywhereCache.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.ttl = null;
+                                object.state = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.pendingUpdate = false;
+                                object.admissionPolicy = "";
+                                object.zone = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.ttl != null && message.hasOwnProperty("ttl"))
+                                object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = message.state;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.pendingUpdate != null && message.hasOwnProperty("pendingUpdate"))
+                                object.pendingUpdate = message.pendingUpdate;
+                            if (message.admissionPolicy != null && message.hasOwnProperty("admissionPolicy"))
+                                object.admissionPolicy = message.admissionPolicy;
+                            if (message.zone != null && message.hasOwnProperty("zone"))
+                                object.zone = message.zone;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AnywhereCache to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AnywhereCache.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AnywhereCache
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.AnywhereCache
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AnywhereCache.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.AnywhereCache";
+                        };
+    
+                        return AnywhereCache;
+                    })();
+    
+                    v2.CreateAnywhereCacheRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateAnywhereCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface ICreateAnywhereCacheRequest
+                         * @property {string|null} [parent] CreateAnywhereCacheRequest parent
+                         * @property {google.storage.control.v2.IAnywhereCache|null} [anywhereCache] CreateAnywhereCacheRequest anywhereCache
+                         * @property {string|null} [requestId] CreateAnywhereCacheRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateAnywhereCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a CreateAnywhereCacheRequest.
+                         * @implements ICreateAnywhereCacheRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.ICreateAnywhereCacheRequest=} [properties] Properties to set
+                         */
+                        function CreateAnywhereCacheRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateAnywhereCacheRequest parent.
+                         * @member {string} parent
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @instance
+                         */
+                        CreateAnywhereCacheRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateAnywhereCacheRequest anywhereCache.
+                         * @member {google.storage.control.v2.IAnywhereCache|null|undefined} anywhereCache
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @instance
+                         */
+                        CreateAnywhereCacheRequest.prototype.anywhereCache = null;
+    
+                        /**
+                         * CreateAnywhereCacheRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @instance
+                         */
+                        CreateAnywhereCacheRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateAnywhereCacheRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.ICreateAnywhereCacheRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.CreateAnywhereCacheRequest} CreateAnywhereCacheRequest instance
+                         */
+                        CreateAnywhereCacheRequest.create = function create(properties) {
+                            return new CreateAnywhereCacheRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAnywhereCacheRequest message. Does not implicitly {@link google.storage.control.v2.CreateAnywhereCacheRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.ICreateAnywhereCacheRequest} message CreateAnywhereCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAnywhereCacheRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.anywhereCache != null && Object.hasOwnProperty.call(message, "anywhereCache"))
+                                $root.google.storage.control.v2.AnywhereCache.encode(message.anywhereCache, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAnywhereCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.CreateAnywhereCacheRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.ICreateAnywhereCacheRequest} message CreateAnywhereCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateAnywhereCacheRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.CreateAnywhereCacheRequest} CreateAnywhereCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAnywhereCacheRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.CreateAnywhereCacheRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.anywhereCache = $root.google.storage.control.v2.AnywhereCache.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateAnywhereCacheRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.CreateAnywhereCacheRequest} CreateAnywhereCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAnywhereCacheRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateAnywhereCacheRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateAnywhereCacheRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.anywhereCache != null && message.hasOwnProperty("anywhereCache")) {
+                                var error = $root.google.storage.control.v2.AnywhereCache.verify(message.anywhereCache);
+                                if (error)
+                                    return "anywhereCache." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateAnywhereCacheRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.CreateAnywhereCacheRequest} CreateAnywhereCacheRequest
+                         */
+                        CreateAnywhereCacheRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.CreateAnywhereCacheRequest)
+                                return object;
+                            var message = new $root.google.storage.control.v2.CreateAnywhereCacheRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.anywhereCache != null) {
+                                if (typeof object.anywhereCache !== "object")
+                                    throw TypeError(".google.storage.control.v2.CreateAnywhereCacheRequest.anywhereCache: object expected");
+                                message.anywhereCache = $root.google.storage.control.v2.AnywhereCache.fromObject(object.anywhereCache);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateAnywhereCacheRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.CreateAnywhereCacheRequest} message CreateAnywhereCacheRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateAnywhereCacheRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.anywhereCache = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.anywhereCache != null && message.hasOwnProperty("anywhereCache"))
+                                object.anywhereCache = $root.google.storage.control.v2.AnywhereCache.toObject(message.anywhereCache, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateAnywhereCacheRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateAnywhereCacheRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateAnywhereCacheRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.CreateAnywhereCacheRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateAnywhereCacheRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.CreateAnywhereCacheRequest";
+                        };
+    
+                        return CreateAnywhereCacheRequest;
+                    })();
+    
+                    v2.UpdateAnywhereCacheRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateAnywhereCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IUpdateAnywhereCacheRequest
+                         * @property {google.storage.control.v2.IAnywhereCache|null} [anywhereCache] UpdateAnywhereCacheRequest anywhereCache
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAnywhereCacheRequest updateMask
+                         * @property {string|null} [requestId] UpdateAnywhereCacheRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateAnywhereCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents an UpdateAnywhereCacheRequest.
+                         * @implements IUpdateAnywhereCacheRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IUpdateAnywhereCacheRequest=} [properties] Properties to set
+                         */
+                        function UpdateAnywhereCacheRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateAnywhereCacheRequest anywhereCache.
+                         * @member {google.storage.control.v2.IAnywhereCache|null|undefined} anywhereCache
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @instance
+                         */
+                        UpdateAnywhereCacheRequest.prototype.anywhereCache = null;
+    
+                        /**
+                         * UpdateAnywhereCacheRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @instance
+                         */
+                        UpdateAnywhereCacheRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateAnywhereCacheRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @instance
+                         */
+                        UpdateAnywhereCacheRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateAnywhereCacheRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateAnywhereCacheRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.UpdateAnywhereCacheRequest} UpdateAnywhereCacheRequest instance
+                         */
+                        UpdateAnywhereCacheRequest.create = function create(properties) {
+                            return new UpdateAnywhereCacheRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAnywhereCacheRequest message. Does not implicitly {@link google.storage.control.v2.UpdateAnywhereCacheRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateAnywhereCacheRequest} message UpdateAnywhereCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAnywhereCacheRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.anywhereCache != null && Object.hasOwnProperty.call(message, "anywhereCache"))
+                                $root.google.storage.control.v2.AnywhereCache.encode(message.anywhereCache, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAnywhereCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateAnywhereCacheRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IUpdateAnywhereCacheRequest} message UpdateAnywhereCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateAnywhereCacheRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.UpdateAnywhereCacheRequest} UpdateAnywhereCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAnywhereCacheRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.UpdateAnywhereCacheRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.anywhereCache = $root.google.storage.control.v2.AnywhereCache.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateAnywhereCacheRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.UpdateAnywhereCacheRequest} UpdateAnywhereCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAnywhereCacheRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateAnywhereCacheRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateAnywhereCacheRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.anywhereCache != null && message.hasOwnProperty("anywhereCache")) {
+                                var error = $root.google.storage.control.v2.AnywhereCache.verify(message.anywhereCache);
+                                if (error)
+                                    return "anywhereCache." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateAnywhereCacheRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.UpdateAnywhereCacheRequest} UpdateAnywhereCacheRequest
+                         */
+                        UpdateAnywhereCacheRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.UpdateAnywhereCacheRequest)
+                                return object;
+                            var message = new $root.google.storage.control.v2.UpdateAnywhereCacheRequest();
+                            if (object.anywhereCache != null) {
+                                if (typeof object.anywhereCache !== "object")
+                                    throw TypeError(".google.storage.control.v2.UpdateAnywhereCacheRequest.anywhereCache: object expected");
+                                message.anywhereCache = $root.google.storage.control.v2.AnywhereCache.fromObject(object.anywhereCache);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.storage.control.v2.UpdateAnywhereCacheRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateAnywhereCacheRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.UpdateAnywhereCacheRequest} message UpdateAnywhereCacheRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateAnywhereCacheRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.anywhereCache = null;
+                                object.updateMask = null;
+                                object.requestId = "";
+                            }
+                            if (message.anywhereCache != null && message.hasOwnProperty("anywhereCache"))
+                                object.anywhereCache = $root.google.storage.control.v2.AnywhereCache.toObject(message.anywhereCache, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateAnywhereCacheRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateAnywhereCacheRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateAnywhereCacheRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.UpdateAnywhereCacheRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateAnywhereCacheRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.UpdateAnywhereCacheRequest";
+                        };
+    
+                        return UpdateAnywhereCacheRequest;
+                    })();
+    
+                    v2.DisableAnywhereCacheRequest = (function() {
+    
+                        /**
+                         * Properties of a DisableAnywhereCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IDisableAnywhereCacheRequest
+                         * @property {string|null} [name] DisableAnywhereCacheRequest name
+                         * @property {string|null} [requestId] DisableAnywhereCacheRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DisableAnywhereCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a DisableAnywhereCacheRequest.
+                         * @implements IDisableAnywhereCacheRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IDisableAnywhereCacheRequest=} [properties] Properties to set
+                         */
+                        function DisableAnywhereCacheRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DisableAnywhereCacheRequest name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.DisableAnywhereCacheRequest
+                         * @instance
+                         */
+                        DisableAnywhereCacheRequest.prototype.name = "";
+    
+                        /**
+                         * DisableAnywhereCacheRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.DisableAnywhereCacheRequest
+                         * @instance
+                         */
+                        DisableAnywhereCacheRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DisableAnywhereCacheRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.DisableAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IDisableAnywhereCacheRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.DisableAnywhereCacheRequest} DisableAnywhereCacheRequest instance
+                         */
+                        DisableAnywhereCacheRequest.create = function create(properties) {
+                            return new DisableAnywhereCacheRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DisableAnywhereCacheRequest message. Does not implicitly {@link google.storage.control.v2.DisableAnywhereCacheRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.DisableAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IDisableAnywhereCacheRequest} message DisableAnywhereCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DisableAnywhereCacheRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DisableAnywhereCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.DisableAnywhereCacheRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.DisableAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IDisableAnywhereCacheRequest} message DisableAnywhereCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DisableAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DisableAnywhereCacheRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.DisableAnywhereCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.DisableAnywhereCacheRequest} DisableAnywhereCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DisableAnywhereCacheRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.DisableAnywhereCacheRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DisableAnywhereCacheRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.DisableAnywhereCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.DisableAnywhereCacheRequest} DisableAnywhereCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DisableAnywhereCacheRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DisableAnywhereCacheRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.DisableAnywhereCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DisableAnywhereCacheRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DisableAnywhereCacheRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.DisableAnywhereCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.DisableAnywhereCacheRequest} DisableAnywhereCacheRequest
+                         */
+                        DisableAnywhereCacheRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.DisableAnywhereCacheRequest)
+                                return object;
+                            var message = new $root.google.storage.control.v2.DisableAnywhereCacheRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DisableAnywhereCacheRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.DisableAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.DisableAnywhereCacheRequest} message DisableAnywhereCacheRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DisableAnywhereCacheRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DisableAnywhereCacheRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.DisableAnywhereCacheRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DisableAnywhereCacheRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DisableAnywhereCacheRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.DisableAnywhereCacheRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DisableAnywhereCacheRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.DisableAnywhereCacheRequest";
+                        };
+    
+                        return DisableAnywhereCacheRequest;
+                    })();
+    
+                    v2.PauseAnywhereCacheRequest = (function() {
+    
+                        /**
+                         * Properties of a PauseAnywhereCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IPauseAnywhereCacheRequest
+                         * @property {string|null} [name] PauseAnywhereCacheRequest name
+                         * @property {string|null} [requestId] PauseAnywhereCacheRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new PauseAnywhereCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a PauseAnywhereCacheRequest.
+                         * @implements IPauseAnywhereCacheRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IPauseAnywhereCacheRequest=} [properties] Properties to set
+                         */
+                        function PauseAnywhereCacheRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PauseAnywhereCacheRequest name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.PauseAnywhereCacheRequest
+                         * @instance
+                         */
+                        PauseAnywhereCacheRequest.prototype.name = "";
+    
+                        /**
+                         * PauseAnywhereCacheRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.PauseAnywhereCacheRequest
+                         * @instance
+                         */
+                        PauseAnywhereCacheRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new PauseAnywhereCacheRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.PauseAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IPauseAnywhereCacheRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.PauseAnywhereCacheRequest} PauseAnywhereCacheRequest instance
+                         */
+                        PauseAnywhereCacheRequest.create = function create(properties) {
+                            return new PauseAnywhereCacheRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PauseAnywhereCacheRequest message. Does not implicitly {@link google.storage.control.v2.PauseAnywhereCacheRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.PauseAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IPauseAnywhereCacheRequest} message PauseAnywhereCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PauseAnywhereCacheRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PauseAnywhereCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.PauseAnywhereCacheRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.PauseAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IPauseAnywhereCacheRequest} message PauseAnywhereCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PauseAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PauseAnywhereCacheRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.PauseAnywhereCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.PauseAnywhereCacheRequest} PauseAnywhereCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PauseAnywhereCacheRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.PauseAnywhereCacheRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PauseAnywhereCacheRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.PauseAnywhereCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.PauseAnywhereCacheRequest} PauseAnywhereCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PauseAnywhereCacheRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PauseAnywhereCacheRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.PauseAnywhereCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PauseAnywhereCacheRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PauseAnywhereCacheRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.PauseAnywhereCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.PauseAnywhereCacheRequest} PauseAnywhereCacheRequest
+                         */
+                        PauseAnywhereCacheRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.PauseAnywhereCacheRequest)
+                                return object;
+                            var message = new $root.google.storage.control.v2.PauseAnywhereCacheRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PauseAnywhereCacheRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.PauseAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.PauseAnywhereCacheRequest} message PauseAnywhereCacheRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PauseAnywhereCacheRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PauseAnywhereCacheRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.PauseAnywhereCacheRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PauseAnywhereCacheRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PauseAnywhereCacheRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.PauseAnywhereCacheRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PauseAnywhereCacheRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.PauseAnywhereCacheRequest";
+                        };
+    
+                        return PauseAnywhereCacheRequest;
+                    })();
+    
+                    v2.ResumeAnywhereCacheRequest = (function() {
+    
+                        /**
+                         * Properties of a ResumeAnywhereCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IResumeAnywhereCacheRequest
+                         * @property {string|null} [name] ResumeAnywhereCacheRequest name
+                         * @property {string|null} [requestId] ResumeAnywhereCacheRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new ResumeAnywhereCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ResumeAnywhereCacheRequest.
+                         * @implements IResumeAnywhereCacheRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IResumeAnywhereCacheRequest=} [properties] Properties to set
+                         */
+                        function ResumeAnywhereCacheRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResumeAnywhereCacheRequest name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.ResumeAnywhereCacheRequest
+                         * @instance
+                         */
+                        ResumeAnywhereCacheRequest.prototype.name = "";
+    
+                        /**
+                         * ResumeAnywhereCacheRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.ResumeAnywhereCacheRequest
+                         * @instance
+                         */
+                        ResumeAnywhereCacheRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new ResumeAnywhereCacheRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ResumeAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IResumeAnywhereCacheRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ResumeAnywhereCacheRequest} ResumeAnywhereCacheRequest instance
+                         */
+                        ResumeAnywhereCacheRequest.create = function create(properties) {
+                            return new ResumeAnywhereCacheRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResumeAnywhereCacheRequest message. Does not implicitly {@link google.storage.control.v2.ResumeAnywhereCacheRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ResumeAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IResumeAnywhereCacheRequest} message ResumeAnywhereCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResumeAnywhereCacheRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResumeAnywhereCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ResumeAnywhereCacheRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ResumeAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IResumeAnywhereCacheRequest} message ResumeAnywhereCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResumeAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResumeAnywhereCacheRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ResumeAnywhereCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ResumeAnywhereCacheRequest} ResumeAnywhereCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResumeAnywhereCacheRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ResumeAnywhereCacheRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResumeAnywhereCacheRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ResumeAnywhereCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ResumeAnywhereCacheRequest} ResumeAnywhereCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResumeAnywhereCacheRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResumeAnywhereCacheRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ResumeAnywhereCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResumeAnywhereCacheRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResumeAnywhereCacheRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ResumeAnywhereCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ResumeAnywhereCacheRequest} ResumeAnywhereCacheRequest
+                         */
+                        ResumeAnywhereCacheRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.ResumeAnywhereCacheRequest)
+                                return object;
+                            var message = new $root.google.storage.control.v2.ResumeAnywhereCacheRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResumeAnywhereCacheRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ResumeAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.ResumeAnywhereCacheRequest} message ResumeAnywhereCacheRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResumeAnywhereCacheRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResumeAnywhereCacheRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ResumeAnywhereCacheRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResumeAnywhereCacheRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResumeAnywhereCacheRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ResumeAnywhereCacheRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResumeAnywhereCacheRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ResumeAnywhereCacheRequest";
+                        };
+    
+                        return ResumeAnywhereCacheRequest;
+                    })();
+    
+                    v2.GetAnywhereCacheRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAnywhereCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IGetAnywhereCacheRequest
+                         * @property {string|null} [name] GetAnywhereCacheRequest name
+                         * @property {string|null} [requestId] GetAnywhereCacheRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new GetAnywhereCacheRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a GetAnywhereCacheRequest.
+                         * @implements IGetAnywhereCacheRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IGetAnywhereCacheRequest=} [properties] Properties to set
+                         */
+                        function GetAnywhereCacheRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAnywhereCacheRequest name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.GetAnywhereCacheRequest
+                         * @instance
+                         */
+                        GetAnywhereCacheRequest.prototype.name = "";
+    
+                        /**
+                         * GetAnywhereCacheRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.GetAnywhereCacheRequest
+                         * @instance
+                         */
+                        GetAnywhereCacheRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new GetAnywhereCacheRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.GetAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetAnywhereCacheRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.GetAnywhereCacheRequest} GetAnywhereCacheRequest instance
+                         */
+                        GetAnywhereCacheRequest.create = function create(properties) {
+                            return new GetAnywhereCacheRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAnywhereCacheRequest message. Does not implicitly {@link google.storage.control.v2.GetAnywhereCacheRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.GetAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetAnywhereCacheRequest} message GetAnywhereCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAnywhereCacheRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAnywhereCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetAnywhereCacheRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.GetAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.IGetAnywhereCacheRequest} message GetAnywhereCacheRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAnywhereCacheRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAnywhereCacheRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.GetAnywhereCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.GetAnywhereCacheRequest} GetAnywhereCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAnywhereCacheRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.GetAnywhereCacheRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAnywhereCacheRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.GetAnywhereCacheRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.GetAnywhereCacheRequest} GetAnywhereCacheRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAnywhereCacheRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAnywhereCacheRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.GetAnywhereCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAnywhereCacheRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAnywhereCacheRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.GetAnywhereCacheRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.GetAnywhereCacheRequest} GetAnywhereCacheRequest
+                         */
+                        GetAnywhereCacheRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.GetAnywhereCacheRequest)
+                                return object;
+                            var message = new $root.google.storage.control.v2.GetAnywhereCacheRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAnywhereCacheRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.GetAnywhereCacheRequest
+                         * @static
+                         * @param {google.storage.control.v2.GetAnywhereCacheRequest} message GetAnywhereCacheRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAnywhereCacheRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAnywhereCacheRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.GetAnywhereCacheRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAnywhereCacheRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAnywhereCacheRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.GetAnywhereCacheRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAnywhereCacheRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.GetAnywhereCacheRequest";
+                        };
+    
+                        return GetAnywhereCacheRequest;
+                    })();
+    
+                    v2.ListAnywhereCachesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAnywhereCachesRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IListAnywhereCachesRequest
+                         * @property {string|null} [parent] ListAnywhereCachesRequest parent
+                         * @property {number|null} [pageSize] ListAnywhereCachesRequest pageSize
+                         * @property {string|null} [pageToken] ListAnywhereCachesRequest pageToken
+                         * @property {string|null} [requestId] ListAnywhereCachesRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new ListAnywhereCachesRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ListAnywhereCachesRequest.
+                         * @implements IListAnywhereCachesRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IListAnywhereCachesRequest=} [properties] Properties to set
+                         */
+                        function ListAnywhereCachesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAnywhereCachesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @instance
+                         */
+                        ListAnywhereCachesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAnywhereCachesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @instance
+                         */
+                        ListAnywhereCachesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAnywhereCachesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @instance
+                         */
+                        ListAnywhereCachesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListAnywhereCachesRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @instance
+                         */
+                        ListAnywhereCachesRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new ListAnywhereCachesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListAnywhereCachesRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ListAnywhereCachesRequest} ListAnywhereCachesRequest instance
+                         */
+                        ListAnywhereCachesRequest.create = function create(properties) {
+                            return new ListAnywhereCachesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAnywhereCachesRequest message. Does not implicitly {@link google.storage.control.v2.ListAnywhereCachesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListAnywhereCachesRequest} message ListAnywhereCachesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAnywhereCachesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAnywhereCachesRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ListAnywhereCachesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @static
+                         * @param {google.storage.control.v2.IListAnywhereCachesRequest} message ListAnywhereCachesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAnywhereCachesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAnywhereCachesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ListAnywhereCachesRequest} ListAnywhereCachesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAnywhereCachesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListAnywhereCachesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAnywhereCachesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ListAnywhereCachesRequest} ListAnywhereCachesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAnywhereCachesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAnywhereCachesRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAnywhereCachesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAnywhereCachesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ListAnywhereCachesRequest} ListAnywhereCachesRequest
+                         */
+                        ListAnywhereCachesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.ListAnywhereCachesRequest)
+                                return object;
+                            var message = new $root.google.storage.control.v2.ListAnywhereCachesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAnywhereCachesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @static
+                         * @param {google.storage.control.v2.ListAnywhereCachesRequest} message ListAnywhereCachesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAnywhereCachesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAnywhereCachesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAnywhereCachesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAnywhereCachesRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ListAnywhereCachesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAnywhereCachesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ListAnywhereCachesRequest";
+                        };
+    
+                        return ListAnywhereCachesRequest;
+                    })();
+    
+                    v2.ListAnywhereCachesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAnywhereCachesResponse.
+                         * @memberof google.storage.control.v2
+                         * @interface IListAnywhereCachesResponse
+                         * @property {Array.<google.storage.control.v2.IAnywhereCache>|null} [anywhereCaches] ListAnywhereCachesResponse anywhereCaches
+                         * @property {string|null} [nextPageToken] ListAnywhereCachesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAnywhereCachesResponse.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a ListAnywhereCachesResponse.
+                         * @implements IListAnywhereCachesResponse
+                         * @constructor
+                         * @param {google.storage.control.v2.IListAnywhereCachesResponse=} [properties] Properties to set
+                         */
+                        function ListAnywhereCachesResponse(properties) {
+                            this.anywhereCaches = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAnywhereCachesResponse anywhereCaches.
+                         * @member {Array.<google.storage.control.v2.IAnywhereCache>} anywhereCaches
+                         * @memberof google.storage.control.v2.ListAnywhereCachesResponse
+                         * @instance
+                         */
+                        ListAnywhereCachesResponse.prototype.anywhereCaches = $util.emptyArray;
+    
+                        /**
+                         * ListAnywhereCachesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.storage.control.v2.ListAnywhereCachesResponse
+                         * @instance
+                         */
+                        ListAnywhereCachesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListAnywhereCachesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.ListAnywhereCachesResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListAnywhereCachesResponse=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.ListAnywhereCachesResponse} ListAnywhereCachesResponse instance
+                         */
+                        ListAnywhereCachesResponse.create = function create(properties) {
+                            return new ListAnywhereCachesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAnywhereCachesResponse message. Does not implicitly {@link google.storage.control.v2.ListAnywhereCachesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.ListAnywhereCachesResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListAnywhereCachesResponse} message ListAnywhereCachesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAnywhereCachesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.anywhereCaches != null && message.anywhereCaches.length)
+                                for (var i = 0; i < message.anywhereCaches.length; ++i)
+                                    $root.google.storage.control.v2.AnywhereCache.encode(message.anywhereCaches[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAnywhereCachesResponse message, length delimited. Does not implicitly {@link google.storage.control.v2.ListAnywhereCachesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.ListAnywhereCachesResponse
+                         * @static
+                         * @param {google.storage.control.v2.IListAnywhereCachesResponse} message ListAnywhereCachesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAnywhereCachesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAnywhereCachesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.ListAnywhereCachesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.ListAnywhereCachesResponse} ListAnywhereCachesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAnywhereCachesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.ListAnywhereCachesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.anywhereCaches && message.anywhereCaches.length))
+                                            message.anywhereCaches = [];
+                                        message.anywhereCaches.push($root.google.storage.control.v2.AnywhereCache.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAnywhereCachesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.ListAnywhereCachesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.ListAnywhereCachesResponse} ListAnywhereCachesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAnywhereCachesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAnywhereCachesResponse message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.ListAnywhereCachesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAnywhereCachesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.anywhereCaches != null && message.hasOwnProperty("anywhereCaches")) {
+                                if (!Array.isArray(message.anywhereCaches))
+                                    return "anywhereCaches: array expected";
+                                for (var i = 0; i < message.anywhereCaches.length; ++i) {
+                                    var error = $root.google.storage.control.v2.AnywhereCache.verify(message.anywhereCaches[i]);
+                                    if (error)
+                                        return "anywhereCaches." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAnywhereCachesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.ListAnywhereCachesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.ListAnywhereCachesResponse} ListAnywhereCachesResponse
+                         */
+                        ListAnywhereCachesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.ListAnywhereCachesResponse)
+                                return object;
+                            var message = new $root.google.storage.control.v2.ListAnywhereCachesResponse();
+                            if (object.anywhereCaches) {
+                                if (!Array.isArray(object.anywhereCaches))
+                                    throw TypeError(".google.storage.control.v2.ListAnywhereCachesResponse.anywhereCaches: array expected");
+                                message.anywhereCaches = [];
+                                for (var i = 0; i < object.anywhereCaches.length; ++i) {
+                                    if (typeof object.anywhereCaches[i] !== "object")
+                                        throw TypeError(".google.storage.control.v2.ListAnywhereCachesResponse.anywhereCaches: object expected");
+                                    message.anywhereCaches[i] = $root.google.storage.control.v2.AnywhereCache.fromObject(object.anywhereCaches[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAnywhereCachesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.ListAnywhereCachesResponse
+                         * @static
+                         * @param {google.storage.control.v2.ListAnywhereCachesResponse} message ListAnywhereCachesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAnywhereCachesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.anywhereCaches = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.anywhereCaches && message.anywhereCaches.length) {
+                                object.anywhereCaches = [];
+                                for (var j = 0; j < message.anywhereCaches.length; ++j)
+                                    object.anywhereCaches[j] = $root.google.storage.control.v2.AnywhereCache.toObject(message.anywhereCaches[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAnywhereCachesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.ListAnywhereCachesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAnywhereCachesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAnywhereCachesResponse
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.ListAnywhereCachesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAnywhereCachesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.ListAnywhereCachesResponse";
+                        };
+    
+                        return ListAnywhereCachesResponse;
                     })();
     
                     return v2;
@@ -25304,6 +28599,225 @@
                 };
     
                 return Empty;
+            })();
+    
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
             })();
     
             protobuf.Timestamp = (function() {
