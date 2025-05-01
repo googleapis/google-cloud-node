@@ -117,10 +117,10 @@ if [ -n "${IS_AI_PLATFORM}" ]; then
 else
     for subdir in "${subdirs[@]}"; do
         for d in `ls -d ${subdir}/*/`; do
+            should_test=false
             if [ "${d}" == "packages/google-cloud-aiplatform" ]; then
                 continue
             fi
-            should_test=false
             if [ -n "${GIT_DIFF_ARG}" ]; then
                 echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} ${d}'"
                 set +e
