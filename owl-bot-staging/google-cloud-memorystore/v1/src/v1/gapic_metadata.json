@@ -1,0 +1,175 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.memorystore.v1",
+  "libraryPackage": "@google-cloud/memorystore",
+  "services": {
+    "Memorystore": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MemorystoreClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "GetCertificateAuthority": {
+              "methods": [
+                "getCertificateAuthority"
+              ]
+            },
+            "GetBackupCollection": {
+              "methods": [
+                "getBackupCollection"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "RescheduleMaintenance": {
+              "methods": [
+                "rescheduleMaintenance"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "ExportBackup": {
+              "methods": [
+                "exportBackup"
+              ]
+            },
+            "BackupInstance": {
+              "methods": [
+                "backupInstance"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListBackupCollections": {
+              "methods": [
+                "listBackupCollections",
+                "listBackupCollectionsStream",
+                "listBackupCollectionsAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MemorystoreClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "GetCertificateAuthority": {
+              "methods": [
+                "getCertificateAuthority"
+              ]
+            },
+            "GetBackupCollection": {
+              "methods": [
+                "getBackupCollection"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "RescheduleMaintenance": {
+              "methods": [
+                "rescheduleMaintenance"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "ExportBackup": {
+              "methods": [
+                "exportBackup"
+              ]
+            },
+            "BackupInstance": {
+              "methods": [
+                "backupInstance"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListBackupCollections": {
+              "methods": [
+                "listBackupCollections",
+                "listBackupCollectionsStream",
+                "listBackupCollectionsAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
