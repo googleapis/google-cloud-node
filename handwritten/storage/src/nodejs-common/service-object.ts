@@ -506,13 +506,16 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
           responseType: 'json',
           url,
           ...methodConfig.reqOpts,
-          body: {
+          body: JSON.stringify({
             ...methodConfig.reqOpts?.body,
             ...metadata,
-          },
+          }),
           queryParameters: {
             ...methodConfig.reqOpts?.queryParameters,
             ...options,
+          },
+          headers: {
+            'Content-Type': 'application/json',
           },
         },
         (err, data, resp) => {

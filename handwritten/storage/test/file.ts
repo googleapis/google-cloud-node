@@ -373,12 +373,10 @@ describe('File', () => {
         STORAGE.storageTransport.makeRequest = sandbox
           .stub()
           .callsFake((reqOpts, callback) => {
+            const body = JSON.parse(reqOpts.body);
             assert.strictEqual(reqOpts.method, 'PATCH');
             assert.strictEqual(reqOpts.url, '/b/bucket-name//o/file-name.png');
-            assert.deepStrictEqual(
-              reqOpts.body.temporaryHold,
-              options.temporaryHold,
-            );
+            assert.deepStrictEqual(body.temporaryHold, options.temporaryHold);
             callback(null);
             return Promise.resolve();
           });
