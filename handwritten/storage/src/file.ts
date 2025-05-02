@@ -3446,16 +3446,16 @@ class File extends ServiceObject<File, FileMetadata> {
 
   moveFileAtomic(
     destination: string | File,
-    options?: MoveFileAtomicOptions
+    options?: MoveFileAtomicOptions,
   ): Promise<MoveFileAtomicResponse>;
   moveFileAtomic(
     destination: string | File,
-    callback: MoveFileAtomicCallback
+    callback: MoveFileAtomicCallback,
   ): void;
   moveFileAtomic(
     destination: string | File,
     options: MoveFileAtomicOptions,
-    callback: MoveFileAtomicCallback
+    callback: MoveFileAtomicCallback,
   ): void;
   /**
    * @typedef {array} MoveFileAtomicResponse
@@ -3555,10 +3555,10 @@ class File extends ServiceObject<File, FileMetadata> {
   moveFileAtomic(
     destination: string | File,
     optionsOrCallback?: MoveFileAtomicOptions | MoveFileAtomicCallback,
-    callback?: MoveFileAtomicCallback
+    callback?: MoveFileAtomicCallback,
   ): Promise<MoveFileAtomicResponse> | void {
     const noDestinationError = new Error(
-      FileExceptionMessages.DESTINATION_NO_NAME
+      FileExceptionMessages.DESTINATION_NO_NAME,
     );
 
     if (!destination) {
@@ -3595,7 +3595,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options?.preconditionOpts
+        options?.preconditionOpts,
       )
     ) {
       this.storage.retryOptions.autoRetry = false;
@@ -3610,23 +3610,25 @@ class File extends ServiceObject<File, FileMetadata> {
       delete options.preconditionOpts;
     }
 
-    this.request(
-      {
-        method: 'POST',
-        uri: `/moveTo/o/${encodeURIComponent(newFile.name)}`,
-        qs: query,
-        json: options,
-      },
-      (err, resp) => {
-        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-        if (err) {
-          callback!(err, null, resp);
-          return;
-        }
+    this.storageTransport
+      .makeRequest(
+        {
+          method: 'POST',
+          url: `${this.baseUrl}/moveTo/o/${encodeURIComponent(newFile.name)}`,
+          queryParameters: query as StorageQueryParameters,
+          body: JSON.stringify(options),
+        },
+        (err, data, resp) => {
+          this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+          if (err) {
+            callback!(err, null, resp);
+            return;
+          }
 
-        callback!(null, newFile, resp);
-      }
-    );
+          callback!(null, newFile, resp);
+        },
+      )
+      .catch(err => callback!(err));
   }
 
   move(
