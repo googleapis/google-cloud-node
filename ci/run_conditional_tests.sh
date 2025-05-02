@@ -86,11 +86,11 @@ tests_with_credentials="packages/google-analytics-admin/ packages/google-area120
 if [ -n "${IS_AI_PLATFORM}" ]; then
     should_test=false
     if [ -n "${GIT_DIFF_ARG}" ]; then
-    echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} packages/google-cloud-aiplatform'"
-    set +e
-    git diff --quiet ${GIT_DIFF_ARG} packages/google-cloud-aiplatform
-    changed=$?
-    set -e
+        echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} packages/google-cloud-aiplatform'"
+        set +e
+        git diff --quiet ${GIT_DIFF_ARG} packages/google-cloud-aiplatform
+        changed=$?
+        set -e
     fi
     if [[ "${changed}" -eq 0 ]]; then
         echo "no change detected in ${d}, skipping"
@@ -118,6 +118,8 @@ else
     for subdir in "${subdirs[@]}"; do
         for d in `ls -d ${subdir}/*/`; do
             should_test=false
+            echo "READ HERE - are we getting here?"
+            echo "${d}"
             if [ "${d}" == "packages/google-cloud-aiplatform" ]; then
                 echo "${d}"
                 echo "packages/google-cloud-aiplatform"
