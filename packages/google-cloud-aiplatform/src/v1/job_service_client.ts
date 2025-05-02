@@ -18,7 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -103,20 +116,41 @@ export class JobServiceClient {
    *     const client = new JobServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof JobServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'aiplatform.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -142,7 +176,7 @@ export class JobServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,18 +189,14 @@ export class JobServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -265,9 +295,10 @@ export class JobServiceClient {
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
-      modelDeploymentMonitoringJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
-      ),
+      modelDeploymentMonitoringJobPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
+        ),
       modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}'
       ),
@@ -298,15 +329,18 @@ export class JobServiceClient {
       projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
-      projectLocationFeatureGroupFeaturePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
-      ),
-      projectLocationFeaturestoreEntityTypeFeaturePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
-      ),
-      projectLocationPublisherModelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
-      ),
+      projectLocationFeatureGroupFeaturePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
+        ),
+      projectLocationFeaturestoreEntityTypeFeaturePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
+        ),
+      projectLocationPublisherModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}'
+        ),
       publisherModelPathTemplate: new this._gaxModule.PathTemplate(
         'publishers/{publisher}/models/{model}'
       ),
@@ -358,22 +392,47 @@ export class JobServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listCustomJobs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'customJobs'),
-      listDataLabelingJobs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataLabelingJobs'),
-      listHyperparameterTuningJobs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'hyperparameterTuningJobs'),
-      listNasJobs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'nasJobs'),
-      listNasTrialDetails:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'nasTrialDetails'),
-      listBatchPredictionJobs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'batchPredictionJobs'),
+      listCustomJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'customJobs'
+      ),
+      listDataLabelingJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dataLabelingJobs'
+      ),
+      listHyperparameterTuningJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'hyperparameterTuningJobs'
+      ),
+      listNasJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'nasJobs'
+      ),
+      listNasTrialDetails: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'nasTrialDetails'
+      ),
+      listBatchPredictionJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'batchPredictionJobs'
+      ),
       searchModelDeploymentMonitoringStatsAnomalies:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'monitoringStats'),
-      listModelDeploymentMonitoringJobs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'modelDeploymentMonitoringJobs')
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'monitoringStats'
+        ),
+      listModelDeploymentMonitoringJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'modelDeploymentMonitoringJobs'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -382,87 +441,1708 @@ export class JobServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/ui/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*}',}],
-      },{selector: 'google.cloud.location.Locations.ListLocations',get: '/ui/{name=projects/*}/locations',additional_bindings: [{get: '/v1/{name=projects/*}/locations',}],
-      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/v1/{resource=projects/*/locations/*/models/*}:getIamPolicy',},{post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',},{post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',},{post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/models/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',},{post: '/v1/{resource=projects/*/locations/*/models/*}:testIamPermissions',},{post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',},{post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',},{post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',},{delete: '/ui/{name=projects/*/locations/*/extensions/*}/operations',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDeploymentJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/ui/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/ui/{name=projects/*/locations/*/agents/*}/operations',},{get: '/ui/{name=projects/*/locations/*/apps/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',},{get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',},{get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations',},{get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations',},{get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',},{get: '/ui/{name=projects/*/locations/*/extensions/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',},{get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/indexes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',},{get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',},{get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',},{get: '/ui/{name=projects/*/locations/*/models/*}/operations',},{get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',},{get: '/ui/{name=projects/*/locations/*/studies/*}/operations',},{get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',},{get: '/ui/{name=projects/*/locations/*/trainingPipelines/*}/operations',},{get: '/ui/{name=projects/*/locations/*/persistentResources/*}/operations',},{get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/schedules/*}/operations',},{get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',},{get: '/v1/{name=projects/*/locations/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',},{get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',},{get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations',},{get: '/v1/{name=projects/*/locations/*/featurestores/*}/operations',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',},{get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/indexes/*}/operations',},{get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*}/operations',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',},{get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/migratableResources/*}/operations',},{get: '/v1/{name=projects/*/locations/*/models/*}/operations',},{get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',},{get: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',},{get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',},{get: '/v1/{name=projects/*/locations/*/reasoningEngines/*}/operations',},{get: '/v1/{name=projects/*/locations/*/studies/*}/operations',},{get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',},{get: '/v1/{name=projects/*/locations/*/trainingPipelines/*}/operations',},{get: '/v1/{name=projects/*/locations/*/persistentResources/*}/operations',},{get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations',},{get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',},{get: '/v1/{name=projects/*/locations/*/schedules/*}/operations',},{get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',},{get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{get: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',}],
-      },{selector: 'google.longrunning.Operations.WaitOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:wait',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/ui/{name=projects/*/locations/*}',
+          additional_bindings: [{get: '/v1/{name=projects/*/locations/*}'}],
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/ui/{name=projects/*}/locations',
+          additional_bindings: [{get: '/v1/{name=projects/*}/locations'}],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',
+          additional_bindings: [
+            {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
+            },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:cancel'},
+            {
+              post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/ui/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/extensions/*}/operations',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/studies/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+            {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/studies/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/ui/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/edgeDeploymentJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}'},
+            {
+              get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/ui/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/trainingPipelines/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
+            {get: '/v1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/featurestores/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/indexes/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/migratableResources/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/models/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/reasoningEngines/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/studies/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/trainingPipelines/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.WaitOperation',
+          post: '/ui/{name=projects/*/locations/*/operations/*}:wait',
+          additional_bindings: [
+            {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:wait'},
+            {
+              post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const deleteCustomJobResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const deleteCustomJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DeleteOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteDataLabelingJobResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const deleteDataLabelingJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DeleteOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteHyperparameterTuningJobResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const deleteHyperparameterTuningJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DeleteOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteNasJobResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const deleteNasJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DeleteOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteBatchPredictionJobResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const deleteBatchPredictionJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DeleteOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
     const updateModelDeploymentMonitoringJobResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob'
+    ) as gax.protobuf.Type;
     const updateModelDeploymentMonitoringJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteModelDeploymentMonitoringJobResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const deleteModelDeploymentMonitoringJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1.DeleteOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       deleteCustomJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteCustomJobResponse.decode.bind(deleteCustomJobResponse),
-        deleteCustomJobMetadata.decode.bind(deleteCustomJobMetadata)),
+        deleteCustomJobMetadata.decode.bind(deleteCustomJobMetadata)
+      ),
       deleteDataLabelingJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteDataLabelingJobResponse.decode.bind(deleteDataLabelingJobResponse),
-        deleteDataLabelingJobMetadata.decode.bind(deleteDataLabelingJobMetadata)),
+        deleteDataLabelingJobResponse.decode.bind(
+          deleteDataLabelingJobResponse
+        ),
+        deleteDataLabelingJobMetadata.decode.bind(deleteDataLabelingJobMetadata)
+      ),
       deleteHyperparameterTuningJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteHyperparameterTuningJobResponse.decode.bind(deleteHyperparameterTuningJobResponse),
-        deleteHyperparameterTuningJobMetadata.decode.bind(deleteHyperparameterTuningJobMetadata)),
+        deleteHyperparameterTuningJobResponse.decode.bind(
+          deleteHyperparameterTuningJobResponse
+        ),
+        deleteHyperparameterTuningJobMetadata.decode.bind(
+          deleteHyperparameterTuningJobMetadata
+        )
+      ),
       deleteNasJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteNasJobResponse.decode.bind(deleteNasJobResponse),
-        deleteNasJobMetadata.decode.bind(deleteNasJobMetadata)),
+        deleteNasJobMetadata.decode.bind(deleteNasJobMetadata)
+      ),
       deleteBatchPredictionJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteBatchPredictionJobResponse.decode.bind(deleteBatchPredictionJobResponse),
-        deleteBatchPredictionJobMetadata.decode.bind(deleteBatchPredictionJobMetadata)),
-      updateModelDeploymentMonitoringJob: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        updateModelDeploymentMonitoringJobResponse.decode.bind(updateModelDeploymentMonitoringJobResponse),
-        updateModelDeploymentMonitoringJobMetadata.decode.bind(updateModelDeploymentMonitoringJobMetadata)),
-      deleteModelDeploymentMonitoringJob: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteModelDeploymentMonitoringJobResponse.decode.bind(deleteModelDeploymentMonitoringJobResponse),
-        deleteModelDeploymentMonitoringJobMetadata.decode.bind(deleteModelDeploymentMonitoringJobMetadata))
+        deleteBatchPredictionJobResponse.decode.bind(
+          deleteBatchPredictionJobResponse
+        ),
+        deleteBatchPredictionJobMetadata.decode.bind(
+          deleteBatchPredictionJobMetadata
+        )
+      ),
+      updateModelDeploymentMonitoringJob:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          updateModelDeploymentMonitoringJobResponse.decode.bind(
+            updateModelDeploymentMonitoringJobResponse
+          ),
+          updateModelDeploymentMonitoringJobMetadata.decode.bind(
+            updateModelDeploymentMonitoringJobMetadata
+          )
+        ),
+      deleteModelDeploymentMonitoringJob:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          deleteModelDeploymentMonitoringJobResponse.decode.bind(
+            deleteModelDeploymentMonitoringJobResponse
+          ),
+          deleteModelDeploymentMonitoringJobMetadata.decode.bind(
+            deleteModelDeploymentMonitoringJobMetadata
+          )
+        ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.aiplatform.v1.JobService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.aiplatform.v1.JobService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -493,28 +2173,69 @@ export class JobServiceClient {
     // Put together the "service stub" for
     // google.cloud.aiplatform.v1.JobService.
     this.jobServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.aiplatform.v1.JobService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.aiplatform.v1.JobService'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.aiplatform.v1.JobService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const jobServiceStubMethods =
-        ['createCustomJob', 'getCustomJob', 'listCustomJobs', 'deleteCustomJob', 'cancelCustomJob', 'createDataLabelingJob', 'getDataLabelingJob', 'listDataLabelingJobs', 'deleteDataLabelingJob', 'cancelDataLabelingJob', 'createHyperparameterTuningJob', 'getHyperparameterTuningJob', 'listHyperparameterTuningJobs', 'deleteHyperparameterTuningJob', 'cancelHyperparameterTuningJob', 'createNasJob', 'getNasJob', 'listNasJobs', 'deleteNasJob', 'cancelNasJob', 'getNasTrialDetail', 'listNasTrialDetails', 'createBatchPredictionJob', 'getBatchPredictionJob', 'listBatchPredictionJobs', 'deleteBatchPredictionJob', 'cancelBatchPredictionJob', 'createModelDeploymentMonitoringJob', 'searchModelDeploymentMonitoringStatsAnomalies', 'getModelDeploymentMonitoringJob', 'listModelDeploymentMonitoringJobs', 'updateModelDeploymentMonitoringJob', 'deleteModelDeploymentMonitoringJob', 'pauseModelDeploymentMonitoringJob', 'resumeModelDeploymentMonitoringJob'];
+    const jobServiceStubMethods = [
+      'createCustomJob',
+      'getCustomJob',
+      'listCustomJobs',
+      'deleteCustomJob',
+      'cancelCustomJob',
+      'createDataLabelingJob',
+      'getDataLabelingJob',
+      'listDataLabelingJobs',
+      'deleteDataLabelingJob',
+      'cancelDataLabelingJob',
+      'createHyperparameterTuningJob',
+      'getHyperparameterTuningJob',
+      'listHyperparameterTuningJobs',
+      'deleteHyperparameterTuningJob',
+      'cancelHyperparameterTuningJob',
+      'createNasJob',
+      'getNasJob',
+      'listNasJobs',
+      'deleteNasJob',
+      'cancelNasJob',
+      'getNasTrialDetail',
+      'listNasTrialDetails',
+      'createBatchPredictionJob',
+      'getBatchPredictionJob',
+      'listBatchPredictionJobs',
+      'deleteBatchPredictionJob',
+      'cancelBatchPredictionJob',
+      'createModelDeploymentMonitoringJob',
+      'searchModelDeploymentMonitoringStatsAnomalies',
+      'getModelDeploymentMonitoringJob',
+      'listModelDeploymentMonitoringJobs',
+      'updateModelDeploymentMonitoringJob',
+      'deleteModelDeploymentMonitoringJob',
+      'pauseModelDeploymentMonitoringJob',
+      'resumeModelDeploymentMonitoringJob',
+    ];
     for (const methodName of jobServiceStubMethods) {
       const callPromise = this.jobServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -539,8 +2260,14 @@ export class JobServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
     }
     return 'aiplatform.googleapis.com';
   }
@@ -551,8 +2278,14 @@ export class JobServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
     }
     return 'aiplatform.googleapis.com';
   }
@@ -585,7 +2318,7 @@ export class JobServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloud-platform.read-only'
+      'https://www.googleapis.com/auth/cloud-platform.read-only',
     ];
   }
 
@@ -595,8 +2328,9 @@ export class JobServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -607,2770 +2341,3962 @@ export class JobServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a CustomJob. A created CustomJob right away
- * will be attempted to be run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to create the CustomJob in.
- *   Format: `projects/{project}/locations/{location}`
- * @param {google.cloud.aiplatform.v1.CustomJob} request.customJob
- *   Required. The CustomJob to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.CustomJob|CustomJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.create_custom_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_CreateCustomJob_async
- */
+  /**
+   * Creates a CustomJob. A created CustomJob right away
+   * will be attempted to be run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the CustomJob in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1.CustomJob} request.customJob
+   *   Required. The CustomJob to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.CustomJob|CustomJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.create_custom_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CreateCustomJob_async
+   */
   createCustomJob(
-      request?: protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.ICustomJob,
-        protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.ICustomJob,
+      protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createCustomJob(
-      request: protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.ICustomJob,
-          protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.ICustomJob,
+      | protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createCustomJob(
-      request: protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.ICustomJob,
-          protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.ICustomJob,
+      | protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createCustomJob(
-      request?: protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.ICustomJob,
-          protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.ICustomJob,
-          protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.ICustomJob,
-        protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.ICustomJob,
+      | protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.ICustomJob,
+      protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createCustomJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.ICustomJob,
-        protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ICustomJob,
+          | protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCustomJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createCustomJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.ICustomJob,
-        protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createCustomJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .createCustomJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ICustomJob,
+          protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCustomJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Gets a CustomJob.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the CustomJob resource.
- *   Format:
- *   `projects/{project}/locations/{location}/customJobs/{custom_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.CustomJob|CustomJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.get_custom_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_GetCustomJob_async
- */
+  /**
+   * Gets a CustomJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the CustomJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/customJobs/{custom_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.CustomJob|CustomJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.get_custom_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_GetCustomJob_async
+   */
   getCustomJob(
-      request?: protos.google.cloud.aiplatform.v1.IGetCustomJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.ICustomJob,
-        protos.google.cloud.aiplatform.v1.IGetCustomJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IGetCustomJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.ICustomJob,
+      protos.google.cloud.aiplatform.v1.IGetCustomJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getCustomJob(
-      request: protos.google.cloud.aiplatform.v1.IGetCustomJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.ICustomJob,
-          protos.google.cloud.aiplatform.v1.IGetCustomJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetCustomJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.ICustomJob,
+      protos.google.cloud.aiplatform.v1.IGetCustomJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getCustomJob(
-      request: protos.google.cloud.aiplatform.v1.IGetCustomJobRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.ICustomJob,
-          protos.google.cloud.aiplatform.v1.IGetCustomJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetCustomJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.ICustomJob,
+      protos.google.cloud.aiplatform.v1.IGetCustomJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getCustomJob(
-      request?: protos.google.cloud.aiplatform.v1.IGetCustomJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.IGetCustomJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.ICustomJob,
-          protos.google.cloud.aiplatform.v1.IGetCustomJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.ICustomJob,
-          protos.google.cloud.aiplatform.v1.IGetCustomJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.ICustomJob,
-        protos.google.cloud.aiplatform.v1.IGetCustomJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IGetCustomJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.ICustomJob,
+      protos.google.cloud.aiplatform.v1.IGetCustomJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.ICustomJob,
+      protos.google.cloud.aiplatform.v1.IGetCustomJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getCustomJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.ICustomJob,
-        protos.google.cloud.aiplatform.v1.IGetCustomJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ICustomJob,
+          | protos.google.cloud.aiplatform.v1.IGetCustomJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCustomJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getCustomJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.ICustomJob,
-        protos.google.cloud.aiplatform.v1.IGetCustomJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getCustomJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .getCustomJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ICustomJob,
+          protos.google.cloud.aiplatform.v1.IGetCustomJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCustomJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Cancels a CustomJob.
- * Starts asynchronous cancellation on the CustomJob. The server
- * makes a best effort to cancel the job, but success is not
- * guaranteed. Clients can use
- * {@link protos.google.cloud.aiplatform.v1.JobService.GetCustomJob|JobService.GetCustomJob}
- * or other methods to check whether the cancellation succeeded or whether the
- * job completed despite cancellation. On successful cancellation,
- * the CustomJob is not deleted; instead it becomes a job with
- * a {@link protos.google.cloud.aiplatform.v1.CustomJob.error|CustomJob.error} value with
- * a {@link protos.google.rpc.Status.code|google.rpc.Status.code} of 1, corresponding to
- * `Code.CANCELLED`, and
- * {@link protos.google.cloud.aiplatform.v1.CustomJob.state|CustomJob.state} is set to
- * `CANCELLED`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the CustomJob to cancel.
- *   Format:
- *   `projects/{project}/locations/{location}/customJobs/{custom_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.cancel_custom_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_CancelCustomJob_async
- */
+  /**
+   * Cancels a CustomJob.
+   * Starts asynchronous cancellation on the CustomJob. The server
+   * makes a best effort to cancel the job, but success is not
+   * guaranteed. Clients can use
+   * {@link protos.google.cloud.aiplatform.v1.JobService.GetCustomJob|JobService.GetCustomJob}
+   * or other methods to check whether the cancellation succeeded or whether the
+   * job completed despite cancellation. On successful cancellation,
+   * the CustomJob is not deleted; instead it becomes a job with
+   * a {@link protos.google.cloud.aiplatform.v1.CustomJob.error|CustomJob.error} value with
+   * a {@link protos.google.rpc.Status.code|google.rpc.Status.code} of 1, corresponding to
+   * `Code.CANCELLED`, and
+   * {@link protos.google.cloud.aiplatform.v1.CustomJob.state|CustomJob.state} is set to
+   * `CANCELLED`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the CustomJob to cancel.
+   *   Format:
+   *   `projects/{project}/locations/{location}/customJobs/{custom_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.cancel_custom_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CancelCustomJob_async
+   */
   cancelCustomJob(
-      request?: protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   cancelCustomJob(
-      request: protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cancelCustomJob(
-      request: protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cancelCustomJob(
-      request?: protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('cancelCustomJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('cancelCustomJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.cancelCustomJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('cancelCustomJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .cancelCustomJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelCustomJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Creates a DataLabelingJob.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the DataLabelingJob.
- *   Format: `projects/{project}/locations/{location}`
- * @param {google.cloud.aiplatform.v1.DataLabelingJob} request.dataLabelingJob
- *   Required. The DataLabelingJob to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.DataLabelingJob|DataLabelingJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.create_data_labeling_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_CreateDataLabelingJob_async
- */
+  /**
+   * Creates a DataLabelingJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the DataLabelingJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1.DataLabelingJob} request.dataLabelingJob
+   *   Required. The DataLabelingJob to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.DataLabelingJob|DataLabelingJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.create_data_labeling_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CreateDataLabelingJob_async
+   */
   createDataLabelingJob(
-      request?: protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-        protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+      (
+        | protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createDataLabelingJob(
-      request: protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-          protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+      | protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createDataLabelingJob(
-      request: protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-          protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+      | protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createDataLabelingJob(
-      request?: protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-          protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-          protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-        protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+      | protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+      (
+        | protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createDataLabelingJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-        protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+          | protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDataLabelingJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createDataLabelingJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-        protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createDataLabelingJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .createDataLabelingJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataLabelingJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Gets a DataLabelingJob.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the DataLabelingJob.
- *   Format:
- *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.DataLabelingJob|DataLabelingJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.get_data_labeling_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_GetDataLabelingJob_async
- */
+  /**
+   * Gets a DataLabelingJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DataLabelingJob.
+   *   Format:
+   *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.DataLabelingJob|DataLabelingJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.get_data_labeling_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_GetDataLabelingJob_async
+   */
   getDataLabelingJob(
-      request?: protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-        protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+      protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getDataLabelingJob(
-      request: protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-          protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+      | protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getDataLabelingJob(
-      request: protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-          protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+      | protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getDataLabelingJob(
-      request?: protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-          protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-          protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-        protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+      | protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+      protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDataLabelingJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-        protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+          | protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataLabelingJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDataLabelingJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.IDataLabelingJob,
-        protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDataLabelingJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .getDataLabelingJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataLabelingJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Cancels a DataLabelingJob. Success of cancellation is not guaranteed.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the DataLabelingJob.
- *   Format:
- *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.cancel_data_labeling_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_CancelDataLabelingJob_async
- */
+  /**
+   * Cancels a DataLabelingJob. Success of cancellation is not guaranteed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DataLabelingJob.
+   *   Format:
+   *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.cancel_data_labeling_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CancelDataLabelingJob_async
+   */
   cancelDataLabelingJob(
-      request?: protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   cancelDataLabelingJob(
-      request: protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cancelDataLabelingJob(
-      request: protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cancelDataLabelingJob(
-      request?: protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('cancelDataLabelingJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('cancelDataLabelingJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.cancelDataLabelingJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('cancelDataLabelingJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .cancelDataLabelingJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelDataLabelingJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Creates a HyperparameterTuningJob
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to create the
- *   HyperparameterTuningJob in. Format:
- *   `projects/{project}/locations/{location}`
- * @param {google.cloud.aiplatform.v1.HyperparameterTuningJob} request.hyperparameterTuningJob
- *   Required. The HyperparameterTuningJob to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob|HyperparameterTuningJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.create_hyperparameter_tuning_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_CreateHyperparameterTuningJob_async
- */
+  /**
+   * Creates a HyperparameterTuningJob
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the
+   *   HyperparameterTuningJob in. Format:
+   *   `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1.HyperparameterTuningJob} request.hyperparameterTuningJob
+   *   Required. The HyperparameterTuningJob to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob|HyperparameterTuningJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.create_hyperparameter_tuning_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CreateHyperparameterTuningJob_async
+   */
   createHyperparameterTuningJob(
-      request?: protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-        protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+      (
+        | protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createHyperparameterTuningJob(
-      request: protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-          protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+      | protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createHyperparameterTuningJob(
-      request: protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-          protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+      | protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createHyperparameterTuningJob(
-      request?: protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-          protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-          protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-        protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+      | protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+      (
+        | protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createHyperparameterTuningJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-        protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+          | protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createHyperparameterTuningJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createHyperparameterTuningJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-        protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createHyperparameterTuningJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .createHyperparameterTuningJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createHyperparameterTuningJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Gets a HyperparameterTuningJob
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the HyperparameterTuningJob resource.
- *   Format:
- *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob|HyperparameterTuningJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.get_hyperparameter_tuning_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_GetHyperparameterTuningJob_async
- */
+  /**
+   * Gets a HyperparameterTuningJob
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the HyperparameterTuningJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob|HyperparameterTuningJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.get_hyperparameter_tuning_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_GetHyperparameterTuningJob_async
+   */
   getHyperparameterTuningJob(
-      request?: protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-        protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+      (
+        | protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getHyperparameterTuningJob(
-      request: protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-          protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+      | protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getHyperparameterTuningJob(
-      request: protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-          protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+      | protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getHyperparameterTuningJob(
-      request?: protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-          protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-          protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-        protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+      | protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+      (
+        | protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getHyperparameterTuningJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-        protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+          | protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getHyperparameterTuningJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getHyperparameterTuningJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
-        protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getHyperparameterTuningJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .getHyperparameterTuningJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getHyperparameterTuningJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Cancels a HyperparameterTuningJob.
- * Starts asynchronous cancellation on the HyperparameterTuningJob. The server
- * makes a best effort to cancel the job, but success is not
- * guaranteed. Clients can use
- * {@link protos.google.cloud.aiplatform.v1.JobService.GetHyperparameterTuningJob|JobService.GetHyperparameterTuningJob}
- * or other methods to check whether the cancellation succeeded or whether the
- * job completed despite cancellation. On successful cancellation,
- * the HyperparameterTuningJob is not deleted; instead it becomes a job with
- * a
- * {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob.error|HyperparameterTuningJob.error}
- * value with a {@link protos.google.rpc.Status.code|google.rpc.Status.code} of 1,
- * corresponding to `Code.CANCELLED`, and
- * {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob.state|HyperparameterTuningJob.state}
- * is set to `CANCELLED`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the HyperparameterTuningJob to cancel.
- *   Format:
- *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.cancel_hyperparameter_tuning_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_CancelHyperparameterTuningJob_async
- */
+  /**
+   * Cancels a HyperparameterTuningJob.
+   * Starts asynchronous cancellation on the HyperparameterTuningJob. The server
+   * makes a best effort to cancel the job, but success is not
+   * guaranteed. Clients can use
+   * {@link protos.google.cloud.aiplatform.v1.JobService.GetHyperparameterTuningJob|JobService.GetHyperparameterTuningJob}
+   * or other methods to check whether the cancellation succeeded or whether the
+   * job completed despite cancellation. On successful cancellation,
+   * the HyperparameterTuningJob is not deleted; instead it becomes a job with
+   * a
+   * {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob.error|HyperparameterTuningJob.error}
+   * value with a {@link protos.google.rpc.Status.code|google.rpc.Status.code} of 1,
+   * corresponding to `Code.CANCELLED`, and
+   * {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob.state|HyperparameterTuningJob.state}
+   * is set to `CANCELLED`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the HyperparameterTuningJob to cancel.
+   *   Format:
+   *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.cancel_hyperparameter_tuning_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CancelHyperparameterTuningJob_async
+   */
   cancelHyperparameterTuningJob(
-      request?: protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   cancelHyperparameterTuningJob(
-      request: protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cancelHyperparameterTuningJob(
-      request: protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cancelHyperparameterTuningJob(
-      request?: protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('cancelHyperparameterTuningJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('cancelHyperparameterTuningJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.cancelHyperparameterTuningJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('cancelHyperparameterTuningJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .cancelHyperparameterTuningJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelHyperparameterTuningJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Creates a NasJob
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to create the NasJob in.
- *   Format: `projects/{project}/locations/{location}`
- * @param {google.cloud.aiplatform.v1.NasJob} request.nasJob
- *   Required. The NasJob to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.NasJob|NasJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.create_nas_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_CreateNasJob_async
- */
+  /**
+   * Creates a NasJob
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the NasJob in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1.NasJob} request.nasJob
+   *   Required. The NasJob to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.NasJob|NasJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.create_nas_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CreateNasJob_async
+   */
   createNasJob(
-      request?: protos.google.cloud.aiplatform.v1.ICreateNasJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.INasJob,
-        protos.google.cloud.aiplatform.v1.ICreateNasJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.ICreateNasJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createNasJob(
-      request: protos.google.cloud.aiplatform.v1.ICreateNasJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.INasJob,
-          protos.google.cloud.aiplatform.v1.ICreateNasJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICreateNasJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createNasJob(
-      request: protos.google.cloud.aiplatform.v1.ICreateNasJobRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.INasJob,
-          protos.google.cloud.aiplatform.v1.ICreateNasJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICreateNasJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createNasJob(
-      request?: protos.google.cloud.aiplatform.v1.ICreateNasJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.ICreateNasJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.INasJob,
-          protos.google.cloud.aiplatform.v1.ICreateNasJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.INasJob,
-          protos.google.cloud.aiplatform.v1.ICreateNasJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.INasJob,
-        protos.google.cloud.aiplatform.v1.ICreateNasJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.ICreateNasJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createNasJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.INasJob,
-        protos.google.cloud.aiplatform.v1.ICreateNasJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INasJob,
+          | protos.google.cloud.aiplatform.v1.ICreateNasJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createNasJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createNasJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.INasJob,
-        protos.google.cloud.aiplatform.v1.ICreateNasJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createNasJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .createNasJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.INasJob,
+          protos.google.cloud.aiplatform.v1.ICreateNasJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNasJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Gets a NasJob
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the NasJob resource.
- *   Format:
- *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.NasJob|NasJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.get_nas_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_GetNasJob_async
- */
+  /**
+   * Gets a NasJob
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NasJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.NasJob|NasJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.get_nas_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_GetNasJob_async
+   */
   getNasJob(
-      request?: protos.google.cloud.aiplatform.v1.IGetNasJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.INasJob,
-        protos.google.cloud.aiplatform.v1.IGetNasJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IGetNasJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.IGetNasJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getNasJob(
-      request: protos.google.cloud.aiplatform.v1.IGetNasJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.INasJob,
-          protos.google.cloud.aiplatform.v1.IGetNasJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetNasJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.IGetNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getNasJob(
-      request: protos.google.cloud.aiplatform.v1.IGetNasJobRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.INasJob,
-          protos.google.cloud.aiplatform.v1.IGetNasJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetNasJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.IGetNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getNasJob(
-      request?: protos.google.cloud.aiplatform.v1.IGetNasJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.IGetNasJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.INasJob,
-          protos.google.cloud.aiplatform.v1.IGetNasJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.INasJob,
-          protos.google.cloud.aiplatform.v1.IGetNasJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.INasJob,
-        protos.google.cloud.aiplatform.v1.IGetNasJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IGetNasJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.IGetNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasJob,
+      protos.google.cloud.aiplatform.v1.IGetNasJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getNasJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.INasJob,
-        protos.google.cloud.aiplatform.v1.IGetNasJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INasJob,
+          | protos.google.cloud.aiplatform.v1.IGetNasJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNasJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getNasJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.INasJob,
-        protos.google.cloud.aiplatform.v1.IGetNasJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getNasJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .getNasJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.INasJob,
+          protos.google.cloud.aiplatform.v1.IGetNasJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getNasJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Cancels a NasJob.
- * Starts asynchronous cancellation on the NasJob. The server
- * makes a best effort to cancel the job, but success is not
- * guaranteed. Clients can use
- * {@link protos.google.cloud.aiplatform.v1.JobService.GetNasJob|JobService.GetNasJob} or
- * other methods to check whether the cancellation succeeded or whether the
- * job completed despite cancellation. On successful cancellation,
- * the NasJob is not deleted; instead it becomes a job with
- * a {@link protos.google.cloud.aiplatform.v1.NasJob.error|NasJob.error} value with a
- * {@link protos.google.rpc.Status.code|google.rpc.Status.code} of 1, corresponding to
- * `Code.CANCELLED`, and
- * {@link protos.google.cloud.aiplatform.v1.NasJob.state|NasJob.state} is set to
- * `CANCELLED`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the NasJob to cancel.
- *   Format:
- *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.cancel_nas_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_CancelNasJob_async
- */
+  /**
+   * Cancels a NasJob.
+   * Starts asynchronous cancellation on the NasJob. The server
+   * makes a best effort to cancel the job, but success is not
+   * guaranteed. Clients can use
+   * {@link protos.google.cloud.aiplatform.v1.JobService.GetNasJob|JobService.GetNasJob} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * job completed despite cancellation. On successful cancellation,
+   * the NasJob is not deleted; instead it becomes a job with
+   * a {@link protos.google.cloud.aiplatform.v1.NasJob.error|NasJob.error} value with a
+   * {@link protos.google.rpc.Status.code|google.rpc.Status.code} of 1, corresponding to
+   * `Code.CANCELLED`, and
+   * {@link protos.google.cloud.aiplatform.v1.NasJob.state|NasJob.state} is set to
+   * `CANCELLED`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NasJob to cancel.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.cancel_nas_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CancelNasJob_async
+   */
   cancelNasJob(
-      request?: protos.google.cloud.aiplatform.v1.ICancelNasJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelNasJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.ICancelNasJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   cancelNasJob(
-      request: protos.google.cloud.aiplatform.v1.ICancelNasJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelNasJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICancelNasJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cancelNasJob(
-      request: protos.google.cloud.aiplatform.v1.ICancelNasJobRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelNasJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICancelNasJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cancelNasJob(
-      request?: protos.google.cloud.aiplatform.v1.ICancelNasJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.ICancelNasJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelNasJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelNasJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelNasJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.ICancelNasJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('cancelNasJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelNasJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelNasJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('cancelNasJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.cancelNasJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelNasJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('cancelNasJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .cancelNasJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1.ICancelNasJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelNasJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Gets a NasTrialDetail.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the NasTrialDetail resource.
- *   Format:
- *   `projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.NasTrialDetail|NasTrialDetail}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.get_nas_trial_detail.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_GetNasTrialDetail_async
- */
+  /**
+   * Gets a NasTrialDetail.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NasTrialDetail resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.NasTrialDetail|NasTrialDetail}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.get_nas_trial_detail.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_GetNasTrialDetail_async
+   */
   getNasTrialDetail(
-      request?: protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.INasTrialDetail,
-        protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasTrialDetail,
+      protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getNasTrialDetail(
-      request: protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.INasTrialDetail,
-          protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.INasTrialDetail,
+      | protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getNasTrialDetail(
-      request: protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.INasTrialDetail,
-          protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.INasTrialDetail,
+      | protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getNasTrialDetail(
-      request?: protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.INasTrialDetail,
-          protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.INasTrialDetail,
-          protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.INasTrialDetail,
-        protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.INasTrialDetail,
+      | protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasTrialDetail,
+      protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getNasTrialDetail request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.INasTrialDetail,
-        protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.INasTrialDetail,
+          | protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNasTrialDetail response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getNasTrialDetail(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.INasTrialDetail,
-        protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getNasTrialDetail response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .getNasTrialDetail(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.INasTrialDetail,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetNasTrialDetailRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNasTrialDetail response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Creates a BatchPredictionJob. A BatchPredictionJob once created will
- * right away be attempted to start.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to create the
- *   BatchPredictionJob in. Format: `projects/{project}/locations/{location}`
- * @param {google.cloud.aiplatform.v1.BatchPredictionJob} request.batchPredictionJob
- *   Required. The BatchPredictionJob to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.BatchPredictionJob|BatchPredictionJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.create_batch_prediction_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_CreateBatchPredictionJob_async
- */
+  /**
+   * Creates a BatchPredictionJob. A BatchPredictionJob once created will
+   * right away be attempted to start.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the
+   *   BatchPredictionJob in. Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1.BatchPredictionJob} request.batchPredictionJob
+   *   Required. The BatchPredictionJob to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.BatchPredictionJob|BatchPredictionJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.create_batch_prediction_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CreateBatchPredictionJob_async
+   */
   createBatchPredictionJob(
-      request?: protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-        protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+      (
+        | protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createBatchPredictionJob(
-      request: protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-          protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+      | protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createBatchPredictionJob(
-      request: protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-          protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+      | protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createBatchPredictionJob(
-      request?: protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-          protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-          protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-        protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+      | protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+      (
+        | protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createBatchPredictionJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-        protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+          | protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createBatchPredictionJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createBatchPredictionJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-        protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createBatchPredictionJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .createBatchPredictionJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createBatchPredictionJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Gets a BatchPredictionJob
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the BatchPredictionJob resource.
- *   Format:
- *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.BatchPredictionJob|BatchPredictionJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.get_batch_prediction_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_GetBatchPredictionJob_async
- */
+  /**
+   * Gets a BatchPredictionJob
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the BatchPredictionJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.BatchPredictionJob|BatchPredictionJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.get_batch_prediction_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_GetBatchPredictionJob_async
+   */
   getBatchPredictionJob(
-      request?: protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-        protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+      (
+        | protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getBatchPredictionJob(
-      request: protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-          protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+      | protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getBatchPredictionJob(
-      request: protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-          protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+      | protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getBatchPredictionJob(
-      request?: protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-          protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-          protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-        protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+      | protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+      (
+        | protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getBatchPredictionJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-        protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+          | protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getBatchPredictionJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getBatchPredictionJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
-        protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getBatchPredictionJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .getBatchPredictionJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getBatchPredictionJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Cancels a BatchPredictionJob.
- *
- * Starts asynchronous cancellation on the BatchPredictionJob. The server
- * makes the best effort to cancel the job, but success is not
- * guaranteed. Clients can use
- * {@link protos.google.cloud.aiplatform.v1.JobService.GetBatchPredictionJob|JobService.GetBatchPredictionJob}
- * or other methods to check whether the cancellation succeeded or whether the
- * job completed despite cancellation. On a successful cancellation,
- * the BatchPredictionJob is not deleted;instead its
- * {@link protos.google.cloud.aiplatform.v1.BatchPredictionJob.state|BatchPredictionJob.state}
- * is set to `CANCELLED`. Any files already outputted by the job are not
- * deleted.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the BatchPredictionJob to cancel.
- *   Format:
- *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.cancel_batch_prediction_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_CancelBatchPredictionJob_async
- */
+  /**
+   * Cancels a BatchPredictionJob.
+   *
+   * Starts asynchronous cancellation on the BatchPredictionJob. The server
+   * makes the best effort to cancel the job, but success is not
+   * guaranteed. Clients can use
+   * {@link protos.google.cloud.aiplatform.v1.JobService.GetBatchPredictionJob|JobService.GetBatchPredictionJob}
+   * or other methods to check whether the cancellation succeeded or whether the
+   * job completed despite cancellation. On a successful cancellation,
+   * the BatchPredictionJob is not deleted;instead its
+   * {@link protos.google.cloud.aiplatform.v1.BatchPredictionJob.state|BatchPredictionJob.state}
+   * is set to `CANCELLED`. Any files already outputted by the job are not
+   * deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the BatchPredictionJob to cancel.
+   *   Format:
+   *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.cancel_batch_prediction_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CancelBatchPredictionJob_async
+   */
   cancelBatchPredictionJob(
-      request?: protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   cancelBatchPredictionJob(
-      request: protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cancelBatchPredictionJob(
-      request: protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cancelBatchPredictionJob(
-      request?: protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('cancelBatchPredictionJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('cancelBatchPredictionJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.cancelBatchPredictionJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('cancelBatchPredictionJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .cancelBatchPredictionJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelBatchPredictionJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Creates a ModelDeploymentMonitoringJob. It will run periodically on a
- * configured interval.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the ModelDeploymentMonitoringJob.
- *   Format: `projects/{project}/locations/{location}`
- * @param {google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob} request.modelDeploymentMonitoringJob
- *   Required. The ModelDeploymentMonitoringJob to create
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob|ModelDeploymentMonitoringJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.create_model_deployment_monitoring_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_CreateModelDeploymentMonitoringJob_async
- */
+  /**
+   * Creates a ModelDeploymentMonitoringJob. It will run periodically on a
+   * configured interval.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob} request.modelDeploymentMonitoringJob
+   *   Required. The ModelDeploymentMonitoringJob to create
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob|ModelDeploymentMonitoringJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.create_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_CreateModelDeploymentMonitoringJob_async
+   */
   createModelDeploymentMonitoringJob(
-      request?: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-        protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      (
+        | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createModelDeploymentMonitoringJob(
-      request: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-          protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createModelDeploymentMonitoringJob(
-      request: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-          protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createModelDeploymentMonitoringJob(
-      request?: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-          protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-          protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-        protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      (
+        | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createModelDeploymentMonitoringJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-        protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+          | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createModelDeploymentMonitoringJob response %j', response);
+          this._log.info(
+            'createModelDeploymentMonitoringJob response %j',
+            response
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createModelDeploymentMonitoringJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-        protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createModelDeploymentMonitoringJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .createModelDeploymentMonitoringJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createModelDeploymentMonitoringJob response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Gets a ModelDeploymentMonitoringJob.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the ModelDeploymentMonitoringJob.
- *   Format:
- *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob|ModelDeploymentMonitoringJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.get_model_deployment_monitoring_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_GetModelDeploymentMonitoringJob_async
- */
+  /**
+   * Gets a ModelDeploymentMonitoringJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ModelDeploymentMonitoringJob.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob|ModelDeploymentMonitoringJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.get_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_GetModelDeploymentMonitoringJob_async
+   */
   getModelDeploymentMonitoringJob(
-      request?: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-        protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      (
+        | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getModelDeploymentMonitoringJob(
-      request: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-          protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getModelDeploymentMonitoringJob(
-      request: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-          protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getModelDeploymentMonitoringJob(
-      request?: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-          protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-          protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-        protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      (
+        | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getModelDeploymentMonitoringJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-        protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+          | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getModelDeploymentMonitoringJob response %j', response);
+          this._log.info(
+            'getModelDeploymentMonitoringJob response %j',
+            response
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getModelDeploymentMonitoringJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
-        protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getModelDeploymentMonitoringJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .getModelDeploymentMonitoringJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getModelDeploymentMonitoringJob response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Pauses a ModelDeploymentMonitoringJob. If the job is running, the server
- * makes a best effort to cancel the job. Will mark
- * {@link protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.state|ModelDeploymentMonitoringJob.state}
- * to 'PAUSED'.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the ModelDeploymentMonitoringJob to pause.
- *   Format:
- *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.pause_model_deployment_monitoring_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_PauseModelDeploymentMonitoringJob_async
- */
+  /**
+   * Pauses a ModelDeploymentMonitoringJob. If the job is running, the server
+   * makes a best effort to cancel the job. Will mark
+   * {@link protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.state|ModelDeploymentMonitoringJob.state}
+   * to 'PAUSED'.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ModelDeploymentMonitoringJob to pause.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.pause_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_PauseModelDeploymentMonitoringJob_async
+   */
   pauseModelDeploymentMonitoringJob(
-      request?: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   pauseModelDeploymentMonitoringJob(
-      request: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   pauseModelDeploymentMonitoringJob(
-      request: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   pauseModelDeploymentMonitoringJob(
-      request?: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('pauseModelDeploymentMonitoringJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('pauseModelDeploymentMonitoringJob response %j', response);
+          this._log.info(
+            'pauseModelDeploymentMonitoringJob response %j',
+            response
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.pauseModelDeploymentMonitoringJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('pauseModelDeploymentMonitoringJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .pauseModelDeploymentMonitoringJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'pauseModelDeploymentMonitoringJob response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
-/**
- * Resumes a paused ModelDeploymentMonitoringJob. It will start to run from
- * next scheduled time. A deleted ModelDeploymentMonitoringJob can't be
- * resumed.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the ModelDeploymentMonitoringJob to resume.
- *   Format:
- *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.resume_model_deployment_monitoring_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_ResumeModelDeploymentMonitoringJob_async
- */
+  /**
+   * Resumes a paused ModelDeploymentMonitoringJob. It will start to run from
+   * next scheduled time. A deleted ModelDeploymentMonitoringJob can't be
+   * resumed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ModelDeploymentMonitoringJob to resume.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.resume_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_ResumeModelDeploymentMonitoringJob_async
+   */
   resumeModelDeploymentMonitoringJob(
-      request?: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   resumeModelDeploymentMonitoringJob(
-      request: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   resumeModelDeploymentMonitoringJob(
-      request: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   resumeModelDeploymentMonitoringJob(
-      request?: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('resumeModelDeploymentMonitoringJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('resumeModelDeploymentMonitoringJob response %j', response);
+          this._log.info(
+            'resumeModelDeploymentMonitoringJob response %j',
+            response
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.resumeModelDeploymentMonitoringJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('resumeModelDeploymentMonitoringJob response %j', response);
-        return [response, options, rawResponse];
-      });
+    return this.innerApiCalls
+      .resumeModelDeploymentMonitoringJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'resumeModelDeploymentMonitoringJob response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
 
-/**
- * Deletes a CustomJob.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the CustomJob resource to be deleted.
- *   Format:
- *   `projects/{project}/locations/{location}/customJobs/{custom_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.delete_custom_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_DeleteCustomJob_async
- */
+  /**
+   * Deletes a CustomJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the CustomJob resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/customJobs/{custom_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_custom_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteCustomJob_async
+   */
   deleteCustomJob(
-      request?: protos.google.cloud.aiplatform.v1.IDeleteCustomJobRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IDeleteCustomJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteCustomJob(
-      request: protos.google.cloud.aiplatform.v1.IDeleteCustomJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IDeleteCustomJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteCustomJob(
-      request: protos.google.cloud.aiplatform.v1.IDeleteCustomJobRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IDeleteCustomJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteCustomJob(
-      request?: protos.google.cloud.aiplatform.v1.IDeleteCustomJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.aiplatform.v1.IDeleteCustomJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCustomJob response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCustomJob request %j', request);
-    return this.innerApiCalls.deleteCustomJob(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteCustomJob response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteCustomJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCustomJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteCustomJob()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.delete_custom_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_DeleteCustomJob_async
- */
-  async checkDeleteCustomJobProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteCustomJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_custom_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteCustomJob_async
+   */
+  async checkDeleteCustomJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
     this._log.info('deleteCustomJob long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCustomJob, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteCustomJob,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
   }
-/**
- * Deletes a DataLabelingJob.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the DataLabelingJob to be deleted.
- *   Format:
- *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.delete_data_labeling_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_DeleteDataLabelingJob_async
- */
+  /**
+   * Deletes a DataLabelingJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DataLabelingJob to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_data_labeling_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteDataLabelingJob_async
+   */
   deleteDataLabelingJob(
-      request?: protos.google.cloud.aiplatform.v1.IDeleteDataLabelingJobRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IDeleteDataLabelingJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteDataLabelingJob(
-      request: protos.google.cloud.aiplatform.v1.IDeleteDataLabelingJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IDeleteDataLabelingJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteDataLabelingJob(
-      request: protos.google.cloud.aiplatform.v1.IDeleteDataLabelingJobRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IDeleteDataLabelingJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteDataLabelingJob(
-      request?: protos.google.cloud.aiplatform.v1.IDeleteDataLabelingJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.aiplatform.v1.IDeleteDataLabelingJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteDataLabelingJob response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteDataLabelingJob request %j', request);
-    return this.innerApiCalls.deleteDataLabelingJob(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteDataLabelingJob response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteDataLabelingJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataLabelingJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteDataLabelingJob()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.delete_data_labeling_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_DeleteDataLabelingJob_async
- */
-  async checkDeleteDataLabelingJobProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteDataLabelingJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_data_labeling_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteDataLabelingJob_async
+   */
+  async checkDeleteDataLabelingJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
     this._log.info('deleteDataLabelingJob long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteDataLabelingJob, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteDataLabelingJob,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
   }
-/**
- * Deletes a HyperparameterTuningJob.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the HyperparameterTuningJob resource to be deleted.
- *   Format:
- *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.delete_hyperparameter_tuning_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_DeleteHyperparameterTuningJob_async
- */
+  /**
+   * Deletes a HyperparameterTuningJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the HyperparameterTuningJob resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_hyperparameter_tuning_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteHyperparameterTuningJob_async
+   */
   deleteHyperparameterTuningJob(
-      request?: protos.google.cloud.aiplatform.v1.IDeleteHyperparameterTuningJobRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IDeleteHyperparameterTuningJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteHyperparameterTuningJob(
-      request: protos.google.cloud.aiplatform.v1.IDeleteHyperparameterTuningJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IDeleteHyperparameterTuningJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteHyperparameterTuningJob(
-      request: protos.google.cloud.aiplatform.v1.IDeleteHyperparameterTuningJobRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IDeleteHyperparameterTuningJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteHyperparameterTuningJob(
-      request?: protos.google.cloud.aiplatform.v1.IDeleteHyperparameterTuningJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.aiplatform.v1.IDeleteHyperparameterTuningJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteHyperparameterTuningJob response %j', rawResponse);
+          this._log.info(
+            'deleteHyperparameterTuningJob response %j',
+            rawResponse
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteHyperparameterTuningJob request %j', request);
-    return this.innerApiCalls.deleteHyperparameterTuningJob(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteHyperparameterTuningJob response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteHyperparameterTuningJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteHyperparameterTuningJob response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteHyperparameterTuningJob()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.delete_hyperparameter_tuning_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_DeleteHyperparameterTuningJob_async
- */
-  async checkDeleteHyperparameterTuningJobProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteHyperparameterTuningJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_hyperparameter_tuning_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteHyperparameterTuningJob_async
+   */
+  async checkDeleteHyperparameterTuningJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
     this._log.info('deleteHyperparameterTuningJob long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteHyperparameterTuningJob, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteHyperparameterTuningJob,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
   }
-/**
- * Deletes a NasJob.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the NasJob resource to be deleted.
- *   Format:
- *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.delete_nas_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_DeleteNasJob_async
- */
+  /**
+   * Deletes a NasJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NasJob resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_nas_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteNasJob_async
+   */
   deleteNasJob(
-      request?: protos.google.cloud.aiplatform.v1.IDeleteNasJobRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IDeleteNasJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteNasJob(
-      request: protos.google.cloud.aiplatform.v1.IDeleteNasJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IDeleteNasJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteNasJob(
-      request: protos.google.cloud.aiplatform.v1.IDeleteNasJobRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IDeleteNasJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteNasJob(
-      request?: protos.google.cloud.aiplatform.v1.IDeleteNasJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.aiplatform.v1.IDeleteNasJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteNasJob response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteNasJob request %j', request);
-    return this.innerApiCalls.deleteNasJob(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteNasJob response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteNasJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNasJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteNasJob()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.delete_nas_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_DeleteNasJob_async
- */
-  async checkDeleteNasJobProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteNasJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_nas_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteNasJob_async
+   */
+  async checkDeleteNasJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
     this._log.info('deleteNasJob long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteNasJob, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteNasJob,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
   }
-/**
- * Deletes a BatchPredictionJob. Can only be called on jobs that already
- * finished.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the BatchPredictionJob resource to be deleted.
- *   Format:
- *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.delete_batch_prediction_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_DeleteBatchPredictionJob_async
- */
+  /**
+   * Deletes a BatchPredictionJob. Can only be called on jobs that already
+   * finished.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the BatchPredictionJob resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_batch_prediction_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteBatchPredictionJob_async
+   */
   deleteBatchPredictionJob(
-      request?: protos.google.cloud.aiplatform.v1.IDeleteBatchPredictionJobRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IDeleteBatchPredictionJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteBatchPredictionJob(
-      request: protos.google.cloud.aiplatform.v1.IDeleteBatchPredictionJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IDeleteBatchPredictionJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteBatchPredictionJob(
-      request: protos.google.cloud.aiplatform.v1.IDeleteBatchPredictionJobRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IDeleteBatchPredictionJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteBatchPredictionJob(
-      request?: protos.google.cloud.aiplatform.v1.IDeleteBatchPredictionJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.aiplatform.v1.IDeleteBatchPredictionJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteBatchPredictionJob response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteBatchPredictionJob request %j', request);
-    return this.innerApiCalls.deleteBatchPredictionJob(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteBatchPredictionJob response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteBatchPredictionJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBatchPredictionJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteBatchPredictionJob()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.delete_batch_prediction_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_DeleteBatchPredictionJob_async
- */
-  async checkDeleteBatchPredictionJobProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteBatchPredictionJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_batch_prediction_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteBatchPredictionJob_async
+   */
+  async checkDeleteBatchPredictionJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
     this._log.info('deleteBatchPredictionJob long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteBatchPredictionJob, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteBatchPredictionJob,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
   }
-/**
- * Updates a ModelDeploymentMonitoringJob.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob} request.modelDeploymentMonitoringJob
- *   Required. The model monitoring configuration which replaces the resource on
- *   the server.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The update mask is used to specify the fields to be overwritten
- *   in the ModelDeploymentMonitoringJob resource by the update. The fields
- *   specified in the update_mask are relative to the resource, not the full
- *   request. A field will be overwritten if it is in the mask. If the user does
- *   not provide a mask then only the non-empty fields present in the request
- *   will be overwritten. Set the update_mask to `*` to override all fields. For
- *   the objective config, the user can either provide the update mask for
- *   model_deployment_monitoring_objective_configs or any combination of its
- *   nested fields, such as:
- *   model_deployment_monitoring_objective_configs.objective_config.training_dataset.
- *
- *   Updatable fields:
- *
- *     * `display_name`
- *     * `model_deployment_monitoring_schedule_config`
- *     * `model_monitoring_alert_config`
- *     * `logging_sampling_strategy`
- *     * `labels`
- *     * `log_ttl`
- *     * `enable_monitoring_pipeline_logs`
- *   .  and
- *     * `model_deployment_monitoring_objective_configs`
- *   .  or
- *     * `model_deployment_monitoring_objective_configs.objective_config.training_dataset`
- *     * `model_deployment_monitoring_objective_configs.objective_config.training_prediction_skew_detection_config`
- *     * `model_deployment_monitoring_objective_configs.objective_config.prediction_drift_detection_config`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.update_model_deployment_monitoring_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_UpdateModelDeploymentMonitoringJob_async
- */
+  /**
+   * Updates a ModelDeploymentMonitoringJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob} request.modelDeploymentMonitoringJob
+   *   Required. The model monitoring configuration which replaces the resource on
+   *   the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask is used to specify the fields to be overwritten
+   *   in the ModelDeploymentMonitoringJob resource by the update. The fields
+   *   specified in the update_mask are relative to the resource, not the full
+   *   request. A field will be overwritten if it is in the mask. If the user does
+   *   not provide a mask then only the non-empty fields present in the request
+   *   will be overwritten. Set the update_mask to `*` to override all fields. For
+   *   the objective config, the user can either provide the update mask for
+   *   model_deployment_monitoring_objective_configs or any combination of its
+   *   nested fields, such as:
+   *   model_deployment_monitoring_objective_configs.objective_config.training_dataset.
+   *
+   *   Updatable fields:
+   *
+   *     * `display_name`
+   *     * `model_deployment_monitoring_schedule_config`
+   *     * `model_monitoring_alert_config`
+   *     * `logging_sampling_strategy`
+   *     * `labels`
+   *     * `log_ttl`
+   *     * `enable_monitoring_pipeline_logs`
+   *   .  and
+   *     * `model_deployment_monitoring_objective_configs`
+   *   .  or
+   *     * `model_deployment_monitoring_objective_configs.objective_config.training_dataset`
+   *     * `model_deployment_monitoring_objective_configs.objective_config.training_prediction_skew_detection_config`
+   *     * `model_deployment_monitoring_objective_configs.objective_config.prediction_drift_detection_config`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.update_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_UpdateModelDeploymentMonitoringJob_async
+   */
   updateModelDeploymentMonitoringJob(
-      request?: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob, protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateModelDeploymentMonitoringJob(
-      request: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob, protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateModelDeploymentMonitoringJob(
-      request: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob, protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateModelDeploymentMonitoringJob(
-      request?: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob, protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob, protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob, protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+            protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'model_deployment_monitoring_job.name': request.modelDeploymentMonitoringJob!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'model_deployment_monitoring_job.name':
+          request.modelDeploymentMonitoringJob!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob, protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+            protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateModelDeploymentMonitoringJob response %j', rawResponse);
+          this._log.info(
+            'updateModelDeploymentMonitoringJob response %j',
+            rawResponse
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateModelDeploymentMonitoringJob request %j', request);
-    return this.innerApiCalls.updateModelDeploymentMonitoringJob(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob, protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateModelDeploymentMonitoringJob response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateModelDeploymentMonitoringJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+            protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateModelDeploymentMonitoringJob response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateModelDeploymentMonitoringJob()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.update_model_deployment_monitoring_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_UpdateModelDeploymentMonitoringJob_async
- */
-  async checkUpdateModelDeploymentMonitoringJobProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob, protos.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateModelDeploymentMonitoringJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.update_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_UpdateModelDeploymentMonitoringJob_async
+   */
+  async checkUpdateModelDeploymentMonitoringJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob,
+      protos.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobOperationMetadata
+    >
+  > {
     this._log.info('updateModelDeploymentMonitoringJob long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateModelDeploymentMonitoringJob, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob, protos.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateModelDeploymentMonitoringJob,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob,
+      protos.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobOperationMetadata
+    >;
   }
-/**
- * Deletes a ModelDeploymentMonitoringJob.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the model monitoring job to delete.
- *   Format:
- *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.delete_model_deployment_monitoring_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_DeleteModelDeploymentMonitoringJob_async
- */
+  /**
+   * Deletes a ModelDeploymentMonitoringJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model monitoring job to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteModelDeploymentMonitoringJob_async
+   */
   deleteModelDeploymentMonitoringJob(
-      request?: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteModelDeploymentMonitoringJob(
-      request: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteModelDeploymentMonitoringJob(
-      request: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteModelDeploymentMonitoringJob(
-      request?: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteModelDeploymentMonitoringJob response %j', rawResponse);
+          this._log.info(
+            'deleteModelDeploymentMonitoringJob response %j',
+            rawResponse
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteModelDeploymentMonitoringJob request %j', request);
-    return this.innerApiCalls.deleteModelDeploymentMonitoringJob(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteModelDeploymentMonitoringJob response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteModelDeploymentMonitoringJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteModelDeploymentMonitoringJob response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteModelDeploymentMonitoringJob()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.delete_model_deployment_monitoring_job.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_DeleteModelDeploymentMonitoringJob_async
- */
-  async checkDeleteModelDeploymentMonitoringJobProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteModelDeploymentMonitoringJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.delete_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_DeleteModelDeploymentMonitoringJob_async
+   */
+  async checkDeleteModelDeploymentMonitoringJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
     this._log.info('deleteModelDeploymentMonitoringJob long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteModelDeploymentMonitoringJob, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1.DeleteOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteModelDeploymentMonitoringJob,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
   }
- /**
- * Lists CustomJobs in a Location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to list the CustomJobs from.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListCustomJobsResponse.next_page_token|ListCustomJobsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListCustomJobs|JobService.ListCustomJobs}
- *   call.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.CustomJob|CustomJob}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listCustomJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists CustomJobs in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the CustomJobs from.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListCustomJobsResponse.next_page_token|ListCustomJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListCustomJobs|JobService.ListCustomJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.CustomJob|CustomJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCustomJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listCustomJobs(
-      request?: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.ICustomJob[],
-        protos.google.cloud.aiplatform.v1.IListCustomJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListCustomJobsResponse
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.ICustomJob[],
+      protos.google.cloud.aiplatform.v1.IListCustomJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListCustomJobsResponse,
+    ]
+  >;
   listCustomJobs(
-      request: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListCustomJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.ICustomJob>): void;
+    request: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListCustomJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.ICustomJob
+    >
+  ): void;
   listCustomJobs(
-      request: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListCustomJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.ICustomJob>): void;
+    request: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListCustomJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.ICustomJob
+    >
+  ): void;
   listCustomJobs(
-      request?: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListCustomJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.ICustomJob>,
-      callback?: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListCustomJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.ICustomJob>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.ICustomJob[],
-        protos.google.cloud.aiplatform.v1.IListCustomJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListCustomJobsResponse
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IListCustomJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ICustomJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListCustomJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.ICustomJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.ICustomJob[],
+      protos.google.cloud.aiplatform.v1.IListCustomJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListCustomJobsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
-      protos.google.cloud.aiplatform.v1.IListCustomJobsResponse|null|undefined,
-      protos.google.cloud.aiplatform.v1.ICustomJob>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListCustomJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ICustomJob
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCustomJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3379,82 +6305,85 @@ export class JobServiceClient {
     this._log.info('listCustomJobs request %j', request);
     return this.innerApiCalls
       .listCustomJobs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.aiplatform.v1.ICustomJob[],
-        protos.google.cloud.aiplatform.v1.IListCustomJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListCustomJobsResponse
-      ]) => {
-        this._log.info('listCustomJobs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ICustomJob[],
+          protos.google.cloud.aiplatform.v1.IListCustomJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListCustomJobsResponse,
+        ]) => {
+          this._log.info('listCustomJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
-/**
- * Equivalent to `listCustomJobs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to list the CustomJobs from.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListCustomJobsResponse.next_page_token|ListCustomJobsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListCustomJobs|JobService.ListCustomJobs}
- *   call.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.CustomJob|CustomJob} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listCustomJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listCustomJobs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the CustomJobs from.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListCustomJobsResponse.next_page_token|ListCustomJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListCustomJobs|JobService.ListCustomJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.CustomJob|CustomJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCustomJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listCustomJobsStream(
-      request?: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listCustomJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomJobs stream %j', request);
     return this.descriptors.page.listCustomJobs.createStream(
       this.innerApiCalls.listCustomJobs as GaxCall,
@@ -3463,75 +6392,76 @@ export class JobServiceClient {
     );
   }
 
-/**
- * Equivalent to `listCustomJobs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to list the CustomJobs from.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListCustomJobsResponse.next_page_token|ListCustomJobsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListCustomJobs|JobService.ListCustomJobs}
- *   call.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.aiplatform.v1.CustomJob|CustomJob}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.list_custom_jobs.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_ListCustomJobs_async
- */
+  /**
+   * Equivalent to `listCustomJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the CustomJobs from.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListCustomJobsResponse.next_page_token|ListCustomJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListCustomJobs|JobService.ListCustomJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1.CustomJob|CustomJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.list_custom_jobs.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_ListCustomJobs_async
+   */
   listCustomJobsAsync(
-      request?: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.aiplatform.v1.ICustomJob>{
+    request?: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.ICustomJob> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listCustomJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomJobs iterate %j', request);
     return this.descriptors.page.listCustomJobs.asyncIterate(
       this.innerApiCalls['listCustomJobs'] as GaxCall,
@@ -3539,118 +6469,143 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.ICustomJob>;
   }
- /**
- * Lists DataLabelingJobs in a Location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the DataLabelingJob.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read. FieldMask represents a set of
- *   symbolic field paths. For example, the mask can be `paths: "name"`. The
- *   "name" here is a field in DataLabelingJob.
- *   If this field is not set, all fields of the DataLabelingJob are returned.
- * @param {string} request.orderBy
- *   A comma-separated list of fields to order by, sorted in ascending order by
- *   default.
- *   Use `desc` after a field name for descending.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.DataLabelingJob|DataLabelingJob}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDataLabelingJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists DataLabelingJobs in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the DataLabelingJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read. FieldMask represents a set of
+   *   symbolic field paths. For example, the mask can be `paths: "name"`. The
+   *   "name" here is a field in DataLabelingJob.
+   *   If this field is not set, all fields of the DataLabelingJob are returned.
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by, sorted in ascending order by
+   *   default.
+   *   Use `desc` after a field name for descending.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.DataLabelingJob|DataLabelingJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDataLabelingJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDataLabelingJobs(
-      request?: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IDataLabelingJob[],
-        protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob[],
+      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse,
+    ]
+  >;
   listDataLabelingJobs(
-      request: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IDataLabelingJob>): void;
+    request: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob
+    >
+  ): void;
   listDataLabelingJobs(
-      request: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IDataLabelingJob>): void;
+    request: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob
+    >
+  ): void;
   listDataLabelingJobs(
-      request?: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IDataLabelingJob>,
-      callback?: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IDataLabelingJob>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IDataLabelingJob[],
-        protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDataLabelingJob[],
+      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
-      protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse|null|undefined,
-      protos.google.cloud.aiplatform.v1.IDataLabelingJob>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDataLabelingJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3659,84 +6614,87 @@ export class JobServiceClient {
     this._log.info('listDataLabelingJobs request %j', request);
     return this.innerApiCalls
       .listDataLabelingJobs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.aiplatform.v1.IDataLabelingJob[],
-        protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse
-      ]) => {
-        this._log.info('listDataLabelingJobs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IDataLabelingJob[],
+          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListDataLabelingJobsResponse,
+        ]) => {
+          this._log.info('listDataLabelingJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
-/**
- * Equivalent to `listDataLabelingJobs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the DataLabelingJob.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read. FieldMask represents a set of
- *   symbolic field paths. For example, the mask can be `paths: "name"`. The
- *   "name" here is a field in DataLabelingJob.
- *   If this field is not set, all fields of the DataLabelingJob are returned.
- * @param {string} request.orderBy
- *   A comma-separated list of fields to order by, sorted in ascending order by
- *   default.
- *   Use `desc` after a field name for descending.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.DataLabelingJob|DataLabelingJob} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDataLabelingJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDataLabelingJobs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the DataLabelingJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read. FieldMask represents a set of
+   *   symbolic field paths. For example, the mask can be `paths: "name"`. The
+   *   "name" here is a field in DataLabelingJob.
+   *   If this field is not set, all fields of the DataLabelingJob are returned.
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by, sorted in ascending order by
+   *   default.
+   *   Use `desc` after a field name for descending.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.DataLabelingJob|DataLabelingJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDataLabelingJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDataLabelingJobsStream(
-      request?: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDataLabelingJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataLabelingJobs stream %j', request);
     return this.descriptors.page.listDataLabelingJobs.createStream(
       this.innerApiCalls.listDataLabelingJobs as GaxCall,
@@ -3745,77 +6703,78 @@ export class JobServiceClient {
     );
   }
 
-/**
- * Equivalent to `listDataLabelingJobs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the DataLabelingJob.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read. FieldMask represents a set of
- *   symbolic field paths. For example, the mask can be `paths: "name"`. The
- *   "name" here is a field in DataLabelingJob.
- *   If this field is not set, all fields of the DataLabelingJob are returned.
- * @param {string} request.orderBy
- *   A comma-separated list of fields to order by, sorted in ascending order by
- *   default.
- *   Use `desc` after a field name for descending.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.aiplatform.v1.DataLabelingJob|DataLabelingJob}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.list_data_labeling_jobs.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_ListDataLabelingJobs_async
- */
+  /**
+   * Equivalent to `listDataLabelingJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the DataLabelingJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read. FieldMask represents a set of
+   *   symbolic field paths. For example, the mask can be `paths: "name"`. The
+   *   "name" here is a field in DataLabelingJob.
+   *   If this field is not set, all fields of the DataLabelingJob are returned.
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by, sorted in ascending order by
+   *   default.
+   *   Use `desc` after a field name for descending.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1.DataLabelingJob|DataLabelingJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.list_data_labeling_jobs.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_ListDataLabelingJobs_async
+   */
   listDataLabelingJobsAsync(
-      request?: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.aiplatform.v1.IDataLabelingJob>{
+    request?: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IDataLabelingJob> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDataLabelingJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataLabelingJobs iterate %j', request);
     return this.descriptors.page.listDataLabelingJobs.asyncIterate(
       this.innerApiCalls['listDataLabelingJobs'] as GaxCall,
@@ -3823,117 +6782,142 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IDataLabelingJob>;
   }
- /**
- * Lists HyperparameterTuningJobs in a Location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to list the
- *   HyperparameterTuningJobs from. Format:
- *   `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token|ListHyperparameterTuningJobsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs|JobService.ListHyperparameterTuningJobs}
- *   call.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob|HyperparameterTuningJob}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listHyperparameterTuningJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists HyperparameterTuningJobs in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the
+   *   HyperparameterTuningJobs from. Format:
+   *   `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token|ListHyperparameterTuningJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs|JobService.ListHyperparameterTuningJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob|HyperparameterTuningJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listHyperparameterTuningJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listHyperparameterTuningJobs(
-      request?: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[],
-        protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[],
+      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse,
+    ]
+  >;
   listHyperparameterTuningJobs(
-      request: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob>): void;
+    request: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob
+    >
+  ): void;
   listHyperparameterTuningJobs(
-      request: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob>): void;
+    request: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob
+    >
+  ): void;
   listHyperparameterTuningJobs(
-      request?: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob>,
-      callback?: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[],
-        protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[],
+      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
-      protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse|null|undefined,
-      protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listHyperparameterTuningJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3942,83 +6926,86 @@ export class JobServiceClient {
     this._log.info('listHyperparameterTuningJobs request %j', request);
     return this.innerApiCalls
       .listHyperparameterTuningJobs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[],
-        protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse
-      ]) => {
-        this._log.info('listHyperparameterTuningJobs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob[],
+          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsResponse,
+        ]) => {
+          this._log.info('listHyperparameterTuningJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
-/**
- * Equivalent to `listHyperparameterTuningJobs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to list the
- *   HyperparameterTuningJobs from. Format:
- *   `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token|ListHyperparameterTuningJobsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs|JobService.ListHyperparameterTuningJobs}
- *   call.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob|HyperparameterTuningJob} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listHyperparameterTuningJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listHyperparameterTuningJobs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the
+   *   HyperparameterTuningJobs from. Format:
+   *   `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token|ListHyperparameterTuningJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs|JobService.ListHyperparameterTuningJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob|HyperparameterTuningJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listHyperparameterTuningJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listHyperparameterTuningJobsStream(
-      request?: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listHyperparameterTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHyperparameterTuningJobs stream %j', request);
     return this.descriptors.page.listHyperparameterTuningJobs.createStream(
       this.innerApiCalls.listHyperparameterTuningJobs as GaxCall,
@@ -4027,76 +7014,77 @@ export class JobServiceClient {
     );
   }
 
-/**
- * Equivalent to `listHyperparameterTuningJobs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to list the
- *   HyperparameterTuningJobs from. Format:
- *   `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token|ListHyperparameterTuningJobsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs|JobService.ListHyperparameterTuningJobs}
- *   call.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob|HyperparameterTuningJob}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.list_hyperparameter_tuning_jobs.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_ListHyperparameterTuningJobs_async
- */
+  /**
+   * Equivalent to `listHyperparameterTuningJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the
+   *   HyperparameterTuningJobs from. Format:
+   *   `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token|ListHyperparameterTuningJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs|JobService.ListHyperparameterTuningJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1.HyperparameterTuningJob|HyperparameterTuningJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.list_hyperparameter_tuning_jobs.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_ListHyperparameterTuningJobs_async
+   */
   listHyperparameterTuningJobsAsync(
-      request?: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob>{
+    request?: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listHyperparameterTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHyperparameterTuningJobs iterate %j', request);
     return this.descriptors.page.listHyperparameterTuningJobs.asyncIterate(
       this.innerApiCalls['listHyperparameterTuningJobs'] as GaxCall,
@@ -4104,116 +7092,135 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IHyperparameterTuningJob>;
   }
- /**
- * Lists NasJobs in a Location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to list the NasJobs
- *   from. Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListNasJobsResponse.next_page_token|ListNasJobsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListNasJobs|JobService.ListNasJobs}
- *   call.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.NasJob|NasJob}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listNasJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists NasJobs in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the NasJobs
+   *   from. Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListNasJobsResponse.next_page_token|ListNasJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListNasJobs|JobService.ListNasJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.NasJob|NasJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNasJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listNasJobs(
-      request?: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.INasJob[],
-        protos.google.cloud.aiplatform.v1.IListNasJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListNasJobsResponse
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasJob[],
+      protos.google.cloud.aiplatform.v1.IListNasJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListNasJobsResponse,
+    ]
+  >;
   listNasJobs(
-      request: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListNasJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.INasJob>): void;
+    request: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+      protos.google.cloud.aiplatform.v1.IListNasJobsResponse | null | undefined,
+      protos.google.cloud.aiplatform.v1.INasJob
+    >
+  ): void;
   listNasJobs(
-      request: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListNasJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.INasJob>): void;
+    request: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+      protos.google.cloud.aiplatform.v1.IListNasJobsResponse | null | undefined,
+      protos.google.cloud.aiplatform.v1.INasJob
+    >
+  ): void;
   listNasJobs(
-      request?: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListNasJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.INasJob>,
-      callback?: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListNasJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.INasJob>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.INasJob[],
-        protos.google.cloud.aiplatform.v1.IListNasJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListNasJobsResponse
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IListNasJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.INasJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+      protos.google.cloud.aiplatform.v1.IListNasJobsResponse | null | undefined,
+      protos.google.cloud.aiplatform.v1.INasJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasJob[],
+      protos.google.cloud.aiplatform.v1.IListNasJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListNasJobsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
-      protos.google.cloud.aiplatform.v1.IListNasJobsResponse|null|undefined,
-      protos.google.cloud.aiplatform.v1.INasJob>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListNasJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.INasJob
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNasJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4222,82 +7229,85 @@ export class JobServiceClient {
     this._log.info('listNasJobs request %j', request);
     return this.innerApiCalls
       .listNasJobs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.aiplatform.v1.INasJob[],
-        protos.google.cloud.aiplatform.v1.IListNasJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListNasJobsResponse
-      ]) => {
-        this._log.info('listNasJobs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.INasJob[],
+          protos.google.cloud.aiplatform.v1.IListNasJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListNasJobsResponse,
+        ]) => {
+          this._log.info('listNasJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
-/**
- * Equivalent to `listNasJobs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to list the NasJobs
- *   from. Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListNasJobsResponse.next_page_token|ListNasJobsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListNasJobs|JobService.ListNasJobs}
- *   call.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.NasJob|NasJob} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listNasJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listNasJobs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the NasJobs
+   *   from. Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListNasJobsResponse.next_page_token|ListNasJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListNasJobs|JobService.ListNasJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.NasJob|NasJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNasJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listNasJobsStream(
-      request?: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listNasJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNasJobs stream %j', request);
     return this.descriptors.page.listNasJobs.createStream(
       this.innerApiCalls.listNasJobs as GaxCall,
@@ -4306,75 +7316,76 @@ export class JobServiceClient {
     );
   }
 
-/**
- * Equivalent to `listNasJobs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to list the NasJobs
- *   from. Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListNasJobsResponse.next_page_token|ListNasJobsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListNasJobs|JobService.ListNasJobs}
- *   call.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.aiplatform.v1.NasJob|NasJob}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.list_nas_jobs.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_ListNasJobs_async
- */
+  /**
+   * Equivalent to `listNasJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the NasJobs
+   *   from. Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListNasJobsResponse.next_page_token|ListNasJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListNasJobs|JobService.ListNasJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1.NasJob|NasJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.list_nas_jobs.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_ListNasJobs_async
+   */
   listNasJobsAsync(
-      request?: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.aiplatform.v1.INasJob>{
+    request?: protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.INasJob> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listNasJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNasJobs iterate %j', request);
     return this.descriptors.page.listNasJobs.asyncIterate(
       this.innerApiCalls['listNasJobs'] as GaxCall,
@@ -4382,94 +7393,119 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.INasJob>;
   }
- /**
- * List top NasTrialDetails of a NasJob.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the NasJob resource.
- *   Format:
- *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListNasTrialDetailsResponse.next_page_token|ListNasTrialDetailsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListNasTrialDetails|JobService.ListNasTrialDetails}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.NasTrialDetail|NasTrialDetail}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listNasTrialDetailsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * List top NasTrialDetails of a NasJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the NasJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListNasTrialDetailsResponse.next_page_token|ListNasTrialDetailsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListNasTrialDetails|JobService.ListNasTrialDetails}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.NasTrialDetail|NasTrialDetail}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNasTrialDetailsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listNasTrialDetails(
-      request?: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.INasTrialDetail[],
-        protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasTrialDetail[],
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse,
+    ]
+  >;
   listNasTrialDetails(
-      request: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
-          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.INasTrialDetail>): void;
+    request: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+      | protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.INasTrialDetail
+    >
+  ): void;
   listNasTrialDetails(
-      request: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
-          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.INasTrialDetail>): void;
+    request: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+      | protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.INasTrialDetail
+    >
+  ): void;
   listNasTrialDetails(
-      request?: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
-          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.INasTrialDetail>,
-      callback?: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
-          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.INasTrialDetail>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.INasTrialDetail[],
-        protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.INasTrialDetail
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+      | protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.INasTrialDetail
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.INasTrialDetail[],
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
-      protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse|null|undefined,
-      protos.google.cloud.aiplatform.v1.INasTrialDetail>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+          | protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.INasTrialDetail
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNasTrialDetails values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4478,60 +7514,63 @@ export class JobServiceClient {
     this._log.info('listNasTrialDetails request %j', request);
     return this.innerApiCalls
       .listNasTrialDetails(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.aiplatform.v1.INasTrialDetail[],
-        protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse
-      ]) => {
-        this._log.info('listNasTrialDetails values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.INasTrialDetail[],
+          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListNasTrialDetailsResponse,
+        ]) => {
+          this._log.info('listNasTrialDetails values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
-/**
- * Equivalent to `listNasTrialDetails`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the NasJob resource.
- *   Format:
- *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListNasTrialDetailsResponse.next_page_token|ListNasTrialDetailsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListNasTrialDetails|JobService.ListNasTrialDetails}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.NasTrialDetail|NasTrialDetail} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listNasTrialDetailsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listNasTrialDetails`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the NasJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListNasTrialDetailsResponse.next_page_token|ListNasTrialDetailsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListNasTrialDetails|JobService.ListNasTrialDetails}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.NasTrialDetail|NasTrialDetail} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNasTrialDetailsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listNasTrialDetailsStream(
-      request?: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listNasTrialDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNasTrialDetails stream %j', request);
     return this.descriptors.page.listNasTrialDetails.createStream(
       this.innerApiCalls.listNasTrialDetails as GaxCall,
@@ -4540,53 +7579,54 @@ export class JobServiceClient {
     );
   }
 
-/**
- * Equivalent to `listNasTrialDetails`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the NasJob resource.
- *   Format:
- *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListNasTrialDetailsResponse.next_page_token|ListNasTrialDetailsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListNasTrialDetails|JobService.ListNasTrialDetails}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.aiplatform.v1.NasTrialDetail|NasTrialDetail}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.list_nas_trial_details.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_ListNasTrialDetails_async
- */
+  /**
+   * Equivalent to `listNasTrialDetails`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the NasJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListNasTrialDetailsResponse.next_page_token|ListNasTrialDetailsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListNasTrialDetails|JobService.ListNasTrialDetails}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1.NasTrialDetail|NasTrialDetail}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.list_nas_trial_details.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_ListNasTrialDetails_async
+   */
   listNasTrialDetailsAsync(
-      request?: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.aiplatform.v1.INasTrialDetail>{
+    request?: protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.INasTrialDetail> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listNasTrialDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNasTrialDetails iterate %j', request);
     return this.descriptors.page.listNasTrialDetails.asyncIterate(
       this.innerApiCalls['listNasTrialDetails'] as GaxCall,
@@ -4594,117 +7634,142 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.INasTrialDetail>;
   }
- /**
- * Lists BatchPredictionJobs in a Location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to list the BatchPredictionJobs
- *   from. Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `model_display_name` supports `=`, `!=` comparisons.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token|ListBatchPredictionJobsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs|JobService.ListBatchPredictionJobs}
- *   call.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.BatchPredictionJob|BatchPredictionJob}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listBatchPredictionJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists BatchPredictionJobs in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the BatchPredictionJobs
+   *   from. Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `model_display_name` supports `=`, `!=` comparisons.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token|ListBatchPredictionJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs|JobService.ListBatchPredictionJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.BatchPredictionJob|BatchPredictionJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBatchPredictionJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBatchPredictionJobs(
-      request?: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IBatchPredictionJob[],
-        protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob[],
+      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse,
+    ]
+  >;
   listBatchPredictionJobs(
-      request: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IBatchPredictionJob>): void;
+    request: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob
+    >
+  ): void;
   listBatchPredictionJobs(
-      request: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IBatchPredictionJob>): void;
+    request: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob
+    >
+  ): void;
   listBatchPredictionJobs(
-      request?: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IBatchPredictionJob>,
-      callback?: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IBatchPredictionJob>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IBatchPredictionJob[],
-        protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IBatchPredictionJob[],
+      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
-      protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse|null|undefined,
-      protos.google.cloud.aiplatform.v1.IBatchPredictionJob>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listBatchPredictionJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4713,83 +7778,86 @@ export class JobServiceClient {
     this._log.info('listBatchPredictionJobs request %j', request);
     return this.innerApiCalls
       .listBatchPredictionJobs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.aiplatform.v1.IBatchPredictionJob[],
-        protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse
-      ]) => {
-        this._log.info('listBatchPredictionJobs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IBatchPredictionJob[],
+          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsResponse,
+        ]) => {
+          this._log.info('listBatchPredictionJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
-/**
- * Equivalent to `listBatchPredictionJobs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to list the BatchPredictionJobs
- *   from. Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `model_display_name` supports `=`, `!=` comparisons.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token|ListBatchPredictionJobsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs|JobService.ListBatchPredictionJobs}
- *   call.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.BatchPredictionJob|BatchPredictionJob} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listBatchPredictionJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listBatchPredictionJobs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the BatchPredictionJobs
+   *   from. Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `model_display_name` supports `=`, `!=` comparisons.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token|ListBatchPredictionJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs|JobService.ListBatchPredictionJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.BatchPredictionJob|BatchPredictionJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBatchPredictionJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBatchPredictionJobsStream(
-      request?: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listBatchPredictionJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBatchPredictionJobs stream %j', request);
     return this.descriptors.page.listBatchPredictionJobs.createStream(
       this.innerApiCalls.listBatchPredictionJobs as GaxCall,
@@ -4798,76 +7866,77 @@ export class JobServiceClient {
     );
   }
 
-/**
- * Equivalent to `listBatchPredictionJobs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Location to list the BatchPredictionJobs
- *   from. Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `model_display_name` supports `=`, `!=` comparisons.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token|ListBatchPredictionJobsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs|JobService.ListBatchPredictionJobs}
- *   call.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.aiplatform.v1.BatchPredictionJob|BatchPredictionJob}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.list_batch_prediction_jobs.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_ListBatchPredictionJobs_async
- */
+  /**
+   * Equivalent to `listBatchPredictionJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the BatchPredictionJobs
+   *   from. Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `model_display_name` supports `=`, `!=` comparisons.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token|ListBatchPredictionJobsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs|JobService.ListBatchPredictionJobs}
+   *   call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1.BatchPredictionJob|BatchPredictionJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.list_batch_prediction_jobs.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_ListBatchPredictionJobs_async
+   */
   listBatchPredictionJobsAsync(
-      request?: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.aiplatform.v1.IBatchPredictionJob>{
+    request?: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IBatchPredictionJob> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listBatchPredictionJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBatchPredictionJobs iterate %j', request);
     return this.descriptors.page.listBatchPredictionJobs.asyncIterate(
       this.innerApiCalls['listBatchPredictionJobs'] as GaxCall,
@@ -4875,362 +7944,443 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IBatchPredictionJob>;
   }
- /**
- * Searches Model Monitoring Statistics generated within a given time window.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.modelDeploymentMonitoringJob
- *   Required. ModelDeploymentMonitoring Job resource name.
- *   Format:
- *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
- * @param {string} request.deployedModelId
- *   Required. The DeployedModel ID of the
- *   [ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
- * @param {string} request.featureDisplayName
- *   The feature display name. If specified, only return the stats belonging to
- *   this feature. Format:
- *   {@link protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name|ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name},
- *   example: "user_destination".
- * @param {number[]} request.objectives
- *   Required. Objectives of the stats to retrieve.
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   A page token received from a previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies|JobService.SearchModelDeploymentMonitoringStatsAnomalies}
- *   call.
- * @param {google.protobuf.Timestamp} request.startTime
- *   The earliest timestamp of stats being generated.
- *   If not set, indicates fetching stats till the earliest possible one.
- * @param {google.protobuf.Timestamp} request.endTime
- *   The latest timestamp of stats being generated.
- *   If not set, indicates feching stats till the latest possible one.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies|ModelMonitoringStatsAnomalies}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `searchModelDeploymentMonitoringStatsAnomaliesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Searches Model Monitoring Statistics generated within a given time window.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.modelDeploymentMonitoringJob
+   *   Required. ModelDeploymentMonitoring Job resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {string} request.deployedModelId
+   *   Required. The DeployedModel ID of the
+   *   [ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
+   * @param {string} request.featureDisplayName
+   *   The feature display name. If specified, only return the stats belonging to
+   *   this feature. Format:
+   *   {@link protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name|ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name},
+   *   example: "user_destination".
+   * @param {number[]} request.objectives
+   *   Required. Objectives of the stats to retrieve.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies|JobService.SearchModelDeploymentMonitoringStatsAnomalies}
+   *   call.
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   The earliest timestamp of stats being generated.
+   *   If not set, indicates fetching stats till the earliest possible one.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   The latest timestamp of stats being generated.
+   *   If not set, indicates feching stats till the latest possible one.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies|ModelMonitoringStatsAnomalies}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchModelDeploymentMonitoringStatsAnomaliesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchModelDeploymentMonitoringStatsAnomalies(
-      request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[],
-        protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest|null,
-        protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[],
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest | null,
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse,
+    ]
+  >;
   searchModelDeploymentMonitoringStatsAnomalies(
-      request: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies>): void;
+    request: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+      | protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies
+    >
+  ): void;
   searchModelDeploymentMonitoringStatsAnomalies(
-      request: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies>): void;
+    request: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+      | protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies
+    >
+  ): void;
   searchModelDeploymentMonitoringStatsAnomalies(
-      request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies>,
-      callback?: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[],
-        protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest|null,
-        protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+      | protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[],
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest | null,
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'model_deployment_monitoring_job': request.modelDeploymentMonitoringJob ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        model_deployment_monitoring_job:
+          request.modelDeploymentMonitoringJob ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse|null|undefined,
-      protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+          | protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('searchModelDeploymentMonitoringStatsAnomalies values %j', values);
+          this._log.info(
+            'searchModelDeploymentMonitoringStatsAnomalies values %j',
+            values
+          );
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('searchModelDeploymentMonitoringStatsAnomalies request %j', request);
+    this._log.info(
+      'searchModelDeploymentMonitoringStatsAnomalies request %j',
+      request
+    );
     return this.innerApiCalls
-      .searchModelDeploymentMonitoringStatsAnomalies(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[],
-        protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest|null,
-        protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
-      ]) => {
-        this._log.info('searchModelDeploymentMonitoringStatsAnomalies values %j', response);
-        return [response, input, output];
-      });
+      .searchModelDeploymentMonitoringStatsAnomalies(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[],
+          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest | null,
+          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse,
+        ]) => {
+          this._log.info(
+            'searchModelDeploymentMonitoringStatsAnomalies values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
-/**
- * Equivalent to `searchModelDeploymentMonitoringStatsAnomalies`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.modelDeploymentMonitoringJob
- *   Required. ModelDeploymentMonitoring Job resource name.
- *   Format:
- *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
- * @param {string} request.deployedModelId
- *   Required. The DeployedModel ID of the
- *   [ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
- * @param {string} request.featureDisplayName
- *   The feature display name. If specified, only return the stats belonging to
- *   this feature. Format:
- *   {@link protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name|ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name},
- *   example: "user_destination".
- * @param {number[]} request.objectives
- *   Required. Objectives of the stats to retrieve.
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   A page token received from a previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies|JobService.SearchModelDeploymentMonitoringStatsAnomalies}
- *   call.
- * @param {google.protobuf.Timestamp} request.startTime
- *   The earliest timestamp of stats being generated.
- *   If not set, indicates fetching stats till the earliest possible one.
- * @param {google.protobuf.Timestamp} request.endTime
- *   The latest timestamp of stats being generated.
- *   If not set, indicates feching stats till the latest possible one.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies|ModelMonitoringStatsAnomalies} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `searchModelDeploymentMonitoringStatsAnomaliesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `searchModelDeploymentMonitoringStatsAnomalies`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.modelDeploymentMonitoringJob
+   *   Required. ModelDeploymentMonitoring Job resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {string} request.deployedModelId
+   *   Required. The DeployedModel ID of the
+   *   [ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
+   * @param {string} request.featureDisplayName
+   *   The feature display name. If specified, only return the stats belonging to
+   *   this feature. Format:
+   *   {@link protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name|ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name},
+   *   example: "user_destination".
+   * @param {number[]} request.objectives
+   *   Required. Objectives of the stats to retrieve.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies|JobService.SearchModelDeploymentMonitoringStatsAnomalies}
+   *   call.
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   The earliest timestamp of stats being generated.
+   *   If not set, indicates fetching stats till the earliest possible one.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   The latest timestamp of stats being generated.
+   *   If not set, indicates feching stats till the latest possible one.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies|ModelMonitoringStatsAnomalies} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchModelDeploymentMonitoringStatsAnomaliesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchModelDeploymentMonitoringStatsAnomaliesStream(
-      request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'model_deployment_monitoring_job': request.modelDeploymentMonitoringJob ?? '',
-    });
-    const defaultCallSettings = this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        model_deployment_monitoring_job:
+          request.modelDeploymentMonitoringJob ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('searchModelDeploymentMonitoringStatsAnomalies stream %j', request);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'searchModelDeploymentMonitoringStatsAnomalies stream %j',
+      request
+    );
     return this.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.createStream(
-      this.innerApiCalls.searchModelDeploymentMonitoringStatsAnomalies as GaxCall,
+      this.innerApiCalls
+        .searchModelDeploymentMonitoringStatsAnomalies as GaxCall,
       request,
       callSettings
     );
   }
 
-/**
- * Equivalent to `searchModelDeploymentMonitoringStatsAnomalies`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.modelDeploymentMonitoringJob
- *   Required. ModelDeploymentMonitoring Job resource name.
- *   Format:
- *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
- * @param {string} request.deployedModelId
- *   Required. The DeployedModel ID of the
- *   [ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
- * @param {string} request.featureDisplayName
- *   The feature display name. If specified, only return the stats belonging to
- *   this feature. Format:
- *   {@link protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name|ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name},
- *   example: "user_destination".
- * @param {number[]} request.objectives
- *   Required. Objectives of the stats to retrieve.
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   A page token received from a previous
- *   {@link protos.google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies|JobService.SearchModelDeploymentMonitoringStatsAnomalies}
- *   call.
- * @param {google.protobuf.Timestamp} request.startTime
- *   The earliest timestamp of stats being generated.
- *   If not set, indicates fetching stats till the earliest possible one.
- * @param {google.protobuf.Timestamp} request.endTime
- *   The latest timestamp of stats being generated.
- *   If not set, indicates feching stats till the latest possible one.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies|ModelMonitoringStatsAnomalies}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.search_model_deployment_monitoring_stats_anomalies.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_SearchModelDeploymentMonitoringStatsAnomalies_async
- */
+  /**
+   * Equivalent to `searchModelDeploymentMonitoringStatsAnomalies`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.modelDeploymentMonitoringJob
+   *   Required. ModelDeploymentMonitoring Job resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {string} request.deployedModelId
+   *   Required. The DeployedModel ID of the
+   *   [ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
+   * @param {string} request.featureDisplayName
+   *   The feature display name. If specified, only return the stats belonging to
+   *   this feature. Format:
+   *   {@link protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name|ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name},
+   *   example: "user_destination".
+   * @param {number[]} request.objectives
+   *   Required. Objectives of the stats to retrieve.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link protos.google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies|JobService.SearchModelDeploymentMonitoringStatsAnomalies}
+   *   call.
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   The earliest timestamp of stats being generated.
+   *   If not set, indicates fetching stats till the earliest possible one.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   The latest timestamp of stats being generated.
+   *   If not set, indicates feching stats till the latest possible one.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies|ModelMonitoringStatsAnomalies}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.search_model_deployment_monitoring_stats_anomalies.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_SearchModelDeploymentMonitoringStatsAnomalies_async
+   */
   searchModelDeploymentMonitoringStatsAnomaliesAsync(
-      request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies>{
+    request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'model_deployment_monitoring_job': request.modelDeploymentMonitoringJob ?? '',
-    });
-    const defaultCallSettings = this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        model_deployment_monitoring_job:
+          request.modelDeploymentMonitoringJob ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this._log.info('searchModelDeploymentMonitoringStatsAnomalies iterate %j', request);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info(
+      'searchModelDeploymentMonitoringStatsAnomalies iterate %j',
+      request
+    );
     return this.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.asyncIterate(
-      this.innerApiCalls['searchModelDeploymentMonitoringStatsAnomalies'] as GaxCall,
+      this.innerApiCalls[
+        'searchModelDeploymentMonitoringStatsAnomalies'
+      ] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies>;
   }
- /**
- * Lists ModelDeploymentMonitoringJobs in a Location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the ModelDeploymentMonitoringJob.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob|ModelDeploymentMonitoringJob}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listModelDeploymentMonitoringJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists ModelDeploymentMonitoringJobs in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob|ModelDeploymentMonitoringJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listModelDeploymentMonitoringJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listModelDeploymentMonitoringJobs(
-      request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[],
-        protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
-      ]>;
+    request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[],
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse,
+    ]
+  >;
   listModelDeploymentMonitoringJobs(
-      request: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob>): void;
+    request: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob
+    >
+  ): void;
   listModelDeploymentMonitoringJobs(
-      request: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob>): void;
+    request: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob
+    >
+  ): void;
   listModelDeploymentMonitoringJobs(
-      request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob>,
-      callback?: PaginationCallback<
-          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
-          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse|null|undefined,
-          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[],
-        protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
-      ]>|void {
+          | protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[],
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
-      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse|null|undefined,
-      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listModelDeploymentMonitoringJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5239,77 +8389,84 @@ export class JobServiceClient {
     this._log.info('listModelDeploymentMonitoringJobs request %j', request);
     return this.innerApiCalls
       .listModelDeploymentMonitoringJobs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[],
-        protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest|null,
-        protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
-      ]) => {
-        this._log.info('listModelDeploymentMonitoringJobs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[],
+          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse,
+        ]) => {
+          this._log.info(
+            'listModelDeploymentMonitoringJobs values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
-/**
- * Equivalent to `listModelDeploymentMonitoringJobs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the ModelDeploymentMonitoringJob.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob|ModelDeploymentMonitoringJob} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listModelDeploymentMonitoringJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listModelDeploymentMonitoringJobs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob|ModelDeploymentMonitoringJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listModelDeploymentMonitoringJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listModelDeploymentMonitoringJobsStream(
-      request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listModelDeploymentMonitoringJobs'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listModelDeploymentMonitoringJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelDeploymentMonitoringJobs stream %j', request);
     return this.descriptors.page.listModelDeploymentMonitoringJobs.createStream(
       this.innerApiCalls.listModelDeploymentMonitoringJobs as GaxCall,
@@ -5318,70 +8475,72 @@ export class JobServiceClient {
     );
   }
 
-/**
- * Equivalent to `listModelDeploymentMonitoringJobs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the ModelDeploymentMonitoringJob.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} request.filter
- *   The standard list filter.
- *
- *   Supported fields:
- *
- *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
- *     * `state` supports `=`, `!=` comparisons.
- *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
- *       `create_time` must be in RFC 3339 format.
- *     * `labels` supports general map functions that is:
- *       `labels.key=value` - key:value equality
- *       `labels.key:* - key existence
- *
- *   Some examples of using the filter are:
- *
- *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
- *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
- *     * `NOT display_name="my_job"`
- *     * `create_time>"2021-05-18T00:00:00Z"`
- *     * `labels.keyA=valueA`
- *     * `labels.keyB:*`
- * @param {number} request.pageSize
- *   The standard list page size.
- * @param {string} request.pageToken
- *   The standard list page token.
- * @param {google.protobuf.FieldMask} request.readMask
- *   Mask specifying which fields to read
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob|ModelDeploymentMonitoringJob}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/job_service.list_model_deployment_monitoring_jobs.js</caption>
- * region_tag:aiplatform_v1_generated_JobService_ListModelDeploymentMonitoringJobs_async
- */
+  /**
+   * Equivalent to `listModelDeploymentMonitoringJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob|ModelDeploymentMonitoringJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/job_service.list_model_deployment_monitoring_jobs.js</caption>
+   * region_tag:aiplatform_v1_generated_JobService_ListModelDeploymentMonitoringJobs_async
+   */
   listModelDeploymentMonitoringJobsAsync(
-      request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob>{
+    request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listModelDeploymentMonitoringJobs'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listModelDeploymentMonitoringJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelDeploymentMonitoringJobs iterate %j', request);
     return this.descriptors.page.listModelDeploymentMonitoringJobs.asyncIterate(
       this.innerApiCalls['listModelDeploymentMonitoringJobs'] as GaxCall,
@@ -5389,31 +8548,31 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -5428,39 +8587,39 @@ export class JobServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -5475,40 +8634,40 @@ export class JobServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -5523,11 +8682,11 @@ export class JobServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -5567,7 +8726,7 @@ export class JobServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -5605,7 +8764,7 @@ export class JobServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -5650,20 +8809,20 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5700,13 +8859,13 @@ export class JobServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5740,7 +8899,7 @@ export class JobServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -5755,20 +8914,20 @@ export class JobServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5812,20 +8971,20 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5843,7 +9002,13 @@ export class JobServiceClient {
    * @param {string} annotation
    * @returns {string} Resource name string.
    */
-  annotationPath(project:string,location:string,dataset:string,dataItem:string,annotation:string) {
+  annotationPath(
+    project: string,
+    location: string,
+    dataset: string,
+    dataItem: string,
+    annotation: string
+  ) {
     return this.pathTemplates.annotationPathTemplate.render({
       project: project,
       location: location,
@@ -5861,7 +9026,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).project;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .project;
   }
 
   /**
@@ -5872,7 +9038,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).location;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .location;
   }
 
   /**
@@ -5883,7 +9050,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).dataset;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .dataset;
   }
 
   /**
@@ -5894,7 +9062,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).data_item;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .data_item;
   }
 
   /**
@@ -5905,7 +9074,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the annotation.
    */
   matchAnnotationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).annotation;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .annotation;
   }
 
   /**
@@ -5917,7 +9087,12 @@ export class JobServiceClient {
    * @param {string} annotation_spec
    * @returns {string} Resource name string.
    */
-  annotationSpecPath(project:string,location:string,dataset:string,annotationSpec:string) {
+  annotationSpecPath(
+    project: string,
+    location: string,
+    dataset: string,
+    annotationSpec: string
+  ) {
     return this.pathTemplates.annotationSpecPathTemplate.render({
       project: project,
       location: location,
@@ -5934,7 +9109,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).project;
+    return this.pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).project;
   }
 
   /**
@@ -5945,7 +9122,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).location;
+    return this.pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).location;
   }
 
   /**
@@ -5956,7 +9135,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).dataset;
+    return this.pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).dataset;
   }
 
   /**
@@ -5967,7 +9148,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the annotation_spec.
    */
   matchAnnotationSpecFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).annotation_spec;
+    return this.pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).annotation_spec;
   }
 
   /**
@@ -5979,7 +9162,12 @@ export class JobServiceClient {
    * @param {string} artifact
    * @returns {string} Resource name string.
    */
-  artifactPath(project:string,location:string,metadataStore:string,artifact:string) {
+  artifactPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    artifact: string
+  ) {
     return this.pathTemplates.artifactPathTemplate.render({
       project: project,
       location: location,
@@ -6018,7 +9206,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromArtifactName(artifactName: string) {
-    return this.pathTemplates.artifactPathTemplate.match(artifactName).metadata_store;
+    return this.pathTemplates.artifactPathTemplate.match(artifactName)
+      .metadata_store;
   }
 
   /**
@@ -6040,7 +9229,11 @@ export class JobServiceClient {
    * @param {string} batch_prediction_job
    * @returns {string} Resource name string.
    */
-  batchPredictionJobPath(project:string,location:string,batchPredictionJob:string) {
+  batchPredictionJobPath(
+    project: string,
+    location: string,
+    batchPredictionJob: string
+  ) {
     return this.pathTemplates.batchPredictionJobPathTemplate.render({
       project: project,
       location: location,
@@ -6056,7 +9249,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).project;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(
+      batchPredictionJobName
+    ).project;
   }
 
   /**
@@ -6067,7 +9262,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).location;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(
+      batchPredictionJobName
+    ).location;
   }
 
   /**
@@ -6077,8 +9274,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing BatchPredictionJob resource.
    * @returns {string} A string representing the batch_prediction_job.
    */
-  matchBatchPredictionJobFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).batch_prediction_job;
+  matchBatchPredictionJobFromBatchPredictionJobName(
+    batchPredictionJobName: string
+  ) {
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(
+      batchPredictionJobName
+    ).batch_prediction_job;
   }
 
   /**
@@ -6089,7 +9290,7 @@ export class JobServiceClient {
    * @param {string} cached_content
    * @returns {string} Resource name string.
    */
-  cachedContentPath(project:string,location:string,cachedContent:string) {
+  cachedContentPath(project: string, location: string, cachedContent: string) {
     return this.pathTemplates.cachedContentPathTemplate.render({
       project: project,
       location: location,
@@ -6105,7 +9306,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).project;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .project;
   }
 
   /**
@@ -6116,7 +9318,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).location;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .location;
   }
 
   /**
@@ -6127,7 +9330,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the cached_content.
    */
   matchCachedContentFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).cached_content;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .cached_content;
   }
 
   /**
@@ -6139,7 +9343,12 @@ export class JobServiceClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  contextPath(project:string,location:string,metadataStore:string,context:string) {
+  contextPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    context: string
+  ) {
     return this.pathTemplates.contextPathTemplate.render({
       project: project,
       location: location,
@@ -6178,7 +9387,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromContextName(contextName: string) {
-    return this.pathTemplates.contextPathTemplate.match(contextName).metadata_store;
+    return this.pathTemplates.contextPathTemplate.match(contextName)
+      .metadata_store;
   }
 
   /**
@@ -6200,7 +9410,7 @@ export class JobServiceClient {
    * @param {string} custom_job
    * @returns {string} Resource name string.
    */
-  customJobPath(project:string,location:string,customJob:string) {
+  customJobPath(project: string, location: string, customJob: string) {
     return this.pathTemplates.customJobPathTemplate.render({
       project: project,
       location: location,
@@ -6216,7 +9426,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName).project;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName)
+      .project;
   }
 
   /**
@@ -6227,7 +9438,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName).location;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName)
+      .location;
   }
 
   /**
@@ -6238,7 +9450,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the custom_job.
    */
   matchCustomJobFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName).custom_job;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName)
+      .custom_job;
   }
 
   /**
@@ -6250,7 +9463,12 @@ export class JobServiceClient {
    * @param {string} data_item
    * @returns {string} Resource name string.
    */
-  dataItemPath(project:string,location:string,dataset:string,dataItem:string) {
+  dataItemPath(
+    project: string,
+    location: string,
+    dataset: string,
+    dataItem: string
+  ) {
     return this.pathTemplates.dataItemPathTemplate.render({
       project: project,
       location: location,
@@ -6300,7 +9518,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromDataItemName(dataItemName: string) {
-    return this.pathTemplates.dataItemPathTemplate.match(dataItemName).data_item;
+    return this.pathTemplates.dataItemPathTemplate.match(dataItemName)
+      .data_item;
   }
 
   /**
@@ -6311,7 +9530,11 @@ export class JobServiceClient {
    * @param {string} data_labeling_job
    * @returns {string} Resource name string.
    */
-  dataLabelingJobPath(project:string,location:string,dataLabelingJob:string) {
+  dataLabelingJobPath(
+    project: string,
+    location: string,
+    dataLabelingJob: string
+  ) {
     return this.pathTemplates.dataLabelingJobPathTemplate.render({
       project: project,
       location: location,
@@ -6327,7 +9550,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).project;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(
+      dataLabelingJobName
+    ).project;
   }
 
   /**
@@ -6338,7 +9563,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).location;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(
+      dataLabelingJobName
+    ).location;
   }
 
   /**
@@ -6349,7 +9576,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the data_labeling_job.
    */
   matchDataLabelingJobFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).data_labeling_job;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(
+      dataLabelingJobName
+    ).data_labeling_job;
   }
 
   /**
@@ -6360,7 +9589,7 @@ export class JobServiceClient {
    * @param {string} dataset
    * @returns {string} Resource name string.
    */
-  datasetPath(project:string,location:string,dataset:string) {
+  datasetPath(project: string, location: string, dataset: string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project: project,
       location: location,
@@ -6410,7 +9639,12 @@ export class JobServiceClient {
    * @param {string} dataset_version
    * @returns {string} Resource name string.
    */
-  datasetVersionPath(project:string,location:string,dataset:string,datasetVersion:string) {
+  datasetVersionPath(
+    project: string,
+    location: string,
+    dataset: string,
+    datasetVersion: string
+  ) {
     return this.pathTemplates.datasetVersionPathTemplate.render({
       project: project,
       location: location,
@@ -6427,7 +9661,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).project;
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).project;
   }
 
   /**
@@ -6438,7 +9674,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).location;
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).location;
   }
 
   /**
@@ -6449,7 +9687,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).dataset;
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).dataset;
   }
 
   /**
@@ -6460,7 +9700,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the dataset_version.
    */
   matchDatasetVersionFromDatasetVersionName(datasetVersionName: string) {
-    return this.pathTemplates.datasetVersionPathTemplate.match(datasetVersionName).dataset_version;
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).dataset_version;
   }
 
   /**
@@ -6471,7 +9713,11 @@ export class JobServiceClient {
    * @param {string} deployment_resource_pool
    * @returns {string} Resource name string.
    */
-  deploymentResourcePoolPath(project:string,location:string,deploymentResourcePool:string) {
+  deploymentResourcePoolPath(
+    project: string,
+    location: string,
+    deploymentResourcePool: string
+  ) {
     return this.pathTemplates.deploymentResourcePoolPathTemplate.render({
       project: project,
       location: location,
@@ -6486,8 +9732,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing DeploymentResourcePool resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
-    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).project;
+  matchProjectFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).project;
   }
 
   /**
@@ -6497,8 +9747,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing DeploymentResourcePool resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
-    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).location;
+  matchLocationFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).location;
   }
 
   /**
@@ -6508,8 +9762,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing DeploymentResourcePool resource.
    * @returns {string} A string representing the deployment_resource_pool.
    */
-  matchDeploymentResourcePoolFromDeploymentResourcePoolName(deploymentResourcePoolName: string) {
-    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(deploymentResourcePoolName).deployment_resource_pool;
+  matchDeploymentResourcePoolFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).deployment_resource_pool;
   }
 
   /**
@@ -6521,7 +9779,12 @@ export class JobServiceClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  entityTypePath(project:string,location:string,featurestore:string,entityType:string) {
+  entityTypePath(
+    project: string,
+    location: string,
+    featurestore: string,
+    entityType: string
+  ) {
     return this.pathTemplates.entityTypePathTemplate.render({
       project: project,
       location: location,
@@ -6538,7 +9801,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).project;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .project;
   }
 
   /**
@@ -6549,7 +9813,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).location;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .location;
   }
 
   /**
@@ -6560,7 +9825,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the featurestore.
    */
   matchFeaturestoreFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).featurestore;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .featurestore;
   }
 
   /**
@@ -6571,7 +9837,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the entity_type.
    */
   matchEntityTypeFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).entity_type;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .entity_type;
   }
 
   /**
@@ -6583,7 +9850,12 @@ export class JobServiceClient {
    * @param {string} execution
    * @returns {string} Resource name string.
    */
-  executionPath(project:string,location:string,metadataStore:string,execution:string) {
+  executionPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    execution: string
+  ) {
     return this.pathTemplates.executionPathTemplate.render({
       project: project,
       location: location,
@@ -6600,7 +9872,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName).project;
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .project;
   }
 
   /**
@@ -6611,7 +9884,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName).location;
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .location;
   }
 
   /**
@@ -6622,7 +9896,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName).metadata_store;
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .metadata_store;
   }
 
   /**
@@ -6633,7 +9908,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the execution.
    */
   matchExecutionFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName).execution;
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .execution;
   }
 
   /**
@@ -6644,7 +9920,7 @@ export class JobServiceClient {
    * @param {string} feature_group
    * @returns {string} Resource name string.
    */
-  featureGroupPath(project:string,location:string,featureGroup:string) {
+  featureGroupPath(project: string, location: string, featureGroup: string) {
     return this.pathTemplates.featureGroupPathTemplate.render({
       project: project,
       location: location,
@@ -6660,7 +9936,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureGroupName(featureGroupName: string) {
-    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName).project;
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
+      .project;
   }
 
   /**
@@ -6671,7 +9948,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureGroupName(featureGroupName: string) {
-    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName).location;
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
+      .location;
   }
 
   /**
@@ -6682,7 +9960,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the feature_group.
    */
   matchFeatureGroupFromFeatureGroupName(featureGroupName: string) {
-    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName).feature_group;
+    return this.pathTemplates.featureGroupPathTemplate.match(featureGroupName)
+      .feature_group;
   }
 
   /**
@@ -6693,7 +9972,11 @@ export class JobServiceClient {
    * @param {string} feature_online_store
    * @returns {string} Resource name string.
    */
-  featureOnlineStorePath(project:string,location:string,featureOnlineStore:string) {
+  featureOnlineStorePath(
+    project: string,
+    location: string,
+    featureOnlineStore: string
+  ) {
     return this.pathTemplates.featureOnlineStorePathTemplate.render({
       project: project,
       location: location,
@@ -6709,7 +9992,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
-    return this.pathTemplates.featureOnlineStorePathTemplate.match(featureOnlineStoreName).project;
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(
+      featureOnlineStoreName
+    ).project;
   }
 
   /**
@@ -6720,7 +10005,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
-    return this.pathTemplates.featureOnlineStorePathTemplate.match(featureOnlineStoreName).location;
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(
+      featureOnlineStoreName
+    ).location;
   }
 
   /**
@@ -6730,8 +10017,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing FeatureOnlineStore resource.
    * @returns {string} A string representing the feature_online_store.
    */
-  matchFeatureOnlineStoreFromFeatureOnlineStoreName(featureOnlineStoreName: string) {
-    return this.pathTemplates.featureOnlineStorePathTemplate.match(featureOnlineStoreName).feature_online_store;
+  matchFeatureOnlineStoreFromFeatureOnlineStoreName(
+    featureOnlineStoreName: string
+  ) {
+    return this.pathTemplates.featureOnlineStorePathTemplate.match(
+      featureOnlineStoreName
+    ).feature_online_store;
   }
 
   /**
@@ -6743,7 +10034,12 @@ export class JobServiceClient {
    * @param {string} feature_view
    * @returns {string} Resource name string.
    */
-  featureViewPath(project:string,location:string,featureOnlineStore:string,featureView:string) {
+  featureViewPath(
+    project: string,
+    location: string,
+    featureOnlineStore: string,
+    featureView: string
+  ) {
     return this.pathTemplates.featureViewPathTemplate.render({
       project: project,
       location: location,
@@ -6760,7 +10056,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).project;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
+      .project;
   }
 
   /**
@@ -6771,7 +10068,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).location;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
+      .location;
   }
 
   /**
@@ -6782,7 +10080,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the feature_online_store.
    */
   matchFeatureOnlineStoreFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).feature_online_store;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
+      .feature_online_store;
   }
 
   /**
@@ -6793,7 +10092,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the feature_view.
    */
   matchFeatureViewFromFeatureViewName(featureViewName: string) {
-    return this.pathTemplates.featureViewPathTemplate.match(featureViewName).feature_view;
+    return this.pathTemplates.featureViewPathTemplate.match(featureViewName)
+      .feature_view;
   }
 
   /**
@@ -6805,7 +10105,12 @@ export class JobServiceClient {
    * @param {string} feature_view
    * @returns {string} Resource name string.
    */
-  featureViewSyncPath(project:string,location:string,featureOnlineStore:string,featureView:string) {
+  featureViewSyncPath(
+    project: string,
+    location: string,
+    featureOnlineStore: string,
+    featureView: string
+  ) {
     return this.pathTemplates.featureViewSyncPathTemplate.render({
       project: project,
       location: location,
@@ -6822,7 +10127,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).project;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(
+      featureViewSyncName
+    ).project;
   }
 
   /**
@@ -6833,7 +10140,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).location;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(
+      featureViewSyncName
+    ).location;
   }
 
   /**
@@ -6844,7 +10153,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the feature_online_store.
    */
   matchFeatureOnlineStoreFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).feature_online_store;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(
+      featureViewSyncName
+    ).feature_online_store;
   }
 
   /**
@@ -6855,7 +10166,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the feature_view.
    */
   matchFeatureViewFromFeatureViewSyncName(featureViewSyncName: string) {
-    return this.pathTemplates.featureViewSyncPathTemplate.match(featureViewSyncName).feature_view;
+    return this.pathTemplates.featureViewSyncPathTemplate.match(
+      featureViewSyncName
+    ).feature_view;
   }
 
   /**
@@ -6866,7 +10179,7 @@ export class JobServiceClient {
    * @param {string} featurestore
    * @returns {string} Resource name string.
    */
-  featurestorePath(project:string,location:string,featurestore:string) {
+  featurestorePath(project: string, location: string, featurestore: string) {
     return this.pathTemplates.featurestorePathTemplate.render({
       project: project,
       location: location,
@@ -6882,7 +10195,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName).project;
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .project;
   }
 
   /**
@@ -6893,7 +10207,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName).location;
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .location;
   }
 
   /**
@@ -6904,7 +10219,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the featurestore.
    */
   matchFeaturestoreFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName).featurestore;
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .featurestore;
   }
 
   /**
@@ -6915,7 +10231,11 @@ export class JobServiceClient {
    * @param {string} hyperparameter_tuning_job
    * @returns {string} Resource name string.
    */
-  hyperparameterTuningJobPath(project:string,location:string,hyperparameterTuningJob:string) {
+  hyperparameterTuningJobPath(
+    project: string,
+    location: string,
+    hyperparameterTuningJob: string
+  ) {
     return this.pathTemplates.hyperparameterTuningJobPathTemplate.render({
       project: project,
       location: location,
@@ -6930,8 +10250,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).project;
+  matchProjectFromHyperparameterTuningJobName(
+    hyperparameterTuningJobName: string
+  ) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
+      hyperparameterTuningJobName
+    ).project;
   }
 
   /**
@@ -6941,8 +10265,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).location;
+  matchLocationFromHyperparameterTuningJobName(
+    hyperparameterTuningJobName: string
+  ) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
+      hyperparameterTuningJobName
+    ).location;
   }
 
   /**
@@ -6952,8 +10280,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the hyperparameter_tuning_job.
    */
-  matchHyperparameterTuningJobFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).hyperparameter_tuning_job;
+  matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+    hyperparameterTuningJobName: string
+  ) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
+      hyperparameterTuningJobName
+    ).hyperparameter_tuning_job;
   }
 
   /**
@@ -6964,7 +10296,7 @@ export class JobServiceClient {
    * @param {string} index
    * @returns {string} Resource name string.
    */
-  indexPath(project:string,location:string,index:string) {
+  indexPath(project: string, location: string, index: string) {
     return this.pathTemplates.indexPathTemplate.render({
       project: project,
       location: location,
@@ -7013,7 +10345,7 @@ export class JobServiceClient {
    * @param {string} index_endpoint
    * @returns {string} Resource name string.
    */
-  indexEndpointPath(project:string,location:string,indexEndpoint:string) {
+  indexEndpointPath(project: string, location: string, indexEndpoint: string) {
     return this.pathTemplates.indexEndpointPathTemplate.render({
       project: project,
       location: location,
@@ -7029,7 +10361,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).project;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .project;
   }
 
   /**
@@ -7040,7 +10373,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).location;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .location;
   }
 
   /**
@@ -7051,7 +10385,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the index_endpoint.
    */
   matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).index_endpoint;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .index_endpoint;
   }
 
   /**
@@ -7061,7 +10396,7 @@ export class JobServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -7099,7 +10434,12 @@ export class JobServiceClient {
    * @param {string} metadata_schema
    * @returns {string} Resource name string.
    */
-  metadataSchemaPath(project:string,location:string,metadataStore:string,metadataSchema:string) {
+  metadataSchemaPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    metadataSchema: string
+  ) {
     return this.pathTemplates.metadataSchemaPathTemplate.render({
       project: project,
       location: location,
@@ -7116,7 +10456,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).project;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).project;
   }
 
   /**
@@ -7127,7 +10469,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).location;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).location;
   }
 
   /**
@@ -7138,7 +10482,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).metadata_store;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).metadata_store;
   }
 
   /**
@@ -7149,7 +10495,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the metadata_schema.
    */
   matchMetadataSchemaFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(metadataSchemaName).metadata_schema;
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).metadata_schema;
   }
 
   /**
@@ -7160,7 +10508,7 @@ export class JobServiceClient {
    * @param {string} metadata_store
    * @returns {string} Resource name string.
    */
-  metadataStorePath(project:string,location:string,metadataStore:string) {
+  metadataStorePath(project: string, location: string, metadataStore: string) {
     return this.pathTemplates.metadataStorePathTemplate.render({
       project: project,
       location: location,
@@ -7176,7 +10524,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName).project;
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .project;
   }
 
   /**
@@ -7187,7 +10536,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName).location;
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .location;
   }
 
   /**
@@ -7198,7 +10548,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the metadata_store.
    */
   matchMetadataStoreFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName).metadata_store;
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .metadata_store;
   }
 
   /**
@@ -7209,7 +10560,7 @@ export class JobServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project:string,location:string,model:string) {
+  modelPath(project: string, location: string, model: string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -7258,7 +10609,11 @@ export class JobServiceClient {
    * @param {string} model_deployment_monitoring_job
    * @returns {string} Resource name string.
    */
-  modelDeploymentMonitoringJobPath(project:string,location:string,modelDeploymentMonitoringJob:string) {
+  modelDeploymentMonitoringJobPath(
+    project: string,
+    location: string,
+    modelDeploymentMonitoringJob: string
+  ) {
     return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render({
       project: project,
       location: location,
@@ -7273,8 +10628,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromModelDeploymentMonitoringJobName(modelDeploymentMonitoringJobName: string) {
-    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(modelDeploymentMonitoringJobName).project;
+  matchProjectFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).project;
   }
 
   /**
@@ -7284,8 +10643,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromModelDeploymentMonitoringJobName(modelDeploymentMonitoringJobName: string) {
-    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(modelDeploymentMonitoringJobName).location;
+  matchLocationFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).location;
   }
 
   /**
@@ -7295,8 +10658,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
    * @returns {string} A string representing the model_deployment_monitoring_job.
    */
-  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(modelDeploymentMonitoringJobName: string) {
-    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(modelDeploymentMonitoringJobName).model_deployment_monitoring_job;
+  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).model_deployment_monitoring_job;
   }
 
   /**
@@ -7308,7 +10675,12 @@ export class JobServiceClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  modelEvaluationPath(project:string,location:string,model:string,evaluation:string) {
+  modelEvaluationPath(
+    project: string,
+    location: string,
+    model: string,
+    evaluation: string
+  ) {
     return this.pathTemplates.modelEvaluationPathTemplate.render({
       project: project,
       location: location,
@@ -7325,7 +10697,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).project;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
+      modelEvaluationName
+    ).project;
   }
 
   /**
@@ -7336,7 +10710,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).location;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
+      modelEvaluationName
+    ).location;
   }
 
   /**
@@ -7347,7 +10723,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).model;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
+      modelEvaluationName
+    ).model;
   }
 
   /**
@@ -7358,7 +10736,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).evaluation;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
+      modelEvaluationName
+    ).evaluation;
   }
 
   /**
@@ -7371,7 +10751,13 @@ export class JobServiceClient {
    * @param {string} slice
    * @returns {string} Resource name string.
    */
-  modelEvaluationSlicePath(project:string,location:string,model:string,evaluation:string,slice:string) {
+  modelEvaluationSlicePath(
+    project: string,
+    location: string,
+    model: string,
+    evaluation: string,
+    slice: string
+  ) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.render({
       project: project,
       location: location,
@@ -7389,7 +10775,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).project;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).project;
   }
 
   /**
@@ -7400,7 +10788,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).location;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).location;
   }
 
   /**
@@ -7411,7 +10801,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).model;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).model;
   }
 
   /**
@@ -7421,8 +10813,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing ModelEvaluationSlice resource.
    * @returns {string} A string representing the evaluation.
    */
-  matchEvaluationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).evaluation;
+  matchEvaluationFromModelEvaluationSliceName(
+    modelEvaluationSliceName: string
+  ) {
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).evaluation;
   }
 
   /**
@@ -7433,7 +10829,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the slice.
    */
   matchSliceFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).slice;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).slice;
   }
 
   /**
@@ -7444,7 +10842,7 @@ export class JobServiceClient {
    * @param {string} nas_job
    * @returns {string} Resource name string.
    */
-  nasJobPath(project:string,location:string,nasJob:string) {
+  nasJobPath(project: string, location: string, nasJob: string) {
     return this.pathTemplates.nasJobPathTemplate.render({
       project: project,
       location: location,
@@ -7494,7 +10892,12 @@ export class JobServiceClient {
    * @param {string} nas_trial_detail
    * @returns {string} Resource name string.
    */
-  nasTrialDetailPath(project:string,location:string,nasJob:string,nasTrialDetail:string) {
+  nasTrialDetailPath(
+    project: string,
+    location: string,
+    nasJob: string,
+    nasTrialDetail: string
+  ) {
     return this.pathTemplates.nasTrialDetailPathTemplate.render({
       project: project,
       location: location,
@@ -7511,7 +10914,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).project;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).project;
   }
 
   /**
@@ -7522,7 +10927,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).location;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).location;
   }
 
   /**
@@ -7533,7 +10940,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the nas_job.
    */
   matchNasJobFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).nas_job;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).nas_job;
   }
 
   /**
@@ -7544,7 +10953,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the nas_trial_detail.
    */
   matchNasTrialDetailFromNasTrialDetailName(nasTrialDetailName: string) {
-    return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).nas_trial_detail;
+    return this.pathTemplates.nasTrialDetailPathTemplate.match(
+      nasTrialDetailName
+    ).nas_trial_detail;
   }
 
   /**
@@ -7555,7 +10966,11 @@ export class JobServiceClient {
    * @param {string} notebook_execution_job
    * @returns {string} Resource name string.
    */
-  notebookExecutionJobPath(project:string,location:string,notebookExecutionJob:string) {
+  notebookExecutionJobPath(
+    project: string,
+    location: string,
+    notebookExecutionJob: string
+  ) {
     return this.pathTemplates.notebookExecutionJobPathTemplate.render({
       project: project,
       location: location,
@@ -7571,7 +10986,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNotebookExecutionJobName(notebookExecutionJobName: string) {
-    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).project;
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).project;
   }
 
   /**
@@ -7582,7 +10999,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNotebookExecutionJobName(notebookExecutionJobName: string) {
-    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).location;
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).location;
   }
 
   /**
@@ -7592,8 +11011,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing NotebookExecutionJob resource.
    * @returns {string} A string representing the notebook_execution_job.
    */
-  matchNotebookExecutionJobFromNotebookExecutionJobName(notebookExecutionJobName: string) {
-    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).notebook_execution_job;
+  matchNotebookExecutionJobFromNotebookExecutionJobName(
+    notebookExecutionJobName: string
+  ) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(
+      notebookExecutionJobName
+    ).notebook_execution_job;
   }
 
   /**
@@ -7604,7 +11027,11 @@ export class JobServiceClient {
    * @param {string} notebook_runtime
    * @returns {string} Resource name string.
    */
-  notebookRuntimePath(project:string,location:string,notebookRuntime:string) {
+  notebookRuntimePath(
+    project: string,
+    location: string,
+    notebookRuntime: string
+  ) {
     return this.pathTemplates.notebookRuntimePathTemplate.render({
       project: project,
       location: location,
@@ -7620,7 +11047,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNotebookRuntimeName(notebookRuntimeName: string) {
-    return this.pathTemplates.notebookRuntimePathTemplate.match(notebookRuntimeName).project;
+    return this.pathTemplates.notebookRuntimePathTemplate.match(
+      notebookRuntimeName
+    ).project;
   }
 
   /**
@@ -7631,7 +11060,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNotebookRuntimeName(notebookRuntimeName: string) {
-    return this.pathTemplates.notebookRuntimePathTemplate.match(notebookRuntimeName).location;
+    return this.pathTemplates.notebookRuntimePathTemplate.match(
+      notebookRuntimeName
+    ).location;
   }
 
   /**
@@ -7642,7 +11073,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the notebook_runtime.
    */
   matchNotebookRuntimeFromNotebookRuntimeName(notebookRuntimeName: string) {
-    return this.pathTemplates.notebookRuntimePathTemplate.match(notebookRuntimeName).notebook_runtime;
+    return this.pathTemplates.notebookRuntimePathTemplate.match(
+      notebookRuntimeName
+    ).notebook_runtime;
   }
 
   /**
@@ -7653,7 +11086,11 @@ export class JobServiceClient {
    * @param {string} notebook_runtime_template
    * @returns {string} Resource name string.
    */
-  notebookRuntimeTemplatePath(project:string,location:string,notebookRuntimeTemplate:string) {
+  notebookRuntimeTemplatePath(
+    project: string,
+    location: string,
+    notebookRuntimeTemplate: string
+  ) {
     return this.pathTemplates.notebookRuntimeTemplatePathTemplate.render({
       project: project,
       location: location,
@@ -7668,8 +11105,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).project;
+  matchProjectFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).project;
   }
 
   /**
@@ -7679,8 +11120,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).location;
+  matchLocationFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).location;
   }
 
   /**
@@ -7690,8 +11135,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing NotebookRuntimeTemplate resource.
    * @returns {string} A string representing the notebook_runtime_template.
    */
-  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(notebookRuntimeTemplateName: string) {
-    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(notebookRuntimeTemplateName).notebook_runtime_template;
+  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).notebook_runtime_template;
   }
 
   /**
@@ -7702,7 +11151,11 @@ export class JobServiceClient {
    * @param {string} persistent_resource
    * @returns {string} Resource name string.
    */
-  persistentResourcePath(project:string,location:string,persistentResource:string) {
+  persistentResourcePath(
+    project: string,
+    location: string,
+    persistentResource: string
+  ) {
     return this.pathTemplates.persistentResourcePathTemplate.render({
       project: project,
       location: location,
@@ -7718,7 +11171,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(persistentResourceName).project;
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).project;
   }
 
   /**
@@ -7729,7 +11184,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(persistentResourceName).location;
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).location;
   }
 
   /**
@@ -7739,8 +11196,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing PersistentResource resource.
    * @returns {string} A string representing the persistent_resource.
    */
-  matchPersistentResourceFromPersistentResourceName(persistentResourceName: string) {
-    return this.pathTemplates.persistentResourcePathTemplate.match(persistentResourceName).persistent_resource;
+  matchPersistentResourceFromPersistentResourceName(
+    persistentResourceName: string
+  ) {
+    return this.pathTemplates.persistentResourcePathTemplate.match(
+      persistentResourceName
+    ).persistent_resource;
   }
 
   /**
@@ -7751,7 +11212,7 @@ export class JobServiceClient {
    * @param {string} pipeline_job
    * @returns {string} Resource name string.
    */
-  pipelineJobPath(project:string,location:string,pipelineJob:string) {
+  pipelineJobPath(project: string, location: string, pipelineJob: string) {
     return this.pathTemplates.pipelineJobPathTemplate.render({
       project: project,
       location: location,
@@ -7767,7 +11228,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPipelineJobName(pipelineJobName: string) {
-    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).project;
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .project;
   }
 
   /**
@@ -7778,7 +11240,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPipelineJobName(pipelineJobName: string) {
-    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).location;
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .location;
   }
 
   /**
@@ -7789,7 +11252,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the pipeline_job.
    */
   matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
-    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).pipeline_job;
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .pipeline_job;
   }
 
   /**
@@ -7800,7 +11264,11 @@ export class JobServiceClient {
    * @param {string} endpoint
    * @returns {string} Resource name string.
    */
-  projectLocationEndpointPath(project:string,location:string,endpoint:string) {
+  projectLocationEndpointPath(
+    project: string,
+    location: string,
+    endpoint: string
+  ) {
     return this.pathTemplates.projectLocationEndpointPathTemplate.render({
       project: project,
       location: location,
@@ -7815,8 +11283,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_endpoint resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationEndpointName(projectLocationEndpointName: string) {
-    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).project;
+  matchProjectFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).project;
   }
 
   /**
@@ -7826,8 +11298,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_endpoint resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationEndpointName(projectLocationEndpointName: string) {
-    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).location;
+  matchLocationFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).location;
   }
 
   /**
@@ -7837,8 +11313,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_endpoint resource.
    * @returns {string} A string representing the endpoint.
    */
-  matchEndpointFromProjectLocationEndpointName(projectLocationEndpointName: string) {
-    return this.pathTemplates.projectLocationEndpointPathTemplate.match(projectLocationEndpointName).endpoint;
+  matchEndpointFromProjectLocationEndpointName(
+    projectLocationEndpointName: string
+  ) {
+    return this.pathTemplates.projectLocationEndpointPathTemplate.match(
+      projectLocationEndpointName
+    ).endpoint;
   }
 
   /**
@@ -7850,13 +11330,20 @@ export class JobServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeatureGroupFeaturePath(project:string,location:string,featureGroup:string,feature:string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render({
-      project: project,
-      location: location,
-      feature_group: featureGroup,
-      feature: feature,
-    });
+  projectLocationFeatureGroupFeaturePath(
+    project: string,
+    location: string,
+    featureGroup: string,
+    feature: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        feature_group: featureGroup,
+        feature: feature,
+      }
+    );
   }
 
   /**
@@ -7866,8 +11353,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).project;
+  matchProjectFromProjectLocationFeatureGroupFeatureName(
+    projectLocationFeatureGroupFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
+      projectLocationFeatureGroupFeatureName
+    ).project;
   }
 
   /**
@@ -7877,8 +11368,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).location;
+  matchLocationFromProjectLocationFeatureGroupFeatureName(
+    projectLocationFeatureGroupFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
+      projectLocationFeatureGroupFeatureName
+    ).location;
   }
 
   /**
@@ -7888,8 +11383,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the feature_group.
    */
-  matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature_group;
+  matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(
+    projectLocationFeatureGroupFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
+      projectLocationFeatureGroupFeatureName
+    ).feature_group;
   }
 
   /**
@@ -7899,8 +11398,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_feature_group_feature resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature;
+  matchFeatureFromProjectLocationFeatureGroupFeatureName(
+    projectLocationFeatureGroupFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(
+      projectLocationFeatureGroupFeatureName
+    ).feature;
   }
 
   /**
@@ -7913,14 +11416,22 @@ export class JobServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeaturestoreEntityTypeFeaturePath(project:string,location:string,featurestore:string,entityType:string,feature:string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render({
-      project: project,
-      location: location,
-      featurestore: featurestore,
-      entity_type: entityType,
-      feature: feature,
-    });
+  projectLocationFeaturestoreEntityTypeFeaturePath(
+    project: string,
+    location: string,
+    featurestore: string,
+    entityType: string,
+    feature: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        featurestore: featurestore,
+        entity_type: entityType,
+        feature: feature,
+      }
+    );
   }
 
   /**
@@ -7930,8 +11441,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).project;
+  matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).project;
   }
 
   /**
@@ -7941,8 +11456,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).location;
+  matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).location;
   }
 
   /**
@@ -7952,8 +11471,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the featurestore.
    */
-  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).featurestore;
+  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).featurestore;
   }
 
   /**
@@ -7963,8 +11486,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).entity_type;
+  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).entity_type;
   }
 
   /**
@@ -7974,8 +11501,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).feature;
+  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(
+    projectLocationFeaturestoreEntityTypeFeatureName: string
+  ) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(
+      projectLocationFeaturestoreEntityTypeFeatureName
+    ).feature;
   }
 
   /**
@@ -7987,7 +11518,12 @@ export class JobServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  projectLocationPublisherModelPath(project:string,location:string,publisher:string,model:string) {
+  projectLocationPublisherModelPath(
+    project: string,
+    location: string,
+    publisher: string,
+    model: string
+  ) {
     return this.pathTemplates.projectLocationPublisherModelPathTemplate.render({
       project: project,
       location: location,
@@ -8003,8 +11539,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).project;
+  matchProjectFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).project;
   }
 
   /**
@@ -8014,8 +11554,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).location;
+  matchLocationFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).location;
   }
 
   /**
@@ -8025,8 +11569,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the publisher.
    */
-  matchPublisherFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).publisher;
+  matchPublisherFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).publisher;
   }
 
   /**
@@ -8036,8 +11584,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing project_location_publisher_model resource.
    * @returns {string} A string representing the model.
    */
-  matchModelFromProjectLocationPublisherModelName(projectLocationPublisherModelName: string) {
-    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(projectLocationPublisherModelName).model;
+  matchModelFromProjectLocationPublisherModelName(
+    projectLocationPublisherModelName: string
+  ) {
+    return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
+      projectLocationPublisherModelName
+    ).model;
   }
 
   /**
@@ -8047,7 +11599,7 @@ export class JobServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  publisherModelPath(publisher:string,model:string) {
+  publisherModelPath(publisher: string, model: string) {
     return this.pathTemplates.publisherModelPathTemplate.render({
       publisher: publisher,
       model: model,
@@ -8062,7 +11614,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the publisher.
    */
   matchPublisherFromPublisherModelName(publisherModelName: string) {
-    return this.pathTemplates.publisherModelPathTemplate.match(publisherModelName).publisher;
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).publisher;
   }
 
   /**
@@ -8073,7 +11627,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromPublisherModelName(publisherModelName: string) {
-    return this.pathTemplates.publisherModelPathTemplate.match(publisherModelName).model;
+    return this.pathTemplates.publisherModelPathTemplate.match(
+      publisherModelName
+    ).model;
   }
 
   /**
@@ -8084,7 +11640,7 @@ export class JobServiceClient {
    * @param {string} rag_corpus
    * @returns {string} Resource name string.
    */
-  ragCorpusPath(project:string,location:string,ragCorpus:string) {
+  ragCorpusPath(project: string, location: string, ragCorpus: string) {
     return this.pathTemplates.ragCorpusPathTemplate.render({
       project: project,
       location: location,
@@ -8100,7 +11656,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRagCorpusName(ragCorpusName: string) {
-    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).project;
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .project;
   }
 
   /**
@@ -8111,7 +11668,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRagCorpusName(ragCorpusName: string) {
-    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).location;
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .location;
   }
 
   /**
@@ -8122,7 +11680,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the rag_corpus.
    */
   matchRagCorpusFromRagCorpusName(ragCorpusName: string) {
-    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).rag_corpus;
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .rag_corpus;
   }
 
   /**
@@ -8134,7 +11693,12 @@ export class JobServiceClient {
    * @param {string} rag_file
    * @returns {string} Resource name string.
    */
-  ragFilePath(project:string,location:string,ragCorpus:string,ragFile:string) {
+  ragFilePath(
+    project: string,
+    location: string,
+    ragCorpus: string,
+    ragFile: string
+  ) {
     return this.pathTemplates.ragFilePathTemplate.render({
       project: project,
       location: location,
@@ -8195,7 +11759,11 @@ export class JobServiceClient {
    * @param {string} reasoning_engine
    * @returns {string} Resource name string.
    */
-  reasoningEnginePath(project:string,location:string,reasoningEngine:string) {
+  reasoningEnginePath(
+    project: string,
+    location: string,
+    reasoningEngine: string
+  ) {
     return this.pathTemplates.reasoningEnginePathTemplate.render({
       project: project,
       location: location,
@@ -8211,7 +11779,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).project;
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).project;
   }
 
   /**
@@ -8222,7 +11792,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).location;
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).location;
   }
 
   /**
@@ -8233,7 +11805,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the reasoning_engine.
    */
   matchReasoningEngineFromReasoningEngineName(reasoningEngineName: string) {
-    return this.pathTemplates.reasoningEnginePathTemplate.match(reasoningEngineName).reasoning_engine;
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).reasoning_engine;
   }
 
   /**
@@ -8245,7 +11819,12 @@ export class JobServiceClient {
    * @param {string} saved_query
    * @returns {string} Resource name string.
    */
-  savedQueryPath(project:string,location:string,dataset:string,savedQuery:string) {
+  savedQueryPath(
+    project: string,
+    location: string,
+    dataset: string,
+    savedQuery: string
+  ) {
     return this.pathTemplates.savedQueryPathTemplate.render({
       project: project,
       location: location,
@@ -8262,7 +11841,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).project;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
+      .project;
   }
 
   /**
@@ -8273,7 +11853,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).location;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
+      .location;
   }
 
   /**
@@ -8284,7 +11865,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).dataset;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
+      .dataset;
   }
 
   /**
@@ -8295,7 +11877,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the saved_query.
    */
   matchSavedQueryFromSavedQueryName(savedQueryName: string) {
-    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).saved_query;
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
+      .saved_query;
   }
 
   /**
@@ -8306,7 +11889,7 @@ export class JobServiceClient {
    * @param {string} schedule
    * @returns {string} Resource name string.
    */
-  schedulePath(project:string,location:string,schedule:string) {
+  schedulePath(project: string, location: string, schedule: string) {
     return this.pathTemplates.schedulePathTemplate.render({
       project: project,
       location: location,
@@ -8355,7 +11938,11 @@ export class JobServiceClient {
    * @param {string} specialist_pool
    * @returns {string} Resource name string.
    */
-  specialistPoolPath(project:string,location:string,specialistPool:string) {
+  specialistPoolPath(
+    project: string,
+    location: string,
+    specialistPool: string
+  ) {
     return this.pathTemplates.specialistPoolPathTemplate.render({
       project: project,
       location: location,
@@ -8371,7 +11958,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).project;
+    return this.pathTemplates.specialistPoolPathTemplate.match(
+      specialistPoolName
+    ).project;
   }
 
   /**
@@ -8382,7 +11971,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).location;
+    return this.pathTemplates.specialistPoolPathTemplate.match(
+      specialistPoolName
+    ).location;
   }
 
   /**
@@ -8393,7 +11984,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the specialist_pool.
    */
   matchSpecialistPoolFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).specialist_pool;
+    return this.pathTemplates.specialistPoolPathTemplate.match(
+      specialistPoolName
+    ).specialist_pool;
   }
 
   /**
@@ -8404,7 +11997,7 @@ export class JobServiceClient {
    * @param {string} study
    * @returns {string} Resource name string.
    */
-  studyPath(project:string,location:string,study:string) {
+  studyPath(project: string, location: string, study: string) {
     return this.pathTemplates.studyPathTemplate.render({
       project: project,
       location: location,
@@ -8453,7 +12046,7 @@ export class JobServiceClient {
    * @param {string} tensorboard
    * @returns {string} Resource name string.
    */
-  tensorboardPath(project:string,location:string,tensorboard:string) {
+  tensorboardPath(project: string, location: string, tensorboard: string) {
     return this.pathTemplates.tensorboardPathTemplate.render({
       project: project,
       location: location,
@@ -8469,7 +12062,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName).project;
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .project;
   }
 
   /**
@@ -8480,7 +12074,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName).location;
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .location;
   }
 
   /**
@@ -8491,7 +12086,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the tensorboard.
    */
   matchTensorboardFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName).tensorboard;
+    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
+      .tensorboard;
   }
 
   /**
@@ -8503,7 +12099,12 @@ export class JobServiceClient {
    * @param {string} experiment
    * @returns {string} Resource name string.
    */
-  tensorboardExperimentPath(project:string,location:string,tensorboard:string,experiment:string) {
+  tensorboardExperimentPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string
+  ) {
     return this.pathTemplates.tensorboardExperimentPathTemplate.render({
       project: project,
       location: location,
@@ -8520,7 +12121,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardExperimentName(tensorboardExperimentName: string) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).project;
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).project;
   }
 
   /**
@@ -8530,8 +12133,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing TensorboardExperiment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromTensorboardExperimentName(tensorboardExperimentName: string) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).location;
+  matchLocationFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).location;
   }
 
   /**
@@ -8541,8 +12148,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing TensorboardExperiment resource.
    * @returns {string} A string representing the tensorboard.
    */
-  matchTensorboardFromTensorboardExperimentName(tensorboardExperimentName: string) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).tensorboard;
+  matchTensorboardFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).tensorboard;
   }
 
   /**
@@ -8552,8 +12163,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing TensorboardExperiment resource.
    * @returns {string} A string representing the experiment.
    */
-  matchExperimentFromTensorboardExperimentName(tensorboardExperimentName: string) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(tensorboardExperimentName).experiment;
+  matchExperimentFromTensorboardExperimentName(
+    tensorboardExperimentName: string
+  ) {
+    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
+      tensorboardExperimentName
+    ).experiment;
   }
 
   /**
@@ -8566,7 +12181,13 @@ export class JobServiceClient {
    * @param {string} run
    * @returns {string} Resource name string.
    */
-  tensorboardRunPath(project:string,location:string,tensorboard:string,experiment:string,run:string) {
+  tensorboardRunPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string,
+    run: string
+  ) {
     return this.pathTemplates.tensorboardRunPathTemplate.render({
       project: project,
       location: location,
@@ -8584,7 +12205,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).project;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).project;
   }
 
   /**
@@ -8595,7 +12218,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).location;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).location;
   }
 
   /**
@@ -8606,7 +12231,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the tensorboard.
    */
   matchTensorboardFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).tensorboard;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).tensorboard;
   }
 
   /**
@@ -8617,7 +12244,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the experiment.
    */
   matchExperimentFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).experiment;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).experiment;
   }
 
   /**
@@ -8628,7 +12257,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the run.
    */
   matchRunFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(tensorboardRunName).run;
+    return this.pathTemplates.tensorboardRunPathTemplate.match(
+      tensorboardRunName
+    ).run;
   }
 
   /**
@@ -8642,7 +12273,14 @@ export class JobServiceClient {
    * @param {string} time_series
    * @returns {string} Resource name string.
    */
-  tensorboardTimeSeriesPath(project:string,location:string,tensorboard:string,experiment:string,run:string,timeSeries:string) {
+  tensorboardTimeSeriesPath(
+    project: string,
+    location: string,
+    tensorboard: string,
+    experiment: string,
+    run: string,
+    timeSeries: string
+  ) {
     return this.pathTemplates.tensorboardTimeSeriesPathTemplate.render({
       project: project,
       location: location,
@@ -8661,7 +12299,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).project;
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).project;
   }
 
   /**
@@ -8671,8 +12311,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).location;
+  matchLocationFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).location;
   }
 
   /**
@@ -8682,8 +12326,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the tensorboard.
    */
-  matchTensorboardFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).tensorboard;
+  matchTensorboardFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).tensorboard;
   }
 
   /**
@@ -8693,8 +12341,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the experiment.
    */
-  matchExperimentFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).experiment;
+  matchExperimentFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).experiment;
   }
 
   /**
@@ -8705,7 +12357,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the run.
    */
   matchRunFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).run;
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).run;
   }
 
   /**
@@ -8715,8 +12369,12 @@ export class JobServiceClient {
    *   A fully-qualified path representing TensorboardTimeSeries resource.
    * @returns {string} A string representing the time_series.
    */
-  matchTimeSeriesFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(tensorboardTimeSeriesName).time_series;
+  matchTimeSeriesFromTensorboardTimeSeriesName(
+    tensorboardTimeSeriesName: string
+  ) {
+    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
+      tensorboardTimeSeriesName
+    ).time_series;
   }
 
   /**
@@ -8727,7 +12385,11 @@ export class JobServiceClient {
    * @param {string} training_pipeline
    * @returns {string} Resource name string.
    */
-  trainingPipelinePath(project:string,location:string,trainingPipeline:string) {
+  trainingPipelinePath(
+    project: string,
+    location: string,
+    trainingPipeline: string
+  ) {
     return this.pathTemplates.trainingPipelinePathTemplate.render({
       project: project,
       location: location,
@@ -8743,7 +12405,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).project;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(
+      trainingPipelineName
+    ).project;
   }
 
   /**
@@ -8754,7 +12418,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).location;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(
+      trainingPipelineName
+    ).location;
   }
 
   /**
@@ -8765,7 +12431,9 @@ export class JobServiceClient {
    * @returns {string} A string representing the training_pipeline.
    */
   matchTrainingPipelineFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).training_pipeline;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(
+      trainingPipelineName
+    ).training_pipeline;
   }
 
   /**
@@ -8777,7 +12445,7 @@ export class JobServiceClient {
    * @param {string} trial
    * @returns {string} Resource name string.
    */
-  trialPath(project:string,location:string,study:string,trial:string) {
+  trialPath(project: string, location: string, study: string, trial: string) {
     return this.pathTemplates.trialPathTemplate.render({
       project: project,
       location: location,
@@ -8838,7 +12506,7 @@ export class JobServiceClient {
    * @param {string} tuning_job
    * @returns {string} Resource name string.
    */
-  tuningJobPath(project:string,location:string,tuningJob:string) {
+  tuningJobPath(project: string, location: string, tuningJob: string) {
     return this.pathTemplates.tuningJobPathTemplate.render({
       project: project,
       location: location,
@@ -8854,7 +12522,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTuningJobName(tuningJobName: string) {
-    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName).project;
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
+      .project;
   }
 
   /**
@@ -8865,7 +12534,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTuningJobName(tuningJobName: string) {
-    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName).location;
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
+      .location;
   }
 
   /**
@@ -8876,7 +12546,8 @@ export class JobServiceClient {
    * @returns {string} A string representing the tuning_job.
    */
   matchTuningJobFromTuningJobName(tuningJobName: string) {
-    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName).tuning_job;
+    return this.pathTemplates.tuningJobPathTemplate.match(tuningJobName)
+      .tuning_job;
   }
 
   /**
@@ -8891,8 +12562,12 @@ export class JobServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch(err => {
+          throw err;
+        });
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

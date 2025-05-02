@@ -53,9 +53,14 @@ async function runBatch(batch: string[]) {
 async function main(runV1orV1beta1?: string) {
   const files = await readdirp(testDir);
   const jsV1Files = files.filter(fn => fn.match(/^gapic_.*_v1\.js$/));
-  const jsV1Beta1Files = files.filter(fn => fn.match(/^gapic_.*_v1beta1\.js$/))
+  const jsV1Beta1Files = files.filter(fn => fn.match(/^gapic_.*_v1beta1\.js$/));
 
-  const filesToRun = runV1orV1beta1 === "true" ? jsV1Files : runV1orV1beta1 === "false" ? jsV1Beta1Files : jsV1Files.concat(jsV1Beta1Files);
+  const filesToRun =
+    runV1orV1beta1 === 'true'
+      ? jsV1Files
+      : runV1orV1beta1 === 'false'
+        ? jsV1Beta1Files
+        : jsV1Files.concat(jsV1Beta1Files);
   const batch: string[] = [];
   for (const file of filesToRun) {
     batch.push(join(testDir, file));
