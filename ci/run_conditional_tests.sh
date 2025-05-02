@@ -119,6 +119,8 @@ else
         for d in `ls -d ${subdir}/*/`; do
             should_test=false
             if [ "${d}" == "packages/google-cloud-aiplatform" ]; then
+                echo "${d}"
+                echo "packages/google-cloud-aiplatform"
                 continue
             fi
             if [ -n "${GIT_DIFF_ARG}" ]; then
