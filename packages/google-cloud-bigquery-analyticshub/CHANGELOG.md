@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v2.0.1...bigquery-analyticshub-v2.1.0) (2025-05-02)
+
+
+### Features
+
+* [bigquery-analyticshub] Support new feature Sharing Cloud Pubsub Streams via AH (GA) and Subscriber Email logging feature ([#6219](https://github.com/googleapis/google-cloud-node/issues/6219)) ([a369ea6](https://github.com/googleapis/google-cloud-node/commit/a369ea6db2a60caecd8d5f1e6a652834bacbd708))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v2.0.0...bigquery-analyticshub-v2.0.1) (2025-03-19)
 
 

@@ -1,5 +1,29 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v4.0.1...orchestration-airflow-v5.0.0) (2025-05-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [orchestration] A new method `CheckUpgrade` is added to service `Environments` ([#5673](https://github.com/googleapis/google-cloud-node/issues/5673)) ([6f8373d](https://github.com/googleapis/google-cloud-node/commit/6f8373d0d04cda5593be12b8cc192a4447cdeb08))
+* [orchestration] add `satisfies_pzi` to `Environment` ([#5676](https://github.com/googleapis/google-cloud-node/issues/5676)) ([66ef73a](https://github.com/googleapis/google-cloud-node/commit/66ef73a560ba5566d263c99ce3940f2f7f2f4a82))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6187](https://github.com/googleapis/google-cloud-node/issues/6187)) ([b33692d](https://github.com/googleapis/google-cloud-node/commit/b33692d64bd42b99f37d0f919f2b0c06a673ab7f))
+* [Many APIs] finalize fixing typings for headers in generator ([#6013](https://github.com/googleapis/google-cloud-node/issues/6013)) ([cd3a2d4](https://github.com/googleapis/google-cloud-node/commit/cd3a2d44fc7a9b3798346162ba19df1c748fba58))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v4.0.0...orchestration-airflow-v4.0.1) (2025-03-21)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v4.0.1...datastream-v4.1.0) (2025-05-02)
+
+
+### Features
+
+* [datastream] A new field `secret_manager_stored_password` is added to multiple messages ([#6218](https://github.com/googleapis/google-cloud-node/issues/6218)) ([f530220](https://github.com/googleapis/google-cloud-node/commit/f5302204749b6f3a6c4831f920b1a03386d5531a))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/datastream-v4.0.0...datastream-v4.0.1) (2025-03-21)
 
 

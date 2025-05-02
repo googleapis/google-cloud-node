@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.0.1...discoveryengine-v3.0.0) (2025-05-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [discoveryengine] move serving config update API to GA ([#6211](https://github.com/googleapis/google-cloud-node/issues/6211)) ([2fcdb39](https://github.com/googleapis/google-cloud-node/commit/2fcdb39efdd799850847756f2dcf128d1262e1a0))
+* [Many APIs] add request/response debug logging to gapics ([afcb5c0](https://github.com/googleapis/google-cloud-node/commit/afcb5c07e82bc8349b9677766cd880f69a97f77f))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.0.0...discoveryengine-v2.0.1) (2025-03-21)
 
 

@@ -1,5 +1,28 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/eventarc-v4.0.1...eventarc-v5.0.0) (2025-05-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [eventarc] Publish Eventarc Advanced protos ([#5773](https://github.com/googleapis/google-cloud-node/issues/5773)) ([90e8024](https://github.com/googleapis/google-cloud-node/commit/90e80249da2893b120decca6715659e032e6485e))
+* [Many APIs] add request/response debug logging to gapics ([afcb5c0](https://github.com/googleapis/google-cloud-node/commit/afcb5c07e82bc8349b9677766cd880f69a97f77f))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+* [Many APIs] finalize fixing typings for headers in generator ([#6012](https://github.com/googleapis/google-cloud-node/issues/6012)) ([b2f99bf](https://github.com/googleapis/google-cloud-node/commit/b2f99bf5b7c1f962fe48148363fa1b1a972e1b26))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/eventarc-v4.0.0...eventarc-v4.0.1) (2025-03-21)
 
 

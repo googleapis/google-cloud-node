@@ -5,6 +5,2580 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "c33de56c0c797598a48a8e0ee07b625de1b082b3",
+          "message": "Add initial files for google.cloud.devicestreaming.v1",
+          "issues": [
+            "6309"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/devicestreaming",
+      "id": "6706f05c-274b-46fb-8b2c-d69cd68cb531",
+      "createTime": "2025-05-02T20:39:31.608Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "ca16fbbb6a185fa322b4371c4c54ffdd03c21393",
+          "message": "Add initial files for google.cloud.chronicle.v1",
+          "issues": [
+            "6308"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "0697b6a0-7dcf-45b7-831a-450e8d979b27",
+      "createTime": "2025-05-02T20:39:31.585Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "d448dd0ffe1216d8564c0eba1c19f64049adf17b",
+          "message": "Add initial files for google.cloud.financialservices.v1",
+          "issues": [
+            "6270"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/financialservices",
+      "id": "39c64a02-da35-4f1b-8ea2-3adb497249b4",
+      "createTime": "2025-05-02T20:39:31.564Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/areainsights",
+      "id": "98b27843-f665-4bb3-a6ff-a9c3b4c841f9",
+      "createTime": "2025-05-02T20:39:31.543Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "75e242bb0c613f77f0ef84bcb02784cbf48224d1",
+          "message": "Add initial files for google.shopping.merchant.reviews.v1beta",
+          "issues": [
+            "5958"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "3c6023f5-b607-433a-af71-26342d1a6f3a",
+      "createTime": "2025-05-02T20:39:31.520Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "930bbcf6317c43ac647d1525d926820c31999c84",
+          "message": "[oracledatabase] re-enable gRPC support",
+          "issues": [
+            "6312"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "f830d44de5a6e3f93a54955f01bb8e34934c5e5c",
+          "message": "[oracledatabase] add new AutonomousDatabase RPCs",
+          "issues": [
+            "6252"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "6c3868af-7de7-45bc-8a61-4de2b9af1025",
+      "createTime": "2025-05-02T20:39:31.499Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e4a4e69982e49e751828d7a7f21dad4c335b95ca",
+          "message": "[gdchardwaremanagement] accept status updates in the SignalZoneState method",
+          "issues": [
+            "6284"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b288d9f4448e1305151a8f734afd8f1233d8c5bb",
+          "message": "[gdchardwaremanagement] add DNS address, Kubernetes primary VLAN ID, and provisioning state to the Zone resource",
+          "issues": [
+            "5805"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "55c77b9d386e49a6fd3c6767a771b31b116e945a",
+          "message": "[gdchardwaremanagement] add a DeleteSite method",
+          "issues": [
+            "5767"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ba7cd868aba5d60d8871449302212db526e31dfc",
+          "message": "[gdchardwaremanagement] add an order type field to distinguish a fulfillment request from a sales inquiry",
+          "issues": [
+            "5685"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "0106bca9-806f-472a-b100-e7f7d17189a1",
+      "createTime": "2025-05-02T20:39:31.478Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "11719759a25e96b3c2d424e44789c4872dfbcd44",
+          "message": "[merchantapi] A new field `automated_discounts` is added to message `google.shopping.merchant.products.v1beta.Product`",
+          "issues": [
+            "6248"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/products",
+      "id": "64bbc5d4-44e0-4e21-b025-2736499883d3",
+      "createTime": "2025-05-02T20:39:31.457Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "864ebd10f82a0406a8432fe839b78255fde6d2f9",
+          "message": "[privilegedaccessmanager] republish docs",
+          "issues": [
+            "5810"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/privilegedaccessmanager",
+      "id": "8fe1ce1c-c99d-48ab-b99d-e90352ccaadc",
+      "createTime": "2025-05-02T20:39:31.436Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "4fd55bc4-41c7-4ec2-862a-cf2c3d709607",
+      "createTime": "2025-05-02T20:39:31.413Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a8819af1314602e905ef8e582c20b505c466003b",
+          "message": "[storagetransfer,publish,grafeas] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/streetview-publish",
+      "id": "f659c5a4-aaf6-4a28-b3d9-57f2c625e00b",
+      "createTime": "2025-05-02T20:39:31.393Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "b80a7b7e6f97d9a07110adb27dcad28f0b5de341",
+          "message": "[developerconnect] A new resource_definition `servicedirectory.googleapis.com/Service` is added",
+          "issues": [
+            "5820"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "8bdb6a6e-6d4b-4655-9b42-e445277f4cc9",
+      "createTime": "2025-05-02T20:39:31.372Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "31d264703dc99125aae56551999d86cdedfc1b81",
+          "message": "[merchantapi] Add GetLfpMerchantState method",
+          "issues": [
+            "6259"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "4130036c-1eac-4c56-8a51-8e7d42862076",
+      "createTime": "2025-05-02T20:39:31.349Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "5dcf193f-e3ce-4b33-8cee-45e91add400d",
+      "createTime": "2025-05-02T20:39:31.329Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "501deeb6-7414-44ea-85d6-77acbb50ac64",
+      "createTime": "2025-05-02T20:39:31.309Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5b4b0d3fc31b656fcbbb0661cb810b9278207ba2",
+          "message": "[apphub] add enum `Type.GLOBAL`",
+          "issues": [
+            "6215"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apphub",
+      "id": "b1826d18-89b3-4989-bbab-64403c63bc63",
+      "createTime": "2025-05-02T20:39:31.286Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "4a5ca81d6dd29f60fd26eea10e2039bc8400aa0b",
+          "message": "[parallelstore] deprecating `daos_version` field",
+          "issues": [
+            "6038"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "9f8c0c2d583656d39d6e6ad6a4b206642e647178",
+          "message": "[parallelstore] A new enum `DeploymentType` is added",
+          "issues": [
+            "5863"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "fefacbcf-58a1-4ee7-ac64-19389887f74c",
+      "createTime": "2025-05-02T20:39:31.266Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "c326e40eda7c5cfeca4bab2837d8eb8139903341",
+          "message": "[redis] [Memorystore for Redis Cluster] Added support for maintenance window and rescheduling maintenance",
+          "issues": [
+            "5954"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "e8af970e-1e00-4644-b7f3-667c54c97b88",
+      "createTime": "2025-05-02T20:39:31.246Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5dc634291b5ae5f427479d718bf0b961ca5f0ad8",
+          "message": "[css] Introduce QuotaService for CSS API",
+          "issues": [
+            "6249"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "6e7974ab-3d19-4fd6-95ed-b088a555848c",
+      "createTime": "2025-05-02T20:39:31.222Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "635063a6-061e-4e09-ac4f-157f3cc4f2b0",
+      "createTime": "2025-05-02T20:39:31.202Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "2494ccb7-31a3-4901-aff4-b784a63846ce",
+      "createTime": "2025-05-02T20:39:31.182Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "5cbac96f-e263-4e83-b23c-1096deca7a62",
+      "createTime": "2025-05-02T20:39:31.159Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a8819af1314602e905ef8e582c20b505c466003b",
+          "message": "[storagetransfer,publish,grafeas] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "06c2485c-3a4a-454d-923d-ac1addeb497d",
+      "createTime": "2025-05-02T20:39:31.139Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c9adc6150ad09630854554c2ed7e558fb3e04315",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6191"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a8819af1314602e905ef8e582c20b505c466003b",
+          "message": "[storagetransfer,publish,grafeas] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "050db4d28f9a203ce2d41db21eb74b3ecb6b4a16",
+          "message": "[Many APIs] Reasoning Engine v1 GAPIC release",
+          "issues": [
+            "5965"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ad373612766920e82241e0ef609abc27be4ab9bb",
+          "message": "[storagetransfer] support cross-bucket replication",
+          "issues": [
+            "5891"
+          ]
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "7676aa69-c674-4d9d-8a3e-5992deda1512",
+      "createTime": "2025-05-02T20:39:31.118Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "f695a2e4-33ae-4146-983c-53b1196ab06f",
+      "createTime": "2025-05-02T20:39:31.095Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6c8ef3521ba94048741a9c33c4a66506bd057812",
+          "message": "[containeranalysis] add new location-specific bindings",
+          "issues": [
+            "6222"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "c02b1222a127a8229ae1da81e07fc2ba386dfd11",
+          "message": "[containeranalysis] add ExportSBOM API method for v1",
+          "issues": [
+            "6210"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "fa593026-4961-44cd-9270-fd84d42a4365",
+      "createTime": "2025-05-02T20:39:31.075Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7b8b4529fbdcfd0286c13754df7121a73e5054c8",
+          "message": "[artifactregistry] add the GoModule and KfpArtifact resources",
+          "issues": [
+            "6231"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "34036296-4cd9-4fc6-9a7b-b3a74ca19e13",
+      "createTime": "2025-05-02T20:39:31.055Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "afe59789-e265-49ac-969b-b477f4516caf",
+      "createTime": "2025-05-02T20:39:31.032Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "03dbe6ca245435b0ed60ae33bac202e09706df91",
+          "message": "[webrisk] A new method_signature `parent,submission` is added to method `SubmitUri` in service `WebRiskService`",
+          "issues": [
+            "6236"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "a5f0d0c0-8126-417e-b1a8-febd74d05858",
+      "createTime": "2025-05-02T20:39:31.012Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "75049d694302c6f053f933abc20517beea5b2c1a",
+          "message": "Update dependency @google-cloud/text-to-speech to v6",
+          "issues": [
+            "6194"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "dc9182d598bfd02af63e95c340e6600db4bac240",
+          "message": "Update dependency @google-cloud/vision to v5",
+          "issues": [
+            "6202"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "7c12c9b077e24bc91b8d7e3b4e94d44d92905949",
+          "message": "Update dependency @google-cloud/automl to v5",
+          "issues": [
+            "6206"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "9.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "c001aed2-99fb-42c6-b815-10cf77e73475",
+      "createTime": "2025-05-02T20:39:30.991Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f1f9df81259237c77433621f449c7d4325c658d8",
+          "message": "[texttospeech] Support HD voice custom pronunciations",
+          "issues": [
+            "6229"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "4d90ce61-ea13-4c9f-ba6e-04abc052b9b7",
+      "createTime": "2025-05-02T20:39:30.969Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "c814761923019ce865a67dcc435cb2d470016ec0",
+          "message": "Update dependency express to v5",
+          "issues": [
+            "6230"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "72590a4b4746a787a00566b42c95f87b5023d834",
+          "message": "Update dependency body-parser to v2",
+          "issues": [
+            "6226"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "b427109f-ac7b-4a5f-9202-99858020231b",
+      "createTime": "2025-05-02T20:39:30.948Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "2c5c68c6049fdb8801ee9b1bcd320a4c7e09ba12",
+          "message": "Expand types for streamingRecognize",
+          "issues": [
+            "6254"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "fb100893835275f1cc1374385ff22764f3e622dd",
+          "message": "Expose google.cloud.location.Locations API",
+          "issues": [
+            "6243"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "f4cf19b8-cc9b-4dd5-aa68-eb830fefea75",
+      "createTime": "2025-05-02T20:39:30.929Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "273ff46e1e2ba9a8aec91d1b68d9b6e26875d629",
+          "message": "[security] added protos for publicca v1alpha1",
+          "issues": [
+            "6255"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/publicca",
+      "id": "89818178-9fdc-4739-8ae8-fd06e5fb0003",
+      "createTime": "2025-05-02T20:39:30.907Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "c814761923019ce865a67dcc435cb2d470016ec0",
+          "message": "Update dependency express to v5",
+          "issues": [
+            "6230"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "72590a4b4746a787a00566b42c95f87b5023d834",
+          "message": "Update dependency body-parser to v2",
+          "issues": [
+            "6226"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "0e82b2bc-55a6-490b-b70c-13291e55db28",
+      "createTime": "2025-05-02T20:39:30.886Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "b065f88b-3041-41cf-83b1-3e7a1bebfb0a",
+      "createTime": "2025-05-02T20:39:30.866Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "8.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "a4e34f45-46d5-459a-a965-0959df784f6f",
+      "createTime": "2025-05-02T20:39:30.843Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "9010372cacb146904e56bc919e0c54e6a7b8b678",
+          "message": "[recaptchaenterprise] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "9cfcf1fead76fdaa16f22737f33859c52945481e",
+          "message": "[recaptchaenterprise] A new enum `Challenge` is added",
+          "issues": [
+            "5807"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ae63b6a3f18b20f27b43a9f21f26f69af95b2461",
+          "message": "[recaptchaenterprise] support for ListIpOverrides and RemoveIpOverride",
+          "issues": [
+            "5777"
+          ]
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "6da17cdc-46f6-45c4-b96a-e5cc7fa1c238",
+      "createTime": "2025-05-02T20:39:30.823Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "5093b7f2-80e1-48cc-9e7b-0b45179470fc",
+      "createTime": "2025-05-02T20:39:30.802Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "697c0a13-79bf-4cd9-9525-234f753c20a4",
+      "createTime": "2025-05-02T20:39:30.779Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "77c7fbab-7698-46aa-a4b8-9ebdfe78a93b",
+      "createTime": "2025-05-02T20:39:30.759Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "c23fa51d-b246-42e5-a94d-2907f4b5b072",
+      "createTime": "2025-05-02T20:39:30.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "413565fe-59bb-4d6b-9414-a4b06c58cb57",
+      "createTime": "2025-05-02T20:39:30.716Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "863c1c7f-c393-4bab-9cc9-5777d6cccb52",
+      "createTime": "2025-05-02T20:39:30.696Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "51ddf79e-dbb6-4bed-93ff-adafa8f4322b",
+      "createTime": "2025-05-02T20:39:30.677Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "424082dcf128f8bae4c129f8fbae904f71e60825",
+          "message": "[orgpolicy] Add managed constraints new fields (e.g. parameter)",
+          "issues": [
+            "6277"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "86612677aaaf491b1c55cc850febd693b3ece358",
+          "message": "[orgpolicy] Support adding constraints to new method types REMOVE_GRANTS and GOVERN_TAGS",
+          "issues": [
+            "5687"
+          ]
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "423b80c0-df1e-4ada-9e3f-0015f7478a65",
+      "createTime": "2025-05-02T20:39:30.654Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "66ef73a560ba5566d263c99ce3940f2f7f2f4a82",
+          "message": "[orchestration] add `satisfies_pzi` to `Environment`",
+          "issues": [
+            "5676"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "6f8373d0d04cda5593be12b8cc192a4447cdeb08",
+          "message": "[orchestration] A new method `CheckUpgrade` is added to service `Environments`",
+          "issues": [
+            "5673"
+          ]
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "a3e39091-36bf-41b1-9fd5-5a16493b62f9",
+      "createTime": "2025-05-02T20:39:30.633Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "fa4995f9-e041-466c-9923-247aa1a04163",
+      "createTime": "2025-05-02T20:39:30.612Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b33692d64bd42b99f37d0f919f2b0c06a673ab7f",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6187"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "62b79592-3683-47c3-b4ea-7a7f6359011f",
+      "createTime": "2025-05-02T20:39:30.590Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "[networkmanagement] add messages and fields related to Direct VPC Egress",
+          "issues": [
+            "6245"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "Add messages and fields related to Serverless External",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "Add messages and fields related to Route",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "Add enum types related to Firewall",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "Add enum types related to Google Service",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "Add enum types related to Abort",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "42630e4ccd8cacb016451dfed78060c41ac879a5",
+          "message": "Add enum types related to Drop",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "b9d72f5e-4acc-470d-b9d0-771ff0c89cad",
+      "createTime": "2025-05-02T20:39:30.569Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "34267b59998c2c9138815478d5f09b2fc434cc06",
+          "message": "[networkconnectivity] add Network Connectivity Center APIs for PSC service automation",
+          "issues": [
+            "6207"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "e6d4fc74-5b27-43f0-88d0-aebf6c1bbf2c",
+      "createTime": "2025-05-02T20:39:30.548Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "72e721a6-8cf7-47da-9ef5-be0f2910c17d",
+      "createTime": "2025-05-02T20:39:30.524Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring",
+      "id": "9e45e24b-7e49-42e9-955a-d03794b3a649",
+      "createTime": "2025-05-02T20:39:30.504Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7c12c9b077e24bc91b8d7e3b4e94d44d92905949",
+          "message": "Update dependency @google-cloud/automl to v5",
+          "issues": [
+            "6206"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "7.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "7c03edbe-6b82-495a-bcd1-e62a33a0f518",
+      "createTime": "2025-05-02T20:39:30.484Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "9e3878c2d7343821f441b7954365c90076962aa3",
+          "message": "[iap] Identity-aware Proxy (IAP) released a feature `Use IAP with Workforce Identity Federation`(https://cloud.google.com/iap/docs/use-workforce-identity-federation) at Feb 7, 2025. Two settings field are newly introduced in the feature release: ...",
+          "issues": [
+            "6251"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "ae940ae9-ca82-469c-95fb-ba15c6a29731",
+      "createTime": "2025-05-02T20:39:30.461Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "8f2a38960f4abe81c7ae4d085e3168c4b7ce07b2",
+          "message": "[gkemulticloud] An optional field `security_posture_config` in message `.google.cloud.gkemulticloud.v1.AttachedCluster` is added",
+          "issues": [
+            "5682"
+          ]
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "b11b21eb-3138-47c4-90a8-c0cfdc671f8e",
+      "createTime": "2025-05-02T20:39:30.437Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "95905ab973a7cc74540201eec9a889cb450c3a39",
+          "message": "[gkehub] Update the configmanagement feature",
+          "issues": [
+            "5925"
+          ],
+          "breakingChangeNote": "[gkehub] Update the configmanagement feature ([#5925](https://github.com/googleapis/google-cloud-node/issues/5925))"
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "c0421228-ea2f-4a4a-9ab3-63a6eb20c094",
+      "createTime": "2025-05-02T20:39:30.417Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "chore",
+          "sha": "e069a9dca4c60cc3f17c08f424853ebabe9e221f",
+          "message": "[gkeconnect] update copyright year for auto-generated protos",
+          "issues": [
+            "5798"
+          ],
+          "breakingChangeNote": "gRPC support is being removed in favor of HTTP support, as gRPC is not currently supported by Connect Gateway."
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "0cb3243b-3f49-418c-9088-aea43a95cd7e",
+      "createTime": "2025-05-02T20:39:30.392Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "bb183bcf-1965-42bf-8d7e-b9bef7367588",
+      "createTime": "2025-05-02T20:39:30.371Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "408f1286-3d35-4658-ba8c-16bcd4f616ce",
+      "createTime": "2025-05-02T20:39:30.351Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "9f33d6a030b696d8f42d11054e5896955b3d0720",
+          "message": "[filestore] add PromoteReplica API",
+          "issues": [
+            "6116"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "da16e18e-a93e-42a8-8992-3c6a3d9722d2",
+      "createTime": "2025-05-02T20:39:30.319Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "fc49da87f341638232166e80adce38d8108461a9",
+          "message": "[eventarc-publishing,securitycentermanagement] Add GroundedGenerationService API",
+          "issues": [
+            "5778"
+          ]
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "a97f64e3-1fd7-440e-a38b-097ec89b3a02",
+      "createTime": "2025-05-02T20:39:30.274Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "fix",
+          "sha": "b2f99bf5b7c1f962fe48148363fa1b1a972e1b26",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6012"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "90e80249da2893b120decca6715659e032e6485e",
+          "message": "[eventarc] Publish Eventarc Advanced protos",
+          "issues": [
+            "5773"
+          ]
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "9c43f7cd-47e2-4509-a3aa-c18177426ae0",
+      "createTime": "2025-05-02T20:39:30.253Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "e17d5105-aad3-437d-bdc0-bc4637b769e9",
+      "createTime": "2025-05-02T20:39:30.233Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "5f913f729b267fca3d8fbd562d84bb945c74674f",
+          "message": "[edgecontainer] add storage schema to local control plane config",
+          "issues": [
+            "5775"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "bb97d9db-20a4-4cac-ad14-b67956cbcf64",
+      "createTime": "2025-05-02T20:39:30.210Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "b282c5ca-2826-49bd-b356-5cf3c4692444",
+      "createTime": "2025-05-02T20:39:30.190Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "96aa3d809b7cfff6410ce89b177ba3fbc6a607da",
+          "message": "Update outdated types for DNS",
+          "issues": [
+            "6238"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "7aa1c72d37b636a6fde876758701a9b37c7a609c",
+          "message": "Update Record typings",
+          "issues": []
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dns",
+      "id": "6649181b-794b-4b9d-a012-36383232540c",
+      "createTime": "2025-05-02T20:39:30.169Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2fcdb39efdd799850847756f2dcf128d1262e1a0",
+          "message": "[discoveryengine] move serving config update API to GA",
+          "issues": [
+            "6211"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906",
+          "message": "[Many APIs] await/catch promises, and update listOperationsAsync return type",
+          "issues": [
+            "6185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "5f0499ed-ac5a-4eb7-85d5-6a543db767ac",
+      "createTime": "2025-05-02T20:39:30.146Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "14b458002aab5692c5cdaff37059ed5b657014ab",
+          "message": "[deploy] Add resource definition for Revision",
+          "issues": [
+            "6233"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "c0c1975f-b0c1-44ac-913b-f14d36356f4c",
+      "createTime": "2025-05-02T20:39:30.126Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f5302204749b6f3a6c4831f920b1a03386d5531a",
+          "message": "[datastream] A new field `secret_manager_stored_password` is added to multiple messages",
+          "issues": [
+            "6218"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "a09517ea-1c9c-43df-b363-455481446b6c",
+      "createTime": "2025-05-02T20:39:30.106Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "b883d1dc78d8fb8805952b1b093b89af5c24e05a",
+          "message": "[dataplex] Add Data Discovery result statistics",
+          "issues": [
+            "6257"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "8d5fcafb028a0bbc38af5b3b34de317f9be2a180",
+          "message": "[dataplex] Add Data Discovery result statistics",
+          "issues": [
+            "6235"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "fc00e9ef-0caf-45a1-8b54-a76c51b794da",
+      "createTime": "2025-05-02T20:39:30.082Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b73d5bc584eae4a079241ab7ecbbbd4932c8f89a",
+          "message": "[compute] Update Compute Engine API to revision 20250415",
+          "issues": [
+            "6275"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "130faf558ddb3c17472753a23fdb9a0a0a63053b",
+          "message": "[compute] Update Compute Engine API to revision 20250320",
+          "issues": [
+            "6216"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "917aba3d-b1f4-45c8-a197-095a1c4ce190",
+      "createTime": "2025-05-02T20:39:30.061Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a369ea6db2a60caecd8d5f1e6a652834bacbd708",
+          "message": "[bigquery-analyticshub] Support new feature Sharing Cloud Pubsub Streams via AH (GA) and Subscriber Email logging feature",
+          "issues": [
+            "6219"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "e991c277-429b-423b-a905-dc403f01dcba",
+      "createTime": "2025-05-02T20:39:30.041Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "b39d1320-4cb8-430b-960d-1c4e10e1264a",
+      "createTime": "2025-05-02T20:39:30.015Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "4309d7ee462728f082ae3e6fe6d2a0ceca7e2ebc",
+          "message": "[analytics-admin] add the `CreateReportingDataAnnotation` method",
+          "issues": [
+            "6266"
+          ]
+        }
+      ],
+      "version": "8.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "795eaeeb-4af4-40fa-aa9d-bad373d4722b",
+      "createTime": "2025-05-02T20:39:29.994Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "484c6e0934fa16c4d500fb9d441dbf8c9f441015",
+          "message": "[generativelanguage] add CODE_RETRIEVAL_QUERY embedding task type",
+          "issues": [
+            "6307"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "484c6e0934fa16c4d500fb9d441dbf8c9f441015",
+          "message": "Add support for ModalityTokenCounts in UsageMetadata responses",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "484c6e0934fa16c4d500fb9d441dbf8c9f441015",
+          "message": "Add seed to GenerationConfig",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "484c6e0934fa16c4d500fb9d441dbf8c9f441015",
+          "message": "Add support for Veo: PredictLongRunning and generated/downloadable files",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "484c6e0934fa16c4d500fb9d441dbf8c9f441015",
+          "message": "Add minimum, maximum, any_of, property_ordering, default and null type to Schema",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "484c6e0934fa16c4d500fb9d441dbf8c9f441015",
+          "message": "Add support for ModalityTokenCounts in UsageMetadata responses",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "484c6e0934fa16c4d500fb9d441dbf8c9f441015",
+          "message": "Add CODE_RETRIEVAL_QUERY embedding task type",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "484c6e0934fa16c4d500fb9d441dbf8c9f441015",
+          "message": "Add language_code to speech config",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "484c6e0934fa16c4d500fb9d441dbf8c9f441015",
+          "message": "Add ThinkingConfig, MediaResolution, and seed to GenerationConfig",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "484c6e0934fa16c4d500fb9d441dbf8c9f441015",
+          "message": "[generativelanguage] add support for live API (https://togithub.com/googleapis/go-genai/issues/275)",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "3aa3299e-c150-4ac6-9af4-f0a506ec6aaf",
+      "createTime": "2025-05-02T20:39:29.968Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "83d590ec19b702c63850edccac9bc7a4a51f2c8d",
           "message": "[parametermanager] add CMEK support",
           "issues": [
@@ -49614,5 +52188,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-03-21T02:18:18.697Z"
+  "updateTime": "2025-05-02T20:39:31.608Z"
 }

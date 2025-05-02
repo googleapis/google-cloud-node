@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v4.0.1...dataplex-v4.1.0) (2025-05-02)
+
+
+### Features
+
+* [dataplex] Add Data Discovery result statistics ([#6235](https://github.com/googleapis/google-cloud-node/issues/6235)) ([8d5fcaf](https://github.com/googleapis/google-cloud-node/commit/8d5fcafb028a0bbc38af5b3b34de317f9be2a180))
+* [dataplex] Add Data Discovery result statistics ([#6257](https://github.com/googleapis/google-cloud-node/issues/6257)) ([b883d1d](https://github.com/googleapis/google-cloud-node/commit/b883d1dc78d8fb8805952b1b093b89af5c24e05a))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/dataplex-v4.0.0...dataplex-v4.0.1) (2025-03-19)
 
 
