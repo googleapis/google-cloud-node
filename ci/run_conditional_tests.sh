@@ -118,11 +118,7 @@ else
     for subdir in "${subdirs[@]}"; do
         for d in `ls -d ${subdir}/*/`; do
             should_test=false
-            echo "READ HERE - are we getting here?"
-            echo "${d}"
-            if [ "${d}" == "packages/google-cloud-aiplatform" ]; then
-                echo "${d}"
-                echo "packages/google-cloud-aiplatform"
+            if [ "${d}" == "packages/google-cloud-aiplatform/" ]; then
                 continue
             fi
             if [ -n "${GIT_DIFF_ARG}" ]; then
