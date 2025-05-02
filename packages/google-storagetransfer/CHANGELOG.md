@@ -1,5 +1,29 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v4.0.1...storage-transfer-v5.0.0) (2025-05-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] Reasoning Engine v1 GAPIC release ([#5965](https://github.com/googleapis/google-cloud-node/issues/5965)) ([050db4d](https://github.com/googleapis/google-cloud-node/commit/050db4d28f9a203ce2d41db21eb74b3ecb6b4a16))
+* [storagetransfer,publish,grafeas] add request/response debug logging to gapics ([a8819af](https://github.com/googleapis/google-cloud-node/commit/a8819af1314602e905ef8e582c20b505c466003b))
+* [storagetransfer] support cross-bucket replication ([#5891](https://github.com/googleapis/google-cloud-node/issues/5891)) ([ad37361](https://github.com/googleapis/google-cloud-node/commit/ad373612766920e82241e0ef609abc27be4ab9bb))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6191](https://github.com/googleapis/google-cloud-node/issues/6191)) ([c9adc61](https://github.com/googleapis/google-cloud-node/commit/c9adc6150ad09630854554c2ed7e558fb3e04315))
+* [Many APIs] finalize fixing typings for headers in generator ([#6019](https://github.com/googleapis/google-cloud-node/issues/6019)) ([734397c](https://github.com/googleapis/google-cloud-node/commit/734397c6b98d0aafe8832544da3f483b1eade1b2))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v4.0.0...storage-transfer-v4.0.1) (2025-03-21)
 
 

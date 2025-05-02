@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/web-risk-v5.0.1...web-risk-v5.1.0) (2025-05-02)
+
+
+### Features
+
+* [webrisk] A new method_signature `parent,submission` is added to method `SubmitUri` in service `WebRiskService` ([#6236](https://github.com/googleapis/google-cloud-node/issues/6236)) ([03dbe6c](https://github.com/googleapis/google-cloud-node/commit/03dbe6ca245435b0ed60ae33bac202e09706df91))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/web-risk-v5.0.0...web-risk-v5.0.1) (2025-03-19)
 
 
