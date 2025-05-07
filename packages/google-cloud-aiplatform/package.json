@@ -53,7 +53,9 @@
     "test": "c8 node build/test/run.js"
   },
   "dependencies": {
-    "google-gax": "^5.0.1-rc.0",
+    "google-gax": "^5.0.1-rc.0"
+  },
+  "overrides": {
     "protobufjs": "7.4.0"
   },
   "devDependencies": {
