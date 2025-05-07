@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "google-gax": "^5.0.1-rc.0",
-    "protobufjs": "^7.4.0"
+    "protobufjs": "7.4.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
