@@ -76,7 +76,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Cloud_deploy.abandon_release
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.abandon_release.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.abandon_release.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.abandon_release.js,samples/README.md)
 
@@ -93,7 +93,7 @@ __Usage:__
 
 ### Cloud_deploy.advance_rollout
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.advance_rollout.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.advance_rollout.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.advance_rollout.js,samples/README.md)
 
@@ -110,7 +110,7 @@ __Usage:__
 
 ### Cloud_deploy.approve_rollout
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.approve_rollout.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.approve_rollout.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.approve_rollout.js,samples/README.md)
 
@@ -127,7 +127,7 @@ __Usage:__
 
 ### Cloud_deploy.cancel_automation_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.cancel_automation_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.cancel_automation_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.cancel_automation_run.js,samples/README.md)
 
@@ -144,7 +144,7 @@ __Usage:__
 
 ### Cloud_deploy.cancel_rollout
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.cancel_rollout.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.cancel_rollout.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.cancel_rollout.js,samples/README.md)
 
@@ -161,7 +161,7 @@ __Usage:__
 
 ### Cloud_deploy.create_automation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_automation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_automation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_automation.js,samples/README.md)
 
@@ -178,7 +178,7 @@ __Usage:__
 
 ### Cloud_deploy.create_custom_target_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_custom_target_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_custom_target_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_custom_target_type.js,samples/README.md)
 
@@ -195,7 +195,7 @@ __Usage:__
 
 ### Cloud_deploy.create_delivery_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_delivery_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_delivery_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_delivery_pipeline.js,samples/README.md)
 
@@ -212,7 +212,7 @@ __Usage:__
 
 ### Cloud_deploy.create_deploy_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_deploy_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_deploy_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_deploy_policy.js,samples/README.md)
 
@@ -229,7 +229,7 @@ __Usage:__
 
 ### Cloud_deploy.create_release
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_release.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_release.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_release.js,samples/README.md)
 
@@ -246,7 +246,7 @@ __Usage:__
 
 ### Cloud_deploy.create_rollout
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_rollout.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_rollout.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_rollout.js,samples/README.md)
 
@@ -263,7 +263,7 @@ __Usage:__
 
 ### Cloud_deploy.create_target
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_target.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_target.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.create_target.js,samples/README.md)
 
@@ -280,7 +280,7 @@ __Usage:__
 
 ### Cloud_deploy.delete_automation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_automation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_automation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_automation.js,samples/README.md)
 
@@ -297,7 +297,7 @@ __Usage:__
 
 ### Cloud_deploy.delete_custom_target_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_custom_target_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_custom_target_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_custom_target_type.js,samples/README.md)
 
@@ -314,7 +314,7 @@ __Usage:__
 
 ### Cloud_deploy.delete_delivery_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_delivery_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_delivery_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_delivery_pipeline.js,samples/README.md)
 
@@ -331,7 +331,7 @@ __Usage:__
 
 ### Cloud_deploy.delete_deploy_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_deploy_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_deploy_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_deploy_policy.js,samples/README.md)
 
@@ -348,7 +348,7 @@ __Usage:__
 
 ### Cloud_deploy.delete_target
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_target.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_target.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.delete_target.js,samples/README.md)
 
@@ -365,7 +365,7 @@ __Usage:__
 
 ### Cloud_deploy.get_automation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_automation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_automation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_automation.js,samples/README.md)
 
@@ -382,7 +382,7 @@ __Usage:__
 
 ### Cloud_deploy.get_automation_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_automation_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_automation_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_automation_run.js,samples/README.md)
 
@@ -399,7 +399,7 @@ __Usage:__
 
 ### Cloud_deploy.get_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_config.js,samples/README.md)
 
@@ -416,7 +416,7 @@ __Usage:__
 
 ### Cloud_deploy.get_custom_target_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_custom_target_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_custom_target_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_custom_target_type.js,samples/README.md)
 
@@ -433,7 +433,7 @@ __Usage:__
 
 ### Cloud_deploy.get_delivery_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_delivery_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_delivery_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_delivery_pipeline.js,samples/README.md)
 
@@ -450,7 +450,7 @@ __Usage:__
 
 ### Cloud_deploy.get_deploy_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_deploy_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_deploy_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_deploy_policy.js,samples/README.md)
 
@@ -467,7 +467,7 @@ __Usage:__
 
 ### Cloud_deploy.get_job_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_job_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_job_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_job_run.js,samples/README.md)
 
@@ -484,7 +484,7 @@ __Usage:__
 
 ### Cloud_deploy.get_release
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_release.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_release.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_release.js,samples/README.md)
 
@@ -501,7 +501,7 @@ __Usage:__
 
 ### Cloud_deploy.get_rollout
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_rollout.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_rollout.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_rollout.js,samples/README.md)
 
@@ -518,7 +518,7 @@ __Usage:__
 
 ### Cloud_deploy.get_target
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_target.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_target.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.get_target.js,samples/README.md)
 
@@ -535,7 +535,7 @@ __Usage:__
 
 ### Cloud_deploy.ignore_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.ignore_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.ignore_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.ignore_job.js,samples/README.md)
 
@@ -552,7 +552,7 @@ __Usage:__
 
 ### Cloud_deploy.list_automation_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_automation_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_automation_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_automation_runs.js,samples/README.md)
 
@@ -569,7 +569,7 @@ __Usage:__
 
 ### Cloud_deploy.list_automations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_automations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_automations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_automations.js,samples/README.md)
 
@@ -586,7 +586,7 @@ __Usage:__
 
 ### Cloud_deploy.list_custom_target_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_custom_target_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_custom_target_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_custom_target_types.js,samples/README.md)
 
@@ -603,7 +603,7 @@ __Usage:__
 
 ### Cloud_deploy.list_delivery_pipelines
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_delivery_pipelines.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_delivery_pipelines.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_delivery_pipelines.js,samples/README.md)
 
@@ -620,7 +620,7 @@ __Usage:__
 
 ### Cloud_deploy.list_deploy_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_deploy_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_deploy_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_deploy_policies.js,samples/README.md)
 
@@ -637,7 +637,7 @@ __Usage:__
 
 ### Cloud_deploy.list_job_runs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_job_runs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_job_runs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_job_runs.js,samples/README.md)
 
@@ -654,7 +654,7 @@ __Usage:__
 
 ### Cloud_deploy.list_releases
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_releases.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_releases.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_releases.js,samples/README.md)
 
@@ -671,7 +671,7 @@ __Usage:__
 
 ### Cloud_deploy.list_rollouts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_rollouts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_rollouts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_rollouts.js,samples/README.md)
 
@@ -688,7 +688,7 @@ __Usage:__
 
 ### Cloud_deploy.list_targets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_targets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_targets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.list_targets.js,samples/README.md)
 
@@ -705,7 +705,7 @@ __Usage:__
 
 ### Cloud_deploy.retry_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.retry_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.retry_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.retry_job.js,samples/README.md)
 
@@ -722,7 +722,7 @@ __Usage:__
 
 ### Cloud_deploy.rollback_target
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.rollback_target.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.rollback_target.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.rollback_target.js,samples/README.md)
 
@@ -739,7 +739,7 @@ __Usage:__
 
 ### Cloud_deploy.terminate_job_run
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.terminate_job_run.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.terminate_job_run.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.terminate_job_run.js,samples/README.md)
 
@@ -756,7 +756,7 @@ __Usage:__
 
 ### Cloud_deploy.update_automation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_automation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_automation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_automation.js,samples/README.md)
 
@@ -773,7 +773,7 @@ __Usage:__
 
 ### Cloud_deploy.update_custom_target_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_custom_target_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_custom_target_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_custom_target_type.js,samples/README.md)
 
@@ -790,7 +790,7 @@ __Usage:__
 
 ### Cloud_deploy.update_delivery_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_delivery_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_delivery_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_delivery_pipeline.js,samples/README.md)
 
@@ -807,7 +807,7 @@ __Usage:__
 
 ### Cloud_deploy.update_deploy_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_deploy_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_deploy_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_deploy_policy.js,samples/README.md)
 
@@ -824,7 +824,7 @@ __Usage:__
 
 ### Cloud_deploy.update_target
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_target.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_target.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/generated/v1/cloud_deploy.update_target.js,samples/README.md)
 
@@ -841,7 +841,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-deploy/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-deploy/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-deploy/samples/quickstart.js,samples/README.md)
 

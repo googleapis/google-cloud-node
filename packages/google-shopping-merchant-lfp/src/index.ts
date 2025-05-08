@@ -27,19 +27,7 @@ type LfpSaleServiceClient = v1beta.LfpSaleServiceClient;
 const LfpStoreServiceClient = v1beta.LfpStoreServiceClient;
 type LfpStoreServiceClient = v1beta.LfpStoreServiceClient;
 
-export {
-  v1beta,
-  LfpInventoryServiceClient,
-  LfpMerchantStateServiceClient,
-  LfpSaleServiceClient,
-  LfpStoreServiceClient,
-};
-export default {
-  v1beta,
-  LfpInventoryServiceClient,
-  LfpMerchantStateServiceClient,
-  LfpSaleServiceClient,
-  LfpStoreServiceClient,
-};
+export {v1beta, LfpInventoryServiceClient, LfpMerchantStateServiceClient, LfpSaleServiceClient, LfpStoreServiceClient};
+export default {v1beta, LfpInventoryServiceClient, LfpMerchantStateServiceClient, LfpSaleServiceClient, LfpStoreServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

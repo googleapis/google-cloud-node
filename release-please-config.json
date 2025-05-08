@@ -199,6 +199,9 @@
     "packages/google-cloud-modelarmor": {},
     "packages/google-maps-areainsights": {},
     "packages/google-cloud-financialservices": {},
+    "packages/google-cloud-chronicle": {},
+    "packages/google-cloud-devicestreaming": {}
+    "packages/google-cloud-financialservices": {},
     "packages/google-cloud-lustre": {}
   },
   "plugins": [
