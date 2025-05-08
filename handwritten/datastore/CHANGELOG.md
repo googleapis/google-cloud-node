@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [10.0.1](https://github.com/googleapis/nodejs-datastore/compare/v10.0.0...v10.0.1) (2025-05-08)
+
+
+### Bug Fixes
+
+* Fix the compiler error blocking the release ([#1391](https://github.com/googleapis/nodejs-datastore/issues/1391)) ([ec91e14](https://github.com/googleapis/nodejs-datastore/commit/ec91e143254dbd8edaa262a5537199ecae4fd1f2))
+
 ## [10.0.0](https://github.com/googleapis/nodejs-datastore/compare/v9.2.1...v10.0.0) (2025-05-02)
 
 
