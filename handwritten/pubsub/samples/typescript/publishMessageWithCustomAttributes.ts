@@ -58,7 +58,7 @@ async function publishMessageWithCustomAttributes(
   // Cache topic objects (publishers) and reuse them.
   const topic = pubSubClient.topic(topicNameOrId);
 
-  const messageId = topic.publishMessage({
+  const messageId = await topic.publishMessage({
     data: dataBuffer,
     attributes: customAttributes,
   });

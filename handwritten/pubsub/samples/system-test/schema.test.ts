@@ -383,7 +383,7 @@ describe('schema', () => {
     const topic = await createTopicWithSchema(id, schema.id, Encodings.Json);
     const sub = await createSub(id, topic.name);
 
-    topic.publishMessage({
+    await topic.publishMessage({
       data: Buffer.from(
         JSON.stringify({
           name: 'Alberta',
@@ -419,7 +419,7 @@ describe('schema', () => {
     );
     const sub = await createSub(id, topic.name);
 
-    topic.publishMessage({
+    await topic.publishMessage({
       data: Buffer.from(
         JSON.stringify({
           name: 'Alberta',
@@ -443,7 +443,7 @@ describe('schema', () => {
     const topic = await createTopicWithSchema(id, schema.id, Encodings.Json);
     const sub = await createSub(id, topic.name);
 
-    topic.publishMessage({
+    await topic.publishMessage({
       data: Buffer.from(
         JSON.stringify({
           name: 'Quebec',

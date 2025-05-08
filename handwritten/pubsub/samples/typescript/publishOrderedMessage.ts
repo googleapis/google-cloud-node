@@ -72,7 +72,7 @@ async function publishOrderedMessage(
   const topic = pubSubClient.topic(topicNameOrId, publishOptions);
 
   // Publishes the message
-  const messageId = topic.publishMessage(message);
+  const messageId = await topic.publishMessage(message);
 
   console.log(`Message ${messageId} published.`);
 
