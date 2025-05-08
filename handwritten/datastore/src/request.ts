@@ -69,6 +69,7 @@ import * as protos from '../protos/protos';
 import {serializer} from 'google-gax';
 import * as gax from 'google-gax';
 import {SaveDataValue} from './interfaces/save';
+
 type JSONValue =
   | string
   | number
@@ -84,7 +85,7 @@ const Struct = root.lookupType('Struct');
 
 // This function decodes Struct proto values
 function decodeStruct(structValue: google.protobuf.IStruct): JSONValue {
-  return serializer.toProto3JSON(Struct.fromObject(structValue));
+  return serializer.toProto3JSON(Struct.fromObject(structValue) as any);
 }
 
 // This function gets a RunQueryInfo object that contains explain metrics that
