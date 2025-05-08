@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [10.0.0](https://github.com/googleapis/nodejs-datastore/compare/v9.2.1...v10.0.0) (2025-05-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 18 ([#1384](https://github.com/googleapis/nodejs-datastore/issues/1384))
+
+### Bug Fixes
+
+* **doc:** Fix param descriptions for filters ([#1346](https://github.com/googleapis/nodejs-datastore/issues/1346)) ([a18c169](https://github.com/googleapis/nodejs-datastore/commit/a18c169e3b67e4e46f8b6bb9eb7cb250a88e40b7))
+* More error visibility in nodejs-datastore ([#1389](https://github.com/googleapis/nodejs-datastore/issues/1389)) ([55934da](https://github.com/googleapis/nodejs-datastore/commit/55934da4c3b9436e8ccf6a0935d416f00a8e1e17))
+* Not check sub-property existence for `null` values ([#1330](https://github.com/googleapis/nodejs-datastore/issues/1330)) ([5c0ddbc](https://github.com/googleapis/nodejs-datastore/commit/5c0ddbca91c41e056443eb0b60449f3cdddd6e69))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 18 ([#1384](https://github.com/googleapis/nodejs-datastore/issues/1384)) ([43c3472](https://github.com/googleapis/nodejs-datastore/commit/43c34720095bf03c13394bab7cd3facdb2ffc985))
+
 ## [9.2.1](https://github.com/googleapis/nodejs-datastore/compare/v9.2.0...v9.2.1) (2024-11-06)
 
 
