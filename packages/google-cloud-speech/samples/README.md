@@ -80,7 +80,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Adaptation.create_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/adaptation.create_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.create_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/adaptation.create_custom_class.js,samples/README.md)
 
@@ -97,7 +97,7 @@ __Usage:__
 
 ### Adaptation.create_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/adaptation.create_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.create_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/adaptation.create_phrase_set.js,samples/README.md)
 
@@ -114,7 +114,7 @@ __Usage:__
 
 ### Adaptation.delete_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/adaptation.delete_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.delete_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/adaptation.delete_custom_class.js,samples/README.md)
 
@@ -131,7 +131,7 @@ __Usage:__
 
 ### Adaptation.delete_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/adaptation.delete_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.delete_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/adaptation.delete_phrase_set.js,samples/README.md)
 
@@ -148,7 +148,7 @@ __Usage:__
 
 ### Adaptation.get_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/adaptation.get_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.get_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/adaptation.get_custom_class.js,samples/README.md)
 
@@ -165,7 +165,7 @@ __Usage:__
 
 ### Adaptation.get_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/adaptation.get_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.get_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/adaptation.get_phrase_set.js,samples/README.md)
 
@@ -182,7 +182,7 @@ __Usage:__
 
 ### Adaptation.list_custom_classes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/adaptation.list_custom_classes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.list_custom_classes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/adaptation.list_custom_classes.js,samples/README.md)
 
@@ -199,7 +199,7 @@ __Usage:__
 
 ### Adaptation.list_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/adaptation.list_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.list_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/adaptation.list_phrase_set.js,samples/README.md)
 
@@ -216,7 +216,7 @@ __Usage:__
 
 ### Adaptation.update_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/adaptation.update_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.update_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/adaptation.update_custom_class.js,samples/README.md)
 
@@ -233,7 +233,7 @@ __Usage:__
 
 ### Adaptation.update_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/adaptation.update_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.update_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/adaptation.update_phrase_set.js,samples/README.md)
 
@@ -250,7 +250,7 @@ __Usage:__
 
 ### Speech.long_running_recognize
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/speech.long_running_recognize.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/speech.long_running_recognize.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/speech.long_running_recognize.js,samples/README.md)
 
@@ -267,7 +267,7 @@ __Usage:__
 
 ### Speech.recognize
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/speech.recognize.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/speech.recognize.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/speech.recognize.js,samples/README.md)
 
@@ -284,7 +284,7 @@ __Usage:__
 
 ### Speech.streaming_recognize
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1/speech.streaming_recognize.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/speech.streaming_recognize.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1/speech.streaming_recognize.js,samples/README.md)
 
@@ -301,7 +301,7 @@ __Usage:__
 
 ### Adaptation.create_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.create_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.create_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.create_custom_class.js,samples/README.md)
 
@@ -318,7 +318,7 @@ __Usage:__
 
 ### Adaptation.create_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.create_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.create_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.create_phrase_set.js,samples/README.md)
 
@@ -335,7 +335,7 @@ __Usage:__
 
 ### Adaptation.delete_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.delete_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.delete_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.delete_custom_class.js,samples/README.md)
 
@@ -352,7 +352,7 @@ __Usage:__
 
 ### Adaptation.delete_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.delete_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.delete_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.delete_phrase_set.js,samples/README.md)
 
@@ -369,7 +369,7 @@ __Usage:__
 
 ### Adaptation.get_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.get_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.get_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.get_custom_class.js,samples/README.md)
 
@@ -386,7 +386,7 @@ __Usage:__
 
 ### Adaptation.get_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.get_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.get_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.get_phrase_set.js,samples/README.md)
 
@@ -403,7 +403,7 @@ __Usage:__
 
 ### Adaptation.list_custom_classes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.list_custom_classes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.list_custom_classes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.list_custom_classes.js,samples/README.md)
 
@@ -420,7 +420,7 @@ __Usage:__
 
 ### Adaptation.list_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.list_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.list_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.list_phrase_set.js,samples/README.md)
 
@@ -437,7 +437,7 @@ __Usage:__
 
 ### Adaptation.update_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.update_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.update_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.update_custom_class.js,samples/README.md)
 
@@ -454,7 +454,7 @@ __Usage:__
 
 ### Adaptation.update_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.update_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.update_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.update_phrase_set.js,samples/README.md)
 
@@ -471,7 +471,7 @@ __Usage:__
 
 ### Speech.long_running_recognize
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/speech.long_running_recognize.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/speech.long_running_recognize.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/speech.long_running_recognize.js,samples/README.md)
 
@@ -488,7 +488,7 @@ __Usage:__
 
 ### Speech.recognize
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/speech.recognize.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/speech.recognize.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/speech.recognize.js,samples/README.md)
 
@@ -505,7 +505,7 @@ __Usage:__
 
 ### Speech.streaming_recognize
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v1p1beta1/speech.streaming_recognize.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/speech.streaming_recognize.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v1p1beta1/speech.streaming_recognize.js,samples/README.md)
 
@@ -522,7 +522,7 @@ __Usage:__
 
 ### Speech.batch_recognize
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.batch_recognize.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.batch_recognize.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.batch_recognize.js,samples/README.md)
 
@@ -539,7 +539,7 @@ __Usage:__
 
 ### Speech.create_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.create_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.create_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.create_custom_class.js,samples/README.md)
 
@@ -556,7 +556,7 @@ __Usage:__
 
 ### Speech.create_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.create_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.create_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.create_phrase_set.js,samples/README.md)
 
@@ -573,7 +573,7 @@ __Usage:__
 
 ### Speech.create_recognizer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.create_recognizer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.create_recognizer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.create_recognizer.js,samples/README.md)
 
@@ -590,7 +590,7 @@ __Usage:__
 
 ### Speech.delete_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.delete_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.delete_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.delete_custom_class.js,samples/README.md)
 
@@ -607,7 +607,7 @@ __Usage:__
 
 ### Speech.delete_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.delete_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.delete_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.delete_phrase_set.js,samples/README.md)
 
@@ -624,7 +624,7 @@ __Usage:__
 
 ### Speech.delete_recognizer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.delete_recognizer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.delete_recognizer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.delete_recognizer.js,samples/README.md)
 
@@ -641,7 +641,7 @@ __Usage:__
 
 ### Speech.get_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.get_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.get_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.get_config.js,samples/README.md)
 
@@ -658,7 +658,7 @@ __Usage:__
 
 ### Speech.get_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.get_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.get_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.get_custom_class.js,samples/README.md)
 
@@ -675,7 +675,7 @@ __Usage:__
 
 ### Speech.get_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.get_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.get_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.get_phrase_set.js,samples/README.md)
 
@@ -692,7 +692,7 @@ __Usage:__
 
 ### Speech.get_recognizer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.get_recognizer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.get_recognizer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.get_recognizer.js,samples/README.md)
 
@@ -709,7 +709,7 @@ __Usage:__
 
 ### Speech.list_custom_classes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.list_custom_classes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.list_custom_classes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.list_custom_classes.js,samples/README.md)
 
@@ -726,7 +726,7 @@ __Usage:__
 
 ### Speech.list_phrase_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.list_phrase_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.list_phrase_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.list_phrase_sets.js,samples/README.md)
 
@@ -743,7 +743,7 @@ __Usage:__
 
 ### Speech.list_recognizers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.list_recognizers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.list_recognizers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.list_recognizers.js,samples/README.md)
 
@@ -760,7 +760,7 @@ __Usage:__
 
 ### Speech.recognize
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.recognize.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.recognize.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.recognize.js,samples/README.md)
 
@@ -777,7 +777,7 @@ __Usage:__
 
 ### Speech.streaming_recognize
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.streaming_recognize.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.streaming_recognize.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.streaming_recognize.js,samples/README.md)
 
@@ -794,7 +794,7 @@ __Usage:__
 
 ### Speech.undelete_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.undelete_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.undelete_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.undelete_custom_class.js,samples/README.md)
 
@@ -811,7 +811,7 @@ __Usage:__
 
 ### Speech.undelete_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.undelete_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.undelete_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.undelete_phrase_set.js,samples/README.md)
 
@@ -828,7 +828,7 @@ __Usage:__
 
 ### Speech.undelete_recognizer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.undelete_recognizer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.undelete_recognizer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.undelete_recognizer.js,samples/README.md)
 
@@ -845,7 +845,7 @@ __Usage:__
 
 ### Speech.update_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.update_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.update_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.update_config.js,samples/README.md)
 
@@ -862,7 +862,7 @@ __Usage:__
 
 ### Speech.update_custom_class
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.update_custom_class.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.update_custom_class.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.update_custom_class.js,samples/README.md)
 
@@ -879,7 +879,7 @@ __Usage:__
 
 ### Speech.update_phrase_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.update_phrase_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.update_phrase_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.update_phrase_set.js,samples/README.md)
 
@@ -896,7 +896,7 @@ __Usage:__
 
 ### Speech.update_recognizer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/generated/v2/speech.update_recognizer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.update_recognizer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/generated/v2/speech.update_recognizer.js,samples/README.md)
 
@@ -913,7 +913,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-speech/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-speech/samples/quickstart.js,samples/README.md)
 
