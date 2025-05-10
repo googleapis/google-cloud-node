@@ -922,12 +922,9 @@ export class CmekServiceClient {
    * @param {string} request.parent
    *   Required. The location at which the EncryptionConfig is to be created.
    * @param {string} request.encryptionConfigId
-   *   Required. The ID of the EncryptionConfig to create.
-   *   The ID must contain only letters (a-z, A-Z), numbers (0-9),
-   *   and hyphens (-).
-   *   The maximum size is 63 characters.
-   *   The first character must be a letter.
-   *   The last character must be a letter or a number.
+   *   Required. The ID of the
+   *   {@link protos.google.cloud.dataplex.v1.EncryptionConfig|EncryptionConfig} to create.
+   *   Currently, only a value of "default" is supported.
    * @param {google.cloud.dataplex.v1.EncryptionConfig} request.encryptionConfig
    *   Required. The EncryptionConfig to create.
    * @param {object} [options]
@@ -3825,8 +3822,10 @@ export class CmekServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();
