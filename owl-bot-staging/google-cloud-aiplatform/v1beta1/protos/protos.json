@@ -22413,6 +22413,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
                           }
+                        },
+                        "checkpoints": {
+                          "rule": "repeated",
+                          "type": "TunedModelCheckpoint",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -22580,12 +22588,26 @@
                         },
                         "totalTruncatedExampleCount": {
                           "type": "int64",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "truncatedExampleIndices": {
                           "rule": "repeated",
                           "type": "int64",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "droppedExampleReasons": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -22809,9 +22831,11 @@
                           "values": {
                             "ADAPTER_SIZE_UNSPECIFIED": 0,
                             "ADAPTER_SIZE_ONE": 1,
+                            "ADAPTER_SIZE_TWO": 6,
                             "ADAPTER_SIZE_FOUR": 2,
                             "ADAPTER_SIZE_EIGHT": 3,
-                            "ADAPTER_SIZE_SIXTEEN": 4
+                            "ADAPTER_SIZE_SIXTEEN": 4,
+                            "ADAPTER_SIZE_THIRTY_TWO": 5
                           }
                         }
                       }
@@ -22835,6 +22859,13 @@
                         "hyperParameters": {
                           "type": "SupervisedHyperParameters",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "exportLastCheckpointOnly": {
+                          "type": "bool",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -22995,6 +23026,26 @@
                           "options": {
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/PipelineJob"
                           }
+                        }
+                      }
+                    },
+                    "TunedModelCheckpoint": {
+                      "fields": {
+                        "checkpointId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "epoch": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "step": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "endpoint": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
