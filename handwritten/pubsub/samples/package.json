@@ -41,7 +41,7 @@
     "@google-cloud/typeless-sample-bot": "^3.0.0",
     "@types/chai": "^4.2.16",
     "chai": "^4.2.0",
-    "gts": "^5.0.0",
+    "gts": "^6.0.0",
     "lru-cache": "9.1.2",
     "mocha": "^9.2.2",
     "rimraf": "5.0.9",
