@@ -4671,6 +4671,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "additionalProperties": {
+                          "type": "google.protobuf.Value",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "ref": {
                           "type": "string",
                           "id": 27,
