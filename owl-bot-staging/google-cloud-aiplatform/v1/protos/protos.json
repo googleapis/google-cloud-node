@@ -4618,7 +4618,41 @@
                       },
                       "nested": {
                         "RagManagedDb": {
-                          "fields": {}
+                          "oneofs": {
+                            "retrievalStrategy": {
+                              "oneof": [
+                                "knn",
+                                "ann"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "knn": {
+                              "type": "KNN",
+                              "id": 1
+                            },
+                            "ann": {
+                              "type": "ANN",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "KNN": {
+                              "fields": {}
+                            },
+                            "ANN": {
+                              "fields": {
+                                "treeDepth": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "leafCount": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
                         },
                         "Pinecone": {
                           "fields": {
@@ -5091,6 +5125,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "rebuildAnnIndex": {
+                          "type": "bool",
+                          "id": 19
                         }
                       }
                     },
