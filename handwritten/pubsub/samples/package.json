@@ -37,7 +37,7 @@
     "protobufjs": "~7.5.0"
   },
   "devDependencies": {
-    "@google-cloud/bigquery": "^7.0.0",
+    "@google-cloud/bigquery": "^8.0.0",
     "@google-cloud/typeless-sample-bot": "^3.0.0",
     "@types/chai": "^4.2.16",
     "chai": "^4.2.0",
