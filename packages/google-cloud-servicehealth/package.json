@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/servicehealth",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Service Health API client for Node.js",
   "repository": {
     "type": "git",

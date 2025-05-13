@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.15.0...chat-v0.16.0) (2025-05-13)
+
+
+### Features
+
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.14.0...chat-v0.15.0) (2025-03-19)
 
 

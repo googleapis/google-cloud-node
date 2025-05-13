@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/video-intelligence-v6.0.1...video-intelligence-v6.1.0) (2025-05-13)
+
+
+### Features
+
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/video-intelligence-v6.0.0...video-intelligence-v6.0.1) (2025-03-19)
 
 

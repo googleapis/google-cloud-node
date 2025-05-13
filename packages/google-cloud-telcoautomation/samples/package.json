@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/telcoautomation": "^0.4.1"
+    "@google-cloud/telcoautomation": "^0.5.0"
   },
   "devDependencies": {
     "c8": "^8.0.0",

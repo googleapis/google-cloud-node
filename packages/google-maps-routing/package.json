@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/routing",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": " client for Node.js",
   "repository": {
     "type": "git",

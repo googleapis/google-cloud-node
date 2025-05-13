@@ -13,7 +13,7 @@
     "test": "mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/grafeas": "^6.0.1",
+    "@google-cloud/grafeas": "^6.1.0",
     "@grpc/grpc-js": "^1.0.0"
   },
   "devDependencies": {
