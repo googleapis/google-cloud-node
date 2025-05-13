@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/assured-workloads",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "Assured Workloads client for Node.js",
   "repository": {
     "type": "git",

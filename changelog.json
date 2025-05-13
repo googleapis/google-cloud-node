@@ -11,6 +11,2384 @@
         },
         {
           "type": "feat",
+          "sha": "d448dd0ffe1216d8564c0eba1c19f64049adf17b",
+          "message": "Add initial files for google.cloud.financialservices.v1",
+          "issues": [
+            "6270"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/financialservices",
+      "id": "bbc8e365-dedc-4b09-9949-f848bdca0603",
+      "createTime": "2025-05-13T17:00:58.054Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "921154e0-45a1-4099-8855-396c6955e061",
+      "createTime": "2025-05-13T17:00:58.031Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parametermanager",
+      "id": "0af7b8e0-f4d6-4b21-9cd6-15bdb05be156",
+      "createTime": "2025-05-13T17:00:58.004Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "a3217048-8c7c-4e24-af26-f866ffb5366c",
+      "createTime": "2025-05-13T17:00:57.981Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "c20c8afc-8b2a-46bb-b82e-c0fc1500e9b3",
+      "createTime": "2025-05-13T17:00:57.961Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "dc44718c-6d20-4d39-9ff5-40246d70e1c3",
+      "createTime": "2025-05-13T17:00:57.942Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/marketing-platform-admin",
+      "id": "0905ff7c-7b2a-4f5f-acb7-830df8849288",
+      "createTime": "2025-05-13T17:00:57.919Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apihub",
+      "id": "7f717bc7-4428-4614-92b8-8e8719cefb1a",
+      "createTime": "2025-05-13T17:00:57.898Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "28a4b10f-bd9e-48b4-a6c4-9ed32e2c4c9a",
+      "createTime": "2025-05-13T17:00:57.874Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/privilegedaccessmanager",
+      "id": "3368cece-9d1c-4690-9e80-1cfad4988d9a",
+      "createTime": "2025-05-13T17:00:57.851Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "b40e708f-0c82-45a1-a59f-57430df2e00f",
+      "createTime": "2025-05-13T17:00:57.833Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "65739fb3-7d1b-4d22-976c-b3d3e7808556",
+      "createTime": "2025-05-13T17:00:57.813Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine",
+      "id": "35a6c05b-20aa-44bc-92d3-f19408139ed8",
+      "createTime": "2025-05-13T17:00:57.791Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/streetview-publish",
+      "id": "7838d506-eb33-4f94-bf9b-1905c193ee59",
+      "createTime": "2025-05-13T17:00:57.773Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "d85ef137-0e07-46f4-a13c-4b3f28ecb9a8",
+      "createTime": "2025-05-13T17:00:57.753Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routeoptimization",
+      "id": "6524b87f-41ad-4812-99ea-3103cbcf7de8",
+      "createTime": "2025-05-13T17:00:57.729Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/solar",
+      "id": "8a9110d4-b718-420e-bc2d-133c76e70da8",
+      "createTime": "2025-05-13T17:00:57.708Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/conversions",
+      "id": "e09f17e0-51dd-4666-ab8a-070a35102567",
+      "createTime": "2025-05-13T17:00:57.679Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securitycentermanagement",
+      "id": "0a6b1b03-ec01-4a1f-8e22-272f90626dd5",
+      "createTime": "2025-05-13T17:00:57.660Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "88b2602c-1701-407d-ae11-f048b4e06454",
+      "createTime": "2025-05-13T17:00:57.641Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "ade578cc-48c9-4ebe-82d7-3f24c086fe70",
+      "createTime": "2025-05-13T17:00:57.593Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "94ad2852-f11e-4429-8e4f-1ac0cc911f24",
+      "createTime": "2025-05-13T17:00:57.549Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine-delivery",
+      "id": "fc993bbf-2cd9-4665-b36a-d657b641c974",
+      "createTime": "2025-05-13T17:00:57.527Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "82610ccb-e3b0-43e7-9017-36cc6ea85a98",
+      "createTime": "2025-05-13T17:00:57.508Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "7c9b9187-2e03-4557-8f7a-4de124ca0136",
+      "createTime": "2025-05-13T17:00:57.489Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "7b9413c1-5383-4881-98c2-5e6077b5364e",
+      "createTime": "2025-05-13T17:00:57.468Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "c987d381-f0a3-4994-ad91-e323a547e15c",
+      "createTime": "2025-05-13T17:00:57.449Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudcontrolspartner",
+      "id": "1e10b0c6-8be2-480c-a0b0-12a8e70ad9cc",
+      "createTime": "2025-05-13T17:00:57.429Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/telcoautomation",
+      "id": "ab5434e0-9f6b-4e14-9ad0-4df85d6321bf",
+      "createTime": "2025-05-13T17:00:57.407Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/servicehealth",
+      "id": "3438acaf-4333-4fc1-94f2-8ccb99c9fcd7",
+      "createTime": "2025-05-13T17:00:57.387Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "40ebd770-27b1-4e3e-9b79-978807991b7c",
+      "createTime": "2025-05-13T17:00:57.367Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "c1d5dbf3-3797-4739-a9f8-26e19aca8f66",
+      "createTime": "2025-05-13T17:00:57.347Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "9dbd0dc3-bc99-4dcb-b46c-9e4d2aa39b8e",
+      "createTime": "2025-05-13T17:00:57.327Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "8f37a970-80bf-42a2-b0b9-b645961550de",
+      "createTime": "2025-05-13T17:00:57.308Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/typeless-sample-bot",
+      "id": "55e81749-d9fa-4027-b0f4-49ab60e07e42",
+      "createTime": "2025-05-13T17:00:57.286Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "7f145a54-3898-4ff5-90c4-33562a571e7f",
+      "createTime": "2025-05-13T17:00:57.267Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "588f26d7-9b42-48ac-a024-f7a55f2420a5",
+      "createTime": "2025-05-13T17:00:57.249Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "332b6fd0-f68b-42cd-84bc-224b54fbba32",
+      "createTime": "2025-05-13T17:00:57.228Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "ab2a308d-39df-4610-8782-a52d1b7448ca",
+      "createTime": "2025-05-13T17:00:57.209Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "0b4be733-09bd-430a-8b57-ea51538819e7",
+      "createTime": "2025-05-13T17:00:57.189Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "c5810428-25dd-4713-bc88-3f09e1ca748e",
+      "createTime": "2025-05-13T17:00:57.166Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "2260f831-6b54-4112-9ac3-b9cb863270bb",
+      "createTime": "2025-05-13T17:00:57.148Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/addressvalidation",
+      "id": "debd60c8-2de0-424c-a85b-5c33ff51d278",
+      "createTime": "2025-05-13T17:00:57.129Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-context-manager",
+      "id": "1bbea9c1-8e4d-46c7-9ac0-7c089a4742f8",
+      "createTime": "2025-05-13T17:00:57.107Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam-credentials",
+      "id": "fc730497-007c-4f6f-ba99-2500329b7314",
+      "createTime": "2025-05-13T17:00:57.088Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "281fcdb9-93ca-4586-9fa3-5a60a38d392b",
+      "createTime": "2025-05-13T17:00:57.068Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "0f954187-4e61-4154-8d8e-a2280207f4b0",
+      "createTime": "2025-05-13T17:00:57.048Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "639fd780-079c-4618-87a3-004019224d91",
+      "createTime": "2025-05-13T17:00:57.027Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "325a7c88-ca94-47f1-8bae-c9eec56c7ce9",
+      "createTime": "2025-05-13T17:00:57.006Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "44f8729a-320c-422b-b80f-7b3ef5bf882d",
+      "createTime": "2025-05-13T17:00:56.984Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "885ce129-1f68-4470-9d79-35a26228154c",
+      "createTime": "2025-05-13T17:00:56.965Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "0f69b468-f6a3-44eb-ac71-933437c7519e",
+      "createTime": "2025-05-13T17:00:56.946Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "71921254-61df-40a8-ab63-d97230bcca83",
+      "createTime": "2025-05-13T17:00:56.925Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "596d0ee0-f85c-48c3-9bdd-3b5262b3e2ca",
+      "createTime": "2025-05-13T17:00:56.906Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "1bfcd6c8-ed63-4796-919e-306f94d21d60",
+      "createTime": "2025-05-13T17:00:56.888Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "1c98a8bf-5725-4ae9-a3ba-7e1dda4124ef",
+      "createTime": "2025-05-13T17:00:56.866Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "79edb8c5-6381-4d8f-88ae-024d130d46e2",
+      "createTime": "2025-05-13T17:00:56.846Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "e4554938-72e6-4507-a189-aec3d120421f",
+      "createTime": "2025-05-13T17:00:56.825Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "564e8b3d-fc83-4fa6-8d97-70deb89899f6",
+      "createTime": "2025-05-13T17:00:56.802Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "465fdc56-1cb7-431b-9e72-0696ad99f11e",
+      "createTime": "2025-05-13T17:00:56.782Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "05b53d11-b94f-419b-9c4f-e421fa32edc7",
+      "createTime": "2025-05-13T17:00:56.763Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "e39ce5f1-ddf6-4406-9b04-6c4642b80cf2",
+      "createTime": "2025-05-13T17:00:56.741Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "a1d66963-6e69-4390-b334-7fb8d4e9bfae",
+      "createTime": "2025-05-13T17:00:56.722Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.21.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "e8b11c0a-f867-4e13-9e31-f33a33404353",
+      "createTime": "2025-05-13T17:00:56.702Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "09b1719c-129e-4799-8ec1-ecfce5183dce",
+      "createTime": "2025-05-13T17:00:56.676Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "baf9d13e-1293-4022-9a39-66062ed93d72",
+      "createTime": "2025-05-13T17:00:56.658Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "9.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "8e64923e-647c-4646-8f01-e0b1574c5667",
+      "createTime": "2025-05-13T17:00:56.637Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "13bf4444-76b8-4f05-8a74-95791c7e3dd1",
+      "createTime": "2025-05-13T17:00:56.618Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "edd5015f-0bb4-404c-8083-8808f201145f",
+      "createTime": "2025-05-13T17:00:56.598Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "7fab5c25-bf08-4868-9924-3923296abda5",
+      "createTime": "2025-05-13T17:00:56.576Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "2522adbe-b1bc-4155-b666-b74f28ed3ca8",
+      "createTime": "2025-05-13T17:00:56.556Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "179d5e56-89f2-4a89-9444-5d93b24a746b",
+      "createTime": "2025-05-13T17:00:56.537Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "18b404d6-f3c3-4098-bfb0-5e3d92c975a1",
+      "createTime": "2025-05-13T17:00:56.515Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "a3e56cf6-9ead-4fd0-afab-e663df69dd2b",
+      "createTime": "2025-05-13T17:00:56.493Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "84627014-ea33-4bf7-9ae6-7a537a1348e1",
+      "createTime": "2025-05-13T17:00:56.471Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "2199c4aa-50e9-4dec-8ccc-6d66eecf9bab",
+      "createTime": "2025-05-13T17:00:56.449Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "64090e46-85ff-4bcc-bbf3-11b368235953",
+      "createTime": "2025-05-13T17:00:56.430Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "b647485c-23a2-4d29-bb51-271c87950101",
+      "createTime": "2025-05-13T17:00:56.411Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "e7688197-eb7e-41be-9a52-4e235cb60361",
+      "createTime": "2025-05-13T17:00:56.389Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "52b98bd1-a98f-4c34-b0d4-d3f59b54f5c4",
+      "createTime": "2025-05-13T17:00:56.369Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "4ce2edec-5afb-44b2-801b-e568d922bd74",
+      "createTime": "2025-05-13T17:00:56.351Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "e5a2e037-1021-40eb-9736-6daa4e601632",
+      "createTime": "2025-05-13T17:00:56.329Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "0d038b27-0bb1-4050-bf1d-6ed5b91faef3",
+      "createTime": "2025-05-13T17:00:56.310Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "70c21b1b-8669-4706-9bf9-52298e332236",
+      "createTime": "2025-05-13T17:00:56.279Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "09a9ef29-7f74-4a24-a597-c60ef9ad5ca0",
+      "createTime": "2025-05-13T17:00:56.253Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/migrationcenter",
+      "id": "f4c1be02-a6f7-48e0-8c08-f4b6d3e28d17",
+      "createTime": "2025-05-13T17:00:56.235Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "1fc40ccc-3b70-4adf-b439-b827cd47b696",
+      "createTime": "2025-05-13T17:00:56.216Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "46b1b7ff-2c95-409f-b7b6-3f5c94a52c0c",
+      "createTime": "2025-05-13T17:00:56.195Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "dc15992e-eb67-45bc-a870-2052c7aef6dc",
+      "createTime": "2025-05-13T17:00:56.177Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managed-identities",
+      "id": "baa95fc8-56cb-4092-8c83-a77cd3419075",
+      "createTime": "2025-05-13T17:00:56.159Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "7d24c938-9ab7-493b-843a-08d2511c92f5",
+      "createTime": "2025-05-13T17:00:56.137Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "75ab4e43-a149-4444-b232-8e132e41cd56",
+      "createTime": "2025-05-13T17:00:56.118Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "e3cfa697-75d4-49be-b0d4-cb9c288a5cd3",
+      "createTime": "2025-05-13T17:00:56.099Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "140c414f-bfe9-46ef-bc73-74a1656d7bbf",
+      "createTime": "2025-05-13T17:00:56.078Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ids",
+      "id": "ba1a4049-9158-4498-b193-be375f2fb70a",
+      "createTime": "2025-05-13T17:00:56.056Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gsuiteaddons",
+      "id": "07054cbe-c9d7-4353-b92c-8e36f81fe5fa",
+      "createTime": "2025-05-13T17:00:56.035Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "2db63d3b-ad74-438b-8427-a5bc764f4dd6",
+      "createTime": "2025-05-13T17:00:56.010Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "cf1c4d01-c201-481e-88db-ffbb2b76da19",
+      "createTime": "2025-05-13T17:00:55.989Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "29290cdf-3c6c-4404-ba4c-bd4dc3e573ab",
+      "createTime": "2025-05-13T17:00:55.967Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "a125a2be-9efb-4c88-abbe-20d2a06083d1",
+      "createTime": "2025-05-13T17:00:55.942Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "cb617727-e1d7-44ae-96e5-8caad5d291d6",
+      "createTime": "2025-05-13T17:00:55.921Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "672226dc-b8d6-4bd2-8008-0c1f82fb170f",
+      "createTime": "2025-05-13T17:00:55.900Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "70c862c8-4cef-430e-a791-9583f635c5f4",
+      "createTime": "2025-05-13T17:00:55.868Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "efa84177-8144-4b27-80ea-8eeee234ec7b",
+      "createTime": "2025-05-13T17:00:55.848Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "5ef62bf1-1dbb-4c58-ae59-70b8c3df7ace",
+      "createTime": "2025-05-13T17:00:55.830Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "86223558-c132-4ded-b44c-1bbd2db693c8",
+      "createTime": "2025-05-13T17:00:55.808Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "24610c20-42ea-4750-8a05-0218870da1ed",
+      "createTime": "2025-05-13T17:00:55.786Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "9.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "fea06497-1797-409d-b2bd-d6e6b1d183b1",
+      "createTime": "2025-05-13T17:00:55.767Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "40f69e4a-db82-48db-87ab-1c3f37519a69",
+      "createTime": "2025-05-13T17:00:55.744Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "6a2a2918-b02e-43bf-a832-7696dd6dd487",
+      "createTime": "2025-05-13T17:00:55.725Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-qna",
+      "id": "dac3ea21-dc58-424e-9057-b57fa51e4c64",
+      "createTime": "2025-05-13T17:00:55.703Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "cb7baa4c-3456-47b0-9795-ad2e6d515440",
+      "createTime": "2025-05-13T17:00:55.671Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datalabeling",
+      "id": "c43dc37c-0596-4285-9746-65f2c4988fec",
+      "createTime": "2025-05-13T17:00:55.653Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-fusion",
+      "id": "68ee8735-d5b3-493d-9836-adccf48b414f",
+      "createTime": "2025-05-13T17:00:55.634Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "6ba885e6-31ff-4037-818f-0a07ac8febfb",
+      "createTime": "2025-05-13T17:00:55.611Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "c9ae0dc4-185b-40bd-b2aa-a4f92ccd0604",
+      "createTime": "2025-05-13T17:00:55.592Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "b768cfa6-361e-4f52-9d9c-efa9e9a1dbd2",
+      "createTime": "2025-05-13T17:00:55.573Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "d55fcbc1-5411-4ec2-8199-dedf32de8cf5",
+      "createTime": "2025-05-13T17:00:55.552Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "1f19cba3-7f2b-46a1-819b-761983a2f160",
+      "createTime": "2025-05-13T17:00:55.533Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/connectors",
+      "id": "39599403-c47b-4da0-a121-2cf8c87c87e5",
+      "createTime": "2025-05-13T17:00:55.513Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "96001980-d439-4eb8-bb88-4b5ea5f41903",
+      "createTime": "2025-05-13T17:00:55.491Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "3c53b65a-e269-40dd-88a6-81b433748a0e",
+      "createTime": "2025-05-13T17:00:55.471Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/procurement",
+      "id": "9082912a-9aae-4029-8e42-7a415b07672f",
+      "createTime": "2025-05-13T17:00:55.451Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "e5a258d5-0813-4a8c-87d7-800e64a44c34",
+      "createTime": "2025-05-13T17:00:55.425Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "47f36036-8adc-4031-a356-e2921a0f3655",
+      "createTime": "2025-05-13T17:00:55.394Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "f7c8da1a-9c6d-4b13-9b1b-ab60e4609a7e",
+      "createTime": "2025-05-13T17:00:55.371Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "41070d04-c927-4054-817b-b8b97864d5aa",
+      "createTime": "2025-05-13T17:00:55.345Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing-budgets",
+      "id": "7aff5167-68ea-4c7d-92a2-9caee96e1f46",
+      "createTime": "2025-05-13T17:00:55.325Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "147b7e07-243b-41ee-9ec0-fffc0c9a2a5b",
+      "createTime": "2025-05-13T17:00:55.307Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "db2db597-56d4-4f63-9bd0-a3e8f4194cf7",
+      "createTime": "2025-05-13T17:00:55.255Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-migration",
+      "id": "10bdf416-c6bf-41ba-bb7e-1a0e3ae24b9a",
+      "createTime": "2025-05-13T17:00:55.194Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "868cdd68-ea85-47cf-829b-a1e9d68730cd",
+      "createTime": "2025-05-13T17:00:55.175Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "10bc09d4-14c6-4af7-8603-7a15b213db37",
+      "createTime": "2025-05-13T17:00:55.156Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-exchange",
+      "id": "24e7e269-0c95-4391-9f39-34d5489812e0",
+      "createTime": "2025-05-13T17:00:55.126Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "cd4b7da0-2410-4f6d-b435-29f3812fa88d",
+      "createTime": "2025-05-13T17:00:55.107Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientgateways",
+      "id": "b784ecfd-443d-4c83-a02b-f18f39f58dc8",
+      "createTime": "2025-05-13T17:00:55.084Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "4db3888a-eb1e-4d8e-9648-56f30e747abe",
+      "createTime": "2025-05-13T17:00:55.061Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appgateways",
+      "id": "76852e25-a7df-4935-9d94-acbc9fced4d0",
+      "createTime": "2025-05-13T17:00:55.041Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnectors",
+      "id": "29f3e805-fd0d-488b-b91c-9ff88bbca326",
+      "createTime": "2025-05-13T17:00:55.022Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnections",
+      "id": "4526b6cd-2cdc-4400-8711-27ee81290e5f",
+      "createTime": "2025-05-13T17:00:54.994Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "2e2eca09-0b6b-44bd-b456-dc859d7c52bf",
+      "createTime": "2025-05-13T17:00:54.973Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "d2f64955-3870-4a96-aa2d-aef1ed042a99",
+      "createTime": "2025-05-13T17:00:54.954Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/automl",
+      "id": "3c5c8df4-79c6-4c4d-ad6b-d7b2cd35db19",
+      "createTime": "2025-05-13T17:00:54.933Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/assured-workloads",
+      "id": "5302fa37-1f91-4171-800e-0387a84a8d6f",
+      "createTime": "2025-05-13T17:00:54.915Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "fbe7bf2d-d8d9-4840-ba0c-eef24e0212f2",
+      "createTime": "2025-05-13T17:00:54.895Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-registry",
+      "id": "d496b601-9300-44c5-ad13-27e12401e8fa",
+      "createTime": "2025-05-13T17:00:54.872Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "dc215d33-26bf-47d5-8c4f-bfcd711e4179",
+      "createTime": "2025-05-13T17:00:54.851Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "a5d2f725-5641-4760-8675-eb99646c61a0",
+      "createTime": "2025-05-13T17:00:54.830Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "ff2cbce7-bfb1-4ea1-8761-5d55425994e7",
+      "createTime": "2025-05-13T17:00:54.808Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/advisorynotifications",
+      "id": "e4aca12a-dbca-403b-b112-84936d757614",
+      "createTime": "2025-05-13T17:00:54.788Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-approval",
+      "id": "79dafa2f-e9df-42bb-9823-c6fce15e1235",
+      "createTime": "2025-05-13T17:00:54.769Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/area120-tables",
+      "id": "4da046a5-0c34-472c-835f-353eee01b973",
+      "createTime": "2025-05-13T17:00:54.747Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appengine-admin",
+      "id": "cecdc842-fdca-47fd-92cd-05c8a24aaa7e",
+      "createTime": "2025-05-13T17:00:54.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "762266b8-c738-4b4e-845d-1c41ca69941d",
+      "createTime": "2025-05-13T17:00:54.701Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "b551c66f-0e43-4c9e-847f-cb9c8c6bc8f2",
+      "createTime": "2025-05-13T17:00:54.671Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "6620635d-4bda-49c1-8a09-8ff82b951174",
+      "createTime": "2025-05-13T17:00:54.650Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "ca7536db-ece1-46d0-88d1-eea711fa1bde",
+      "createTime": "2025-05-13T17:00:54.631Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "336a8cbf-87d8-4594-bf3c-ec2fed94f7cb",
+      "createTime": "2025-05-13T17:00:54.593Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
           "sha": "c33de56c0c797598a48a8e0ee07b625de1b082b3",
           "message": "Add initial files for google.cloud.devicestreaming.v1",
           "issues": [
@@ -50632,5 +53010,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-05-09T01:02:58.759Z"
+  "updateTime": "2025-05-13T17:00:58.054Z"
 }

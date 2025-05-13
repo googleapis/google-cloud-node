@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/asset-v6.1.0...asset-v6.2.0) (2025-05-13)
+
+
+### Features
+
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/asset-v6.0.0...asset-v6.1.0) (2025-03-19)
 
 
