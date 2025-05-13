@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [6.0.1](https://github.com/googleapis/nodejs-logging-winston/compare/v6.0.0...v6.0.1) (2024-10-23)
+
+
+### Bug Fixes
+
+* Fix trace_sampled type to be consistent with API documentation ([#830](https://github.com/googleapis/nodejs-logging-winston/issues/830)) ([33103dc](https://github.com/googleapis/nodejs-logging-winston/commit/33103dc073968d5b919c030ef035c2b317074134))
+* Skip writing RequestLogEntry for Cloud Run with flag enabled ([#821](https://github.com/googleapis/nodejs-logging-winston/issues/821)) ([7a0ec6f](https://github.com/googleapis/nodejs-logging-winston/commit/7a0ec6ffc1841487ab8f290de443f8a7465a2277))
+
 ## [6.0.0](https://github.com/googleapis/nodejs-logging-winston/compare/v5.3.0...v6.0.0) (2023-08-10)
 
 
