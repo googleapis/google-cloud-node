@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -778,6 +781,13 @@
                         "vpcAccess": {
                           "type": "VpcAccess",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "nodeSelector": {
+                          "type": "NodeSelector",
+                          "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3680,6 +3690,13 @@
                         "satisfiesPzs": {
                           "type": "bool",
                           "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nodeSelector": {
+                          "type": "NodeSelector",
+                          "id": 36,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }

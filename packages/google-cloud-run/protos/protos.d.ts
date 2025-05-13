@@ -1795,6 +1795,9 @@ export namespace google {
 
                     /** TaskTemplate vpcAccess */
                     vpcAccess?: (google.cloud.run.v2.IVpcAccess|null);
+
+                    /** TaskTemplate nodeSelector */
+                    nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
                 }
 
                 /** Represents a TaskTemplate. */
@@ -1829,6 +1832,9 @@ export namespace google {
 
                     /** TaskTemplate vpcAccess. */
                     public vpcAccess?: (google.cloud.run.v2.IVpcAccess|null);
+
+                    /** TaskTemplate nodeSelector. */
+                    public nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
 
                     /** TaskTemplate retries. */
                     public retries?: "maxRetries";
@@ -9731,6 +9737,9 @@ export namespace google {
                     /** Task satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
 
+                    /** Task nodeSelector */
+                    nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
+
                     /** Task etag */
                     etag?: (string|null);
                 }
@@ -9833,6 +9842,9 @@ export namespace google {
 
                     /** Task satisfiesPzs. */
                     public satisfiesPzs: boolean;
+
+                    /** Task nodeSelector. */
+                    public nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
 
                     /** Task etag. */
                     public etag: string;

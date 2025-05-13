@@ -4878,6 +4878,7 @@
                          * @property {google.cloud.run.v2.ExecutionEnvironment|null} [executionEnvironment] TaskTemplate executionEnvironment
                          * @property {string|null} [encryptionKey] TaskTemplate encryptionKey
                          * @property {google.cloud.run.v2.IVpcAccess|null} [vpcAccess] TaskTemplate vpcAccess
+                         * @property {google.cloud.run.v2.INodeSelector|null} [nodeSelector] TaskTemplate nodeSelector
                          */
     
                         /**
@@ -4961,6 +4962,14 @@
                          */
                         TaskTemplate.prototype.vpcAccess = null;
     
+                        /**
+                         * TaskTemplate nodeSelector.
+                         * @member {google.cloud.run.v2.INodeSelector|null|undefined} nodeSelector
+                         * @memberof google.cloud.run.v2.TaskTemplate
+                         * @instance
+                         */
+                        TaskTemplate.prototype.nodeSelector = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -5017,6 +5026,8 @@
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.encryptionKey);
                             if (message.vpcAccess != null && Object.hasOwnProperty.call(message, "vpcAccess"))
                                 $root.google.cloud.run.v2.VpcAccess.encode(message.vpcAccess, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.nodeSelector != null && Object.hasOwnProperty.call(message, "nodeSelector"))
+                                $root.google.cloud.run.v2.NodeSelector.encode(message.nodeSelector, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -5085,6 +5096,10 @@
                                     }
                                 case 8: {
                                         message.vpcAccess = $root.google.cloud.run.v2.VpcAccess.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.nodeSelector = $root.google.cloud.run.v2.NodeSelector.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5171,6 +5186,11 @@
                                 if (error)
                                     return "vpcAccess." + error;
                             }
+                            if (message.nodeSelector != null && message.hasOwnProperty("nodeSelector")) {
+                                var error = $root.google.cloud.run.v2.NodeSelector.verify(message.nodeSelector);
+                                if (error)
+                                    return "nodeSelector." + error;
+                            }
                             return null;
                         };
     
@@ -5242,6 +5262,11 @@
                                     throw TypeError(".google.cloud.run.v2.TaskTemplate.vpcAccess: object expected");
                                 message.vpcAccess = $root.google.cloud.run.v2.VpcAccess.fromObject(object.vpcAccess);
                             }
+                            if (object.nodeSelector != null) {
+                                if (typeof object.nodeSelector !== "object")
+                                    throw TypeError(".google.cloud.run.v2.TaskTemplate.nodeSelector: object expected");
+                                message.nodeSelector = $root.google.cloud.run.v2.NodeSelector.fromObject(object.nodeSelector);
+                            }
                             return message;
                         };
     
@@ -5268,6 +5293,7 @@
                                 object.executionEnvironment = options.enums === String ? "EXECUTION_ENVIRONMENT_UNSPECIFIED" : 0;
                                 object.encryptionKey = "";
                                 object.vpcAccess = null;
+                                object.nodeSelector = null;
                             }
                             if (message.containers && message.containers.length) {
                                 object.containers = [];
@@ -5294,6 +5320,8 @@
                                 object.encryptionKey = message.encryptionKey;
                             if (message.vpcAccess != null && message.hasOwnProperty("vpcAccess"))
                                 object.vpcAccess = $root.google.cloud.run.v2.VpcAccess.toObject(message.vpcAccess, options);
+                            if (message.nodeSelector != null && message.hasOwnProperty("nodeSelector"))
+                                object.nodeSelector = $root.google.cloud.run.v2.NodeSelector.toObject(message.nodeSelector, options);
                             return object;
                         };
     
@@ -25578,6 +25606,7 @@
                          * @property {google.cloud.run.v2.IVpcAccess|null} [vpcAccess] Task vpcAccess
                          * @property {string|null} [logUri] Task logUri
                          * @property {boolean|null} [satisfiesPzs] Task satisfiesPzs
+                         * @property {google.cloud.run.v2.INodeSelector|null} [nodeSelector] Task nodeSelector
                          * @property {string|null} [etag] Task etag
                          */
     
@@ -25842,6 +25871,14 @@
                         Task.prototype.satisfiesPzs = false;
     
                         /**
+                         * Task nodeSelector.
+                         * @member {google.cloud.run.v2.INodeSelector|null|undefined} nodeSelector
+                         * @memberof google.cloud.run.v2.Task
+                         * @instance
+                         */
+                        Task.prototype.nodeSelector = null;
+    
+                        /**
                          * Task etag.
                          * @member {string} etag
                          * @memberof google.cloud.run.v2.Task
@@ -25938,6 +25975,8 @@
                                 writer.uint32(/* id 33, wireType 0 =*/264).bool(message.satisfiesPzs);
                             if (message.scheduledTime != null && Object.hasOwnProperty.call(message, "scheduledTime"))
                                 $root.google.protobuf.Timestamp.encode(message.scheduledTime, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+                            if (message.nodeSelector != null && Object.hasOwnProperty.call(message, "nodeSelector"))
+                                $root.google.cloud.run.v2.NodeSelector.encode(message.nodeSelector, writer.uint32(/* id 36, wireType 2 =*/290).fork()).ldelim();
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -26138,6 +26177,10 @@
                                         message.satisfiesPzs = reader.bool();
                                         break;
                                     }
+                                case 36: {
+                                        message.nodeSelector = $root.google.cloud.run.v2.NodeSelector.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 99: {
                                         message.etag = reader.string();
                                         break;
@@ -26321,6 +26364,11 @@
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 if (typeof message.satisfiesPzs !== "boolean")
                                     return "satisfiesPzs: boolean expected";
+                            if (message.nodeSelector != null && message.hasOwnProperty("nodeSelector")) {
+                                var error = $root.google.cloud.run.v2.NodeSelector.verify(message.nodeSelector);
+                                if (error)
+                                    return "nodeSelector." + error;
+                            }
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -26495,6 +26543,11 @@
                                 message.logUri = String(object.logUri);
                             if (object.satisfiesPzs != null)
                                 message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.nodeSelector != null) {
+                                if (typeof object.nodeSelector !== "object")
+                                    throw TypeError(".google.cloud.run.v2.Task.nodeSelector: object expected");
+                                message.nodeSelector = $root.google.cloud.run.v2.NodeSelector.fromObject(object.nodeSelector);
+                            }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             return message;
@@ -26556,6 +26609,7 @@
                                 object.logUri = "";
                                 object.satisfiesPzs = false;
                                 object.scheduledTime = null;
+                                object.nodeSelector = null;
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -26640,6 +26694,8 @@
                                 object.satisfiesPzs = message.satisfiesPzs;
                             if (message.scheduledTime != null && message.hasOwnProperty("scheduledTime"))
                                 object.scheduledTime = $root.google.protobuf.Timestamp.toObject(message.scheduledTime, options);
+                            if (message.nodeSelector != null && message.hasOwnProperty("nodeSelector"))
+                                object.nodeSelector = $root.google.cloud.run.v2.NodeSelector.toObject(message.nodeSelector, options);
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
