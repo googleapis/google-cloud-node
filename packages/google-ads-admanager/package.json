@@ -1,6 +1,6 @@
 {
   "name": "@google-ads/admanager",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Google Ad Manager API client for Node.js",
   "repository": {
     "type": "git",

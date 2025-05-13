@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.5.0...managedkafka-v0.6.0) (2025-05-13)
+
+
+### Features
+
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.4.0...managedkafka-v0.5.0) (2025-03-19)
 
 

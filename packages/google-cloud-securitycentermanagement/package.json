@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/securitycentermanagement",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Security Center Management API client for Node.js",
   "repository": {
     "type": "git",

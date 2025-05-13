@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.3.1...backupdr-v0.4.0) (2025-05-13)
+
+
+### Features
+
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.3.0...backupdr-v0.3.1) (2025-03-19)
 
 
