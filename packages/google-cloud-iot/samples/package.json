@@ -15,7 +15,7 @@
     "test": "echo tests deprecated"
   },
   "dependencies": {
-    "@google-cloud/iot": "^5.0.1",
+    "@google-cloud/iot": "^5.1.0",
     "@google-cloud/pubsub": "^4.0.0",
     "@google-cloud/storage": "^7.0.0"
   },

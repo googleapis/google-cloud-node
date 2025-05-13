@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/contact-center-insights",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "contactcenterinsights client for Node.js",
   "repository": {
     "type": "git",
