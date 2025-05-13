@@ -46,6 +46,11 @@ function main(parent) {
    *  A token identifying a page of results the server should return.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. The scope for which supported flags are requested. If not
+   *  specified, default is DATABASE.
+   */
+  // const scope = {}
 
   // Imports the Alloydb library
   const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1alpha;
