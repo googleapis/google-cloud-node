@@ -335,6 +335,18 @@ export class AlloyDBAdminClient {
     const updateClusterMetadata = protoFilesRoot.lookup(
       '.google.cloud.alloydb.v1alpha.OperationMetadata'
     ) as gax.protobuf.Type;
+    const exportClusterResponse = protoFilesRoot.lookup(
+      '.google.cloud.alloydb.v1alpha.ExportClusterResponse'
+    ) as gax.protobuf.Type;
+    const exportClusterMetadata = protoFilesRoot.lookup(
+      '.google.cloud.alloydb.v1alpha.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const importClusterResponse = protoFilesRoot.lookup(
+      '.google.cloud.alloydb.v1alpha.ImportClusterResponse'
+    ) as gax.protobuf.Type;
+    const importClusterMetadata = protoFilesRoot.lookup(
+      '.google.cloud.alloydb.v1alpha.OperationMetadata'
+    ) as gax.protobuf.Type;
     const upgradeClusterResponse = protoFilesRoot.lookup(
       '.google.cloud.alloydb.v1alpha.UpgradeClusterResponse'
     ) as gax.protobuf.Type;
@@ -448,6 +460,16 @@ export class AlloyDBAdminClient {
         this.operationsClient,
         updateClusterResponse.decode.bind(updateClusterResponse),
         updateClusterMetadata.decode.bind(updateClusterMetadata)
+      ),
+      exportCluster: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportClusterResponse.decode.bind(exportClusterResponse),
+        exportClusterMetadata.decode.bind(exportClusterMetadata)
+      ),
+      importCluster: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importClusterResponse.decode.bind(importClusterResponse),
+        importClusterMetadata.decode.bind(importClusterMetadata)
       ),
       upgradeCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -598,6 +620,8 @@ export class AlloyDBAdminClient {
       'getCluster',
       'createCluster',
       'updateCluster',
+      'exportCluster',
+      'importCluster',
       'upgradeCluster',
       'deleteCluster',
       'promoteCluster',
@@ -1259,9 +1283,9 @@ export class AlloyDBAdminClient {
    * @param {string} [request.publicKey]
    *   Optional. The public key from the client.
    * @param {boolean} [request.useMetadataExchange]
-   *   Optional. An optional hint to the endpoint to generate a client
-   *   ceritificate that can be used by AlloyDB connectors to exchange additional
-   *   metadata with the server after TLS handshake.
+   *   Optional. An optional hint to the endpoint to generate a client certificate
+   *   that can be used by AlloyDB connectors to exchange additional metadata with
+   *   the server after TLS handshake.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2417,6 +2441,376 @@ export class AlloyDBAdminClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.alloydb.v1alpha.Cluster,
+      protos.google.cloud.alloydb.v1alpha.OperationMetadata
+    >;
+  }
+  /**
+   * Exports data from the cluster.
+   * Imperative only.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.alloydb.v1alpha.GcsDestination} request.gcsDestination
+   *   Required. Option to export data to cloud storage.
+   * @param {google.cloud.alloydb.v1alpha.ExportClusterRequest.CsvExportOptions} request.csvExportOptions
+   *   Options for exporting data in CSV format. Required field to be set for
+   *   CSV file type.
+   * @param {google.cloud.alloydb.v1alpha.ExportClusterRequest.SqlExportOptions} request.sqlExportOptions
+   *   Options for exporting data in SQL format. Required field to be set for
+   *   SQL file type.
+   * @param {string} request.name
+   *   Required. The resource name of the cluster.
+   * @param {string} request.database
+   *   Required. Name of the database where the export command will be executed.
+   *   Note - Value provided should be the same as expected from
+   *   `SELECT current_database();` and NOT as a resource reference.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alloy_d_b_admin.export_cluster.js</caption>
+   * region_tag:alloydb_v1alpha_generated_AlloyDBAdmin_ExportCluster_async
+   */
+  exportCluster(
+    request?: protos.google.cloud.alloydb.v1alpha.IExportClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.alloydb.v1alpha.IExportClusterResponse,
+        protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportCluster(
+    request: protos.google.cloud.alloydb.v1alpha.IExportClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1alpha.IExportClusterResponse,
+        protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportCluster(
+    request: protos.google.cloud.alloydb.v1alpha.IExportClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1alpha.IExportClusterResponse,
+        protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportCluster(
+    request?: protos.google.cloud.alloydb.v1alpha.IExportClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1alpha.IExportClusterResponse,
+            protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1alpha.IExportClusterResponse,
+        protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.alloydb.v1alpha.IExportClusterResponse,
+        protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1alpha.IExportClusterResponse,
+            protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportCluster request %j', request);
+    return this.innerApiCalls
+      .exportCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1alpha.IExportClusterResponse,
+            protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `exportCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alloy_d_b_admin.export_cluster.js</caption>
+   * region_tag:alloydb_v1alpha_generated_AlloyDBAdmin_ExportCluster_async
+   */
+  async checkExportClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.alloydb.v1alpha.ExportClusterResponse,
+      protos.google.cloud.alloydb.v1alpha.OperationMetadata
+    >
+  > {
+    this._log.info('exportCluster long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportCluster,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.alloydb.v1alpha.ExportClusterResponse,
+      protos.google.cloud.alloydb.v1alpha.OperationMetadata
+    >;
+  }
+  /**
+   * Imports data to the cluster.
+   * Imperative only.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.alloydb.v1alpha.ImportClusterRequest.SqlImportOptions} request.sqlImportOptions
+   *   Options for importing data in SQL format.
+   * @param {google.cloud.alloydb.v1alpha.ImportClusterRequest.CsvImportOptions} request.csvImportOptions
+   *   Options for importing data in CSV format.
+   * @param {string} request.name
+   *   Required. The resource name of the cluster.
+   * @param {string} request.gcsUri
+   *   Required. The path to the file in Google Cloud Storage where the source
+   *   file for import will be stored. The URI is in the form
+   *   `gs://bucketName/fileName`.
+   * @param {string} [request.database]
+   *   Optional. Name of the database to which the import will be done.
+   *   For import from SQL file, this is required only if the file does not
+   *   specify a database.
+   *   Note - Value provided should be the same as expected from `SELECT
+   *   current_database();` and NOT as a resource reference.
+   * @param {string} [request.user]
+   *   Optional. Database user to be used for importing the data.
+   *   Note - Value provided should be the same as expected from
+   *   `SELECT current_user;` and NOT as a resource reference.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alloy_d_b_admin.import_cluster.js</caption>
+   * region_tag:alloydb_v1alpha_generated_AlloyDBAdmin_ImportCluster_async
+   */
+  importCluster(
+    request?: protos.google.cloud.alloydb.v1alpha.IImportClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.alloydb.v1alpha.IImportClusterResponse,
+        protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  importCluster(
+    request: protos.google.cloud.alloydb.v1alpha.IImportClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1alpha.IImportClusterResponse,
+        protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importCluster(
+    request: protos.google.cloud.alloydb.v1alpha.IImportClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1alpha.IImportClusterResponse,
+        protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importCluster(
+    request?: protos.google.cloud.alloydb.v1alpha.IImportClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1alpha.IImportClusterResponse,
+            protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.alloydb.v1alpha.IImportClusterResponse,
+        protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.alloydb.v1alpha.IImportClusterResponse,
+        protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.alloydb.v1alpha.IImportClusterResponse,
+            protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importCluster request %j', request);
+    return this.innerApiCalls
+      .importCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.alloydb.v1alpha.IImportClusterResponse,
+            protos.google.cloud.alloydb.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `importCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alloy_d_b_admin.import_cluster.js</caption>
+   * region_tag:alloydb_v1alpha_generated_AlloyDBAdmin_ImportCluster_async
+   */
+  async checkImportClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.alloydb.v1alpha.ImportClusterResponse,
+      protos.google.cloud.alloydb.v1alpha.OperationMetadata
+    >
+  > {
+    this._log.info('importCluster long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importCluster,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.alloydb.v1alpha.ImportClusterResponse,
       protos.google.cloud.alloydb.v1alpha.OperationMetadata
     >;
   }
@@ -6447,6 +6841,9 @@ export class AlloyDBAdminClient {
    *   If unspecified, server will pick an appropriate default.
    * @param {string} request.pageToken
    *   A token identifying a page of results the server should return.
+   * @param {google.cloud.alloydb.v1alpha.SupportedDatabaseFlag.Scope} [request.scope]
+   *   Optional. The scope for which supported flags are requested. If not
+   *   specified, default is DATABASE.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6579,6 +6976,9 @@ export class AlloyDBAdminClient {
    *   If unspecified, server will pick an appropriate default.
    * @param {string} request.pageToken
    *   A token identifying a page of results the server should return.
+   * @param {google.cloud.alloydb.v1alpha.SupportedDatabaseFlag.Scope} [request.scope]
+   *   Optional. The scope for which supported flags are requested. If not
+   *   specified, default is DATABASE.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -6634,6 +7034,9 @@ export class AlloyDBAdminClient {
    *   If unspecified, server will pick an appropriate default.
    * @param {string} request.pageToken
    *   A token identifying a page of results the server should return.
+   * @param {google.cloud.alloydb.v1alpha.SupportedDatabaseFlag.Scope} [request.scope]
+   *   Optional. The scope for which supported flags are requested. If not
+   *   specified, default is DATABASE.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
