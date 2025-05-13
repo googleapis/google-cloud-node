@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/policy-troubleshooter-iam-v0.6.1...policy-troubleshooter-iam-v0.7.0) (2025-05-13)
+
+
+### Features
+
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/policy-troubleshooter-iam-v0.6.0...policy-troubleshooter-iam-v0.6.1) (2025-03-21)
 
 

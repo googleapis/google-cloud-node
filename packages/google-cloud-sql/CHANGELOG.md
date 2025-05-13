@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.20.1...sql-v0.21.0) (2025-05-13)
+
+
+### Features
+
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [0.20.1](https://github.com/googleapis/google-cloud-node/compare/sql-v0.20.0...sql-v0.20.1) (2025-03-19)
 
 
