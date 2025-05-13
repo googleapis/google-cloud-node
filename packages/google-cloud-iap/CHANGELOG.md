@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/iap-v4.0.1...iap-v4.1.0) (2025-05-09)
+
+
+### Features
+
+* [iap] Identity-aware Proxy (IAP) released a feature `Use IAP with Workforce Identity Federation`(https://cloud.google.com/iap/docs/use-workforce-identity-federation) at Feb 7, 2025. Two settings field are newly introduced in the feature release: ... ([#6251](https://github.com/googleapis/google-cloud-node/issues/6251)) ([9e3878c](https://github.com/googleapis/google-cloud-node/commit/9e3878c2d7343821f441b7954365c90076962aa3))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/iap-v4.0.0...iap-v4.0.1) (2025-03-19)
 
 

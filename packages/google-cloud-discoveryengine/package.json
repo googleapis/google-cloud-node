@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/discoveryengine",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Discovery Engine API client for Node.js",
   "repository": {
     "type": "git",
@@ -42,7 +42,7 @@
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
     "samples-test": "echo 'removing sample tests because they take too long'",
-     "system-test": "echo 'removing system tests because they take too long'",
+    "system-test": "echo 'removing system tests because they take too long'",
     "test": "echo 'removing unit tests because they take too long'"
   },
   "dependencies": {

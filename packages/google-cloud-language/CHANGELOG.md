@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [7.0.2](https://github.com/googleapis/google-cloud-node/compare/language-v7.0.1...language-v7.0.2) (2025-05-09)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/automl to v5 ([#6206](https://github.com/googleapis/google-cloud-node/issues/6206)) ([7c12c9b](https://github.com/googleapis/google-cloud-node/commit/7c12c9b077e24bc91b8d7e3b4e94d44d92905949))
+
 ## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/language-v7.0.0...language-v7.0.1) (2025-03-19)
 
 
