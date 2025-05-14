@@ -1863,6 +1863,852 @@ describe('v2.StorageControlClient', () => {
     });
   });
 
+  describe('getProjectIntelligenceConfig', () => {
+    it('invokes getProjectIntelligenceConfig without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetProjectIntelligenceConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetProjectIntelligenceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceConfig()
+      );
+      client.innerApiCalls.getProjectIntelligenceConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getProjectIntelligenceConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getProjectIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProjectIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProjectIntelligenceConfig without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetProjectIntelligenceConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetProjectIntelligenceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceConfig()
+      );
+      client.innerApiCalls.getProjectIntelligenceConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectIntelligenceConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IIntelligenceConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getProjectIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProjectIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProjectIntelligenceConfig with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetProjectIntelligenceConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetProjectIntelligenceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getProjectIntelligenceConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getProjectIntelligenceConfig(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getProjectIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProjectIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProjectIntelligenceConfig with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetProjectIntelligenceConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetProjectIntelligenceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getProjectIntelligenceConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateProjectIntelligenceConfig', () => {
+    it('invokes updateProjectIntelligenceConfig without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest()
+      );
+      request.intelligenceConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest',
+        ['intelligenceConfig', 'name']
+      );
+      request.intelligenceConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceConfig()
+      );
+      client.innerApiCalls.updateProjectIntelligenceConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateProjectIntelligenceConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateProjectIntelligenceConfig without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest()
+      );
+      request.intelligenceConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest',
+        ['intelligenceConfig', 'name']
+      );
+      request.intelligenceConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceConfig()
+      );
+      client.innerApiCalls.updateProjectIntelligenceConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateProjectIntelligenceConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IIntelligenceConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateProjectIntelligenceConfig with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest()
+      );
+      request.intelligenceConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest',
+        ['intelligenceConfig', 'name']
+      );
+      request.intelligenceConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateProjectIntelligenceConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateProjectIntelligenceConfig(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateProjectIntelligenceConfig with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest()
+      );
+      request.intelligenceConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest',
+        ['intelligenceConfig', 'name']
+      );
+      request.intelligenceConfig.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateProjectIntelligenceConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getFolderIntelligenceConfig', () => {
+    it('invokes getFolderIntelligenceConfig without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetFolderIntelligenceConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetFolderIntelligenceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceConfig()
+      );
+      client.innerApiCalls.getFolderIntelligenceConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getFolderIntelligenceConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getFolderIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getFolderIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getFolderIntelligenceConfig without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetFolderIntelligenceConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetFolderIntelligenceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceConfig()
+      );
+      client.innerApiCalls.getFolderIntelligenceConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getFolderIntelligenceConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IIntelligenceConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getFolderIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getFolderIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getFolderIntelligenceConfig with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetFolderIntelligenceConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetFolderIntelligenceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getFolderIntelligenceConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getFolderIntelligenceConfig(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getFolderIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getFolderIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getFolderIntelligenceConfig with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetFolderIntelligenceConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetFolderIntelligenceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getFolderIntelligenceConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateFolderIntelligenceConfig', () => {
+    it('invokes updateFolderIntelligenceConfig without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest()
+      );
+      request.intelligenceConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest',
+        ['intelligenceConfig', 'name']
+      );
+      request.intelligenceConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceConfig()
+      );
+      client.innerApiCalls.updateFolderIntelligenceConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateFolderIntelligenceConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateFolderIntelligenceConfig without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest()
+      );
+      request.intelligenceConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest',
+        ['intelligenceConfig', 'name']
+      );
+      request.intelligenceConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceConfig()
+      );
+      client.innerApiCalls.updateFolderIntelligenceConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateFolderIntelligenceConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IIntelligenceConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateFolderIntelligenceConfig with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest()
+      );
+      request.intelligenceConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest',
+        ['intelligenceConfig', 'name']
+      );
+      request.intelligenceConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateFolderIntelligenceConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateFolderIntelligenceConfig(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateFolderIntelligenceConfig with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest()
+      );
+      request.intelligenceConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest',
+        ['intelligenceConfig', 'name']
+      );
+      request.intelligenceConfig.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateFolderIntelligenceConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getOrganizationIntelligenceConfig', () => {
+    it('invokes getOrganizationIntelligenceConfig without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceConfig()
+      );
+      client.innerApiCalls.getOrganizationIntelligenceConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.getOrganizationIntelligenceConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getOrganizationIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getOrganizationIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getOrganizationIntelligenceConfig without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceConfig()
+      );
+      client.innerApiCalls.getOrganizationIntelligenceConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getOrganizationIntelligenceConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IIntelligenceConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getOrganizationIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getOrganizationIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getOrganizationIntelligenceConfig with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getOrganizationIntelligenceConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getOrganizationIntelligenceConfig(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getOrganizationIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getOrganizationIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getOrganizationIntelligenceConfig with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getOrganizationIntelligenceConfig(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateOrganizationIntelligenceConfig', () => {
+    it('invokes updateOrganizationIntelligenceConfig without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest()
+      );
+      request.intelligenceConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest',
+        ['intelligenceConfig', 'name']
+      );
+      request.intelligenceConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceConfig()
+      );
+      client.innerApiCalls.updateOrganizationIntelligenceConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.updateOrganizationIntelligenceConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateOrganizationIntelligenceConfig without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest()
+      );
+      request.intelligenceConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest',
+        ['intelligenceConfig', 'name']
+      );
+      request.intelligenceConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.storage.control.v2.IntelligenceConfig()
+      );
+      client.innerApiCalls.updateOrganizationIntelligenceConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateOrganizationIntelligenceConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.storage.control.v2.IIntelligenceConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateOrganizationIntelligenceConfig with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest()
+      );
+      request.intelligenceConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest',
+        ['intelligenceConfig', 'name']
+      );
+      request.intelligenceConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateOrganizationIntelligenceConfig =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.updateOrganizationIntelligenceConfig(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateOrganizationIntelligenceConfig with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest()
+      );
+      request.intelligenceConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest',
+        ['intelligenceConfig', 'name']
+      );
+      request.intelligenceConfig.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateOrganizationIntelligenceConfig(request),
+        expectedError
+      );
+    });
+  });
+
   describe('renameFolder', () => {
     it('invokes renameFolder without error', async () => {
       const client = new storagecontrolModule.v2.StorageControlClient({
@@ -3918,6 +4764,69 @@ describe('v2.StorageControlClient', () => {
       });
     });
 
+    describe('folderLocationIntelligenceConfig', async () => {
+      const fakePath = '/rendered/path/folderLocationIntelligenceConfig';
+      const expectedParameters = {
+        folder: 'folderValue',
+        location: 'locationValue',
+      };
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.folderLocationIntelligenceConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.folderLocationIntelligenceConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('folderLocationIntelligenceConfigPath', () => {
+        const result = client.folderLocationIntelligenceConfigPath(
+          'folderValue',
+          'locationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderLocationIntelligenceConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderLocationIntelligenceConfigName', () => {
+        const result =
+          client.matchFolderFromFolderLocationIntelligenceConfigName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationIntelligenceConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFolderLocationIntelligenceConfigName', () => {
+        const result =
+          client.matchLocationFromFolderLocationIntelligenceConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationIntelligenceConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('managedFolder', async () => {
       const fakePath = '/rendered/path/managedFolder';
       const expectedParameters = {
@@ -3982,6 +4891,67 @@ describe('v2.StorageControlClient', () => {
       });
     });
 
+    describe('orgLocationIntelligenceConfig', async () => {
+      const fakePath = '/rendered/path/orgLocationIntelligenceConfig';
+      const expectedParameters = {
+        org: 'orgValue',
+        location: 'locationValue',
+      };
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.orgLocationIntelligenceConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.orgLocationIntelligenceConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('orgLocationIntelligenceConfigPath', () => {
+        const result = client.orgLocationIntelligenceConfigPath(
+          'orgValue',
+          'locationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.orgLocationIntelligenceConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrgFromOrgLocationIntelligenceConfigName', () => {
+        const result =
+          client.matchOrgFromOrgLocationIntelligenceConfigName(fakePath);
+        assert.strictEqual(result, 'orgValue');
+        assert(
+          (
+            client.pathTemplates.orgLocationIntelligenceConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrgLocationIntelligenceConfigName', () => {
+        const result =
+          client.matchLocationFromOrgLocationIntelligenceConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.orgLocationIntelligenceConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -4014,6 +4984,71 @@ describe('v2.StorageControlClient', () => {
         assert.strictEqual(result, 'projectValue');
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationIntelligenceConfig', async () => {
+      const fakePath = '/rendered/path/projectLocationIntelligenceConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationIntelligenceConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationIntelligenceConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationIntelligenceConfigPath', () => {
+        const result = client.projectLocationIntelligenceConfigPath(
+          'projectValue',
+          'locationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationIntelligenceConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationIntelligenceConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationIntelligenceConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationIntelligenceConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationIntelligenceConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationIntelligenceConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationIntelligenceConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

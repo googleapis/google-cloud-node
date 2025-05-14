@@ -120,6 +120,36 @@
           "timeout_millis": 60000,
           "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
           "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "GetProjectIntelligenceConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "UpdateProjectIntelligenceConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "GetFolderIntelligenceConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "UpdateFolderIntelligenceConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "GetOrganizationIntelligenceConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "UpdateOrganizationIntelligenceConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         }
       }
     }

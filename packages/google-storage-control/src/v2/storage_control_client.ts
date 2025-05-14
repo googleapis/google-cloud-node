@@ -214,12 +214,24 @@ export class StorageControlClient {
       folderPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/buckets/{bucket}/folders/{folder=**}'
       ),
+      folderLocationIntelligenceConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/intelligenceConfig'
+        ),
       managedFolderPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/buckets/{bucket}/managedFolders/{managed_folder=**}'
       ),
+      orgLocationIntelligenceConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{org}/locations/{location}/intelligenceConfig'
+        ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
+      projectLocationIntelligenceConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/intelligenceConfig'
+        ),
       storageLayoutPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/buckets/{bucket}/storageLayout'
       ),
@@ -365,6 +377,12 @@ export class StorageControlClient {
       'resumeAnywhereCache',
       'getAnywhereCache',
       'listAnywhereCaches',
+      'getProjectIntelligenceConfig',
+      'updateProjectIntelligenceConfig',
+      'getFolderIntelligenceConfig',
+      'updateFolderIntelligenceConfig',
+      'getOrganizationIntelligenceConfig',
+      'updateOrganizationIntelligenceConfig',
     ];
     for (const methodName of storageControlStubMethods) {
       const callPromise = this.storageControlStub.then(
@@ -2033,6 +2051,822 @@ export class StorageControlClient {
           {} | undefined,
         ]) => {
           this._log.info('getAnywhereCache response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Returns the Project scoped singleton IntelligenceConfig resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `IntelligenceConfig` resource associated with
+   *   your project.
+   *
+   *   Format: `projects/{id}/locations/global/intelligenceConfig`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceConfig|IntelligenceConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_project_intelligence_config.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetProjectIntelligenceConfig_async
+   */
+  getProjectIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getProjectIntelligenceConfig(
+    request: protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProjectIntelligenceConfig(
+    request: protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProjectIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          | protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getProjectIntelligenceConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          | protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProjectIntelligenceConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProjectIntelligenceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          (
+            | protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProjectIntelligenceConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Updates the Project scoped singleton IntelligenceConfig resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.control.v2.IntelligenceConfig} request.intelligenceConfig
+   *   Required. The `IntelligenceConfig` resource to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The `update_mask` that specifies the fields within the
+   *   `IntelligenceConfig` resource that should be modified by this update. Only
+   *   the listed fields are updated.
+   * @param {string} [request.requestId]
+   *   Optional. The ID that uniquely identifies the request, preventing duplicate
+   *   processing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceConfig|IntelligenceConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_project_intelligence_config.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateProjectIntelligenceConfig_async
+   */
+  updateProjectIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateProjectIntelligenceConfig(
+    request: protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateProjectIntelligenceConfig(
+    request: protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateProjectIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          | protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'intelligence_config.name': request.intelligenceConfig!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateProjectIntelligenceConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          | protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateProjectIntelligenceConfig response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateProjectIntelligenceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          (
+            | protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateProjectIntelligenceConfig response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Returns the Folder scoped singleton IntelligenceConfig resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `IntelligenceConfig` resource associated with
+   *   your folder.
+   *
+   *   Format: `folders/{id}/locations/global/intelligenceConfig`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceConfig|IntelligenceConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_folder_intelligence_config.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetFolderIntelligenceConfig_async
+   */
+  getFolderIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getFolderIntelligenceConfig(
+    request: protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFolderIntelligenceConfig(
+    request: protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFolderIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          | protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getFolderIntelligenceConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          | protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFolderIntelligenceConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFolderIntelligenceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          (
+            | protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getFolderIntelligenceConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Updates the Folder scoped singleton IntelligenceConfig resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.control.v2.IntelligenceConfig} request.intelligenceConfig
+   *   Required. The `IntelligenceConfig` resource to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The `update_mask` that specifies the fields within the
+   *   `IntelligenceConfig` resource that should be modified by this update. Only
+   *   the listed fields are updated.
+   * @param {string} [request.requestId]
+   *   Optional. The ID that uniquely identifies the request, preventing duplicate
+   *   processing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceConfig|IntelligenceConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_folder_intelligence_config.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateFolderIntelligenceConfig_async
+   */
+  updateFolderIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateFolderIntelligenceConfig(
+    request: protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateFolderIntelligenceConfig(
+    request: protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateFolderIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          | protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'intelligence_config.name': request.intelligenceConfig!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateFolderIntelligenceConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          | protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateFolderIntelligenceConfig response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateFolderIntelligenceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          (
+            | protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateFolderIntelligenceConfig response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Returns the Organization scoped singleton IntelligenceConfig resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `IntelligenceConfig` resource associated with
+   *   your organization.
+   *
+   *   Format: `organizations/{org_id}/locations/global/intelligenceConfig`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceConfig|IntelligenceConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_organization_intelligence_config.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetOrganizationIntelligenceConfig_async
+   */
+  getOrganizationIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getOrganizationIntelligenceConfig(
+    request: protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getOrganizationIntelligenceConfig(
+    request: protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getOrganizationIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          | protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getOrganizationIntelligenceConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          | protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getOrganizationIntelligenceConfig response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOrganizationIntelligenceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          (
+            | protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getOrganizationIntelligenceConfig response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Updates the Organization scoped singleton IntelligenceConfig resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storage.control.v2.IntelligenceConfig} request.intelligenceConfig
+   *   Required. The `IntelligenceConfig` resource to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The `update_mask` that specifies the fields within the
+   *   `IntelligenceConfig` resource that should be modified by this update. Only
+   *   the listed fields are updated.
+   * @param {string} [request.requestId]
+   *   Optional. The ID that uniquely identifies the request, preventing duplicate
+   *   processing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.storage.control.v2.IntelligenceConfig|IntelligenceConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.update_organization_intelligence_config.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_UpdateOrganizationIntelligenceConfig_async
+   */
+  updateOrganizationIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateOrganizationIntelligenceConfig(
+    request: protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateOrganizationIntelligenceConfig(
+    request: protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest,
+    callback: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateOrganizationIntelligenceConfig(
+    request?: protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          | protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      | protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.storage.control.v2.IIntelligenceConfig,
+      (
+        | protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'intelligence_config.name': request.intelligenceConfig!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateOrganizationIntelligenceConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          | protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateOrganizationIntelligenceConfig response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateOrganizationIntelligenceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.storage.control.v2.IIntelligenceConfig,
+          (
+            | protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateOrganizationIntelligenceConfig response %j',
+            response
+          );
           return [response, options, rawResponse];
         }
       );
@@ -3854,6 +4688,52 @@ export class StorageControlClient {
   }
 
   /**
+   * Return a fully-qualified folderLocationIntelligenceConfig resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  folderLocationIntelligenceConfigPath(folder: string, location: string) {
+    return this.pathTemplates.folderLocationIntelligenceConfigPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+      }
+    );
+  }
+
+  /**
+   * Parse the folder from FolderLocationIntelligenceConfig resource.
+   *
+   * @param {string} folderLocationIntelligenceConfigName
+   *   A fully-qualified path representing folder_location_intelligenceConfig resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationIntelligenceConfigName(
+    folderLocationIntelligenceConfigName: string
+  ) {
+    return this.pathTemplates.folderLocationIntelligenceConfigPathTemplate.match(
+      folderLocationIntelligenceConfigName
+    ).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationIntelligenceConfig resource.
+   *
+   * @param {string} folderLocationIntelligenceConfigName
+   *   A fully-qualified path representing folder_location_intelligenceConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationIntelligenceConfigName(
+    folderLocationIntelligenceConfigName: string
+  ) {
+    return this.pathTemplates.folderLocationIntelligenceConfigPathTemplate.match(
+      folderLocationIntelligenceConfigName
+    ).location;
+  }
+
+  /**
    * Return a fully-qualified managedFolder resource name string.
    *
    * @param {string} project
@@ -3906,6 +4786,50 @@ export class StorageControlClient {
   }
 
   /**
+   * Return a fully-qualified orgLocationIntelligenceConfig resource name string.
+   *
+   * @param {string} org
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  orgLocationIntelligenceConfigPath(org: string, location: string) {
+    return this.pathTemplates.orgLocationIntelligenceConfigPathTemplate.render({
+      org: org,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the org from OrgLocationIntelligenceConfig resource.
+   *
+   * @param {string} orgLocationIntelligenceConfigName
+   *   A fully-qualified path representing org_location_intelligenceConfig resource.
+   * @returns {string} A string representing the org.
+   */
+  matchOrgFromOrgLocationIntelligenceConfigName(
+    orgLocationIntelligenceConfigName: string
+  ) {
+    return this.pathTemplates.orgLocationIntelligenceConfigPathTemplate.match(
+      orgLocationIntelligenceConfigName
+    ).org;
+  }
+
+  /**
+   * Parse the location from OrgLocationIntelligenceConfig resource.
+   *
+   * @param {string} orgLocationIntelligenceConfigName
+   *   A fully-qualified path representing org_location_intelligenceConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrgLocationIntelligenceConfigName(
+    orgLocationIntelligenceConfigName: string
+  ) {
+    return this.pathTemplates.orgLocationIntelligenceConfigPathTemplate.match(
+      orgLocationIntelligenceConfigName
+    ).location;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -3926,6 +4850,52 @@ export class StorageControlClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationIntelligenceConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationIntelligenceConfigPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationIntelligenceConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationIntelligenceConfig resource.
+   *
+   * @param {string} projectLocationIntelligenceConfigName
+   *   A fully-qualified path representing project_location_intelligenceConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationIntelligenceConfigName(
+    projectLocationIntelligenceConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationIntelligenceConfigPathTemplate.match(
+      projectLocationIntelligenceConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationIntelligenceConfig resource.
+   *
+   * @param {string} projectLocationIntelligenceConfigName
+   *   A fully-qualified path representing project_location_intelligenceConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationIntelligenceConfigName(
+    projectLocationIntelligenceConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationIntelligenceConfigPathTemplate.match(
+      projectLocationIntelligenceConfigName
+    ).location;
   }
 
   /**
