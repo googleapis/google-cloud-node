@@ -127,18 +127,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v2.CaseAttachmentServiceClient', () => {
+describe('v2beta.CaseAttachmentServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient();
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient();
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -150,7 +150,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          caseattachmentserviceModule.v2.CaseAttachmentServiceClient
+          caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient
             .servicePath;
         assert.strictEqual(servicePath, 'cloudsupport.googleapis.com');
         assert(stub.called);
@@ -160,7 +160,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          caseattachmentserviceModule.v2.CaseAttachmentServiceClient
+          caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient
             .apiEndpoint;
         assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
         assert(stub.called);
@@ -169,7 +169,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           universeDomain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -178,7 +178,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           universe_domain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -191,7 +191,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new caseattachmentserviceModule.v2.CaseAttachmentServiceClient();
+            new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'cloudsupport.example.com');
           if (saved) {
@@ -205,7 +205,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+            new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
               universeDomain: 'configured.example.com',
             });
           const servicePath = client.apiEndpoint;
@@ -223,7 +223,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -232,20 +232,20 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('has port', () => {
       const port =
-        caseattachmentserviceModule.v2.CaseAttachmentServiceClient.port;
+        caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient();
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           fallback: true,
         });
       assert(client);
@@ -253,7 +253,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -264,7 +264,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('has close method for the initialized client', done => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -284,7 +284,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -302,7 +302,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -315,7 +315,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -339,24 +339,30 @@ describe('v2.CaseAttachmentServiceClient', () => {
   describe('listAttachments', () => {
     it('invokes listAttachments without error', async () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ListAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ListAttachmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.Attachment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.Attachment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.Attachment()
+        ),
       ];
       client.innerApiCalls.listAttachments = stubSimpleCall(expectedResponse);
       const [response] = await client.listAttachments(request);
@@ -373,24 +379,30 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('invokes listAttachments without error using callback', async () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ListAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ListAttachmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.Attachment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.Attachment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.Attachment()
+        ),
       ];
       client.innerApiCalls.listAttachments =
         stubSimpleCallWithCallback(expectedResponse);
@@ -399,7 +411,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.support.v2.IAttachment[] | null
+            result?: protos.google.cloud.support.v2beta.IAttachment[] | null
           ) => {
             if (err) {
               reject(err);
@@ -423,16 +435,16 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('invokes listAttachments with error', async () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ListAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ListAttachmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -455,33 +467,39 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('invokes listAttachmentsStream without error', async () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ListAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ListAttachmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.Attachment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.Attachment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.Attachment()
+        ),
       ];
       client.descriptors.page.listAttachments.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listAttachmentsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2.Attachment[] = [];
+        const responses: protos.google.cloud.support.v2beta.Attachment[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.support.v2.Attachment) => {
+          (response: protos.google.cloud.support.v2beta.Attachment) => {
             responses.push(response);
           }
         );
@@ -510,16 +528,16 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('invokes listAttachmentsStream with error', async () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ListAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ListAttachmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -529,10 +547,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.listAttachmentsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2.Attachment[] = [];
+        const responses: protos.google.cloud.support.v2beta.Attachment[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.support.v2.Attachment) => {
+          (response: protos.google.cloud.support.v2beta.Attachment) => {
             responses.push(response);
           }
         );
@@ -560,28 +578,34 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('uses async iteration with listAttachments without error', async () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ListAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ListAttachmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.Attachment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.Attachment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.Attachment()
+        ),
       ];
       client.descriptors.page.listAttachments.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.support.v2.IAttachment[] = [];
+      const responses: protos.google.cloud.support.v2beta.IAttachment[] = [];
       const iterable = client.listAttachmentsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -604,16 +628,16 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('uses async iteration with listAttachments with error', async () => {
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ListAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ListAttachmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -623,7 +647,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listAttachmentsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.support.v2.IAttachment[] = [];
+        const responses: protos.google.cloud.support.v2beta.IAttachment[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -652,7 +676,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         case: 'caseValue',
       };
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -710,7 +734,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         attachment_id: 'attachmentIdValue',
       };
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -792,7 +816,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         comment: 'commentValue',
       };
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -864,6 +888,88 @@ describe('v2.CaseAttachmentServiceClient', () => {
       });
     });
 
+    describe('organizationCaseEmailMessage', async () => {
+      const fakePath = '/rendered/path/organizationCaseEmailMessage';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        case: 'caseValue',
+        email_message: 'emailMessageValue',
+      };
+      const client =
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.organizationCaseEmailMessagePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationCaseEmailMessagePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationCaseEmailMessagePath', () => {
+        const result = client.organizationCaseEmailMessagePath(
+          'organizationValue',
+          'caseValue',
+          'emailMessageValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationCaseEmailMessageName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationCaseEmailMessageName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCaseFromOrganizationCaseEmailMessageName', () => {
+        const result =
+          client.matchCaseFromOrganizationCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'caseValue');
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEmailMessageFromOrganizationCaseEmailMessageName', () => {
+        const result =
+          client.matchEmailMessageFromOrganizationCaseEmailMessageName(
+            fakePath
+          );
+        assert.strictEqual(result, 'emailMessageValue');
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectCase', async () => {
       const fakePath = '/rendered/path/projectCase';
       const expectedParameters = {
@@ -871,7 +977,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         case: 'caseValue',
       };
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -922,7 +1028,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         attachment_id: 'attachmentIdValue',
       };
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1002,7 +1108,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         comment: 'commentValue',
       };
       const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1063,6 +1169,86 @@ describe('v2.CaseAttachmentServiceClient', () => {
         assert(
           (
             client.pathTemplates.projectCaseCommentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectCaseEmailMessage', async () => {
+      const fakePath = '/rendered/path/projectCaseEmailMessage';
+      const expectedParameters = {
+        project: 'projectValue',
+        case: 'caseValue',
+        email_message: 'emailMessageValue',
+      };
+      const client =
+        new caseattachmentserviceModule.v2beta.CaseAttachmentServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.projectCaseEmailMessagePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectCaseEmailMessagePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectCaseEmailMessagePath', () => {
+        const result = client.projectCaseEmailMessagePath(
+          'projectValue',
+          'caseValue',
+          'emailMessageValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectCaseEmailMessageName', () => {
+        const result =
+          client.matchProjectFromProjectCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCaseFromProjectCaseEmailMessageName', () => {
+        const result =
+          client.matchCaseFromProjectCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'caseValue');
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEmailMessageFromProjectCaseEmailMessageName', () => {
+        const result =
+          client.matchEmailMessageFromProjectCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'emailMessageValue');
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
               .match as SinonStub
           )
             .getCall(-1)

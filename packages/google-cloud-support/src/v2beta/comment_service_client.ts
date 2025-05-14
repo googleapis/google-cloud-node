@@ -33,18 +33,18 @@ import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v2/case_attachment_service_client_config.json`.
+ * `src/v2beta/comment_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './case_attachment_service_client_config.json';
+import * as gapicConfig from './comment_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  A service to manage file attachments for Google Cloud support cases.
+ *  A service to manage comments on cases.
  * @class
- * @memberof v2
+ * @memberof v2beta
  */
-export class CaseAttachmentServiceClient {
+export class CommentServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -66,10 +66,10 @@ export class CaseAttachmentServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  caseAttachmentServiceStub?: Promise<{[name: string]: Function}>;
+  commentServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of CaseAttachmentServiceClient.
+   * Construct an instance of CommentServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -104,7 +104,7 @@ export class CaseAttachmentServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new CaseAttachmentServiceClient({fallback: true}, gax);
+   *     const client = new CommentServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -112,8 +112,7 @@ export class CaseAttachmentServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof CaseAttachmentServiceClient;
+    const staticMembers = this.constructor as typeof CommentServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -213,6 +212,10 @@ export class CaseAttachmentServiceClient {
       organizationCaseCommentPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/cases/{case}/comments/{comment}'
       ),
+      organizationCaseEmailMessagePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/cases/{case}/emailMessages/{email_message}'
+        ),
       projectCasePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/cases/{case}'
       ),
@@ -222,22 +225,25 @@ export class CaseAttachmentServiceClient {
       projectCaseCommentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/cases/{case}/comments/{comment}'
       ),
+      projectCaseEmailMessagePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/cases/{case}/emailMessages/{email_message}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAttachments: new this._gaxModule.PageDescriptor(
+      listComments: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'attachments'
+        'comments'
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.support.v2.CaseAttachmentService',
+      'google.cloud.support.v2beta.CommentService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -265,28 +271,28 @@ export class CaseAttachmentServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.caseAttachmentServiceStub) {
-      return this.caseAttachmentServiceStub;
+    if (this.commentServiceStub) {
+      return this.commentServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.support.v2.CaseAttachmentService.
-    this.caseAttachmentServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.support.v2beta.CommentService.
+    this.commentServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.support.v2.CaseAttachmentService'
+            'google.cloud.support.v2beta.CommentService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.support.v2.CaseAttachmentService,
+          (this._protos as any).google.cloud.support.v2beta.CommentService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const caseAttachmentServiceStubMethods = ['listAttachments'];
-    for (const methodName of caseAttachmentServiceStubMethods) {
-      const callPromise = this.caseAttachmentServiceStub.then(
+    const commentServiceStubMethods = ['listComments', 'createComment'];
+    for (const methodName of commentServiceStubMethods) {
+      const callPromise = this.commentServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -311,7 +317,7 @@ export class CaseAttachmentServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.caseAttachmentServiceStub;
+    return this.commentServiceStub;
   }
 
   /**
@@ -398,19 +404,25 @@ export class CaseAttachmentServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-
   /**
-   * List all the attachments associated with a support case.
+   * Add a new comment to a case.
+   *
+   * The comment must have the following fields set: `body`.
    *
    * EXAMPLES:
    *
    * cURL:
    *
    * ```shell
-   * case="projects/some-project/cases/23598314"
+   * case="projects/some-project/cases/43591344"
    * curl \
+   *   --request POST \
    *   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-   *   "https://cloudsupport.googleapis.com/v2/$case/attachments"
+   *   --header 'Content-Type: application/json' \
+   *   --data '{
+   *     "body": "This is a test comment."
+   *   }' \
+   *   "https://cloudsupport.googleapis.com/v2/$case/comments"
    * ```
    *
    * Python:
@@ -426,7 +438,161 @@ export class CaseAttachmentServiceClient {
    * )
    * request = (
    *     supportApiService.cases()
-   *     .attachments()
+   *     .comments()
+   *     .create(
+   *         parent="projects/some-project/cases/43595344",
+   *         body={"body": "This is a test comment."},
+   *     )
+   * )
+   * print(request.execute())
+   * ```
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the case to which the comment should be added.
+   * @param {google.cloud.support.v2beta.Comment} request.comment
+   *   Required. The comment to be added.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.support.v2beta.Comment|Comment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/comment_service.create_comment.js</caption>
+   * region_tag:cloudsupport_v2beta_generated_CommentService_CreateComment_async
+   */
+  createComment(
+    request?: protos.google.cloud.support.v2beta.ICreateCommentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.support.v2beta.IComment,
+      protos.google.cloud.support.v2beta.ICreateCommentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createComment(
+    request: protos.google.cloud.support.v2beta.ICreateCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.support.v2beta.IComment,
+      | protos.google.cloud.support.v2beta.ICreateCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createComment(
+    request: protos.google.cloud.support.v2beta.ICreateCommentRequest,
+    callback: Callback<
+      protos.google.cloud.support.v2beta.IComment,
+      | protos.google.cloud.support.v2beta.ICreateCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createComment(
+    request?: protos.google.cloud.support.v2beta.ICreateCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.support.v2beta.IComment,
+          | protos.google.cloud.support.v2beta.ICreateCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.support.v2beta.IComment,
+      | protos.google.cloud.support.v2beta.ICreateCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.support.v2beta.IComment,
+      protos.google.cloud.support.v2beta.ICreateCommentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createComment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.support.v2beta.IComment,
+          | protos.google.cloud.support.v2beta.ICreateCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createComment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.support.v2beta.IComment,
+          protos.google.cloud.support.v2beta.ICreateCommentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createComment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+
+  /**
+   * List all the comments associated with a case.
+   *
+   * EXAMPLES:
+   *
+   * cURL:
+   *
+   * ```shell
+   * case="projects/some-project/cases/43595344"
+   * curl \
+   *   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+   *   "https://cloudsupport.googleapis.com/v2/$case/comments"
+   * ```
+   *
+   * Python:
+   *
+   * ```python
+   * import googleapiclient.discovery
+   *
+   * api_version = "v2"
+   * supportApiService = googleapiclient.discovery.build(
+   *     serviceName="cloudsupport",
+   *     version=api_version,
+   *     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version={api_version}",
+   * )
+   * request = (
+   *     supportApiService.cases()
+   *     .comments()
    *     .list(parent="projects/some-project/cases/43595344")
    * )
    * print(request.execute())
@@ -435,85 +601,78 @@ export class CaseAttachmentServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the case for which attachments should be listed.
+   *   Required. The name of the case for which to list comments.
    * @param {number} request.pageSize
-   *   The maximum number of attachments fetched with each request.
-   *
-   *   If not provided, the default is 10. The maximum page size that will be
-   *   returned is 100.
-   *
-   *   The size of each page can be smaller than the requested page size and can
-   *   include zero. For example, you could request 100 attachments on one page,
-   *   receive 0, and then on the next page, receive 90.
+   *   The maximum number of comments to fetch. Defaults to 10.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
+   *   first page is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.support.v2.Attachment|Attachment}.
+   *   The first element of the array is Array of {@link protos.google.cloud.support.v2beta.Comment|Comment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listAttachmentsAsync()`
+   *   We recommend using `listCommentsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listAttachments(
-    request?: protos.google.cloud.support.v2.IListAttachmentsRequest,
+  listComments(
+    request?: protos.google.cloud.support.v2beta.IListCommentsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.support.v2.IAttachment[],
-      protos.google.cloud.support.v2.IListAttachmentsRequest | null,
-      protos.google.cloud.support.v2.IListAttachmentsResponse,
+      protos.google.cloud.support.v2beta.IComment[],
+      protos.google.cloud.support.v2beta.IListCommentsRequest | null,
+      protos.google.cloud.support.v2beta.IListCommentsResponse,
     ]
   >;
-  listAttachments(
-    request: protos.google.cloud.support.v2.IListAttachmentsRequest,
+  listComments(
+    request: protos.google.cloud.support.v2beta.IListCommentsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.support.v2.IListAttachmentsRequest,
-      | protos.google.cloud.support.v2.IListAttachmentsResponse
+      protos.google.cloud.support.v2beta.IListCommentsRequest,
+      | protos.google.cloud.support.v2beta.IListCommentsResponse
       | null
       | undefined,
-      protos.google.cloud.support.v2.IAttachment
+      protos.google.cloud.support.v2beta.IComment
     >
   ): void;
-  listAttachments(
-    request: protos.google.cloud.support.v2.IListAttachmentsRequest,
+  listComments(
+    request: protos.google.cloud.support.v2beta.IListCommentsRequest,
     callback: PaginationCallback<
-      protos.google.cloud.support.v2.IListAttachmentsRequest,
-      | protos.google.cloud.support.v2.IListAttachmentsResponse
+      protos.google.cloud.support.v2beta.IListCommentsRequest,
+      | protos.google.cloud.support.v2beta.IListCommentsResponse
       | null
       | undefined,
-      protos.google.cloud.support.v2.IAttachment
+      protos.google.cloud.support.v2beta.IComment
     >
   ): void;
-  listAttachments(
-    request?: protos.google.cloud.support.v2.IListAttachmentsRequest,
+  listComments(
+    request?: protos.google.cloud.support.v2beta.IListCommentsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.support.v2.IListAttachmentsRequest,
-          | protos.google.cloud.support.v2.IListAttachmentsResponse
+          protos.google.cloud.support.v2beta.IListCommentsRequest,
+          | protos.google.cloud.support.v2beta.IListCommentsResponse
           | null
           | undefined,
-          protos.google.cloud.support.v2.IAttachment
+          protos.google.cloud.support.v2beta.IComment
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.support.v2.IListAttachmentsRequest,
-      | protos.google.cloud.support.v2.IListAttachmentsResponse
+      protos.google.cloud.support.v2beta.IListCommentsRequest,
+      | protos.google.cloud.support.v2beta.IListCommentsResponse
       | null
       | undefined,
-      protos.google.cloud.support.v2.IAttachment
+      protos.google.cloud.support.v2beta.IComment
     >
   ): Promise<
     [
-      protos.google.cloud.support.v2.IAttachment[],
-      protos.google.cloud.support.v2.IListAttachmentsRequest | null,
-      protos.google.cloud.support.v2.IListAttachmentsResponse,
+      protos.google.cloud.support.v2beta.IComment[],
+      protos.google.cloud.support.v2beta.IListCommentsRequest | null,
+      protos.google.cloud.support.v2beta.IListCommentsResponse,
     ]
   > | void {
     request = request || {};
@@ -536,64 +695,57 @@ export class CaseAttachmentServiceClient {
     });
     const wrappedCallback:
       | PaginationCallback<
-          protos.google.cloud.support.v2.IListAttachmentsRequest,
-          | protos.google.cloud.support.v2.IListAttachmentsResponse
+          protos.google.cloud.support.v2beta.IListCommentsRequest,
+          | protos.google.cloud.support.v2beta.IListCommentsResponse
           | null
           | undefined,
-          protos.google.cloud.support.v2.IAttachment
+          protos.google.cloud.support.v2beta.IComment
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAttachments values %j', values);
+          this._log.info('listComments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAttachments request %j', request);
+    this._log.info('listComments request %j', request);
     return this.innerApiCalls
-      .listAttachments(request, options, wrappedCallback)
+      .listComments(request, options, wrappedCallback)
       ?.then(
         ([response, input, output]: [
-          protos.google.cloud.support.v2.IAttachment[],
-          protos.google.cloud.support.v2.IListAttachmentsRequest | null,
-          protos.google.cloud.support.v2.IListAttachmentsResponse,
+          protos.google.cloud.support.v2beta.IComment[],
+          protos.google.cloud.support.v2beta.IListCommentsRequest | null,
+          protos.google.cloud.support.v2beta.IListCommentsResponse,
         ]) => {
-          this._log.info('listAttachments values %j', response);
+          this._log.info('listComments values %j', response);
           return [response, input, output];
         }
       );
   }
 
   /**
-   * Equivalent to `listAttachments`, but returns a NodeJS Stream object.
+   * Equivalent to `listComments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the case for which attachments should be listed.
+   *   Required. The name of the case for which to list comments.
    * @param {number} request.pageSize
-   *   The maximum number of attachments fetched with each request.
-   *
-   *   If not provided, the default is 10. The maximum page size that will be
-   *   returned is 100.
-   *
-   *   The size of each page can be smaller than the requested page size and can
-   *   include zero. For example, you could request 100 attachments on one page,
-   *   receive 0, and then on the next page, receive 90.
+   *   The maximum number of comments to fetch. Defaults to 10.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
+   *   first page is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.support.v2.Attachment|Attachment} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.support.v2beta.Comment|Comment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAttachmentsAsync()`
+   *   We recommend using `listCommentsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listAttachmentsStream(
-    request?: protos.google.cloud.support.v2.IListAttachmentsRequest,
+  listCommentsStream(
+    request?: protos.google.cloud.support.v2beta.IListCommentsRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -604,55 +756,48 @@ export class CaseAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listAttachments'];
+    const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAttachments stream %j', request);
-    return this.descriptors.page.listAttachments.createStream(
-      this.innerApiCalls.listAttachments as GaxCall,
+    this._log.info('listComments stream %j', request);
+    return this.descriptors.page.listComments.createStream(
+      this.innerApiCalls.listComments as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listAttachments`, but returns an iterable object.
+   * Equivalent to `listComments`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the case for which attachments should be listed.
+   *   Required. The name of the case for which to list comments.
    * @param {number} request.pageSize
-   *   The maximum number of attachments fetched with each request.
-   *
-   *   If not provided, the default is 10. The maximum page size that will be
-   *   returned is 100.
-   *
-   *   The size of each page can be smaller than the requested page size and can
-   *   include zero. For example, you could request 100 attachments on one page,
-   *   receive 0, and then on the next page, receive 90.
+   *   The maximum number of comments to fetch. Defaults to 10.
    * @param {string} request.pageToken
    *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
+   *   first page is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.support.v2.Attachment|Attachment}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.support.v2beta.Comment|Comment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/case_attachment_service.list_attachments.js</caption>
-   * region_tag:cloudsupport_v2_generated_CaseAttachmentService_ListAttachments_async
+   * @example <caption>include:samples/generated/v2beta/comment_service.list_comments.js</caption>
+   * region_tag:cloudsupport_v2beta_generated_CommentService_ListComments_async
    */
-  listAttachmentsAsync(
-    request?: protos.google.cloud.support.v2.IListAttachmentsRequest,
+  listCommentsAsync(
+    request?: protos.google.cloud.support.v2beta.IListCommentsRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.support.v2.IAttachment> {
+  ): AsyncIterable<protos.google.cloud.support.v2beta.IComment> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -661,17 +806,17 @@ export class CaseAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listAttachments'];
+    const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAttachments iterate %j', request);
-    return this.descriptors.page.listAttachments.asyncIterate(
-      this.innerApiCalls['listAttachments'] as GaxCall,
+    this._log.info('listComments iterate %j', request);
+    return this.descriptors.page.listComments.asyncIterate(
+      this.innerApiCalls['listComments'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.support.v2.IAttachment>;
+    ) as AsyncIterable<protos.google.cloud.support.v2beta.IComment>;
   }
   // --------------------
   // -- Path templates --
@@ -848,6 +993,71 @@ export class CaseAttachmentServiceClient {
   }
 
   /**
+   * Return a fully-qualified organizationCaseEmailMessage resource name string.
+   *
+   * @param {string} organization
+   * @param {string} caseParam
+   * @param {string} email_message
+   * @returns {string} Resource name string.
+   */
+  organizationCaseEmailMessagePath(
+    organization: string,
+    caseParam: string,
+    emailMessage: string
+  ) {
+    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.render({
+      organization: organization,
+      case: caseParam,
+      email_message: emailMessage,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationCaseEmailMessage resource.
+   *
+   * @param {string} organizationCaseEmailMessageName
+   *   A fully-qualified path representing organization_case_email_message resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationCaseEmailMessageName(
+    organizationCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.match(
+      organizationCaseEmailMessageName
+    ).organization;
+  }
+
+  /**
+   * Parse the case from OrganizationCaseEmailMessage resource.
+   *
+   * @param {string} organizationCaseEmailMessageName
+   *   A fully-qualified path representing organization_case_email_message resource.
+   * @returns {string} A string representing the case.
+   */
+  matchCaseFromOrganizationCaseEmailMessageName(
+    organizationCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.match(
+      organizationCaseEmailMessageName
+    ).case;
+  }
+
+  /**
+   * Parse the email_message from OrganizationCaseEmailMessage resource.
+   *
+   * @param {string} organizationCaseEmailMessageName
+   *   A fully-qualified path representing organization_case_email_message resource.
+   * @returns {string} A string representing the email_message.
+   */
+  matchEmailMessageFromOrganizationCaseEmailMessageName(
+    organizationCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.match(
+      organizationCaseEmailMessageName
+    ).email_message;
+  }
+
+  /**
    * Return a fully-qualified projectCase resource name string.
    *
    * @param {string} project
@@ -1006,14 +1216,79 @@ export class CaseAttachmentServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectCaseEmailMessage resource name string.
+   *
+   * @param {string} project
+   * @param {string} caseParam
+   * @param {string} email_message
+   * @returns {string} Resource name string.
+   */
+  projectCaseEmailMessagePath(
+    project: string,
+    caseParam: string,
+    emailMessage: string
+  ) {
+    return this.pathTemplates.projectCaseEmailMessagePathTemplate.render({
+      project: project,
+      case: caseParam,
+      email_message: emailMessage,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectCaseEmailMessage resource.
+   *
+   * @param {string} projectCaseEmailMessageName
+   *   A fully-qualified path representing project_case_email_message resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectCaseEmailMessageName(
+    projectCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.projectCaseEmailMessagePathTemplate.match(
+      projectCaseEmailMessageName
+    ).project;
+  }
+
+  /**
+   * Parse the case from ProjectCaseEmailMessage resource.
+   *
+   * @param {string} projectCaseEmailMessageName
+   *   A fully-qualified path representing project_case_email_message resource.
+   * @returns {string} A string representing the case.
+   */
+  matchCaseFromProjectCaseEmailMessageName(
+    projectCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.projectCaseEmailMessagePathTemplate.match(
+      projectCaseEmailMessageName
+    ).case;
+  }
+
+  /**
+   * Parse the email_message from ProjectCaseEmailMessage resource.
+   *
+   * @param {string} projectCaseEmailMessageName
+   *   A fully-qualified path representing project_case_email_message resource.
+   * @returns {string} A string representing the email_message.
+   */
+  matchEmailMessageFromProjectCaseEmailMessageName(
+    projectCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.projectCaseEmailMessagePathTemplate.match(
+      projectCaseEmailMessageName
+    ).email_message;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.caseAttachmentServiceStub && !this._terminated) {
-      return this.caseAttachmentServiceStub.then(stub => {
+    if (this.commentServiceStub && !this._terminated) {
+      return this.commentServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

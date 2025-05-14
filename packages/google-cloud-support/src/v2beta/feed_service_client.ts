@@ -33,18 +33,18 @@ import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v2/case_attachment_service_client_config.json`.
+ * `src/v2beta/feed_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './case_attachment_service_client_config.json';
+import * as gapicConfig from './feed_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  A service to manage file attachments for Google Cloud support cases.
+ *  A service to view case feed items.
  * @class
- * @memberof v2
+ * @memberof v2beta
  */
-export class CaseAttachmentServiceClient {
+export class FeedServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -66,10 +66,10 @@ export class CaseAttachmentServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  caseAttachmentServiceStub?: Promise<{[name: string]: Function}>;
+  feedServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of CaseAttachmentServiceClient.
+   * Construct an instance of FeedServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -104,7 +104,7 @@ export class CaseAttachmentServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new CaseAttachmentServiceClient({fallback: true}, gax);
+   *     const client = new FeedServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -112,8 +112,7 @@ export class CaseAttachmentServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof CaseAttachmentServiceClient;
+    const staticMembers = this.constructor as typeof FeedServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -213,6 +212,10 @@ export class CaseAttachmentServiceClient {
       organizationCaseCommentPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/cases/{case}/comments/{comment}'
       ),
+      organizationCaseEmailMessagePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/cases/{case}/emailMessages/{email_message}'
+        ),
       projectCasePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/cases/{case}'
       ),
@@ -222,22 +225,25 @@ export class CaseAttachmentServiceClient {
       projectCaseCommentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/cases/{case}/comments/{comment}'
       ),
+      projectCaseEmailMessagePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/cases/{case}/emailMessages/{email_message}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAttachments: new this._gaxModule.PageDescriptor(
+      showFeed: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'attachments'
+        'feedItems'
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.support.v2.CaseAttachmentService',
+      'google.cloud.support.v2beta.FeedService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -265,28 +271,28 @@ export class CaseAttachmentServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.caseAttachmentServiceStub) {
-      return this.caseAttachmentServiceStub;
+    if (this.feedServiceStub) {
+      return this.feedServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.support.v2.CaseAttachmentService.
-    this.caseAttachmentServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.support.v2beta.FeedService.
+    this.feedServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.support.v2.CaseAttachmentService'
+            'google.cloud.support.v2beta.FeedService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.support.v2.CaseAttachmentService,
+          (this._protos as any).google.cloud.support.v2beta.FeedService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const caseAttachmentServiceStubMethods = ['listAttachments'];
-    for (const methodName of caseAttachmentServiceStubMethods) {
-      const callPromise = this.caseAttachmentServiceStub.then(
+    const feedServiceStubMethods = ['showFeed'];
+    for (const methodName of feedServiceStubMethods) {
+      const callPromise = this.feedServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -311,7 +317,7 @@ export class CaseAttachmentServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.caseAttachmentServiceStub;
+    return this.feedServiceStub;
   }
 
   /**
@@ -400,120 +406,86 @@ export class CaseAttachmentServiceClient {
   // -------------------
 
   /**
-   * List all the attachments associated with a support case.
-   *
-   * EXAMPLES:
-   *
-   * cURL:
-   *
-   * ```shell
-   * case="projects/some-project/cases/23598314"
-   * curl \
-   *   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-   *   "https://cloudsupport.googleapis.com/v2/$case/attachments"
-   * ```
-   *
-   * Python:
-   *
-   * ```python
-   * import googleapiclient.discovery
-   *
-   * api_version = "v2"
-   * supportApiService = googleapiclient.discovery.build(
-   *     serviceName="cloudsupport",
-   *     version=api_version,
-   *     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version={api_version}",
-   * )
-   * request = (
-   *     supportApiService.cases()
-   *     .attachments()
-   *     .list(parent="projects/some-project/cases/43595344")
-   * )
-   * print(request.execute())
-   * ```
+   * Show items in the feed of this case, including case emails,
+   * attachments, and comments.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the case for which attachments should be listed.
-   * @param {number} request.pageSize
-   *   The maximum number of attachments fetched with each request.
+   *   Required. The resource name of the case for which feed items should be
+   *   listed.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to order feed items by, followed by `asc` or `desc`
+   *   postfix. The only valid field is
+   *   `creation_time`. This list is case-insensitive, default sorting order is
+   *   ascending, and the redundant space characters are insignificant.
    *
-   *   If not provided, the default is 10. The maximum page size that will be
-   *   returned is 100.
-   *
-   *   The size of each page can be smaller than the requested page size and can
-   *   include zero. For example, you could request 100 attachments on one page,
-   *   receive 0, and then on the next page, receive 90.
-   * @param {string} request.pageToken
-   *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
+   *   Example: `creation_time desc`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of feed items fetched with each request.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying the page of results to return. If
+   *   unspecified, it retrieves the first page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.support.v2.Attachment|Attachment}.
+   *   The first element of the array is Array of {@link protos.google.cloud.support.v2beta.FeedItem|FeedItem}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listAttachmentsAsync()`
+   *   We recommend using `showFeedAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listAttachments(
-    request?: protos.google.cloud.support.v2.IListAttachmentsRequest,
+  showFeed(
+    request?: protos.google.cloud.support.v2beta.IShowFeedRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.support.v2.IAttachment[],
-      protos.google.cloud.support.v2.IListAttachmentsRequest | null,
-      protos.google.cloud.support.v2.IListAttachmentsResponse,
+      protos.google.cloud.support.v2beta.IFeedItem[],
+      protos.google.cloud.support.v2beta.IShowFeedRequest | null,
+      protos.google.cloud.support.v2beta.IShowFeedResponse,
     ]
   >;
-  listAttachments(
-    request: protos.google.cloud.support.v2.IListAttachmentsRequest,
+  showFeed(
+    request: protos.google.cloud.support.v2beta.IShowFeedRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.support.v2.IListAttachmentsRequest,
-      | protos.google.cloud.support.v2.IListAttachmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.support.v2.IAttachment
+      protos.google.cloud.support.v2beta.IShowFeedRequest,
+      protos.google.cloud.support.v2beta.IShowFeedResponse | null | undefined,
+      protos.google.cloud.support.v2beta.IFeedItem
     >
   ): void;
-  listAttachments(
-    request: protos.google.cloud.support.v2.IListAttachmentsRequest,
+  showFeed(
+    request: protos.google.cloud.support.v2beta.IShowFeedRequest,
     callback: PaginationCallback<
-      protos.google.cloud.support.v2.IListAttachmentsRequest,
-      | protos.google.cloud.support.v2.IListAttachmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.support.v2.IAttachment
+      protos.google.cloud.support.v2beta.IShowFeedRequest,
+      protos.google.cloud.support.v2beta.IShowFeedResponse | null | undefined,
+      protos.google.cloud.support.v2beta.IFeedItem
     >
   ): void;
-  listAttachments(
-    request?: protos.google.cloud.support.v2.IListAttachmentsRequest,
+  showFeed(
+    request?: protos.google.cloud.support.v2beta.IShowFeedRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.support.v2.IListAttachmentsRequest,
-          | protos.google.cloud.support.v2.IListAttachmentsResponse
+          protos.google.cloud.support.v2beta.IShowFeedRequest,
+          | protos.google.cloud.support.v2beta.IShowFeedResponse
           | null
           | undefined,
-          protos.google.cloud.support.v2.IAttachment
+          protos.google.cloud.support.v2beta.IFeedItem
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.support.v2.IListAttachmentsRequest,
-      | protos.google.cloud.support.v2.IListAttachmentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.support.v2.IAttachment
+      protos.google.cloud.support.v2beta.IShowFeedRequest,
+      protos.google.cloud.support.v2beta.IShowFeedResponse | null | undefined,
+      protos.google.cloud.support.v2beta.IFeedItem
     >
   ): Promise<
     [
-      protos.google.cloud.support.v2.IAttachment[],
-      protos.google.cloud.support.v2.IListAttachmentsRequest | null,
-      protos.google.cloud.support.v2.IListAttachmentsResponse,
+      protos.google.cloud.support.v2beta.IFeedItem[],
+      protos.google.cloud.support.v2beta.IShowFeedRequest | null,
+      protos.google.cloud.support.v2beta.IShowFeedResponse,
     ]
   > | void {
     request = request || {};
@@ -536,64 +508,65 @@ export class CaseAttachmentServiceClient {
     });
     const wrappedCallback:
       | PaginationCallback<
-          protos.google.cloud.support.v2.IListAttachmentsRequest,
-          | protos.google.cloud.support.v2.IListAttachmentsResponse
+          protos.google.cloud.support.v2beta.IShowFeedRequest,
+          | protos.google.cloud.support.v2beta.IShowFeedResponse
           | null
           | undefined,
-          protos.google.cloud.support.v2.IAttachment
+          protos.google.cloud.support.v2beta.IFeedItem
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listAttachments values %j', values);
+          this._log.info('showFeed values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listAttachments request %j', request);
+    this._log.info('showFeed request %j', request);
     return this.innerApiCalls
-      .listAttachments(request, options, wrappedCallback)
+      .showFeed(request, options, wrappedCallback)
       ?.then(
         ([response, input, output]: [
-          protos.google.cloud.support.v2.IAttachment[],
-          protos.google.cloud.support.v2.IListAttachmentsRequest | null,
-          protos.google.cloud.support.v2.IListAttachmentsResponse,
+          protos.google.cloud.support.v2beta.IFeedItem[],
+          protos.google.cloud.support.v2beta.IShowFeedRequest | null,
+          protos.google.cloud.support.v2beta.IShowFeedResponse,
         ]) => {
-          this._log.info('listAttachments values %j', response);
+          this._log.info('showFeed values %j', response);
           return [response, input, output];
         }
       );
   }
 
   /**
-   * Equivalent to `listAttachments`, but returns a NodeJS Stream object.
+   * Equivalent to `showFeed`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the case for which attachments should be listed.
-   * @param {number} request.pageSize
-   *   The maximum number of attachments fetched with each request.
+   *   Required. The resource name of the case for which feed items should be
+   *   listed.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to order feed items by, followed by `asc` or `desc`
+   *   postfix. The only valid field is
+   *   `creation_time`. This list is case-insensitive, default sorting order is
+   *   ascending, and the redundant space characters are insignificant.
    *
-   *   If not provided, the default is 10. The maximum page size that will be
-   *   returned is 100.
-   *
-   *   The size of each page can be smaller than the requested page size and can
-   *   include zero. For example, you could request 100 attachments on one page,
-   *   receive 0, and then on the next page, receive 90.
-   * @param {string} request.pageToken
-   *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
+   *   Example: `creation_time desc`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of feed items fetched with each request.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying the page of results to return. If
+   *   unspecified, it retrieves the first page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.support.v2.Attachment|Attachment} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.support.v2beta.FeedItem|FeedItem} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAttachmentsAsync()`
+   *   We recommend using `showFeedAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listAttachmentsStream(
-    request?: protos.google.cloud.support.v2.IListAttachmentsRequest,
+  showFeedStream(
+    request?: protos.google.cloud.support.v2beta.IShowFeedRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -604,55 +577,56 @@ export class CaseAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listAttachments'];
+    const defaultCallSettings = this._defaults['showFeed'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAttachments stream %j', request);
-    return this.descriptors.page.listAttachments.createStream(
-      this.innerApiCalls.listAttachments as GaxCall,
+    this._log.info('showFeed stream %j', request);
+    return this.descriptors.page.showFeed.createStream(
+      this.innerApiCalls.showFeed as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listAttachments`, but returns an iterable object.
+   * Equivalent to `showFeed`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the case for which attachments should be listed.
-   * @param {number} request.pageSize
-   *   The maximum number of attachments fetched with each request.
+   *   Required. The resource name of the case for which feed items should be
+   *   listed.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to order feed items by, followed by `asc` or `desc`
+   *   postfix. The only valid field is
+   *   `creation_time`. This list is case-insensitive, default sorting order is
+   *   ascending, and the redundant space characters are insignificant.
    *
-   *   If not provided, the default is 10. The maximum page size that will be
-   *   returned is 100.
-   *
-   *   The size of each page can be smaller than the requested page size and can
-   *   include zero. For example, you could request 100 attachments on one page,
-   *   receive 0, and then on the next page, receive 90.
-   * @param {string} request.pageToken
-   *   A token identifying the page of results to return. If unspecified, the
-   *   first page is retrieved.
+   *   Example: `creation_time desc`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of feed items fetched with each request.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying the page of results to return. If
+   *   unspecified, it retrieves the first page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.support.v2.Attachment|Attachment}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.support.v2beta.FeedItem|FeedItem}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/case_attachment_service.list_attachments.js</caption>
-   * region_tag:cloudsupport_v2_generated_CaseAttachmentService_ListAttachments_async
+   * @example <caption>include:samples/generated/v2beta/feed_service.show_feed.js</caption>
+   * region_tag:cloudsupport_v2beta_generated_FeedService_ShowFeed_async
    */
-  listAttachmentsAsync(
-    request?: protos.google.cloud.support.v2.IListAttachmentsRequest,
+  showFeedAsync(
+    request?: protos.google.cloud.support.v2beta.IShowFeedRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.support.v2.IAttachment> {
+  ): AsyncIterable<protos.google.cloud.support.v2beta.IFeedItem> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -661,17 +635,17 @@ export class CaseAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listAttachments'];
+    const defaultCallSettings = this._defaults['showFeed'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listAttachments iterate %j', request);
-    return this.descriptors.page.listAttachments.asyncIterate(
-      this.innerApiCalls['listAttachments'] as GaxCall,
+    this._log.info('showFeed iterate %j', request);
+    return this.descriptors.page.showFeed.asyncIterate(
+      this.innerApiCalls['showFeed'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.support.v2.IAttachment>;
+    ) as AsyncIterable<protos.google.cloud.support.v2beta.IFeedItem>;
   }
   // --------------------
   // -- Path templates --
@@ -848,6 +822,71 @@ export class CaseAttachmentServiceClient {
   }
 
   /**
+   * Return a fully-qualified organizationCaseEmailMessage resource name string.
+   *
+   * @param {string} organization
+   * @param {string} caseParam
+   * @param {string} email_message
+   * @returns {string} Resource name string.
+   */
+  organizationCaseEmailMessagePath(
+    organization: string,
+    caseParam: string,
+    emailMessage: string
+  ) {
+    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.render({
+      organization: organization,
+      case: caseParam,
+      email_message: emailMessage,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationCaseEmailMessage resource.
+   *
+   * @param {string} organizationCaseEmailMessageName
+   *   A fully-qualified path representing organization_case_email_message resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationCaseEmailMessageName(
+    organizationCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.match(
+      organizationCaseEmailMessageName
+    ).organization;
+  }
+
+  /**
+   * Parse the case from OrganizationCaseEmailMessage resource.
+   *
+   * @param {string} organizationCaseEmailMessageName
+   *   A fully-qualified path representing organization_case_email_message resource.
+   * @returns {string} A string representing the case.
+   */
+  matchCaseFromOrganizationCaseEmailMessageName(
+    organizationCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.match(
+      organizationCaseEmailMessageName
+    ).case;
+  }
+
+  /**
+   * Parse the email_message from OrganizationCaseEmailMessage resource.
+   *
+   * @param {string} organizationCaseEmailMessageName
+   *   A fully-qualified path representing organization_case_email_message resource.
+   * @returns {string} A string representing the email_message.
+   */
+  matchEmailMessageFromOrganizationCaseEmailMessageName(
+    organizationCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.match(
+      organizationCaseEmailMessageName
+    ).email_message;
+  }
+
+  /**
    * Return a fully-qualified projectCase resource name string.
    *
    * @param {string} project
@@ -1006,14 +1045,79 @@ export class CaseAttachmentServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectCaseEmailMessage resource name string.
+   *
+   * @param {string} project
+   * @param {string} caseParam
+   * @param {string} email_message
+   * @returns {string} Resource name string.
+   */
+  projectCaseEmailMessagePath(
+    project: string,
+    caseParam: string,
+    emailMessage: string
+  ) {
+    return this.pathTemplates.projectCaseEmailMessagePathTemplate.render({
+      project: project,
+      case: caseParam,
+      email_message: emailMessage,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectCaseEmailMessage resource.
+   *
+   * @param {string} projectCaseEmailMessageName
+   *   A fully-qualified path representing project_case_email_message resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectCaseEmailMessageName(
+    projectCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.projectCaseEmailMessagePathTemplate.match(
+      projectCaseEmailMessageName
+    ).project;
+  }
+
+  /**
+   * Parse the case from ProjectCaseEmailMessage resource.
+   *
+   * @param {string} projectCaseEmailMessageName
+   *   A fully-qualified path representing project_case_email_message resource.
+   * @returns {string} A string representing the case.
+   */
+  matchCaseFromProjectCaseEmailMessageName(
+    projectCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.projectCaseEmailMessagePathTemplate.match(
+      projectCaseEmailMessageName
+    ).case;
+  }
+
+  /**
+   * Parse the email_message from ProjectCaseEmailMessage resource.
+   *
+   * @param {string} projectCaseEmailMessageName
+   *   A fully-qualified path representing project_case_email_message resource.
+   * @returns {string} A string representing the email_message.
+   */
+  matchEmailMessageFromProjectCaseEmailMessageName(
+    projectCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.projectCaseEmailMessagePathTemplate.match(
+      projectCaseEmailMessageName
+    ).email_message;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.caseAttachmentServiceStub && !this._terminated) {
-      return this.caseAttachmentServiceStub.then(stub => {
+    if (this.feedServiceStub && !this._terminated) {
+      return this.feedServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

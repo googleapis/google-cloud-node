@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as caseattachmentserviceModule from '../src';
+import * as commentserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -127,18 +127,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v2.CaseAttachmentServiceClient', () => {
+describe('v2beta.CommentServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient();
+      const client = new commentserviceModule.v2beta.CommentServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient();
+      const client = new commentserviceModule.v2beta.CommentServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -150,8 +148,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          caseattachmentserviceModule.v2.CaseAttachmentServiceClient
-            .servicePath;
+          commentserviceModule.v2beta.CommentServiceClient.servicePath;
         assert.strictEqual(servicePath, 'cloudsupport.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -160,27 +157,24 @@ describe('v2.CaseAttachmentServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          caseattachmentserviceModule.v2.CaseAttachmentServiceClient
-            .apiEndpoint;
+          commentserviceModule.v2beta.CommentServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          universeDomain: 'example.com',
-        });
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        universeDomain: 'example.com',
+      });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudsupport.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          universe_domain: 'example.com',
-        });
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        universe_domain: 'example.com',
+      });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudsupport.example.com');
     });
@@ -190,8 +184,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new caseattachmentserviceModule.v2.CaseAttachmentServiceClient();
+          const client = new commentserviceModule.v2beta.CommentServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'cloudsupport.example.com');
           if (saved) {
@@ -204,10 +197,9 @@ describe('v2.CaseAttachmentServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-              universeDomain: 'configured.example.com',
-            });
+          const client = new commentserviceModule.v2beta.CommentServiceClient({
+            universeDomain: 'configured.example.com',
+          });
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
             servicePath,
@@ -223,7 +215,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new commentserviceModule.v2beta.CommentServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -231,47 +223,42 @@ describe('v2.CaseAttachmentServiceClient', () => {
     });
 
     it('has port', () => {
-      const port =
-        caseattachmentserviceModule.v2.CaseAttachmentServiceClient.port;
+      const port = commentserviceModule.v2beta.CommentServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient();
+      const client = new commentserviceModule.v2beta.CommentServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          fallback: true,
-        });
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        fallback: true,
+      });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.caseAttachmentServiceStub, undefined);
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.commentServiceStub, undefined);
       await client.initialize();
-      assert(client.caseAttachmentServiceStub);
+      assert(client.commentServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize().catch(err => {
         throw err;
       });
-      assert(client.caseAttachmentServiceStub);
+      assert(client.commentServiceStub);
       client
         .close()
         .then(() => {
@@ -283,12 +270,11 @@ describe('v2.CaseAttachmentServiceClient', () => {
     });
 
     it('has close method for the non-initialized client', done => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.caseAttachmentServiceStub, undefined);
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.commentServiceStub, undefined);
       client
         .close()
         .then(() => {
@@ -301,11 +287,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -314,11 +299,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -336,70 +320,64 @@ describe('v2.CaseAttachmentServiceClient', () => {
     });
   });
 
-  describe('listAttachments', () => {
-    it('invokes listAttachments without error', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+  describe('createComment', () => {
+    it('invokes createComment without error', async () => {
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.CreateCommentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.CreateCommentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-      ];
-      client.innerApiCalls.listAttachments = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAttachments(request);
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.support.v2beta.Comment()
+      );
+      client.innerApiCalls.createComment = stubSimpleCall(expectedResponse);
+      const [response] = await client.createComment(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listAttachments as SinonStub
+        client.innerApiCalls.createComment as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listAttachments as SinonStub
+        client.innerApiCalls.createComment as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listAttachments without error using callback', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes createComment without error using callback', async () => {
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.CreateCommentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.CreateCommentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-      ];
-      client.innerApiCalls.listAttachments =
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.support.v2beta.Comment()
+      );
+      client.innerApiCalls.createComment =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listAttachments(
+        client.createComment(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.support.v2.IAttachment[] | null
+            result?: protos.google.cloud.support.v2beta.IComment | null
           ) => {
             if (err) {
               reject(err);
@@ -412,76 +390,210 @@ describe('v2.CaseAttachmentServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listAttachments as SinonStub
+        client.innerApiCalls.createComment as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listAttachments as SinonStub
+        client.innerApiCalls.createComment as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listAttachments with error', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes createComment with error', async () => {
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.CreateCommentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.CreateCommentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listAttachments = stubSimpleCall(
+      client.innerApiCalls.createComment = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.listAttachments(request), expectedError);
+      await assert.rejects(client.createComment(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.listAttachments as SinonStub
+        client.innerApiCalls.createComment as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listAttachments as SinonStub
+        client.innerApiCalls.createComment as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listAttachmentsStream without error', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes createComment with closed client', async () => {
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.CreateCommentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.CreateCommentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createComment(request), expectedError);
+    });
+  });
+
+  describe('listComments', () => {
+    it('invokes listComments without error', async () => {
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.support.v2beta.ListCommentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.support.v2beta.ListCommentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
       ];
-      client.descriptors.page.listAttachments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAttachmentsStream(request);
+      client.innerApiCalls.listComments = stubSimpleCall(expectedResponse);
+      const [response] = await client.listComments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listComments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listComments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listComments without error using callback', async () => {
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.support.v2beta.ListCommentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.support.v2beta.ListCommentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+      ];
+      client.innerApiCalls.listComments =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2.Attachment[] = [];
+        client.listComments(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.support.v2beta.IComment[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listComments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listComments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listComments with error', async () => {
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.support.v2beta.ListCommentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.support.v2beta.ListCommentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listComments = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listComments(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listComments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listComments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listCommentsStream without error', async () => {
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.support.v2beta.ListCommentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.support.v2beta.ListCommentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+      ];
+      client.descriptors.page.listComments.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listCommentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.support.v2beta.Comment[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.support.v2.Attachment) => {
+          (response: protos.google.cloud.support.v2beta.Comment) => {
             responses.push(response);
           }
         );
@@ -495,12 +607,12 @@ describe('v2.CaseAttachmentServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listAttachments.createStream as SinonStub)
+        (client.descriptors.page.listComments.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAttachments, request)
+          .calledWith(client.innerApiCalls.listComments, request)
       );
       assert(
-        (client.descriptors.page.listAttachments.createStream as SinonStub)
+        (client.descriptors.page.listComments.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -508,31 +620,32 @@ describe('v2.CaseAttachmentServiceClient', () => {
       );
     });
 
-    it('invokes listAttachmentsStream with error', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes listCommentsStream with error', async () => {
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ListCommentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ListCommentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listAttachments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAttachmentsStream(request);
+      client.descriptors.page.listComments.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listCommentsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2.Attachment[] = [];
+        const responses: protos.google.cloud.support.v2beta.Comment[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.support.v2.Attachment) => {
+          (response: protos.google.cloud.support.v2beta.Comment) => {
             responses.push(response);
           }
         );
@@ -545,12 +658,12 @@ describe('v2.CaseAttachmentServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listAttachments.createStream as SinonStub)
+        (client.descriptors.page.listComments.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAttachments, request)
+          .calledWith(client.innerApiCalls.listComments, request)
       );
       assert(
-        (client.descriptors.page.listAttachments.createStream as SinonStub)
+        (client.descriptors.page.listComments.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -558,43 +671,42 @@ describe('v2.CaseAttachmentServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listAttachments without error', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('uses async iteration with listComments without error', async () => {
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ListCommentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ListCommentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
       ];
-      client.descriptors.page.listAttachments.asyncIterate =
+      client.descriptors.page.listComments.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.support.v2.IAttachment[] = [];
-      const iterable = client.listAttachmentsAsync(request);
+      const responses: protos.google.cloud.support.v2beta.IComment[] = [];
+      const iterable = client.listCommentsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listAttachments.asyncIterate as SinonStub
+          client.descriptors.page.listComments.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listAttachments.asyncIterate as SinonStub)
+        (client.descriptors.page.listComments.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -602,40 +714,39 @@ describe('v2.CaseAttachmentServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listAttachments with error', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('uses async iteration with listComments with error', async () => {
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ListCommentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ListCommentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listAttachments.asyncIterate =
+      client.descriptors.page.listComments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAttachmentsAsync(request);
+      const iterable = client.listCommentsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.support.v2.IAttachment[] = [];
+        const responses: protos.google.cloud.support.v2beta.IComment[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listAttachments.asyncIterate as SinonStub
+          client.descriptors.page.listComments.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listAttachments.asyncIterate as SinonStub)
+        (client.descriptors.page.listComments.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -651,11 +762,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
         organization: 'organizationValue',
         case: 'caseValue',
       };
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       client.pathTemplates.organizationCasePathTemplate.render = sinon
         .stub()
@@ -709,11 +819,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
         case: 'caseValue',
         attachment_id: 'attachmentIdValue',
       };
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       client.pathTemplates.organizationCaseAttachmentIdPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -791,11 +900,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
         case: 'caseValue',
         comment: 'commentValue',
       };
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       client.pathTemplates.organizationCaseCommentPathTemplate.render = sinon
         .stub()
@@ -864,17 +972,97 @@ describe('v2.CaseAttachmentServiceClient', () => {
       });
     });
 
+    describe('organizationCaseEmailMessage', async () => {
+      const fakePath = '/rendered/path/organizationCaseEmailMessage';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        case: 'caseValue',
+        email_message: 'emailMessageValue',
+      };
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.organizationCaseEmailMessagePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationCaseEmailMessagePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationCaseEmailMessagePath', () => {
+        const result = client.organizationCaseEmailMessagePath(
+          'organizationValue',
+          'caseValue',
+          'emailMessageValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationCaseEmailMessageName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationCaseEmailMessageName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCaseFromOrganizationCaseEmailMessageName', () => {
+        const result =
+          client.matchCaseFromOrganizationCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'caseValue');
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEmailMessageFromOrganizationCaseEmailMessageName', () => {
+        const result =
+          client.matchEmailMessageFromOrganizationCaseEmailMessageName(
+            fakePath
+          );
+        assert.strictEqual(result, 'emailMessageValue');
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectCase', async () => {
       const fakePath = '/rendered/path/projectCase';
       const expectedParameters = {
         project: 'projectValue',
         case: 'caseValue',
       };
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       client.pathTemplates.projectCasePathTemplate.render = sinon
         .stub()
@@ -921,11 +1109,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
         case: 'caseValue',
         attachment_id: 'attachmentIdValue',
       };
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       client.pathTemplates.projectCaseAttachmentIdPathTemplate.render = sinon
         .stub()
@@ -1001,11 +1188,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
         case: 'caseValue',
         comment: 'commentValue',
       };
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       client.pathTemplates.projectCaseCommentPathTemplate.render = sinon
         .stub()
@@ -1063,6 +1249,85 @@ describe('v2.CaseAttachmentServiceClient', () => {
         assert(
           (
             client.pathTemplates.projectCaseCommentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectCaseEmailMessage', async () => {
+      const fakePath = '/rendered/path/projectCaseEmailMessage';
+      const expectedParameters = {
+        project: 'projectValue',
+        case: 'caseValue',
+        email_message: 'emailMessageValue',
+      };
+      const client = new commentserviceModule.v2beta.CommentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectCaseEmailMessagePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectCaseEmailMessagePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectCaseEmailMessagePath', () => {
+        const result = client.projectCaseEmailMessagePath(
+          'projectValue',
+          'caseValue',
+          'emailMessageValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectCaseEmailMessageName', () => {
+        const result =
+          client.matchProjectFromProjectCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCaseFromProjectCaseEmailMessageName', () => {
+        const result =
+          client.matchCaseFromProjectCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'caseValue');
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEmailMessageFromProjectCaseEmailMessageName', () => {
+        const result =
+          client.matchEmailMessageFromProjectCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'emailMessageValue');
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
               .match as SinonStub
           )
             .getCall(-1)

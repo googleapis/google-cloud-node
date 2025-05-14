@@ -127,16 +127,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v2.CaseServiceClient', () => {
+describe('v2beta.CaseServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new caseserviceModule.v2.CaseServiceClient();
+      const client = new caseserviceModule.v2beta.CaseServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new caseserviceModule.v2.CaseServiceClient();
+      const client = new caseserviceModule.v2beta.CaseServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -147,7 +147,8 @@ describe('v2.CaseServiceClient', () => {
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = caseserviceModule.v2.CaseServiceClient.servicePath;
+        const servicePath =
+          caseserviceModule.v2beta.CaseServiceClient.servicePath;
         assert.strictEqual(servicePath, 'cloudsupport.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -155,14 +156,15 @@ describe('v2.CaseServiceClient', () => {
 
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = caseserviceModule.v2.CaseServiceClient.apiEndpoint;
+        const apiEndpoint =
+          caseserviceModule.v2beta.CaseServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         universeDomain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -170,7 +172,7 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         universe_domain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -182,7 +184,7 @@ describe('v2.CaseServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new caseserviceModule.v2.CaseServiceClient();
+          const client = new caseserviceModule.v2beta.CaseServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'cloudsupport.example.com');
           if (saved) {
@@ -195,7 +197,7 @@ describe('v2.CaseServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new caseserviceModule.v2.CaseServiceClient({
+          const client = new caseserviceModule.v2beta.CaseServiceClient({
             universeDomain: 'configured.example.com',
           });
           const servicePath = client.apiEndpoint;
@@ -213,7 +215,7 @@ describe('v2.CaseServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new caseserviceModule.v2.CaseServiceClient({
+        new caseserviceModule.v2beta.CaseServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -221,25 +223,25 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = caseserviceModule.v2.CaseServiceClient.port;
+      const port = caseserviceModule.v2beta.CaseServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new caseserviceModule.v2.CaseServiceClient();
+      const client = new caseserviceModule.v2beta.CaseServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -249,7 +251,7 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('has close method for the initialized client', done => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -268,7 +270,7 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -285,7 +287,7 @@ describe('v2.CaseServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -297,7 +299,7 @@ describe('v2.CaseServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -320,22 +322,22 @@ describe('v2.CaseServiceClient', () => {
 
   describe('getCase', () => {
     it('invokes getCase without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.GetCaseRequest()
+        new protos.google.cloud.support.v2beta.GetCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.GetCaseRequest',
+        '.google.cloud.support.v2beta.GetCaseRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.support.v2.Case()
+        new protos.google.cloud.support.v2beta.Case()
       );
       client.innerApiCalls.getCase = stubSimpleCall(expectedResponse);
       const [response] = await client.getCase(request);
@@ -351,22 +353,22 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes getCase without error using callback', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.GetCaseRequest()
+        new protos.google.cloud.support.v2beta.GetCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.GetCaseRequest',
+        '.google.cloud.support.v2beta.GetCaseRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.support.v2.Case()
+        new protos.google.cloud.support.v2beta.Case()
       );
       client.innerApiCalls.getCase =
         stubSimpleCallWithCallback(expectedResponse);
@@ -375,7 +377,7 @@ describe('v2.CaseServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.support.v2.ICase | null
+            result?: protos.google.cloud.support.v2beta.ICase | null
           ) => {
             if (err) {
               reject(err);
@@ -398,16 +400,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes getCase with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.GetCaseRequest()
+        new protos.google.cloud.support.v2beta.GetCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.GetCaseRequest',
+        '.google.cloud.support.v2beta.GetCaseRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -426,16 +428,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes getCase with closed client', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.GetCaseRequest()
+        new protos.google.cloud.support.v2beta.GetCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.GetCaseRequest',
+        '.google.cloud.support.v2beta.GetCaseRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -449,22 +451,22 @@ describe('v2.CaseServiceClient', () => {
 
   describe('createCase', () => {
     it('invokes createCase without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.CreateCaseRequest()
+        new protos.google.cloud.support.v2beta.CreateCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.CreateCaseRequest',
+        '.google.cloud.support.v2beta.CreateCaseRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.support.v2.Case()
+        new protos.google.cloud.support.v2beta.Case()
       );
       client.innerApiCalls.createCase = stubSimpleCall(expectedResponse);
       const [response] = await client.createCase(request);
@@ -480,22 +482,22 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes createCase without error using callback', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.CreateCaseRequest()
+        new protos.google.cloud.support.v2beta.CreateCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.CreateCaseRequest',
+        '.google.cloud.support.v2beta.CreateCaseRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.support.v2.Case()
+        new protos.google.cloud.support.v2beta.Case()
       );
       client.innerApiCalls.createCase =
         stubSimpleCallWithCallback(expectedResponse);
@@ -504,7 +506,7 @@ describe('v2.CaseServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.support.v2.ICase | null
+            result?: protos.google.cloud.support.v2beta.ICase | null
           ) => {
             if (err) {
               reject(err);
@@ -527,16 +529,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes createCase with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.CreateCaseRequest()
+        new protos.google.cloud.support.v2beta.CreateCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.CreateCaseRequest',
+        '.google.cloud.support.v2beta.CreateCaseRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -558,16 +560,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes createCase with closed client', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.CreateCaseRequest()
+        new protos.google.cloud.support.v2beta.CreateCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.CreateCaseRequest',
+        '.google.cloud.support.v2beta.CreateCaseRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -581,23 +583,23 @@ describe('v2.CaseServiceClient', () => {
 
   describe('updateCase', () => {
     it('invokes updateCase without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.UpdateCaseRequest()
+        new protos.google.cloud.support.v2beta.UpdateCaseRequest()
       );
       request.case ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.UpdateCaseRequest',
+        '.google.cloud.support.v2beta.UpdateCaseRequest',
         ['case', 'name']
       );
       request.case.name = defaultValue1;
       const expectedHeaderRequestParams = `case.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.support.v2.Case()
+        new protos.google.cloud.support.v2beta.Case()
       );
       client.innerApiCalls.updateCase = stubSimpleCall(expectedResponse);
       const [response] = await client.updateCase(request);
@@ -613,23 +615,23 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes updateCase without error using callback', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.UpdateCaseRequest()
+        new protos.google.cloud.support.v2beta.UpdateCaseRequest()
       );
       request.case ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.UpdateCaseRequest',
+        '.google.cloud.support.v2beta.UpdateCaseRequest',
         ['case', 'name']
       );
       request.case.name = defaultValue1;
       const expectedHeaderRequestParams = `case.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.support.v2.Case()
+        new protos.google.cloud.support.v2beta.Case()
       );
       client.innerApiCalls.updateCase =
         stubSimpleCallWithCallback(expectedResponse);
@@ -638,7 +640,7 @@ describe('v2.CaseServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.support.v2.ICase | null
+            result?: protos.google.cloud.support.v2beta.ICase | null
           ) => {
             if (err) {
               reject(err);
@@ -661,17 +663,17 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes updateCase with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.UpdateCaseRequest()
+        new protos.google.cloud.support.v2beta.UpdateCaseRequest()
       );
       request.case ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.UpdateCaseRequest',
+        '.google.cloud.support.v2beta.UpdateCaseRequest',
         ['case', 'name']
       );
       request.case.name = defaultValue1;
@@ -693,17 +695,17 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes updateCase with closed client', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.UpdateCaseRequest()
+        new protos.google.cloud.support.v2beta.UpdateCaseRequest()
       );
       request.case ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.UpdateCaseRequest',
+        '.google.cloud.support.v2beta.UpdateCaseRequest',
         ['case', 'name']
       );
       request.case.name = defaultValue1;
@@ -717,22 +719,22 @@ describe('v2.CaseServiceClient', () => {
 
   describe('escalateCase', () => {
     it('invokes escalateCase without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.EscalateCaseRequest()
+        new protos.google.cloud.support.v2beta.EscalateCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.EscalateCaseRequest',
+        '.google.cloud.support.v2beta.EscalateCaseRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.support.v2.Case()
+        new protos.google.cloud.support.v2beta.Case()
       );
       client.innerApiCalls.escalateCase = stubSimpleCall(expectedResponse);
       const [response] = await client.escalateCase(request);
@@ -748,22 +750,22 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes escalateCase without error using callback', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.EscalateCaseRequest()
+        new protos.google.cloud.support.v2beta.EscalateCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.EscalateCaseRequest',
+        '.google.cloud.support.v2beta.EscalateCaseRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.support.v2.Case()
+        new protos.google.cloud.support.v2beta.Case()
       );
       client.innerApiCalls.escalateCase =
         stubSimpleCallWithCallback(expectedResponse);
@@ -772,7 +774,7 @@ describe('v2.CaseServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.support.v2.ICase | null
+            result?: protos.google.cloud.support.v2beta.ICase | null
           ) => {
             if (err) {
               reject(err);
@@ -795,16 +797,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes escalateCase with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.EscalateCaseRequest()
+        new protos.google.cloud.support.v2beta.EscalateCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.EscalateCaseRequest',
+        '.google.cloud.support.v2beta.EscalateCaseRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -826,16 +828,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes escalateCase with closed client', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.EscalateCaseRequest()
+        new protos.google.cloud.support.v2beta.EscalateCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.EscalateCaseRequest',
+        '.google.cloud.support.v2beta.EscalateCaseRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -849,22 +851,22 @@ describe('v2.CaseServiceClient', () => {
 
   describe('closeCase', () => {
     it('invokes closeCase without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.CloseCaseRequest()
+        new protos.google.cloud.support.v2beta.CloseCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.CloseCaseRequest',
+        '.google.cloud.support.v2beta.CloseCaseRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.support.v2.Case()
+        new protos.google.cloud.support.v2beta.Case()
       );
       client.innerApiCalls.closeCase = stubSimpleCall(expectedResponse);
       const [response] = await client.closeCase(request);
@@ -880,22 +882,22 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes closeCase without error using callback', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.CloseCaseRequest()
+        new protos.google.cloud.support.v2beta.CloseCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.CloseCaseRequest',
+        '.google.cloud.support.v2beta.CloseCaseRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.support.v2.Case()
+        new protos.google.cloud.support.v2beta.Case()
       );
       client.innerApiCalls.closeCase =
         stubSimpleCallWithCallback(expectedResponse);
@@ -904,7 +906,7 @@ describe('v2.CaseServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.support.v2.ICase | null
+            result?: protos.google.cloud.support.v2beta.ICase | null
           ) => {
             if (err) {
               reject(err);
@@ -927,16 +929,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes closeCase with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.CloseCaseRequest()
+        new protos.google.cloud.support.v2beta.CloseCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.CloseCaseRequest',
+        '.google.cloud.support.v2beta.CloseCaseRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -955,16 +957,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes closeCase with closed client', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.CloseCaseRequest()
+        new protos.google.cloud.support.v2beta.CloseCaseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.CloseCaseRequest',
+        '.google.cloud.support.v2beta.CloseCaseRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -978,24 +980,24 @@ describe('v2.CaseServiceClient', () => {
 
   describe('listCases', () => {
     it('invokes listCases without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListCasesRequest()
+        new protos.google.cloud.support.v2beta.ListCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListCasesRequest',
+        '.google.cloud.support.v2beta.ListCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
       ];
       client.innerApiCalls.listCases = stubSimpleCall(expectedResponse);
       const [response] = await client.listCases(request);
@@ -1011,24 +1013,24 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes listCases without error using callback', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListCasesRequest()
+        new protos.google.cloud.support.v2beta.ListCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListCasesRequest',
+        '.google.cloud.support.v2beta.ListCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
       ];
       client.innerApiCalls.listCases =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1037,7 +1039,7 @@ describe('v2.CaseServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.support.v2.ICase[] | null
+            result?: protos.google.cloud.support.v2beta.ICase[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1060,16 +1062,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes listCases with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListCasesRequest()
+        new protos.google.cloud.support.v2beta.ListCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListCasesRequest',
+        '.google.cloud.support.v2beta.ListCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1088,33 +1090,36 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes listCasesStream without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListCasesRequest()
+        new protos.google.cloud.support.v2beta.ListCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListCasesRequest',
+        '.google.cloud.support.v2beta.ListCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
       ];
       client.descriptors.page.listCases.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listCasesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2.Case[] = [];
-        stream.on('data', (response: protos.google.cloud.support.v2.Case) => {
-          responses.push(response);
-        });
+        const responses: protos.google.cloud.support.v2beta.Case[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.support.v2beta.Case) => {
+            responses.push(response);
+          }
+        );
         stream.on('end', () => {
           resolve(responses);
         });
@@ -1139,16 +1144,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes listCasesStream with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListCasesRequest()
+        new protos.google.cloud.support.v2beta.ListCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListCasesRequest',
+        '.google.cloud.support.v2beta.ListCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1160,10 +1165,13 @@ describe('v2.CaseServiceClient', () => {
       );
       const stream = client.listCasesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2.Case[] = [];
-        stream.on('data', (response: protos.google.cloud.support.v2.Case) => {
-          responses.push(response);
-        });
+        const responses: protos.google.cloud.support.v2beta.Case[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.support.v2beta.Case) => {
+            responses.push(response);
+          }
+        );
         stream.on('end', () => {
           resolve(responses);
         });
@@ -1187,28 +1195,28 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('uses async iteration with listCases without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListCasesRequest()
+        new protos.google.cloud.support.v2beta.ListCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListCasesRequest',
+        '.google.cloud.support.v2beta.ListCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
       ];
       client.descriptors.page.listCases.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.support.v2.ICase[] = [];
+      const responses: protos.google.cloud.support.v2beta.ICase[] = [];
       const iterable = client.listCasesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1229,16 +1237,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('uses async iteration with listCases with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListCasesRequest()
+        new protos.google.cloud.support.v2beta.ListCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListCasesRequest',
+        '.google.cloud.support.v2beta.ListCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1250,7 +1258,7 @@ describe('v2.CaseServiceClient', () => {
       );
       const iterable = client.listCasesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.support.v2.ICase[] = [];
+        const responses: protos.google.cloud.support.v2beta.ICase[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -1272,24 +1280,24 @@ describe('v2.CaseServiceClient', () => {
 
   describe('searchCases', () => {
     it('invokes searchCases without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCasesRequest()
+        new protos.google.cloud.support.v2beta.SearchCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.SearchCasesRequest',
+        '.google.cloud.support.v2beta.SearchCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
       ];
       client.innerApiCalls.searchCases = stubSimpleCall(expectedResponse);
       const [response] = await client.searchCases(request);
@@ -1305,24 +1313,24 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes searchCases without error using callback', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCasesRequest()
+        new protos.google.cloud.support.v2beta.SearchCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.SearchCasesRequest',
+        '.google.cloud.support.v2beta.SearchCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
       ];
       client.innerApiCalls.searchCases =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1331,7 +1339,7 @@ describe('v2.CaseServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.support.v2.ICase[] | null
+            result?: protos.google.cloud.support.v2beta.ICase[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1354,16 +1362,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes searchCases with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCasesRequest()
+        new protos.google.cloud.support.v2beta.SearchCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.SearchCasesRequest',
+        '.google.cloud.support.v2beta.SearchCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1385,33 +1393,36 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes searchCasesStream without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCasesRequest()
+        new protos.google.cloud.support.v2beta.SearchCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.SearchCasesRequest',
+        '.google.cloud.support.v2beta.SearchCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
       ];
       client.descriptors.page.searchCases.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.searchCasesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2.Case[] = [];
-        stream.on('data', (response: protos.google.cloud.support.v2.Case) => {
-          responses.push(response);
-        });
+        const responses: protos.google.cloud.support.v2beta.Case[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.support.v2beta.Case) => {
+            responses.push(response);
+          }
+        );
         stream.on('end', () => {
           resolve(responses);
         });
@@ -1436,16 +1447,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes searchCasesStream with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCasesRequest()
+        new protos.google.cloud.support.v2beta.SearchCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.SearchCasesRequest',
+        '.google.cloud.support.v2beta.SearchCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1457,10 +1468,13 @@ describe('v2.CaseServiceClient', () => {
       );
       const stream = client.searchCasesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2.Case[] = [];
-        stream.on('data', (response: protos.google.cloud.support.v2.Case) => {
-          responses.push(response);
-        });
+        const responses: protos.google.cloud.support.v2beta.Case[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.support.v2beta.Case) => {
+            responses.push(response);
+          }
+        );
         stream.on('end', () => {
           resolve(responses);
         });
@@ -1484,28 +1498,28 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('uses async iteration with searchCases without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCasesRequest()
+        new protos.google.cloud.support.v2beta.SearchCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.SearchCasesRequest',
+        '.google.cloud.support.v2beta.SearchCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
+        generateSampleMessage(new protos.google.cloud.support.v2beta.Case()),
       ];
       client.descriptors.page.searchCases.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.support.v2.ICase[] = [];
+      const responses: protos.google.cloud.support.v2beta.ICase[] = [];
       const iterable = client.searchCasesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1527,16 +1541,16 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('uses async iteration with searchCases with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCasesRequest()
+        new protos.google.cloud.support.v2beta.SearchCasesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.SearchCasesRequest',
+        '.google.cloud.support.v2beta.SearchCasesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1548,7 +1562,7 @@ describe('v2.CaseServiceClient', () => {
       );
       const iterable = client.searchCasesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.support.v2.ICase[] = [];
+        const responses: protos.google.cloud.support.v2beta.ICase[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -1571,23 +1585,23 @@ describe('v2.CaseServiceClient', () => {
 
   describe('searchCaseClassifications', () => {
     it('invokes searchCaseClassifications without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
+        new protos.google.cloud.support.v2beta.SearchCaseClassificationsRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.support.v2.CaseClassification()
+          new protos.google.cloud.support.v2beta.CaseClassification()
         ),
         generateSampleMessage(
-          new protos.google.cloud.support.v2.CaseClassification()
+          new protos.google.cloud.support.v2beta.CaseClassification()
         ),
         generateSampleMessage(
-          new protos.google.cloud.support.v2.CaseClassification()
+          new protos.google.cloud.support.v2beta.CaseClassification()
         ),
       ];
       client.innerApiCalls.searchCaseClassifications =
@@ -1597,23 +1611,23 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes searchCaseClassifications without error using callback', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
+        new protos.google.cloud.support.v2beta.SearchCaseClassificationsRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.support.v2.CaseClassification()
+          new protos.google.cloud.support.v2beta.CaseClassification()
         ),
         generateSampleMessage(
-          new protos.google.cloud.support.v2.CaseClassification()
+          new protos.google.cloud.support.v2beta.CaseClassification()
         ),
         generateSampleMessage(
-          new protos.google.cloud.support.v2.CaseClassification()
+          new protos.google.cloud.support.v2beta.CaseClassification()
         ),
       ];
       client.innerApiCalls.searchCaseClassifications =
@@ -1623,7 +1637,9 @@ describe('v2.CaseServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.support.v2.ICaseClassification[] | null
+            result?:
+              | protos.google.cloud.support.v2beta.ICaseClassification[]
+              | null
           ) => {
             if (err) {
               reject(err);
@@ -1638,13 +1654,13 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes searchCaseClassifications with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
+        new protos.google.cloud.support.v2beta.SearchCaseClassificationsRequest()
       );
       const expectedError = new Error('expected');
       client.innerApiCalls.searchCaseClassifications = stubSimpleCall(
@@ -1658,34 +1674,34 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes searchCaseClassificationsStream without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
+        new protos.google.cloud.support.v2beta.SearchCaseClassificationsRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.support.v2.CaseClassification()
+          new protos.google.cloud.support.v2beta.CaseClassification()
         ),
         generateSampleMessage(
-          new protos.google.cloud.support.v2.CaseClassification()
+          new protos.google.cloud.support.v2beta.CaseClassification()
         ),
         generateSampleMessage(
-          new protos.google.cloud.support.v2.CaseClassification()
+          new protos.google.cloud.support.v2beta.CaseClassification()
         ),
       ];
       client.descriptors.page.searchCaseClassifications.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.searchCaseClassificationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2.CaseClassification[] =
+        const responses: protos.google.cloud.support.v2beta.CaseClassification[] =
           [];
         stream.on(
           'data',
-          (response: protos.google.cloud.support.v2.CaseClassification) => {
+          (response: protos.google.cloud.support.v2beta.CaseClassification) => {
             responses.push(response);
           }
         );
@@ -1709,24 +1725,24 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('invokes searchCaseClassificationsStream with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
+        new protos.google.cloud.support.v2beta.SearchCaseClassificationsRequest()
       );
       const expectedError = new Error('expected');
       client.descriptors.page.searchCaseClassifications.createStream =
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.searchCaseClassificationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2.CaseClassification[] =
+        const responses: protos.google.cloud.support.v2beta.CaseClassification[] =
           [];
         stream.on(
           'data',
-          (response: protos.google.cloud.support.v2.CaseClassification) => {
+          (response: protos.google.cloud.support.v2beta.CaseClassification) => {
             responses.push(response);
           }
         );
@@ -1749,28 +1765,28 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('uses async iteration with searchCaseClassifications without error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
+        new protos.google.cloud.support.v2beta.SearchCaseClassificationsRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.support.v2.CaseClassification()
+          new protos.google.cloud.support.v2beta.CaseClassification()
         ),
         generateSampleMessage(
-          new protos.google.cloud.support.v2.CaseClassification()
+          new protos.google.cloud.support.v2beta.CaseClassification()
         ),
         generateSampleMessage(
-          new protos.google.cloud.support.v2.CaseClassification()
+          new protos.google.cloud.support.v2beta.CaseClassification()
         ),
       ];
       client.descriptors.page.searchCaseClassifications.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.support.v2.ICaseClassification[] =
+      const responses: protos.google.cloud.support.v2beta.ICaseClassification[] =
         [];
       const iterable = client.searchCaseClassificationsAsync(request);
       for await (const resource of iterable) {
@@ -1787,20 +1803,20 @@ describe('v2.CaseServiceClient', () => {
     });
 
     it('uses async iteration with searchCaseClassifications with error', async () => {
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
+        new protos.google.cloud.support.v2beta.SearchCaseClassificationsRequest()
       );
       const expectedError = new Error('expected');
       client.descriptors.page.searchCaseClassifications.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.searchCaseClassificationsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.support.v2.ICaseClassification[] =
+        const responses: protos.google.cloud.support.v2beta.ICaseClassification[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1822,7 +1838,7 @@ describe('v2.CaseServiceClient', () => {
       const expectedParameters = {
         organization: 'organizationValue',
       };
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1861,7 +1877,7 @@ describe('v2.CaseServiceClient', () => {
         organization: 'organizationValue',
         case: 'caseValue',
       };
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1918,7 +1934,7 @@ describe('v2.CaseServiceClient', () => {
         case: 'caseValue',
         attachment_id: 'attachmentIdValue',
       };
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1999,7 +2015,7 @@ describe('v2.CaseServiceClient', () => {
         case: 'caseValue',
         comment: 'commentValue',
       };
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2071,13 +2087,94 @@ describe('v2.CaseServiceClient', () => {
       });
     });
 
+    describe('organizationCaseEmailMessage', async () => {
+      const fakePath = '/rendered/path/organizationCaseEmailMessage';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        case: 'caseValue',
+        email_message: 'emailMessageValue',
+      };
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.organizationCaseEmailMessagePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationCaseEmailMessagePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationCaseEmailMessagePath', () => {
+        const result = client.organizationCaseEmailMessagePath(
+          'organizationValue',
+          'caseValue',
+          'emailMessageValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationCaseEmailMessageName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationCaseEmailMessageName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCaseFromOrganizationCaseEmailMessageName', () => {
+        const result =
+          client.matchCaseFromOrganizationCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'caseValue');
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEmailMessageFromOrganizationCaseEmailMessageName', () => {
+        const result =
+          client.matchEmailMessageFromOrganizationCaseEmailMessageName(
+            fakePath
+          );
+        assert.strictEqual(result, 'emailMessageValue');
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectCase', async () => {
       const fakePath = '/rendered/path/projectCase';
       const expectedParameters = {
         project: 'projectValue',
         case: 'caseValue',
       };
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2127,7 +2224,7 @@ describe('v2.CaseServiceClient', () => {
         case: 'caseValue',
         attachment_id: 'attachmentIdValue',
       };
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2206,7 +2303,7 @@ describe('v2.CaseServiceClient', () => {
         case: 'caseValue',
         comment: 'commentValue',
       };
-      const client = new caseserviceModule.v2.CaseServiceClient({
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2267,6 +2364,85 @@ describe('v2.CaseServiceClient', () => {
         assert(
           (
             client.pathTemplates.projectCaseCommentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectCaseEmailMessage', async () => {
+      const fakePath = '/rendered/path/projectCaseEmailMessage';
+      const expectedParameters = {
+        project: 'projectValue',
+        case: 'caseValue',
+        email_message: 'emailMessageValue',
+      };
+      const client = new caseserviceModule.v2beta.CaseServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectCaseEmailMessagePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectCaseEmailMessagePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectCaseEmailMessagePath', () => {
+        const result = client.projectCaseEmailMessagePath(
+          'projectValue',
+          'caseValue',
+          'emailMessageValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectCaseEmailMessageName', () => {
+        const result =
+          client.matchProjectFromProjectCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCaseFromProjectCaseEmailMessageName', () => {
+        const result =
+          client.matchCaseFromProjectCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'caseValue');
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEmailMessageFromProjectCaseEmailMessageName', () => {
+        const result =
+          client.matchEmailMessageFromProjectCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'emailMessageValue');
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
               .match as SinonStub
           )
             .getCall(-1)

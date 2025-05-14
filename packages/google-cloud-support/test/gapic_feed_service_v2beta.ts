@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as caseattachmentserviceModule from '../src';
+import * as feedserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -127,18 +127,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v2.CaseAttachmentServiceClient', () => {
+describe('v2beta.FeedServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient();
+      const client = new feedserviceModule.v2beta.FeedServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient();
+      const client = new feedserviceModule.v2beta.FeedServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -150,8 +148,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          caseattachmentserviceModule.v2.CaseAttachmentServiceClient
-            .servicePath;
+          feedserviceModule.v2beta.FeedServiceClient.servicePath;
         assert.strictEqual(servicePath, 'cloudsupport.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -160,27 +157,24 @@ describe('v2.CaseAttachmentServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          caseattachmentserviceModule.v2.CaseAttachmentServiceClient
-            .apiEndpoint;
+          feedserviceModule.v2beta.FeedServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          universeDomain: 'example.com',
-        });
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        universeDomain: 'example.com',
+      });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudsupport.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          universe_domain: 'example.com',
-        });
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        universe_domain: 'example.com',
+      });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudsupport.example.com');
     });
@@ -190,8 +184,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new caseattachmentserviceModule.v2.CaseAttachmentServiceClient();
+          const client = new feedserviceModule.v2beta.FeedServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'cloudsupport.example.com');
           if (saved) {
@@ -204,10 +197,9 @@ describe('v2.CaseAttachmentServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-              universeDomain: 'configured.example.com',
-            });
+          const client = new feedserviceModule.v2beta.FeedServiceClient({
+            universeDomain: 'configured.example.com',
+          });
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
             servicePath,
@@ -223,7 +215,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
+        new feedserviceModule.v2beta.FeedServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -231,47 +223,42 @@ describe('v2.CaseAttachmentServiceClient', () => {
     });
 
     it('has port', () => {
-      const port =
-        caseattachmentserviceModule.v2.CaseAttachmentServiceClient.port;
+      const port = feedserviceModule.v2beta.FeedServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient();
+      const client = new feedserviceModule.v2beta.FeedServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          fallback: true,
-        });
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        fallback: true,
+      });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.caseAttachmentServiceStub, undefined);
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.feedServiceStub, undefined);
       await client.initialize();
-      assert(client.caseAttachmentServiceStub);
+      assert(client.feedServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize().catch(err => {
         throw err;
       });
-      assert(client.caseAttachmentServiceStub);
+      assert(client.feedServiceStub);
       client
         .close()
         .then(() => {
@@ -283,12 +270,11 @@ describe('v2.CaseAttachmentServiceClient', () => {
     });
 
     it('has close method for the non-initialized client', done => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.caseAttachmentServiceStub, undefined);
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.feedServiceStub, undefined);
       client
         .close()
         .then(() => {
@@ -301,11 +287,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -314,11 +299,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -336,70 +320,80 @@ describe('v2.CaseAttachmentServiceClient', () => {
     });
   });
 
-  describe('listAttachments', () => {
-    it('invokes listAttachments without error', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+  describe('showFeed', () => {
+    it('invokes showFeed without error', async () => {
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ShowFeedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ShowFeedRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.FeedItem()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.FeedItem()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.FeedItem()
+        ),
       ];
-      client.innerApiCalls.listAttachments = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAttachments(request);
+      client.innerApiCalls.showFeed = stubSimpleCall(expectedResponse);
+      const [response] = await client.showFeed(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listAttachments as SinonStub
+        client.innerApiCalls.showFeed as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listAttachments as SinonStub
+        client.innerApiCalls.showFeed as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listAttachments without error using callback', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes showFeed without error using callback', async () => {
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ShowFeedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ShowFeedRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.FeedItem()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.FeedItem()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.FeedItem()
+        ),
       ];
-      client.innerApiCalls.listAttachments =
+      client.innerApiCalls.showFeed =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listAttachments(
+        client.showFeed(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.support.v2.IAttachment[] | null
+            result?: protos.google.cloud.support.v2beta.IFeedItem[] | null
           ) => {
             if (err) {
               reject(err);
@@ -412,76 +406,77 @@ describe('v2.CaseAttachmentServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listAttachments as SinonStub
+        client.innerApiCalls.showFeed as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listAttachments as SinonStub
+        client.innerApiCalls.showFeed as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listAttachments with error', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes showFeed with error', async () => {
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ShowFeedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ShowFeedRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listAttachments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listAttachments(request), expectedError);
+      client.innerApiCalls.showFeed = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.showFeed(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.listAttachments as SinonStub
+        client.innerApiCalls.showFeed as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listAttachments as SinonStub
+        client.innerApiCalls.showFeed as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listAttachmentsStream without error', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes showFeedStream without error', async () => {
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ShowFeedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ShowFeedRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.FeedItem()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.FeedItem()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.FeedItem()
+        ),
       ];
-      client.descriptors.page.listAttachments.createStream =
+      client.descriptors.page.showFeed.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listAttachmentsStream(request);
+      const stream = client.showFeedStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2.Attachment[] = [];
+        const responses: protos.google.cloud.support.v2beta.FeedItem[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.support.v2.Attachment) => {
+          (response: protos.google.cloud.support.v2beta.FeedItem) => {
             responses.push(response);
           }
         );
@@ -495,12 +490,12 @@ describe('v2.CaseAttachmentServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listAttachments.createStream as SinonStub)
+        (client.descriptors.page.showFeed.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAttachments, request)
+          .calledWith(client.innerApiCalls.showFeed, request)
       );
       assert(
-        (client.descriptors.page.listAttachments.createStream as SinonStub)
+        (client.descriptors.page.showFeed.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -508,31 +503,32 @@ describe('v2.CaseAttachmentServiceClient', () => {
       );
     });
 
-    it('invokes listAttachmentsStream with error', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes showFeedStream with error', async () => {
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ShowFeedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ShowFeedRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listAttachments.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAttachmentsStream(request);
+      client.descriptors.page.showFeed.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.showFeedStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2.Attachment[] = [];
+        const responses: protos.google.cloud.support.v2beta.FeedItem[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.support.v2.Attachment) => {
+          (response: protos.google.cloud.support.v2beta.FeedItem) => {
             responses.push(response);
           }
         );
@@ -545,12 +541,12 @@ describe('v2.CaseAttachmentServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listAttachments.createStream as SinonStub)
+        (client.descriptors.page.showFeed.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAttachments, request)
+          .calledWith(client.innerApiCalls.showFeed, request)
       );
       assert(
-        (client.descriptors.page.listAttachments.createStream as SinonStub)
+        (client.descriptors.page.showFeed.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -558,43 +554,47 @@ describe('v2.CaseAttachmentServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listAttachments without error', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('uses async iteration with showFeed without error', async () => {
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ShowFeedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ShowFeedRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
-        generateSampleMessage(new protos.google.cloud.support.v2.Attachment()),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.FeedItem()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.FeedItem()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.support.v2beta.FeedItem()
+        ),
       ];
-      client.descriptors.page.listAttachments.asyncIterate =
+      client.descriptors.page.showFeed.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.support.v2.IAttachment[] = [];
-      const iterable = client.listAttachmentsAsync(request);
+      const responses: protos.google.cloud.support.v2beta.IFeedItem[] = [];
+      const iterable = client.showFeedAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAttachments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.showFeed.asyncIterate as SinonStub).getCall(0)
+          .args[1],
         request
       );
       assert(
-        (client.descriptors.page.listAttachments.asyncIterate as SinonStub)
+        (client.descriptors.page.showFeed.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -602,40 +602,40 @@ describe('v2.CaseAttachmentServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listAttachments with error', async () => {
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('uses async iteration with showFeed with error', async () => {
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.support.v2.ListAttachmentsRequest()
+        new protos.google.cloud.support.v2beta.ShowFeedRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2.ListAttachmentsRequest',
+        '.google.cloud.support.v2beta.ShowFeedRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listAttachments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAttachmentsAsync(request);
+      client.descriptors.page.showFeed.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.showFeedAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.support.v2.IAttachment[] = [];
+        const responses: protos.google.cloud.support.v2beta.IFeedItem[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAttachments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.showFeed.asyncIterate as SinonStub).getCall(0)
+          .args[1],
         request
       );
       assert(
-        (client.descriptors.page.listAttachments.asyncIterate as SinonStub)
+        (client.descriptors.page.showFeed.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -651,11 +651,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
         organization: 'organizationValue',
         case: 'caseValue',
       };
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       client.pathTemplates.organizationCasePathTemplate.render = sinon
         .stub()
@@ -709,11 +708,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
         case: 'caseValue',
         attachment_id: 'attachmentIdValue',
       };
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       client.pathTemplates.organizationCaseAttachmentIdPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -791,11 +789,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
         case: 'caseValue',
         comment: 'commentValue',
       };
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       client.pathTemplates.organizationCaseCommentPathTemplate.render = sinon
         .stub()
@@ -864,17 +861,97 @@ describe('v2.CaseAttachmentServiceClient', () => {
       });
     });
 
+    describe('organizationCaseEmailMessage', async () => {
+      const fakePath = '/rendered/path/organizationCaseEmailMessage';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        case: 'caseValue',
+        email_message: 'emailMessageValue',
+      };
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.organizationCaseEmailMessagePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationCaseEmailMessagePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationCaseEmailMessagePath', () => {
+        const result = client.organizationCaseEmailMessagePath(
+          'organizationValue',
+          'caseValue',
+          'emailMessageValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationCaseEmailMessageName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationCaseEmailMessageName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCaseFromOrganizationCaseEmailMessageName', () => {
+        const result =
+          client.matchCaseFromOrganizationCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'caseValue');
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEmailMessageFromOrganizationCaseEmailMessageName', () => {
+        const result =
+          client.matchEmailMessageFromOrganizationCaseEmailMessageName(
+            fakePath
+          );
+        assert.strictEqual(result, 'emailMessageValue');
+        assert(
+          (
+            client.pathTemplates.organizationCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectCase', async () => {
       const fakePath = '/rendered/path/projectCase';
       const expectedParameters = {
         project: 'projectValue',
         case: 'caseValue',
       };
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       client.pathTemplates.projectCasePathTemplate.render = sinon
         .stub()
@@ -921,11 +998,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
         case: 'caseValue',
         attachment_id: 'attachmentIdValue',
       };
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       client.pathTemplates.projectCaseAttachmentIdPathTemplate.render = sinon
         .stub()
@@ -1001,11 +1077,10 @@ describe('v2.CaseAttachmentServiceClient', () => {
         case: 'caseValue',
         comment: 'commentValue',
       };
-      const client =
-        new caseattachmentserviceModule.v2.CaseAttachmentServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       await client.initialize();
       client.pathTemplates.projectCaseCommentPathTemplate.render = sinon
         .stub()
@@ -1063,6 +1138,85 @@ describe('v2.CaseAttachmentServiceClient', () => {
         assert(
           (
             client.pathTemplates.projectCaseCommentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectCaseEmailMessage', async () => {
+      const fakePath = '/rendered/path/projectCaseEmailMessage';
+      const expectedParameters = {
+        project: 'projectValue',
+        case: 'caseValue',
+        email_message: 'emailMessageValue',
+      };
+      const client = new feedserviceModule.v2beta.FeedServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectCaseEmailMessagePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectCaseEmailMessagePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectCaseEmailMessagePath', () => {
+        const result = client.projectCaseEmailMessagePath(
+          'projectValue',
+          'caseValue',
+          'emailMessageValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectCaseEmailMessageName', () => {
+        const result =
+          client.matchProjectFromProjectCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCaseFromProjectCaseEmailMessageName', () => {
+        const result =
+          client.matchCaseFromProjectCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'caseValue');
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEmailMessageFromProjectCaseEmailMessageName', () => {
+        const result =
+          client.matchEmailMessageFromProjectCaseEmailMessageName(fakePath);
+        assert.strictEqual(result, 'emailMessageValue');
+        assert(
+          (
+            client.pathTemplates.projectCaseEmailMessagePathTemplate
               .match as SinonStub
           )
             .getCall(-1)

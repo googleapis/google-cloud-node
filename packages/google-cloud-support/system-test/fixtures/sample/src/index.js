@@ -23,6 +23,7 @@ function main() {
   const caseAttachmentServiceClient = new support.CaseAttachmentServiceClient();
   const caseServiceClient = new support.CaseServiceClient();
   const commentServiceClient = new support.CommentServiceClient();
+  const feedServiceClient = new support.FeedServiceClient();
 }
 
 main();

@@ -33,7 +33,7 @@ import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v2/case_attachment_service_client_config.json`.
+ * `src/v2beta/case_attachment_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './case_attachment_service_client_config.json';
@@ -42,7 +42,7 @@ const version = require('../../../package.json').version;
 /**
  *  A service to manage file attachments for Google Cloud support cases.
  * @class
- * @memberof v2
+ * @memberof v2beta
  */
 export class CaseAttachmentServiceClient {
   private _terminated = false;
@@ -213,6 +213,10 @@ export class CaseAttachmentServiceClient {
       organizationCaseCommentPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/cases/{case}/comments/{comment}'
       ),
+      organizationCaseEmailMessagePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/cases/{case}/emailMessages/{email_message}'
+        ),
       projectCasePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/cases/{case}'
       ),
@@ -221,6 +225,9 @@ export class CaseAttachmentServiceClient {
       ),
       projectCaseCommentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/cases/{case}/comments/{comment}'
+      ),
+      projectCaseEmailMessagePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/cases/{case}/emailMessages/{email_message}'
       ),
     };
 
@@ -237,7 +244,7 @@ export class CaseAttachmentServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.support.v2.CaseAttachmentService',
+      'google.cloud.support.v2beta.CaseAttachmentService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -270,14 +277,15 @@ export class CaseAttachmentServiceClient {
     }
 
     // Put together the "service stub" for
-    // google.cloud.support.v2.CaseAttachmentService.
+    // google.cloud.support.v2beta.CaseAttachmentService.
     this.caseAttachmentServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.support.v2.CaseAttachmentService'
+            'google.cloud.support.v2beta.CaseAttachmentService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.support.v2.CaseAttachmentService,
+          (this._protos as any).google.cloud.support.v2beta
+            .CaseAttachmentService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
@@ -451,7 +459,7 @@ export class CaseAttachmentServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.support.v2.Attachment|Attachment}.
+   *   The first element of the array is Array of {@link protos.google.cloud.support.v2beta.Attachment|Attachment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -461,59 +469,59 @@ export class CaseAttachmentServiceClient {
    *   for more details and examples.
    */
   listAttachments(
-    request?: protos.google.cloud.support.v2.IListAttachmentsRequest,
+    request?: protos.google.cloud.support.v2beta.IListAttachmentsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.support.v2.IAttachment[],
-      protos.google.cloud.support.v2.IListAttachmentsRequest | null,
-      protos.google.cloud.support.v2.IListAttachmentsResponse,
+      protos.google.cloud.support.v2beta.IAttachment[],
+      protos.google.cloud.support.v2beta.IListAttachmentsRequest | null,
+      protos.google.cloud.support.v2beta.IListAttachmentsResponse,
     ]
   >;
   listAttachments(
-    request: protos.google.cloud.support.v2.IListAttachmentsRequest,
+    request: protos.google.cloud.support.v2beta.IListAttachmentsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.support.v2.IListAttachmentsRequest,
-      | protos.google.cloud.support.v2.IListAttachmentsResponse
+      protos.google.cloud.support.v2beta.IListAttachmentsRequest,
+      | protos.google.cloud.support.v2beta.IListAttachmentsResponse
       | null
       | undefined,
-      protos.google.cloud.support.v2.IAttachment
+      protos.google.cloud.support.v2beta.IAttachment
     >
   ): void;
   listAttachments(
-    request: protos.google.cloud.support.v2.IListAttachmentsRequest,
+    request: protos.google.cloud.support.v2beta.IListAttachmentsRequest,
     callback: PaginationCallback<
-      protos.google.cloud.support.v2.IListAttachmentsRequest,
-      | protos.google.cloud.support.v2.IListAttachmentsResponse
+      protos.google.cloud.support.v2beta.IListAttachmentsRequest,
+      | protos.google.cloud.support.v2beta.IListAttachmentsResponse
       | null
       | undefined,
-      protos.google.cloud.support.v2.IAttachment
+      protos.google.cloud.support.v2beta.IAttachment
     >
   ): void;
   listAttachments(
-    request?: protos.google.cloud.support.v2.IListAttachmentsRequest,
+    request?: protos.google.cloud.support.v2beta.IListAttachmentsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.support.v2.IListAttachmentsRequest,
-          | protos.google.cloud.support.v2.IListAttachmentsResponse
+          protos.google.cloud.support.v2beta.IListAttachmentsRequest,
+          | protos.google.cloud.support.v2beta.IListAttachmentsResponse
           | null
           | undefined,
-          protos.google.cloud.support.v2.IAttachment
+          protos.google.cloud.support.v2beta.IAttachment
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.support.v2.IListAttachmentsRequest,
-      | protos.google.cloud.support.v2.IListAttachmentsResponse
+      protos.google.cloud.support.v2beta.IListAttachmentsRequest,
+      | protos.google.cloud.support.v2beta.IListAttachmentsResponse
       | null
       | undefined,
-      protos.google.cloud.support.v2.IAttachment
+      protos.google.cloud.support.v2beta.IAttachment
     >
   ): Promise<
     [
-      protos.google.cloud.support.v2.IAttachment[],
-      protos.google.cloud.support.v2.IListAttachmentsRequest | null,
-      protos.google.cloud.support.v2.IListAttachmentsResponse,
+      protos.google.cloud.support.v2beta.IAttachment[],
+      protos.google.cloud.support.v2beta.IListAttachmentsRequest | null,
+      protos.google.cloud.support.v2beta.IListAttachmentsResponse,
     ]
   > | void {
     request = request || {};
@@ -536,11 +544,11 @@ export class CaseAttachmentServiceClient {
     });
     const wrappedCallback:
       | PaginationCallback<
-          protos.google.cloud.support.v2.IListAttachmentsRequest,
-          | protos.google.cloud.support.v2.IListAttachmentsResponse
+          protos.google.cloud.support.v2beta.IListAttachmentsRequest,
+          | protos.google.cloud.support.v2beta.IListAttachmentsResponse
           | null
           | undefined,
-          protos.google.cloud.support.v2.IAttachment
+          protos.google.cloud.support.v2beta.IAttachment
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
@@ -553,9 +561,9 @@ export class CaseAttachmentServiceClient {
       .listAttachments(request, options, wrappedCallback)
       ?.then(
         ([response, input, output]: [
-          protos.google.cloud.support.v2.IAttachment[],
-          protos.google.cloud.support.v2.IListAttachmentsRequest | null,
-          protos.google.cloud.support.v2.IListAttachmentsResponse,
+          protos.google.cloud.support.v2beta.IAttachment[],
+          protos.google.cloud.support.v2beta.IListAttachmentsRequest | null,
+          protos.google.cloud.support.v2beta.IListAttachmentsResponse,
         ]) => {
           this._log.info('listAttachments values %j', response);
           return [response, input, output];
@@ -584,7 +592,7 @@ export class CaseAttachmentServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.support.v2.Attachment|Attachment} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.support.v2beta.Attachment|Attachment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAttachmentsAsync()`
@@ -593,7 +601,7 @@ export class CaseAttachmentServiceClient {
    *   for more details and examples.
    */
   listAttachmentsStream(
-    request?: protos.google.cloud.support.v2.IListAttachmentsRequest,
+    request?: protos.google.cloud.support.v2beta.IListAttachmentsRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -642,17 +650,17 @@ export class CaseAttachmentServiceClient {
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.support.v2.Attachment|Attachment}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.support.v2beta.Attachment|Attachment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/case_attachment_service.list_attachments.js</caption>
-   * region_tag:cloudsupport_v2_generated_CaseAttachmentService_ListAttachments_async
+   * @example <caption>include:samples/generated/v2beta/case_attachment_service.list_attachments.js</caption>
+   * region_tag:cloudsupport_v2beta_generated_CaseAttachmentService_ListAttachments_async
    */
   listAttachmentsAsync(
-    request?: protos.google.cloud.support.v2.IListAttachmentsRequest,
+    request?: protos.google.cloud.support.v2beta.IListAttachmentsRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.support.v2.IAttachment> {
+  ): AsyncIterable<protos.google.cloud.support.v2beta.IAttachment> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -671,7 +679,7 @@ export class CaseAttachmentServiceClient {
       this.innerApiCalls['listAttachments'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.support.v2.IAttachment>;
+    ) as AsyncIterable<protos.google.cloud.support.v2beta.IAttachment>;
   }
   // --------------------
   // -- Path templates --
@@ -848,6 +856,71 @@ export class CaseAttachmentServiceClient {
   }
 
   /**
+   * Return a fully-qualified organizationCaseEmailMessage resource name string.
+   *
+   * @param {string} organization
+   * @param {string} caseParam
+   * @param {string} email_message
+   * @returns {string} Resource name string.
+   */
+  organizationCaseEmailMessagePath(
+    organization: string,
+    caseParam: string,
+    emailMessage: string
+  ) {
+    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.render({
+      organization: organization,
+      case: caseParam,
+      email_message: emailMessage,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationCaseEmailMessage resource.
+   *
+   * @param {string} organizationCaseEmailMessageName
+   *   A fully-qualified path representing organization_case_email_message resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationCaseEmailMessageName(
+    organizationCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.match(
+      organizationCaseEmailMessageName
+    ).organization;
+  }
+
+  /**
+   * Parse the case from OrganizationCaseEmailMessage resource.
+   *
+   * @param {string} organizationCaseEmailMessageName
+   *   A fully-qualified path representing organization_case_email_message resource.
+   * @returns {string} A string representing the case.
+   */
+  matchCaseFromOrganizationCaseEmailMessageName(
+    organizationCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.match(
+      organizationCaseEmailMessageName
+    ).case;
+  }
+
+  /**
+   * Parse the email_message from OrganizationCaseEmailMessage resource.
+   *
+   * @param {string} organizationCaseEmailMessageName
+   *   A fully-qualified path representing organization_case_email_message resource.
+   * @returns {string} A string representing the email_message.
+   */
+  matchEmailMessageFromOrganizationCaseEmailMessageName(
+    organizationCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.organizationCaseEmailMessagePathTemplate.match(
+      organizationCaseEmailMessageName
+    ).email_message;
+  }
+
+  /**
    * Return a fully-qualified projectCase resource name string.
    *
    * @param {string} project
@@ -1003,6 +1076,71 @@ export class CaseAttachmentServiceClient {
     return this.pathTemplates.projectCaseCommentPathTemplate.match(
       projectCaseCommentName
     ).comment;
+  }
+
+  /**
+   * Return a fully-qualified projectCaseEmailMessage resource name string.
+   *
+   * @param {string} project
+   * @param {string} caseParam
+   * @param {string} email_message
+   * @returns {string} Resource name string.
+   */
+  projectCaseEmailMessagePath(
+    project: string,
+    caseParam: string,
+    emailMessage: string
+  ) {
+    return this.pathTemplates.projectCaseEmailMessagePathTemplate.render({
+      project: project,
+      case: caseParam,
+      email_message: emailMessage,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectCaseEmailMessage resource.
+   *
+   * @param {string} projectCaseEmailMessageName
+   *   A fully-qualified path representing project_case_email_message resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectCaseEmailMessageName(
+    projectCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.projectCaseEmailMessagePathTemplate.match(
+      projectCaseEmailMessageName
+    ).project;
+  }
+
+  /**
+   * Parse the case from ProjectCaseEmailMessage resource.
+   *
+   * @param {string} projectCaseEmailMessageName
+   *   A fully-qualified path representing project_case_email_message resource.
+   * @returns {string} A string representing the case.
+   */
+  matchCaseFromProjectCaseEmailMessageName(
+    projectCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.projectCaseEmailMessagePathTemplate.match(
+      projectCaseEmailMessageName
+    ).case;
+  }
+
+  /**
+   * Parse the email_message from ProjectCaseEmailMessage resource.
+   *
+   * @param {string} projectCaseEmailMessageName
+   *   A fully-qualified path representing project_case_email_message resource.
+   * @returns {string} A string representing the email_message.
+   */
+  matchEmailMessageFromProjectCaseEmailMessageName(
+    projectCaseEmailMessageName: string
+  ) {
+    return this.pathTemplates.projectCaseEmailMessagePathTemplate.match(
+      projectCaseEmailMessageName
+    ).email_message;
   }
 
   /**

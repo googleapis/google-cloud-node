@@ -29,13 +29,13 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  An expression written in the Google Cloud filter language. If non-empty,
-   *  then only cases whose fields match the filter are returned. If empty, then
-   *  no messages are filtered out.
+   *  An expression used to filter case classifications.
+   *  If it's an empty string, then no filtering happens. Otherwise, case
+   *  classifications will be returned that match the filter.
    */
   // const query = 'abc123'
   /**
-   *  The maximum number of cases fetched with each request.
+   *  The maximum number of classifications fetched with each request.
    */
   // const pageSize = 1234
   /**
