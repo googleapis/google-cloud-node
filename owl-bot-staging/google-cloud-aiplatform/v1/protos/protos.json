@@ -7963,6 +7963,10 @@
                           "type": "string",
                           "id": 28
                         },
+                        "checkpointId": {
+                          "type": "string",
+                          "id": 29
+                        },
                         "speculativeDecodingSpec": {
                           "type": "SpeculativeDecodingSpec",
                           "id": 30,
