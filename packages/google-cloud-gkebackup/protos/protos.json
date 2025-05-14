@@ -577,6 +577,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "backupChannel": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "gkebackup.googleapis.com/BackupChannel"
+                          }
+                        },
                         "lastSuccessfulBackupTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 19,
@@ -893,6 +901,20 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "backupConfigDetails": {
+                              "type": "BackupConfigDetails",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "retentionPolicyDetails": {
+                              "type": "RetentionPolicyDetails",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -905,6 +927,79 @@
                                 "FAILED": 4,
                                 "DEACTIVATED": 5,
                                 "DELETING": 6
+                              }
+                            },
+                            "BackupConfigDetails": {
+                              "oneofs": {
+                                "backupScope": {
+                                  "oneof": [
+                                    "allNamespaces",
+                                    "selectedNamespaces",
+                                    "selectedApplications"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "allNamespaces": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "selectedNamespaces": {
+                                  "type": "Namespaces",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "selectedApplications": {
+                                  "type": "NamespacedNames",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "includeVolumeData": {
+                                  "type": "bool",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "includeSecrets": {
+                                  "type": "bool",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "encryptionKey": {
+                                  "type": "EncryptionKey",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "RetentionPolicyDetails": {
+                              "fields": {
+                                "backupDeleteLockDays": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "backupRetainDays": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
                               }
                             }
                           }
@@ -3733,6 +3828,14 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "restoreChannel": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "gkebackup.googleapis.com/RestoreChannel"
                           }
                         }
                       },

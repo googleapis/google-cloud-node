@@ -1130,6 +1130,9 @@ export namespace google {
                     /** BackupPlan rpoRiskReason */
                     rpoRiskReason?: (string|null);
 
+                    /** BackupPlan backupChannel */
+                    backupChannel?: (string|null);
+
                     /** BackupPlan lastSuccessfulBackupTime */
                     lastSuccessfulBackupTime?: (google.protobuf.ITimestamp|null);
                 }
@@ -1193,6 +1196,9 @@ export namespace google {
 
                     /** BackupPlan rpoRiskReason. */
                     public rpoRiskReason: string;
+
+                    /** BackupPlan backupChannel. */
+                    public backupChannel: string;
 
                     /** BackupPlan lastSuccessfulBackupTime. */
                     public lastSuccessfulBackupTime?: (google.protobuf.ITimestamp|null);
@@ -2137,6 +2143,12 @@ export namespace google {
 
                         /** BackupPlanDetails lastSuccessfulBackup */
                         lastSuccessfulBackup?: (string|null);
+
+                        /** BackupPlanDetails backupConfigDetails */
+                        backupConfigDetails?: (google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails|null);
+
+                        /** BackupPlanDetails retentionPolicyDetails */
+                        retentionPolicyDetails?: (google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails|null);
                     }
 
                     /** Represents a BackupPlanDetails. */
@@ -2165,6 +2177,12 @@ export namespace google {
 
                         /** BackupPlanDetails lastSuccessfulBackup. */
                         public lastSuccessfulBackup: string;
+
+                        /** BackupPlanDetails backupConfigDetails. */
+                        public backupConfigDetails?: (google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails|null);
+
+                        /** BackupPlanDetails retentionPolicyDetails. */
+                        public retentionPolicyDetails?: (google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails|null);
 
                         /**
                          * Creates a new BackupPlanDetails instance using the specified properties.
@@ -2255,6 +2273,239 @@ export namespace google {
                             FAILED = 4,
                             DEACTIVATED = 5,
                             DELETING = 6
+                        }
+
+                        /** Properties of a BackupConfigDetails. */
+                        interface IBackupConfigDetails {
+
+                            /** BackupConfigDetails allNamespaces */
+                            allNamespaces?: (boolean|null);
+
+                            /** BackupConfigDetails selectedNamespaces */
+                            selectedNamespaces?: (google.cloud.gkebackup.v1.INamespaces|null);
+
+                            /** BackupConfigDetails selectedApplications */
+                            selectedApplications?: (google.cloud.gkebackup.v1.INamespacedNames|null);
+
+                            /** BackupConfigDetails includeVolumeData */
+                            includeVolumeData?: (boolean|null);
+
+                            /** BackupConfigDetails includeSecrets */
+                            includeSecrets?: (boolean|null);
+
+                            /** BackupConfigDetails encryptionKey */
+                            encryptionKey?: (google.cloud.gkebackup.v1.IEncryptionKey|null);
+                        }
+
+                        /** Represents a BackupConfigDetails. */
+                        class BackupConfigDetails implements IBackupConfigDetails {
+
+                            /**
+                             * Constructs a new BackupConfigDetails.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails);
+
+                            /** BackupConfigDetails allNamespaces. */
+                            public allNamespaces?: (boolean|null);
+
+                            /** BackupConfigDetails selectedNamespaces. */
+                            public selectedNamespaces?: (google.cloud.gkebackup.v1.INamespaces|null);
+
+                            /** BackupConfigDetails selectedApplications. */
+                            public selectedApplications?: (google.cloud.gkebackup.v1.INamespacedNames|null);
+
+                            /** BackupConfigDetails includeVolumeData. */
+                            public includeVolumeData: boolean;
+
+                            /** BackupConfigDetails includeSecrets. */
+                            public includeSecrets: boolean;
+
+                            /** BackupConfigDetails encryptionKey. */
+                            public encryptionKey?: (google.cloud.gkebackup.v1.IEncryptionKey|null);
+
+                            /** BackupConfigDetails backupScope. */
+                            public backupScope?: ("allNamespaces"|"selectedNamespaces"|"selectedApplications");
+
+                            /**
+                             * Creates a new BackupConfigDetails instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns BackupConfigDetails instance
+                             */
+                            public static create(properties?: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails;
+
+                            /**
+                             * Encodes the specified BackupConfigDetails message. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.verify|verify} messages.
+                             * @param message BackupConfigDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified BackupConfigDetails message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.verify|verify} messages.
+                             * @param message BackupConfigDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a BackupConfigDetails message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns BackupConfigDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails;
+
+                            /**
+                             * Decodes a BackupConfigDetails message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns BackupConfigDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails;
+
+                            /**
+                             * Verifies a BackupConfigDetails message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a BackupConfigDetails message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns BackupConfigDetails
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails;
+
+                            /**
+                             * Creates a plain object from a BackupConfigDetails message. Also converts values to other types if specified.
+                             * @param message BackupConfigDetails
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this BackupConfigDetails to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for BackupConfigDetails
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a RetentionPolicyDetails. */
+                        interface IRetentionPolicyDetails {
+
+                            /** RetentionPolicyDetails backupDeleteLockDays */
+                            backupDeleteLockDays?: (number|null);
+
+                            /** RetentionPolicyDetails backupRetainDays */
+                            backupRetainDays?: (number|null);
+                        }
+
+                        /** Represents a RetentionPolicyDetails. */
+                        class RetentionPolicyDetails implements IRetentionPolicyDetails {
+
+                            /**
+                             * Constructs a new RetentionPolicyDetails.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails);
+
+                            /** RetentionPolicyDetails backupDeleteLockDays. */
+                            public backupDeleteLockDays: number;
+
+                            /** RetentionPolicyDetails backupRetainDays. */
+                            public backupRetainDays: number;
+
+                            /**
+                             * Creates a new RetentionPolicyDetails instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RetentionPolicyDetails instance
+                             */
+                            public static create(properties?: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails;
+
+                            /**
+                             * Encodes the specified RetentionPolicyDetails message. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails.verify|verify} messages.
+                             * @param message RetentionPolicyDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RetentionPolicyDetails message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails.verify|verify} messages.
+                             * @param message RetentionPolicyDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RetentionPolicyDetails message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RetentionPolicyDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails;
+
+                            /**
+                             * Decodes a RetentionPolicyDetails message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RetentionPolicyDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails;
+
+                            /**
+                             * Verifies a RetentionPolicyDetails message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RetentionPolicyDetails message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RetentionPolicyDetails
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails;
+
+                            /**
+                             * Creates a plain object from a RetentionPolicyDetails message. Also converts values to other types if specified.
+                             * @param message RetentionPolicyDetails
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RetentionPolicyDetails to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RetentionPolicyDetails
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
                 }
@@ -10528,6 +10779,9 @@ export namespace google {
 
                     /** RestorePlan stateReason */
                     stateReason?: (string|null);
+
+                    /** RestorePlan restoreChannel */
+                    restoreChannel?: (string|null);
                 }
 
                 /** Represents a RestorePlan. */
@@ -10574,6 +10828,9 @@ export namespace google {
 
                     /** RestorePlan stateReason. */
                     public stateReason: string;
+
+                    /** RestorePlan restoreChannel. */
+                    public restoreChannel: string;
 
                     /**
                      * Creates a new RestorePlan instance using the specified properties.

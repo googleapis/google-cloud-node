@@ -3016,6 +3016,7 @@
                          * @property {string|null} [stateReason] BackupPlan stateReason
                          * @property {number|null} [rpoRiskLevel] BackupPlan rpoRiskLevel
                          * @property {string|null} [rpoRiskReason] BackupPlan rpoRiskReason
+                         * @property {string|null} [backupChannel] BackupPlan backupChannel
                          * @property {google.protobuf.ITimestamp|null} [lastSuccessfulBackupTime] BackupPlan lastSuccessfulBackupTime
                          */
     
@@ -3172,6 +3173,14 @@
                         BackupPlan.prototype.rpoRiskReason = "";
     
                         /**
+                         * BackupPlan backupChannel.
+                         * @member {string} backupChannel
+                         * @memberof google.cloud.gkebackup.v1.BackupPlan
+                         * @instance
+                         */
+                        BackupPlan.prototype.backupChannel = "";
+    
+                        /**
                          * BackupPlan lastSuccessfulBackupTime.
                          * @member {google.protobuf.ITimestamp|null|undefined} lastSuccessfulBackupTime
                          * @memberof google.cloud.gkebackup.v1.BackupPlan
@@ -3238,6 +3247,8 @@
                                 writer.uint32(/* id 16, wireType 0 =*/128).int32(message.rpoRiskLevel);
                             if (message.rpoRiskReason != null && Object.hasOwnProperty.call(message, "rpoRiskReason"))
                                 writer.uint32(/* id 17, wireType 2 =*/138).string(message.rpoRiskReason);
+                            if (message.backupChannel != null && Object.hasOwnProperty.call(message, "backupChannel"))
+                                writer.uint32(/* id 18, wireType 2 =*/146).string(message.backupChannel);
                             if (message.lastSuccessfulBackupTime != null && Object.hasOwnProperty.call(message, "lastSuccessfulBackupTime"))
                                 $root.google.protobuf.Timestamp.encode(message.lastSuccessfulBackupTime, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             return writer;
@@ -3361,6 +3372,10 @@
                                         message.rpoRiskReason = reader.string();
                                         break;
                                     }
+                                case 18: {
+                                        message.backupChannel = reader.string();
+                                        break;
+                                    }
                                 case 19: {
                                         message.lastSuccessfulBackupTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
@@ -3476,6 +3491,9 @@
                             if (message.rpoRiskReason != null && message.hasOwnProperty("rpoRiskReason"))
                                 if (!$util.isString(message.rpoRiskReason))
                                     return "rpoRiskReason: string expected";
+                            if (message.backupChannel != null && message.hasOwnProperty("backupChannel"))
+                                if (!$util.isString(message.backupChannel))
+                                    return "backupChannel: string expected";
                             if (message.lastSuccessfulBackupTime != null && message.hasOwnProperty("lastSuccessfulBackupTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.lastSuccessfulBackupTime);
                                 if (error)
@@ -3584,6 +3602,8 @@
                                 message.rpoRiskLevel = object.rpoRiskLevel | 0;
                             if (object.rpoRiskReason != null)
                                 message.rpoRiskReason = String(object.rpoRiskReason);
+                            if (object.backupChannel != null)
+                                message.backupChannel = String(object.backupChannel);
                             if (object.lastSuccessfulBackupTime != null) {
                                 if (typeof object.lastSuccessfulBackupTime !== "object")
                                     throw TypeError(".google.cloud.gkebackup.v1.BackupPlan.lastSuccessfulBackupTime: object expected");
@@ -3624,6 +3644,7 @@
                                 object.stateReason = "";
                                 object.rpoRiskLevel = 0;
                                 object.rpoRiskReason = "";
+                                object.backupChannel = "";
                                 object.lastSuccessfulBackupTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -3664,6 +3685,8 @@
                                 object.rpoRiskLevel = message.rpoRiskLevel;
                             if (message.rpoRiskReason != null && message.hasOwnProperty("rpoRiskReason"))
                                 object.rpoRiskReason = message.rpoRiskReason;
+                            if (message.backupChannel != null && message.hasOwnProperty("backupChannel"))
+                                object.backupChannel = message.backupChannel;
                             if (message.lastSuccessfulBackupTime != null && message.hasOwnProperty("lastSuccessfulBackupTime"))
                                 object.lastSuccessfulBackupTime = $root.google.protobuf.Timestamp.toObject(message.lastSuccessfulBackupTime, options);
                             return object;
@@ -5907,6 +5930,8 @@
                              * @property {google.protobuf.ITimestamp|null} [nextScheduledBackupTime] BackupPlanDetails nextScheduledBackupTime
                              * @property {number|null} [rpoRiskLevel] BackupPlanDetails rpoRiskLevel
                              * @property {string|null} [lastSuccessfulBackup] BackupPlanDetails lastSuccessfulBackup
+                             * @property {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails|null} [backupConfigDetails] BackupPlanDetails backupConfigDetails
+                             * @property {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails|null} [retentionPolicyDetails] BackupPlanDetails retentionPolicyDetails
                              */
     
                             /**
@@ -5973,6 +5998,22 @@
                             BackupPlanDetails.prototype.lastSuccessfulBackup = "";
     
                             /**
+                             * BackupPlanDetails backupConfigDetails.
+                             * @member {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails|null|undefined} backupConfigDetails
+                             * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails
+                             * @instance
+                             */
+                            BackupPlanDetails.prototype.backupConfigDetails = null;
+    
+                            /**
+                             * BackupPlanDetails retentionPolicyDetails.
+                             * @member {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails|null|undefined} retentionPolicyDetails
+                             * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails
+                             * @instance
+                             */
+                            BackupPlanDetails.prototype.retentionPolicyDetails = null;
+    
+                            /**
                              * Creates a new BackupPlanDetails instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails
@@ -6008,6 +6049,10 @@
                                     writer.uint32(/* id 5, wireType 0 =*/40).int32(message.rpoRiskLevel);
                                 if (message.lastSuccessfulBackup != null && Object.hasOwnProperty.call(message, "lastSuccessfulBackup"))
                                     writer.uint32(/* id 6, wireType 2 =*/50).string(message.lastSuccessfulBackup);
+                                if (message.backupConfigDetails != null && Object.hasOwnProperty.call(message, "backupConfigDetails"))
+                                    $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.encode(message.backupConfigDetails, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.retentionPolicyDetails != null && Object.hasOwnProperty.call(message, "retentionPolicyDetails"))
+                                    $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails.encode(message.retentionPolicyDetails, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 return writer;
                             };
     
@@ -6064,6 +6109,14 @@
                                         }
                                     case 6: {
                                             message.lastSuccessfulBackup = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.backupConfigDetails = $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.retentionPolicyDetails = $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -6133,6 +6186,16 @@
                                 if (message.lastSuccessfulBackup != null && message.hasOwnProperty("lastSuccessfulBackup"))
                                     if (!$util.isString(message.lastSuccessfulBackup))
                                         return "lastSuccessfulBackup: string expected";
+                                if (message.backupConfigDetails != null && message.hasOwnProperty("backupConfigDetails")) {
+                                    var error = $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.verify(message.backupConfigDetails);
+                                    if (error)
+                                        return "backupConfigDetails." + error;
+                                }
+                                if (message.retentionPolicyDetails != null && message.hasOwnProperty("retentionPolicyDetails")) {
+                                    var error = $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails.verify(message.retentionPolicyDetails);
+                                    if (error)
+                                        return "retentionPolicyDetails." + error;
+                                }
                                 return null;
                             };
     
@@ -6200,6 +6263,16 @@
                                     message.rpoRiskLevel = object.rpoRiskLevel | 0;
                                 if (object.lastSuccessfulBackup != null)
                                     message.lastSuccessfulBackup = String(object.lastSuccessfulBackup);
+                                if (object.backupConfigDetails != null) {
+                                    if (typeof object.backupConfigDetails !== "object")
+                                        throw TypeError(".google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.backupConfigDetails: object expected");
+                                    message.backupConfigDetails = $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.fromObject(object.backupConfigDetails);
+                                }
+                                if (object.retentionPolicyDetails != null) {
+                                    if (typeof object.retentionPolicyDetails !== "object")
+                                        throw TypeError(".google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.retentionPolicyDetails: object expected");
+                                    message.retentionPolicyDetails = $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails.fromObject(object.retentionPolicyDetails);
+                                }
                                 return message;
                             };
     
@@ -6223,6 +6296,8 @@
                                     object.nextScheduledBackupTime = null;
                                     object.rpoRiskLevel = 0;
                                     object.lastSuccessfulBackup = "";
+                                    object.backupConfigDetails = null;
+                                    object.retentionPolicyDetails = null;
                                 }
                                 if (message.protectedPodCount != null && message.hasOwnProperty("protectedPodCount"))
                                     object.protectedPodCount = message.protectedPodCount;
@@ -6236,6 +6311,10 @@
                                     object.rpoRiskLevel = message.rpoRiskLevel;
                                 if (message.lastSuccessfulBackup != null && message.hasOwnProperty("lastSuccessfulBackup"))
                                     object.lastSuccessfulBackup = message.lastSuccessfulBackup;
+                                if (message.backupConfigDetails != null && message.hasOwnProperty("backupConfigDetails"))
+                                    object.backupConfigDetails = $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.toObject(message.backupConfigDetails, options);
+                                if (message.retentionPolicyDetails != null && message.hasOwnProperty("retentionPolicyDetails"))
+                                    object.retentionPolicyDetails = $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails.toObject(message.retentionPolicyDetails, options);
                                 return object;
                             };
     
@@ -6287,6 +6366,600 @@
                                 values[valuesById[5] = "DEACTIVATED"] = 5;
                                 values[valuesById[6] = "DELETING"] = 6;
                                 return values;
+                            })();
+    
+                            BackupPlanDetails.BackupConfigDetails = (function() {
+    
+                                /**
+                                 * Properties of a BackupConfigDetails.
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails
+                                 * @interface IBackupConfigDetails
+                                 * @property {boolean|null} [allNamespaces] BackupConfigDetails allNamespaces
+                                 * @property {google.cloud.gkebackup.v1.INamespaces|null} [selectedNamespaces] BackupConfigDetails selectedNamespaces
+                                 * @property {google.cloud.gkebackup.v1.INamespacedNames|null} [selectedApplications] BackupConfigDetails selectedApplications
+                                 * @property {boolean|null} [includeVolumeData] BackupConfigDetails includeVolumeData
+                                 * @property {boolean|null} [includeSecrets] BackupConfigDetails includeSecrets
+                                 * @property {google.cloud.gkebackup.v1.IEncryptionKey|null} [encryptionKey] BackupConfigDetails encryptionKey
+                                 */
+    
+                                /**
+                                 * Constructs a new BackupConfigDetails.
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails
+                                 * @classdesc Represents a BackupConfigDetails.
+                                 * @implements IBackupConfigDetails
+                                 * @constructor
+                                 * @param {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails=} [properties] Properties to set
+                                 */
+                                function BackupConfigDetails(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * BackupConfigDetails allNamespaces.
+                                 * @member {boolean|null|undefined} allNamespaces
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @instance
+                                 */
+                                BackupConfigDetails.prototype.allNamespaces = null;
+    
+                                /**
+                                 * BackupConfigDetails selectedNamespaces.
+                                 * @member {google.cloud.gkebackup.v1.INamespaces|null|undefined} selectedNamespaces
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @instance
+                                 */
+                                BackupConfigDetails.prototype.selectedNamespaces = null;
+    
+                                /**
+                                 * BackupConfigDetails selectedApplications.
+                                 * @member {google.cloud.gkebackup.v1.INamespacedNames|null|undefined} selectedApplications
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @instance
+                                 */
+                                BackupConfigDetails.prototype.selectedApplications = null;
+    
+                                /**
+                                 * BackupConfigDetails includeVolumeData.
+                                 * @member {boolean} includeVolumeData
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @instance
+                                 */
+                                BackupConfigDetails.prototype.includeVolumeData = false;
+    
+                                /**
+                                 * BackupConfigDetails includeSecrets.
+                                 * @member {boolean} includeSecrets
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @instance
+                                 */
+                                BackupConfigDetails.prototype.includeSecrets = false;
+    
+                                /**
+                                 * BackupConfigDetails encryptionKey.
+                                 * @member {google.cloud.gkebackup.v1.IEncryptionKey|null|undefined} encryptionKey
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @instance
+                                 */
+                                BackupConfigDetails.prototype.encryptionKey = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * BackupConfigDetails backupScope.
+                                 * @member {"allNamespaces"|"selectedNamespaces"|"selectedApplications"|undefined} backupScope
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @instance
+                                 */
+                                Object.defineProperty(BackupConfigDetails.prototype, "backupScope", {
+                                    get: $util.oneOfGetter($oneOfFields = ["allNamespaces", "selectedNamespaces", "selectedApplications"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new BackupConfigDetails instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @static
+                                 * @param {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails=} [properties] Properties to set
+                                 * @returns {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails} BackupConfigDetails instance
+                                 */
+                                BackupConfigDetails.create = function create(properties) {
+                                    return new BackupConfigDetails(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified BackupConfigDetails message. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @static
+                                 * @param {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails} message BackupConfigDetails message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                BackupConfigDetails.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.allNamespaces != null && Object.hasOwnProperty.call(message, "allNamespaces"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.allNamespaces);
+                                    if (message.selectedNamespaces != null && Object.hasOwnProperty.call(message, "selectedNamespaces"))
+                                        $root.google.cloud.gkebackup.v1.Namespaces.encode(message.selectedNamespaces, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.selectedApplications != null && Object.hasOwnProperty.call(message, "selectedApplications"))
+                                        $root.google.cloud.gkebackup.v1.NamespacedNames.encode(message.selectedApplications, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.includeVolumeData != null && Object.hasOwnProperty.call(message, "includeVolumeData"))
+                                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.includeVolumeData);
+                                    if (message.includeSecrets != null && Object.hasOwnProperty.call(message, "includeSecrets"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.includeSecrets);
+                                    if (message.encryptionKey != null && Object.hasOwnProperty.call(message, "encryptionKey"))
+                                        $root.google.cloud.gkebackup.v1.EncryptionKey.encode(message.encryptionKey, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified BackupConfigDetails message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @static
+                                 * @param {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails} message BackupConfigDetails message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                BackupConfigDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a BackupConfigDetails message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails} BackupConfigDetails
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                BackupConfigDetails.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.allNamespaces = reader.bool();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.selectedNamespaces = $root.google.cloud.gkebackup.v1.Namespaces.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.selectedApplications = $root.google.cloud.gkebackup.v1.NamespacedNames.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.includeVolumeData = reader.bool();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.includeSecrets = reader.bool();
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.encryptionKey = $root.google.cloud.gkebackup.v1.EncryptionKey.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a BackupConfigDetails message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails} BackupConfigDetails
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                BackupConfigDetails.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a BackupConfigDetails message.
+                                 * @function verify
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                BackupConfigDetails.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.allNamespaces != null && message.hasOwnProperty("allNamespaces")) {
+                                        properties.backupScope = 1;
+                                        if (typeof message.allNamespaces !== "boolean")
+                                            return "allNamespaces: boolean expected";
+                                    }
+                                    if (message.selectedNamespaces != null && message.hasOwnProperty("selectedNamespaces")) {
+                                        if (properties.backupScope === 1)
+                                            return "backupScope: multiple values";
+                                        properties.backupScope = 1;
+                                        {
+                                            var error = $root.google.cloud.gkebackup.v1.Namespaces.verify(message.selectedNamespaces);
+                                            if (error)
+                                                return "selectedNamespaces." + error;
+                                        }
+                                    }
+                                    if (message.selectedApplications != null && message.hasOwnProperty("selectedApplications")) {
+                                        if (properties.backupScope === 1)
+                                            return "backupScope: multiple values";
+                                        properties.backupScope = 1;
+                                        {
+                                            var error = $root.google.cloud.gkebackup.v1.NamespacedNames.verify(message.selectedApplications);
+                                            if (error)
+                                                return "selectedApplications." + error;
+                                        }
+                                    }
+                                    if (message.includeVolumeData != null && message.hasOwnProperty("includeVolumeData"))
+                                        if (typeof message.includeVolumeData !== "boolean")
+                                            return "includeVolumeData: boolean expected";
+                                    if (message.includeSecrets != null && message.hasOwnProperty("includeSecrets"))
+                                        if (typeof message.includeSecrets !== "boolean")
+                                            return "includeSecrets: boolean expected";
+                                    if (message.encryptionKey != null && message.hasOwnProperty("encryptionKey")) {
+                                        var error = $root.google.cloud.gkebackup.v1.EncryptionKey.verify(message.encryptionKey);
+                                        if (error)
+                                            return "encryptionKey." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a BackupConfigDetails message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails} BackupConfigDetails
+                                 */
+                                BackupConfigDetails.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails)
+                                        return object;
+                                    var message = new $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails();
+                                    if (object.allNamespaces != null)
+                                        message.allNamespaces = Boolean(object.allNamespaces);
+                                    if (object.selectedNamespaces != null) {
+                                        if (typeof object.selectedNamespaces !== "object")
+                                            throw TypeError(".google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.selectedNamespaces: object expected");
+                                        message.selectedNamespaces = $root.google.cloud.gkebackup.v1.Namespaces.fromObject(object.selectedNamespaces);
+                                    }
+                                    if (object.selectedApplications != null) {
+                                        if (typeof object.selectedApplications !== "object")
+                                            throw TypeError(".google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.selectedApplications: object expected");
+                                        message.selectedApplications = $root.google.cloud.gkebackup.v1.NamespacedNames.fromObject(object.selectedApplications);
+                                    }
+                                    if (object.includeVolumeData != null)
+                                        message.includeVolumeData = Boolean(object.includeVolumeData);
+                                    if (object.includeSecrets != null)
+                                        message.includeSecrets = Boolean(object.includeSecrets);
+                                    if (object.encryptionKey != null) {
+                                        if (typeof object.encryptionKey !== "object")
+                                            throw TypeError(".google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.encryptionKey: object expected");
+                                        message.encryptionKey = $root.google.cloud.gkebackup.v1.EncryptionKey.fromObject(object.encryptionKey);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a BackupConfigDetails message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @static
+                                 * @param {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails} message BackupConfigDetails
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                BackupConfigDetails.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.includeVolumeData = false;
+                                        object.includeSecrets = false;
+                                        object.encryptionKey = null;
+                                    }
+                                    if (message.allNamespaces != null && message.hasOwnProperty("allNamespaces")) {
+                                        object.allNamespaces = message.allNamespaces;
+                                        if (options.oneofs)
+                                            object.backupScope = "allNamespaces";
+                                    }
+                                    if (message.selectedNamespaces != null && message.hasOwnProperty("selectedNamespaces")) {
+                                        object.selectedNamespaces = $root.google.cloud.gkebackup.v1.Namespaces.toObject(message.selectedNamespaces, options);
+                                        if (options.oneofs)
+                                            object.backupScope = "selectedNamespaces";
+                                    }
+                                    if (message.selectedApplications != null && message.hasOwnProperty("selectedApplications")) {
+                                        object.selectedApplications = $root.google.cloud.gkebackup.v1.NamespacedNames.toObject(message.selectedApplications, options);
+                                        if (options.oneofs)
+                                            object.backupScope = "selectedApplications";
+                                    }
+                                    if (message.includeVolumeData != null && message.hasOwnProperty("includeVolumeData"))
+                                        object.includeVolumeData = message.includeVolumeData;
+                                    if (message.includeSecrets != null && message.hasOwnProperty("includeSecrets"))
+                                        object.includeSecrets = message.includeSecrets;
+                                    if (message.encryptionKey != null && message.hasOwnProperty("encryptionKey"))
+                                        object.encryptionKey = $root.google.cloud.gkebackup.v1.EncryptionKey.toObject(message.encryptionKey, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this BackupConfigDetails to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                BackupConfigDetails.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for BackupConfigDetails
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                BackupConfigDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails";
+                                };
+    
+                                return BackupConfigDetails;
+                            })();
+    
+                            BackupPlanDetails.RetentionPolicyDetails = (function() {
+    
+                                /**
+                                 * Properties of a RetentionPolicyDetails.
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails
+                                 * @interface IRetentionPolicyDetails
+                                 * @property {number|null} [backupDeleteLockDays] RetentionPolicyDetails backupDeleteLockDays
+                                 * @property {number|null} [backupRetainDays] RetentionPolicyDetails backupRetainDays
+                                 */
+    
+                                /**
+                                 * Constructs a new RetentionPolicyDetails.
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails
+                                 * @classdesc Represents a RetentionPolicyDetails.
+                                 * @implements IRetentionPolicyDetails
+                                 * @constructor
+                                 * @param {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails=} [properties] Properties to set
+                                 */
+                                function RetentionPolicyDetails(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RetentionPolicyDetails backupDeleteLockDays.
+                                 * @member {number} backupDeleteLockDays
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails
+                                 * @instance
+                                 */
+                                RetentionPolicyDetails.prototype.backupDeleteLockDays = 0;
+    
+                                /**
+                                 * RetentionPolicyDetails backupRetainDays.
+                                 * @member {number} backupRetainDays
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails
+                                 * @instance
+                                 */
+                                RetentionPolicyDetails.prototype.backupRetainDays = 0;
+    
+                                /**
+                                 * Creates a new RetentionPolicyDetails instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails
+                                 * @static
+                                 * @param {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails=} [properties] Properties to set
+                                 * @returns {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails} RetentionPolicyDetails instance
+                                 */
+                                RetentionPolicyDetails.create = function create(properties) {
+                                    return new RetentionPolicyDetails(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RetentionPolicyDetails message. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails
+                                 * @static
+                                 * @param {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails} message RetentionPolicyDetails message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RetentionPolicyDetails.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.backupDeleteLockDays != null && Object.hasOwnProperty.call(message, "backupDeleteLockDays"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.backupDeleteLockDays);
+                                    if (message.backupRetainDays != null && Object.hasOwnProperty.call(message, "backupRetainDays"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.backupRetainDays);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RetentionPolicyDetails message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails
+                                 * @static
+                                 * @param {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails} message RetentionPolicyDetails message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RetentionPolicyDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RetentionPolicyDetails message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails} RetentionPolicyDetails
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RetentionPolicyDetails.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.backupDeleteLockDays = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.backupRetainDays = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RetentionPolicyDetails message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails} RetentionPolicyDetails
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RetentionPolicyDetails.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RetentionPolicyDetails message.
+                                 * @function verify
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RetentionPolicyDetails.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.backupDeleteLockDays != null && message.hasOwnProperty("backupDeleteLockDays"))
+                                        if (!$util.isInteger(message.backupDeleteLockDays))
+                                            return "backupDeleteLockDays: integer expected";
+                                    if (message.backupRetainDays != null && message.hasOwnProperty("backupRetainDays"))
+                                        if (!$util.isInteger(message.backupRetainDays))
+                                            return "backupRetainDays: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RetentionPolicyDetails message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails} RetentionPolicyDetails
+                                 */
+                                RetentionPolicyDetails.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails)
+                                        return object;
+                                    var message = new $root.google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails();
+                                    if (object.backupDeleteLockDays != null)
+                                        message.backupDeleteLockDays = object.backupDeleteLockDays | 0;
+                                    if (object.backupRetainDays != null)
+                                        message.backupRetainDays = object.backupRetainDays | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RetentionPolicyDetails message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails
+                                 * @static
+                                 * @param {google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails} message RetentionPolicyDetails
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RetentionPolicyDetails.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.backupDeleteLockDays = 0;
+                                        object.backupRetainDays = 0;
+                                    }
+                                    if (message.backupDeleteLockDays != null && message.hasOwnProperty("backupDeleteLockDays"))
+                                        object.backupDeleteLockDays = message.backupDeleteLockDays;
+                                    if (message.backupRetainDays != null && message.hasOwnProperty("backupRetainDays"))
+                                        object.backupRetainDays = message.backupRetainDays;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RetentionPolicyDetails to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RetentionPolicyDetails.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RetentionPolicyDetails
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RetentionPolicyDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails";
+                                };
+    
+                                return RetentionPolicyDetails;
                             })();
     
                             return BackupPlanDetails;
@@ -25981,6 +26654,7 @@
                          * @property {string|null} [etag] RestorePlan etag
                          * @property {google.cloud.gkebackup.v1.RestorePlan.State|null} [state] RestorePlan state
                          * @property {string|null} [stateReason] RestorePlan stateReason
+                         * @property {string|null} [restoreChannel] RestorePlan restoreChannel
                          */
     
                         /**
@@ -26096,6 +26770,14 @@
                         RestorePlan.prototype.stateReason = "";
     
                         /**
+                         * RestorePlan restoreChannel.
+                         * @member {string} restoreChannel
+                         * @memberof google.cloud.gkebackup.v1.RestorePlan
+                         * @instance
+                         */
+                        RestorePlan.prototype.restoreChannel = "";
+    
+                        /**
                          * Creates a new RestorePlan instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gkebackup.v1.RestorePlan
@@ -26144,6 +26826,8 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).int32(message.state);
                             if (message.stateReason != null && Object.hasOwnProperty.call(message, "stateReason"))
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.stateReason);
+                            if (message.restoreChannel != null && Object.hasOwnProperty.call(message, "restoreChannel"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.restoreChannel);
                             return writer;
                         };
     
@@ -26245,6 +26929,10 @@
                                         message.stateReason = reader.string();
                                         break;
                                     }
+                                case 13: {
+                                        message.restoreChannel = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -26335,6 +27023,9 @@
                             if (message.stateReason != null && message.hasOwnProperty("stateReason"))
                                 if (!$util.isString(message.stateReason))
                                     return "stateReason: string expected";
+                            if (message.restoreChannel != null && message.hasOwnProperty("restoreChannel"))
+                                if (!$util.isString(message.restoreChannel))
+                                    return "restoreChannel: string expected";
                             return null;
                         };
     
@@ -26414,6 +27105,8 @@
                             }
                             if (object.stateReason != null)
                                 message.stateReason = String(object.stateReason);
+                            if (object.restoreChannel != null)
+                                message.restoreChannel = String(object.restoreChannel);
                             return message;
                         };
     
@@ -26444,6 +27137,7 @@
                                 object.etag = "";
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.stateReason = "";
+                                object.restoreChannel = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -26473,6 +27167,8 @@
                                 object.state = options.enums === String ? $root.google.cloud.gkebackup.v1.RestorePlan.State[message.state] === undefined ? message.state : $root.google.cloud.gkebackup.v1.RestorePlan.State[message.state] : message.state;
                             if (message.stateReason != null && message.hasOwnProperty("stateReason"))
                                 object.stateReason = message.stateReason;
+                            if (message.restoreChannel != null && message.hasOwnProperty("restoreChannel"))
+                                object.restoreChannel = message.restoreChannel;
                             return object;
                         };
     
