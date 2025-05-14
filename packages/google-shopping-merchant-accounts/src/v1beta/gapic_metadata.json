@@ -397,6 +397,21 @@
                 "getOnlineReturnPolicy"
               ]
             },
+            "CreateOnlineReturnPolicy": {
+              "methods": [
+                "createOnlineReturnPolicy"
+              ]
+            },
+            "UpdateOnlineReturnPolicy": {
+              "methods": [
+                "updateOnlineReturnPolicy"
+              ]
+            },
+            "DeleteOnlineReturnPolicy": {
+              "methods": [
+                "deleteOnlineReturnPolicy"
+              ]
+            },
             "ListOnlineReturnPolicies": {
               "methods": [
                 "listOnlineReturnPolicies",
@@ -412,6 +427,21 @@
             "GetOnlineReturnPolicy": {
               "methods": [
                 "getOnlineReturnPolicy"
+              ]
+            },
+            "CreateOnlineReturnPolicy": {
+              "methods": [
+                "createOnlineReturnPolicy"
+              ]
+            },
+            "UpdateOnlineReturnPolicy": {
+              "methods": [
+                "updateOnlineReturnPolicy"
+              ]
+            },
+            "DeleteOnlineReturnPolicy": {
+              "methods": [
+                "deleteOnlineReturnPolicy"
               ]
             },
             "ListOnlineReturnPolicies": {

@@ -2145,6 +2145,64 @@
                                   "(google.api.method_signature)": "parent"
                                 }
                               ]
+                            },
+                            "CreateOnlineReturnPolicy": {
+                              "requestType": "CreateOnlineReturnPolicyRequest",
+                              "responseType": "OnlineReturnPolicy",
+                              "options": {
+                                "(google.api.http).post": "/accounts/v1beta/{parent=accounts/*}/onlineReturnPolicies",
+                                "(google.api.http).body": "online_return_policy",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/accounts/v1beta/{parent=accounts/*}/onlineReturnPolicies",
+                                    "body": "online_return_policy"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "UpdateOnlineReturnPolicy": {
+                              "requestType": "UpdateOnlineReturnPolicyRequest",
+                              "responseType": "OnlineReturnPolicy",
+                              "options": {
+                                "(google.api.http).patch": "/accounts/v1beta/{online_return_policy.name=accounts/*/onlineReturnPolicies/*}",
+                                "(google.api.http).body": "online_return_policy",
+                                "(google.api.method_signature)": "online_return_policy,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/accounts/v1beta/{online_return_policy.name=accounts/*/onlineReturnPolicies/*}",
+                                    "body": "online_return_policy"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "online_return_policy,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteOnlineReturnPolicy": {
+                              "requestType": "DeleteOnlineReturnPolicyRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/accounts/v1beta/{name=accounts/*/onlineReturnPolicies/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/accounts/v1beta/{name=accounts/*/onlineReturnPolicies/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
                             }
                           }
                         },
@@ -2186,6 +2244,52 @@
                             }
                           }
                         },
+                        "CreateOnlineReturnPolicyRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "merchantapi.googleapis.com/OnlineReturnPolicy"
+                              }
+                            },
+                            "onlineReturnPolicy": {
+                              "type": "OnlineReturnPolicy",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateOnlineReturnPolicyRequest": {
+                          "fields": {
+                            "onlineReturnPolicy": {
+                              "type": "OnlineReturnPolicy",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DeleteOnlineReturnPolicyRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/OnlineReturnPolicy"
+                              }
+                            }
+                          }
+                        },
                         "ListOnlineReturnPoliciesResponse": {
                           "fields": {
                             "onlineReturnPolicies": {
@@ -2221,6 +2325,11 @@
                               "oneof": [
                                 "acceptExchange"
                               ]
+                            },
+                            "_returnLabelSource": {
+                              "oneof": [
+                                "returnLabelSource"
+                              ]
                             }
                           },
                           "fields": {
@@ -2255,7 +2364,10 @@
                             },
                             "policy": {
                               "type": "Policy",
-                              "id": 5
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "seasonalOverrides": {
                               "rule": "repeated",
@@ -2267,21 +2379,33 @@
                             },
                             "restockingFee": {
                               "type": "RestockingFee",
-                              "id": 6
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "returnMethods": {
                               "rule": "repeated",
                               "type": "ReturnMethod",
-                              "id": 7
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "itemConditions": {
                               "rule": "repeated",
                               "type": "ItemCondition",
-                              "id": 8
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "returnShippingFee": {
                               "type": "ReturnShippingFee",
-                              "id": 9
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "returnPolicyUri": {
                               "type": "string",
@@ -2307,6 +2431,13 @@
                             "acceptExchange": {
                               "type": "bool",
                               "id": 13,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "returnLabelSource": {
+                              "type": "ReturnLabelSource",
+                              "id": 15,
                               "options": {
                                 "proto3_optional": true
                               }
@@ -2433,6 +2564,14 @@
                                 "ITEM_CONDITION_UNSPECIFIED": 0,
                                 "NEW": 1,
                                 "USED": 2
+                              }
+                            },
+                            "ReturnLabelSource": {
+                              "values": {
+                                "RETURN_LABEL_SOURCE_UNSPECIFIED": 0,
+                                "DOWNLOAD_AND_PRINT": 1,
+                                "IN_THE_PACKAGE": 2,
+                                "CUSTOMER_RESPONSIBILITY": 3
                               }
                             }
                           }
