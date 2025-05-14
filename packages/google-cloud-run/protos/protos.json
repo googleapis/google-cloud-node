@@ -299,7 +299,8 @@
                             "WAITING_FOR_OPERATION": 13,
                             "IMMEDIATE_RETRY": 14,
                             "POSTPONED_RETRY": 15,
-                            "INTERNAL": 16
+                            "INTERNAL": 16,
+                            "VPC_NETWORK_NOT_FOUND": 17
                           }
                         },
                         "RevisionReason": {
@@ -1544,7 +1545,10 @@
                         },
                         "parallelism": {
                           "type": "int32",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "taskCount": {
                           "type": "int32",
@@ -2405,6 +2409,13 @@
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/services/{service}/revisions/{revision}",
                         "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
                       },
+                      "oneofs": {
+                        "_gpuZonalRedundancyDisabled": {
+                          "oneof": [
+                            "gpuZonalRedundancyDisabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -2587,6 +2598,21 @@
                           "type": "NodeSelector",
                           "id": 40
                         },
+                        "gpuZonalRedundancyDisabled": {
+                          "type": "bool",
+                          "id": 48,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "creator": {
+                          "type": "string",
+                          "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "etag": {
                           "type": "string",
                           "id": 99,
@@ -2605,6 +2631,13 @@
                       }
                     },
                     "RevisionTemplate": {
+                      "oneofs": {
+                        "_gpuZonalRedundancyDisabled": {
+                          "oneof": [
+                            "gpuZonalRedundancyDisabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "revision": {
                           "type": "string",
@@ -2732,6 +2765,14 @@
                           "id": 21,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gpuZonalRedundancyDisabled": {
+                          "type": "bool",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }

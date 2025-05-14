@@ -838,7 +838,8 @@ export namespace google {
                         WAITING_FOR_OPERATION = 13,
                         IMMEDIATE_RETRY = 14,
                         POSTPONED_RETRY = 15,
-                        INTERNAL = 16
+                        INTERNAL = 16,
+                        VPC_NETWORK_NOT_FOUND = 17
                     }
 
                     /** RevisionReason enum. */
@@ -7390,6 +7391,12 @@ export namespace google {
                     /** Revision nodeSelector */
                     nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
 
+                    /** Revision gpuZonalRedundancyDisabled */
+                    gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** Revision creator */
+                    creator?: (string|null);
+
                     /** Revision etag */
                     etag?: (string|null);
                 }
@@ -7496,8 +7503,17 @@ export namespace google {
                     /** Revision nodeSelector. */
                     public nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
 
+                    /** Revision gpuZonalRedundancyDisabled. */
+                    public gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** Revision creator. */
+                    public creator: string;
+
                     /** Revision etag. */
                     public etag: string;
+
+                    /** Revision _gpuZonalRedundancyDisabled. */
+                    public _gpuZonalRedundancyDisabled?: "gpuZonalRedundancyDisabled";
 
                     /**
                      * Creates a new Revision instance using the specified properties.
@@ -7730,6 +7746,9 @@ export namespace google {
 
                     /** RevisionTemplate nodeSelector */
                     nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
+
+                    /** RevisionTemplate gpuZonalRedundancyDisabled */
+                    gpuZonalRedundancyDisabled?: (boolean|null);
                 }
 
                 /** Represents a RevisionTemplate. */
@@ -7794,6 +7813,12 @@ export namespace google {
 
                     /** RevisionTemplate nodeSelector. */
                     public nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
+
+                    /** RevisionTemplate gpuZonalRedundancyDisabled. */
+                    public gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** RevisionTemplate _gpuZonalRedundancyDisabled. */
+                    public _gpuZonalRedundancyDisabled?: "gpuZonalRedundancyDisabled";
 
                     /**
                      * Creates a new RevisionTemplate instance using the specified properties.

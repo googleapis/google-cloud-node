@@ -1949,6 +1949,7 @@
                                 case 14:
                                 case 15:
                                 case 16:
+                                case 17:
                                     break;
                                 }
                             }
@@ -2133,6 +2134,10 @@
                             case "INTERNAL":
                             case 16:
                                 message.reason = 16;
+                                break;
+                            case "VPC_NETWORK_NOT_FOUND":
+                            case 17:
+                                message.reason = 17;
                                 break;
                             }
                             switch (object.revisionReason) {
@@ -2361,6 +2366,7 @@
                          * @property {number} IMMEDIATE_RETRY=14 IMMEDIATE_RETRY value
                          * @property {number} POSTPONED_RETRY=15 POSTPONED_RETRY value
                          * @property {number} INTERNAL=16 INTERNAL value
+                         * @property {number} VPC_NETWORK_NOT_FOUND=17 VPC_NETWORK_NOT_FOUND value
                          */
                         Condition.CommonReason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -2379,6 +2385,7 @@
                             values[valuesById[14] = "IMMEDIATE_RETRY"] = 14;
                             values[valuesById[15] = "POSTPONED_RETRY"] = 15;
                             values[valuesById[16] = "INTERNAL"] = 16;
+                            values[valuesById[17] = "VPC_NETWORK_NOT_FOUND"] = 17;
                             return values;
                         })();
     
@@ -18781,6 +18788,8 @@
                          * @property {boolean|null} [sessionAffinity] Revision sessionAffinity
                          * @property {google.cloud.run.v2.IRevisionScalingStatus|null} [scalingStatus] Revision scalingStatus
                          * @property {google.cloud.run.v2.INodeSelector|null} [nodeSelector] Revision nodeSelector
+                         * @property {boolean|null} [gpuZonalRedundancyDisabled] Revision gpuZonalRedundancyDisabled
+                         * @property {string|null} [creator] Revision creator
                          * @property {string|null} [etag] Revision etag
                          */
     
@@ -19053,12 +19062,42 @@
                         Revision.prototype.nodeSelector = null;
     
                         /**
+                         * Revision gpuZonalRedundancyDisabled.
+                         * @member {boolean|null|undefined} gpuZonalRedundancyDisabled
+                         * @memberof google.cloud.run.v2.Revision
+                         * @instance
+                         */
+                        Revision.prototype.gpuZonalRedundancyDisabled = null;
+    
+                        /**
+                         * Revision creator.
+                         * @member {string} creator
+                         * @memberof google.cloud.run.v2.Revision
+                         * @instance
+                         */
+                        Revision.prototype.creator = "";
+    
+                        /**
                          * Revision etag.
                          * @member {string} etag
                          * @memberof google.cloud.run.v2.Revision
                          * @instance
                          */
                         Revision.prototype.etag = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Revision _gpuZonalRedundancyDisabled.
+                         * @member {"gpuZonalRedundancyDisabled"|undefined} _gpuZonalRedundancyDisabled
+                         * @memberof google.cloud.run.v2.Revision
+                         * @instance
+                         */
+                        Object.defineProperty(Revision.prototype, "_gpuZonalRedundancyDisabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["gpuZonalRedundancyDisabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Revision instance using the specified properties.
@@ -19151,6 +19190,10 @@
                                 $root.google.cloud.run.v2.RevisionScalingStatus.encode(message.scalingStatus, writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
                             if (message.nodeSelector != null && Object.hasOwnProperty.call(message, "nodeSelector"))
                                 $root.google.cloud.run.v2.NodeSelector.encode(message.nodeSelector, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
+                            if (message.gpuZonalRedundancyDisabled != null && Object.hasOwnProperty.call(message, "gpuZonalRedundancyDisabled"))
+                                writer.uint32(/* id 48, wireType 0 =*/384).bool(message.gpuZonalRedundancyDisabled);
+                            if (message.creator != null && Object.hasOwnProperty.call(message, "creator"))
+                                writer.uint32(/* id 49, wireType 2 =*/394).string(message.creator);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -19355,6 +19398,14 @@
                                         message.nodeSelector = $root.google.cloud.run.v2.NodeSelector.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 48: {
+                                        message.gpuZonalRedundancyDisabled = reader.bool();
+                                        break;
+                                    }
+                                case 49: {
+                                        message.creator = reader.string();
+                                        break;
+                                    }
                                 case 99: {
                                         message.etag = reader.string();
                                         break;
@@ -19394,6 +19445,7 @@
                         Revision.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -19560,6 +19612,14 @@
                                 if (error)
                                     return "nodeSelector." + error;
                             }
+                            if (message.gpuZonalRedundancyDisabled != null && message.hasOwnProperty("gpuZonalRedundancyDisabled")) {
+                                properties._gpuZonalRedundancyDisabled = 1;
+                                if (typeof message.gpuZonalRedundancyDisabled !== "boolean")
+                                    return "gpuZonalRedundancyDisabled: boolean expected";
+                            }
+                            if (message.creator != null && message.hasOwnProperty("creator"))
+                                if (!$util.isString(message.creator))
+                                    return "creator: string expected";
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
@@ -19795,6 +19855,10 @@
                                     throw TypeError(".google.cloud.run.v2.Revision.nodeSelector: object expected");
                                 message.nodeSelector = $root.google.cloud.run.v2.NodeSelector.fromObject(object.nodeSelector);
                             }
+                            if (object.gpuZonalRedundancyDisabled != null)
+                                message.gpuZonalRedundancyDisabled = Boolean(object.gpuZonalRedundancyDisabled);
+                            if (object.creator != null)
+                                message.creator = String(object.creator);
                             if (object.etag != null)
                                 message.etag = String(object.etag);
                             return message;
@@ -19857,6 +19921,7 @@
                                 object.sessionAffinity = false;
                                 object.scalingStatus = null;
                                 object.nodeSelector = null;
+                                object.creator = "";
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -19943,6 +20008,13 @@
                                 object.scalingStatus = $root.google.cloud.run.v2.RevisionScalingStatus.toObject(message.scalingStatus, options);
                             if (message.nodeSelector != null && message.hasOwnProperty("nodeSelector"))
                                 object.nodeSelector = $root.google.cloud.run.v2.NodeSelector.toObject(message.nodeSelector, options);
+                            if (message.gpuZonalRedundancyDisabled != null && message.hasOwnProperty("gpuZonalRedundancyDisabled")) {
+                                object.gpuZonalRedundancyDisabled = message.gpuZonalRedundancyDisabled;
+                                if (options.oneofs)
+                                    object._gpuZonalRedundancyDisabled = "gpuZonalRedundancyDisabled";
+                            }
+                            if (message.creator != null && message.hasOwnProperty("creator"))
+                                object.creator = message.creator;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
@@ -20204,6 +20276,7 @@
                          * @property {boolean|null} [sessionAffinity] RevisionTemplate sessionAffinity
                          * @property {boolean|null} [healthCheckDisabled] RevisionTemplate healthCheckDisabled
                          * @property {google.cloud.run.v2.INodeSelector|null} [nodeSelector] RevisionTemplate nodeSelector
+                         * @property {boolean|null} [gpuZonalRedundancyDisabled] RevisionTemplate gpuZonalRedundancyDisabled
                          */
     
                         /**
@@ -20370,6 +20443,28 @@
                         RevisionTemplate.prototype.nodeSelector = null;
     
                         /**
+                         * RevisionTemplate gpuZonalRedundancyDisabled.
+                         * @member {boolean|null|undefined} gpuZonalRedundancyDisabled
+                         * @memberof google.cloud.run.v2.RevisionTemplate
+                         * @instance
+                         */
+                        RevisionTemplate.prototype.gpuZonalRedundancyDisabled = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RevisionTemplate _gpuZonalRedundancyDisabled.
+                         * @member {"gpuZonalRedundancyDisabled"|undefined} _gpuZonalRedundancyDisabled
+                         * @memberof google.cloud.run.v2.RevisionTemplate
+                         * @instance
+                         */
+                        Object.defineProperty(RevisionTemplate.prototype, "_gpuZonalRedundancyDisabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["gpuZonalRedundancyDisabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new RevisionTemplate instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.run.v2.RevisionTemplate
@@ -20433,6 +20528,8 @@
                                 writer.uint32(/* id 20, wireType 0 =*/160).bool(message.healthCheckDisabled);
                             if (message.nodeSelector != null && Object.hasOwnProperty.call(message, "nodeSelector"))
                                 $root.google.cloud.run.v2.NodeSelector.encode(message.nodeSelector, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.gpuZonalRedundancyDisabled != null && Object.hasOwnProperty.call(message, "gpuZonalRedundancyDisabled"))
+                                writer.uint32(/* id 24, wireType 0 =*/192).bool(message.gpuZonalRedundancyDisabled);
                             return writer;
                         };
     
@@ -20581,6 +20678,10 @@
                                         message.nodeSelector = $root.google.cloud.run.v2.NodeSelector.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 24: {
+                                        message.gpuZonalRedundancyDisabled = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20616,6 +20717,7 @@
                         RevisionTemplate.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.revision != null && message.hasOwnProperty("revision"))
                                 if (!$util.isString(message.revision))
                                     return "revision: string expected";
@@ -20715,6 +20817,11 @@
                                 var error = $root.google.cloud.run.v2.NodeSelector.verify(message.nodeSelector);
                                 if (error)
                                     return "nodeSelector." + error;
+                            }
+                            if (message.gpuZonalRedundancyDisabled != null && message.hasOwnProperty("gpuZonalRedundancyDisabled")) {
+                                properties._gpuZonalRedundancyDisabled = 1;
+                                if (typeof message.gpuZonalRedundancyDisabled !== "boolean")
+                                    return "gpuZonalRedundancyDisabled: boolean expected";
                             }
                             return null;
                         };
@@ -20847,6 +20954,8 @@
                                     throw TypeError(".google.cloud.run.v2.RevisionTemplate.nodeSelector: object expected");
                                 message.nodeSelector = $root.google.cloud.run.v2.NodeSelector.fromObject(object.nodeSelector);
                             }
+                            if (object.gpuZonalRedundancyDisabled != null)
+                                message.gpuZonalRedundancyDisabled = Boolean(object.gpuZonalRedundancyDisabled);
                             return message;
                         };
     
@@ -20936,6 +21045,11 @@
                                 object.healthCheckDisabled = message.healthCheckDisabled;
                             if (message.nodeSelector != null && message.hasOwnProperty("nodeSelector"))
                                 object.nodeSelector = $root.google.cloud.run.v2.NodeSelector.toObject(message.nodeSelector, options);
+                            if (message.gpuZonalRedundancyDisabled != null && message.hasOwnProperty("gpuZonalRedundancyDisabled")) {
+                                object.gpuZonalRedundancyDisabled = message.gpuZonalRedundancyDisabled;
+                                if (options.oneofs)
+                                    object._gpuZonalRedundancyDisabled = "gpuZonalRedundancyDisabled";
+                            }
                             return object;
                         };
     
