@@ -7224,6 +7224,48 @@ export namespace google {
                          * @returns Promise
                          */
                         public listOnlineReturnPolicies(request: google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest): Promise<google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesResponse>;
+
+                        /**
+                         * Calls CreateOnlineReturnPolicy.
+                         * @param request CreateOnlineReturnPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and OnlineReturnPolicy
+                         */
+                        public createOnlineReturnPolicy(request: google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest, callback: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.CreateOnlineReturnPolicyCallback): void;
+
+                        /**
+                         * Calls CreateOnlineReturnPolicy.
+                         * @param request CreateOnlineReturnPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createOnlineReturnPolicy(request: google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest): Promise<google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy>;
+
+                        /**
+                         * Calls UpdateOnlineReturnPolicy.
+                         * @param request UpdateOnlineReturnPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and OnlineReturnPolicy
+                         */
+                        public updateOnlineReturnPolicy(request: google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest, callback: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.UpdateOnlineReturnPolicyCallback): void;
+
+                        /**
+                         * Calls UpdateOnlineReturnPolicy.
+                         * @param request UpdateOnlineReturnPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateOnlineReturnPolicy(request: google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest): Promise<google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy>;
+
+                        /**
+                         * Calls DeleteOnlineReturnPolicy.
+                         * @param request DeleteOnlineReturnPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteOnlineReturnPolicy(request: google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest, callback: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.DeleteOnlineReturnPolicyCallback): void;
+
+                        /**
+                         * Calls DeleteOnlineReturnPolicy.
+                         * @param request DeleteOnlineReturnPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteOnlineReturnPolicy(request: google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest): Promise<google.protobuf.Empty>;
                     }
 
                     namespace OnlineReturnPolicyService {
@@ -7241,6 +7283,27 @@ export namespace google {
                          * @param [response] ListOnlineReturnPoliciesResponse
                          */
                         type ListOnlineReturnPoliciesCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService|createOnlineReturnPolicy}.
+                         * @param error Error, if any
+                         * @param [response] OnlineReturnPolicy
+                         */
+                        type CreateOnlineReturnPolicyCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService|updateOnlineReturnPolicy}.
+                         * @param error Error, if any
+                         * @param [response] OnlineReturnPolicy
+                         */
+                        type UpdateOnlineReturnPolicyCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService|deleteOnlineReturnPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteOnlineReturnPolicyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                     }
 
                     /** Properties of a GetOnlineReturnPolicyRequest. */
@@ -7449,6 +7512,309 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a CreateOnlineReturnPolicyRequest. */
+                    interface ICreateOnlineReturnPolicyRequest {
+
+                        /** CreateOnlineReturnPolicyRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateOnlineReturnPolicyRequest onlineReturnPolicy */
+                        onlineReturnPolicy?: (google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy|null);
+                    }
+
+                    /** Represents a CreateOnlineReturnPolicyRequest. */
+                    class CreateOnlineReturnPolicyRequest implements ICreateOnlineReturnPolicyRequest {
+
+                        /**
+                         * Constructs a new CreateOnlineReturnPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest);
+
+                        /** CreateOnlineReturnPolicyRequest parent. */
+                        public parent: string;
+
+                        /** CreateOnlineReturnPolicyRequest onlineReturnPolicy. */
+                        public onlineReturnPolicy?: (google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy|null);
+
+                        /**
+                         * Creates a new CreateOnlineReturnPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateOnlineReturnPolicyRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest): google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Encodes the specified CreateOnlineReturnPolicyRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest.verify|verify} messages.
+                         * @param message CreateOnlineReturnPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateOnlineReturnPolicyRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest.verify|verify} messages.
+                         * @param message CreateOnlineReturnPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateOnlineReturnPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateOnlineReturnPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Decodes a CreateOnlineReturnPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateOnlineReturnPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Verifies a CreateOnlineReturnPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateOnlineReturnPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateOnlineReturnPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a CreateOnlineReturnPolicyRequest message. Also converts values to other types if specified.
+                         * @param message CreateOnlineReturnPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateOnlineReturnPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateOnlineReturnPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateOnlineReturnPolicyRequest. */
+                    interface IUpdateOnlineReturnPolicyRequest {
+
+                        /** UpdateOnlineReturnPolicyRequest onlineReturnPolicy */
+                        onlineReturnPolicy?: (google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy|null);
+
+                        /** UpdateOnlineReturnPolicyRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateOnlineReturnPolicyRequest. */
+                    class UpdateOnlineReturnPolicyRequest implements IUpdateOnlineReturnPolicyRequest {
+
+                        /**
+                         * Constructs a new UpdateOnlineReturnPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest);
+
+                        /** UpdateOnlineReturnPolicyRequest onlineReturnPolicy. */
+                        public onlineReturnPolicy?: (google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy|null);
+
+                        /** UpdateOnlineReturnPolicyRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateOnlineReturnPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateOnlineReturnPolicyRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest): google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Encodes the specified UpdateOnlineReturnPolicyRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest.verify|verify} messages.
+                         * @param message UpdateOnlineReturnPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateOnlineReturnPolicyRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest.verify|verify} messages.
+                         * @param message UpdateOnlineReturnPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateOnlineReturnPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateOnlineReturnPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Decodes an UpdateOnlineReturnPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateOnlineReturnPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Verifies an UpdateOnlineReturnPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateOnlineReturnPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateOnlineReturnPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateOnlineReturnPolicyRequest message. Also converts values to other types if specified.
+                         * @param message UpdateOnlineReturnPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateOnlineReturnPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateOnlineReturnPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteOnlineReturnPolicyRequest. */
+                    interface IDeleteOnlineReturnPolicyRequest {
+
+                        /** DeleteOnlineReturnPolicyRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteOnlineReturnPolicyRequest. */
+                    class DeleteOnlineReturnPolicyRequest implements IDeleteOnlineReturnPolicyRequest {
+
+                        /**
+                         * Constructs a new DeleteOnlineReturnPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest);
+
+                        /** DeleteOnlineReturnPolicyRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteOnlineReturnPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteOnlineReturnPolicyRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest): google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest;
+
+                        /**
+                         * Encodes the specified DeleteOnlineReturnPolicyRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest.verify|verify} messages.
+                         * @param message DeleteOnlineReturnPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteOnlineReturnPolicyRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest.verify|verify} messages.
+                         * @param message DeleteOnlineReturnPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteOnlineReturnPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteOnlineReturnPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest;
+
+                        /**
+                         * Decodes a DeleteOnlineReturnPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteOnlineReturnPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest;
+
+                        /**
+                         * Verifies a DeleteOnlineReturnPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteOnlineReturnPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteOnlineReturnPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteOnlineReturnPolicyRequest message. Also converts values to other types if specified.
+                         * @param message DeleteOnlineReturnPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteOnlineReturnPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteOnlineReturnPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a ListOnlineReturnPoliciesResponse. */
                     interface IListOnlineReturnPoliciesResponse {
 
@@ -7596,6 +7962,9 @@ export namespace google {
 
                         /** OnlineReturnPolicy acceptExchange */
                         acceptExchange?: (boolean|null);
+
+                        /** OnlineReturnPolicy returnLabelSource */
+                        returnLabelSource?: (google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|keyof typeof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|null);
                     }
 
                     /** Represents an OnlineReturnPolicy. */
@@ -7649,6 +8018,9 @@ export namespace google {
                         /** OnlineReturnPolicy acceptExchange. */
                         public acceptExchange?: (boolean|null);
 
+                        /** OnlineReturnPolicy returnLabelSource. */
+                        public returnLabelSource?: (google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|keyof typeof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|null);
+
                         /** OnlineReturnPolicy _acceptDefectiveOnly. */
                         public _acceptDefectiveOnly?: "acceptDefectiveOnly";
 
@@ -7657,6 +8029,9 @@ export namespace google {
 
                         /** OnlineReturnPolicy _acceptExchange. */
                         public _acceptExchange?: "acceptExchange";
+
+                        /** OnlineReturnPolicy _returnLabelSource. */
+                        public _returnLabelSource?: "returnLabelSource";
 
                         /**
                          * Creates a new OnlineReturnPolicy instance using the specified properties.
@@ -8208,6 +8583,14 @@ export namespace google {
                             ITEM_CONDITION_UNSPECIFIED = 0,
                             NEW = 1,
                             USED = 2
+                        }
+
+                        /** ReturnLabelSource enum. */
+                        enum ReturnLabelSource {
+                            RETURN_LABEL_SOURCE_UNSPECIFIED = 0,
+                            DOWNLOAD_AND_PRINT = 1,
+                            IN_THE_PACKAGE = 2,
+                            CUSTOMER_RESPONSIBILITY = 3
                         }
                     }
 

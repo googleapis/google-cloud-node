@@ -496,6 +496,463 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
     });
   });
 
+  describe('createOnlineReturnPolicy', () => {
+    it('invokes createOnlineReturnPolicy without error', async () => {
+      const client =
+        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
+      );
+      client.innerApiCalls.createOnlineReturnPolicy =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createOnlineReturnPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createOnlineReturnPolicy without error using callback', async () => {
+      const client =
+        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
+      );
+      client.innerApiCalls.createOnlineReturnPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createOnlineReturnPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createOnlineReturnPolicy with error', async () => {
+      const client =
+        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createOnlineReturnPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createOnlineReturnPolicy(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createOnlineReturnPolicy with closed client', async () => {
+      const client =
+        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.createOnlineReturnPolicy(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateOnlineReturnPolicy', () => {
+    it('invokes updateOnlineReturnPolicy without error', async () => {
+      const client =
+        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest()
+      );
+      request.onlineReturnPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest',
+        ['onlineReturnPolicy', 'name']
+      );
+      request.onlineReturnPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `online_return_policy.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
+      );
+      client.innerApiCalls.updateOnlineReturnPolicy =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateOnlineReturnPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateOnlineReturnPolicy without error using callback', async () => {
+      const client =
+        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest()
+      );
+      request.onlineReturnPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest',
+        ['onlineReturnPolicy', 'name']
+      );
+      request.onlineReturnPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `online_return_policy.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
+      );
+      client.innerApiCalls.updateOnlineReturnPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateOnlineReturnPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateOnlineReturnPolicy with error', async () => {
+      const client =
+        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest()
+      );
+      request.onlineReturnPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest',
+        ['onlineReturnPolicy', 'name']
+      );
+      request.onlineReturnPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `online_return_policy.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateOnlineReturnPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateOnlineReturnPolicy(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateOnlineReturnPolicy with closed client', async () => {
+      const client =
+        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest()
+      );
+      request.onlineReturnPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest',
+        ['onlineReturnPolicy', 'name']
+      );
+      request.onlineReturnPolicy.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateOnlineReturnPolicy(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deleteOnlineReturnPolicy', () => {
+    it('invokes deleteOnlineReturnPolicy without error', async () => {
+      const client =
+        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteOnlineReturnPolicy =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteOnlineReturnPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteOnlineReturnPolicy without error using callback', async () => {
+      const client =
+        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteOnlineReturnPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteOnlineReturnPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteOnlineReturnPolicy with error', async () => {
+      const client =
+        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteOnlineReturnPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteOnlineReturnPolicy(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteOnlineReturnPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteOnlineReturnPolicy with closed client', async () => {
+      const client =
+        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.deleteOnlineReturnPolicy(request),
+        expectedError
+      );
+    });
+  });
+
   describe('listOnlineReturnPolicies', () => {
     it('invokes listOnlineReturnPolicies without error', async () => {
       const client =

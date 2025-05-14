@@ -44,7 +44,7 @@ const version = require('../../../package.json').version;
  *  configuration, encompassing return policies for both ads and free listings
  *  ## programs. This API defines the following resource model:
  *
- *  {@link protos.google.shopping.merchant.accounts.v1.OnlineReturnPolicy|OnlineReturnPolicy}
+ *  [OnlineReturnPolicy](/merchant/api/reference/rpc/google.shopping.merchant.accounts.v1beta#google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy)
  * @class
  * @memberof v1beta
  */
@@ -322,6 +322,9 @@ export class OnlineReturnPolicyServiceClient {
     const onlineReturnPolicyServiceStubMethods = [
       'getOnlineReturnPolicy',
       'listOnlineReturnPolicies',
+      'createOnlineReturnPolicy',
+      'updateOnlineReturnPolicy',
+      'deleteOnlineReturnPolicy',
     ];
     for (const methodName of onlineReturnPolicyServiceStubMethods) {
       const callPromise = this.onlineReturnPolicyServiceStub.then(
@@ -437,7 +440,7 @@ export class OnlineReturnPolicyServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets an existing return policy for a given business.
+   * Gets an existing return policy for a given merchant.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -564,14 +567,400 @@ export class OnlineReturnPolicyServiceClient {
         }
       );
   }
-
   /**
-   * Lists all existing return policies for a given business.
+   * Creates a new return policy for a given merchant.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The business account for which to list return policies.
+   *   Required. The merchant account for which to create a return policy.
+   *   Format: `accounts/{account}`
+   * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy} request.onlineReturnPolicy
+   *   Required. The return policy to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy|OnlineReturnPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/online_return_policy_service.create_online_return_policy.js</caption>
+   * region_tag:merchantapi_v1beta_generated_OnlineReturnPolicyService_CreateOnlineReturnPolicy_async
+   */
+  createOnlineReturnPolicy(
+    request?: protos.google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createOnlineReturnPolicy(
+    request: protos.google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+      | protos.google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createOnlineReturnPolicy(
+    request: protos.google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+      | protos.google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createOnlineReturnPolicy(
+    request?: protos.google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+          | protos.google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+      | protos.google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createOnlineReturnPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+          | protos.google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createOnlineReturnPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createOnlineReturnPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createOnlineReturnPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Updates an existing return policy for a given merchant.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy} request.onlineReturnPolicy
+   *   Required. The return policy to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy|OnlineReturnPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/online_return_policy_service.update_online_return_policy.js</caption>
+   * region_tag:merchantapi_v1beta_generated_OnlineReturnPolicyService_UpdateOnlineReturnPolicy_async
+   */
+  updateOnlineReturnPolicy(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateOnlineReturnPolicy(
+    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+      | protos.google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateOnlineReturnPolicy(
+    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+      | protos.google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateOnlineReturnPolicy(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+      | protos.google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'online_return_policy.name': request.onlineReturnPolicy!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateOnlineReturnPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateOnlineReturnPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateOnlineReturnPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateOnlineReturnPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Deletes an existing return policy for a given merchant.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the return policy to delete.
+   *   Format: `accounts/{account}/onlineReturnPolicies/{return_policy}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/online_return_policy_service.delete_online_return_policy.js</caption>
+   * region_tag:merchantapi_v1beta_generated_OnlineReturnPolicyService_DeleteOnlineReturnPolicy_async
+   */
+  deleteOnlineReturnPolicy(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteOnlineReturnPolicy(
+    request: protos.google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteOnlineReturnPolicy(
+    request: protos.google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteOnlineReturnPolicy(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteOnlineReturnPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteOnlineReturnPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteOnlineReturnPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteOnlineReturnPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+
+  /**
+   * Lists all existing return policies for a given merchant.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The merchant account for which to list return policies.
    *   Format: `accounts/{account}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of `OnlineReturnPolicy` resources to return.
@@ -708,7 +1097,7 @@ export class OnlineReturnPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The business account for which to list return policies.
+   *   Required. The merchant account for which to list return policies.
    *   Format: `accounts/{account}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of `OnlineReturnPolicy` resources to return.
@@ -768,7 +1157,7 @@ export class OnlineReturnPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The business account for which to list return policies.
+   *   Required. The merchant account for which to list return policies.
    *   Format: `accounts/{account}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of `OnlineReturnPolicy` resources to return.

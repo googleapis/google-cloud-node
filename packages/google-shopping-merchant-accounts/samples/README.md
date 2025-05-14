@@ -36,8 +36,11 @@
   * [Homepage_service.get_homepage](#homepage_service.get_homepage)
   * [Homepage_service.unclaim_homepage](#homepage_service.unclaim_homepage)
   * [Homepage_service.update_homepage](#homepage_service.update_homepage)
+  * [Online_return_policy_service.create_online_return_policy](#online_return_policy_service.create_online_return_policy)
+  * [Online_return_policy_service.delete_online_return_policy](#online_return_policy_service.delete_online_return_policy)
   * [Online_return_policy_service.get_online_return_policy](#online_return_policy_service.get_online_return_policy)
   * [Online_return_policy_service.list_online_return_policies](#online_return_policy_service.list_online_return_policies)
+  * [Online_return_policy_service.update_online_return_policy](#online_return_policy_service.update_online_return_policy)
   * [Programs_service.disable_program](#programs_service.disable_program)
   * [Programs_service.enable_program](#programs_service.enable_program)
   * [Programs_service.get_program](#programs_service.get_program)
@@ -484,6 +487,40 @@ __Usage:__
 
 
 
+### Online_return_policy_service.create_online_return_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/online_return_policy_service.create_online_return_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/online_return_policy_service.create_online_return_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/online_return_policy_service.create_online_return_policy.js`
+
+
+-----
+
+
+
+
+### Online_return_policy_service.delete_online_return_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/online_return_policy_service.delete_online_return_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/online_return_policy_service.delete_online_return_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/online_return_policy_service.delete_online_return_policy.js`
+
+
+-----
+
+
+
+
 ### Online_return_policy_service.get_online_return_policy
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/online_return_policy_service.get_online_return_policy.js).
@@ -511,6 +548,23 @@ __Usage:__
 
 
 `node packages/google-shopping-merchant-accounts/samples/generated/v1beta/online_return_policy_service.list_online_return_policies.js`
+
+
+-----
+
+
+
+
+### Online_return_policy_service.update_online_return_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/online_return_policy_service.update_online_return_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/online_return_policy_service.update_online_return_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/online_return_policy_service.update_online_return_policy.js`
 
 
 -----

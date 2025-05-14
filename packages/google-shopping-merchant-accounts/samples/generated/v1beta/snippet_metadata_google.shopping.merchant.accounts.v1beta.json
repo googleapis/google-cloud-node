@@ -1063,7 +1063,7 @@
             "regionTag": "merchantapi_v1beta_generated_OnlineReturnPolicyService_GetOnlineReturnPolicy_async",
             "title": "AccountIssueService getOnlineReturnPolicy Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets an existing return policy for a given business.",
+            "description": " Gets an existing return policy for a given merchant.",
             "canonical": true,
             "file": "online_return_policy_service.get_online_return_policy.js",
             "language": "JAVASCRIPT",
@@ -1103,7 +1103,7 @@
             "regionTag": "merchantapi_v1beta_generated_OnlineReturnPolicyService_ListOnlineReturnPolicies_async",
             "title": "AccountIssueService listOnlineReturnPolicies Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists all existing return policies for a given business.",
+            "description": " Lists all existing return policies for a given merchant.",
             "canonical": true,
             "file": "online_return_policy_service.list_online_return_policies.js",
             "language": "JAVASCRIPT",
@@ -1140,6 +1140,134 @@
                 "method": {
                     "shortName": "ListOnlineReturnPolicies",
                     "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.ListOnlineReturnPolicies",
+                    "service": {
+                        "shortName": "OnlineReturnPolicyService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_OnlineReturnPolicyService_CreateOnlineReturnPolicy_async",
+            "title": "AccountIssueService createOnlineReturnPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new return policy for a given merchant.",
+            "canonical": true,
+            "file": "online_return_policy_service.create_online_return_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateOnlineReturnPolicy",
+                "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.CreateOnlineReturnPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "online_return_policy",
+                        "type": ".google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy",
+                "client": {
+                    "shortName": "OnlineReturnPolicyServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateOnlineReturnPolicy",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.CreateOnlineReturnPolicy",
+                    "service": {
+                        "shortName": "OnlineReturnPolicyService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_OnlineReturnPolicyService_UpdateOnlineReturnPolicy_async",
+            "title": "AccountIssueService updateOnlineReturnPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates an existing return policy for a given merchant.",
+            "canonical": true,
+            "file": "online_return_policy_service.update_online_return_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateOnlineReturnPolicy",
+                "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.UpdateOnlineReturnPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "online_return_policy",
+                        "type": ".google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy",
+                "client": {
+                    "shortName": "OnlineReturnPolicyServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateOnlineReturnPolicy",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.UpdateOnlineReturnPolicy",
+                    "service": {
+                        "shortName": "OnlineReturnPolicyService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_OnlineReturnPolicyService_DeleteOnlineReturnPolicy_async",
+            "title": "AccountIssueService deleteOnlineReturnPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes an existing return policy for a given merchant.",
+            "canonical": true,
+            "file": "online_return_policy_service.delete_online_return_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteOnlineReturnPolicy",
+                "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.DeleteOnlineReturnPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "OnlineReturnPolicyServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteOnlineReturnPolicy",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.DeleteOnlineReturnPolicy",
                     "service": {
                         "shortName": "OnlineReturnPolicyService",
                         "fullName": "google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService"
