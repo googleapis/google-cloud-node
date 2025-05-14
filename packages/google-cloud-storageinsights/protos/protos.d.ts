@@ -143,6 +143,104 @@ export namespace google {
                      * @returns Promise
                      */
                     public getReportDetail(request: google.cloud.storageinsights.v1.IGetReportDetailRequest): Promise<google.cloud.storageinsights.v1.ReportDetail>;
+
+                    /**
+                     * Calls ListDatasetConfigs.
+                     * @param request ListDatasetConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDatasetConfigsResponse
+                     */
+                    public listDatasetConfigs(request: google.cloud.storageinsights.v1.IListDatasetConfigsRequest, callback: google.cloud.storageinsights.v1.StorageInsights.ListDatasetConfigsCallback): void;
+
+                    /**
+                     * Calls ListDatasetConfigs.
+                     * @param request ListDatasetConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDatasetConfigs(request: google.cloud.storageinsights.v1.IListDatasetConfigsRequest): Promise<google.cloud.storageinsights.v1.ListDatasetConfigsResponse>;
+
+                    /**
+                     * Calls GetDatasetConfig.
+                     * @param request GetDatasetConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DatasetConfig
+                     */
+                    public getDatasetConfig(request: google.cloud.storageinsights.v1.IGetDatasetConfigRequest, callback: google.cloud.storageinsights.v1.StorageInsights.GetDatasetConfigCallback): void;
+
+                    /**
+                     * Calls GetDatasetConfig.
+                     * @param request GetDatasetConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDatasetConfig(request: google.cloud.storageinsights.v1.IGetDatasetConfigRequest): Promise<google.cloud.storageinsights.v1.DatasetConfig>;
+
+                    /**
+                     * Calls CreateDatasetConfig.
+                     * @param request CreateDatasetConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createDatasetConfig(request: google.cloud.storageinsights.v1.ICreateDatasetConfigRequest, callback: google.cloud.storageinsights.v1.StorageInsights.CreateDatasetConfigCallback): void;
+
+                    /**
+                     * Calls CreateDatasetConfig.
+                     * @param request CreateDatasetConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDatasetConfig(request: google.cloud.storageinsights.v1.ICreateDatasetConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateDatasetConfig.
+                     * @param request UpdateDatasetConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateDatasetConfig(request: google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest, callback: google.cloud.storageinsights.v1.StorageInsights.UpdateDatasetConfigCallback): void;
+
+                    /**
+                     * Calls UpdateDatasetConfig.
+                     * @param request UpdateDatasetConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDatasetConfig(request: google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteDatasetConfig.
+                     * @param request DeleteDatasetConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteDatasetConfig(request: google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest, callback: google.cloud.storageinsights.v1.StorageInsights.DeleteDatasetConfigCallback): void;
+
+                    /**
+                     * Calls DeleteDatasetConfig.
+                     * @param request DeleteDatasetConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDatasetConfig(request: google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls LinkDataset.
+                     * @param request LinkDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public linkDataset(request: google.cloud.storageinsights.v1.ILinkDatasetRequest, callback: google.cloud.storageinsights.v1.StorageInsights.LinkDatasetCallback): void;
+
+                    /**
+                     * Calls LinkDataset.
+                     * @param request LinkDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public linkDataset(request: google.cloud.storageinsights.v1.ILinkDatasetRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UnlinkDataset.
+                     * @param request UnlinkDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public unlinkDataset(request: google.cloud.storageinsights.v1.IUnlinkDatasetRequest, callback: google.cloud.storageinsights.v1.StorageInsights.UnlinkDatasetCallback): void;
+
+                    /**
+                     * Calls UnlinkDataset.
+                     * @param request UnlinkDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public unlinkDataset(request: google.cloud.storageinsights.v1.IUnlinkDatasetRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace StorageInsights {
@@ -195,6 +293,55 @@ export namespace google {
                      * @param [response] ReportDetail
                      */
                     type GetReportDetailCallback = (error: (Error|null), response?: google.cloud.storageinsights.v1.ReportDetail) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|listDatasetConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListDatasetConfigsResponse
+                     */
+                    type ListDatasetConfigsCallback = (error: (Error|null), response?: google.cloud.storageinsights.v1.ListDatasetConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|getDatasetConfig}.
+                     * @param error Error, if any
+                     * @param [response] DatasetConfig
+                     */
+                    type GetDatasetConfigCallback = (error: (Error|null), response?: google.cloud.storageinsights.v1.DatasetConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|createDatasetConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateDatasetConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|updateDatasetConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateDatasetConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|deleteDatasetConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteDatasetConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|linkDataset}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type LinkDatasetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|unlinkDataset}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UnlinkDatasetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a ListReportConfigsRequest. */
@@ -2329,6 +2476,2410 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ReportConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Identity. */
+                interface IIdentity {
+
+                    /** Identity name */
+                    name?: (string|null);
+
+                    /** Identity type */
+                    type?: (google.cloud.storageinsights.v1.Identity.IdentityType|keyof typeof google.cloud.storageinsights.v1.Identity.IdentityType|null);
+                }
+
+                /** Represents an Identity. */
+                class Identity implements IIdentity {
+
+                    /**
+                     * Constructs a new Identity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storageinsights.v1.IIdentity);
+
+                    /** Identity name. */
+                    public name: string;
+
+                    /** Identity type. */
+                    public type: (google.cloud.storageinsights.v1.Identity.IdentityType|keyof typeof google.cloud.storageinsights.v1.Identity.IdentityType);
+
+                    /**
+                     * Creates a new Identity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Identity instance
+                     */
+                    public static create(properties?: google.cloud.storageinsights.v1.IIdentity): google.cloud.storageinsights.v1.Identity;
+
+                    /**
+                     * Encodes the specified Identity message. Does not implicitly {@link google.cloud.storageinsights.v1.Identity.verify|verify} messages.
+                     * @param message Identity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storageinsights.v1.IIdentity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Identity message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.Identity.verify|verify} messages.
+                     * @param message Identity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storageinsights.v1.IIdentity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Identity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Identity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.Identity;
+
+                    /**
+                     * Decodes an Identity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Identity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.Identity;
+
+                    /**
+                     * Verifies an Identity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Identity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Identity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.Identity;
+
+                    /**
+                     * Creates a plain object from an Identity message. Also converts values to other types if specified.
+                     * @param message Identity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storageinsights.v1.Identity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Identity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Identity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Identity {
+
+                    /** IdentityType enum. */
+                    enum IdentityType {
+                        IDENTITY_TYPE_UNSPECIFIED = 0,
+                        IDENTITY_TYPE_PER_CONFIG = 1,
+                        IDENTITY_TYPE_PER_PROJECT = 2
+                    }
+                }
+
+                /** Properties of a DatasetConfig. */
+                interface IDatasetConfig {
+
+                    /** DatasetConfig name */
+                    name?: (string|null);
+
+                    /** DatasetConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DatasetConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DatasetConfig labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** DatasetConfig uid */
+                    uid?: (string|null);
+
+                    /** DatasetConfig organizationNumber */
+                    organizationNumber?: (number|Long|string|null);
+
+                    /** DatasetConfig sourceProjects */
+                    sourceProjects?: (google.cloud.storageinsights.v1.DatasetConfig.ISourceProjects|null);
+
+                    /** DatasetConfig sourceFolders */
+                    sourceFolders?: (google.cloud.storageinsights.v1.DatasetConfig.ISourceFolders|null);
+
+                    /** DatasetConfig organizationScope */
+                    organizationScope?: (boolean|null);
+
+                    /** DatasetConfig cloudStorageObjectPath */
+                    cloudStorageObjectPath?: (string|null);
+
+                    /** DatasetConfig includeCloudStorageLocations */
+                    includeCloudStorageLocations?: (google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations|null);
+
+                    /** DatasetConfig excludeCloudStorageLocations */
+                    excludeCloudStorageLocations?: (google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations|null);
+
+                    /** DatasetConfig includeCloudStorageBuckets */
+                    includeCloudStorageBuckets?: (google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets|null);
+
+                    /** DatasetConfig excludeCloudStorageBuckets */
+                    excludeCloudStorageBuckets?: (google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets|null);
+
+                    /** DatasetConfig includeNewlyCreatedBuckets */
+                    includeNewlyCreatedBuckets?: (boolean|null);
+
+                    /** DatasetConfig skipVerificationAndIngest */
+                    skipVerificationAndIngest?: (boolean|null);
+
+                    /** DatasetConfig retentionPeriodDays */
+                    retentionPeriodDays?: (number|null);
+
+                    /** DatasetConfig link */
+                    link?: (google.cloud.storageinsights.v1.DatasetConfig.ILink|null);
+
+                    /** DatasetConfig identity */
+                    identity?: (google.cloud.storageinsights.v1.IIdentity|null);
+
+                    /** DatasetConfig status */
+                    status?: (google.rpc.IStatus|null);
+
+                    /** DatasetConfig datasetConfigState */
+                    datasetConfigState?: (google.cloud.storageinsights.v1.DatasetConfig.ConfigState|keyof typeof google.cloud.storageinsights.v1.DatasetConfig.ConfigState|null);
+
+                    /** DatasetConfig description */
+                    description?: (string|null);
+                }
+
+                /** Represents a DatasetConfig. */
+                class DatasetConfig implements IDatasetConfig {
+
+                    /**
+                     * Constructs a new DatasetConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storageinsights.v1.IDatasetConfig);
+
+                    /** DatasetConfig name. */
+                    public name: string;
+
+                    /** DatasetConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DatasetConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DatasetConfig labels. */
+                    public labels: { [k: string]: string };
+
+                    /** DatasetConfig uid. */
+                    public uid: string;
+
+                    /** DatasetConfig organizationNumber. */
+                    public organizationNumber: (number|Long|string);
+
+                    /** DatasetConfig sourceProjects. */
+                    public sourceProjects?: (google.cloud.storageinsights.v1.DatasetConfig.ISourceProjects|null);
+
+                    /** DatasetConfig sourceFolders. */
+                    public sourceFolders?: (google.cloud.storageinsights.v1.DatasetConfig.ISourceFolders|null);
+
+                    /** DatasetConfig organizationScope. */
+                    public organizationScope?: (boolean|null);
+
+                    /** DatasetConfig cloudStorageObjectPath. */
+                    public cloudStorageObjectPath?: (string|null);
+
+                    /** DatasetConfig includeCloudStorageLocations. */
+                    public includeCloudStorageLocations?: (google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations|null);
+
+                    /** DatasetConfig excludeCloudStorageLocations. */
+                    public excludeCloudStorageLocations?: (google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations|null);
+
+                    /** DatasetConfig includeCloudStorageBuckets. */
+                    public includeCloudStorageBuckets?: (google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets|null);
+
+                    /** DatasetConfig excludeCloudStorageBuckets. */
+                    public excludeCloudStorageBuckets?: (google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets|null);
+
+                    /** DatasetConfig includeNewlyCreatedBuckets. */
+                    public includeNewlyCreatedBuckets: boolean;
+
+                    /** DatasetConfig skipVerificationAndIngest. */
+                    public skipVerificationAndIngest: boolean;
+
+                    /** DatasetConfig retentionPeriodDays. */
+                    public retentionPeriodDays: number;
+
+                    /** DatasetConfig link. */
+                    public link?: (google.cloud.storageinsights.v1.DatasetConfig.ILink|null);
+
+                    /** DatasetConfig identity. */
+                    public identity?: (google.cloud.storageinsights.v1.IIdentity|null);
+
+                    /** DatasetConfig status. */
+                    public status?: (google.rpc.IStatus|null);
+
+                    /** DatasetConfig datasetConfigState. */
+                    public datasetConfigState: (google.cloud.storageinsights.v1.DatasetConfig.ConfigState|keyof typeof google.cloud.storageinsights.v1.DatasetConfig.ConfigState);
+
+                    /** DatasetConfig description. */
+                    public description: string;
+
+                    /** DatasetConfig sourceOptions. */
+                    public sourceOptions?: ("sourceProjects"|"sourceFolders"|"organizationScope"|"cloudStorageObjectPath");
+
+                    /** DatasetConfig cloudStorageLocations. */
+                    public cloudStorageLocations?: ("includeCloudStorageLocations"|"excludeCloudStorageLocations");
+
+                    /** DatasetConfig cloudStorageBuckets. */
+                    public cloudStorageBuckets?: ("includeCloudStorageBuckets"|"excludeCloudStorageBuckets");
+
+                    /**
+                     * Creates a new DatasetConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatasetConfig instance
+                     */
+                    public static create(properties?: google.cloud.storageinsights.v1.IDatasetConfig): google.cloud.storageinsights.v1.DatasetConfig;
+
+                    /**
+                     * Encodes the specified DatasetConfig message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.verify|verify} messages.
+                     * @param message DatasetConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storageinsights.v1.IDatasetConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatasetConfig message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.verify|verify} messages.
+                     * @param message DatasetConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storageinsights.v1.IDatasetConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatasetConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatasetConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.DatasetConfig;
+
+                    /**
+                     * Decodes a DatasetConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatasetConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.DatasetConfig;
+
+                    /**
+                     * Verifies a DatasetConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatasetConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatasetConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.DatasetConfig;
+
+                    /**
+                     * Creates a plain object from a DatasetConfig message. Also converts values to other types if specified.
+                     * @param message DatasetConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storageinsights.v1.DatasetConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatasetConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatasetConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DatasetConfig {
+
+                    /** Properties of a SourceProjects. */
+                    interface ISourceProjects {
+
+                        /** SourceProjects projectNumbers */
+                        projectNumbers?: ((number|Long|string)[]|null);
+                    }
+
+                    /** Represents a SourceProjects. */
+                    class SourceProjects implements ISourceProjects {
+
+                        /**
+                         * Constructs a new SourceProjects.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.storageinsights.v1.DatasetConfig.ISourceProjects);
+
+                        /** SourceProjects projectNumbers. */
+                        public projectNumbers: (number|Long|string)[];
+
+                        /**
+                         * Creates a new SourceProjects instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SourceProjects instance
+                         */
+                        public static create(properties?: google.cloud.storageinsights.v1.DatasetConfig.ISourceProjects): google.cloud.storageinsights.v1.DatasetConfig.SourceProjects;
+
+                        /**
+                         * Encodes the specified SourceProjects message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.SourceProjects.verify|verify} messages.
+                         * @param message SourceProjects message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.storageinsights.v1.DatasetConfig.ISourceProjects, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SourceProjects message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.SourceProjects.verify|verify} messages.
+                         * @param message SourceProjects message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.storageinsights.v1.DatasetConfig.ISourceProjects, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SourceProjects message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SourceProjects
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.DatasetConfig.SourceProjects;
+
+                        /**
+                         * Decodes a SourceProjects message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SourceProjects
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.DatasetConfig.SourceProjects;
+
+                        /**
+                         * Verifies a SourceProjects message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SourceProjects message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SourceProjects
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.DatasetConfig.SourceProjects;
+
+                        /**
+                         * Creates a plain object from a SourceProjects message. Also converts values to other types if specified.
+                         * @param message SourceProjects
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.storageinsights.v1.DatasetConfig.SourceProjects, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SourceProjects to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SourceProjects
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SourceFolders. */
+                    interface ISourceFolders {
+
+                        /** SourceFolders folderNumbers */
+                        folderNumbers?: ((number|Long|string)[]|null);
+                    }
+
+                    /** Represents a SourceFolders. */
+                    class SourceFolders implements ISourceFolders {
+
+                        /**
+                         * Constructs a new SourceFolders.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.storageinsights.v1.DatasetConfig.ISourceFolders);
+
+                        /** SourceFolders folderNumbers. */
+                        public folderNumbers: (number|Long|string)[];
+
+                        /**
+                         * Creates a new SourceFolders instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SourceFolders instance
+                         */
+                        public static create(properties?: google.cloud.storageinsights.v1.DatasetConfig.ISourceFolders): google.cloud.storageinsights.v1.DatasetConfig.SourceFolders;
+
+                        /**
+                         * Encodes the specified SourceFolders message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.SourceFolders.verify|verify} messages.
+                         * @param message SourceFolders message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.storageinsights.v1.DatasetConfig.ISourceFolders, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SourceFolders message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.SourceFolders.verify|verify} messages.
+                         * @param message SourceFolders message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.storageinsights.v1.DatasetConfig.ISourceFolders, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SourceFolders message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SourceFolders
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.DatasetConfig.SourceFolders;
+
+                        /**
+                         * Decodes a SourceFolders message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SourceFolders
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.DatasetConfig.SourceFolders;
+
+                        /**
+                         * Verifies a SourceFolders message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SourceFolders message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SourceFolders
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.DatasetConfig.SourceFolders;
+
+                        /**
+                         * Creates a plain object from a SourceFolders message. Also converts values to other types if specified.
+                         * @param message SourceFolders
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.storageinsights.v1.DatasetConfig.SourceFolders, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SourceFolders to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SourceFolders
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CloudStorageLocations. */
+                    interface ICloudStorageLocations {
+
+                        /** CloudStorageLocations locations */
+                        locations?: (string[]|null);
+                    }
+
+                    /** Represents a CloudStorageLocations. */
+                    class CloudStorageLocations implements ICloudStorageLocations {
+
+                        /**
+                         * Constructs a new CloudStorageLocations.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations);
+
+                        /** CloudStorageLocations locations. */
+                        public locations: string[];
+
+                        /**
+                         * Creates a new CloudStorageLocations instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudStorageLocations instance
+                         */
+                        public static create(properties?: google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations): google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations;
+
+                        /**
+                         * Encodes the specified CloudStorageLocations message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.verify|verify} messages.
+                         * @param message CloudStorageLocations message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudStorageLocations message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.verify|verify} messages.
+                         * @param message CloudStorageLocations message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudStorageLocations message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudStorageLocations
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations;
+
+                        /**
+                         * Decodes a CloudStorageLocations message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudStorageLocations
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations;
+
+                        /**
+                         * Verifies a CloudStorageLocations message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudStorageLocations message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudStorageLocations
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations;
+
+                        /**
+                         * Creates a plain object from a CloudStorageLocations message. Also converts values to other types if specified.
+                         * @param message CloudStorageLocations
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudStorageLocations to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudStorageLocations
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CloudStorageBuckets. */
+                    interface ICloudStorageBuckets {
+
+                        /** CloudStorageBuckets cloudStorageBuckets */
+                        cloudStorageBuckets?: (google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.ICloudStorageBucket[]|null);
+                    }
+
+                    /** Represents a CloudStorageBuckets. */
+                    class CloudStorageBuckets implements ICloudStorageBuckets {
+
+                        /**
+                         * Constructs a new CloudStorageBuckets.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets);
+
+                        /** CloudStorageBuckets cloudStorageBuckets. */
+                        public cloudStorageBuckets: google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.ICloudStorageBucket[];
+
+                        /**
+                         * Creates a new CloudStorageBuckets instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudStorageBuckets instance
+                         */
+                        public static create(properties?: google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets): google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets;
+
+                        /**
+                         * Encodes the specified CloudStorageBuckets message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.verify|verify} messages.
+                         * @param message CloudStorageBuckets message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudStorageBuckets message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.verify|verify} messages.
+                         * @param message CloudStorageBuckets message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudStorageBuckets message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudStorageBuckets
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets;
+
+                        /**
+                         * Decodes a CloudStorageBuckets message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudStorageBuckets
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets;
+
+                        /**
+                         * Verifies a CloudStorageBuckets message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudStorageBuckets message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudStorageBuckets
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets;
+
+                        /**
+                         * Creates a plain object from a CloudStorageBuckets message. Also converts values to other types if specified.
+                         * @param message CloudStorageBuckets
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudStorageBuckets to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudStorageBuckets
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CloudStorageBuckets {
+
+                        /** Properties of a CloudStorageBucket. */
+                        interface ICloudStorageBucket {
+
+                            /** CloudStorageBucket bucketName */
+                            bucketName?: (string|null);
+
+                            /** CloudStorageBucket bucketPrefixRegex */
+                            bucketPrefixRegex?: (string|null);
+                        }
+
+                        /** Represents a CloudStorageBucket. */
+                        class CloudStorageBucket implements ICloudStorageBucket {
+
+                            /**
+                             * Constructs a new CloudStorageBucket.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.ICloudStorageBucket);
+
+                            /** CloudStorageBucket bucketName. */
+                            public bucketName?: (string|null);
+
+                            /** CloudStorageBucket bucketPrefixRegex. */
+                            public bucketPrefixRegex?: (string|null);
+
+                            /** CloudStorageBucket cloudStorageBucket. */
+                            public cloudStorageBucket?: ("bucketName"|"bucketPrefixRegex");
+
+                            /**
+                             * Creates a new CloudStorageBucket instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CloudStorageBucket instance
+                             */
+                            public static create(properties?: google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.ICloudStorageBucket): google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket;
+
+                            /**
+                             * Encodes the specified CloudStorageBucket message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket.verify|verify} messages.
+                             * @param message CloudStorageBucket message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.ICloudStorageBucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CloudStorageBucket message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket.verify|verify} messages.
+                             * @param message CloudStorageBucket message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.ICloudStorageBucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CloudStorageBucket message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CloudStorageBucket
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket;
+
+                            /**
+                             * Decodes a CloudStorageBucket message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CloudStorageBucket
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket;
+
+                            /**
+                             * Verifies a CloudStorageBucket message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CloudStorageBucket message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CloudStorageBucket
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket;
+
+                            /**
+                             * Creates a plain object from a CloudStorageBucket message. Also converts values to other types if specified.
+                             * @param message CloudStorageBucket
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CloudStorageBucket to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CloudStorageBucket
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a Link. */
+                    interface ILink {
+
+                        /** Link dataset */
+                        dataset?: (string|null);
+
+                        /** Link linked */
+                        linked?: (boolean|null);
+                    }
+
+                    /** Represents a Link. */
+                    class Link implements ILink {
+
+                        /**
+                         * Constructs a new Link.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.storageinsights.v1.DatasetConfig.ILink);
+
+                        /** Link dataset. */
+                        public dataset: string;
+
+                        /** Link linked. */
+                        public linked: boolean;
+
+                        /**
+                         * Creates a new Link instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Link instance
+                         */
+                        public static create(properties?: google.cloud.storageinsights.v1.DatasetConfig.ILink): google.cloud.storageinsights.v1.DatasetConfig.Link;
+
+                        /**
+                         * Encodes the specified Link message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.Link.verify|verify} messages.
+                         * @param message Link message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.storageinsights.v1.DatasetConfig.ILink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Link message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.Link.verify|verify} messages.
+                         * @param message Link message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.storageinsights.v1.DatasetConfig.ILink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Link message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Link
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.DatasetConfig.Link;
+
+                        /**
+                         * Decodes a Link message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Link
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.DatasetConfig.Link;
+
+                        /**
+                         * Verifies a Link message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Link message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Link
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.DatasetConfig.Link;
+
+                        /**
+                         * Creates a plain object from a Link message. Also converts values to other types if specified.
+                         * @param message Link
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.storageinsights.v1.DatasetConfig.Link, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Link to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Link
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** ConfigState enum. */
+                    enum ConfigState {
+                        CONFIG_STATE_UNSPECIFIED = 0,
+                        CONFIG_STATE_ACTIVE = 1,
+                        CONFIG_STATE_VERIFICATION_IN_PROGRESS = 2,
+                        CONFIG_STATE_CREATED = 3,
+                        CONFIG_STATE_PROCESSING = 4
+                    }
+
+                    /** Properties of a BucketErrors. */
+                    interface IBucketErrors {
+
+                        /** BucketErrors validatedCount */
+                        validatedCount?: (number|Long|string|null);
+
+                        /** BucketErrors permissionDeniedCount */
+                        permissionDeniedCount?: (number|Long|string|null);
+
+                        /** BucketErrors permissionDeniedBucketIds */
+                        permissionDeniedBucketIds?: (string[]|null);
+
+                        /** BucketErrors nonManagementHubEntitledCount */
+                        nonManagementHubEntitledCount?: (number|Long|string|null);
+
+                        /** BucketErrors internalErrorCount */
+                        internalErrorCount?: (number|Long|string|null);
+
+                        /** BucketErrors nonStorageIntelligenceEntitledCount */
+                        nonStorageIntelligenceEntitledCount?: (number|Long|string|null);
+
+                        /** BucketErrors nonStorageIntelligenceEntitledBucketIds */
+                        nonStorageIntelligenceEntitledBucketIds?: (string[]|null);
+                    }
+
+                    /** Represents a BucketErrors. */
+                    class BucketErrors implements IBucketErrors {
+
+                        /**
+                         * Constructs a new BucketErrors.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.storageinsights.v1.DatasetConfig.IBucketErrors);
+
+                        /** BucketErrors validatedCount. */
+                        public validatedCount: (number|Long|string);
+
+                        /** BucketErrors permissionDeniedCount. */
+                        public permissionDeniedCount: (number|Long|string);
+
+                        /** BucketErrors permissionDeniedBucketIds. */
+                        public permissionDeniedBucketIds: string[];
+
+                        /** BucketErrors nonManagementHubEntitledCount. */
+                        public nonManagementHubEntitledCount: (number|Long|string);
+
+                        /** BucketErrors internalErrorCount. */
+                        public internalErrorCount: (number|Long|string);
+
+                        /** BucketErrors nonStorageIntelligenceEntitledCount. */
+                        public nonStorageIntelligenceEntitledCount: (number|Long|string);
+
+                        /** BucketErrors nonStorageIntelligenceEntitledBucketIds. */
+                        public nonStorageIntelligenceEntitledBucketIds: string[];
+
+                        /**
+                         * Creates a new BucketErrors instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BucketErrors instance
+                         */
+                        public static create(properties?: google.cloud.storageinsights.v1.DatasetConfig.IBucketErrors): google.cloud.storageinsights.v1.DatasetConfig.BucketErrors;
+
+                        /**
+                         * Encodes the specified BucketErrors message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.BucketErrors.verify|verify} messages.
+                         * @param message BucketErrors message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.storageinsights.v1.DatasetConfig.IBucketErrors, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BucketErrors message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.BucketErrors.verify|verify} messages.
+                         * @param message BucketErrors message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.storageinsights.v1.DatasetConfig.IBucketErrors, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BucketErrors message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BucketErrors
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.DatasetConfig.BucketErrors;
+
+                        /**
+                         * Decodes a BucketErrors message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BucketErrors
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.DatasetConfig.BucketErrors;
+
+                        /**
+                         * Verifies a BucketErrors message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BucketErrors message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BucketErrors
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.DatasetConfig.BucketErrors;
+
+                        /**
+                         * Creates a plain object from a BucketErrors message. Also converts values to other types if specified.
+                         * @param message BucketErrors
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.storageinsights.v1.DatasetConfig.BucketErrors, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BucketErrors to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BucketErrors
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProjectErrors. */
+                    interface IProjectErrors {
+
+                        /** ProjectErrors validatedCount */
+                        validatedCount?: (number|Long|string|null);
+
+                        /** ProjectErrors outsideOrgErrorCount */
+                        outsideOrgErrorCount?: (number|Long|string|null);
+
+                        /** ProjectErrors outsideOrgProjectNumbers */
+                        outsideOrgProjectNumbers?: ((number|Long|string)[]|null);
+
+                        /** ProjectErrors nonManagementHubEntitledErrorCount */
+                        nonManagementHubEntitledErrorCount?: (number|Long|string|null);
+
+                        /** ProjectErrors nonManagementHubEntitledProjectNumbers */
+                        nonManagementHubEntitledProjectNumbers?: ((number|Long|string)[]|null);
+
+                        /** ProjectErrors nonStorageIntelligenceEntitledErrorCount */
+                        nonStorageIntelligenceEntitledErrorCount?: (number|Long|string|null);
+
+                        /** ProjectErrors nonStorageIntelligenceEntitledProjectNumbers */
+                        nonStorageIntelligenceEntitledProjectNumbers?: ((number|Long|string)[]|null);
+
+                        /** ProjectErrors internalErrorCount */
+                        internalErrorCount?: (number|Long|string|null);
+
+                        /** ProjectErrors destinationProjectOrgError */
+                        destinationProjectOrgError?: (boolean|null);
+
+                        /** ProjectErrors destinationProjectCheckHasInternalError */
+                        destinationProjectCheckHasInternalError?: (boolean|null);
+                    }
+
+                    /** Represents a ProjectErrors. */
+                    class ProjectErrors implements IProjectErrors {
+
+                        /**
+                         * Constructs a new ProjectErrors.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.storageinsights.v1.DatasetConfig.IProjectErrors);
+
+                        /** ProjectErrors validatedCount. */
+                        public validatedCount?: (number|Long|string|null);
+
+                        /** ProjectErrors outsideOrgErrorCount. */
+                        public outsideOrgErrorCount?: (number|Long|string|null);
+
+                        /** ProjectErrors outsideOrgProjectNumbers. */
+                        public outsideOrgProjectNumbers: (number|Long|string)[];
+
+                        /** ProjectErrors nonManagementHubEntitledErrorCount. */
+                        public nonManagementHubEntitledErrorCount?: (number|Long|string|null);
+
+                        /** ProjectErrors nonManagementHubEntitledProjectNumbers. */
+                        public nonManagementHubEntitledProjectNumbers: (number|Long|string)[];
+
+                        /** ProjectErrors nonStorageIntelligenceEntitledErrorCount. */
+                        public nonStorageIntelligenceEntitledErrorCount?: (number|Long|string|null);
+
+                        /** ProjectErrors nonStorageIntelligenceEntitledProjectNumbers. */
+                        public nonStorageIntelligenceEntitledProjectNumbers: (number|Long|string)[];
+
+                        /** ProjectErrors internalErrorCount. */
+                        public internalErrorCount?: (number|Long|string|null);
+
+                        /** ProjectErrors destinationProjectOrgError. */
+                        public destinationProjectOrgError?: (boolean|null);
+
+                        /** ProjectErrors destinationProjectCheckHasInternalError. */
+                        public destinationProjectCheckHasInternalError?: (boolean|null);
+
+                        /** ProjectErrors _validatedCount. */
+                        public _validatedCount?: "validatedCount";
+
+                        /** ProjectErrors _outsideOrgErrorCount. */
+                        public _outsideOrgErrorCount?: "outsideOrgErrorCount";
+
+                        /** ProjectErrors _nonManagementHubEntitledErrorCount. */
+                        public _nonManagementHubEntitledErrorCount?: "nonManagementHubEntitledErrorCount";
+
+                        /** ProjectErrors _nonStorageIntelligenceEntitledErrorCount. */
+                        public _nonStorageIntelligenceEntitledErrorCount?: "nonStorageIntelligenceEntitledErrorCount";
+
+                        /** ProjectErrors _internalErrorCount. */
+                        public _internalErrorCount?: "internalErrorCount";
+
+                        /** ProjectErrors destinationProjectCheckResult. */
+                        public destinationProjectCheckResult?: ("destinationProjectOrgError"|"destinationProjectCheckHasInternalError");
+
+                        /**
+                         * Creates a new ProjectErrors instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProjectErrors instance
+                         */
+                        public static create(properties?: google.cloud.storageinsights.v1.DatasetConfig.IProjectErrors): google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors;
+
+                        /**
+                         * Encodes the specified ProjectErrors message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors.verify|verify} messages.
+                         * @param message ProjectErrors message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.storageinsights.v1.DatasetConfig.IProjectErrors, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProjectErrors message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors.verify|verify} messages.
+                         * @param message ProjectErrors message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.storageinsights.v1.DatasetConfig.IProjectErrors, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProjectErrors message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProjectErrors
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors;
+
+                        /**
+                         * Decodes a ProjectErrors message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProjectErrors
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors;
+
+                        /**
+                         * Verifies a ProjectErrors message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProjectErrors message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProjectErrors
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors;
+
+                        /**
+                         * Creates a plain object from a ProjectErrors message. Also converts values to other types if specified.
+                         * @param message ProjectErrors
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProjectErrors to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProjectErrors
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ValidationErrorsBeforeIngestion. */
+                    interface IValidationErrorsBeforeIngestion {
+
+                        /** ValidationErrorsBeforeIngestion bucketErrors */
+                        bucketErrors?: (google.cloud.storageinsights.v1.DatasetConfig.IBucketErrors|null);
+
+                        /** ValidationErrorsBeforeIngestion projectErrors */
+                        projectErrors?: (google.cloud.storageinsights.v1.DatasetConfig.IProjectErrors|null);
+                    }
+
+                    /** Represents a ValidationErrorsBeforeIngestion. */
+                    class ValidationErrorsBeforeIngestion implements IValidationErrorsBeforeIngestion {
+
+                        /**
+                         * Constructs a new ValidationErrorsBeforeIngestion.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.storageinsights.v1.DatasetConfig.IValidationErrorsBeforeIngestion);
+
+                        /** ValidationErrorsBeforeIngestion bucketErrors. */
+                        public bucketErrors?: (google.cloud.storageinsights.v1.DatasetConfig.IBucketErrors|null);
+
+                        /** ValidationErrorsBeforeIngestion projectErrors. */
+                        public projectErrors?: (google.cloud.storageinsights.v1.DatasetConfig.IProjectErrors|null);
+
+                        /**
+                         * Creates a new ValidationErrorsBeforeIngestion instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ValidationErrorsBeforeIngestion instance
+                         */
+                        public static create(properties?: google.cloud.storageinsights.v1.DatasetConfig.IValidationErrorsBeforeIngestion): google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion;
+
+                        /**
+                         * Encodes the specified ValidationErrorsBeforeIngestion message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion.verify|verify} messages.
+                         * @param message ValidationErrorsBeforeIngestion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.storageinsights.v1.DatasetConfig.IValidationErrorsBeforeIngestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ValidationErrorsBeforeIngestion message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion.verify|verify} messages.
+                         * @param message ValidationErrorsBeforeIngestion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.storageinsights.v1.DatasetConfig.IValidationErrorsBeforeIngestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ValidationErrorsBeforeIngestion message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ValidationErrorsBeforeIngestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion;
+
+                        /**
+                         * Decodes a ValidationErrorsBeforeIngestion message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ValidationErrorsBeforeIngestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion;
+
+                        /**
+                         * Verifies a ValidationErrorsBeforeIngestion message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ValidationErrorsBeforeIngestion message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ValidationErrorsBeforeIngestion
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion;
+
+                        /**
+                         * Creates a plain object from a ValidationErrorsBeforeIngestion message. Also converts values to other types if specified.
+                         * @param message ValidationErrorsBeforeIngestion
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ValidationErrorsBeforeIngestion to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ValidationErrorsBeforeIngestion
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a ListDatasetConfigsRequest. */
+                interface IListDatasetConfigsRequest {
+
+                    /** ListDatasetConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDatasetConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDatasetConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDatasetConfigsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListDatasetConfigsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListDatasetConfigsRequest. */
+                class ListDatasetConfigsRequest implements IListDatasetConfigsRequest {
+
+                    /**
+                     * Constructs a new ListDatasetConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storageinsights.v1.IListDatasetConfigsRequest);
+
+                    /** ListDatasetConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListDatasetConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDatasetConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDatasetConfigsRequest filter. */
+                    public filter: string;
+
+                    /** ListDatasetConfigsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListDatasetConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDatasetConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.storageinsights.v1.IListDatasetConfigsRequest): google.cloud.storageinsights.v1.ListDatasetConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListDatasetConfigsRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.ListDatasetConfigsRequest.verify|verify} messages.
+                     * @param message ListDatasetConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storageinsights.v1.IListDatasetConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDatasetConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.ListDatasetConfigsRequest.verify|verify} messages.
+                     * @param message ListDatasetConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storageinsights.v1.IListDatasetConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDatasetConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDatasetConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.ListDatasetConfigsRequest;
+
+                    /**
+                     * Decodes a ListDatasetConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDatasetConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.ListDatasetConfigsRequest;
+
+                    /**
+                     * Verifies a ListDatasetConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDatasetConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDatasetConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.ListDatasetConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDatasetConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListDatasetConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storageinsights.v1.ListDatasetConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDatasetConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDatasetConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDatasetConfigsResponse. */
+                interface IListDatasetConfigsResponse {
+
+                    /** ListDatasetConfigsResponse datasetConfigs */
+                    datasetConfigs?: (google.cloud.storageinsights.v1.IDatasetConfig[]|null);
+
+                    /** ListDatasetConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListDatasetConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListDatasetConfigsResponse. */
+                class ListDatasetConfigsResponse implements IListDatasetConfigsResponse {
+
+                    /**
+                     * Constructs a new ListDatasetConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storageinsights.v1.IListDatasetConfigsResponse);
+
+                    /** ListDatasetConfigsResponse datasetConfigs. */
+                    public datasetConfigs: google.cloud.storageinsights.v1.IDatasetConfig[];
+
+                    /** ListDatasetConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListDatasetConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListDatasetConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDatasetConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.storageinsights.v1.IListDatasetConfigsResponse): google.cloud.storageinsights.v1.ListDatasetConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListDatasetConfigsResponse message. Does not implicitly {@link google.cloud.storageinsights.v1.ListDatasetConfigsResponse.verify|verify} messages.
+                     * @param message ListDatasetConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storageinsights.v1.IListDatasetConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDatasetConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.ListDatasetConfigsResponse.verify|verify} messages.
+                     * @param message ListDatasetConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storageinsights.v1.IListDatasetConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDatasetConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDatasetConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.ListDatasetConfigsResponse;
+
+                    /**
+                     * Decodes a ListDatasetConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDatasetConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.ListDatasetConfigsResponse;
+
+                    /**
+                     * Verifies a ListDatasetConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDatasetConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDatasetConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.ListDatasetConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDatasetConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListDatasetConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storageinsights.v1.ListDatasetConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDatasetConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDatasetConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDatasetConfigRequest. */
+                interface IGetDatasetConfigRequest {
+
+                    /** GetDatasetConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDatasetConfigRequest. */
+                class GetDatasetConfigRequest implements IGetDatasetConfigRequest {
+
+                    /**
+                     * Constructs a new GetDatasetConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storageinsights.v1.IGetDatasetConfigRequest);
+
+                    /** GetDatasetConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDatasetConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDatasetConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.storageinsights.v1.IGetDatasetConfigRequest): google.cloud.storageinsights.v1.GetDatasetConfigRequest;
+
+                    /**
+                     * Encodes the specified GetDatasetConfigRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.GetDatasetConfigRequest.verify|verify} messages.
+                     * @param message GetDatasetConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storageinsights.v1.IGetDatasetConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDatasetConfigRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.GetDatasetConfigRequest.verify|verify} messages.
+                     * @param message GetDatasetConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storageinsights.v1.IGetDatasetConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDatasetConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDatasetConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.GetDatasetConfigRequest;
+
+                    /**
+                     * Decodes a GetDatasetConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDatasetConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.GetDatasetConfigRequest;
+
+                    /**
+                     * Verifies a GetDatasetConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDatasetConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDatasetConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.GetDatasetConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetDatasetConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetDatasetConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storageinsights.v1.GetDatasetConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDatasetConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDatasetConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateDatasetConfigRequest. */
+                interface ICreateDatasetConfigRequest {
+
+                    /** CreateDatasetConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDatasetConfigRequest datasetConfigId */
+                    datasetConfigId?: (string|null);
+
+                    /** CreateDatasetConfigRequest datasetConfig */
+                    datasetConfig?: (google.cloud.storageinsights.v1.IDatasetConfig|null);
+
+                    /** CreateDatasetConfigRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateDatasetConfigRequest. */
+                class CreateDatasetConfigRequest implements ICreateDatasetConfigRequest {
+
+                    /**
+                     * Constructs a new CreateDatasetConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storageinsights.v1.ICreateDatasetConfigRequest);
+
+                    /** CreateDatasetConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateDatasetConfigRequest datasetConfigId. */
+                    public datasetConfigId: string;
+
+                    /** CreateDatasetConfigRequest datasetConfig. */
+                    public datasetConfig?: (google.cloud.storageinsights.v1.IDatasetConfig|null);
+
+                    /** CreateDatasetConfigRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateDatasetConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDatasetConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.storageinsights.v1.ICreateDatasetConfigRequest): google.cloud.storageinsights.v1.CreateDatasetConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateDatasetConfigRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.CreateDatasetConfigRequest.verify|verify} messages.
+                     * @param message CreateDatasetConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storageinsights.v1.ICreateDatasetConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDatasetConfigRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.CreateDatasetConfigRequest.verify|verify} messages.
+                     * @param message CreateDatasetConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storageinsights.v1.ICreateDatasetConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDatasetConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDatasetConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.CreateDatasetConfigRequest;
+
+                    /**
+                     * Decodes a CreateDatasetConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDatasetConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.CreateDatasetConfigRequest;
+
+                    /**
+                     * Verifies a CreateDatasetConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDatasetConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDatasetConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.CreateDatasetConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDatasetConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateDatasetConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storageinsights.v1.CreateDatasetConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDatasetConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDatasetConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDatasetConfigRequest. */
+                interface IUpdateDatasetConfigRequest {
+
+                    /** UpdateDatasetConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateDatasetConfigRequest datasetConfig */
+                    datasetConfig?: (google.cloud.storageinsights.v1.IDatasetConfig|null);
+
+                    /** UpdateDatasetConfigRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateDatasetConfigRequest. */
+                class UpdateDatasetConfigRequest implements IUpdateDatasetConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateDatasetConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest);
+
+                    /** UpdateDatasetConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateDatasetConfigRequest datasetConfig. */
+                    public datasetConfig?: (google.cloud.storageinsights.v1.IDatasetConfig|null);
+
+                    /** UpdateDatasetConfigRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateDatasetConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDatasetConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest): google.cloud.storageinsights.v1.UpdateDatasetConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateDatasetConfigRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.UpdateDatasetConfigRequest.verify|verify} messages.
+                     * @param message UpdateDatasetConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDatasetConfigRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.UpdateDatasetConfigRequest.verify|verify} messages.
+                     * @param message UpdateDatasetConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDatasetConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDatasetConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.UpdateDatasetConfigRequest;
+
+                    /**
+                     * Decodes an UpdateDatasetConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDatasetConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.UpdateDatasetConfigRequest;
+
+                    /**
+                     * Verifies an UpdateDatasetConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDatasetConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDatasetConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.UpdateDatasetConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDatasetConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDatasetConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storageinsights.v1.UpdateDatasetConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDatasetConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDatasetConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDatasetConfigRequest. */
+                interface IDeleteDatasetConfigRequest {
+
+                    /** DeleteDatasetConfigRequest name */
+                    name?: (string|null);
+
+                    /** DeleteDatasetConfigRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteDatasetConfigRequest. */
+                class DeleteDatasetConfigRequest implements IDeleteDatasetConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteDatasetConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest);
+
+                    /** DeleteDatasetConfigRequest name. */
+                    public name: string;
+
+                    /** DeleteDatasetConfigRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteDatasetConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDatasetConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest): google.cloud.storageinsights.v1.DeleteDatasetConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteDatasetConfigRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.DeleteDatasetConfigRequest.verify|verify} messages.
+                     * @param message DeleteDatasetConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDatasetConfigRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DeleteDatasetConfigRequest.verify|verify} messages.
+                     * @param message DeleteDatasetConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDatasetConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDatasetConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.DeleteDatasetConfigRequest;
+
+                    /**
+                     * Decodes a DeleteDatasetConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDatasetConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.DeleteDatasetConfigRequest;
+
+                    /**
+                     * Verifies a DeleteDatasetConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDatasetConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDatasetConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.DeleteDatasetConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDatasetConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDatasetConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storageinsights.v1.DeleteDatasetConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDatasetConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDatasetConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LinkDatasetRequest. */
+                interface ILinkDatasetRequest {
+
+                    /** LinkDatasetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a LinkDatasetRequest. */
+                class LinkDatasetRequest implements ILinkDatasetRequest {
+
+                    /**
+                     * Constructs a new LinkDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storageinsights.v1.ILinkDatasetRequest);
+
+                    /** LinkDatasetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new LinkDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LinkDatasetRequest instance
+                     */
+                    public static create(properties?: google.cloud.storageinsights.v1.ILinkDatasetRequest): google.cloud.storageinsights.v1.LinkDatasetRequest;
+
+                    /**
+                     * Encodes the specified LinkDatasetRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.LinkDatasetRequest.verify|verify} messages.
+                     * @param message LinkDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storageinsights.v1.ILinkDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LinkDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.LinkDatasetRequest.verify|verify} messages.
+                     * @param message LinkDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storageinsights.v1.ILinkDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LinkDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LinkDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.LinkDatasetRequest;
+
+                    /**
+                     * Decodes a LinkDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LinkDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.LinkDatasetRequest;
+
+                    /**
+                     * Verifies a LinkDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LinkDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LinkDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.LinkDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a LinkDatasetRequest message. Also converts values to other types if specified.
+                     * @param message LinkDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storageinsights.v1.LinkDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LinkDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LinkDatasetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LinkDatasetResponse. */
+                interface ILinkDatasetResponse {
+                }
+
+                /** Represents a LinkDatasetResponse. */
+                class LinkDatasetResponse implements ILinkDatasetResponse {
+
+                    /**
+                     * Constructs a new LinkDatasetResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storageinsights.v1.ILinkDatasetResponse);
+
+                    /**
+                     * Creates a new LinkDatasetResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LinkDatasetResponse instance
+                     */
+                    public static create(properties?: google.cloud.storageinsights.v1.ILinkDatasetResponse): google.cloud.storageinsights.v1.LinkDatasetResponse;
+
+                    /**
+                     * Encodes the specified LinkDatasetResponse message. Does not implicitly {@link google.cloud.storageinsights.v1.LinkDatasetResponse.verify|verify} messages.
+                     * @param message LinkDatasetResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storageinsights.v1.ILinkDatasetResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LinkDatasetResponse message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.LinkDatasetResponse.verify|verify} messages.
+                     * @param message LinkDatasetResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storageinsights.v1.ILinkDatasetResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LinkDatasetResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LinkDatasetResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.LinkDatasetResponse;
+
+                    /**
+                     * Decodes a LinkDatasetResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LinkDatasetResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.LinkDatasetResponse;
+
+                    /**
+                     * Verifies a LinkDatasetResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LinkDatasetResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LinkDatasetResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.LinkDatasetResponse;
+
+                    /**
+                     * Creates a plain object from a LinkDatasetResponse message. Also converts values to other types if specified.
+                     * @param message LinkDatasetResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storageinsights.v1.LinkDatasetResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LinkDatasetResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LinkDatasetResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UnlinkDatasetRequest. */
+                interface IUnlinkDatasetRequest {
+
+                    /** UnlinkDatasetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an UnlinkDatasetRequest. */
+                class UnlinkDatasetRequest implements IUnlinkDatasetRequest {
+
+                    /**
+                     * Constructs a new UnlinkDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storageinsights.v1.IUnlinkDatasetRequest);
+
+                    /** UnlinkDatasetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new UnlinkDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UnlinkDatasetRequest instance
+                     */
+                    public static create(properties?: google.cloud.storageinsights.v1.IUnlinkDatasetRequest): google.cloud.storageinsights.v1.UnlinkDatasetRequest;
+
+                    /**
+                     * Encodes the specified UnlinkDatasetRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.UnlinkDatasetRequest.verify|verify} messages.
+                     * @param message UnlinkDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storageinsights.v1.IUnlinkDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UnlinkDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.UnlinkDatasetRequest.verify|verify} messages.
+                     * @param message UnlinkDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storageinsights.v1.IUnlinkDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UnlinkDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UnlinkDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.UnlinkDatasetRequest;
+
+                    /**
+                     * Decodes an UnlinkDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UnlinkDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.UnlinkDatasetRequest;
+
+                    /**
+                     * Verifies an UnlinkDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UnlinkDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UnlinkDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.UnlinkDatasetRequest;
+
+                    /**
+                     * Creates a plain object from an UnlinkDatasetRequest message. Also converts values to other types if specified.
+                     * @param message UnlinkDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storageinsights.v1.UnlinkDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UnlinkDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UnlinkDatasetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LocationMetadata. */
+                interface ILocationMetadata {
+
+                    /** LocationMetadata reportConfigAvailable */
+                    reportConfigAvailable?: (boolean|null);
+
+                    /** LocationMetadata datasetConfigAvailable */
+                    datasetConfigAvailable?: (boolean|null);
+                }
+
+                /** Represents a LocationMetadata. */
+                class LocationMetadata implements ILocationMetadata {
+
+                    /**
+                     * Constructs a new LocationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storageinsights.v1.ILocationMetadata);
+
+                    /** LocationMetadata reportConfigAvailable. */
+                    public reportConfigAvailable: boolean;
+
+                    /** LocationMetadata datasetConfigAvailable. */
+                    public datasetConfigAvailable: boolean;
+
+                    /**
+                     * Creates a new LocationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LocationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.storageinsights.v1.ILocationMetadata): google.cloud.storageinsights.v1.LocationMetadata;
+
+                    /**
+                     * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.storageinsights.v1.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storageinsights.v1.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.LocationMetadata.verify|verify} messages.
+                     * @param message LocationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storageinsights.v1.ILocationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storageinsights.v1.LocationMetadata;
+
+                    /**
+                     * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LocationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storageinsights.v1.LocationMetadata;
+
+                    /**
+                     * Verifies a LocationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LocationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storageinsights.v1.LocationMetadata;
+
+                    /**
+                     * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                     * @param message LocationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storageinsights.v1.LocationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LocationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LocationMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -7369,6 +9920,9 @@ export namespace google {
 
             /** MethodOptions .google.api.methodSignature */
             ".google.api.methodSignature"?: (string[]|null);
+
+            /** MethodOptions .google.longrunning.operationInfo */
+            ".google.longrunning.operationInfo"?: (google.longrunning.IOperationInfo|null);
         }
 
         /** Represents a MethodOptions. */
@@ -8662,6 +11216,109 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of an Empty. */
         interface IEmpty {
         }
@@ -8952,104 +11609,973 @@ export namespace google {
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
+    }
 
-        /** Properties of an Any. */
-        interface IAny {
+    /** Namespace longrunning. */
+    namespace longrunning {
 
-            /** Any type_url */
-            type_url?: (string|null);
+        /** Represents an Operations */
+        class Operations extends $protobuf.rpc.Service {
 
-            /** Any value */
-            value?: (Uint8Array|string|null);
+            /**
+             * Constructs a new Operations service.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             */
+            constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+            /**
+             * Creates new Operations service using the specified rpc implementation.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             * @returns RPC service. Useful where requests and/or responses are streamed.
+             */
+            public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Operations;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and ListOperationsResponse
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest, callback: google.longrunning.Operations.ListOperationsCallback): void;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @returns Promise
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest): Promise<google.longrunning.ListOperationsResponse>;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest, callback: google.longrunning.Operations.GetOperationCallback): void;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @returns Promise
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest): Promise<google.longrunning.Operation>;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest, callback: google.longrunning.Operations.DeleteOperationCallback): void;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @returns Promise
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest, callback: google.longrunning.Operations.CancelOperationCallback): void;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @returns Promise
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest, callback: google.longrunning.Operations.WaitOperationCallback): void;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @returns Promise
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest): Promise<google.longrunning.Operation>;
         }
 
-        /** Represents an Any. */
-        class Any implements IAny {
+        namespace Operations {
 
             /**
-             * Constructs a new Any.
+             * Callback as used by {@link google.longrunning.Operations|listOperations}.
+             * @param error Error, if any
+             * @param [response] ListOperationsResponse
+             */
+            type ListOperationsCallback = (error: (Error|null), response?: google.longrunning.ListOperationsResponse) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|getOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type GetOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type DeleteOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type CancelOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|waitOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type WaitOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+        }
+
+        /** Properties of an Operation. */
+        interface IOperation {
+
+            /** Operation name */
+            name?: (string|null);
+
+            /** Operation metadata */
+            metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done */
+            done?: (boolean|null);
+
+            /** Operation error */
+            error?: (google.rpc.IStatus|null);
+
+            /** Operation response */
+            response?: (google.protobuf.IAny|null);
+        }
+
+        /** Represents an Operation. */
+        class Operation implements IOperation {
+
+            /**
+             * Constructs a new Operation.
              * @param [properties] Properties to set
              */
-            constructor(properties?: google.protobuf.IAny);
+            constructor(properties?: google.longrunning.IOperation);
 
-            /** Any type_url. */
-            public type_url: string;
+            /** Operation name. */
+            public name: string;
 
-            /** Any value. */
-            public value: (Uint8Array|string);
+            /** Operation metadata. */
+            public metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done. */
+            public done: boolean;
+
+            /** Operation error. */
+            public error?: (google.rpc.IStatus|null);
+
+            /** Operation response. */
+            public response?: (google.protobuf.IAny|null);
+
+            /** Operation result. */
+            public result?: ("error"|"response");
 
             /**
-             * Creates a new Any instance using the specified properties.
+             * Creates a new Operation instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns Any instance
+             * @returns Operation instance
              */
-            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+            public static create(properties?: google.longrunning.IOperation): google.longrunning.Operation;
 
             /**
-             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
+             * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
+             * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes an Any message from the specified reader or buffer.
+             * Decodes an Operation message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns Any
+             * @returns Operation
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.Operation;
 
             /**
-             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * Decodes an Operation message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns Any
+             * @returns Operation
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.Operation;
 
             /**
-             * Verifies an Any message.
+             * Verifies an Operation message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * Creates an Operation message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns Any
+             * @returns Operation
              */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+            public static fromObject(object: { [k: string]: any }): google.longrunning.Operation;
 
             /**
-             * Creates a plain object from an Any message. Also converts values to other types if specified.
-             * @param message Any
+             * Creates a plain object from an Operation message. Also converts values to other types if specified.
+             * @param message Operation
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: google.longrunning.Operation, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this Any to JSON.
+             * Converts this Operation to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
 
             /**
-             * Gets the default type url for Any
+             * Gets the default type url for Operation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a GetOperationRequest. */
+        interface IGetOperationRequest {
+
+            /** GetOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a GetOperationRequest. */
+        class GetOperationRequest implements IGetOperationRequest {
+
+            /**
+             * Constructs a new GetOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IGetOperationRequest);
+
+            /** GetOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new GetOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GetOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IGetOperationRequest): google.longrunning.GetOperationRequest;
+
+            /**
+             * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.GetOperationRequest;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.GetOperationRequest;
+
+            /**
+             * Verifies a GetOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GetOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.GetOperationRequest;
+
+            /**
+             * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+             * @param message GetOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.GetOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GetOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GetOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ListOperationsRequest. */
+        interface IListOperationsRequest {
+
+            /** ListOperationsRequest name */
+            name?: (string|null);
+
+            /** ListOperationsRequest filter */
+            filter?: (string|null);
+
+            /** ListOperationsRequest pageSize */
+            pageSize?: (number|null);
+
+            /** ListOperationsRequest pageToken */
+            pageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsRequest. */
+        class ListOperationsRequest implements IListOperationsRequest {
+
+            /**
+             * Constructs a new ListOperationsRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsRequest);
+
+            /** ListOperationsRequest name. */
+            public name: string;
+
+            /** ListOperationsRequest filter. */
+            public filter: string;
+
+            /** ListOperationsRequest pageSize. */
+            public pageSize: number;
+
+            /** ListOperationsRequest pageToken. */
+            public pageToken: string;
+
+            /**
+             * Creates a new ListOperationsRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsRequest instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsRequest): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Verifies a ListOperationsRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+             * @param message ListOperationsRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ListOperationsResponse. */
+        interface IListOperationsResponse {
+
+            /** ListOperationsResponse operations */
+            operations?: (google.longrunning.IOperation[]|null);
+
+            /** ListOperationsResponse nextPageToken */
+            nextPageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsResponse. */
+        class ListOperationsResponse implements IListOperationsResponse {
+
+            /**
+             * Constructs a new ListOperationsResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsResponse);
+
+            /** ListOperationsResponse operations. */
+            public operations: google.longrunning.IOperation[];
+
+            /** ListOperationsResponse nextPageToken. */
+            public nextPageToken: string;
+
+            /**
+             * Creates a new ListOperationsResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsResponse instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsResponse): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Verifies a ListOperationsResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsResponse
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+             * @param message ListOperationsResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsResponse to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsResponse
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a CancelOperationRequest. */
+        interface ICancelOperationRequest {
+
+            /** CancelOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a CancelOperationRequest. */
+        class CancelOperationRequest implements ICancelOperationRequest {
+
+            /**
+             * Constructs a new CancelOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.ICancelOperationRequest);
+
+            /** CancelOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new CancelOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CancelOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.ICancelOperationRequest): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Verifies a CancelOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CancelOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+             * @param message CancelOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.CancelOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CancelOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CancelOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DeleteOperationRequest. */
+        interface IDeleteOperationRequest {
+
+            /** DeleteOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a DeleteOperationRequest. */
+        class DeleteOperationRequest implements IDeleteOperationRequest {
+
+            /**
+             * Constructs a new DeleteOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IDeleteOperationRequest);
+
+            /** DeleteOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new DeleteOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DeleteOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IDeleteOperationRequest): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Verifies a DeleteOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DeleteOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+             * @param message DeleteOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.DeleteOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DeleteOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DeleteOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a WaitOperationRequest. */
+        interface IWaitOperationRequest {
+
+            /** WaitOperationRequest name */
+            name?: (string|null);
+
+            /** WaitOperationRequest timeout */
+            timeout?: (google.protobuf.IDuration|null);
+        }
+
+        /** Represents a WaitOperationRequest. */
+        class WaitOperationRequest implements IWaitOperationRequest {
+
+            /**
+             * Constructs a new WaitOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IWaitOperationRequest);
+
+            /** WaitOperationRequest name. */
+            public name: string;
+
+            /** WaitOperationRequest timeout. */
+            public timeout?: (google.protobuf.IDuration|null);
+
+            /**
+             * Creates a new WaitOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns WaitOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IWaitOperationRequest): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Verifies a WaitOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns WaitOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+             * @param message WaitOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.WaitOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this WaitOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for WaitOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an OperationInfo. */
+        interface IOperationInfo {
+
+            /** OperationInfo responseType */
+            responseType?: (string|null);
+
+            /** OperationInfo metadataType */
+            metadataType?: (string|null);
+        }
+
+        /** Represents an OperationInfo. */
+        class OperationInfo implements IOperationInfo {
+
+            /**
+             * Constructs a new OperationInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperationInfo);
+
+            /** OperationInfo responseType. */
+            public responseType: string;
+
+            /** OperationInfo metadataType. */
+            public metadataType: string;
+
+            /**
+             * Creates a new OperationInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns OperationInfo instance
+             */
+            public static create(properties?: google.longrunning.IOperationInfo): google.longrunning.OperationInfo;
+
+            /**
+             * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.OperationInfo;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.OperationInfo;
+
+            /**
+             * Verifies an OperationInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns OperationInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.OperationInfo;
+
+            /**
+             * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+             * @param message OperationInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.OperationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this OperationInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OperationInfo
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
