@@ -4041,6 +4041,115 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of an AutomatedDiscounts. */
+                    interface IAutomatedDiscounts {
+
+                        /** AutomatedDiscounts priorPrice */
+                        priorPrice?: (google.shopping.type.IPrice|null);
+
+                        /** AutomatedDiscounts priorPriceProgressive */
+                        priorPriceProgressive?: (google.shopping.type.IPrice|null);
+
+                        /** AutomatedDiscounts gadPrice */
+                        gadPrice?: (google.shopping.type.IPrice|null);
+                    }
+
+                    /** Represents an AutomatedDiscounts. */
+                    class AutomatedDiscounts implements IAutomatedDiscounts {
+
+                        /**
+                         * Constructs a new AutomatedDiscounts.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.products.v1beta.IAutomatedDiscounts);
+
+                        /** AutomatedDiscounts priorPrice. */
+                        public priorPrice?: (google.shopping.type.IPrice|null);
+
+                        /** AutomatedDiscounts priorPriceProgressive. */
+                        public priorPriceProgressive?: (google.shopping.type.IPrice|null);
+
+                        /** AutomatedDiscounts gadPrice. */
+                        public gadPrice?: (google.shopping.type.IPrice|null);
+
+                        /**
+                         * Creates a new AutomatedDiscounts instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AutomatedDiscounts instance
+                         */
+                        public static create(properties?: google.shopping.merchant.products.v1beta.IAutomatedDiscounts): google.shopping.merchant.products.v1beta.AutomatedDiscounts;
+
+                        /**
+                         * Encodes the specified AutomatedDiscounts message. Does not implicitly {@link google.shopping.merchant.products.v1beta.AutomatedDiscounts.verify|verify} messages.
+                         * @param message AutomatedDiscounts message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.products.v1beta.IAutomatedDiscounts, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AutomatedDiscounts message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1beta.AutomatedDiscounts.verify|verify} messages.
+                         * @param message AutomatedDiscounts message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.products.v1beta.IAutomatedDiscounts, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AutomatedDiscounts message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AutomatedDiscounts
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1beta.AutomatedDiscounts;
+
+                        /**
+                         * Decodes an AutomatedDiscounts message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AutomatedDiscounts
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1beta.AutomatedDiscounts;
+
+                        /**
+                         * Verifies an AutomatedDiscounts message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AutomatedDiscounts message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AutomatedDiscounts
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1beta.AutomatedDiscounts;
+
+                        /**
+                         * Creates a plain object from an AutomatedDiscounts message. Also converts values to other types if specified.
+                         * @param message AutomatedDiscounts
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.products.v1beta.AutomatedDiscounts, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AutomatedDiscounts to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AutomatedDiscounts
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Represents a ProductsService */
                     class ProductsService extends $protobuf.rpc.Service {
 
@@ -4139,6 +4248,9 @@ export namespace google {
 
                         /** Product productStatus */
                         productStatus?: (google.shopping.merchant.products.v1beta.IProductStatus|null);
+
+                        /** Product automatedDiscounts */
+                        automatedDiscounts?: (google.shopping.merchant.products.v1beta.IAutomatedDiscounts|null);
                     }
 
                     /** Represents a Product. */
@@ -4179,6 +4291,9 @@ export namespace google {
 
                         /** Product productStatus. */
                         public productStatus?: (google.shopping.merchant.products.v1beta.IProductStatus|null);
+
+                        /** Product automatedDiscounts. */
+                        public automatedDiscounts?: (google.shopping.merchant.products.v1beta.IAutomatedDiscounts|null);
 
                         /** Product _versionNumber. */
                         public _versionNumber?: "versionNumber";
@@ -5892,6 +6007,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -5932,6 +6050,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -10150,6 +10271,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -10398,7 +10522,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -10429,7 +10553,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;

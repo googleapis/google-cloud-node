@@ -195,7 +195,7 @@
             "regionTag": "merchantapi_v1beta_generated_ProductsService_ListProducts_async",
             "title": "ProductInputsService listProducts Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists the processed products in your Merchant Center account. The response might contain fewer items than specified by pageSize. Rely on pageToken to determine if there are more items to be requested. After inserting, updating, or deleting a product input, it may take several minutes before the updated processed product can be retrieved.",
+            "description": " Lists the processed products in your Merchant Center account. The response might contain fewer items than specified by `pageSize`. Rely on `pageToken` to determine if there are more items to be requested. After inserting, updating, or deleting a product input, it may take several minutes before the updated processed product can be retrieved.",
             "canonical": true,
             "file": "products_service.list_products.js",
             "language": "JAVASCRIPT",

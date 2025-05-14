@@ -56,6 +56,46 @@
             }
         },
         {
+            "regionTag": "merchantapi_v1beta_generated_LfpMerchantStateService_GetLfpMerchantState_async",
+            "title": "LfpInventoryService getLfpMerchantState Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the LFP state of a merchant",
+            "canonical": true,
+            "file": "lfp_merchant_state_service.get_lfp_merchant_state.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetLfpMerchantState",
+                "fullName": "google.shopping.merchant.lfp.v1beta.LfpMerchantStateService.GetLfpMerchantState",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.lfp.v1beta.LfpMerchantState",
+                "client": {
+                    "shortName": "LfpMerchantStateServiceClient",
+                    "fullName": "google.shopping.merchant.lfp.v1beta.LfpMerchantStateServiceClient"
+                },
+                "method": {
+                    "shortName": "GetLfpMerchantState",
+                    "fullName": "google.shopping.merchant.lfp.v1beta.LfpMerchantStateService.GetLfpMerchantState",
+                    "service": {
+                        "shortName": "LfpMerchantStateService",
+                        "fullName": "google.shopping.merchant.lfp.v1beta.LfpMerchantStateService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "merchantapi_v1beta_generated_LfpSaleService_InsertLfpSale_async",
             "title": "LfpInventoryService insertLfpSale Sample",
             "origin": "API_DEFINITION",

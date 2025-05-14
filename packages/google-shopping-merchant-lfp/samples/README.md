@@ -13,6 +13,7 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Lfp_inventory_service.insert_lfp_inventory](#lfp_inventory_service.insert_lfp_inventory)
+  * [Lfp_merchant_state_service.get_lfp_merchant_state](#lfp_merchant_state_service.get_lfp_merchant_state)
   * [Lfp_sale_service.insert_lfp_sale](#lfp_sale_service.insert_lfp_sale)
   * [Lfp_store_service.delete_lfp_store](#lfp_store_service.delete_lfp_store)
   * [Lfp_store_service.get_lfp_store](#lfp_store_service.get_lfp_store)
@@ -37,7 +38,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Lfp_inventory_service.insert_lfp_inventory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_inventory_service.insert_lfp_inventory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_inventory_service.insert_lfp_inventory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_inventory_service.insert_lfp_inventory.js,samples/README.md)
 
@@ -52,9 +53,26 @@ __Usage:__
 
 
 
+### Lfp_merchant_state_service.get_lfp_merchant_state
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_merchant_state_service.get_lfp_merchant_state.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_merchant_state_service.get_lfp_merchant_state.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_merchant_state_service.get_lfp_merchant_state.js`
+
+
+-----
+
+
+
+
 ### Lfp_sale_service.insert_lfp_sale
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_sale_service.insert_lfp_sale.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_sale_service.insert_lfp_sale.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_sale_service.insert_lfp_sale.js,samples/README.md)
 
@@ -71,7 +89,7 @@ __Usage:__
 
 ### Lfp_store_service.delete_lfp_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.delete_lfp_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.delete_lfp_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.delete_lfp_store.js,samples/README.md)
 
@@ -88,7 +106,7 @@ __Usage:__
 
 ### Lfp_store_service.get_lfp_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.get_lfp_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.get_lfp_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.get_lfp_store.js,samples/README.md)
 
@@ -105,7 +123,7 @@ __Usage:__
 
 ### Lfp_store_service.insert_lfp_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.insert_lfp_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.insert_lfp_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.insert_lfp_store.js,samples/README.md)
 
@@ -122,7 +140,7 @@ __Usage:__
 
 ### Lfp_store_service.list_lfp_stores
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.list_lfp_stores.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.list_lfp_stores.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.list_lfp_stores.js,samples/README.md)
 
@@ -139,7 +157,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-shopping-merchant-lfp/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-lfp/samples/quickstart.js,samples/README.md)
 

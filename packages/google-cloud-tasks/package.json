@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/tasks",
   "description": "Cloud Tasks API client for Node.js",
-  "version": "6.0.1",
+  "version": "6.1.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "repository": {
@@ -97,8 +97,8 @@
     "jsdoc-region-tag": "^3.0.0",
     "long": "^5.3.1",
     "mocha": "^11.1.0",
-    "pack-n-play": "3.0.0",
     "sinon": "^20.0.0",
+    "pack-n-play": "3.0.1",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.2",
     "webpack": "^5.98.0",

@@ -208,6 +208,9 @@ export class LfpInventoryServiceClient {
       lfpInventoryPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/lfpInventories/{target_merchant}~{store_code}~{offer}'
       ),
+      lfpMerchantStatePathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/lfpMerchantStates/{lfp_merchant_state}'
+      ),
       lfpSalePathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/lfpSales/{sale}'
       ),
@@ -609,6 +612,46 @@ export class LfpInventoryServiceClient {
   matchOfferFromLfpInventoryName(lfpInventoryName: string) {
     return this.pathTemplates.lfpInventoryPathTemplate.match(lfpInventoryName)
       .offer;
+  }
+
+  /**
+   * Return a fully-qualified lfpMerchantState resource name string.
+   *
+   * @param {string} account
+   * @param {string} lfp_merchant_state
+   * @returns {string} Resource name string.
+   */
+  lfpMerchantStatePath(account: string, lfpMerchantState: string) {
+    return this.pathTemplates.lfpMerchantStatePathTemplate.render({
+      account: account,
+      lfp_merchant_state: lfpMerchantState,
+    });
+  }
+
+  /**
+   * Parse the account from LfpMerchantState resource.
+   *
+   * @param {string} lfpMerchantStateName
+   *   A fully-qualified path representing LfpMerchantState resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromLfpMerchantStateName(lfpMerchantStateName: string) {
+    return this.pathTemplates.lfpMerchantStatePathTemplate.match(
+      lfpMerchantStateName
+    ).account;
+  }
+
+  /**
+   * Parse the lfp_merchant_state from LfpMerchantState resource.
+   *
+   * @param {string} lfpMerchantStateName
+   *   A fully-qualified path representing LfpMerchantState resource.
+   * @returns {string} A string representing the lfp_merchant_state.
+   */
+  matchLfpMerchantStateFromLfpMerchantStateName(lfpMerchantStateName: string) {
+    return this.pathTemplates.lfpMerchantStatePathTemplate.match(
+      lfpMerchantStateName
+    ).lfp_merchant_state;
   }
 
   /**

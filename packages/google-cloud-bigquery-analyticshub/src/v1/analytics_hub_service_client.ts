@@ -509,7 +509,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the data exchange.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
+   *   e.g. `projects/myproject/locations/us/dataExchanges/123`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -637,10 +637,10 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource path of the data exchange.
-   *   e.g. `projects/myproject/locations/US`.
+   *   e.g. `projects/myproject/locations/us`.
    * @param {string} request.dataExchangeId
    *   Required. The ID of the data exchange.
-   *   Must contain only ASCII letters, numbers (0-9), underscores (_).
+   *   Must contain only Unicode letters, numbers (0-9), underscores (_).
    *   Max length: 100 bytes.
    * @param {google.cloud.bigquery.analyticshub.v1.DataExchange} request.dataExchange
    *   Required. The data exchange to create.
@@ -902,7 +902,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The full name of the data exchange resource that you want to
-   *   delete. For example, `projects/myproject/locations/US/dataExchanges/123`.
+   *   delete. For example, `projects/myproject/locations/us/dataExchanges/123`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1030,7 +1030,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the listing.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+   *   e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1158,10 +1158,10 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource path of the listing.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
+   *   e.g. `projects/myproject/locations/us/dataExchanges/123`.
    * @param {string} request.listingId
    *   Required. The ID of the listing to create.
-   *   Must contain only ASCII letters, numbers (0-9), underscores (_).
+   *   Must contain only Unicode letters, numbers (0-9), underscores (_).
    *   Max length: 100 bytes.
    * @param {google.cloud.bigquery.analyticshub.v1.Listing} request.listing
    *   Required. The listing to create.
@@ -1423,7 +1423,11 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the listing to delete.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+   *   e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456`.
+   * @param {boolean} [request.deleteCommercial]
+   *   Optional. If the listing is commercial then this field must be set to true,
+   *   otherwise a failure is thrown. This acts as a safety guard to avoid
+   *   deleting commercial listings accidentally.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1561,7 +1565,7 @@ export class AnalyticsHubServiceClient {
    *   subscriber.
    * @param {string} request.name
    *   Required. Resource name of the listing that you want to subscribe to.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+   *   e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1689,7 +1693,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the subscription.
-   *   e.g. projects/123/locations/US/subscriptions/456
+   *   e.g. projects/123/locations/us/subscriptions/456
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1817,7 +1821,11 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the subscription to revoke.
-   *   e.g. projects/123/locations/US/subscriptions/456
+   *   e.g. projects/123/locations/us/subscriptions/456
+   * @param {boolean} [request.revokeCommercial]
+   *   Optional. If the subscription is commercial then this field must be set to
+   *   true, otherwise a failure is thrown. This acts as a safety guard to avoid
+   *   revoking commercial subscriptions accidentally.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2286,17 +2294,19 @@ export class AnalyticsHubServiceClient {
   }
 
   /**
-   * Creates a Subscription to a Data Clean Room. This is a long-running
-   * operation as it will create one or more linked datasets.
+   * Creates a Subscription to a Data Clean Room. This is a
+   * long-running operation as it will create one or more linked datasets.
+   * Throws a Bad Request error if the Data Exchange does not contain any
+   * listings.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the Data Exchange.
-   *   e.g. `projects/publisherproject/locations/US/dataExchanges/123`
+   *   e.g. `projects/publisherproject/locations/us/dataExchanges/123`
    * @param {string} request.destination
    *   Required. The parent resource path of the Subscription.
-   *   e.g. `projects/subscriberproject/locations/US`
+   *   e.g. `projects/subscriberproject/locations/us`
    * @param {google.cloud.bigquery.analyticshub.v1.DestinationDataset} [request.destinationDataset]
    *   Optional. BigQuery destination dataset to create for the subscriber.
    * @param {string} request.subscription
@@ -2475,7 +2485,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the Subscription to refresh.
-   *   e.g. `projects/subscriberproject/locations/US/subscriptions/123`
+   *   e.g. `projects/subscriberproject/locations/us/subscriptions/123`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2645,7 +2655,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Resource name of the subscription to delete.
-   *   e.g. projects/123/locations/US/subscriptions/456
+   *   e.g. projects/123/locations/us/subscriptions/456
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2815,7 +2825,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource path of the data exchanges.
-   *   e.g. `projects/myproject/locations/US`.
+   *   e.g. `projects/myproject/locations/us`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
    *   the page tokens to iterate through the entire collection.
@@ -2943,7 +2953,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource path of the data exchanges.
-   *   e.g. `projects/myproject/locations/US`.
+   *   e.g. `projects/myproject/locations/us`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
    *   the page tokens to iterate through the entire collection.
@@ -2994,7 +3004,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource path of the data exchanges.
-   *   e.g. `projects/myproject/locations/US`.
+   *   e.g. `projects/myproject/locations/us`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
    *   the page tokens to iterate through the entire collection.
@@ -3045,7 +3055,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.organization
    *   Required. The organization resource path of the projects containing
-   *   DataExchanges. e.g. `organizations/myorg/locations/US`.
+   *   DataExchanges. e.g. `organizations/myorg/locations/us`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
    *   the page tokens to iterate through the entire collection.
@@ -3173,7 +3183,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.organization
    *   Required. The organization resource path of the projects containing
-   *   DataExchanges. e.g. `organizations/myorg/locations/US`.
+   *   DataExchanges. e.g. `organizations/myorg/locations/us`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
    *   the page tokens to iterate through the entire collection.
@@ -3224,7 +3234,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.organization
    *   Required. The organization resource path of the projects containing
-   *   DataExchanges. e.g. `organizations/myorg/locations/US`.
+   *   DataExchanges. e.g. `organizations/myorg/locations/us`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
    *   the page tokens to iterate through the entire collection.
@@ -3274,7 +3284,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource path of the listing.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
+   *   e.g. `projects/myproject/locations/us/dataExchanges/123`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
    *   the page tokens to iterate through the entire collection.
@@ -3402,7 +3412,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource path of the listing.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
+   *   e.g. `projects/myproject/locations/us/dataExchanges/123`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
    *   the page tokens to iterate through the entire collection.
@@ -3453,7 +3463,7 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource path of the listing.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
+   *   e.g. `projects/myproject/locations/us/dataExchanges/123`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
    *   the page tokens to iterate through the entire collection.
@@ -3503,13 +3513,13 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource path of the subscription.
-   *   e.g. projects/myproject/locations/US
+   *   e.g. projects/myproject/locations/us
    * @param {string} request.filter
    *   An expression for filtering the results of the request. Eligible
    *   fields for filtering are:
    *
-   *    * `listing`
-   *    * `data_exchange`
+   *    + `listing`
+   *    + `data_exchange`
    *
    *   Alternatively, a literal wrapped in double quotes may be provided.
    *   This will be checked for an exact match against both fields above.
@@ -3517,9 +3527,9 @@ export class AnalyticsHubServiceClient {
    *   In all cases, the full Data Exchange or Listing resource name must
    *   be provided. Some example of using filters:
    *
-   *    * data_exchange="projects/myproject/locations/us/dataExchanges/123"
-   *    * listing="projects/123/locations/us/dataExchanges/456/listings/789"
-   *    * "projects/myproject/locations/us/dataExchanges/123"
+   *    + data_exchange="projects/myproject/locations/us/dataExchanges/123"
+   *    + listing="projects/123/locations/us/dataExchanges/456/listings/789"
+   *    + "projects/myproject/locations/us/dataExchanges/123"
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page.
    * @param {string} request.pageToken
@@ -3645,13 +3655,13 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource path of the subscription.
-   *   e.g. projects/myproject/locations/US
+   *   e.g. projects/myproject/locations/us
    * @param {string} request.filter
    *   An expression for filtering the results of the request. Eligible
    *   fields for filtering are:
    *
-   *    * `listing`
-   *    * `data_exchange`
+   *    + `listing`
+   *    + `data_exchange`
    *
    *   Alternatively, a literal wrapped in double quotes may be provided.
    *   This will be checked for an exact match against both fields above.
@@ -3659,9 +3669,9 @@ export class AnalyticsHubServiceClient {
    *   In all cases, the full Data Exchange or Listing resource name must
    *   be provided. Some example of using filters:
    *
-   *    * data_exchange="projects/myproject/locations/us/dataExchanges/123"
-   *    * listing="projects/123/locations/us/dataExchanges/456/listings/789"
-   *    * "projects/myproject/locations/us/dataExchanges/123"
+   *    + data_exchange="projects/myproject/locations/us/dataExchanges/123"
+   *    + listing="projects/123/locations/us/dataExchanges/456/listings/789"
+   *    + "projects/myproject/locations/us/dataExchanges/123"
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page.
    * @param {string} request.pageToken
@@ -3710,13 +3720,13 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource path of the subscription.
-   *   e.g. projects/myproject/locations/US
+   *   e.g. projects/myproject/locations/us
    * @param {string} request.filter
    *   An expression for filtering the results of the request. Eligible
    *   fields for filtering are:
    *
-   *    * `listing`
-   *    * `data_exchange`
+   *    + `listing`
+   *    + `data_exchange`
    *
    *   Alternatively, a literal wrapped in double quotes may be provided.
    *   This will be checked for an exact match against both fields above.
@@ -3724,9 +3734,9 @@ export class AnalyticsHubServiceClient {
    *   In all cases, the full Data Exchange or Listing resource name must
    *   be provided. Some example of using filters:
    *
-   *    * data_exchange="projects/myproject/locations/us/dataExchanges/123"
-   *    * listing="projects/123/locations/us/dataExchanges/456/listings/789"
-   *    * "projects/myproject/locations/us/dataExchanges/123"
+   *    + data_exchange="projects/myproject/locations/us/dataExchanges/123"
+   *    + listing="projects/123/locations/us/dataExchanges/456/listings/789"
+   *    + "projects/myproject/locations/us/dataExchanges/123"
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page.
    * @param {string} request.pageToken
@@ -3775,8 +3785,8 @@ export class AnalyticsHubServiceClient {
    * @param {string} request.resource
    *   Required. Resource name of the requested target. This resource may be
    *   either a Listing or a DataExchange. e.g.
-   *   projects/123/locations/US/dataExchanges/456 OR e.g.
-   *   projects/123/locations/US/dataExchanges/456/listings/789
+   *   projects/123/locations/us/dataExchanges/456 OR e.g.
+   *   projects/123/locations/us/dataExchanges/456/listings/789
    * @param {boolean} request.includeDeletedSubscriptions
    *   If selected, includes deleted subscriptions in the response
    *   (up to 63 days after deletion).
@@ -3906,8 +3916,8 @@ export class AnalyticsHubServiceClient {
    * @param {string} request.resource
    *   Required. Resource name of the requested target. This resource may be
    *   either a Listing or a DataExchange. e.g.
-   *   projects/123/locations/US/dataExchanges/456 OR e.g.
-   *   projects/123/locations/US/dataExchanges/456/listings/789
+   *   projects/123/locations/us/dataExchanges/456 OR e.g.
+   *   projects/123/locations/us/dataExchanges/456/listings/789
    * @param {boolean} request.includeDeletedSubscriptions
    *   If selected, includes deleted subscriptions in the response
    *   (up to 63 days after deletion).
@@ -3961,8 +3971,8 @@ export class AnalyticsHubServiceClient {
    * @param {string} request.resource
    *   Required. Resource name of the requested target. This resource may be
    *   either a Listing or a DataExchange. e.g.
-   *   projects/123/locations/US/dataExchanges/456 OR e.g.
-   *   projects/123/locations/US/dataExchanges/456/listings/789
+   *   projects/123/locations/us/dataExchanges/456 OR e.g.
+   *   projects/123/locations/us/dataExchanges/456/listings/789
    * @param {boolean} request.includeDeletedSubscriptions
    *   If selected, includes deleted subscriptions in the response
    *   (up to 63 days after deletion).
@@ -4478,7 +4488,7 @@ export class AnalyticsHubServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

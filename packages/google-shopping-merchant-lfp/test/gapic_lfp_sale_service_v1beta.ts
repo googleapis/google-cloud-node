@@ -193,9 +193,14 @@ describe('v1beta.LfpSaleServiceClient', () => {
         throw err;
       });
       assert(client.lfpSaleServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -204,9 +209,14 @@ describe('v1beta.LfpSaleServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.lfpSaleServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -369,7 +379,9 @@ describe('v1beta.LfpSaleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insertLfpSale(request), expectedError);
     });
   });
@@ -445,6 +457,62 @@ describe('v1beta.LfpSaleServiceClient', () => {
         assert.strictEqual(result, 'offerValue');
         assert(
           (client.pathTemplates.lfpInventoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('lfpMerchantState', async () => {
+      const fakePath = '/rendered/path/lfpMerchantState';
+      const expectedParameters = {
+        account: 'accountValue',
+        lfp_merchant_state: 'lfpMerchantStateValue',
+      };
+      const client = new lfpsaleserviceModule.v1beta.LfpSaleServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.lfpMerchantStatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.lfpMerchantStatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lfpMerchantStatePath', () => {
+        const result = client.lfpMerchantStatePath(
+          'accountValue',
+          'lfpMerchantStateValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.lfpMerchantStatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromLfpMerchantStateName', () => {
+        const result = client.matchAccountFromLfpMerchantStateName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.lfpMerchantStatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLfpMerchantStateFromLfpMerchantStateName', () => {
+        const result =
+          client.matchLfpMerchantStateFromLfpMerchantStateName(fakePath);
+        assert.strictEqual(result, 'lfpMerchantStateValue');
+        assert(
+          (client.pathTemplates.lfpMerchantStatePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

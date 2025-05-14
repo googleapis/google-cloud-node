@@ -16991,6 +16991,709 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('createReportingDataAnnotation', () => {
+    it('invokes createReportingDataAnnotation without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+      );
+      client.innerApiCalls.createReportingDataAnnotation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createReportingDataAnnotation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createReportingDataAnnotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReportingDataAnnotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createReportingDataAnnotation without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+      );
+      client.innerApiCalls.createReportingDataAnnotation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createReportingDataAnnotation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IReportingDataAnnotation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createReportingDataAnnotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReportingDataAnnotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createReportingDataAnnotation with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createReportingDataAnnotation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createReportingDataAnnotation(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createReportingDataAnnotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReportingDataAnnotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createReportingDataAnnotation with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateReportingDataAnnotationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createReportingDataAnnotation(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getReportingDataAnnotation', () => {
+    it('invokes getReportingDataAnnotation without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+      );
+      client.innerApiCalls.getReportingDataAnnotation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getReportingDataAnnotation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getReportingDataAnnotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReportingDataAnnotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getReportingDataAnnotation without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+      );
+      client.innerApiCalls.getReportingDataAnnotation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getReportingDataAnnotation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IReportingDataAnnotation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getReportingDataAnnotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReportingDataAnnotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getReportingDataAnnotation with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getReportingDataAnnotation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getReportingDataAnnotation(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getReportingDataAnnotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReportingDataAnnotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getReportingDataAnnotation with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetReportingDataAnnotationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getReportingDataAnnotation(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateReportingDataAnnotation', () => {
+    it('invokes updateReportingDataAnnotation without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest()
+      );
+      request.reportingDataAnnotation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest',
+        ['reportingDataAnnotation', 'name']
+      );
+      request.reportingDataAnnotation.name = defaultValue1;
+      const expectedHeaderRequestParams = `reporting_data_annotation.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+      );
+      client.innerApiCalls.updateReportingDataAnnotation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateReportingDataAnnotation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateReportingDataAnnotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateReportingDataAnnotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateReportingDataAnnotation without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest()
+      );
+      request.reportingDataAnnotation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest',
+        ['reportingDataAnnotation', 'name']
+      );
+      request.reportingDataAnnotation.name = defaultValue1;
+      const expectedHeaderRequestParams = `reporting_data_annotation.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+      );
+      client.innerApiCalls.updateReportingDataAnnotation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateReportingDataAnnotation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IReportingDataAnnotation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateReportingDataAnnotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateReportingDataAnnotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateReportingDataAnnotation with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest()
+      );
+      request.reportingDataAnnotation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest',
+        ['reportingDataAnnotation', 'name']
+      );
+      request.reportingDataAnnotation.name = defaultValue1;
+      const expectedHeaderRequestParams = `reporting_data_annotation.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateReportingDataAnnotation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateReportingDataAnnotation(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateReportingDataAnnotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateReportingDataAnnotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateReportingDataAnnotation with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest()
+      );
+      request.reportingDataAnnotation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateReportingDataAnnotationRequest',
+        ['reportingDataAnnotation', 'name']
+      );
+      request.reportingDataAnnotation.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateReportingDataAnnotation(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deleteReportingDataAnnotation', () => {
+    it('invokes deleteReportingDataAnnotation without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteReportingDataAnnotation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteReportingDataAnnotation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteReportingDataAnnotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteReportingDataAnnotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteReportingDataAnnotation without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteReportingDataAnnotation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteReportingDataAnnotation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteReportingDataAnnotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteReportingDataAnnotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteReportingDataAnnotation with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteReportingDataAnnotation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteReportingDataAnnotation(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteReportingDataAnnotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteReportingDataAnnotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteReportingDataAnnotation with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteReportingDataAnnotationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteReportingDataAnnotation(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('submitUserDeletion', () => {
+    it('invokes submitUserDeletion without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SubmitUserDeletionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.SubmitUserDeletionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SubmitUserDeletionResponse()
+      );
+      client.innerApiCalls.submitUserDeletion =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.submitUserDeletion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.submitUserDeletion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.submitUserDeletion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes submitUserDeletion without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SubmitUserDeletionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.SubmitUserDeletionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SubmitUserDeletionResponse()
+      );
+      client.innerApiCalls.submitUserDeletion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.submitUserDeletion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.ISubmitUserDeletionResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.submitUserDeletion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.submitUserDeletion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes submitUserDeletion with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SubmitUserDeletionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.SubmitUserDeletionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.submitUserDeletion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.submitUserDeletion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.submitUserDeletion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.submitUserDeletion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes submitUserDeletion with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SubmitUserDeletionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.SubmitUserDeletionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.submitUserDeletion(request), expectedError);
+    });
+  });
+
   describe('listAccounts', () => {
     it('invokes listAccounts without error', async () => {
       const client =
@@ -26125,6 +26828,378 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('listReportingDataAnnotations', () => {
+    it('invokes listReportingDataAnnotations without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+        ),
+      ];
+      client.innerApiCalls.listReportingDataAnnotations =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listReportingDataAnnotations(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listReportingDataAnnotations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReportingDataAnnotations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReportingDataAnnotations without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+        ),
+      ];
+      client.innerApiCalls.listReportingDataAnnotations =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listReportingDataAnnotations(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.admin.v1alpha.IReportingDataAnnotation[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listReportingDataAnnotations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReportingDataAnnotations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReportingDataAnnotations with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listReportingDataAnnotations = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listReportingDataAnnotations(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listReportingDataAnnotations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReportingDataAnnotations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReportingDataAnnotationsStream without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+        ),
+      ];
+      client.descriptors.page.listReportingDataAnnotations.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listReportingDataAnnotationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.ReportingDataAnnotation[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.ReportingDataAnnotation
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listReportingDataAnnotations
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listReportingDataAnnotations,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.listReportingDataAnnotations
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listReportingDataAnnotationsStream with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listReportingDataAnnotations.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listReportingDataAnnotationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.ReportingDataAnnotation[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.ReportingDataAnnotation
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listReportingDataAnnotations
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listReportingDataAnnotations,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.listReportingDataAnnotations
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listReportingDataAnnotations without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.ReportingDataAnnotation()
+        ),
+      ];
+      client.descriptors.page.listReportingDataAnnotations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.admin.v1alpha.IReportingDataAnnotation[] =
+        [];
+      const iterable = client.listReportingDataAnnotationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listReportingDataAnnotations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listReportingDataAnnotations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listReportingDataAnnotations with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListReportingDataAnnotationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listReportingDataAnnotations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listReportingDataAnnotationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.IReportingDataAnnotation[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listReportingDataAnnotations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listReportingDataAnnotations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('account', async () => {
       const fakePath = '/rendered/path/account';
@@ -27724,6 +28799,72 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         assert(
           (
             client.pathTemplates.propertyAccessBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('reportingDataAnnotation', async () => {
+      const fakePath = '/rendered/path/reportingDataAnnotation';
+      const expectedParameters = {
+        property: 'propertyValue',
+        reporting_data_annotation: 'reportingDataAnnotationValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.reportingDataAnnotationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.reportingDataAnnotationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('reportingDataAnnotationPath', () => {
+        const result = client.reportingDataAnnotationPath(
+          'propertyValue',
+          'reportingDataAnnotationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.reportingDataAnnotationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromReportingDataAnnotationName', () => {
+        const result =
+          client.matchPropertyFromReportingDataAnnotationName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (
+            client.pathTemplates.reportingDataAnnotationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchReportingDataAnnotationFromReportingDataAnnotationName', () => {
+        const result =
+          client.matchReportingDataAnnotationFromReportingDataAnnotationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'reportingDataAnnotationValue');
+        assert(
+          (
+            client.pathTemplates.reportingDataAnnotationPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

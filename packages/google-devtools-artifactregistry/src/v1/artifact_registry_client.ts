@@ -239,6 +239,12 @@ export class ArtifactRegistryClient {
       genericArtifactPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/genericArtifacts/{generic_artifact}'
       ),
+      goModulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/goModules/{go_module}'
+      ),
+      kfpArtifactPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/kfpArtifacts/{kfp_artifact}'
+      ),
       mavenArtifactPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/mavenArtifacts/{maven_artifact}'
       ),
@@ -5229,7 +5235,8 @@ export class ArtifactRegistryClient {
    *   The name of the repository holding all requested versions.
    * @param {string[]} request.names
    *   Required. The names of the versions to delete.
-   *   A maximum of 10000 versions can be deleted in a batch.
+   *   The maximum number of versions deleted per batch is determined by the
+   *   service and is dependent on the available resources in the region.
    * @param {boolean} request.validateOnly
    *   If true, the request is performed without deleting data, following AIP-163.
    * @param {object} [options]
@@ -9650,6 +9657,146 @@ export class ArtifactRegistryClient {
     return this.pathTemplates.genericArtifactPathTemplate.match(
       genericArtifactName
     ).generic_artifact;
+  }
+
+  /**
+   * Return a fully-qualified goModule resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} go_module
+   * @returns {string} Resource name string.
+   */
+  goModulePath(
+    project: string,
+    location: string,
+    repository: string,
+    goModule: string
+  ) {
+    return this.pathTemplates.goModulePathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      go_module: goModule,
+    });
+  }
+
+  /**
+   * Parse the project from GoModule resource.
+   *
+   * @param {string} goModuleName
+   *   A fully-qualified path representing GoModule resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGoModuleName(goModuleName: string) {
+    return this.pathTemplates.goModulePathTemplate.match(goModuleName).project;
+  }
+
+  /**
+   * Parse the location from GoModule resource.
+   *
+   * @param {string} goModuleName
+   *   A fully-qualified path representing GoModule resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGoModuleName(goModuleName: string) {
+    return this.pathTemplates.goModulePathTemplate.match(goModuleName).location;
+  }
+
+  /**
+   * Parse the repository from GoModule resource.
+   *
+   * @param {string} goModuleName
+   *   A fully-qualified path representing GoModule resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromGoModuleName(goModuleName: string) {
+    return this.pathTemplates.goModulePathTemplate.match(goModuleName)
+      .repository;
+  }
+
+  /**
+   * Parse the go_module from GoModule resource.
+   *
+   * @param {string} goModuleName
+   *   A fully-qualified path representing GoModule resource.
+   * @returns {string} A string representing the go_module.
+   */
+  matchGoModuleFromGoModuleName(goModuleName: string) {
+    return this.pathTemplates.goModulePathTemplate.match(goModuleName)
+      .go_module;
+  }
+
+  /**
+   * Return a fully-qualified kfpArtifact resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} kfp_artifact
+   * @returns {string} Resource name string.
+   */
+  kfpArtifactPath(
+    project: string,
+    location: string,
+    repository: string,
+    kfpArtifact: string
+  ) {
+    return this.pathTemplates.kfpArtifactPathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      kfp_artifact: kfpArtifact,
+    });
+  }
+
+  /**
+   * Parse the project from KfpArtifact resource.
+   *
+   * @param {string} kfpArtifactName
+   *   A fully-qualified path representing KfpArtifact resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromKfpArtifactName(kfpArtifactName: string) {
+    return this.pathTemplates.kfpArtifactPathTemplate.match(kfpArtifactName)
+      .project;
+  }
+
+  /**
+   * Parse the location from KfpArtifact resource.
+   *
+   * @param {string} kfpArtifactName
+   *   A fully-qualified path representing KfpArtifact resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromKfpArtifactName(kfpArtifactName: string) {
+    return this.pathTemplates.kfpArtifactPathTemplate.match(kfpArtifactName)
+      .location;
+  }
+
+  /**
+   * Parse the repository from KfpArtifact resource.
+   *
+   * @param {string} kfpArtifactName
+   *   A fully-qualified path representing KfpArtifact resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromKfpArtifactName(kfpArtifactName: string) {
+    return this.pathTemplates.kfpArtifactPathTemplate.match(kfpArtifactName)
+      .repository;
+  }
+
+  /**
+   * Parse the kfp_artifact from KfpArtifact resource.
+   *
+   * @param {string} kfpArtifactName
+   *   A fully-qualified path representing KfpArtifact resource.
+   * @returns {string} A string representing the kfp_artifact.
+   */
+  matchKfpArtifactFromKfpArtifactName(kfpArtifactName: string) {
+    return this.pathTemplates.kfpArtifactPathTemplate.match(kfpArtifactName)
+      .kfp_artifact;
   }
 
   /**

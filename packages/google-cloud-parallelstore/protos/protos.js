@@ -643,12 +643,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Instance.decode = function decode(reader, length) {
+                        Instance.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.Instance(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -1282,12 +1284,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListInstancesRequest.decode = function decode(reader, length) {
+                        ListInstancesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.ListInstancesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -1560,12 +1564,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListInstancesResponse.decode = function decode(reader, length) {
+                        ListInstancesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.ListInstancesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.instances && message.instances.length))
@@ -1822,12 +1828,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetInstanceRequest.decode = function decode(reader, length) {
+                        GetInstanceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.GetInstanceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -2058,12 +2066,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateInstanceRequest.decode = function decode(reader, length) {
+                        CreateInstanceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.CreateInstanceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -2325,12 +2335,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateInstanceRequest.decode = function decode(reader, length) {
+                        UpdateInstanceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.UpdateInstanceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -2574,12 +2586,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteInstanceRequest.decode = function decode(reader, length) {
+                        DeleteInstanceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.DeleteInstanceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -2856,12 +2870,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OperationMetadata.decode = function decode(reader, length) {
+                        OperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.OperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -3142,12 +3158,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SourceGcsBucket.decode = function decode(reader, length) {
+                        SourceGcsBucket.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.SourceGcsBucket();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -3345,12 +3363,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DestinationGcsBucket.decode = function decode(reader, length) {
+                        DestinationGcsBucket.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.DestinationGcsBucket();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -3548,12 +3568,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SourceParallelstore.decode = function decode(reader, length) {
+                        SourceParallelstore.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.SourceParallelstore();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.path = reader.string();
@@ -3751,12 +3773,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DestinationParallelstore.decode = function decode(reader, length) {
+                        DestinationParallelstore.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.DestinationParallelstore();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.path = reader.string();
@@ -4023,12 +4047,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImportDataRequest.decode = function decode(reader, length) {
+                        ImportDataRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.ImportDataRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.sourceGcsBucket = $root.google.cloud.parallelstore.v1.SourceGcsBucket.decode(reader, reader.uint32());
@@ -4365,12 +4391,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportDataRequest.decode = function decode(reader, length) {
+                        ExportDataRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.ExportDataRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.sourceParallelstore = $root.google.cloud.parallelstore.v1.SourceParallelstore.decode(reader, reader.uint32());
@@ -4627,12 +4655,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImportDataResponse.decode = function decode(reader, length) {
+                        ImportDataResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.ImportDataResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -4826,12 +4856,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransferErrorLogEntry.decode = function decode(reader, length) {
+                        TransferErrorLogEntry.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.TransferErrorLogEntry();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -5080,12 +5112,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransferErrorSummary.decode = function decode(reader, length) {
+                        TransferErrorSummary.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.TransferErrorSummary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.errorCode = reader.int32();
@@ -5513,12 +5547,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImportDataMetadata.decode = function decode(reader, length) {
+                        ImportDataMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.ImportDataMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.operationMetadata = $root.google.cloud.parallelstore.v1.TransferOperationMetadata.decode(reader, reader.uint32());
@@ -5805,12 +5841,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportDataResponse.decode = function decode(reader, length) {
+                        ExportDataResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.ExportDataResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -6068,12 +6106,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportDataMetadata.decode = function decode(reader, length) {
+                        ExportDataMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.ExportDataMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.operationMetadata = $root.google.cloud.parallelstore.v1.TransferOperationMetadata.decode(reader, reader.uint32());
@@ -6464,12 +6504,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransferOperationMetadata.decode = function decode(reader, length) {
+                        TransferOperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.TransferOperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 7: {
                                         message.sourceParallelstore = $root.google.cloud.parallelstore.v1.SourceParallelstore.decode(reader, reader.uint32());
@@ -6911,12 +6953,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransferCounters.decode = function decode(reader, length) {
+                        TransferCounters.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1.TransferCounters();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.objectsFound = reader.int64();
@@ -7815,12 +7859,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Instance.decode = function decode(reader, length) {
+                        Instance.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.Instance(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -7954,6 +8000,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -8074,6 +8121,10 @@
                             case "UPGRADING":
                             case 5:
                                 message.state = 5;
+                                break;
+                            case "REPAIRING":
+                            case 6:
+                                message.state = 6;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -8303,6 +8354,7 @@
                          * @property {number} DELETING=3 DELETING value
                          * @property {number} FAILED=4 FAILED value
                          * @property {number} UPGRADING=5 UPGRADING value
+                         * @property {number} REPAIRING=6 REPAIRING value
                          */
                         Instance.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -8312,10 +8364,383 @@
                             values[valuesById[3] = "DELETING"] = 3;
                             values[valuesById[4] = "FAILED"] = 4;
                             values[valuesById[5] = "UPGRADING"] = 5;
+                            values[valuesById[6] = "REPAIRING"] = 6;
                             return values;
                         })();
     
                         return Instance;
+                    })();
+    
+                    v1beta.TransferMetadataOptions = (function() {
+    
+                        /**
+                         * Properties of a TransferMetadataOptions.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @interface ITransferMetadataOptions
+                         * @property {google.cloud.parallelstore.v1beta.TransferMetadataOptions.Uid|null} [uid] TransferMetadataOptions uid
+                         * @property {google.cloud.parallelstore.v1beta.TransferMetadataOptions.Gid|null} [gid] TransferMetadataOptions gid
+                         * @property {google.cloud.parallelstore.v1beta.TransferMetadataOptions.Mode|null} [mode] TransferMetadataOptions mode
+                         */
+    
+                        /**
+                         * Constructs a new TransferMetadataOptions.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @classdesc Represents a TransferMetadataOptions.
+                         * @implements ITransferMetadataOptions
+                         * @constructor
+                         * @param {google.cloud.parallelstore.v1beta.ITransferMetadataOptions=} [properties] Properties to set
+                         */
+                        function TransferMetadataOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferMetadataOptions uid.
+                         * @member {google.cloud.parallelstore.v1beta.TransferMetadataOptions.Uid} uid
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @instance
+                         */
+                        TransferMetadataOptions.prototype.uid = 0;
+    
+                        /**
+                         * TransferMetadataOptions gid.
+                         * @member {google.cloud.parallelstore.v1beta.TransferMetadataOptions.Gid} gid
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @instance
+                         */
+                        TransferMetadataOptions.prototype.gid = 0;
+    
+                        /**
+                         * TransferMetadataOptions mode.
+                         * @member {google.cloud.parallelstore.v1beta.TransferMetadataOptions.Mode} mode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @instance
+                         */
+                        TransferMetadataOptions.prototype.mode = 0;
+    
+                        /**
+                         * Creates a new TransferMetadataOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferMetadataOptions=} [properties] Properties to set
+                         * @returns {google.cloud.parallelstore.v1beta.TransferMetadataOptions} TransferMetadataOptions instance
+                         */
+                        TransferMetadataOptions.create = function create(properties) {
+                            return new TransferMetadataOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferMetadataOptions message. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferMetadataOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferMetadataOptions} message TransferMetadataOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferMetadataOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
+                            if (message.gid != null && Object.hasOwnProperty.call(message, "gid"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.gid);
+                            if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.mode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferMetadataOptions message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferMetadataOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferMetadataOptions} message TransferMetadataOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferMetadataOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferMetadataOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.parallelstore.v1beta.TransferMetadataOptions} TransferMetadataOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferMetadataOptions.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uid = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.gid = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.mode = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferMetadataOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.parallelstore.v1beta.TransferMetadataOptions} TransferMetadataOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferMetadataOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferMetadataOptions message.
+                         * @function verify
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferMetadataOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                switch (message.uid) {
+                                default:
+                                    return "uid: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.gid != null && message.hasOwnProperty("gid"))
+                                switch (message.gid) {
+                                default:
+                                    return "gid: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                switch (message.mode) {
+                                default:
+                                    return "mode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferMetadataOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.parallelstore.v1beta.TransferMetadataOptions} TransferMetadataOptions
+                         */
+                        TransferMetadataOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions)
+                                return object;
+                            var message = new $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions();
+                            switch (object.uid) {
+                            default:
+                                if (typeof object.uid === "number") {
+                                    message.uid = object.uid;
+                                    break;
+                                }
+                                break;
+                            case "UID_UNSPECIFIED":
+                            case 0:
+                                message.uid = 0;
+                                break;
+                            case "UID_SKIP":
+                            case 1:
+                                message.uid = 1;
+                                break;
+                            case "UID_NUMBER_PRESERVE":
+                            case 2:
+                                message.uid = 2;
+                                break;
+                            }
+                            switch (object.gid) {
+                            default:
+                                if (typeof object.gid === "number") {
+                                    message.gid = object.gid;
+                                    break;
+                                }
+                                break;
+                            case "GID_UNSPECIFIED":
+                            case 0:
+                                message.gid = 0;
+                                break;
+                            case "GID_SKIP":
+                            case 1:
+                                message.gid = 1;
+                                break;
+                            case "GID_NUMBER_PRESERVE":
+                            case 2:
+                                message.gid = 2;
+                                break;
+                            }
+                            switch (object.mode) {
+                            default:
+                                if (typeof object.mode === "number") {
+                                    message.mode = object.mode;
+                                    break;
+                                }
+                                break;
+                            case "MODE_UNSPECIFIED":
+                            case 0:
+                                message.mode = 0;
+                                break;
+                            case "MODE_SKIP":
+                            case 1:
+                                message.mode = 1;
+                                break;
+                            case "MODE_PRESERVE":
+                            case 2:
+                                message.mode = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferMetadataOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.TransferMetadataOptions} message TransferMetadataOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferMetadataOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.uid = options.enums === String ? "UID_UNSPECIFIED" : 0;
+                                object.gid = options.enums === String ? "GID_UNSPECIFIED" : 0;
+                                object.mode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = options.enums === String ? $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.Uid[message.uid] === undefined ? message.uid : $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.Uid[message.uid] : message.uid;
+                            if (message.gid != null && message.hasOwnProperty("gid"))
+                                object.gid = options.enums === String ? $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.Gid[message.gid] === undefined ? message.gid : $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.Gid[message.gid] : message.gid;
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                object.mode = options.enums === String ? $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.Mode[message.mode] : message.mode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferMetadataOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferMetadataOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TransferMetadataOptions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.parallelstore.v1beta.TransferMetadataOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TransferMetadataOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.parallelstore.v1beta.TransferMetadataOptions";
+                        };
+    
+                        /**
+                         * Uid enum.
+                         * @name google.cloud.parallelstore.v1beta.TransferMetadataOptions.Uid
+                         * @enum {number}
+                         * @property {number} UID_UNSPECIFIED=0 UID_UNSPECIFIED value
+                         * @property {number} UID_SKIP=1 UID_SKIP value
+                         * @property {number} UID_NUMBER_PRESERVE=2 UID_NUMBER_PRESERVE value
+                         */
+                        TransferMetadataOptions.Uid = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "UID_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "UID_SKIP"] = 1;
+                            values[valuesById[2] = "UID_NUMBER_PRESERVE"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Gid enum.
+                         * @name google.cloud.parallelstore.v1beta.TransferMetadataOptions.Gid
+                         * @enum {number}
+                         * @property {number} GID_UNSPECIFIED=0 GID_UNSPECIFIED value
+                         * @property {number} GID_SKIP=1 GID_SKIP value
+                         * @property {number} GID_NUMBER_PRESERVE=2 GID_NUMBER_PRESERVE value
+                         */
+                        TransferMetadataOptions.Gid = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "GID_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GID_SKIP"] = 1;
+                            values[valuesById[2] = "GID_NUMBER_PRESERVE"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Mode enum.
+                         * @name google.cloud.parallelstore.v1beta.TransferMetadataOptions.Mode
+                         * @enum {number}
+                         * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                         * @property {number} MODE_SKIP=1 MODE_SKIP value
+                         * @property {number} MODE_PRESERVE=2 MODE_PRESERVE value
+                         */
+                        TransferMetadataOptions.Mode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MODE_SKIP"] = 1;
+                            values[valuesById[2] = "MODE_PRESERVE"] = 2;
+                            return values;
+                        })();
+    
+                        return TransferMetadataOptions;
                     })();
     
                     v1beta.ListInstancesRequest = (function() {
@@ -8447,12 +8872,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListInstancesRequest.decode = function decode(reader, length) {
+                        ListInstancesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.ListInstancesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -8725,12 +9152,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListInstancesResponse.decode = function decode(reader, length) {
+                        ListInstancesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.ListInstancesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.instances && message.instances.length))
@@ -8987,12 +9416,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetInstanceRequest.decode = function decode(reader, length) {
+                        GetInstanceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.GetInstanceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -9223,12 +9654,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateInstanceRequest.decode = function decode(reader, length) {
+                        CreateInstanceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.CreateInstanceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -9490,12 +9923,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateInstanceRequest.decode = function decode(reader, length) {
+                        UpdateInstanceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.UpdateInstanceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -9739,12 +10174,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteInstanceRequest.decode = function decode(reader, length) {
+                        DeleteInstanceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.DeleteInstanceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -10021,12 +10458,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OperationMetadata.decode = function decode(reader, length) {
+                        OperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.OperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -10307,12 +10746,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SourceGcsBucket.decode = function decode(reader, length) {
+                        SourceGcsBucket.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.SourceGcsBucket();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -10510,12 +10951,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DestinationGcsBucket.decode = function decode(reader, length) {
+                        DestinationGcsBucket.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -10713,12 +11156,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SourceParallelstore.decode = function decode(reader, length) {
+                        SourceParallelstore.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.SourceParallelstore();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.path = reader.string();
@@ -10916,12 +11361,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DestinationParallelstore.decode = function decode(reader, length) {
+                        DestinationParallelstore.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.DestinationParallelstore();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.path = reader.string();
@@ -11045,6 +11492,7 @@
                          * @property {string|null} [name] ImportDataRequest name
                          * @property {string|null} [requestId] ImportDataRequest requestId
                          * @property {string|null} [serviceAccount] ImportDataRequest serviceAccount
+                         * @property {google.cloud.parallelstore.v1beta.ITransferMetadataOptions|null} [metadataOptions] ImportDataRequest metadataOptions
                          */
     
                         /**
@@ -11101,6 +11549,14 @@
                          * @instance
                          */
                         ImportDataRequest.prototype.serviceAccount = "";
+    
+                        /**
+                         * ImportDataRequest metadataOptions.
+                         * @member {google.cloud.parallelstore.v1beta.ITransferMetadataOptions|null|undefined} metadataOptions
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataRequest
+                         * @instance
+                         */
+                        ImportDataRequest.prototype.metadataOptions = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -11161,6 +11617,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceAccount);
+                            if (message.metadataOptions != null && Object.hasOwnProperty.call(message, "metadataOptions"))
+                                $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.encode(message.metadataOptions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -11188,12 +11646,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImportDataRequest.decode = function decode(reader, length) {
+                        ImportDataRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.ImportDataRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.sourceGcsBucket = $root.google.cloud.parallelstore.v1beta.SourceGcsBucket.decode(reader, reader.uint32());
@@ -11213,6 +11673,10 @@
                                     }
                                 case 5: {
                                         message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.metadataOptions = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -11276,6 +11740,11 @@
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 if (!$util.isString(message.serviceAccount))
                                     return "serviceAccount: string expected";
+                            if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions")) {
+                                var error = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.verify(message.metadataOptions);
+                                if (error)
+                                    return "metadataOptions." + error;
+                            }
                             return null;
                         };
     
@@ -11307,6 +11776,11 @@
                                 message.requestId = String(object.requestId);
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
+                            if (object.metadataOptions != null) {
+                                if (typeof object.metadataOptions !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ImportDataRequest.metadataOptions: object expected");
+                                message.metadataOptions = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.fromObject(object.metadataOptions);
+                            }
                             return message;
                         };
     
@@ -11327,6 +11801,7 @@
                                 object.name = "";
                                 object.requestId = "";
                                 object.serviceAccount = "";
+                                object.metadataOptions = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -11344,6 +11819,8 @@
                                 object.requestId = message.requestId;
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
+                            if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions"))
+                                object.metadataOptions = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.toObject(message.metadataOptions, options);
                             return object;
                         };
     
@@ -11387,6 +11864,7 @@
                          * @property {string|null} [name] ExportDataRequest name
                          * @property {string|null} [requestId] ExportDataRequest requestId
                          * @property {string|null} [serviceAccount] ExportDataRequest serviceAccount
+                         * @property {google.cloud.parallelstore.v1beta.ITransferMetadataOptions|null} [metadataOptions] ExportDataRequest metadataOptions
                          */
     
                         /**
@@ -11443,6 +11921,14 @@
                          * @instance
                          */
                         ExportDataRequest.prototype.serviceAccount = "";
+    
+                        /**
+                         * ExportDataRequest metadataOptions.
+                         * @member {google.cloud.parallelstore.v1beta.ITransferMetadataOptions|null|undefined} metadataOptions
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataRequest
+                         * @instance
+                         */
+                        ExportDataRequest.prototype.metadataOptions = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -11503,6 +11989,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceAccount);
+                            if (message.metadataOptions != null && Object.hasOwnProperty.call(message, "metadataOptions"))
+                                $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.encode(message.metadataOptions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -11530,12 +12018,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportDataRequest.decode = function decode(reader, length) {
+                        ExportDataRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.ExportDataRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.sourceParallelstore = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.decode(reader, reader.uint32());
@@ -11555,6 +12045,10 @@
                                     }
                                 case 5: {
                                         message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.metadataOptions = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -11618,6 +12112,11 @@
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 if (!$util.isString(message.serviceAccount))
                                     return "serviceAccount: string expected";
+                            if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions")) {
+                                var error = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.verify(message.metadataOptions);
+                                if (error)
+                                    return "metadataOptions." + error;
+                            }
                             return null;
                         };
     
@@ -11649,6 +12148,11 @@
                                 message.requestId = String(object.requestId);
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
+                            if (object.metadataOptions != null) {
+                                if (typeof object.metadataOptions !== "object")
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.ExportDataRequest.metadataOptions: object expected");
+                                message.metadataOptions = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.fromObject(object.metadataOptions);
+                            }
                             return message;
                         };
     
@@ -11669,6 +12173,7 @@
                                 object.name = "";
                                 object.requestId = "";
                                 object.serviceAccount = "";
+                                object.metadataOptions = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -11686,6 +12191,8 @@
                                 object.requestId = message.requestId;
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
+                            if (message.metadataOptions != null && message.hasOwnProperty("metadataOptions"))
+                                object.metadataOptions = $root.google.cloud.parallelstore.v1beta.TransferMetadataOptions.toObject(message.metadataOptions, options);
                             return object;
                         };
     
@@ -11792,12 +12299,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImportDataResponse.decode = function decode(reader, length) {
+                        ImportDataResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.ImportDataResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -11891,6 +12400,633 @@
                         };
     
                         return ImportDataResponse;
+                    })();
+    
+                    v1beta.TransferErrorLogEntry = (function() {
+    
+                        /**
+                         * Properties of a TransferErrorLogEntry.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @interface ITransferErrorLogEntry
+                         * @property {string|null} [uri] TransferErrorLogEntry uri
+                         * @property {Array.<string>|null} [errorDetails] TransferErrorLogEntry errorDetails
+                         */
+    
+                        /**
+                         * Constructs a new TransferErrorLogEntry.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @classdesc Represents a TransferErrorLogEntry.
+                         * @implements ITransferErrorLogEntry
+                         * @constructor
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorLogEntry=} [properties] Properties to set
+                         */
+                        function TransferErrorLogEntry(properties) {
+                            this.errorDetails = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferErrorLogEntry uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @instance
+                         */
+                        TransferErrorLogEntry.prototype.uri = "";
+    
+                        /**
+                         * TransferErrorLogEntry errorDetails.
+                         * @member {Array.<string>} errorDetails
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @instance
+                         */
+                        TransferErrorLogEntry.prototype.errorDetails = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TransferErrorLogEntry instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorLogEntry=} [properties] Properties to set
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorLogEntry} TransferErrorLogEntry instance
+                         */
+                        TransferErrorLogEntry.create = function create(properties) {
+                            return new TransferErrorLogEntry(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferErrorLogEntry message. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferErrorLogEntry.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorLogEntry} message TransferErrorLogEntry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferErrorLogEntry.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.errorDetails != null && message.errorDetails.length)
+                                for (var i = 0; i < message.errorDetails.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.errorDetails[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferErrorLogEntry message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferErrorLogEntry.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorLogEntry} message TransferErrorLogEntry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferErrorLogEntry.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferErrorLogEntry message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorLogEntry} TransferErrorLogEntry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferErrorLogEntry.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.errorDetails && message.errorDetails.length))
+                                            message.errorDetails = [];
+                                        message.errorDetails.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferErrorLogEntry message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorLogEntry} TransferErrorLogEntry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferErrorLogEntry.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferErrorLogEntry message.
+                         * @function verify
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferErrorLogEntry.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.errorDetails != null && message.hasOwnProperty("errorDetails")) {
+                                if (!Array.isArray(message.errorDetails))
+                                    return "errorDetails: array expected";
+                                for (var i = 0; i < message.errorDetails.length; ++i)
+                                    if (!$util.isString(message.errorDetails[i]))
+                                        return "errorDetails: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferErrorLogEntry message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorLogEntry} TransferErrorLogEntry
+                         */
+                        TransferErrorLogEntry.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry)
+                                return object;
+                            var message = new $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.errorDetails) {
+                                if (!Array.isArray(object.errorDetails))
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferErrorLogEntry.errorDetails: array expected");
+                                message.errorDetails = [];
+                                for (var i = 0; i < object.errorDetails.length; ++i)
+                                    message.errorDetails[i] = String(object.errorDetails[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferErrorLogEntry message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.TransferErrorLogEntry} message TransferErrorLogEntry
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferErrorLogEntry.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.errorDetails = [];
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.errorDetails && message.errorDetails.length) {
+                                object.errorDetails = [];
+                                for (var j = 0; j < message.errorDetails.length; ++j)
+                                    object.errorDetails[j] = message.errorDetails[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferErrorLogEntry to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferErrorLogEntry.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TransferErrorLogEntry
+                         * @function getTypeUrl
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorLogEntry
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TransferErrorLogEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.parallelstore.v1beta.TransferErrorLogEntry";
+                        };
+    
+                        return TransferErrorLogEntry;
+                    })();
+    
+                    v1beta.TransferErrorSummary = (function() {
+    
+                        /**
+                         * Properties of a TransferErrorSummary.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @interface ITransferErrorSummary
+                         * @property {google.rpc.Code|null} [errorCode] TransferErrorSummary errorCode
+                         * @property {number|Long|null} [errorCount] TransferErrorSummary errorCount
+                         * @property {Array.<google.cloud.parallelstore.v1beta.ITransferErrorLogEntry>|null} [errorLogEntries] TransferErrorSummary errorLogEntries
+                         */
+    
+                        /**
+                         * Constructs a new TransferErrorSummary.
+                         * @memberof google.cloud.parallelstore.v1beta
+                         * @classdesc Represents a TransferErrorSummary.
+                         * @implements ITransferErrorSummary
+                         * @constructor
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorSummary=} [properties] Properties to set
+                         */
+                        function TransferErrorSummary(properties) {
+                            this.errorLogEntries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferErrorSummary errorCode.
+                         * @member {google.rpc.Code} errorCode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @instance
+                         */
+                        TransferErrorSummary.prototype.errorCode = 0;
+    
+                        /**
+                         * TransferErrorSummary errorCount.
+                         * @member {number|Long} errorCount
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @instance
+                         */
+                        TransferErrorSummary.prototype.errorCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * TransferErrorSummary errorLogEntries.
+                         * @member {Array.<google.cloud.parallelstore.v1beta.ITransferErrorLogEntry>} errorLogEntries
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @instance
+                         */
+                        TransferErrorSummary.prototype.errorLogEntries = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TransferErrorSummary instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorSummary=} [properties] Properties to set
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorSummary} TransferErrorSummary instance
+                         */
+                        TransferErrorSummary.create = function create(properties) {
+                            return new TransferErrorSummary(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferErrorSummary message. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferErrorSummary.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorSummary} message TransferErrorSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferErrorSummary.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.errorCode != null && Object.hasOwnProperty.call(message, "errorCode"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.errorCode);
+                            if (message.errorCount != null && Object.hasOwnProperty.call(message, "errorCount"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.errorCount);
+                            if (message.errorLogEntries != null && message.errorLogEntries.length)
+                                for (var i = 0; i < message.errorLogEntries.length; ++i)
+                                    $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry.encode(message.errorLogEntries[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferErrorSummary message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1beta.TransferErrorSummary.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.ITransferErrorSummary} message TransferErrorSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferErrorSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferErrorSummary message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorSummary} TransferErrorSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferErrorSummary.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.TransferErrorSummary();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.errorCode = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.errorCount = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.errorLogEntries && message.errorLogEntries.length))
+                                            message.errorLogEntries = [];
+                                        message.errorLogEntries.push($root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferErrorSummary message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorSummary} TransferErrorSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferErrorSummary.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferErrorSummary message.
+                         * @function verify
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferErrorSummary.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.errorCode != null && message.hasOwnProperty("errorCode"))
+                                switch (message.errorCode) {
+                                default:
+                                    return "errorCode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 16:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                    break;
+                                }
+                            if (message.errorCount != null && message.hasOwnProperty("errorCount"))
+                                if (!$util.isInteger(message.errorCount) && !(message.errorCount && $util.isInteger(message.errorCount.low) && $util.isInteger(message.errorCount.high)))
+                                    return "errorCount: integer|Long expected";
+                            if (message.errorLogEntries != null && message.hasOwnProperty("errorLogEntries")) {
+                                if (!Array.isArray(message.errorLogEntries))
+                                    return "errorLogEntries: array expected";
+                                for (var i = 0; i < message.errorLogEntries.length; ++i) {
+                                    var error = $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry.verify(message.errorLogEntries[i]);
+                                    if (error)
+                                        return "errorLogEntries." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferErrorSummary message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.parallelstore.v1beta.TransferErrorSummary} TransferErrorSummary
+                         */
+                        TransferErrorSummary.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.parallelstore.v1beta.TransferErrorSummary)
+                                return object;
+                            var message = new $root.google.cloud.parallelstore.v1beta.TransferErrorSummary();
+                            switch (object.errorCode) {
+                            default:
+                                if (typeof object.errorCode === "number") {
+                                    message.errorCode = object.errorCode;
+                                    break;
+                                }
+                                break;
+                            case "OK":
+                            case 0:
+                                message.errorCode = 0;
+                                break;
+                            case "CANCELLED":
+                            case 1:
+                                message.errorCode = 1;
+                                break;
+                            case "UNKNOWN":
+                            case 2:
+                                message.errorCode = 2;
+                                break;
+                            case "INVALID_ARGUMENT":
+                            case 3:
+                                message.errorCode = 3;
+                                break;
+                            case "DEADLINE_EXCEEDED":
+                            case 4:
+                                message.errorCode = 4;
+                                break;
+                            case "NOT_FOUND":
+                            case 5:
+                                message.errorCode = 5;
+                                break;
+                            case "ALREADY_EXISTS":
+                            case 6:
+                                message.errorCode = 6;
+                                break;
+                            case "PERMISSION_DENIED":
+                            case 7:
+                                message.errorCode = 7;
+                                break;
+                            case "UNAUTHENTICATED":
+                            case 16:
+                                message.errorCode = 16;
+                                break;
+                            case "RESOURCE_EXHAUSTED":
+                            case 8:
+                                message.errorCode = 8;
+                                break;
+                            case "FAILED_PRECONDITION":
+                            case 9:
+                                message.errorCode = 9;
+                                break;
+                            case "ABORTED":
+                            case 10:
+                                message.errorCode = 10;
+                                break;
+                            case "OUT_OF_RANGE":
+                            case 11:
+                                message.errorCode = 11;
+                                break;
+                            case "UNIMPLEMENTED":
+                            case 12:
+                                message.errorCode = 12;
+                                break;
+                            case "INTERNAL":
+                            case 13:
+                                message.errorCode = 13;
+                                break;
+                            case "UNAVAILABLE":
+                            case 14:
+                                message.errorCode = 14;
+                                break;
+                            case "DATA_LOSS":
+                            case 15:
+                                message.errorCode = 15;
+                                break;
+                            }
+                            if (object.errorCount != null)
+                                if ($util.Long)
+                                    (message.errorCount = $util.Long.fromValue(object.errorCount)).unsigned = false;
+                                else if (typeof object.errorCount === "string")
+                                    message.errorCount = parseInt(object.errorCount, 10);
+                                else if (typeof object.errorCount === "number")
+                                    message.errorCount = object.errorCount;
+                                else if (typeof object.errorCount === "object")
+                                    message.errorCount = new $util.LongBits(object.errorCount.low >>> 0, object.errorCount.high >>> 0).toNumber();
+                            if (object.errorLogEntries) {
+                                if (!Array.isArray(object.errorLogEntries))
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferErrorSummary.errorLogEntries: array expected");
+                                message.errorLogEntries = [];
+                                for (var i = 0; i < object.errorLogEntries.length; ++i) {
+                                    if (typeof object.errorLogEntries[i] !== "object")
+                                        throw TypeError(".google.cloud.parallelstore.v1beta.TransferErrorSummary.errorLogEntries: object expected");
+                                    message.errorLogEntries[i] = $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry.fromObject(object.errorLogEntries[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferErrorSummary message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {google.cloud.parallelstore.v1beta.TransferErrorSummary} message TransferErrorSummary
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferErrorSummary.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.errorLogEntries = [];
+                            if (options.defaults) {
+                                object.errorCode = options.enums === String ? "OK" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.errorCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.errorCount = options.longs === String ? "0" : 0;
+                            }
+                            if (message.errorCode != null && message.hasOwnProperty("errorCode"))
+                                object.errorCode = options.enums === String ? $root.google.rpc.Code[message.errorCode] === undefined ? message.errorCode : $root.google.rpc.Code[message.errorCode] : message.errorCode;
+                            if (message.errorCount != null && message.hasOwnProperty("errorCount"))
+                                if (typeof message.errorCount === "number")
+                                    object.errorCount = options.longs === String ? String(message.errorCount) : message.errorCount;
+                                else
+                                    object.errorCount = options.longs === String ? $util.Long.prototype.toString.call(message.errorCount) : options.longs === Number ? new $util.LongBits(message.errorCount.low >>> 0, message.errorCount.high >>> 0).toNumber() : message.errorCount;
+                            if (message.errorLogEntries && message.errorLogEntries.length) {
+                                object.errorLogEntries = [];
+                                for (var j = 0; j < message.errorLogEntries.length; ++j)
+                                    object.errorLogEntries[j] = $root.google.cloud.parallelstore.v1beta.TransferErrorLogEntry.toObject(message.errorLogEntries[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferErrorSummary to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferErrorSummary.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TransferErrorSummary
+                         * @function getTypeUrl
+                         * @memberof google.cloud.parallelstore.v1beta.TransferErrorSummary
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TransferErrorSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.parallelstore.v1beta.TransferErrorSummary";
+                        };
+    
+                        return TransferErrorSummary;
                     })();
     
                     v1beta.ImportDataMetadata = (function() {
@@ -12055,12 +13191,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImportDataMetadata.decode = function decode(reader, length) {
+                        ImportDataMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.ImportDataMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.decode(reader, reader.uint32());
@@ -12347,12 +13485,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportDataResponse.decode = function decode(reader, length) {
+                        ExportDataResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.ExportDataResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -12610,12 +13750,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportDataMetadata.decode = function decode(reader, length) {
+                        ExportDataMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.ExportDataMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.operationMetadata = $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata.decode(reader, reader.uint32());
@@ -12840,6 +13982,7 @@
                          * @property {google.cloud.parallelstore.v1beta.IDestinationParallelstore|null} [destinationParallelstore] TransferOperationMetadata destinationParallelstore
                          * @property {google.cloud.parallelstore.v1beta.ITransferCounters|null} [counters] TransferOperationMetadata counters
                          * @property {google.cloud.parallelstore.v1beta.TransferType|null} [transferType] TransferOperationMetadata transferType
+                         * @property {Array.<google.cloud.parallelstore.v1beta.ITransferErrorSummary>|null} [errorSummary] TransferOperationMetadata errorSummary
                          */
     
                         /**
@@ -12851,6 +13994,7 @@
                          * @param {google.cloud.parallelstore.v1beta.ITransferOperationMetadata=} [properties] Properties to set
                          */
                         function TransferOperationMetadata(properties) {
+                            this.errorSummary = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -12904,6 +14048,14 @@
                          * @instance
                          */
                         TransferOperationMetadata.prototype.transferType = 0;
+    
+                        /**
+                         * TransferOperationMetadata errorSummary.
+                         * @member {Array.<google.cloud.parallelstore.v1beta.ITransferErrorSummary>} errorSummary
+                         * @memberof google.cloud.parallelstore.v1beta.TransferOperationMetadata
+                         * @instance
+                         */
+                        TransferOperationMetadata.prototype.errorSummary = $util.emptyArray;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -12966,6 +14118,9 @@
                                 $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.encode(message.destinationGcsBucket, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.destinationParallelstore != null && Object.hasOwnProperty.call(message, "destinationParallelstore"))
                                 $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.encode(message.destinationParallelstore, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.errorSummary != null && message.errorSummary.length)
+                                for (var i = 0; i < message.errorSummary.length; ++i)
+                                    $root.google.cloud.parallelstore.v1beta.TransferErrorSummary.encode(message.errorSummary[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -12993,12 +14148,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransferOperationMetadata.decode = function decode(reader, length) {
+                        TransferOperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.TransferOperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 7: {
                                         message.sourceParallelstore = $root.google.cloud.parallelstore.v1beta.SourceParallelstore.decode(reader, reader.uint32());
@@ -13022,6 +14179,12 @@
                                     }
                                 case 6: {
                                         message.transferType = reader.int32();
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.errorSummary && message.errorSummary.length))
+                                            message.errorSummary = [];
+                                        message.errorSummary.push($root.google.cloud.parallelstore.v1beta.TransferErrorSummary.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -13110,6 +14273,15 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.errorSummary != null && message.hasOwnProperty("errorSummary")) {
+                                if (!Array.isArray(message.errorSummary))
+                                    return "errorSummary: array expected";
+                                for (var i = 0; i < message.errorSummary.length; ++i) {
+                                    var error = $root.google.cloud.parallelstore.v1beta.TransferErrorSummary.verify(message.errorSummary[i]);
+                                    if (error)
+                                        return "errorSummary." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -13170,6 +14342,16 @@
                                 message.transferType = 2;
                                 break;
                             }
+                            if (object.errorSummary) {
+                                if (!Array.isArray(object.errorSummary))
+                                    throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.errorSummary: array expected");
+                                message.errorSummary = [];
+                                for (var i = 0; i < object.errorSummary.length; ++i) {
+                                    if (typeof object.errorSummary[i] !== "object")
+                                        throw TypeError(".google.cloud.parallelstore.v1beta.TransferOperationMetadata.errorSummary: object expected");
+                                    message.errorSummary[i] = $root.google.cloud.parallelstore.v1beta.TransferErrorSummary.fromObject(object.errorSummary[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -13186,6 +14368,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.errorSummary = [];
                             if (options.defaults) {
                                 object.counters = null;
                                 object.transferType = options.enums === String ? "TRANSFER_TYPE_UNSPECIFIED" : 0;
@@ -13213,6 +14397,11 @@
                                 object.destinationParallelstore = $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.toObject(message.destinationParallelstore, options);
                                 if (options.oneofs)
                                     object.destination = "destinationParallelstore";
+                            }
+                            if (message.errorSummary && message.errorSummary.length) {
+                                object.errorSummary = [];
+                                for (var j = 0; j < message.errorSummary.length; ++j)
+                                    object.errorSummary[j] = $root.google.cloud.parallelstore.v1beta.TransferErrorSummary.toObject(message.errorSummary[j], options);
                             }
                             return object;
                         };
@@ -13258,6 +14447,8 @@
                          * @property {number|Long|null} [bytesSkipped] TransferCounters bytesSkipped
                          * @property {number|Long|null} [objectsCopied] TransferCounters objectsCopied
                          * @property {number|Long|null} [bytesCopied] TransferCounters bytesCopied
+                         * @property {number|Long|null} [objectsFailed] TransferCounters objectsFailed
+                         * @property {number|Long|null} [bytesFailed] TransferCounters bytesFailed
                          */
     
                         /**
@@ -13324,6 +14515,22 @@
                         TransferCounters.prototype.bytesCopied = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
+                         * TransferCounters objectsFailed.
+                         * @member {number|Long} objectsFailed
+                         * @memberof google.cloud.parallelstore.v1beta.TransferCounters
+                         * @instance
+                         */
+                        TransferCounters.prototype.objectsFailed = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * TransferCounters bytesFailed.
+                         * @member {number|Long} bytesFailed
+                         * @memberof google.cloud.parallelstore.v1beta.TransferCounters
+                         * @instance
+                         */
+                        TransferCounters.prototype.bytesFailed = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
                          * Creates a new TransferCounters instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.parallelstore.v1beta.TransferCounters
@@ -13359,6 +14566,10 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).int64(message.objectsCopied);
                             if (message.bytesCopied != null && Object.hasOwnProperty.call(message, "bytesCopied"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).int64(message.bytesCopied);
+                            if (message.objectsFailed != null && Object.hasOwnProperty.call(message, "objectsFailed"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.objectsFailed);
+                            if (message.bytesFailed != null && Object.hasOwnProperty.call(message, "bytesFailed"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.bytesFailed);
                             return writer;
                         };
     
@@ -13386,12 +14597,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransferCounters.decode = function decode(reader, length) {
+                        TransferCounters.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.parallelstore.v1beta.TransferCounters();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.objectsFound = reader.int64();
@@ -13415,6 +14628,14 @@
                                     }
                                 case 6: {
                                         message.bytesCopied = reader.int64();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.objectsFailed = reader.int64();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.bytesFailed = reader.int64();
                                         break;
                                     }
                                 default:
@@ -13470,6 +14691,12 @@
                             if (message.bytesCopied != null && message.hasOwnProperty("bytesCopied"))
                                 if (!$util.isInteger(message.bytesCopied) && !(message.bytesCopied && $util.isInteger(message.bytesCopied.low) && $util.isInteger(message.bytesCopied.high)))
                                     return "bytesCopied: integer|Long expected";
+                            if (message.objectsFailed != null && message.hasOwnProperty("objectsFailed"))
+                                if (!$util.isInteger(message.objectsFailed) && !(message.objectsFailed && $util.isInteger(message.objectsFailed.low) && $util.isInteger(message.objectsFailed.high)))
+                                    return "objectsFailed: integer|Long expected";
+                            if (message.bytesFailed != null && message.hasOwnProperty("bytesFailed"))
+                                if (!$util.isInteger(message.bytesFailed) && !(message.bytesFailed && $util.isInteger(message.bytesFailed.low) && $util.isInteger(message.bytesFailed.high)))
+                                    return "bytesFailed: integer|Long expected";
                             return null;
                         };
     
@@ -13539,6 +14766,24 @@
                                     message.bytesCopied = object.bytesCopied;
                                 else if (typeof object.bytesCopied === "object")
                                     message.bytesCopied = new $util.LongBits(object.bytesCopied.low >>> 0, object.bytesCopied.high >>> 0).toNumber();
+                            if (object.objectsFailed != null)
+                                if ($util.Long)
+                                    (message.objectsFailed = $util.Long.fromValue(object.objectsFailed)).unsigned = false;
+                                else if (typeof object.objectsFailed === "string")
+                                    message.objectsFailed = parseInt(object.objectsFailed, 10);
+                                else if (typeof object.objectsFailed === "number")
+                                    message.objectsFailed = object.objectsFailed;
+                                else if (typeof object.objectsFailed === "object")
+                                    message.objectsFailed = new $util.LongBits(object.objectsFailed.low >>> 0, object.objectsFailed.high >>> 0).toNumber();
+                            if (object.bytesFailed != null)
+                                if ($util.Long)
+                                    (message.bytesFailed = $util.Long.fromValue(object.bytesFailed)).unsigned = false;
+                                else if (typeof object.bytesFailed === "string")
+                                    message.bytesFailed = parseInt(object.bytesFailed, 10);
+                                else if (typeof object.bytesFailed === "number")
+                                    message.bytesFailed = object.bytesFailed;
+                                else if (typeof object.bytesFailed === "object")
+                                    message.bytesFailed = new $util.LongBits(object.bytesFailed.low >>> 0, object.bytesFailed.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -13586,6 +14831,16 @@
                                     object.bytesCopied = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.bytesCopied = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.objectsFailed = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.objectsFailed = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.bytesFailed = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.bytesFailed = options.longs === String ? "0" : 0;
                             }
                             if (message.objectsFound != null && message.hasOwnProperty("objectsFound"))
                                 if (typeof message.objectsFound === "number")
@@ -13617,6 +14872,16 @@
                                     object.bytesCopied = options.longs === String ? String(message.bytesCopied) : message.bytesCopied;
                                 else
                                     object.bytesCopied = options.longs === String ? $util.Long.prototype.toString.call(message.bytesCopied) : options.longs === Number ? new $util.LongBits(message.bytesCopied.low >>> 0, message.bytesCopied.high >>> 0).toNumber() : message.bytesCopied;
+                            if (message.objectsFailed != null && message.hasOwnProperty("objectsFailed"))
+                                if (typeof message.objectsFailed === "number")
+                                    object.objectsFailed = options.longs === String ? String(message.objectsFailed) : message.objectsFailed;
+                                else
+                                    object.objectsFailed = options.longs === String ? $util.Long.prototype.toString.call(message.objectsFailed) : options.longs === Number ? new $util.LongBits(message.objectsFailed.low >>> 0, message.objectsFailed.high >>> 0).toNumber() : message.objectsFailed;
+                            if (message.bytesFailed != null && message.hasOwnProperty("bytesFailed"))
+                                if (typeof message.bytesFailed === "number")
+                                    object.bytesFailed = options.longs === String ? String(message.bytesFailed) : message.bytesFailed;
+                                else
+                                    object.bytesFailed = options.longs === String ? $util.Long.prototype.toString.call(message.bytesFailed) : options.longs === Number ? new $util.LongBits(message.bytesFailed.low >>> 0, message.bytesFailed.high >>> 0).toNumber() : message.bytesFailed;
                             return object;
                         };
     
@@ -13765,12 +15030,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -14115,12 +15382,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -14499,12 +15768,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -14731,12 +16002,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -15100,12 +16373,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -15444,6 +16719,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -15545,6 +16821,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -15591,6 +16875,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -15618,12 +16904,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -15669,6 +16957,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -15763,6 +17055,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -15857,6 +17152,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -15886,6 +17183,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -15916,6 +17214,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -16057,12 +17357,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -16324,12 +17626,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -16532,12 +17836,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -16740,12 +18046,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -16948,12 +18256,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -17221,12 +18531,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -17600,12 +18912,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -17808,12 +19122,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -18040,12 +19356,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -18318,12 +19636,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -18672,12 +19992,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldInfo.decode = function decode(reader, length) {
+                FieldInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.format = reader.int32();
@@ -19002,12 +20324,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -19397,12 +20721,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -19627,12 +20953,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -20027,12 +21355,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -20694,12 +22024,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -21179,12 +22511,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -21423,12 +22757,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -21679,12 +23015,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -22024,12 +23362,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -22403,12 +23743,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -22928,12 +24270,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -23199,12 +24543,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -23518,12 +24864,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -23759,12 +25107,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -24016,12 +25366,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -24324,12 +25676,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -24828,12 +26182,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -25448,12 +26804,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -25905,12 +27263,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
@@ -25942,12 +27297,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -26690,12 +28047,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -26986,12 +28345,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -27272,12 +28633,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -27584,12 +28947,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -27775,6 +29140,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -27834,6 +29200,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -27868,6 +29242,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -27895,12 +29271,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -27922,6 +29300,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -27982,6 +29364,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -28018,6 +29403,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -28041,6 +29428,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -28055,6 +29443,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -28242,12 +29632,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -28676,12 +30068,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -29015,12 +30409,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -29291,12 +30687,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -29826,12 +31224,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -30210,12 +31610,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -30500,12 +31902,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -30775,12 +32179,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -31086,12 +32492,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -31354,12 +32762,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -31680,12 +33090,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -31921,12 +33333,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Any.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -32135,12 +33549,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -32323,12 +33739,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -32551,12 +33969,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -33051,12 +34471,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Operation.decode = function decode(reader, length) {
+                Operation.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -33331,12 +34753,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetOperationRequest.decode = function decode(reader, length) {
+                GetOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -33567,12 +34991,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsRequest.decode = function decode(reader, length) {
+                ListOperationsRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 4: {
                                 message.name = reader.string();
@@ -33820,12 +35246,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsResponse.decode = function decode(reader, length) {
+                ListOperationsResponse.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.operations && message.operations.length))
@@ -34055,12 +35483,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelOperationRequest.decode = function decode(reader, length) {
+                CancelOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -34258,12 +35688,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DeleteOperationRequest.decode = function decode(reader, length) {
+                DeleteOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -34472,12 +35904,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                WaitOperationRequest.decode = function decode(reader, length) {
+                WaitOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -34704,12 +36138,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OperationInfo.decode = function decode(reader, length) {
+                OperationInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.responseType = reader.string();
@@ -34956,12 +36392,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length) {
+                Status.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();

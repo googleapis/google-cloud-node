@@ -35,6 +35,36 @@
                 "getReportDetail"
               ]
             },
+            "GetDatasetConfig": {
+              "methods": [
+                "getDatasetConfig"
+              ]
+            },
+            "CreateDatasetConfig": {
+              "methods": [
+                "createDatasetConfig"
+              ]
+            },
+            "UpdateDatasetConfig": {
+              "methods": [
+                "updateDatasetConfig"
+              ]
+            },
+            "DeleteDatasetConfig": {
+              "methods": [
+                "deleteDatasetConfig"
+              ]
+            },
+            "LinkDataset": {
+              "methods": [
+                "linkDataset"
+              ]
+            },
+            "UnlinkDataset": {
+              "methods": [
+                "unlinkDataset"
+              ]
+            },
             "ListReportConfigs": {
               "methods": [
                 "listReportConfigs",
@@ -47,6 +77,13 @@
                 "listReportDetails",
                 "listReportDetailsStream",
                 "listReportDetailsAsync"
+              ]
+            },
+            "ListDatasetConfigs": {
+              "methods": [
+                "listDatasetConfigs",
+                "listDatasetConfigsStream",
+                "listDatasetConfigsAsync"
               ]
             }
           }
@@ -79,6 +116,36 @@
                 "getReportDetail"
               ]
             },
+            "GetDatasetConfig": {
+              "methods": [
+                "getDatasetConfig"
+              ]
+            },
+            "CreateDatasetConfig": {
+              "methods": [
+                "createDatasetConfig"
+              ]
+            },
+            "UpdateDatasetConfig": {
+              "methods": [
+                "updateDatasetConfig"
+              ]
+            },
+            "DeleteDatasetConfig": {
+              "methods": [
+                "deleteDatasetConfig"
+              ]
+            },
+            "LinkDataset": {
+              "methods": [
+                "linkDataset"
+              ]
+            },
+            "UnlinkDataset": {
+              "methods": [
+                "unlinkDataset"
+              ]
+            },
             "ListReportConfigs": {
               "methods": [
                 "listReportConfigs",
@@ -91,6 +158,13 @@
                 "listReportDetails",
                 "listReportDetailsStream",
                 "listReportDetailsAsync"
+              ]
+            },
+            "ListDatasetConfigs": {
+              "methods": [
+                "listDatasetConfigs",
+                "listDatasetConfigsStream",
+                "listDatasetConfigsAsync"
               ]
             }
           }

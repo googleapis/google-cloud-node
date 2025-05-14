@@ -3605,6 +3605,11 @@
                 "setIamPolicy"
               ]
             },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
@@ -3645,6 +3650,11 @@
             "SetIamPolicy": {
               "methods": [
                 "setIamPolicy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
               ]
             },
             "TestIamPermissions": {
@@ -7371,6 +7381,54 @@
         }
       }
     },
+    "ReservationBlocks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReservationBlocksClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "PerformMaintenance": {
+              "methods": [
+                "performMaintenance"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReservationBlocksClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "PerformMaintenance": {
+              "methods": [
+                "performMaintenance"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Reservations": {
       "clients": {
         "grpc": {
@@ -7394,6 +7452,11 @@
             "Insert": {
               "methods": [
                 "insert"
+              ]
+            },
+            "PerformMaintenance": {
+              "methods": [
+                "performMaintenance"
               ]
             },
             "Resize": {
@@ -7453,6 +7516,11 @@
             "Insert": {
               "methods": [
                 "insert"
+              ]
+            },
+            "PerformMaintenance": {
+              "methods": [
+                "performMaintenance"
               ]
             },
             "Resize": {

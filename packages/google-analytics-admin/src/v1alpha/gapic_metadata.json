@@ -625,6 +625,31 @@
                 "deleteSubpropertyEventFilter"
               ]
             },
+            "CreateReportingDataAnnotation": {
+              "methods": [
+                "createReportingDataAnnotation"
+              ]
+            },
+            "GetReportingDataAnnotation": {
+              "methods": [
+                "getReportingDataAnnotation"
+              ]
+            },
+            "UpdateReportingDataAnnotation": {
+              "methods": [
+                "updateReportingDataAnnotation"
+              ]
+            },
+            "DeleteReportingDataAnnotation": {
+              "methods": [
+                "deleteReportingDataAnnotation"
+              ]
+            },
+            "SubmitUserDeletion": {
+              "methods": [
+                "submitUserDeletion"
+              ]
+            },
             "ListAccounts": {
               "methods": [
                 "listAccounts",
@@ -812,6 +837,13 @@
                 "listSubpropertyEventFilters",
                 "listSubpropertyEventFiltersStream",
                 "listSubpropertyEventFiltersAsync"
+              ]
+            },
+            "ListReportingDataAnnotations": {
+              "methods": [
+                "listReportingDataAnnotations",
+                "listReportingDataAnnotationsStream",
+                "listReportingDataAnnotationsAsync"
               ]
             }
           }
@@ -1434,6 +1466,31 @@
                 "deleteSubpropertyEventFilter"
               ]
             },
+            "CreateReportingDataAnnotation": {
+              "methods": [
+                "createReportingDataAnnotation"
+              ]
+            },
+            "GetReportingDataAnnotation": {
+              "methods": [
+                "getReportingDataAnnotation"
+              ]
+            },
+            "UpdateReportingDataAnnotation": {
+              "methods": [
+                "updateReportingDataAnnotation"
+              ]
+            },
+            "DeleteReportingDataAnnotation": {
+              "methods": [
+                "deleteReportingDataAnnotation"
+              ]
+            },
+            "SubmitUserDeletion": {
+              "methods": [
+                "submitUserDeletion"
+              ]
+            },
             "ListAccounts": {
               "methods": [
                 "listAccounts",
@@ -1621,6 +1678,13 @@
                 "listSubpropertyEventFilters",
                 "listSubpropertyEventFiltersStream",
                 "listSubpropertyEventFiltersAsync"
+              ]
+            },
+            "ListReportingDataAnnotations": {
+              "methods": [
+                "listReportingDataAnnotations",
+                "listReportingDataAnnotationsStream",
+                "listReportingDataAnnotationsAsync"
               ]
             }
           }

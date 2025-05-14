@@ -4949,6 +4949,13 @@ export class GDCHardwareManagementClient {
    * @param {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal} [request.provisioningStateSignal]
    *   Optional. The provisioning state signal to send for this zone. Either
    *   state_signal or provisioning_state_signal must be set, but not both.
+   * @param {string} [request.step]
+   *   Optional. The step being executed. Provides a finer grained status when the
+   *   state_signal is FACTORY_TURNUP_CHECKS_STARTED or
+   *   FACTORY_TURNUP_CHECKS_FAILED.
+   * @param {string} [request.details]
+   *   Optional. Additional details, such as an error message when state_signal is
+   *   FACTORY_TURNUP_CHECKS_FAILED.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

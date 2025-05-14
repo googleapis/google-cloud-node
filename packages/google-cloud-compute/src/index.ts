@@ -172,6 +172,8 @@ const RegionUrlMapsClient = v1.RegionUrlMapsClient;
 type RegionUrlMapsClient = v1.RegionUrlMapsClient;
 const RegionZonesClient = v1.RegionZonesClient;
 type RegionZonesClient = v1.RegionZonesClient;
+const ReservationBlocksClient = v1.ReservationBlocksClient;
+type ReservationBlocksClient = v1.ReservationBlocksClient;
 const ReservationsClient = v1.ReservationsClient;
 type ReservationsClient = v1.ReservationsClient;
 const ResourcePoliciesClient = v1.ResourcePoliciesClient;
@@ -301,6 +303,7 @@ export {
   RegionTargetTcpProxiesClient,
   RegionUrlMapsClient,
   RegionZonesClient,
+  ReservationBlocksClient,
   ReservationsClient,
   ResourcePoliciesClient,
   RoutersClient,
@@ -404,6 +407,7 @@ export default {
   RegionTargetTcpProxiesClient,
   RegionUrlMapsClient,
   RegionZonesClient,
+  ReservationBlocksClient,
   ReservationsClient,
   ResourcePoliciesClient,
   RoutersClient,

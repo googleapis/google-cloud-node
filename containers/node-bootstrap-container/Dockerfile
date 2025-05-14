@@ -16,7 +16,7 @@
 
 # Use the official lightweight Node.js 18 image.
 # https://hub.docker.com/_/node
-FROM golang:1.16-alpine as gobuild
+FROM golang:1.22-alpine as gobuild
 
 RUN go install github.com/bazelbuild/buildtools/buildozer@latest
 
