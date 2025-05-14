@@ -425,6 +425,120 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "GetProjectIntelligenceConfig": {
+                          "requestType": "GetProjectIntelligenceConfigRequest",
+                          "responseType": "IntelligenceConfig",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/intelligenceConfig}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/intelligenceConfig}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateProjectIntelligenceConfig": {
+                          "requestType": "UpdateProjectIntelligenceConfigRequest",
+                          "responseType": "IntelligenceConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{intelligence_config.name=projects/*/locations/*/intelligenceConfig}",
+                            "(google.api.http).body": "intelligence_config",
+                            "(google.api.method_signature)": "intelligence_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{intelligence_config.name=projects/*/locations/*/intelligenceConfig}",
+                                "body": "intelligence_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "intelligence_config,update_mask"
+                            }
+                          ]
+                        },
+                        "GetFolderIntelligenceConfig": {
+                          "requestType": "GetFolderIntelligenceConfigRequest",
+                          "responseType": "IntelligenceConfig",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=folders/*/locations/*/intelligenceConfig}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=folders/*/locations/*/intelligenceConfig}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateFolderIntelligenceConfig": {
+                          "requestType": "UpdateFolderIntelligenceConfigRequest",
+                          "responseType": "IntelligenceConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{intelligence_config.name=folders/*/locations/*/intelligenceConfig}",
+                            "(google.api.http).body": "intelligence_config",
+                            "(google.api.method_signature)": "intelligence_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{intelligence_config.name=folders/*/locations/*/intelligenceConfig}",
+                                "body": "intelligence_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "intelligence_config,update_mask"
+                            }
+                          ]
+                        },
+                        "GetOrganizationIntelligenceConfig": {
+                          "requestType": "GetOrganizationIntelligenceConfigRequest",
+                          "responseType": "IntelligenceConfig",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=organizations/*/locations/*/intelligenceConfig}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=organizations/*/locations/*/intelligenceConfig}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateOrganizationIntelligenceConfig": {
+                          "requestType": "UpdateOrganizationIntelligenceConfigRequest",
+                          "responseType": "IntelligenceConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{intelligence_config.name=organizations/*/locations/*/intelligenceConfig}",
+                            "(google.api.http).body": "intelligence_config",
+                            "(google.api.method_signature)": "intelligence_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{intelligence_config.name=organizations/*/locations/*/intelligenceConfig}",
+                                "body": "intelligence_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "intelligence_config,update_mask"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1466,6 +1580,278 @@
                           "id": 2
                         }
                       }
+                    },
+                    "IntelligenceConfig": {
+                      "options": {
+                        "(google.api.resource).type": "storage.googleapis.com/IntelligenceConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/intelligenceConfig",
+                        "(google.api.resource).plural": "intelligenceConfigs",
+                        "(google.api.resource).singular": "intelligenceConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "editionConfig": {
+                          "type": "EditionConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "filter": {
+                          "type": "Filter",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "effectiveIntelligenceConfig": {
+                          "type": "EffectiveIntelligenceConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "trialConfig": {
+                          "type": "TrialConfig",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "EditionConfig": {
+                          "values": {
+                            "EDITION_CONFIG_UNSPECIFIED": 0,
+                            "INHERIT": 1,
+                            "DISABLED": 2,
+                            "STANDARD": 3,
+                            "TRIAL": 5
+                          }
+                        },
+                        "Filter": {
+                          "oneofs": {
+                            "cloudStorageLocations": {
+                              "oneof": [
+                                "includedCloudStorageLocations",
+                                "excludedCloudStorageLocations"
+                              ]
+                            },
+                            "cloudStorageBuckets": {
+                              "oneof": [
+                                "includedCloudStorageBuckets",
+                                "excludedCloudStorageBuckets"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "includedCloudStorageLocations": {
+                              "type": "CloudStorageLocations",
+                              "id": 1
+                            },
+                            "excludedCloudStorageLocations": {
+                              "type": "CloudStorageLocations",
+                              "id": 2
+                            },
+                            "includedCloudStorageBuckets": {
+                              "type": "CloudStorageBuckets",
+                              "id": 3
+                            },
+                            "excludedCloudStorageBuckets": {
+                              "type": "CloudStorageBuckets",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "CloudStorageLocations": {
+                              "fields": {
+                                "locations": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "CloudStorageBuckets": {
+                              "fields": {
+                                "bucketIdRegexes": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "EffectiveIntelligenceConfig": {
+                          "fields": {
+                            "effectiveEdition": {
+                              "type": "EffectiveEdition",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "intelligenceConfig": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "EffectiveEdition": {
+                              "values": {
+                                "EFFECTIVE_EDITION_UNSPECIFIED": 0,
+                                "NONE": 1,
+                                "STANDARD": 2
+                              }
+                            }
+                          }
+                        },
+                        "TrialConfig": {
+                          "fields": {
+                            "expireTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "UpdateOrganizationIntelligenceConfigRequest": {
+                      "fields": {
+                        "intelligenceConfig": {
+                          "type": "IntelligenceConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateFolderIntelligenceConfigRequest": {
+                      "fields": {
+                        "intelligenceConfig": {
+                          "type": "IntelligenceConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateProjectIntelligenceConfigRequest": {
+                      "fields": {
+                        "intelligenceConfig": {
+                          "type": "IntelligenceConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetOrganizationIntelligenceConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "storage.googleapis.com/IntelligenceConfig"
+                          }
+                        }
+                      }
+                    },
+                    "GetFolderIntelligenceConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "storage.googleapis.com/IntelligenceConfig"
+                          }
+                        }
+                      }
+                    },
+                    "GetProjectIntelligenceConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "storage.googleapis.com/IntelligenceConfig"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -1477,12 +1863,99 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "HttpProto",
+            "java_outer_classname": "RoutingProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
           },
           "nested": {
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
             "methodSignature": {
               "rule": "repeated",
               "type": "string",
@@ -1919,93 +2392,6 @@
                   "id": 1
                 },
                 "pathTemplate": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "http": {
-              "type": "HttpRule",
-              "id": 72295728,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Http": {
-              "fields": {
-                "rules": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 1
-                },
-                "fullyDecodeReservedExpansion": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "HttpRule": {
-              "oneofs": {
-                "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
-                }
-              },
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "get": {
-                  "type": "string",
-                  "id": 2
-                },
-                "put": {
-                  "type": "string",
-                  "id": 3
-                },
-                "post": {
-                  "type": "string",
-                  "id": 4
-                },
-                "delete": {
-                  "type": "string",
-                  "id": 5
-                },
-                "patch": {
-                  "type": "string",
-                  "id": 6
-                },
-                "custom": {
-                  "type": "CustomHttpPattern",
-                  "id": 8
-                },
-                "body": {
-                  "type": "string",
-                  "id": 7
-                },
-                "responseBody": {
-                  "type": "string",
-                  "id": 12
-                },
-                "additionalBindings": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 11
-                }
-              }
-            },
-            "CustomHttpPattern": {
-              "fields": {
-                "kind": {
-                  "type": "string",
-                  "id": 1
-                },
-                "path": {
                   "type": "string",
                   "id": 2
                 }

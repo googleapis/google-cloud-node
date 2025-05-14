@@ -20,7 +20,10 @@
   * [Storage_control.disable_anywhere_cache](#storage_control.disable_anywhere_cache)
   * [Storage_control.get_anywhere_cache](#storage_control.get_anywhere_cache)
   * [Storage_control.get_folder](#storage_control.get_folder)
+  * [Storage_control.get_folder_intelligence_config](#storage_control.get_folder_intelligence_config)
   * [Storage_control.get_managed_folder](#storage_control.get_managed_folder)
+  * [Storage_control.get_organization_intelligence_config](#storage_control.get_organization_intelligence_config)
+  * [Storage_control.get_project_intelligence_config](#storage_control.get_project_intelligence_config)
   * [Storage_control.get_storage_layout](#storage_control.get_storage_layout)
   * [Storage_control.list_anywhere_caches](#storage_control.list_anywhere_caches)
   * [Storage_control.list_folders](#storage_control.list_folders)
@@ -29,6 +32,9 @@
   * [Storage_control.rename_folder](#storage_control.rename_folder)
   * [Storage_control.resume_anywhere_cache](#storage_control.resume_anywhere_cache)
   * [Storage_control.update_anywhere_cache](#storage_control.update_anywhere_cache)
+  * [Storage_control.update_folder_intelligence_config](#storage_control.update_folder_intelligence_config)
+  * [Storage_control.update_organization_intelligence_config](#storage_control.update_organization_intelligence_config)
+  * [Storage_control.update_project_intelligence_config](#storage_control.update_project_intelligence_config)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -182,6 +188,23 @@ __Usage:__
 
 
 
+### Storage_control.get_folder_intelligence_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_folder_intelligence_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.get_folder_intelligence_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.get_folder_intelligence_config.js`
+
+
+-----
+
+
+
+
 ### Storage_control.get_managed_folder
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_managed_folder.js).
@@ -192,6 +215,40 @@ __Usage:__
 
 
 `node packages/google-storage-control/samples/generated/v2/storage_control.get_managed_folder.js`
+
+
+-----
+
+
+
+
+### Storage_control.get_organization_intelligence_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_organization_intelligence_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.get_organization_intelligence_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.get_organization_intelligence_config.js`
+
+
+-----
+
+
+
+
+### Storage_control.get_project_intelligence_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_project_intelligence_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.get_project_intelligence_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.get_project_intelligence_config.js`
 
 
 -----
@@ -328,6 +385,57 @@ __Usage:__
 
 
 `node packages/google-storage-control/samples/generated/v2/storage_control.update_anywhere_cache.js`
+
+
+-----
+
+
+
+
+### Storage_control.update_folder_intelligence_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.update_folder_intelligence_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.update_folder_intelligence_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.update_folder_intelligence_config.js`
+
+
+-----
+
+
+
+
+### Storage_control.update_organization_intelligence_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.update_organization_intelligence_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.update_organization_intelligence_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.update_organization_intelligence_config.js`
+
+
+-----
+
+
+
+
+### Storage_control.update_project_intelligence_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.update_project_intelligence_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/generated/v2/storage_control.update_project_intelligence_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/generated/v2/storage_control.update_project_intelligence_config.js`
 
 
 -----
