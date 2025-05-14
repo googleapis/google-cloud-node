@@ -11,6 +11,80 @@
         },
         {
           "type": "feat",
+          "sha": "d448dd0ffe1216d8564c0eba1c19f64049adf17b",
+          "message": "Add initial files for google.cloud.financialservices.v1",
+          "issues": [
+            "6270"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/financialservices",
+      "id": "c9e87f99-04bc-4c7e-b8eb-7d29fab1743d",
+      "createTime": "2025-05-14T16:49:21.742Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "756187e34ac6bb5f253e432a77b18f4fdd65006e",
+          "message": "[storageinsights] Add Client Libraries for Datasets",
+          "issues": [
+            "6351"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "657008e8-c4ce-4f63-ada2-9dfe5c44190c",
+      "createTime": "2025-05-14T16:49:21.719Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "350da9c145847f9aa376653b94e6aa7e0fcdd2cd",
+          "message": "[run] support GPU zonal redundancy setting in Cloud Run services",
+          "issues": [
+            "6349"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "9a1896ea-26fd-4d6d-bb37-37d0b2984b35",
+      "createTime": "2025-05-14T16:49:21.693Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e88f290fd76cdb8a721a0c4ed9592e6f020cadc",
+          "message": "[bigquery-analyticshub] Add support for Analytics Hub & Marketplace Integration",
+          "issues": [
+            "6347"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "2de589d5-1dfd-4a9d-84a9-3b45f9225d66",
+      "createTime": "2025-05-14T16:49:21.674Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
           "sha": "c33de56c0c797598a48a8e0ee07b625de1b082b3",
           "message": "Add initial files for google.cloud.devicestreaming.v1",
           "issues": [
@@ -50632,5 +50706,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-05-09T01:02:58.759Z"
+  "updateTime": "2025-05-14T16:49:21.742Z"
 }
