@@ -37,6 +37,9 @@ export namespace google {
 
                     /** Actor googleSupport */
                     googleSupport?: (boolean|null);
+
+                    /** Actor username */
+                    username?: (string|null);
                 }
 
                 /** Represents an Actor. */
@@ -56,6 +59,9 @@ export namespace google {
 
                     /** Actor googleSupport. */
                     public googleSupport: boolean;
+
+                    /** Actor username. */
+                    public username: string;
 
                     /**
                      * Creates a new Actor instance using the specified properties.

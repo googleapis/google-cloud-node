@@ -75,6 +75,7 @@
                          * @property {string|null} [displayName] Actor displayName
                          * @property {string|null} [email] Actor email
                          * @property {boolean|null} [googleSupport] Actor googleSupport
+                         * @property {string|null} [username] Actor username
                          */
     
                         /**
@@ -117,6 +118,14 @@
                         Actor.prototype.googleSupport = false;
     
                         /**
+                         * Actor username.
+                         * @member {string} username
+                         * @memberof google.cloud.support.v2.Actor
+                         * @instance
+                         */
+                        Actor.prototype.username = "";
+    
+                        /**
                          * Creates a new Actor instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.support.v2.Actor
@@ -146,6 +155,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.email);
                             if (message.googleSupport != null && Object.hasOwnProperty.call(message, "googleSupport"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.googleSupport);
+                            if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.username);
                             return writer;
                         };
     
@@ -192,6 +203,10 @@
                                         message.googleSupport = reader.bool();
                                         break;
                                     }
+                                case 5: {
+                                        message.username = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -236,6 +251,9 @@
                             if (message.googleSupport != null && message.hasOwnProperty("googleSupport"))
                                 if (typeof message.googleSupport !== "boolean")
                                     return "googleSupport: boolean expected";
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                if (!$util.isString(message.username))
+                                    return "username: string expected";
                             return null;
                         };
     
@@ -257,6 +275,8 @@
                                 message.email = String(object.email);
                             if (object.googleSupport != null)
                                 message.googleSupport = Boolean(object.googleSupport);
+                            if (object.username != null)
+                                message.username = String(object.username);
                             return message;
                         };
     
@@ -277,6 +297,7 @@
                                 object.displayName = "";
                                 object.email = "";
                                 object.googleSupport = false;
+                                object.username = "";
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
@@ -284,6 +305,8 @@
                                 object.email = message.email;
                             if (message.googleSupport != null && message.hasOwnProperty("googleSupport"))
                                 object.googleSupport = message.googleSupport;
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                object.username = message.username;
                             return object;
                         };
     
