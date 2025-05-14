@@ -1,0 +1,10 @@
+[
+  "../../protos/google/cloud/support/v2/actor.proto",
+  "../../protos/google/cloud/support/v2/attachment.proto",
+  "../../protos/google/cloud/support/v2/attachment_service.proto",
+  "../../protos/google/cloud/support/v2/case.proto",
+  "../../protos/google/cloud/support/v2/case_service.proto",
+  "../../protos/google/cloud/support/v2/comment.proto",
+  "../../protos/google/cloud/support/v2/comment_service.proto",
+  "../../protos/google/cloud/support/v2/escalation.proto"
+]
