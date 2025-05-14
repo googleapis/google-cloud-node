@@ -11,6 +11,29 @@
         },
         {
           "type": "feat",
+          "sha": "d448dd0ffe1216d8564c0eba1c19f64049adf17b",
+          "message": "Add initial files for google.cloud.financialservices.v1",
+          "issues": [
+            "6270"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/financialservices",
+      "id": "640263c5-1724-4b44-9e5f-fdc702b83988",
+      "createTime": "2025-05-14T15:23:03.376Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
           "sha": "c33de56c0c797598a48a8e0ee07b625de1b082b3",
           "message": "Add initial files for google.cloud.devicestreaming.v1",
           "issues": [
@@ -50632,5 +50655,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-05-09T01:02:58.759Z"
+  "updateTime": "2025-05-14T15:23:03.376Z"
 }

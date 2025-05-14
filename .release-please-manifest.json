@@ -197,7 +197,7 @@
   "packages/google-cloud-parametermanager": "0.3.0",
   "packages/google-maps-areainsights": "0.3.0",
   "packages/google-cloud-modelarmor": "0.1.1",
-  "packages/google-cloud-financialservices": "0.1.0",
+  "packages/google-cloud-financialservices": "0.2.0",
   "packages/google-cloud-chronicle": "0.1.0",
   "packages/google-cloud-devicestreaming": "0.1.0"
 }
