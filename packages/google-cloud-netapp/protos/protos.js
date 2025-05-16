@@ -2421,6 +2421,7 @@
                          * @property {boolean|null} [satisfiesPzi] Backup satisfiesPzi
                          * @property {string|null} [volumeRegion] Backup volumeRegion
                          * @property {string|null} [backupRegion] Backup backupRegion
+                         * @property {google.protobuf.ITimestamp|null} [enforcedRetentionEndTime] Backup enforcedRetentionEndTime
                          */
     
                         /**
@@ -2551,6 +2552,14 @@
                          */
                         Backup.prototype.backupRegion = "";
     
+                        /**
+                         * Backup enforcedRetentionEndTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} enforcedRetentionEndTime
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.enforcedRetentionEndTime = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -2618,6 +2627,8 @@
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.volumeRegion);
                             if (message.backupRegion != null && Object.hasOwnProperty.call(message, "backupRegion"))
                                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.backupRegion);
+                            if (message.enforcedRetentionEndTime != null && Object.hasOwnProperty.call(message, "enforcedRetentionEndTime"))
+                                $root.google.protobuf.Timestamp.encode(message.enforcedRetentionEndTime, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -2727,6 +2738,10 @@
                                         message.backupRegion = reader.string();
                                         break;
                                     }
+                                case 15: {
+                                        message.enforcedRetentionEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2830,6 +2845,11 @@
                             if (message.backupRegion != null && message.hasOwnProperty("backupRegion"))
                                 if (!$util.isString(message.backupRegion))
                                     return "backupRegion: string expected";
+                            if (message.enforcedRetentionEndTime != null && message.hasOwnProperty("enforcedRetentionEndTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.enforcedRetentionEndTime);
+                                if (error)
+                                    return "enforcedRetentionEndTime." + error;
+                            }
                             return null;
                         };
     
@@ -2947,6 +2967,11 @@
                                 message.volumeRegion = String(object.volumeRegion);
                             if (object.backupRegion != null)
                                 message.backupRegion = String(object.backupRegion);
+                            if (object.enforcedRetentionEndTime != null) {
+                                if (typeof object.enforcedRetentionEndTime !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.Backup.enforcedRetentionEndTime: object expected");
+                                message.enforcedRetentionEndTime = $root.google.protobuf.Timestamp.fromObject(object.enforcedRetentionEndTime);
+                            }
                             return message;
                         };
     
@@ -2986,6 +3011,7 @@
                                 object.satisfiesPzi = false;
                                 object.volumeRegion = "";
                                 object.backupRegion = "";
+                                object.enforcedRetentionEndTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -3028,6 +3054,8 @@
                                 object.volumeRegion = message.volumeRegion;
                             if (message.backupRegion != null && message.hasOwnProperty("backupRegion"))
                                 object.backupRegion = message.backupRegion;
+                            if (message.enforcedRetentionEndTime != null && message.hasOwnProperty("enforcedRetentionEndTime"))
+                                object.enforcedRetentionEndTime = $root.google.protobuf.Timestamp.toObject(message.enforcedRetentionEndTime, options);
                             return object;
                         };
     
@@ -6687,6 +6715,7 @@
                          * @property {string|null} [backupRegion] BackupVault backupRegion
                          * @property {string|null} [sourceBackupVault] BackupVault sourceBackupVault
                          * @property {string|null} [destinationBackupVault] BackupVault destinationBackupVault
+                         * @property {google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy|null} [backupRetentionPolicy] BackupVault backupRetentionPolicy
                          */
     
                         /**
@@ -6786,6 +6815,14 @@
                         BackupVault.prototype.destinationBackupVault = "";
     
                         /**
+                         * BackupVault backupRetentionPolicy.
+                         * @member {google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy|null|undefined} backupRetentionPolicy
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @instance
+                         */
+                        BackupVault.prototype.backupRetentionPolicy = null;
+    
+                        /**
                          * Creates a new BackupVault instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.netapp.v1.BackupVault
@@ -6830,6 +6867,8 @@
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.sourceBackupVault);
                             if (message.destinationBackupVault != null && Object.hasOwnProperty.call(message, "destinationBackupVault"))
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.destinationBackupVault);
+                            if (message.backupRetentionPolicy != null && Object.hasOwnProperty.call(message, "backupRetentionPolicy"))
+                                $root.google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.encode(message.backupRetentionPolicy, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -6923,6 +6962,10 @@
                                         message.destinationBackupVault = reader.string();
                                         break;
                                     }
+                                case 11: {
+                                        message.backupRetentionPolicy = $root.google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7010,6 +7053,11 @@
                             if (message.destinationBackupVault != null && message.hasOwnProperty("destinationBackupVault"))
                                 if (!$util.isString(message.destinationBackupVault))
                                     return "destinationBackupVault: string expected";
+                            if (message.backupRetentionPolicy != null && message.hasOwnProperty("backupRetentionPolicy")) {
+                                var error = $root.google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.verify(message.backupRetentionPolicy);
+                                if (error)
+                                    return "backupRetentionPolicy." + error;
+                            }
                             return null;
                         };
     
@@ -7101,6 +7149,11 @@
                                 message.sourceBackupVault = String(object.sourceBackupVault);
                             if (object.destinationBackupVault != null)
                                 message.destinationBackupVault = String(object.destinationBackupVault);
+                            if (object.backupRetentionPolicy != null) {
+                                if (typeof object.backupRetentionPolicy !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.BackupVault.backupRetentionPolicy: object expected");
+                                message.backupRetentionPolicy = $root.google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.fromObject(object.backupRetentionPolicy);
+                            }
                             return message;
                         };
     
@@ -7129,6 +7182,7 @@
                                 object.backupRegion = "";
                                 object.sourceBackupVault = "";
                                 object.destinationBackupVault = "";
+                                object.backupRetentionPolicy = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -7154,6 +7208,8 @@
                                 object.sourceBackupVault = message.sourceBackupVault;
                             if (message.destinationBackupVault != null && message.hasOwnProperty("destinationBackupVault"))
                                 object.destinationBackupVault = message.destinationBackupVault;
+                            if (message.backupRetentionPolicy != null && message.hasOwnProperty("backupRetentionPolicy"))
+                                object.backupRetentionPolicy = $root.google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.toObject(message.backupRetentionPolicy, options);
                             return object;
                         };
     
@@ -7182,6 +7238,302 @@
                             }
                             return typeUrlPrefix + "/google.cloud.netapp.v1.BackupVault";
                         };
+    
+                        BackupVault.BackupRetentionPolicy = (function() {
+    
+                            /**
+                             * Properties of a BackupRetentionPolicy.
+                             * @memberof google.cloud.netapp.v1.BackupVault
+                             * @interface IBackupRetentionPolicy
+                             * @property {number|null} [backupMinimumEnforcedRetentionDays] BackupRetentionPolicy backupMinimumEnforcedRetentionDays
+                             * @property {boolean|null} [dailyBackupImmutable] BackupRetentionPolicy dailyBackupImmutable
+                             * @property {boolean|null} [weeklyBackupImmutable] BackupRetentionPolicy weeklyBackupImmutable
+                             * @property {boolean|null} [monthlyBackupImmutable] BackupRetentionPolicy monthlyBackupImmutable
+                             * @property {boolean|null} [manualBackupImmutable] BackupRetentionPolicy manualBackupImmutable
+                             */
+    
+                            /**
+                             * Constructs a new BackupRetentionPolicy.
+                             * @memberof google.cloud.netapp.v1.BackupVault
+                             * @classdesc Represents a BackupRetentionPolicy.
+                             * @implements IBackupRetentionPolicy
+                             * @constructor
+                             * @param {google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy=} [properties] Properties to set
+                             */
+                            function BackupRetentionPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BackupRetentionPolicy backupMinimumEnforcedRetentionDays.
+                             * @member {number} backupMinimumEnforcedRetentionDays
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @instance
+                             */
+                            BackupRetentionPolicy.prototype.backupMinimumEnforcedRetentionDays = 0;
+    
+                            /**
+                             * BackupRetentionPolicy dailyBackupImmutable.
+                             * @member {boolean} dailyBackupImmutable
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @instance
+                             */
+                            BackupRetentionPolicy.prototype.dailyBackupImmutable = false;
+    
+                            /**
+                             * BackupRetentionPolicy weeklyBackupImmutable.
+                             * @member {boolean} weeklyBackupImmutable
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @instance
+                             */
+                            BackupRetentionPolicy.prototype.weeklyBackupImmutable = false;
+    
+                            /**
+                             * BackupRetentionPolicy monthlyBackupImmutable.
+                             * @member {boolean} monthlyBackupImmutable
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @instance
+                             */
+                            BackupRetentionPolicy.prototype.monthlyBackupImmutable = false;
+    
+                            /**
+                             * BackupRetentionPolicy manualBackupImmutable.
+                             * @member {boolean} manualBackupImmutable
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @instance
+                             */
+                            BackupRetentionPolicy.prototype.manualBackupImmutable = false;
+    
+                            /**
+                             * Creates a new BackupRetentionPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @static
+                             * @param {google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy} BackupRetentionPolicy instance
+                             */
+                            BackupRetentionPolicy.create = function create(properties) {
+                                return new BackupRetentionPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BackupRetentionPolicy message. Does not implicitly {@link google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @static
+                             * @param {google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy} message BackupRetentionPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BackupRetentionPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.backupMinimumEnforcedRetentionDays != null && Object.hasOwnProperty.call(message, "backupMinimumEnforcedRetentionDays"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.backupMinimumEnforcedRetentionDays);
+                                if (message.dailyBackupImmutable != null && Object.hasOwnProperty.call(message, "dailyBackupImmutable"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.dailyBackupImmutable);
+                                if (message.weeklyBackupImmutable != null && Object.hasOwnProperty.call(message, "weeklyBackupImmutable"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.weeklyBackupImmutable);
+                                if (message.monthlyBackupImmutable != null && Object.hasOwnProperty.call(message, "monthlyBackupImmutable"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.monthlyBackupImmutable);
+                                if (message.manualBackupImmutable != null && Object.hasOwnProperty.call(message, "manualBackupImmutable"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.manualBackupImmutable);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BackupRetentionPolicy message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @static
+                             * @param {google.cloud.netapp.v1.BackupVault.IBackupRetentionPolicy} message BackupRetentionPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BackupRetentionPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BackupRetentionPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy} BackupRetentionPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BackupRetentionPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.backupMinimumEnforcedRetentionDays = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.dailyBackupImmutable = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.weeklyBackupImmutable = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.monthlyBackupImmutable = reader.bool();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.manualBackupImmutable = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BackupRetentionPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy} BackupRetentionPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BackupRetentionPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BackupRetentionPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BackupRetentionPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.backupMinimumEnforcedRetentionDays != null && message.hasOwnProperty("backupMinimumEnforcedRetentionDays"))
+                                    if (!$util.isInteger(message.backupMinimumEnforcedRetentionDays))
+                                        return "backupMinimumEnforcedRetentionDays: integer expected";
+                                if (message.dailyBackupImmutable != null && message.hasOwnProperty("dailyBackupImmutable"))
+                                    if (typeof message.dailyBackupImmutable !== "boolean")
+                                        return "dailyBackupImmutable: boolean expected";
+                                if (message.weeklyBackupImmutable != null && message.hasOwnProperty("weeklyBackupImmutable"))
+                                    if (typeof message.weeklyBackupImmutable !== "boolean")
+                                        return "weeklyBackupImmutable: boolean expected";
+                                if (message.monthlyBackupImmutable != null && message.hasOwnProperty("monthlyBackupImmutable"))
+                                    if (typeof message.monthlyBackupImmutable !== "boolean")
+                                        return "monthlyBackupImmutable: boolean expected";
+                                if (message.manualBackupImmutable != null && message.hasOwnProperty("manualBackupImmutable"))
+                                    if (typeof message.manualBackupImmutable !== "boolean")
+                                        return "manualBackupImmutable: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BackupRetentionPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy} BackupRetentionPolicy
+                             */
+                            BackupRetentionPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy();
+                                if (object.backupMinimumEnforcedRetentionDays != null)
+                                    message.backupMinimumEnforcedRetentionDays = object.backupMinimumEnforcedRetentionDays | 0;
+                                if (object.dailyBackupImmutable != null)
+                                    message.dailyBackupImmutable = Boolean(object.dailyBackupImmutable);
+                                if (object.weeklyBackupImmutable != null)
+                                    message.weeklyBackupImmutable = Boolean(object.weeklyBackupImmutable);
+                                if (object.monthlyBackupImmutable != null)
+                                    message.monthlyBackupImmutable = Boolean(object.monthlyBackupImmutable);
+                                if (object.manualBackupImmutable != null)
+                                    message.manualBackupImmutable = Boolean(object.manualBackupImmutable);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BackupRetentionPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @static
+                             * @param {google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy} message BackupRetentionPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BackupRetentionPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.backupMinimumEnforcedRetentionDays = 0;
+                                    object.dailyBackupImmutable = false;
+                                    object.weeklyBackupImmutable = false;
+                                    object.monthlyBackupImmutable = false;
+                                    object.manualBackupImmutable = false;
+                                }
+                                if (message.backupMinimumEnforcedRetentionDays != null && message.hasOwnProperty("backupMinimumEnforcedRetentionDays"))
+                                    object.backupMinimumEnforcedRetentionDays = message.backupMinimumEnforcedRetentionDays;
+                                if (message.dailyBackupImmutable != null && message.hasOwnProperty("dailyBackupImmutable"))
+                                    object.dailyBackupImmutable = message.dailyBackupImmutable;
+                                if (message.weeklyBackupImmutable != null && message.hasOwnProperty("weeklyBackupImmutable"))
+                                    object.weeklyBackupImmutable = message.weeklyBackupImmutable;
+                                if (message.monthlyBackupImmutable != null && message.hasOwnProperty("monthlyBackupImmutable"))
+                                    object.monthlyBackupImmutable = message.monthlyBackupImmutable;
+                                if (message.manualBackupImmutable != null && message.hasOwnProperty("manualBackupImmutable"))
+                                    object.manualBackupImmutable = message.manualBackupImmutable;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BackupRetentionPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BackupRetentionPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BackupRetentionPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BackupRetentionPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.netapp.v1.BackupVault.BackupRetentionPolicy";
+                            };
+    
+                            return BackupRetentionPolicy;
+                        })();
     
                         /**
                          * State enum.
@@ -32105,6 +32457,9 @@
                          * @property {string|null} [zone] StoragePool zone
                          * @property {boolean|null} [satisfiesPzs] StoragePool satisfiesPzs
                          * @property {boolean|null} [satisfiesPzi] StoragePool satisfiesPzi
+                         * @property {boolean|null} [customPerformanceEnabled] StoragePool customPerformanceEnabled
+                         * @property {number|Long|null} [totalThroughputMibps] StoragePool totalThroughputMibps
+                         * @property {number|Long|null} [totalIops] StoragePool totalIops
                          */
     
                         /**
@@ -32299,6 +32654,30 @@
                          */
                         StoragePool.prototype.satisfiesPzi = false;
     
+                        /**
+                         * StoragePool customPerformanceEnabled.
+                         * @member {boolean} customPerformanceEnabled
+                         * @memberof google.cloud.netapp.v1.StoragePool
+                         * @instance
+                         */
+                        StoragePool.prototype.customPerformanceEnabled = false;
+    
+                        /**
+                         * StoragePool totalThroughputMibps.
+                         * @member {number|Long} totalThroughputMibps
+                         * @memberof google.cloud.netapp.v1.StoragePool
+                         * @instance
+                         */
+                        StoragePool.prototype.totalThroughputMibps = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * StoragePool totalIops.
+                         * @member {number|Long} totalIops
+                         * @memberof google.cloud.netapp.v1.StoragePool
+                         * @instance
+                         */
+                        StoragePool.prototype.totalIops = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -32382,6 +32761,12 @@
                                 writer.uint32(/* id 23, wireType 0 =*/184).bool(message.satisfiesPzs);
                             if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
                                 writer.uint32(/* id 24, wireType 0 =*/192).bool(message.satisfiesPzi);
+                            if (message.customPerformanceEnabled != null && Object.hasOwnProperty.call(message, "customPerformanceEnabled"))
+                                writer.uint32(/* id 25, wireType 0 =*/200).bool(message.customPerformanceEnabled);
+                            if (message.totalThroughputMibps != null && Object.hasOwnProperty.call(message, "totalThroughputMibps"))
+                                writer.uint32(/* id 26, wireType 0 =*/208).int64(message.totalThroughputMibps);
+                            if (message.totalIops != null && Object.hasOwnProperty.call(message, "totalIops"))
+                                writer.uint32(/* id 27, wireType 0 =*/216).int64(message.totalIops);
                             return writer;
                         };
     
@@ -32523,6 +32908,18 @@
                                         message.satisfiesPzi = reader.bool();
                                         break;
                                     }
+                                case 25: {
+                                        message.customPerformanceEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 26: {
+                                        message.totalThroughputMibps = reader.int64();
+                                        break;
+                                    }
+                                case 27: {
+                                        message.totalIops = reader.int64();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -32659,6 +33056,15 @@
                             if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
                                 if (typeof message.satisfiesPzi !== "boolean")
                                     return "satisfiesPzi: boolean expected";
+                            if (message.customPerformanceEnabled != null && message.hasOwnProperty("customPerformanceEnabled"))
+                                if (typeof message.customPerformanceEnabled !== "boolean")
+                                    return "customPerformanceEnabled: boolean expected";
+                            if (message.totalThroughputMibps != null && message.hasOwnProperty("totalThroughputMibps"))
+                                if (!$util.isInteger(message.totalThroughputMibps) && !(message.totalThroughputMibps && $util.isInteger(message.totalThroughputMibps.low) && $util.isInteger(message.totalThroughputMibps.high)))
+                                    return "totalThroughputMibps: integer|Long expected";
+                            if (message.totalIops != null && message.hasOwnProperty("totalIops"))
+                                if (!$util.isInteger(message.totalIops) && !(message.totalIops && $util.isInteger(message.totalIops.low) && $util.isInteger(message.totalIops.high)))
+                                    return "totalIops: integer|Long expected";
                             return null;
                         };
     
@@ -32822,6 +33228,26 @@
                                 message.satisfiesPzs = Boolean(object.satisfiesPzs);
                             if (object.satisfiesPzi != null)
                                 message.satisfiesPzi = Boolean(object.satisfiesPzi);
+                            if (object.customPerformanceEnabled != null)
+                                message.customPerformanceEnabled = Boolean(object.customPerformanceEnabled);
+                            if (object.totalThroughputMibps != null)
+                                if ($util.Long)
+                                    (message.totalThroughputMibps = $util.Long.fromValue(object.totalThroughputMibps)).unsigned = false;
+                                else if (typeof object.totalThroughputMibps === "string")
+                                    message.totalThroughputMibps = parseInt(object.totalThroughputMibps, 10);
+                                else if (typeof object.totalThroughputMibps === "number")
+                                    message.totalThroughputMibps = object.totalThroughputMibps;
+                                else if (typeof object.totalThroughputMibps === "object")
+                                    message.totalThroughputMibps = new $util.LongBits(object.totalThroughputMibps.low >>> 0, object.totalThroughputMibps.high >>> 0).toNumber();
+                            if (object.totalIops != null)
+                                if ($util.Long)
+                                    (message.totalIops = $util.Long.fromValue(object.totalIops)).unsigned = false;
+                                else if (typeof object.totalIops === "string")
+                                    message.totalIops = parseInt(object.totalIops, 10);
+                                else if (typeof object.totalIops === "number")
+                                    message.totalIops = object.totalIops;
+                                else if (typeof object.totalIops === "object")
+                                    message.totalIops = new $util.LongBits(object.totalIops.low >>> 0, object.totalIops.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -32869,6 +33295,17 @@
                                 object.zone = "";
                                 object.satisfiesPzs = false;
                                 object.satisfiesPzi = false;
+                                object.customPerformanceEnabled = false;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalThroughputMibps = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalThroughputMibps = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalIops = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalIops = options.longs === String ? "0" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -32927,6 +33364,18 @@
                                 object.satisfiesPzs = message.satisfiesPzs;
                             if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
                                 object.satisfiesPzi = message.satisfiesPzi;
+                            if (message.customPerformanceEnabled != null && message.hasOwnProperty("customPerformanceEnabled"))
+                                object.customPerformanceEnabled = message.customPerformanceEnabled;
+                            if (message.totalThroughputMibps != null && message.hasOwnProperty("totalThroughputMibps"))
+                                if (typeof message.totalThroughputMibps === "number")
+                                    object.totalThroughputMibps = options.longs === String ? String(message.totalThroughputMibps) : message.totalThroughputMibps;
+                                else
+                                    object.totalThroughputMibps = options.longs === String ? $util.Long.prototype.toString.call(message.totalThroughputMibps) : options.longs === Number ? new $util.LongBits(message.totalThroughputMibps.low >>> 0, message.totalThroughputMibps.high >>> 0).toNumber() : message.totalThroughputMibps;
+                            if (message.totalIops != null && message.hasOwnProperty("totalIops"))
+                                if (typeof message.totalIops === "number")
+                                    object.totalIops = options.longs === String ? String(message.totalIops) : message.totalIops;
+                                else
+                                    object.totalIops = options.longs === String ? $util.Long.prototype.toString.call(message.totalIops) : options.longs === Number ? new $util.LongBits(message.totalIops.low >>> 0, message.totalIops.high >>> 0).toNumber() : message.totalIops;
                             return object;
                         };
     
