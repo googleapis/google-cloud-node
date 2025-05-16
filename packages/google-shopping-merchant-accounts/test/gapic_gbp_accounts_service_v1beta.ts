@@ -21,7 +21,9 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as shippingsettingsserviceModule from '../src';
+import * as gbpaccountsserviceModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
@@ -64,18 +66,79 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-describe('v1beta.ShippingSettingsServiceClient', () => {
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
+}
+
+describe('v1beta.GbpAccountsServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient();
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient();
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -87,8 +150,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient
-            .servicePath;
+          gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient.servicePath;
         assert.strictEqual(servicePath, 'merchantapi.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -97,8 +159,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient
-            .apiEndpoint;
+          gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -106,7 +167,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           universeDomain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -115,7 +176,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           universe_domain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -128,7 +189,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient();
+            new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.example.com');
           if (saved) {
@@ -142,9 +203,9 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient(
-              {universeDomain: 'configured.example.com'}
-            );
+            new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
+              universeDomain: 'configured.example.com',
+            });
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
           if (saved) {
@@ -157,7 +218,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -166,20 +227,20 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
 
     it('has port', () => {
       const port =
-        shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient.port;
+        gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient();
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           fallback: true,
         });
       assert(client);
@@ -187,25 +248,25 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.shippingSettingsServiceStub, undefined);
+      assert.strictEqual(client.gbpAccountsServiceStub, undefined);
       await client.initialize();
-      assert(client.shippingSettingsServiceStub);
+      assert(client.gbpAccountsServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize().catch(err => {
         throw err;
       });
-      assert(client.shippingSettingsServiceStub);
+      assert(client.gbpAccountsServiceStub);
       client
         .close()
         .then(() => {
@@ -218,11 +279,11 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.shippingSettingsServiceStub, undefined);
+      assert.strictEqual(client.gbpAccountsServiceStub, undefined);
       client
         .close()
         .then(() => {
@@ -236,7 +297,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -249,7 +310,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -270,67 +331,66 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
     });
   });
 
-  describe('getShippingSettings', () => {
-    it('invokes getShippingSettings without error', async () => {
+  describe('linkGbpAccount', () => {
+    it('invokes linkGbpAccount without error', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest',
-        ['name']
+        '.google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ShippingSettings()
+        new protos.google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse()
       );
-      client.innerApiCalls.getShippingSettings =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getShippingSettings(request);
+      client.innerApiCalls.linkGbpAccount = stubSimpleCall(expectedResponse);
+      const [response] = await client.linkGbpAccount(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getShippingSettings as SinonStub
+        client.innerApiCalls.linkGbpAccount as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getShippingSettings as SinonStub
+        client.innerApiCalls.linkGbpAccount as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getShippingSettings without error using callback', async () => {
+    it('invokes linkGbpAccount without error using callback', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest',
-        ['name']
+        '.google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ShippingSettings()
+        new protos.google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse()
       );
-      client.innerApiCalls.getShippingSettings =
+      client.innerApiCalls.linkGbpAccount =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getShippingSettings(
+        client.linkGbpAccount(
           request,
           (
             err?: Error | null,
-            result?: protos.google.shopping.merchant.accounts.v1beta.IShippingSettings | null
+            result?: protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -343,131 +403,148 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getShippingSettings as SinonStub
+        client.innerApiCalls.linkGbpAccount as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getShippingSettings as SinonStub
+        client.innerApiCalls.linkGbpAccount as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getShippingSettings with error', async () => {
+    it('invokes linkGbpAccount with error', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest',
-        ['name']
+        '.google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getShippingSettings = stubSimpleCall(
+      client.innerApiCalls.linkGbpAccount = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getShippingSettings(request), expectedError);
+      await assert.rejects(client.linkGbpAccount(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getShippingSettings as SinonStub
+        client.innerApiCalls.linkGbpAccount as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getShippingSettings as SinonStub
+        client.innerApiCalls.linkGbpAccount as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getShippingSettings with closed client', async () => {
+    it('invokes linkGbpAccount with closed client', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest',
-        ['name']
+        '.google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest',
+        ['parent']
       );
-      request.name = defaultValue1;
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close().catch(err => {
         throw err;
       });
-      await assert.rejects(client.getShippingSettings(request), expectedError);
+      await assert.rejects(client.linkGbpAccount(request), expectedError);
     });
   });
 
-  describe('insertShippingSettings', () => {
-    it('invokes insertShippingSettings without error', async () => {
+  describe('listGbpAccounts', () => {
+    it('invokes listGbpAccounts without error', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest',
+        '.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ShippingSettings()
-      );
-      client.innerApiCalls.insertShippingSettings =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.insertShippingSettings(request);
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.GbpAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.GbpAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.GbpAccount()
+        ),
+      ];
+      client.innerApiCalls.listGbpAccounts = stubSimpleCall(expectedResponse);
+      const [response] = await client.listGbpAccounts(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.insertShippingSettings as SinonStub
+        client.innerApiCalls.listGbpAccounts as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.insertShippingSettings as SinonStub
+        client.innerApiCalls.listGbpAccounts as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes insertShippingSettings without error using callback', async () => {
+    it('invokes listGbpAccounts without error using callback', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest',
+        '.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ShippingSettings()
-      );
-      client.innerApiCalls.insertShippingSettings =
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.GbpAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.GbpAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.GbpAccount()
+        ),
+      ];
+      client.innerApiCalls.listGbpAccounts =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.insertShippingSettings(
+        client.listGbpAccounts(
           request,
           (
             err?: Error | null,
-            result?: protos.google.shopping.merchant.accounts.v1beta.IShippingSettings | null
+            result?:
+              | protos.google.shopping.merchant.accounts.v1beta.IGbpAccount[]
+              | null
           ) => {
             if (err) {
               reject(err);
@@ -480,72 +557,254 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.insertShippingSettings as SinonStub
+        client.innerApiCalls.listGbpAccounts as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.insertShippingSettings as SinonStub
+        client.innerApiCalls.listGbpAccounts as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes insertShippingSettings with error', async () => {
+    it('invokes listGbpAccounts with error', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest',
+        '.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.insertShippingSettings = stubSimpleCall(
+      client.innerApiCalls.listGbpAccounts = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.insertShippingSettings(request),
-        expectedError
-      );
+      await assert.rejects(client.listGbpAccounts(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.insertShippingSettings as SinonStub
+        client.innerApiCalls.listGbpAccounts as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.insertShippingSettings as SinonStub
+        client.innerApiCalls.listGbpAccounts as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes insertShippingSettings with closed client', async () => {
+    it('invokes listGbpAccountsStream without error', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest',
+        '.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.GbpAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.GbpAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.GbpAccount()
+        ),
+      ];
+      client.descriptors.page.listGbpAccounts.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listGbpAccountsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.shopping.merchant.accounts.v1beta.GbpAccount[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.shopping.merchant.accounts.v1beta.GbpAccount
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
       });
-      await assert.rejects(
-        client.insertShippingSettings(request),
-        expectedError
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listGbpAccounts.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listGbpAccounts, request)
+      );
+      assert(
+        (client.descriptors.page.listGbpAccounts.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listGbpAccountsStream with error', async () => {
+      const client =
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGbpAccounts.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listGbpAccountsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.shopping.merchant.accounts.v1beta.GbpAccount[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.shopping.merchant.accounts.v1beta.GbpAccount
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listGbpAccounts.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listGbpAccounts, request)
+      );
+      assert(
+        (client.descriptors.page.listGbpAccounts.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listGbpAccounts without error', async () => {
+      const client =
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.GbpAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.GbpAccount()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.GbpAccount()
+        ),
+      ];
+      client.descriptors.page.listGbpAccounts.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.shopping.merchant.accounts.v1beta.IGbpAccount[] =
+        [];
+      const iterable = client.listGbpAccountsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGbpAccounts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listGbpAccounts.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listGbpAccounts with error', async () => {
+      const client =
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGbpAccounts.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listGbpAccountsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.shopping.merchant.accounts.v1beta.IGbpAccount[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGbpAccounts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listGbpAccounts.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -557,7 +816,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -597,7 +856,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         issue: 'issueValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -647,7 +906,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         tax: 'taxValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -696,7 +955,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -738,7 +997,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -784,7 +1043,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -826,7 +1085,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -866,7 +1125,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         email: 'emailValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -922,7 +1181,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         gbp_account: 'gbpAccountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -971,7 +1230,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1012,7 +1271,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         lfp_provider: 'lfpProviderValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1077,7 +1336,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         omnichannel_setting: 'omnichannelSettingValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1140,7 +1399,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         return_policy: 'returnPolicyValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1203,7 +1462,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         program: 'programValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1253,7 +1512,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         region: 'regionValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1302,7 +1561,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1344,7 +1603,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         version: 'versionValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1384,7 +1643,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         identifier: 'identifierValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1446,7 +1705,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         email: 'emailValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new gbpaccountsserviceModule.v1beta.GbpAccountsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });

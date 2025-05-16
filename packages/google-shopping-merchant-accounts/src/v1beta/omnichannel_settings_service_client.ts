@@ -23,26 +23,31 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  PaginationCallback,
+  GaxCall,
 } from 'google-gax';
-
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/homepage_service_client_config.json`.
+ * `src/v1beta/omnichannel_settings_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './homepage_service_client_config.json';
+import * as gapicConfig from './omnichannel_settings_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service to support an API for a store's homepage.
+ *  The service facilitates the management of a merchant's omnichannel settings.
+ *  ## This API defines the following resource model:
+ *
+ *  {@link protos.google.shopping.merchant.accounts.v1.OmnichannelSetting|OmnichannelSetting}
  * @class
  * @memberof v1beta
  */
-export class HomepageServiceClient {
+export class OmnichannelSettingsServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -64,10 +69,10 @@ export class HomepageServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  homepageServiceStub?: Promise<{[name: string]: Function}>;
+  omnichannelSettingsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of HomepageServiceClient.
+   * Construct an instance of OmnichannelSettingsServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -102,7 +107,7 @@ export class HomepageServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new HomepageServiceClient({fallback: true}, gax);
+   *     const client = new OmnichannelSettingsServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -110,7 +115,8 @@ export class HomepageServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof HomepageServiceClient;
+    const staticMembers = this
+      .constructor as typeof OmnichannelSettingsServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -260,9 +266,20 @@ export class HomepageServiceClient {
       ),
     };
 
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listOmnichannelSettings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'omnichannelSettings'
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.accounts.v1beta.HomepageService',
+      'google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -290,34 +307,35 @@ export class HomepageServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.homepageServiceStub) {
-      return this.homepageServiceStub;
+    if (this.omnichannelSettingsServiceStub) {
+      return this.omnichannelSettingsServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.shopping.merchant.accounts.v1beta.HomepageService.
-    this.homepageServiceStub = this._gaxGrpc.createStub(
+    // google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService.
+    this.omnichannelSettingsServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.accounts.v1beta.HomepageService'
+            'google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.shopping.merchant.accounts.v1beta
-            .HomepageService,
+            .OmnichannelSettingsService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const homepageServiceStubMethods = [
-      'getHomepage',
-      'updateHomepage',
-      'claimHomepage',
-      'unclaimHomepage',
+    const omnichannelSettingsServiceStubMethods = [
+      'getOmnichannelSetting',
+      'listOmnichannelSettings',
+      'createOmnichannelSetting',
+      'updateOmnichannelSetting',
+      'requestInventoryVerification',
     ];
-    for (const methodName of homepageServiceStubMethods) {
-      const callPromise = this.homepageServiceStub.then(
+    for (const methodName of omnichannelSettingsServiceStubMethods) {
+      const callPromise = this.omnichannelSettingsServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -331,7 +349,7 @@ export class HomepageServiceClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -342,7 +360,7 @@ export class HomepageServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.homepageServiceStub;
+    return this.omnichannelSettingsServiceStub;
   }
 
   /**
@@ -430,79 +448,79 @@ export class HomepageServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Retrieves a store's homepage.
+   * Get the omnichannel settings for a given merchant.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the homepage to retrieve.
-   *   Format: `accounts/{account}/homepage`
+   *   Required. The name of the omnichannel setting to retrieve.
+   *   Format: `accounts/{account}/omnichannelSettings/{omnichannel_setting}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Homepage|Homepage}.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting|OmnichannelSetting}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/homepage_service.get_homepage.js</caption>
-   * region_tag:merchantapi_v1beta_generated_HomepageService_GetHomepage_async
+   * @example <caption>include:samples/generated/v1beta/omnichannel_settings_service.get_omnichannel_setting.js</caption>
+   * region_tag:merchantapi_v1beta_generated_OmnichannelSettingsService_GetOmnichannelSetting_async
    */
-  getHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest,
+  getOmnichannelSetting(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
       (
-        | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+        | protos.google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
-  getHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest,
+  getOmnichannelSetting(
+    request: protos.google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+      | protos.google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest,
+  getOmnichannelSetting(
+    request: protos.google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest,
     callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+      | protos.google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest,
+  getOmnichannelSetting(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+          protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+      | protos.google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
       (
-        | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+        | protos.google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest
         | undefined
       ),
       {} | undefined,
@@ -526,112 +544,256 @@ export class HomepageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getHomepage request %j', request);
+    this._log.info('getOmnichannelSetting request %j', request);
     const wrappedCallback:
       | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+          protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest
           | null
           | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getHomepage response %j', response);
+          this._log.info('getOmnichannelSetting response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
     return this.innerApiCalls
-      .getHomepage(request, options, wrappedCallback)
+      .getOmnichannelSetting(request, options, wrappedCallback)
       ?.then(
         ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+          protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
           (
-            | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+            | protos.google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest
             | undefined
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getHomepage response %j', response);
+          this._log.info('getOmnichannelSetting response %j', response);
           return [response, options, rawResponse];
         }
       );
   }
   /**
-   * Updates a store's homepage. Executing this method requires admin access.
+   * Create the omnichannel settings for a given merchant.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.shopping.merchant.accounts.v1beta.Homepage} request.homepage
-   *   Required. The new version of the homepage.
+   * @param {string} request.parent
+   *   Required. The parent resource where this omnichannel setting will be
+   *   created. Format: `accounts/{account}`
+   * @param {google.shopping.merchant.accounts.v1beta.OmnichannelSetting} request.omnichannelSetting
+   *   Required. The omnichannel setting to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting|OmnichannelSetting}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/omnichannel_settings_service.create_omnichannel_setting.js</caption>
+   * region_tag:merchantapi_v1beta_generated_OmnichannelSettingsService_CreateOmnichannelSetting_async
+   */
+  createOmnichannelSetting(
+    request?: protos.google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createOmnichannelSetting(
+    request: protos.google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+      | protos.google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createOmnichannelSetting(
+    request: protos.google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+      | protos.google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createOmnichannelSetting(
+    request?: protos.google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+          | protos.google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+      | protos.google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createOmnichannelSetting request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+          | protos.google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createOmnichannelSetting response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createOmnichannelSetting(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createOmnichannelSetting response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Update the omnichannel setting for a given merchant in a given country.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.shopping.merchant.accounts.v1beta.OmnichannelSetting} request.omnichannelSetting
+   *   Required. The omnichannel setting to update.
+   *
+   *   The omnichannel setting's `name` field is used to identify the
+   *   omnichannel setting to be updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. List of fields being updated.
+   *   Required. The list of fields to be updated.
+   *
+   *   The following fields are supported in snake_case only:
+   *   - `lsf_type`
+   *   - `in_stock`
+   *   - `pickup`
+   *   - `odo`
+   *   - `about`
+   *   - `inventory_verification`
+   *
+   *   Full replacement with wildcard `*`is supported, while empty/implied update
+   *   mask is not.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Homepage|Homepage}.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting|OmnichannelSetting}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/homepage_service.update_homepage.js</caption>
-   * region_tag:merchantapi_v1beta_generated_HomepageService_UpdateHomepage_async
+   * @example <caption>include:samples/generated/v1beta/omnichannel_settings_service.update_omnichannel_setting.js</caption>
+   * region_tag:merchantapi_v1beta_generated_OmnichannelSettingsService_UpdateOmnichannelSetting_async
    */
-  updateHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest,
+  updateOmnichannelSetting(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
       (
-        | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
+        | protos.google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
-  updateHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest,
+  updateOmnichannelSetting(
+    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+      | protos.google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  updateHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest,
+  updateOmnichannelSetting(
+    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest,
     callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+      | protos.google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  updateHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest,
+  updateOmnichannelSetting(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
+          protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+      | protos.google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
       (
-        | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
+        | protos.google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest
         | undefined
       ),
       {} | undefined,
@@ -650,129 +812,117 @@ export class HomepageServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'homepage.name': request.homepage!.name ?? '',
+        'omnichannel_setting.name': request.omnichannelSetting!.name ?? '',
       });
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateHomepage request %j', request);
+    this._log.info('updateOmnichannelSetting request %j', request);
     const wrappedCallback:
       | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
+          protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest
           | null
           | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateHomepage response %j', response);
+          this._log.info('updateOmnichannelSetting response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
     return this.innerApiCalls
-      .updateHomepage(request, options, wrappedCallback)
+      .updateOmnichannelSetting(request, options, wrappedCallback)
       ?.then(
         ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+          protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting,
           (
-            | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
+            | protos.google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest
             | undefined
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateHomepage response %j', response);
+          this._log.info('updateOmnichannelSetting response %j', response);
           return [response, options, rawResponse];
         }
       );
   }
   /**
-   * Claims a store's homepage. Executing this method requires admin access.
-   *
-   * If the homepage is already claimed, this will recheck the
-   * verification (unless the merchant is exempted from claiming, which also
-   * exempts from verification) and return a successful response. If ownership
-   * can no longer be verified, it will return an error, but it won't clear the
-   * claim. In case of failure, a canonical error message will be returned:
-   *    * PERMISSION_DENIED: user doesn't have the necessary permissions on this
-   *    MC account;
-   *    * FAILED_PRECONDITION:
-   *      - The account is not a Merchant Center account;
-   *      - MC account doesn't have a homepage;
-   *      - claiming failed (in this case the error message will contain more
-   *      details).
+   * Requests inventory verification for a given merchant in a given country.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the homepage to claim.
-   *   Format: `accounts/{account}/homepage`
+   *   Required. The name of the omnichannel setting to request inventory
+   *   verification. Format:
+   *   `accounts/{account}/omnichannelSettings/{omnichannel_setting}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Homepage|Homepage}.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse|RequestInventoryVerificationResponse}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/homepage_service.claim_homepage.js</caption>
-   * region_tag:merchantapi_v1beta_generated_HomepageService_ClaimHomepage_async
+   * @example <caption>include:samples/generated/v1beta/omnichannel_settings_service.request_inventory_verification.js</caption>
+   * region_tag:merchantapi_v1beta_generated_OmnichannelSettingsService_RequestInventoryVerification_async
    */
-  claimHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest,
+  requestInventoryVerification(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+      protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse,
       (
-        | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
+        | protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
-  claimHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest,
+  requestInventoryVerification(
+    request: protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
+      protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse,
+      | protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  claimHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest,
+  requestInventoryVerification(
+    request: protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest,
     callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
+      protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse,
+      | protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  claimHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest,
+  requestInventoryVerification(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
+          protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse,
+          | protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
+      protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse,
+      | protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+      protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse,
       (
-        | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
+        | protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest
         | undefined
       ),
       {} | undefined,
@@ -796,166 +946,282 @@ export class HomepageServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('claimHomepage request %j', request);
+    this._log.info('requestInventoryVerification request %j', request);
     const wrappedCallback:
       | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
+          protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse,
+          | protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest
           | null
           | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('claimHomepage response %j', response);
+          this._log.info('requestInventoryVerification response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
     return this.innerApiCalls
-      .claimHomepage(request, options, wrappedCallback)
+      .requestInventoryVerification(request, options, wrappedCallback)
       ?.then(
         ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+          protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse,
           (
-            | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
+            | protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest
             | undefined
           ),
           {} | undefined,
         ]) => {
-          this._log.info('claimHomepage response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Unclaims a store's homepage. Executing this method requires admin access.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the homepage to unclaim.
-   *   Format: `accounts/{account}/homepage`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Homepage|Homepage}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/homepage_service.unclaim_homepage.js</caption>
-   * region_tag:merchantapi_v1beta_generated_HomepageService_UnclaimHomepage_async
-   */
-  unclaimHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  unclaimHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  unclaimHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  unclaimHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('unclaimHomepage request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('unclaimHomepage response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .unclaimHomepage(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          (
-            | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('unclaimHomepage response %j', response);
+          this._log.info('requestInventoryVerification response %j', response);
           return [response, options, rawResponse];
         }
       );
   }
 
+  /**
+   * List all the omnichannel settings for a given merchant.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of omnichannel settings.
+   *   Format: `accounts/{account}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of omnichannel settings to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 omnichannel
+   *   settings will be returned. The maximum value is 1000; values above 1000
+   *   will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListOmnichannelSettings`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListOmnichannelSettings`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting|OmnichannelSetting}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listOmnichannelSettingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listOmnichannelSettings(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting[],
+      protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest | null,
+      protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse,
+    ]
+  >;
+  listOmnichannelSettings(
+    request: protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest,
+      | protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse
+      | null
+      | undefined,
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting
+    >
+  ): void;
+  listOmnichannelSettings(
+    request: protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest,
+    callback: PaginationCallback<
+      protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest,
+      | protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse
+      | null
+      | undefined,
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting
+    >
+  ): void;
+  listOmnichannelSettings(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest,
+          | protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting
+        >,
+    callback?: PaginationCallback<
+      protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest,
+      | protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse
+      | null
+      | undefined,
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting
+    >
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting[],
+      protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest | null,
+      protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest,
+          | protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOmnichannelSettings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOmnichannelSettings request %j', request);
+    return this.innerApiCalls
+      .listOmnichannelSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting[],
+          protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest | null,
+          protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse,
+        ]) => {
+          this._log.info('listOmnichannelSettings values %j', response);
+          return [response, input, output];
+        }
+      );
+  }
+
+  /**
+   * Equivalent to `listOmnichannelSettings`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of omnichannel settings.
+   *   Format: `accounts/{account}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of omnichannel settings to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 omnichannel
+   *   settings will be returned. The maximum value is 1000; values above 1000
+   *   will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListOmnichannelSettings`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListOmnichannelSettings`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting|OmnichannelSetting} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listOmnichannelSettingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listOmnichannelSettingsStream(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listOmnichannelSettings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOmnichannelSettings stream %j', request);
+    return this.descriptors.page.listOmnichannelSettings.createStream(
+      this.innerApiCalls.listOmnichannelSettings as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listOmnichannelSettings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of omnichannel settings.
+   *   Format: `accounts/{account}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of omnichannel settings to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 omnichannel
+   *   settings will be returned. The maximum value is 1000; values above 1000
+   *   will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListOmnichannelSettings`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListOmnichannelSettings`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting|OmnichannelSetting}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/omnichannel_settings_service.list_omnichannel_settings.js</caption>
+   * region_tag:merchantapi_v1beta_generated_OmnichannelSettingsService_ListOmnichannelSettings_async
+   */
+  listOmnichannelSettingsAsync(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listOmnichannelSettings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOmnichannelSettings iterate %j', request);
+    return this.descriptors.page.listOmnichannelSettings.asyncIterate(
+      this.innerApiCalls['listOmnichannelSettings'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1605,8 +1871,8 @@ export class HomepageServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.homepageServiceStub && !this._terminated) {
-      return this.homepageServiceStub.then(stub => {
+    if (this.omnichannelSettingsServiceStub && !this._terminated) {
+      return this.omnichannelSettingsServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -32,10 +32,19 @@
   * [Business_info_service.update_business_info](#business_info_service.update_business_info)
   * [Email_preferences_service.get_email_preferences](#email_preferences_service.get_email_preferences)
   * [Email_preferences_service.update_email_preferences](#email_preferences_service.update_email_preferences)
+  * [Gbp_accounts_service.link_gbp_account](#gbp_accounts_service.link_gbp_account)
+  * [Gbp_accounts_service.list_gbp_accounts](#gbp_accounts_service.list_gbp_accounts)
   * [Homepage_service.claim_homepage](#homepage_service.claim_homepage)
   * [Homepage_service.get_homepage](#homepage_service.get_homepage)
   * [Homepage_service.unclaim_homepage](#homepage_service.unclaim_homepage)
   * [Homepage_service.update_homepage](#homepage_service.update_homepage)
+  * [Lfp_providers_service.find_lfp_providers](#lfp_providers_service.find_lfp_providers)
+  * [Lfp_providers_service.link_lfp_provider](#lfp_providers_service.link_lfp_provider)
+  * [Omnichannel_settings_service.create_omnichannel_setting](#omnichannel_settings_service.create_omnichannel_setting)
+  * [Omnichannel_settings_service.get_omnichannel_setting](#omnichannel_settings_service.get_omnichannel_setting)
+  * [Omnichannel_settings_service.list_omnichannel_settings](#omnichannel_settings_service.list_omnichannel_settings)
+  * [Omnichannel_settings_service.request_inventory_verification](#omnichannel_settings_service.request_inventory_verification)
+  * [Omnichannel_settings_service.update_omnichannel_setting](#omnichannel_settings_service.update_omnichannel_setting)
   * [Online_return_policy_service.create_online_return_policy](#online_return_policy_service.create_online_return_policy)
   * [Online_return_policy_service.delete_online_return_policy](#online_return_policy_service.delete_online_return_policy)
   * [Online_return_policy_service.get_online_return_policy](#online_return_policy_service.get_online_return_policy)
@@ -419,6 +428,40 @@ __Usage:__
 
 
 
+### Gbp_accounts_service.link_gbp_account
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/gbp_accounts_service.link_gbp_account.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/gbp_accounts_service.link_gbp_account.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/gbp_accounts_service.link_gbp_account.js`
+
+
+-----
+
+
+
+
+### Gbp_accounts_service.list_gbp_accounts
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/gbp_accounts_service.list_gbp_accounts.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/gbp_accounts_service.list_gbp_accounts.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/gbp_accounts_service.list_gbp_accounts.js`
+
+
+-----
+
+
+
+
 ### Homepage_service.claim_homepage
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/homepage_service.claim_homepage.js).
@@ -480,6 +523,125 @@ __Usage:__
 
 
 `node packages/google-shopping-merchant-accounts/samples/generated/v1beta/homepage_service.update_homepage.js`
+
+
+-----
+
+
+
+
+### Lfp_providers_service.find_lfp_providers
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/lfp_providers_service.find_lfp_providers.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/lfp_providers_service.find_lfp_providers.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/lfp_providers_service.find_lfp_providers.js`
+
+
+-----
+
+
+
+
+### Lfp_providers_service.link_lfp_provider
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/lfp_providers_service.link_lfp_provider.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/lfp_providers_service.link_lfp_provider.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/lfp_providers_service.link_lfp_provider.js`
+
+
+-----
+
+
+
+
+### Omnichannel_settings_service.create_omnichannel_setting
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.create_omnichannel_setting.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.create_omnichannel_setting.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.create_omnichannel_setting.js`
+
+
+-----
+
+
+
+
+### Omnichannel_settings_service.get_omnichannel_setting
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.get_omnichannel_setting.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.get_omnichannel_setting.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.get_omnichannel_setting.js`
+
+
+-----
+
+
+
+
+### Omnichannel_settings_service.list_omnichannel_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.list_omnichannel_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.list_omnichannel_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.list_omnichannel_settings.js`
+
+
+-----
+
+
+
+
+### Omnichannel_settings_service.request_inventory_verification
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.request_inventory_verification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.request_inventory_verification.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.request_inventory_verification.js`
+
+
+-----
+
+
+
+
+### Omnichannel_settings_service.update_omnichannel_setting
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.update_omnichannel_setting.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.update_omnichannel_setting.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/omnichannel_settings_service.update_omnichannel_setting.js`
 
 
 -----
