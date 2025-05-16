@@ -23,26 +23,31 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  PaginationCallback,
+  GaxCall,
 } from 'google-gax';
-
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/homepage_service_client_config.json`.
+ * `src/v1beta/gbp_accounts_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './homepage_service_client_config.json';
+import * as gapicConfig from './gbp_accounts_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service to support an API for a store's homepage.
+ *  The service facilitates the management of a merchant's Google Business
+ *  Profile (GBP) account settings. This API defines the following resource
+ *  model:
+ *  - {@link protos.google.shopping.merchant.accounts.v1.GbpAccount|GbpAccount}
  * @class
  * @memberof v1beta
  */
-export class HomepageServiceClient {
+export class GbpAccountsServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -64,10 +69,10 @@ export class HomepageServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  homepageServiceStub?: Promise<{[name: string]: Function}>;
+  gbpAccountsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of HomepageServiceClient.
+   * Construct an instance of GbpAccountsServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -102,7 +107,7 @@ export class HomepageServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new HomepageServiceClient({fallback: true}, gax);
+   *     const client = new GbpAccountsServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -110,7 +115,7 @@ export class HomepageServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof HomepageServiceClient;
+    const staticMembers = this.constructor as typeof GbpAccountsServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -260,9 +265,20 @@ export class HomepageServiceClient {
       ),
     };
 
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listGbpAccounts: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'gbpAccounts'
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.accounts.v1beta.HomepageService',
+      'google.shopping.merchant.accounts.v1beta.GbpAccountsService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -290,34 +306,29 @@ export class HomepageServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.homepageServiceStub) {
-      return this.homepageServiceStub;
+    if (this.gbpAccountsServiceStub) {
+      return this.gbpAccountsServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.shopping.merchant.accounts.v1beta.HomepageService.
-    this.homepageServiceStub = this._gaxGrpc.createStub(
+    // google.shopping.merchant.accounts.v1beta.GbpAccountsService.
+    this.gbpAccountsServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.accounts.v1beta.HomepageService'
+            'google.shopping.merchant.accounts.v1beta.GbpAccountsService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.shopping.merchant.accounts.v1beta
-            .HomepageService,
+            .GbpAccountsService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const homepageServiceStubMethods = [
-      'getHomepage',
-      'updateHomepage',
-      'claimHomepage',
-      'unclaimHomepage',
-    ];
-    for (const methodName of homepageServiceStubMethods) {
-      const callPromise = this.homepageServiceStub.then(
+    const gbpAccountsServiceStubMethods = ['listGbpAccounts', 'linkGbpAccount'];
+    for (const methodName of gbpAccountsServiceStubMethods) {
+      const callPromise = this.gbpAccountsServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -331,7 +342,7 @@ export class HomepageServiceClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -342,7 +353,7 @@ export class HomepageServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.homepageServiceStub;
+    return this.gbpAccountsServiceStub;
   }
 
   /**
@@ -430,79 +441,81 @@ export class HomepageServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Retrieves a store's homepage.
+   * Link the specified merchant to a GBP account for all countries.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the homepage to retrieve.
-   *   Format: `accounts/{account}/homepage`
+   * @param {string} request.parent
+   *   Required. The name of the parent resource to which the GBP account is
+   *   linked. Format: `accounts/{account}`.
+   * @param {string} request.gbpEmail
+   *   Required. The email address of the Business Profile account.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Homepage|Homepage}.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse|LinkGbpAccountResponse}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/homepage_service.get_homepage.js</caption>
-   * region_tag:merchantapi_v1beta_generated_HomepageService_GetHomepage_async
+   * @example <caption>include:samples/generated/v1beta/gbp_accounts_service.link_gbp_account.js</caption>
+   * region_tag:merchantapi_v1beta_generated_GbpAccountsService_LinkGbpAccount_async
    */
-  getHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest,
+  linkGbpAccount(
+    request?: protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+      protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse,
       (
-        | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+        | protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
-  getHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest,
+  linkGbpAccount(
+    request: protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+      protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse,
+      | protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest,
+  linkGbpAccount(
+    request: protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest,
     callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+      protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse,
+      | protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest,
+  linkGbpAccount(
+    request?: protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+          protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse,
+          | protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+      protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse,
+      | protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+      protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse,
       (
-        | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+        | protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest
         | undefined
       ),
       {} | undefined,
@@ -521,441 +534,290 @@ export class HomepageServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
+        parent: request.parent ?? '',
       });
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getHomepage request %j', request);
+    this._log.info('linkGbpAccount request %j', request);
     const wrappedCallback:
       | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+          protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse,
+          | protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest
           | null
           | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getHomepage response %j', response);
+          this._log.info('linkGbpAccount response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
     return this.innerApiCalls
-      .getHomepage(request, options, wrappedCallback)
+      .linkGbpAccount(request, options, wrappedCallback)
       ?.then(
         ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
+          protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse,
           (
-            | protos.google.shopping.merchant.accounts.v1beta.IGetHomepageRequest
+            | protos.google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest
             | undefined
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getHomepage response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Updates a store's homepage. Executing this method requires admin access.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.shopping.merchant.accounts.v1beta.Homepage} request.homepage
-   *   Required. The new version of the homepage.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. List of fields being updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Homepage|Homepage}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/homepage_service.update_homepage.js</caption>
-   * region_tag:merchantapi_v1beta_generated_HomepageService_UpdateHomepage_async
-   */
-  updateHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  updateHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'homepage.name': request.homepage!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('updateHomepage request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('updateHomepage response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .updateHomepage(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          (
-            | protos.google.shopping.merchant.accounts.v1beta.IUpdateHomepageRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateHomepage response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Claims a store's homepage. Executing this method requires admin access.
-   *
-   * If the homepage is already claimed, this will recheck the
-   * verification (unless the merchant is exempted from claiming, which also
-   * exempts from verification) and return a successful response. If ownership
-   * can no longer be verified, it will return an error, but it won't clear the
-   * claim. In case of failure, a canonical error message will be returned:
-   *    * PERMISSION_DENIED: user doesn't have the necessary permissions on this
-   *    MC account;
-   *    * FAILED_PRECONDITION:
-   *      - The account is not a Merchant Center account;
-   *      - MC account doesn't have a homepage;
-   *      - claiming failed (in this case the error message will contain more
-   *      details).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the homepage to claim.
-   *   Format: `accounts/{account}/homepage`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Homepage|Homepage}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/homepage_service.claim_homepage.js</caption>
-   * region_tag:merchantapi_v1beta_generated_HomepageService_ClaimHomepage_async
-   */
-  claimHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  claimHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  claimHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  claimHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('claimHomepage request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('claimHomepage response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .claimHomepage(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          (
-            | protos.google.shopping.merchant.accounts.v1beta.IClaimHomepageRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('claimHomepage response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Unclaims a store's homepage. Executing this method requires admin access.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the homepage to unclaim.
-   *   Format: `accounts/{account}/homepage`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.Homepage|Homepage}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/homepage_service.unclaim_homepage.js</caption>
-   * region_tag:merchantapi_v1beta_generated_HomepageService_UnclaimHomepage_async
-   */
-  unclaimHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  unclaimHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  unclaimHomepage(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  unclaimHomepage(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-      (
-        | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('unclaimHomepage request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('unclaimHomepage response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .unclaimHomepage(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IHomepage,
-          (
-            | protos.google.shopping.merchant.accounts.v1beta.IUnclaimHomepageRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('unclaimHomepage response %j', response);
+          this._log.info('linkGbpAccount response %j', response);
           return [response, options, rawResponse];
         }
       );
   }
 
+  /**
+   * List the GBP accounts for a given merchant.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource under which the GBP accounts are
+   *   listed. Format: `accounts/{account}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `GbpAccount` resources to return. The
+   *   service returns fewer than this value if the number of gbp accounts is less
+   *   that than the `pageSize`. The default value is 50. The maximum value is
+   *   1000; If a value higher than the maximum is specified, then the `pageSize`
+   *   will default to the maximum.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListGbpAccounts` call.
+   *   Provide the page token to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListGbpAccounts` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.shopping.merchant.accounts.v1beta.GbpAccount|GbpAccount}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listGbpAccountsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGbpAccounts(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.IGbpAccount[],
+      protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest | null,
+      protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse,
+    ]
+  >;
+  listGbpAccounts(
+    request: protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest,
+      | protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse
+      | null
+      | undefined,
+      protos.google.shopping.merchant.accounts.v1beta.IGbpAccount
+    >
+  ): void;
+  listGbpAccounts(
+    request: protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest,
+    callback: PaginationCallback<
+      protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest,
+      | protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse
+      | null
+      | undefined,
+      protos.google.shopping.merchant.accounts.v1beta.IGbpAccount
+    >
+  ): void;
+  listGbpAccounts(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest,
+          | protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IGbpAccount
+        >,
+    callback?: PaginationCallback<
+      protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest,
+      | protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse
+      | null
+      | undefined,
+      protos.google.shopping.merchant.accounts.v1beta.IGbpAccount
+    >
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.IGbpAccount[],
+      protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest | null,
+      protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest,
+          | protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IGbpAccount
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGbpAccounts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGbpAccounts request %j', request);
+    return this.innerApiCalls
+      .listGbpAccounts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.accounts.v1beta.IGbpAccount[],
+          protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest | null,
+          protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse,
+        ]) => {
+          this._log.info('listGbpAccounts values %j', response);
+          return [response, input, output];
+        }
+      );
+  }
+
+  /**
+   * Equivalent to `listGbpAccounts`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource under which the GBP accounts are
+   *   listed. Format: `accounts/{account}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `GbpAccount` resources to return. The
+   *   service returns fewer than this value if the number of gbp accounts is less
+   *   that than the `pageSize`. The default value is 50. The maximum value is
+   *   1000; If a value higher than the maximum is specified, then the `pageSize`
+   *   will default to the maximum.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListGbpAccounts` call.
+   *   Provide the page token to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListGbpAccounts` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.shopping.merchant.accounts.v1beta.GbpAccount|GbpAccount} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listGbpAccountsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGbpAccountsStream(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGbpAccounts'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGbpAccounts stream %j', request);
+    return this.descriptors.page.listGbpAccounts.createStream(
+      this.innerApiCalls.listGbpAccounts as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listGbpAccounts`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource under which the GBP accounts are
+   *   listed. Format: `accounts/{account}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `GbpAccount` resources to return. The
+   *   service returns fewer than this value if the number of gbp accounts is less
+   *   that than the `pageSize`. The default value is 50. The maximum value is
+   *   1000; If a value higher than the maximum is specified, then the `pageSize`
+   *   will default to the maximum.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListGbpAccounts` call.
+   *   Provide the page token to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListGbpAccounts` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.shopping.merchant.accounts.v1beta.GbpAccount|GbpAccount}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/gbp_accounts_service.list_gbp_accounts.js</caption>
+   * region_tag:merchantapi_v1beta_generated_GbpAccountsService_ListGbpAccounts_async
+   */
+  listGbpAccountsAsync(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.shopping.merchant.accounts.v1beta.IGbpAccount> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGbpAccounts'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listGbpAccounts iterate %j', request);
+    return this.descriptors.page.listGbpAccounts.asyncIterate(
+      this.innerApiCalls['listGbpAccounts'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.shopping.merchant.accounts.v1beta.IGbpAccount>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1605,8 +1467,8 @@ export class HomepageServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.homepageServiceStub && !this._terminated) {
-      return this.homepageServiceStub.then(stub => {
+    if (this.gbpAccountsServiceStub && !this._terminated) {
+      return this.gbpAccountsServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

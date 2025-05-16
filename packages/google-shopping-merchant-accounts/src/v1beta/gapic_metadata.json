@@ -333,6 +333,44 @@
         }
       }
     },
+    "GbpAccountsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GbpAccountsServiceClient",
+          "rpcs": {
+            "LinkGbpAccount": {
+              "methods": [
+                "linkGbpAccount"
+              ]
+            },
+            "ListGbpAccounts": {
+              "methods": [
+                "listGbpAccounts",
+                "listGbpAccountsStream",
+                "listGbpAccountsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GbpAccountsServiceClient",
+          "rpcs": {
+            "LinkGbpAccount": {
+              "methods": [
+                "linkGbpAccount"
+              ]
+            },
+            "ListGbpAccounts": {
+              "methods": [
+                "listGbpAccounts",
+                "listGbpAccountsStream",
+                "listGbpAccountsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "HomepageService": {
       "clients": {
         "grpc": {
@@ -381,6 +419,112 @@
             "UnclaimHomepage": {
               "methods": [
                 "unclaimHomepage"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LfpProvidersService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LfpProvidersServiceClient",
+          "rpcs": {
+            "LinkLfpProvider": {
+              "methods": [
+                "linkLfpProvider"
+              ]
+            },
+            "FindLfpProviders": {
+              "methods": [
+                "findLfpProviders",
+                "findLfpProvidersStream",
+                "findLfpProvidersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LfpProvidersServiceClient",
+          "rpcs": {
+            "LinkLfpProvider": {
+              "methods": [
+                "linkLfpProvider"
+              ]
+            },
+            "FindLfpProviders": {
+              "methods": [
+                "findLfpProviders",
+                "findLfpProvidersStream",
+                "findLfpProvidersAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "OmnichannelSettingsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OmnichannelSettingsServiceClient",
+          "rpcs": {
+            "GetOmnichannelSetting": {
+              "methods": [
+                "getOmnichannelSetting"
+              ]
+            },
+            "CreateOmnichannelSetting": {
+              "methods": [
+                "createOmnichannelSetting"
+              ]
+            },
+            "UpdateOmnichannelSetting": {
+              "methods": [
+                "updateOmnichannelSetting"
+              ]
+            },
+            "RequestInventoryVerification": {
+              "methods": [
+                "requestInventoryVerification"
+              ]
+            },
+            "ListOmnichannelSettings": {
+              "methods": [
+                "listOmnichannelSettings",
+                "listOmnichannelSettingsStream",
+                "listOmnichannelSettingsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OmnichannelSettingsServiceClient",
+          "rpcs": {
+            "GetOmnichannelSetting": {
+              "methods": [
+                "getOmnichannelSetting"
+              ]
+            },
+            "CreateOmnichannelSetting": {
+              "methods": [
+                "createOmnichannelSetting"
+              ]
+            },
+            "UpdateOmnichannelSetting": {
+              "methods": [
+                "updateOmnichannelSetting"
+              ]
+            },
+            "RequestInventoryVerification": {
+              "methods": [
+                "requestInventoryVerification"
+              ]
+            },
+            "ListOmnichannelSettings": {
+              "methods": [
+                "listOmnichannelSettings",
+                "listOmnichannelSettingsStream",
+                "listOmnichannelSettingsAsync"
               ]
             }
           }

@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as accounttaxserviceModule from '../src';
+import * as omnichannelsettingsserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -127,18 +127,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta.AccountTaxServiceClient', () => {
+describe('v1beta.OmnichannelSettingsServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new accounttaxserviceModule.v1beta.AccountTaxServiceClient();
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new accounttaxserviceModule.v1beta.AccountTaxServiceClient();
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -150,7 +150,8 @@ describe('v1beta.AccountTaxServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          accounttaxserviceModule.v1beta.AccountTaxServiceClient.servicePath;
+          omnichannelsettingsserviceModule.v1beta
+            .OmnichannelSettingsServiceClient.servicePath;
         assert.strictEqual(servicePath, 'merchantapi.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -159,24 +160,27 @@ describe('v1beta.AccountTaxServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          accounttaxserviceModule.v1beta.AccountTaxServiceClient.apiEndpoint;
+          omnichannelsettingsserviceModule.v1beta
+            .OmnichannelSettingsServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {universeDomain: 'example.com'}
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {universeDomain: 'example.com'}
+        );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'merchantapi.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {universe_domain: 'example.com'}
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {universe_domain: 'example.com'}
+        );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'merchantapi.example.com');
     });
@@ -187,7 +191,7 @@ describe('v1beta.AccountTaxServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new accounttaxserviceModule.v1beta.AccountTaxServiceClient();
+            new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.example.com');
           if (saved) {
@@ -201,9 +205,9 @@ describe('v1beta.AccountTaxServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new accounttaxserviceModule.v1beta.AccountTaxServiceClient({
-              universeDomain: 'configured.example.com',
-            });
+            new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+              {universeDomain: 'configured.example.com'}
+            );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
           if (saved) {
@@ -216,57 +220,61 @@ describe('v1beta.AccountTaxServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new accounttaxserviceModule.v1beta.AccountTaxServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
       });
     });
 
     it('has port', () => {
-      const port = accounttaxserviceModule.v1beta.AccountTaxServiceClient.port;
+      const port =
+        omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient
+          .port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new accounttaxserviceModule.v1beta.AccountTaxServiceClient();
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          fallback: true,
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            fallback: true,
+          }
+        );
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.accountTaxServiceStub, undefined);
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.omnichannelSettingsServiceStub, undefined);
       await client.initialize();
-      assert(client.accountTaxServiceStub);
+      assert(client.omnichannelSettingsServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize().catch(err => {
         throw err;
       });
-      assert(client.accountTaxServiceStub);
+      assert(client.omnichannelSettingsServiceStub);
       client
         .close()
         .then(() => {
@@ -278,13 +286,14 @@ describe('v1beta.AccountTaxServiceClient', () => {
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
-      assert.strictEqual(client.accountTaxServiceStub, undefined);
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.omnichannelSettingsServiceStub, undefined);
       client
         .close()
         .then(() => {
@@ -297,12 +306,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -311,12 +321,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -334,68 +345,71 @@ describe('v1beta.AccountTaxServiceClient', () => {
     });
   });
 
-  describe('getAccountTax', () => {
-    it('invokes getAccountTax without error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+  describe('getOmnichannelSetting', () => {
+    it('invokes getOmnichannelSetting without error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+        new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
       );
-      client.innerApiCalls.getAccountTax = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAccountTax(request);
+      client.innerApiCalls.getOmnichannelSetting =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getOmnichannelSetting(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getAccountTax as SinonStub
+        client.innerApiCalls.getOmnichannelSetting as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccountTax as SinonStub
+        client.innerApiCalls.getOmnichannelSetting as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getAccountTax without error using callback', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes getOmnichannelSetting without error using callback', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+        new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
       );
-      client.innerApiCalls.getAccountTax =
+      client.innerApiCalls.getOmnichannelSetting =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getAccountTax(
+        client.getOmnichannelSetting(
           request,
           (
             err?: Error | null,
-            result?: protos.google.shopping.merchant.accounts.v1beta.IAccountTax | null
+            result?: protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting | null
           ) => {
             if (err) {
               reject(err);
@@ -408,61 +422,66 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getAccountTax as SinonStub
+        client.innerApiCalls.getOmnichannelSetting as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccountTax as SinonStub
+        client.innerApiCalls.getOmnichannelSetting as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getAccountTax with error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes getOmnichannelSetting with error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getAccountTax = stubSimpleCall(
+      client.innerApiCalls.getOmnichannelSetting = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getAccountTax(request), expectedError);
+      await assert.rejects(
+        client.getOmnichannelSetting(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.getAccountTax as SinonStub
+        client.innerApiCalls.getOmnichannelSetting as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccountTax as SinonStub
+        client.innerApiCalls.getOmnichannelSetting as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getAccountTax with closed client', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes getOmnichannelSetting with closed client', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -470,74 +489,78 @@ describe('v1beta.AccountTaxServiceClient', () => {
       client.close().catch(err => {
         throw err;
       });
-      await assert.rejects(client.getAccountTax(request), expectedError);
+      await assert.rejects(
+        client.getOmnichannelSetting(request),
+        expectedError
+      );
     });
   });
 
-  describe('updateAccountTax', () => {
-    it('invokes updateAccountTax without error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+  describe('createOmnichannelSetting', () => {
+    it('invokes createOmnichannelSetting without error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest()
       );
-      request.accountTax ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest',
-        ['accountTax', 'name']
+        '.google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest',
+        ['parent']
       );
-      request.accountTax.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_tax.name=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+        new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
       );
-      client.innerApiCalls.updateAccountTax = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateAccountTax(request);
+      client.innerApiCalls.createOmnichannelSetting =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createOmnichannelSetting(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateAccountTax as SinonStub
+        client.innerApiCalls.createOmnichannelSetting as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccountTax as SinonStub
+        client.innerApiCalls.createOmnichannelSetting as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateAccountTax without error using callback', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes createOmnichannelSetting without error using callback', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest()
       );
-      request.accountTax ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest',
-        ['accountTax', 'name']
+        '.google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest',
+        ['parent']
       );
-      request.accountTax.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_tax.name=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+        new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
       );
-      client.innerApiCalls.updateAccountTax =
+      client.innerApiCalls.createOmnichannelSetting =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.updateAccountTax(
+        client.createOmnichannelSetting(
           request,
           (
             err?: Error | null,
-            result?: protos.google.shopping.merchant.accounts.v1beta.IAccountTax | null
+            result?: protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting | null
           ) => {
             if (err) {
               reject(err);
@@ -550,153 +573,468 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.updateAccountTax as SinonStub
+        client.innerApiCalls.createOmnichannelSetting as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccountTax as SinonStub
+        client.innerApiCalls.createOmnichannelSetting as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateAccountTax with error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes createOmnichannelSetting with error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest()
       );
-      request.accountTax ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest',
-        ['accountTax', 'name']
+        '.google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest',
+        ['parent']
       );
-      request.accountTax.name = defaultValue1;
-      const expectedHeaderRequestParams = `account_tax.name=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateAccountTax = stubSimpleCall(
+      client.innerApiCalls.createOmnichannelSetting = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.updateAccountTax(request), expectedError);
+      await assert.rejects(
+        client.createOmnichannelSetting(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.updateAccountTax as SinonStub
+        client.innerApiCalls.createOmnichannelSetting as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.updateAccountTax as SinonStub
+        client.innerApiCalls.createOmnichannelSetting as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes updateAccountTax with closed client', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes createOmnichannelSetting with closed client', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest()
       );
-      request.accountTax ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.UpdateAccountTaxRequest',
-        ['accountTax', 'name']
+        '.google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest',
+        ['parent']
       );
-      request.accountTax.name = defaultValue1;
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close().catch(err => {
         throw err;
       });
-      await assert.rejects(client.updateAccountTax(request), expectedError);
+      await assert.rejects(
+        client.createOmnichannelSetting(request),
+        expectedError
+      );
     });
   });
 
-  describe('listAccountTax', () => {
-    it('invokes listAccountTax without error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+  describe('updateOmnichannelSetting', () => {
+    it('invokes updateOmnichannelSetting without error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest()
       );
+      request.omnichannelSetting ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
-        ['parent']
+        '.google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest',
+        ['omnichannelSetting', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
-        ),
-      ];
-      client.innerApiCalls.listAccountTax = stubSimpleCall(expectedResponse);
-      const [response] = await client.listAccountTax(request);
+      request.omnichannelSetting.name = defaultValue1;
+      const expectedHeaderRequestParams = `omnichannel_setting.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
+      );
+      client.innerApiCalls.updateOmnichannelSetting =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateOmnichannelSetting(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listAccountTax as SinonStub
+        client.innerApiCalls.updateOmnichannelSetting as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccountTax as SinonStub
+        client.innerApiCalls.updateOmnichannelSetting as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listAccountTax without error using callback', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes updateOmnichannelSetting without error using callback', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest()
+      );
+      request.omnichannelSetting ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest',
+        ['omnichannelSetting', 'name']
+      );
+      request.omnichannelSetting.name = defaultValue1;
+      const expectedHeaderRequestParams = `omnichannel_setting.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
+      );
+      client.innerApiCalls.updateOmnichannelSetting =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateOmnichannelSetting(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateOmnichannelSetting as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateOmnichannelSetting as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateOmnichannelSetting with error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest()
+      );
+      request.omnichannelSetting ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest',
+        ['omnichannelSetting', 'name']
+      );
+      request.omnichannelSetting.name = defaultValue1;
+      const expectedHeaderRequestParams = `omnichannel_setting.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateOmnichannelSetting = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateOmnichannelSetting(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateOmnichannelSetting as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateOmnichannelSetting as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateOmnichannelSetting with closed client', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest()
+      );
+      request.omnichannelSetting ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest',
+        ['omnichannelSetting', 'name']
+      );
+      request.omnichannelSetting.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateOmnichannelSetting(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('requestInventoryVerification', () => {
+    it('invokes requestInventoryVerification without error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse()
+      );
+      client.innerApiCalls.requestInventoryVerification =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.requestInventoryVerification(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.requestInventoryVerification as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.requestInventoryVerification as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes requestInventoryVerification without error using callback', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse()
+      );
+      client.innerApiCalls.requestInventoryVerification =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.requestInventoryVerification(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.requestInventoryVerification as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.requestInventoryVerification as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes requestInventoryVerification with error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.requestInventoryVerification = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.requestInventoryVerification(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.requestInventoryVerification as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.requestInventoryVerification as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes requestInventoryVerification with closed client', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.requestInventoryVerification(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('listOmnichannelSettings', () => {
+    it('invokes listOmnichannelSettings without error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+          new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
         ),
         generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+          new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
         ),
         generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+          new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
         ),
       ];
-      client.innerApiCalls.listAccountTax =
+      client.innerApiCalls.listOmnichannelSettings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listOmnichannelSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listOmnichannelSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listOmnichannelSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listOmnichannelSettings without error using callback', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
+        ),
+      ];
+      client.innerApiCalls.listOmnichannelSettings =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listAccountTax(
+        client.listOmnichannelSettings(
           request,
           (
             err?: Error | null,
             result?:
-              | protos.google.shopping.merchant.accounts.v1beta.IAccountTax[]
+              | protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting[]
               | null
           ) => {
             if (err) {
@@ -710,86 +1048,91 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listAccountTax as SinonStub
+        client.innerApiCalls.listOmnichannelSettings as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccountTax as SinonStub
+        client.innerApiCalls.listOmnichannelSettings as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listAccountTax with error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes listOmnichannelSettings with error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listAccountTax = stubSimpleCall(
+      client.innerApiCalls.listOmnichannelSettings = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.listAccountTax(request), expectedError);
+      await assert.rejects(
+        client.listOmnichannelSettings(request),
+        expectedError
+      );
       const actualRequest = (
-        client.innerApiCalls.listAccountTax as SinonStub
+        client.innerApiCalls.listOmnichannelSettings as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listAccountTax as SinonStub
+        client.innerApiCalls.listOmnichannelSettings as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listAccountTaxStream without error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes listOmnichannelSettingsStream without error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+          new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
         ),
         generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+          new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
         ),
         generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+          new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
         ),
       ];
-      client.descriptors.page.listAccountTax.createStream =
+      client.descriptors.page.listOmnichannelSettings.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listAccountTaxStream(request);
+      const stream = client.listOmnichannelSettingsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.merchant.accounts.v1beta.AccountTax[] =
+        const responses: protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.shopping.merchant.accounts.v1beta.AccountTax
+            response: protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting
           ) => {
             responses.push(response);
           }
@@ -804,47 +1147,54 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listAccountTax.createStream as SinonStub)
+        (
+          client.descriptors.page.listOmnichannelSettings
+            .createStream as SinonStub
+        )
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAccountTax, request)
+          .calledWith(client.innerApiCalls.listOmnichannelSettings, request)
       );
       assert(
-        (client.descriptors.page.listAccountTax.createStream as SinonStub)
+        (
+          client.descriptors.page.listOmnichannelSettings
+            .createStream as SinonStub
+        )
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
-    it('invokes listAccountTaxStream with error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('invokes listOmnichannelSettingsStream with error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listAccountTax.createStream =
+      client.descriptors.page.listOmnichannelSettings.createStream =
         stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAccountTaxStream(request);
+      const stream = client.listOmnichannelSettingsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.merchant.accounts.v1beta.AccountTax[] =
+        const responses: protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.shopping.merchant.accounts.v1beta.AccountTax
+            response: protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting
           ) => {
             responses.push(response);
           }
@@ -858,94 +1208,106 @@ describe('v1beta.AccountTaxServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listAccountTax.createStream as SinonStub)
+        (
+          client.descriptors.page.listOmnichannelSettings
+            .createStream as SinonStub
+        )
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAccountTax, request)
+          .calledWith(client.innerApiCalls.listOmnichannelSettings, request)
       );
       assert(
-        (client.descriptors.page.listAccountTax.createStream as SinonStub)
+        (
+          client.descriptors.page.listOmnichannelSettings
+            .createStream as SinonStub
+        )
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
-    it('uses async iteration with listAccountTax without error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('uses async iteration with listOmnichannelSettings without error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+          new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
         ),
         generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+          new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
         ),
         generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.AccountTax()
+          new protos.google.shopping.merchant.accounts.v1beta.OmnichannelSetting()
         ),
       ];
-      client.descriptors.page.listAccountTax.asyncIterate =
+      client.descriptors.page.listOmnichannelSettings.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.shopping.merchant.accounts.v1beta.IAccountTax[] =
+      const responses: protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting[] =
         [];
-      const iterable = client.listAccountTaxAsync(request);
+      const iterable = client.listOmnichannelSettingsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listAccountTax.asyncIterate as SinonStub
+          client.descriptors.page.listOmnichannelSettings
+            .asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listAccountTax.asyncIterate as SinonStub)
+        (
+          client.descriptors.page.listOmnichannelSettings
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
-    it('uses async iteration with listAccountTax with error', async () => {
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+    it('uses async iteration with listOmnichannelSettings with error', async () => {
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListAccountTaxRequest',
+        '.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listAccountTax.asyncIterate =
+      client.descriptors.page.listOmnichannelSettings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAccountTaxAsync(request);
+      const iterable = client.listOmnichannelSettingsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.shopping.merchant.accounts.v1beta.IAccountTax[] =
+        const responses: protos.google.shopping.merchant.accounts.v1beta.IOmnichannelSetting[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -953,16 +1315,20 @@ describe('v1beta.AccountTaxServiceClient', () => {
       });
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listAccountTax.asyncIterate as SinonStub
+          client.descriptors.page.listOmnichannelSettings
+            .asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listAccountTax.asyncIterate as SinonStub)
+        (
+          client.descriptors.page.listOmnichannelSettings
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -973,12 +1339,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
@@ -1014,12 +1381,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         issue: 'issueValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.accountIssuePathTemplate.render = sinon
         .stub()
@@ -1065,12 +1433,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         tax: 'taxValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.accountTaxPathTemplate.render = sinon
         .stub()
@@ -1115,12 +1484,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.autofeedSettingsPathTemplate.render = sinon
         .stub()
@@ -1158,12 +1528,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.automaticImprovementsPathTemplate.render = sinon
         .stub()
@@ -1205,12 +1576,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.businessIdentityPathTemplate.render = sinon
         .stub()
@@ -1248,12 +1620,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.businessInfoPathTemplate.render = sinon
         .stub()
@@ -1289,12 +1662,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         email: 'emailValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.emailPreferencesPathTemplate.render = sinon
         .stub()
@@ -1346,12 +1720,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         gbp_account: 'gbpAccountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.gbpAccountPathTemplate.render = sinon
         .stub()
@@ -1396,12 +1771,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.homepagePathTemplate.render = sinon
         .stub()
@@ -1438,12 +1814,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         omnichannel_setting: 'omnichannelSettingValue',
         lfp_provider: 'lfpProviderValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.lfpProviderPathTemplate.render = sinon
         .stub()
@@ -1504,12 +1881,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         omnichannel_setting: 'omnichannelSettingValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.omnichannelSettingPathTemplate.render = sinon
         .stub()
@@ -1568,12 +1946,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         return_policy: 'returnPolicyValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.onlineReturnPolicyPathTemplate.render = sinon
         .stub()
@@ -1632,12 +2011,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         program: 'programValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.programPathTemplate.render = sinon
         .stub()
@@ -1683,12 +2063,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         region: 'regionValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.regionPathTemplate.render = sinon
         .stub()
@@ -1733,12 +2114,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         account: 'accountValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.shippingSettingsPathTemplate.render = sinon
         .stub()
@@ -1776,12 +2158,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
       const expectedParameters = {
         version: 'versionValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.termsOfServicePathTemplate.render = sinon
         .stub()
@@ -1817,12 +2200,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         identifier: 'identifierValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.termsOfServiceAgreementStatePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1880,12 +2264,13 @@ describe('v1beta.AccountTaxServiceClient', () => {
         account: 'accountValue',
         email: 'emailValue',
       };
-      const client = new accounttaxserviceModule.v1beta.AccountTaxServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new omnichannelsettingsserviceModule.v1beta.OmnichannelSettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       await client.initialize();
       client.pathTemplates.userPathTemplate.render = sinon
         .stub()

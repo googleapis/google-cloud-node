@@ -21,7 +21,9 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as shippingsettingsserviceModule from '../src';
+import * as lfpprovidersserviceModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
@@ -64,18 +66,79 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-describe('v1beta.ShippingSettingsServiceClient', () => {
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
+}
+
+describe('v1beta.LfpProvidersServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient();
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient();
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -87,7 +150,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient
+          lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient
             .servicePath;
         assert.strictEqual(servicePath, 'merchantapi.googleapis.com');
         assert(stub.called);
@@ -97,7 +160,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient
+          lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient
             .apiEndpoint;
         assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
         assert(stub.called);
@@ -106,7 +169,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           universeDomain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -115,7 +178,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           universe_domain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -128,7 +191,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient();
+            new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.example.com');
           if (saved) {
@@ -142,9 +205,9 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient(
-              {universeDomain: 'configured.example.com'}
-            );
+            new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
+              universeDomain: 'configured.example.com',
+            });
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
           if (saved) {
@@ -157,7 +220,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -166,20 +229,20 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
 
     it('has port', () => {
       const port =
-        shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient.port;
+        lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient();
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           fallback: true,
         });
       assert(client);
@@ -187,25 +250,25 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.shippingSettingsServiceStub, undefined);
+      assert.strictEqual(client.lfpProvidersServiceStub, undefined);
       await client.initialize();
-      assert(client.shippingSettingsServiceStub);
+      assert(client.lfpProvidersServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize().catch(err => {
         throw err;
       });
-      assert(client.shippingSettingsServiceStub);
+      assert(client.lfpProvidersServiceStub);
       client
         .close()
         .then(() => {
@@ -218,11 +281,11 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.shippingSettingsServiceStub, undefined);
+      assert.strictEqual(client.lfpProvidersServiceStub, undefined);
       client
         .close()
         .then(() => {
@@ -236,7 +299,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -249,7 +312,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -270,67 +333,66 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
     });
   });
 
-  describe('getShippingSettings', () => {
-    it('invokes getShippingSettings without error', async () => {
+  describe('linkLfpProvider', () => {
+    it('invokes linkLfpProvider without error', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest',
+        '.google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ShippingSettings()
+        new protos.google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse()
       );
-      client.innerApiCalls.getShippingSettings =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getShippingSettings(request);
+      client.innerApiCalls.linkLfpProvider = stubSimpleCall(expectedResponse);
+      const [response] = await client.linkLfpProvider(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getShippingSettings as SinonStub
+        client.innerApiCalls.linkLfpProvider as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getShippingSettings as SinonStub
+        client.innerApiCalls.linkLfpProvider as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getShippingSettings without error using callback', async () => {
+    it('invokes linkLfpProvider without error using callback', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest',
+        '.google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ShippingSettings()
+        new protos.google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse()
       );
-      client.innerApiCalls.getShippingSettings =
+      client.innerApiCalls.linkLfpProvider =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getShippingSettings(
+        client.linkLfpProvider(
           request,
           (
             err?: Error | null,
-            result?: protos.google.shopping.merchant.accounts.v1beta.IShippingSettings | null
+            result?: protos.google.shopping.merchant.accounts.v1beta.ILinkLfpProviderResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -343,59 +405,59 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getShippingSettings as SinonStub
+        client.innerApiCalls.linkLfpProvider as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getShippingSettings as SinonStub
+        client.innerApiCalls.linkLfpProvider as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getShippingSettings with error', async () => {
+    it('invokes linkLfpProvider with error', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest',
+        '.google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getShippingSettings = stubSimpleCall(
+      client.innerApiCalls.linkLfpProvider = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getShippingSettings(request), expectedError);
+      await assert.rejects(client.linkLfpProvider(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getShippingSettings as SinonStub
+        client.innerApiCalls.linkLfpProvider as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getShippingSettings as SinonStub
+        client.innerApiCalls.linkLfpProvider as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getShippingSettings with closed client', async () => {
+    it('invokes linkLfpProvider with closed client', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetShippingSettingsRequest',
+        '.google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -403,71 +465,88 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
       client.close().catch(err => {
         throw err;
       });
-      await assert.rejects(client.getShippingSettings(request), expectedError);
+      await assert.rejects(client.linkLfpProvider(request), expectedError);
     });
   });
 
-  describe('insertShippingSettings', () => {
-    it('invokes insertShippingSettings without error', async () => {
+  describe('findLfpProviders', () => {
+    it('invokes findLfpProviders without error', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest',
+        '.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ShippingSettings()
-      );
-      client.innerApiCalls.insertShippingSettings =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.insertShippingSettings(request);
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.LfpProvider()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.LfpProvider()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.LfpProvider()
+        ),
+      ];
+      client.innerApiCalls.findLfpProviders = stubSimpleCall(expectedResponse);
+      const [response] = await client.findLfpProviders(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.insertShippingSettings as SinonStub
+        client.innerApiCalls.findLfpProviders as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.insertShippingSettings as SinonStub
+        client.innerApiCalls.findLfpProviders as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes insertShippingSettings without error using callback', async () => {
+    it('invokes findLfpProviders without error using callback', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest',
+        '.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ShippingSettings()
-      );
-      client.innerApiCalls.insertShippingSettings =
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.LfpProvider()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.LfpProvider()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.LfpProvider()
+        ),
+      ];
+      client.innerApiCalls.findLfpProviders =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.insertShippingSettings(
+        client.findLfpProviders(
           request,
           (
             err?: Error | null,
-            result?: protos.google.shopping.merchant.accounts.v1beta.IShippingSettings | null
+            result?:
+              | protos.google.shopping.merchant.accounts.v1beta.ILfpProvider[]
+              | null
           ) => {
             if (err) {
               reject(err);
@@ -480,72 +559,254 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.insertShippingSettings as SinonStub
+        client.innerApiCalls.findLfpProviders as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.insertShippingSettings as SinonStub
+        client.innerApiCalls.findLfpProviders as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes insertShippingSettings with error', async () => {
+    it('invokes findLfpProviders with error', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest',
+        '.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.insertShippingSettings = stubSimpleCall(
+      client.innerApiCalls.findLfpProviders = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.insertShippingSettings(request),
-        expectedError
-      );
+      await assert.rejects(client.findLfpProviders(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.insertShippingSettings as SinonStub
+        client.innerApiCalls.findLfpProviders as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.insertShippingSettings as SinonStub
+        client.innerApiCalls.findLfpProviders as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes insertShippingSettings with closed client', async () => {
+    it('invokes findLfpProvidersStream without error', async () => {
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.InsertShippingSettingsRequest',
+        '.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.LfpProvider()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.LfpProvider()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.LfpProvider()
+        ),
+      ];
+      client.descriptors.page.findLfpProviders.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.findLfpProvidersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.shopping.merchant.accounts.v1beta.LfpProvider[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.shopping.merchant.accounts.v1beta.LfpProvider
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
       });
-      await assert.rejects(
-        client.insertShippingSettings(request),
-        expectedError
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.findLfpProviders.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.findLfpProviders, request)
+      );
+      assert(
+        (client.descriptors.page.findLfpProviders.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes findLfpProvidersStream with error', async () => {
+      const client =
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.findLfpProviders.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.findLfpProvidersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.shopping.merchant.accounts.v1beta.LfpProvider[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.shopping.merchant.accounts.v1beta.LfpProvider
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.findLfpProviders.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.findLfpProviders, request)
+      );
+      assert(
+        (client.descriptors.page.findLfpProviders.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with findLfpProviders without error', async () => {
+      const client =
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.LfpProvider()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.LfpProvider()
+        ),
+        generateSampleMessage(
+          new protos.google.shopping.merchant.accounts.v1beta.LfpProvider()
+        ),
+      ];
+      client.descriptors.page.findLfpProviders.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.shopping.merchant.accounts.v1beta.ILfpProvider[] =
+        [];
+      const iterable = client.findLfpProvidersAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.findLfpProviders.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.findLfpProviders.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with findLfpProviders with error', async () => {
+      const client =
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.findLfpProviders.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.findLfpProvidersAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.shopping.merchant.accounts.v1beta.ILfpProvider[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.findLfpProviders.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.findLfpProviders.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -557,7 +818,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -597,7 +858,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         issue: 'issueValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -647,7 +908,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         tax: 'taxValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -696,7 +957,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -738,7 +999,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -784,7 +1045,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -826,7 +1087,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -866,7 +1127,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         email: 'emailValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -922,7 +1183,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         gbp_account: 'gbpAccountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -971,7 +1232,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1012,7 +1273,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         lfp_provider: 'lfpProviderValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1077,7 +1338,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         omnichannel_setting: 'omnichannelSettingValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1140,7 +1401,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         return_policy: 'returnPolicyValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1203,7 +1464,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         program: 'programValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1253,7 +1514,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         region: 'regionValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1302,7 +1563,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1344,7 +1605,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         version: 'versionValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1384,7 +1645,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         identifier: 'identifierValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1446,7 +1707,7 @@ describe('v1beta.ShippingSettingsServiceClient', () => {
         email: 'emailValue',
       };
       const client =
-        new shippingsettingsserviceModule.v1beta.ShippingSettingsServiceClient({
+        new lfpprovidersserviceModule.v1beta.LfpProvidersServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
