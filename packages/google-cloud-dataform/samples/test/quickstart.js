@@ -18,7 +18,7 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const { DataformClient } = require('@google-cloud/dataform').v1beta1;
+const {DataformClient} = require('@google-cloud/dataform').v1beta1;
 const dataformClient = new DataformClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
@@ -33,7 +33,10 @@ describe('Quickstart', () => {
   });
 
   it('should run quickstart', async () => {
-    const output = execSync(`node ./quickstart.js projects/${projectId}/locations/us-central1`, {cwd});
+    const output = execSync(
+      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+      {cwd}
+    );
     assert(output !== null);
   });
 });
