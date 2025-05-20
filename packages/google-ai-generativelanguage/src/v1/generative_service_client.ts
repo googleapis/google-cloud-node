@@ -576,8 +576,8 @@ export class GenerativeServiceClient {
    *   Required. The content to embed. Only the `parts.text` fields will be
    *   counted.
    * @param {google.ai.generativelanguage.v1.TaskType} [request.taskType]
-   *   Optional. Optional task type for which the embeddings will be used. Can
-   *   only be set for `models/embedding-001`.
+   *   Optional. Optional task type for which the embeddings will be used. Not
+   *   supported on earlier models (`models/embedding-001`).
    * @param {string} [request.title]
    *   Optional. An optional title for the text. Only applicable when TaskType is
    *   `RETRIEVAL_DOCUMENT`.

@@ -29,14 +29,16 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of Case object for which attachments should be
-   *  listed.
+   *  Required. The name of the case for which attachments should be listed.
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of attachments fetched with each request. If not
-   *  provided, the default is 10. The maximum page size that will be returned is
-   *  100.
+   *  The maximum number of attachments fetched with each request.
+   *  If not provided, the default is 10. The maximum page size that will be
+   *  returned is 100.
+   *  The size of each page can be smaller than the requested page size and can
+   *  include zero. For example, you could request 100 attachments on one page,
+   *  receive 0, and then on the next page, receive 90.
    */
   // const pageSize = 1234
   /**

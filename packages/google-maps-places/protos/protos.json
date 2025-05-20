@@ -66,22 +66,6 @@
                 }
               }
             },
-            "Money": {
-              "fields": {
-                "currencyCode": {
-                  "type": "string",
-                  "id": 1
-                },
-                "units": {
-                  "type": "int64",
-                  "id": 2
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 3
-                }
-              }
-            },
             "Date": {
               "fields": {
                 "year": {
@@ -93,6 +77,22 @@
                   "id": 2
                 },
                 "day": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
+            },
+            "Money": {
+              "fields": {
+                "currencyCode": {
+                  "type": "string",
+                  "id": 1
+                },
+                "units": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "nanos": {
                   "type": "int32",
                   "id": 3
                 }
@@ -225,6 +225,114 @@
                     "php_namespace": "Google\\Maps\\Places\\V1"
                   },
                   "nested": {
+                    "AddressDescriptor": {
+                      "fields": {
+                        "landmarks": {
+                          "rule": "repeated",
+                          "type": "Landmark",
+                          "id": 1
+                        },
+                        "areas": {
+                          "rule": "repeated",
+                          "type": "Area",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Landmark": {
+                          "oneofs": {
+                            "_travelDistanceMeters": {
+                              "oneof": [
+                                "travelDistanceMeters"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "places.googleapis.com/Place"
+                              }
+                            },
+                            "placeId": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "displayName": {
+                              "type": "google.type.LocalizedText",
+                              "id": 3
+                            },
+                            "types": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
+                            },
+                            "spatialRelationship": {
+                              "type": "SpatialRelationship",
+                              "id": 5
+                            },
+                            "straightLineDistanceMeters": {
+                              "type": "float",
+                              "id": 6
+                            },
+                            "travelDistanceMeters": {
+                              "type": "float",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SpatialRelationship": {
+                              "values": {
+                                "NEAR": 0,
+                                "WITHIN": 1,
+                                "BESIDE": 2,
+                                "ACROSS_THE_ROAD": 3,
+                                "DOWN_THE_ROAD": 4,
+                                "AROUND_THE_CORNER": 5,
+                                "BEHIND": 6
+                              }
+                            }
+                          }
+                        },
+                        "Area": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "places.googleapis.com/Place"
+                              }
+                            },
+                            "placeId": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "displayName": {
+                              "type": "google.type.LocalizedText",
+                              "id": 3
+                            },
+                            "containment": {
+                              "type": "Containment",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "Containment": {
+                              "values": {
+                                "CONTAINMENT_UNSPECIFIED": 0,
+                                "WITHIN": 1,
+                                "OUTSKIRTS": 2,
+                                "NEAR": 3
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "AuthorAttribution": {
                       "fields": {
                         "displayName": {
@@ -309,6 +417,14 @@
                         "publishTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 14
+                        },
+                        "flagContentUri": {
+                          "type": "string",
+                          "id": 15
+                        },
+                        "googleMapsUri": {
+                          "type": "string",
+                          "id": 16
                         }
                       }
                     },
@@ -439,6 +555,14 @@
                           "rule": "repeated",
                           "type": "AuthorAttribution",
                           "id": 4
+                        },
+                        "flagContentUri": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "googleMapsUri": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -1077,10 +1201,6 @@
                           "type": "GenerativeSummary",
                           "id": 80
                         },
-                        "areaSummary": {
-                          "type": "AreaSummary",
-                          "id": 81
-                        },
                         "containingPlaces": {
                           "rule": "repeated",
                           "type": "ContainingPlace",
@@ -1093,9 +1213,25 @@
                             "proto3_optional": true
                           }
                         },
+                        "addressDescriptor": {
+                          "type": "AddressDescriptor",
+                          "id": 84
+                        },
                         "priceRange": {
                           "type": "PriceRange",
                           "id": 86
+                        },
+                        "reviewSummary": {
+                          "type": "ReviewSummary",
+                          "id": 87
+                        },
+                        "evChargeAmenitySummary": {
+                          "type": "EvChargeAmenitySummary",
+                          "id": 89
+                        },
+                        "neighborhoodSummary": {
+                          "type": "NeighborhoodSummary",
+                          "id": 91
                         }
                       },
                       "nested": {
@@ -1508,22 +1644,13 @@
                               "type": "google.type.LocalizedText",
                               "id": 1
                             },
-                            "description": {
-                              "type": "google.type.LocalizedText",
-                              "id": 2
-                            },
-                            "references": {
-                              "type": "References",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "AreaSummary": {
-                          "fields": {
-                            "contentBlocks": {
-                              "rule": "repeated",
-                              "type": "ContentBlock",
+                            "overviewFlagContentUri": {
+                              "type": "string",
                               "id": 4
+                            },
+                            "disclosureText": {
+                              "type": "google.type.LocalizedText",
+                              "id": 6
                             }
                           }
                         },
@@ -1539,6 +1666,70 @@
                             "id": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "ReviewSummary": {
+                          "fields": {
+                            "text": {
+                              "type": "google.type.LocalizedText",
+                              "id": 1
+                            },
+                            "flagContentUri": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "disclosureText": {
+                              "type": "google.type.LocalizedText",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "EvChargeAmenitySummary": {
+                          "fields": {
+                            "overview": {
+                              "type": "ContentBlock",
+                              "id": 1
+                            },
+                            "coffee": {
+                              "type": "ContentBlock",
+                              "id": 2
+                            },
+                            "restaurant": {
+                              "type": "ContentBlock",
+                              "id": 3
+                            },
+                            "store": {
+                              "type": "ContentBlock",
+                              "id": 4
+                            },
+                            "flagContentUri": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "disclosureText": {
+                              "type": "google.type.LocalizedText",
+                              "id": 6
+                            }
+                          }
+                        },
+                        "NeighborhoodSummary": {
+                          "fields": {
+                            "overview": {
+                              "type": "ContentBlock",
+                              "id": 1
+                            },
+                            "description": {
+                              "type": "ContentBlock",
+                              "id": 2
+                            },
+                            "flagContentUri": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "disclosureText": {
+                              "type": "google.type.LocalizedText",
+                              "id": 4
                             }
                           }
                         }

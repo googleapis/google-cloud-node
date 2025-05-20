@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.5.1...gdchardwaremanagement-v0.6.0) (2025-05-09)
+
+
+### Features
+
+* [gdchardwaremanagement] accept status updates in the SignalZoneState method ([#6284](https://github.com/googleapis/google-cloud-node/issues/6284)) ([e4a4e69](https://github.com/googleapis/google-cloud-node/commit/e4a4e69982e49e751828d7a7f21dad4c335b95ca))
+
 ## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.5.0...gdchardwaremanagement-v0.5.1) (2025-03-21)
 
 

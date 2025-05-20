@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -778,9 +781,19 @@
                                 "discoveryType"
                               ]
                             },
+                            "_commercialInfo": {
+                              "oneof": [
+                                "commercialInfo"
+                              ]
+                            },
                             "_logLinkedDatasetQueryUserEmail": {
                               "oneof": [
                                 "logLinkedDatasetQueryUserEmail"
+                              ]
+                            },
+                            "_allowOnlyMetadataSharing": {
+                              "oneof": [
+                                "allowOnlyMetadataSharing"
                               ]
                             }
                           },
@@ -893,9 +906,25 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             },
+                            "commercialInfo": {
+                              "type": "CommercialInfo",
+                              "id": 17,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
                             "logLinkedDatasetQueryUserEmail": {
                               "type": "bool",
                               "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "allowOnlyMetadataSharing": {
+                              "type": "bool",
+                              "id": 19,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
@@ -934,7 +963,8 @@
                                   "oneofs": {
                                     "resource": {
                                       "oneof": [
-                                        "table"
+                                        "table",
+                                        "routine"
                                       ]
                                     }
                                   },
@@ -945,6 +975,14 @@
                                       "options": {
                                         "(google.api.field_behavior)": "OPTIONAL",
                                         "(google.api.resource_reference).type": "bigquery.googleapis.com/Table"
+                                      }
+                                    },
+                                    "routine": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL",
+                                        "(google.api.resource_reference).type": "bigquery.googleapis.com/Routine"
                                       }
                                     }
                                   }
@@ -1017,6 +1055,69 @@
                                   "id": 2,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "CommercialInfo": {
+                              "oneofs": {
+                                "_cloudMarketplace": {
+                                  "oneof": [
+                                    "cloudMarketplace"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "cloudMarketplace": {
+                                  "type": "GoogleCloudMarketplaceInfo",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "GoogleCloudMarketplaceInfo": {
+                                  "oneofs": {
+                                    "_service": {
+                                      "oneof": [
+                                        "service"
+                                      ]
+                                    },
+                                    "_commercialState": {
+                                      "oneof": [
+                                        "commercialState"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "service": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                        "(google.api.resource_reference).type": "servicemanagement.googleapis.com/ManagedService",
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "commercialState": {
+                                      "type": "CommercialState",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                        "proto3_optional": true
+                                      }
+                                    }
+                                  },
+                                  "nested": {
+                                    "CommercialState": {
+                                      "values": {
+                                        "COMMERCIAL_STATE_UNSPECIFIED": 0,
+                                        "ONBOARDING": 1,
+                                        "ACTIVE": 2
+                                      }
+                                    }
                                   }
                                 }
                               }
@@ -1158,12 +1259,26 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             },
+                            "commercialInfo": {
+                              "type": "CommercialInfo",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
                             "logLinkedDatasetQueryUserEmail": {
                               "type": "bool",
                               "id": 14,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "proto3_optional": true
+                              }
+                            },
+                            "destinationDataset": {
+                              "type": "DestinationDataset",
+                              "id": 15,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           },
@@ -1197,6 +1312,30 @@
                                   "id": 2,
                                   "options": {
                                     "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "CommercialInfo": {
+                              "fields": {
+                                "cloudMarketplace": {
+                                  "type": "GoogleCloudMarketplaceInfo",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "GoogleCloudMarketplaceInfo": {
+                                  "fields": {
+                                    "order": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.resource_reference).type": "cloudcommerceconsumerprocurement.googleapis.com/Order"
+                                      }
+                                    }
                                   }
                                 }
                               }
@@ -1442,6 +1581,13 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "analyticshub.googleapis.com/Listing"
                               }
+                            },
+                            "deleteCommercial": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -1647,6 +1793,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "analyticshub.googleapis.com/Subscription"
+                              }
+                            },
+                            "revokeCommercial": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
