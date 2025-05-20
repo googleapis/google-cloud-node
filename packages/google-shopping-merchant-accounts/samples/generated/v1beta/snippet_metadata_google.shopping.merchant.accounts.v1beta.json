@@ -1602,7 +1602,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -1639,7 +1639,7 @@
             "regionTag": "merchantapi_v1beta_generated_OnlineReturnPolicyService_DeleteOnlineReturnPolicy_async",
             "title": "AccountIssueService deleteOnlineReturnPolicy Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes an existing return policy for a given merchant.",
+            "description": " Deletes an existing return policy.",
             "canonical": true,
             "file": "online_return_policy_service.delete_online_return_policy.js",
             "language": "JAVASCRIPT",

@@ -10345,115 +10345,6 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
-                    /** Properties of a ListOnlineReturnPoliciesRequest. */
-                    interface IListOnlineReturnPoliciesRequest {
-
-                        /** ListOnlineReturnPoliciesRequest parent */
-                        parent?: (string|null);
-
-                        /** ListOnlineReturnPoliciesRequest pageSize */
-                        pageSize?: (number|null);
-
-                        /** ListOnlineReturnPoliciesRequest pageToken */
-                        pageToken?: (string|null);
-                    }
-
-                    /** Represents a ListOnlineReturnPoliciesRequest. */
-                    class ListOnlineReturnPoliciesRequest implements IListOnlineReturnPoliciesRequest {
-
-                        /**
-                         * Constructs a new ListOnlineReturnPoliciesRequest.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest);
-
-                        /** ListOnlineReturnPoliciesRequest parent. */
-                        public parent: string;
-
-                        /** ListOnlineReturnPoliciesRequest pageSize. */
-                        public pageSize: number;
-
-                        /** ListOnlineReturnPoliciesRequest pageToken. */
-                        public pageToken: string;
-
-                        /**
-                         * Creates a new ListOnlineReturnPoliciesRequest instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ListOnlineReturnPoliciesRequest instance
-                         */
-                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest): google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest;
-
-                        /**
-                         * Encodes the specified ListOnlineReturnPoliciesRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest.verify|verify} messages.
-                         * @param message ListOnlineReturnPoliciesRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ListOnlineReturnPoliciesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest.verify|verify} messages.
-                         * @param message ListOnlineReturnPoliciesRequest message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ListOnlineReturnPoliciesRequest message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ListOnlineReturnPoliciesRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest;
-
-                        /**
-                         * Decodes a ListOnlineReturnPoliciesRequest message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ListOnlineReturnPoliciesRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest;
-
-                        /**
-                         * Verifies a ListOnlineReturnPoliciesRequest message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ListOnlineReturnPoliciesRequest message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ListOnlineReturnPoliciesRequest
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest;
-
-                        /**
-                         * Creates a plain object from a ListOnlineReturnPoliciesRequest message. Also converts values to other types if specified.
-                         * @param message ListOnlineReturnPoliciesRequest
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ListOnlineReturnPoliciesRequest to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for ListOnlineReturnPoliciesRequest
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
                     /** Properties of a CreateOnlineReturnPolicyRequest. */
                     interface ICreateOnlineReturnPolicyRequest {
 
@@ -10751,6 +10642,115 @@ export namespace google {
 
                         /**
                          * Gets the default type url for DeleteOnlineReturnPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListOnlineReturnPoliciesRequest. */
+                    interface IListOnlineReturnPoliciesRequest {
+
+                        /** ListOnlineReturnPoliciesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListOnlineReturnPoliciesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListOnlineReturnPoliciesRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListOnlineReturnPoliciesRequest. */
+                    class ListOnlineReturnPoliciesRequest implements IListOnlineReturnPoliciesRequest {
+
+                        /**
+                         * Constructs a new ListOnlineReturnPoliciesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest);
+
+                        /** ListOnlineReturnPoliciesRequest parent. */
+                        public parent: string;
+
+                        /** ListOnlineReturnPoliciesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListOnlineReturnPoliciesRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListOnlineReturnPoliciesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListOnlineReturnPoliciesRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest): google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest;
+
+                        /**
+                         * Encodes the specified ListOnlineReturnPoliciesRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest.verify|verify} messages.
+                         * @param message ListOnlineReturnPoliciesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListOnlineReturnPoliciesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest.verify|verify} messages.
+                         * @param message ListOnlineReturnPoliciesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListOnlineReturnPoliciesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListOnlineReturnPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest;
+
+                        /**
+                         * Decodes a ListOnlineReturnPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListOnlineReturnPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest;
+
+                        /**
+                         * Verifies a ListOnlineReturnPoliciesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListOnlineReturnPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListOnlineReturnPoliciesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest;
+
+                        /**
+                         * Creates a plain object from a ListOnlineReturnPoliciesRequest message. Also converts values to other types if specified.
+                         * @param message ListOnlineReturnPoliciesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListOnlineReturnPoliciesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListOnlineReturnPoliciesRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
