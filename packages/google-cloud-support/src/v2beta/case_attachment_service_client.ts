@@ -410,36 +410,6 @@ export class CaseAttachmentServiceClient {
   /**
    * List all the attachments associated with a support case.
    *
-   * EXAMPLES:
-   *
-   * cURL:
-   *
-   * ```shell
-   * case="projects/some-project/cases/23598314"
-   * curl \
-   *   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-   *   "https://cloudsupport.googleapis.com/v2/$case/attachments"
-   * ```
-   *
-   * Python:
-   *
-   * ```python
-   * import googleapiclient.discovery
-   *
-   * api_version = "v2"
-   * supportApiService = googleapiclient.discovery.build(
-   *     serviceName="cloudsupport",
-   *     version=api_version,
-   *     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version={api_version}",
-   * )
-   * request = (
-   *     supportApiService.cases()
-   *     .attachments()
-   *     .list(parent="projects/some-project/cases/43595344")
-   * )
-   * print(request.execute())
-   * ```
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
