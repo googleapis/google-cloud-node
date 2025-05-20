@@ -4289,6 +4289,42 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "maxResults": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dataStoreSpecs": {
+                          "rule": "repeated",
+                          "type": "DataStoreSpec",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "DataStoreSpec": {
+                          "fields": {
+                            "dataStore": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
                         }
                       }
                     },
