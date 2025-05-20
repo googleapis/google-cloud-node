@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "grafeas": {
       "nested": {
@@ -81,7 +84,8 @@
                 "COMPLIANCE": 9,
                 "DSSE_ATTESTATION": 10,
                 "VULNERABILITY_ASSESSMENT": 11,
-                "SBOM_REFERENCE": 12
+                "SBOM_REFERENCE": 12,
+                "SECRET": 13
               }
             },
             "RelatedUrl": {
@@ -142,6 +146,51 @@
                 "filePath": {
                   "type": "string",
                   "id": 1
+                },
+                "layerDetails": {
+                  "type": "LayerDetails",
+                  "id": 2
+                }
+              }
+            },
+            "BaseImage": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "repository": {
+                  "type": "string",
+                  "id": 2
+                },
+                "layerCount": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
+            },
+            "LayerDetails": {
+              "fields": {
+                "index": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "diffId": {
+                  "type": "string",
+                  "id": 2
+                },
+                "chainId": {
+                  "type": "string",
+                  "id": 5
+                },
+                "command": {
+                  "type": "string",
+                  "id": 3
+                },
+                "baseImages": {
+                  "rule": "repeated",
+                  "type": "BaseImage",
+                  "id": 4
                 }
               }
             },
@@ -1931,7 +1980,8 @@
                     "upgrade",
                     "compliance",
                     "dsseAttestation",
-                    "sbomReference"
+                    "sbomReference",
+                    "secret"
                   ]
                 }
               },
@@ -2008,6 +2058,10 @@
                   "type": "grafeas.v1.SBOMReferenceOccurrence",
                   "id": 19
                 },
+                "secret": {
+                  "type": "grafeas.v1.SecretOccurrence",
+                  "id": 20
+                },
                 "envelope": {
                   "type": "grafeas.v1.Envelope",
                   "id": 18
@@ -2033,7 +2087,8 @@
                     "compliance",
                     "dsseAttestation",
                     "vulnerabilityAssessment",
-                    "sbomReference"
+                    "sbomReference",
+                    "secret"
                   ]
                 }
               },
@@ -2123,6 +2178,10 @@
                 "sbomReference": {
                   "type": "grafeas.v1.SBOMReferenceNote",
                   "id": 21
+                },
+                "secret": {
+                  "type": "grafeas.v1.SecretNote",
+                  "id": 22
                 }
               }
             },
@@ -2773,6 +2832,93 @@
                   "type": "string",
                   "id": 4
                 }
+              }
+            },
+            "SecretNote": {
+              "fields": {}
+            },
+            "SecretOccurrence": {
+              "fields": {
+                "kind": {
+                  "type": "SecretKind",
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED"
+                  }
+                },
+                "locations": {
+                  "rule": "repeated",
+                  "type": "SecretLocation",
+                  "id": 2,
+                  "options": {
+                    "(google.api.field_behavior)": "OPTIONAL"
+                  }
+                },
+                "statuses": {
+                  "rule": "repeated",
+                  "type": "SecretStatus",
+                  "id": 3,
+                  "options": {
+                    "(google.api.field_behavior)": "OPTIONAL"
+                  }
+                }
+              }
+            },
+            "SecretLocation": {
+              "oneofs": {
+                "location": {
+                  "oneof": [
+                    "fileLocation"
+                  ]
+                }
+              },
+              "fields": {
+                "fileLocation": {
+                  "type": "FileLocation",
+                  "id": 1
+                }
+              }
+            },
+            "SecretStatus": {
+              "fields": {
+                "status": {
+                  "type": "Status",
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "OPTIONAL"
+                  }
+                },
+                "updateTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 2,
+                  "options": {
+                    "(google.api.field_behavior)": "OPTIONAL"
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "id": 3,
+                  "options": {
+                    "(google.api.field_behavior)": "OPTIONAL"
+                  }
+                }
+              },
+              "nested": {
+                "Status": {
+                  "values": {
+                    "STATUS_UNSPECIFIED": 0,
+                    "UNKNOWN": 1,
+                    "VALID": 2,
+                    "INVALID": 3
+                  }
+                }
+              }
+            },
+            "SecretKind": {
+              "values": {
+                "SECRET_KIND_UNSPECIFIED": 0,
+                "SECRET_KIND_UNKNOWN": 1,
+                "SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY": 2
               }
             },
             "UpgradeNote": {

@@ -23,6 +23,18 @@
   * [Case_service.update_case](#case_service.update_case)
   * [Comment_service.create_comment](#comment_service.create_comment)
   * [Comment_service.list_comments](#comment_service.list_comments)
+  * [Case_attachment_service.list_attachments](#case_attachment_service.list_attachments)
+  * [Case_service.close_case](#case_service.close_case)
+  * [Case_service.create_case](#case_service.create_case)
+  * [Case_service.escalate_case](#case_service.escalate_case)
+  * [Case_service.get_case](#case_service.get_case)
+  * [Case_service.list_cases](#case_service.list_cases)
+  * [Case_service.search_case_classifications](#case_service.search_case_classifications)
+  * [Case_service.search_cases](#case_service.search_cases)
+  * [Case_service.update_case](#case_service.update_case)
+  * [Comment_service.create_comment](#comment_service.create_comment)
+  * [Comment_service.list_comments](#comment_service.list_comments)
+  * [Feed_service.show_feed](#feed_service.show_feed)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -220,6 +232,210 @@ __Usage:__
 
 
 `node packages/google-cloud-support/samples/generated/v2/comment_service.list_comments.js`
+
+
+-----
+
+
+
+
+### Case_attachment_service.list_attachments
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_attachment_service.list_attachments.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/case_attachment_service.list_attachments.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/case_attachment_service.list_attachments.js`
+
+
+-----
+
+
+
+
+### Case_service.close_case
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_service.close_case.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/case_service.close_case.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/case_service.close_case.js`
+
+
+-----
+
+
+
+
+### Case_service.create_case
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_service.create_case.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/case_service.create_case.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/case_service.create_case.js`
+
+
+-----
+
+
+
+
+### Case_service.escalate_case
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_service.escalate_case.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/case_service.escalate_case.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/case_service.escalate_case.js`
+
+
+-----
+
+
+
+
+### Case_service.get_case
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_service.get_case.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/case_service.get_case.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/case_service.get_case.js`
+
+
+-----
+
+
+
+
+### Case_service.list_cases
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_service.list_cases.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/case_service.list_cases.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/case_service.list_cases.js`
+
+
+-----
+
+
+
+
+### Case_service.search_case_classifications
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_service.search_case_classifications.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/case_service.search_case_classifications.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/case_service.search_case_classifications.js`
+
+
+-----
+
+
+
+
+### Case_service.search_cases
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_service.search_cases.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/case_service.search_cases.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/case_service.search_cases.js`
+
+
+-----
+
+
+
+
+### Case_service.update_case
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/case_service.update_case.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/case_service.update_case.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/case_service.update_case.js`
+
+
+-----
+
+
+
+
+### Comment_service.create_comment
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/comment_service.create_comment.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/comment_service.create_comment.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/comment_service.create_comment.js`
+
+
+-----
+
+
+
+
+### Comment_service.list_comments
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/comment_service.list_comments.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/comment_service.list_comments.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/comment_service.list_comments.js`
+
+
+-----
+
+
+
+
+### Feed_service.show_feed
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-support/samples/generated/v2beta/feed_service.show_feed.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-support/samples/generated/v2beta/feed_service.show_feed.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-support/samples/generated/v2beta/feed_service.show_feed.js`
 
 
 -----

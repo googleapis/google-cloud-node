@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -11,7 +14,7 @@
                     "csharp_namespace": "Google.Cloud.AlloyDb.V1",
                     "go_package": "cloud.google.com/go/alloydb/apiv1/alloydbpb;alloydbpb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "ServiceProto",
+                    "java_outer_classname": "DataModelProto",
                     "java_package": "com.google.cloud.alloydb.v1",
                     "php_namespace": "Google\\Cloud\\AlloyDb\\V1",
                     "ruby_package": "Google::Cloud::AlloyDB::V1",
@@ -19,67 +22,97 @@
                     "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
                   },
                   "nested": {
-                    "SqlResult": {
+                    "CloudSQLBackupRunSource": {
                       "fields": {
-                        "columns": {
-                          "rule": "repeated",
-                          "type": "SqlResultColumn",
-                          "id": 1
-                        },
-                        "rows": {
-                          "rule": "repeated",
-                          "type": "SqlResultRow",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "SqlResultColumn": {
-                      "fields": {
-                        "name": {
+                        "project": {
                           "type": "string",
                           "id": 1
                         },
-                        "type": {
+                        "instanceId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "backupRunId": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
-                    "SqlResultRow": {
-                      "fields": {
-                        "values": {
-                          "rule": "repeated",
-                          "type": "SqlResultValue",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "SqlResultValue": {
-                      "oneofs": {
-                        "_value": {
-                          "oneof": [
-                            "value"
+                    "AlloyDBCSQLAdmin": {
+                      "options": {
+                        "(google.api.default_host)": "alloydb.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "RestoreFromCloudSQL": {
+                          "requestType": "RestoreFromCloudSQLRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/clusters:restoreFromCloudSQL",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,cluster_id",
+                            "(google.longrunning.operation_info).response_type": "Cluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/clusters:restoreFromCloudSQL",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,cluster_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Cluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
                           ]
-                        },
-                        "_nullValue": {
+                        }
+                      }
+                    },
+                    "RestoreFromCloudSQLRequest": {
+                      "oneofs": {
+                        "source": {
                           "oneof": [
-                            "nullValue"
+                            "cloudsqlBackupRunSource"
                           ]
                         }
                       },
                       "fields": {
-                        "value": {
+                        "cloudsqlBackupRunSource": {
+                          "type": "CloudSQLBackupRunSource",
+                          "id": 101
+                        },
+                        "parent": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "proto3_optional": true
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "alloydb.googleapis.com/Cluster"
                           }
                         },
-                        "nullValue": {
-                          "type": "bool",
+                        "clusterId": {
+                          "type": "string",
                           "id": 2,
                           "options": {
-                            "proto3_optional": true
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "cluster": {
+                          "type": "Cluster",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -483,7 +516,8 @@
                         "source": {
                           "oneof": [
                             "backupSource",
-                            "migrationSource"
+                            "migrationSource",
+                            "cloudsqlBackupRunSource"
                           ]
                         }
                       },
@@ -498,6 +532,13 @@
                         "migrationSource": {
                           "type": "MigrationSource",
                           "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cloudsqlBackupRunSource": {
+                          "type": "CloudSQLBackupRunSource",
+                          "id": 42,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -755,6 +796,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "serviceOwnedProjectNumber": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -904,6 +952,10 @@
                           "type": "QueryInsightsInstanceConfig",
                           "id": 21
                         },
+                        "observabilityConfig": {
+                          "type": "ObservabilityInstanceConfig",
+                          "id": 26
+                        },
                         "readPoolConfig": {
                           "type": "ReadPoolConfig",
                           "id": 14
@@ -983,6 +1035,10 @@
                             "cpuCount": {
                               "type": "int32",
                               "id": 1
+                            },
+                            "machineType": {
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         },
@@ -990,19 +1046,31 @@
                           "fields": {
                             "zoneId": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "id": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "ip": {
                               "type": "string",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "state": {
                               "type": "string",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -1052,6 +1120,109 @@
                             }
                           }
                         },
+                        "ObservabilityInstanceConfig": {
+                          "oneofs": {
+                            "_enabled": {
+                              "oneof": [
+                                "enabled"
+                              ]
+                            },
+                            "_preserveComments": {
+                              "oneof": [
+                                "preserveComments"
+                              ]
+                            },
+                            "_trackWaitEvents": {
+                              "oneof": [
+                                "trackWaitEvents"
+                              ]
+                            },
+                            "_trackWaitEventTypes": {
+                              "oneof": [
+                                "trackWaitEventTypes"
+                              ]
+                            },
+                            "_maxQueryStringLength": {
+                              "oneof": [
+                                "maxQueryStringLength"
+                              ]
+                            },
+                            "_recordApplicationTags": {
+                              "oneof": [
+                                "recordApplicationTags"
+                              ]
+                            },
+                            "_queryPlansPerMinute": {
+                              "oneof": [
+                                "queryPlansPerMinute"
+                              ]
+                            },
+                            "_trackActiveQueries": {
+                              "oneof": [
+                                "trackActiveQueries"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "preserveComments": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "trackWaitEvents": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "trackWaitEventTypes": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "maxQueryStringLength": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "recordApplicationTags": {
+                              "type": "bool",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "queryPlansPerMinute": {
+                              "type": "int32",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "trackActiveQueries": {
+                              "type": "bool",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
                         "ReadPoolConfig": {
                           "fields": {
                             "nodeCount": {
@@ -1078,6 +1249,48 @@
                             }
                           }
                         },
+                        "PscInterfaceConfig": {
+                          "fields": {
+                            "networkAttachmentResource": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "PscAutoConnectionConfig": {
+                          "fields": {
+                            "consumerProject": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "consumerNetwork": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "ipAddress": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_info).format": "IPV4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "consumerNetworkStatus": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "PscInstanceConfig": {
                           "fields": {
                             "serviceAttachmentLink": {
@@ -1100,6 +1313,22 @@
                               "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "pscInterfaceConfigs": {
+                              "rule": "repeated",
+                              "type": "PscInterfaceConfig",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pscAutoConnections": {
+                              "rule": "repeated",
+                              "type": "PscAutoConnectionConfig",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -1417,6 +1646,12 @@
                             "stringRestrictions",
                             "integerRestrictions"
                           ]
+                        },
+                        "recommendedValue": {
+                          "oneof": [
+                            "recommendedStringValue",
+                            "recommendedIntegerValue"
+                          ]
                         }
                       },
                       "fields": {
@@ -1427,6 +1662,14 @@
                         "integerRestrictions": {
                           "type": "IntegerRestrictions",
                           "id": 8
+                        },
+                        "recommendedStringValue": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "recommendedIntegerValue": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 11
                         },
                         "name": {
                           "type": "string",
@@ -1452,6 +1695,10 @@
                         "requiresDbRestart": {
                           "type": "bool",
                           "id": 6
+                        },
+                        "scope": {
+                          "type": "Scope",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -1483,6 +1730,13 @@
                             "INTEGER": 2,
                             "FLOAT": 3,
                             "NONE": 4
+                          }
+                        },
+                        "Scope": {
+                          "values": {
+                            "SCOPE_UNSPECIFIED": 0,
+                            "DATABASE": 1,
+                            "CONNECTION_POOL": 2
                           }
                         }
                       }
@@ -1668,6 +1922,90 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Cluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ExportCluster": {
+                          "requestType": "ExportClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:export",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,gcs_destination,database,csv_export_options,sql_export_options",
+                            "(google.longrunning.operation_info).response_type": "ExportClusterResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/clusters/*}:export",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,gcs_destination,database,csv_export_options,sql_export_options"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportClusterResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ImportCluster": {
+                          "requestType": "ImportClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:import",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,gcs_uri,database,user",
+                            "(google.longrunning.operation_info).response_type": "ImportClusterResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/clusters/*}:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,gcs_uri,database,user"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ImportClusterResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpgradeCluster": {
+                          "requestType": "UpgradeClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{name=projects/*/locations/*/clusters/*}:upgrade",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,version",
+                            "(google.longrunning.operation_info).response_type": "UpgradeClusterResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{name=projects/*/locations/*/clusters/*}:upgrade",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,version"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "UpgradeClusterResponse",
                                 "metadata_type": "OperationMetadata"
                               }
                             }
@@ -2562,6 +2900,420 @@
                         }
                       }
                     },
+                    "GcsDestination": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ExportClusterRequest": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        },
+                        "exportOptions": {
+                          "oneof": [
+                            "csvExportOptions",
+                            "sqlExportOptions"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "csvExportOptions": {
+                          "type": "CsvExportOptions",
+                          "id": 4
+                        },
+                        "sqlExportOptions": {
+                          "type": "SqlExportOptions",
+                          "id": 5
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "database": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CsvExportOptions": {
+                          "fields": {
+                            "selectQuery": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "fieldDelimiter": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "quoteCharacter": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "escapeCharacter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SqlExportOptions": {
+                          "oneofs": {
+                            "_schemaOnly": {
+                              "oneof": [
+                                "schemaOnly"
+                              ]
+                            },
+                            "_cleanTargetObjects": {
+                              "oneof": [
+                                "cleanTargetObjects"
+                              ]
+                            },
+                            "_ifExistTargetObjects": {
+                              "oneof": [
+                                "ifExistTargetObjects"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "tables": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "schemaOnly": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "cleanTargetObjects": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "ifExistTargetObjects": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExportClusterResponse": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ImportClusterRequest": {
+                      "oneofs": {
+                        "importOptions": {
+                          "oneof": [
+                            "sqlImportOptions",
+                            "csvImportOptions"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sqlImportOptions": {
+                          "type": "SqlImportOptions",
+                          "id": 4
+                        },
+                        "csvImportOptions": {
+                          "type": "CsvImportOptions",
+                          "id": 7
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "gcsUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "database": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "user": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SqlImportOptions": {
+                          "fields": {}
+                        },
+                        "CsvImportOptions": {
+                          "fields": {
+                            "table": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "columns": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "fieldDelimiter": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "quoteCharacter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "escapeCharacter": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ImportClusterResponse": {
+                      "fields": {
+                        "bytesDownloaded": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpgradeClusterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "version": {
+                          "type": "DatabaseVersion",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpgradeClusterResponse": {
+                      "fields": {
+                        "status": {
+                          "type": "Status",
+                          "id": 1
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "clusterUpgradeDetails": {
+                          "rule": "repeated",
+                          "type": "ClusterUpgradeDetails",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "StageInfo": {
+                          "fields": {
+                            "stage": {
+                              "type": "Stage",
+                              "id": 1
+                            },
+                            "status": {
+                              "type": "Status",
+                              "id": 2
+                            },
+                            "logsUrl": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "InstanceUpgradeDetails": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "upgradeStatus": {
+                              "type": "Status",
+                              "id": 2
+                            },
+                            "instanceType": {
+                              "type": "Instance.InstanceType",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ClusterUpgradeDetails": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "upgradeStatus": {
+                              "type": "Status",
+                              "id": 2
+                            },
+                            "clusterType": {
+                              "type": "Cluster.ClusterType",
+                              "id": 3
+                            },
+                            "databaseVersion": {
+                              "type": "DatabaseVersion",
+                              "id": 4
+                            },
+                            "stageInfo": {
+                              "rule": "repeated",
+                              "type": "StageInfo",
+                              "id": 5
+                            },
+                            "instanceUpgradeDetails": {
+                              "rule": "repeated",
+                              "type": "InstanceUpgradeDetails",
+                              "id": 6
+                            }
+                          }
+                        },
+                        "Status": {
+                          "values": {
+                            "STATUS_UNSPECIFIED": 0,
+                            "NOT_STARTED": 4,
+                            "IN_PROGRESS": 5,
+                            "SUCCESS": 1,
+                            "FAILED": 2,
+                            "PARTIAL_SUCCESS": 3,
+                            "CANCEL_IN_PROGRESS": 6,
+                            "CANCELLED": 7
+                          }
+                        },
+                        "Stage": {
+                          "values": {
+                            "STAGE_UNSPECIFIED": 0,
+                            "ALLOYDB_PRECHECK": 1,
+                            "PG_UPGRADE_CHECK": 2,
+                            "PREPARE_FOR_UPGRADE": 5,
+                            "PRIMARY_INSTANCE_UPGRADE": 3,
+                            "READ_POOL_INSTANCES_UPGRADE": 4,
+                            "ROLLBACK": 6,
+                            "CLEANUP": 7
+                          }
+                        }
+                      }
+                    },
                     "DeleteClusterRequest": {
                       "fields": {
                         "name": {
@@ -3170,7 +3922,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "sqlStatement": {
@@ -3412,6 +4164,13 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "scope": {
+                          "type": "SupportedDatabaseFlag.Scope",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3510,7 +4269,8 @@
                       "oneofs": {
                         "requestSpecific": {
                           "oneof": [
-                            "batchCreateInstancesMetadata"
+                            "batchCreateInstancesMetadata",
+                            "upgradeClusterStatus"
                           ]
                         }
                       },
@@ -3518,6 +4278,13 @@
                         "batchCreateInstancesMetadata": {
                           "type": "BatchCreateInstancesMetadata",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "upgradeClusterStatus": {
+                          "type": "UpgradeClusterStatus",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3569,6 +4336,86 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UpgradeClusterStatus": {
+                      "fields": {
+                        "state": {
+                          "type": "UpgradeClusterResponse.Status",
+                          "id": 1
+                        },
+                        "cancellable": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "sourceVersion": {
+                          "type": "DatabaseVersion",
+                          "id": 3
+                        },
+                        "targetVersion": {
+                          "type": "DatabaseVersion",
+                          "id": 4
+                        },
+                        "stages": {
+                          "rule": "repeated",
+                          "type": "StageStatus",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "StageStatus": {
+                          "oneofs": {
+                            "stageSpecificStatus": {
+                              "oneof": [
+                                "readPoolInstancesUpgrade"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "readPoolInstancesUpgrade": {
+                              "type": "ReadPoolInstancesUpgradeStageStatus",
+                              "id": 11
+                            },
+                            "stage": {
+                              "type": "UpgradeClusterResponse.Stage",
+                              "id": 1
+                            },
+                            "state": {
+                              "type": "UpgradeClusterResponse.Status",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ReadPoolInstancesUpgradeStageStatus": {
+                          "fields": {
+                            "upgradeStats": {
+                              "type": "Stats",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Stats": {
+                              "fields": {
+                                "notStarted": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "ongoing": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "success": {
+                                  "type": "int32",
+                                  "id": 3
+                                },
+                                "failed": {
+                                  "type": "int32",
+                                  "id": 4
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -3793,43 +4640,6 @@
                           "id": 2
                         }
                       }
-                    }
-                  }
-                },
-                "v1alpha": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.AlloyDb.V1Alpha",
-                    "go_package": "cloud.google.com/go/alloydb/apiv1alpha/alloydbpb;alloydbpb",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "ServiceProto",
-                    "java_package": "com.google.cloud.alloydb.v1alpha",
-                    "php_namespace": "Google\\Cloud\\AlloyDb\\V1alpha",
-                    "ruby_package": "Google::Cloud::AlloyDB::V1alpha",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
-                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
-                  },
-                  "nested": {
-                    "CloudSQLBackupRunSource": {
-                      "fields": {
-                        "project": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "instanceId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "backupRunId": {
-                          "type": "int64",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
                     },
                     "SqlResult": {
                       "fields": {
@@ -3895,25 +4705,113 @@
                           }
                         }
                       }
-                    },
-                    "GeminiClusterConfig": {
+                    }
+                  }
+                },
+                "v1alpha": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.AlloyDb.V1Alpha",
+                    "go_package": "cloud.google.com/go/alloydb/apiv1alpha/alloydbpb;alloydbpb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "DataModelProto",
+                    "java_package": "com.google.cloud.alloydb.v1alpha",
+                    "php_namespace": "Google\\Cloud\\AlloyDb\\V1alpha",
+                    "ruby_package": "Google::Cloud::AlloyDB::V1alpha",
+                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
+                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
+                  },
+                  "nested": {
+                    "CloudSQLBackupRunSource": {
                       "fields": {
-                        "entitled": {
-                          "type": "bool",
-                          "id": 1,
+                        "project": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "backupRunId": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
                     },
-                    "GeminiInstanceConfig": {
+                    "AlloyDBCSQLAdmin": {
+                      "options": {
+                        "(google.api.default_host)": "alloydb.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "RestoreFromCloudSQL": {
+                          "requestType": "RestoreFromCloudSQLRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=projects/*/locations/*}/clusters:restoreFromCloudSQL",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,cluster_id",
+                            "(google.longrunning.operation_info).response_type": "Cluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=projects/*/locations/*}/clusters:restoreFromCloudSQL",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,cluster_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Cluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RestoreFromCloudSQLRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "cloudsqlBackupRunSource"
+                          ]
+                        }
+                      },
                       "fields": {
-                        "entitled": {
-                          "type": "bool",
+                        "cloudsqlBackupRunSource": {
+                          "type": "CloudSQLBackupRunSource",
+                          "id": 101
+                        },
+                        "parent": {
+                          "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "clusterId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "cluster": {
+                          "type": "Cluster",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -4860,6 +5758,13 @@
                             "(google.api.field_info).format": "IPV4",
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "gcaConfig": {
+                          "type": "GCAInstanceConfig",
+                          "id": 38,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -4868,6 +5773,10 @@
                             "cpuCount": {
                               "type": "int32",
                               "id": 1
+                            },
+                            "machineType": {
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         },
@@ -4875,19 +5784,31 @@
                           "fields": {
                             "zoneId": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "id": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "ip": {
                               "type": "string",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "state": {
                               "type": "string",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -5103,6 +6024,40 @@
                             }
                           }
                         },
+                        "PscAutoConnectionConfig": {
+                          "fields": {
+                            "consumerProject": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "consumerNetwork": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "ipAddress": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_info).format": "IPV4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "consumerNetworkStatus": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "PscInstanceConfig": {
                           "fields": {
                             "serviceAttachmentLink": {
@@ -5131,6 +6086,14 @@
                               "rule": "repeated",
                               "type": "PscInterfaceConfig",
                               "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pscAutoConnections": {
+                              "rule": "repeated",
+                              "type": "PscAutoConnectionConfig",
+                              "id": 9,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -5473,6 +6436,12 @@
                             "stringRestrictions",
                             "integerRestrictions"
                           ]
+                        },
+                        "recommendedValue": {
+                          "oneof": [
+                            "recommendedStringValue",
+                            "recommendedIntegerValue"
+                          ]
                         }
                       },
                       "fields": {
@@ -5483,6 +6452,14 @@
                         "integerRestrictions": {
                           "type": "IntegerRestrictions",
                           "id": 8
+                        },
+                        "recommendedStringValue": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "recommendedIntegerValue": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 11
                         },
                         "name": {
                           "type": "string",
@@ -5508,6 +6485,10 @@
                         "requiresDbRestart": {
                           "type": "bool",
                           "id": 6
+                        },
+                        "scope": {
+                          "type": "Scope",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -5539,6 +6520,13 @@
                             "INTEGER": 2,
                             "FLOAT": 3,
                             "NONE": 4
+                          }
+                        },
+                        "Scope": {
+                          "values": {
+                            "SCOPE_UNSPECIFIED": 0,
+                            "DATABASE": 1,
+                            "CONNECTION_POOL": 2
                           }
                         }
                       }
@@ -5627,6 +6615,45 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GCAEntitlementType": {
+                      "values": {
+                        "GCA_ENTITLEMENT_TYPE_UNSPECIFIED": 0,
+                        "GCA_STANDARD": 1
+                      }
+                    },
+                    "GeminiClusterConfig": {
+                      "fields": {
+                        "entitled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GeminiInstanceConfig": {
+                      "fields": {
+                        "entitled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GCAInstanceConfig": {
+                      "fields": {
+                        "gcaEntitlement": {
+                          "type": "GCAEntitlementType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -5724,6 +6751,62 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Cluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ExportCluster": {
+                          "requestType": "ExportClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=projects/*/locations/*/clusters/*}:export",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,gcs_destination,database,csv_export_options,sql_export_options",
+                            "(google.longrunning.operation_info).response_type": "ExportClusterResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=projects/*/locations/*/clusters/*}:export",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,gcs_destination,database,csv_export_options,sql_export_options"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportClusterResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ImportCluster": {
+                          "requestType": "ImportClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=projects/*/locations/*/clusters/*}:import",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,gcs_uri,database,user",
+                            "(google.longrunning.operation_info).response_type": "ImportClusterResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=projects/*/locations/*/clusters/*}:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,gcs_uri,database,user"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ImportClusterResponse",
                                 "metadata_type": "OperationMetadata"
                               }
                             }
@@ -6642,6 +7725,274 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GcsDestination": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ExportClusterRequest": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        },
+                        "exportOptions": {
+                          "oneof": [
+                            "csvExportOptions",
+                            "sqlExportOptions"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "csvExportOptions": {
+                          "type": "CsvExportOptions",
+                          "id": 4
+                        },
+                        "sqlExportOptions": {
+                          "type": "SqlExportOptions",
+                          "id": 5
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "database": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CsvExportOptions": {
+                          "fields": {
+                            "selectQuery": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "fieldDelimiter": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "quoteCharacter": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "escapeCharacter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SqlExportOptions": {
+                          "oneofs": {
+                            "_schemaOnly": {
+                              "oneof": [
+                                "schemaOnly"
+                              ]
+                            },
+                            "_cleanTargetObjects": {
+                              "oneof": [
+                                "cleanTargetObjects"
+                              ]
+                            },
+                            "_ifExistTargetObjects": {
+                              "oneof": [
+                                "ifExistTargetObjects"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "tables": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "schemaOnly": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "cleanTargetObjects": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "ifExistTargetObjects": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExportClusterResponse": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ImportClusterRequest": {
+                      "oneofs": {
+                        "importOptions": {
+                          "oneof": [
+                            "sqlImportOptions",
+                            "csvImportOptions"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sqlImportOptions": {
+                          "type": "SqlImportOptions",
+                          "id": 4
+                        },
+                        "csvImportOptions": {
+                          "type": "CsvImportOptions",
+                          "id": 7
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "gcsUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "database": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "user": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SqlImportOptions": {
+                          "fields": {}
+                        },
+                        "CsvImportOptions": {
+                          "fields": {
+                            "table": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "columns": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "fieldDelimiter": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "quoteCharacter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "escapeCharacter": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ImportClusterResponse": {
+                      "fields": {
+                        "bytesDownloaded": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -7642,6 +8993,13 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "scope": {
+                          "type": "SupportedDatabaseFlag.Scope",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8156,43 +9514,6 @@
                           "id": 2
                         }
                       }
-                    }
-                  }
-                },
-                "v1beta": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.AlloyDb.V1Beta",
-                    "go_package": "cloud.google.com/go/alloydb/apiv1beta/alloydbpb;alloydbpb",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "ServiceProto",
-                    "java_package": "com.google.cloud.alloydb.v1beta",
-                    "php_namespace": "Google\\Cloud\\AlloyDb\\V1beta",
-                    "ruby_package": "Google::Cloud::AlloyDB::V1beta",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
-                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
-                  },
-                  "nested": {
-                    "CloudSQLBackupRunSource": {
-                      "fields": {
-                        "project": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "instanceId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "backupRunId": {
-                          "type": "int64",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
                     },
                     "SqlResult": {
                       "fields": {
@@ -8258,25 +9579,113 @@
                           }
                         }
                       }
-                    },
-                    "GeminiClusterConfig": {
+                    }
+                  }
+                },
+                "v1beta": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.AlloyDb.V1Beta",
+                    "go_package": "cloud.google.com/go/alloydb/apiv1beta/alloydbpb;alloydbpb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "DataModelProto",
+                    "java_package": "com.google.cloud.alloydb.v1beta",
+                    "php_namespace": "Google\\Cloud\\AlloyDb\\V1beta",
+                    "ruby_package": "Google::Cloud::AlloyDB::V1beta",
+                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
+                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
+                  },
+                  "nested": {
+                    "CloudSQLBackupRunSource": {
                       "fields": {
-                        "entitled": {
-                          "type": "bool",
-                          "id": 1,
+                        "project": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "backupRunId": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
                     },
-                    "GeminiInstanceConfig": {
+                    "AlloyDBCSQLAdmin": {
+                      "options": {
+                        "(google.api.default_host)": "alloydb.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "RestoreFromCloudSQL": {
+                          "requestType": "RestoreFromCloudSQLRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*}/clusters:restoreFromCloudSQL",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,cluster_id",
+                            "(google.longrunning.operation_info).response_type": "Cluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*}/clusters:restoreFromCloudSQL",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,cluster_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Cluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RestoreFromCloudSQLRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "cloudsqlBackupRunSource"
+                          ]
+                        }
+                      },
                       "fields": {
-                        "entitled": {
-                          "type": "bool",
+                        "cloudsqlBackupRunSource": {
+                          "type": "CloudSQLBackupRunSource",
+                          "id": 101
+                        },
+                        "parent": {
+                          "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "clusterId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "cluster": {
+                          "type": "Cluster",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -8967,6 +10376,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "serviceOwnedProjectNumber": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -9202,6 +10618,13 @@
                             "(google.api.field_info).format": "IPV4",
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "gcaConfig": {
+                          "type": "GCAInstanceConfig",
+                          "id": 38,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -9210,6 +10633,10 @@
                             "cpuCount": {
                               "type": "int32",
                               "id": 1
+                            },
+                            "machineType": {
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         },
@@ -9449,6 +10876,48 @@
                             }
                           }
                         },
+                        "PscInterfaceConfig": {
+                          "fields": {
+                            "networkAttachmentResource": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "PscAutoConnectionConfig": {
+                          "fields": {
+                            "consumerProject": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "consumerNetwork": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "ipAddress": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_info).format": "IPV4",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "consumerNetworkStatus": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "PscInstanceConfig": {
                           "fields": {
                             "serviceAttachmentLink": {
@@ -9471,6 +10940,22 @@
                               "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "pscInterfaceConfigs": {
+                              "rule": "repeated",
+                              "type": "PscInterfaceConfig",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pscAutoConnections": {
+                              "rule": "repeated",
+                              "type": "PscAutoConnectionConfig",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -9804,6 +11289,12 @@
                             "stringRestrictions",
                             "integerRestrictions"
                           ]
+                        },
+                        "recommendedValue": {
+                          "oneof": [
+                            "recommendedStringValue",
+                            "recommendedIntegerValue"
+                          ]
                         }
                       },
                       "fields": {
@@ -9814,6 +11305,14 @@
                         "integerRestrictions": {
                           "type": "IntegerRestrictions",
                           "id": 8
+                        },
+                        "recommendedStringValue": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "recommendedIntegerValue": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 11
                         },
                         "name": {
                           "type": "string",
@@ -9839,6 +11338,10 @@
                         "requiresDbRestart": {
                           "type": "bool",
                           "id": 6
+                        },
+                        "scope": {
+                          "type": "Scope",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -9870,6 +11373,13 @@
                             "INTEGER": 2,
                             "FLOAT": 3,
                             "NONE": 4
+                          }
+                        },
+                        "Scope": {
+                          "values": {
+                            "SCOPE_UNSPECIFIED": 0,
+                            "DATABASE": 1,
+                            "CONNECTION_POOL": 2
                           }
                         }
                       }
@@ -9958,6 +11468,45 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GCAEntitlementType": {
+                      "values": {
+                        "GCA_ENTITLEMENT_TYPE_UNSPECIFIED": 0,
+                        "GCA_STANDARD": 1
+                      }
+                    },
+                    "GeminiClusterConfig": {
+                      "fields": {
+                        "entitled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GeminiInstanceConfig": {
+                      "fields": {
+                        "entitled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GCAInstanceConfig": {
+                      "fields": {
+                        "gcaEntitlement": {
+                          "type": "GCAEntitlementType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -10083,6 +11632,34 @@
                             {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "ExportClusterResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ImportCluster": {
+                          "requestType": "ImportClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/clusters/*}:import",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,gcs_uri,database,user",
+                            "(google.longrunning.operation_info).response_type": "ImportClusterResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/clusters/*}:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,gcs_uri,database,user"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ImportClusterResponse",
                                 "metadata_type": "OperationMetadata"
                               }
                             }
@@ -11168,6 +12745,111 @@
                         }
                       }
                     },
+                    "ImportClusterRequest": {
+                      "oneofs": {
+                        "importOptions": {
+                          "oneof": [
+                            "sqlImportOptions",
+                            "csvImportOptions"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sqlImportOptions": {
+                          "type": "SqlImportOptions",
+                          "id": 4
+                        },
+                        "csvImportOptions": {
+                          "type": "CsvImportOptions",
+                          "id": 7
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "gcsUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "database": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "user": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SqlImportOptions": {
+                          "fields": {}
+                        },
+                        "CsvImportOptions": {
+                          "fields": {
+                            "table": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "columns": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "fieldDelimiter": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "quoteCharacter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "escapeCharacter": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ImportClusterResponse": {
+                      "fields": {
+                        "bytesDownloaded": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "UpgradeClusterRequest": {
                       "fields": {
                         "name": {
@@ -12164,6 +13846,13 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "scope": {
+                          "type": "SupportedDatabaseFlag.Scope",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -12678,6 +14367,71 @@
                           "id": 2
                         }
                       }
+                    },
+                    "SqlResult": {
+                      "fields": {
+                        "columns": {
+                          "rule": "repeated",
+                          "type": "SqlResultColumn",
+                          "id": 1
+                        },
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "SqlResultRow",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SqlResultColumn": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SqlResultRow": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "SqlResultValue",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SqlResultValue": {
+                      "oneofs": {
+                        "_value": {
+                          "oneof": [
+                            "value"
+                          ]
+                        },
+                        "_nullValue": {
+                          "oneof": [
+                            "nullValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "value": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nullValue": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -12687,9 +14441,9 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api;api",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "LaunchStageProto",
+            "java_outer_classname": "FieldInfoProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -12712,107 +14466,6 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
-              }
-            },
-            "fieldInfo": {
-              "type": "google.api.FieldInfo",
-              "id": 291403980,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldInfo": {
-              "fields": {
-                "format": {
-                  "type": "Format",
-                  "id": 1
-                }
-              },
-              "nested": {
-                "Format": {
-                  "values": {
-                    "FORMAT_UNSPECIFIED": 0,
-                    "UUID4": 1,
-                    "IPV4": 2,
-                    "IPV6": 3,
-                    "IPV4_OR_IPV6": 4
-                  }
-                }
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
               }
             },
             "http": {
@@ -13195,6 +14848,107 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
               }
             }
           }
