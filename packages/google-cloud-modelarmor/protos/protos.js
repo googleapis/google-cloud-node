@@ -6907,6 +6907,7 @@
                              * @interface ISanitizationMetadata
                              * @property {number|Long|null} [errorCode] SanitizationMetadata errorCode
                              * @property {string|null} [errorMessage] SanitizationMetadata errorMessage
+                             * @property {boolean|null} [ignorePartialInvocationFailures] SanitizationMetadata ignorePartialInvocationFailures
                              */
     
                             /**
@@ -6941,6 +6942,14 @@
                             SanitizationMetadata.prototype.errorMessage = "";
     
                             /**
+                             * SanitizationMetadata ignorePartialInvocationFailures.
+                             * @member {boolean} ignorePartialInvocationFailures
+                             * @memberof google.cloud.modelarmor.v1.SanitizationResult.SanitizationMetadata
+                             * @instance
+                             */
+                            SanitizationMetadata.prototype.ignorePartialInvocationFailures = false;
+    
+                            /**
                              * Creates a new SanitizationMetadata instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.modelarmor.v1.SanitizationResult.SanitizationMetadata
@@ -6968,6 +6977,8 @@
                                     writer.uint32(/* id 1, wireType 0 =*/8).int64(message.errorCode);
                                 if (message.errorMessage != null && Object.hasOwnProperty.call(message, "errorMessage"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.errorMessage);
+                                if (message.ignorePartialInvocationFailures != null && Object.hasOwnProperty.call(message, "ignorePartialInvocationFailures"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.ignorePartialInvocationFailures);
                                 return writer;
                             };
     
@@ -7008,6 +7019,10 @@
                                         }
                                     case 2: {
                                             message.errorMessage = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.ignorePartialInvocationFailures = reader.bool();
                                             break;
                                         }
                                     default:
@@ -7051,6 +7066,9 @@
                                 if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
                                     if (!$util.isString(message.errorMessage))
                                         return "errorMessage: string expected";
+                                if (message.ignorePartialInvocationFailures != null && message.hasOwnProperty("ignorePartialInvocationFailures"))
+                                    if (typeof message.ignorePartialInvocationFailures !== "boolean")
+                                        return "ignorePartialInvocationFailures: boolean expected";
                                 return null;
                             };
     
@@ -7077,6 +7095,8 @@
                                         message.errorCode = new $util.LongBits(object.errorCode.low >>> 0, object.errorCode.high >>> 0).toNumber();
                                 if (object.errorMessage != null)
                                     message.errorMessage = String(object.errorMessage);
+                                if (object.ignorePartialInvocationFailures != null)
+                                    message.ignorePartialInvocationFailures = Boolean(object.ignorePartialInvocationFailures);
                                 return message;
                             };
     
@@ -7100,6 +7120,7 @@
                                     } else
                                         object.errorCode = options.longs === String ? "0" : 0;
                                     object.errorMessage = "";
+                                    object.ignorePartialInvocationFailures = false;
                                 }
                                 if (message.errorCode != null && message.hasOwnProperty("errorCode"))
                                     if (typeof message.errorCode === "number")
@@ -7108,6 +7129,8 @@
                                         object.errorCode = options.longs === String ? $util.Long.prototype.toString.call(message.errorCode) : options.longs === Number ? new $util.LongBits(message.errorCode.low >>> 0, message.errorCode.high >>> 0).toNumber() : message.errorCode;
                                 if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
                                     object.errorMessage = message.errorMessage;
+                                if (message.ignorePartialInvocationFailures != null && message.hasOwnProperty("ignorePartialInvocationFailures"))
+                                    object.ignorePartialInvocationFailures = message.ignorePartialInvocationFailures;
                                 return object;
                             };
     
@@ -9327,6 +9350,9 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
+                                case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.byteData != null && message.hasOwnProperty("byteData"))
@@ -9365,6 +9391,18 @@
                             case "PDF":
                             case 2:
                                 message.byteDataType = 2;
+                                break;
+                            case "WORD_DOCUMENT":
+                            case 3:
+                                message.byteDataType = 3;
+                                break;
+                            case "EXCEL_DOCUMENT":
+                            case 4:
+                                message.byteDataType = 4;
+                                break;
+                            case "POWERPOINT_DOCUMENT":
+                            case 5:
+                                message.byteDataType = 5;
                                 break;
                             }
                             if (object.byteData != null)
@@ -9438,12 +9476,18 @@
                          * @property {number} BYTE_ITEM_TYPE_UNSPECIFIED=0 BYTE_ITEM_TYPE_UNSPECIFIED value
                          * @property {number} PLAINTEXT_UTF8=1 PLAINTEXT_UTF8 value
                          * @property {number} PDF=2 PDF value
+                         * @property {number} WORD_DOCUMENT=3 WORD_DOCUMENT value
+                         * @property {number} EXCEL_DOCUMENT=4 EXCEL_DOCUMENT value
+                         * @property {number} POWERPOINT_DOCUMENT=5 POWERPOINT_DOCUMENT value
                          */
                         ByteDataItem.ByteItemType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "BYTE_ITEM_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "PLAINTEXT_UTF8"] = 1;
                             values[valuesById[2] = "PDF"] = 2;
+                            values[valuesById[3] = "WORD_DOCUMENT"] = 3;
+                            values[valuesById[4] = "EXCEL_DOCUMENT"] = 4;
+                            values[valuesById[5] = "POWERPOINT_DOCUMENT"] = 5;
                             return values;
                         })();
     

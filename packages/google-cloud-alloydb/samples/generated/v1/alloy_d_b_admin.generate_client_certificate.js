@@ -60,9 +60,9 @@ function main(parent) {
    */
   // const publicKey = 'abc123'
   /**
-   *  Optional. An optional hint to the endpoint to generate a client
-   *  ceritificate that can be used by AlloyDB connectors to exchange additional
-   *  metadata with the server after TLS handshake.
+   *  Optional. An optional hint to the endpoint to generate a client certificate
+   *  that can be used by AlloyDB connectors to exchange additional metadata with
+   *  the server after TLS handshake.
    */
   // const useMetadataExchange = true
 
