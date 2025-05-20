@@ -206,6 +206,9 @@ export class ChatServiceClient {
       attachmentPathTemplate: new this._gaxModule.PathTemplate(
         'spaces/{space}/messages/{message}/attachments/{attachment}'
       ),
+      customEmojiPathTemplate: new this._gaxModule.PathTemplate(
+        'customEmojis/{custom_emoji}'
+      ),
       membershipPathTemplate: new this._gaxModule.PathTemplate(
         'spaces/{space}/members/{member}'
       ),
@@ -264,6 +267,11 @@ export class ChatServiceClient {
         'pageToken',
         'nextPageToken',
         'reactions'
+      ),
+      listCustomEmojis: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'customEmojis'
       ),
       listSpaceEvents: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -346,6 +354,10 @@ export class ChatServiceClient {
       'createReaction',
       'listReactions',
       'deleteReaction',
+      'createCustomEmoji',
+      'getCustomEmoji',
+      'listCustomEmojis',
+      'deleteCustomEmoji',
       'getSpaceReadState',
       'updateSpaceReadState',
       'getThreadReadState',
@@ -452,6 +464,8 @@ export class ChatServiceClient {
       'https://www.googleapis.com/auth/chat.admin.spaces',
       'https://www.googleapis.com/auth/chat.admin.spaces.readonly',
       'https://www.googleapis.com/auth/chat.bot',
+      'https://www.googleapis.com/auth/chat.customemojis',
+      'https://www.googleapis.com/auth/chat.customemojis.readonly',
       'https://www.googleapis.com/auth/chat.delete',
       'https://www.googleapis.com/auth/chat.import',
       'https://www.googleapis.com/auth/chat.memberships',
@@ -3263,6 +3277,372 @@ export class ChatServiceClient {
       );
   }
   /**
+   * Creates a custom emoji.
+   *
+   * Custom emojis are only available for Google Workspace accounts, and the
+   * administrator must turn custom emojis on for the organization. For more
+   * information, see [Learn about custom emojis in Google
+   * Chat](https://support.google.com/chat/answer/12800149) and
+   * [Manage custom emoji
+   * permissions](https://support.google.com/a/answer/12850085).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.chat.v1.CustomEmoji} request.customEmoji
+   *   Required. The custom emoji to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.CustomEmoji|CustomEmoji}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.create_custom_emoji.js</caption>
+   * region_tag:chat_v1_generated_ChatService_CreateCustomEmoji_async
+   */
+  createCustomEmoji(
+    request?: protos.google.chat.v1.ICreateCustomEmojiRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ICustomEmoji,
+      protos.google.chat.v1.ICreateCustomEmojiRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createCustomEmoji(
+    request: protos.google.chat.v1.ICreateCustomEmojiRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.ICustomEmoji,
+      protos.google.chat.v1.ICreateCustomEmojiRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCustomEmoji(
+    request: protos.google.chat.v1.ICreateCustomEmojiRequest,
+    callback: Callback<
+      protos.google.chat.v1.ICustomEmoji,
+      protos.google.chat.v1.ICreateCustomEmojiRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCustomEmoji(
+    request?: protos.google.chat.v1.ICreateCustomEmojiRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.ICustomEmoji,
+          protos.google.chat.v1.ICreateCustomEmojiRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.ICustomEmoji,
+      protos.google.chat.v1.ICreateCustomEmojiRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ICustomEmoji,
+      protos.google.chat.v1.ICreateCustomEmojiRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createCustomEmoji request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ICustomEmoji,
+          protos.google.chat.v1.ICreateCustomEmojiRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCustomEmoji response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCustomEmoji(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ICustomEmoji,
+          protos.google.chat.v1.ICreateCustomEmojiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCustomEmoji response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Returns details about a custom emoji.
+   *
+   * Custom emojis are only available for Google Workspace accounts, and the
+   * administrator must turn custom emojis on for the organization. For more
+   * information, see [Learn about custom emojis in Google
+   * Chat](https://support.google.com/chat/answer/12800149) and
+   * [Manage custom emoji
+   * permissions](https://support.google.com/a/answer/12850085).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the custom emoji.
+   *
+   *   Format: `customEmojis/{customEmoji}`
+   *
+   *   You can use the emoji name as an alias for `{customEmoji}`. For example,
+   *   `customEmojis/:example-emoji:` where `:example-emoji:` is the emoji name
+   *   for a custom emoji.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.CustomEmoji|CustomEmoji}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.get_custom_emoji.js</caption>
+   * region_tag:chat_v1_generated_ChatService_GetCustomEmoji_async
+   */
+  getCustomEmoji(
+    request?: protos.google.chat.v1.IGetCustomEmojiRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ICustomEmoji,
+      protos.google.chat.v1.IGetCustomEmojiRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getCustomEmoji(
+    request: protos.google.chat.v1.IGetCustomEmojiRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.ICustomEmoji,
+      protos.google.chat.v1.IGetCustomEmojiRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCustomEmoji(
+    request: protos.google.chat.v1.IGetCustomEmojiRequest,
+    callback: Callback<
+      protos.google.chat.v1.ICustomEmoji,
+      protos.google.chat.v1.IGetCustomEmojiRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCustomEmoji(
+    request?: protos.google.chat.v1.IGetCustomEmojiRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.ICustomEmoji,
+          protos.google.chat.v1.IGetCustomEmojiRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.ICustomEmoji,
+      protos.google.chat.v1.IGetCustomEmojiRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ICustomEmoji,
+      protos.google.chat.v1.IGetCustomEmojiRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getCustomEmoji request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ICustomEmoji,
+          protos.google.chat.v1.IGetCustomEmojiRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCustomEmoji response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCustomEmoji(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ICustomEmoji,
+          protos.google.chat.v1.IGetCustomEmojiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCustomEmoji response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Deletes a custom emoji. By default, users can only delete custom emoji they
+   * created. [Emoji managers](https://support.google.com/a/answer/12850085)
+   * assigned by the administrator can delete any custom emoji in the
+   * organization. See [Learn about custom emojis in Google
+   * Chat](https://support.google.com/chat/answer/12800149).
+   *
+   * Custom emojis are only available for Google Workspace accounts, and the
+   * administrator must turn custom emojis on for the organization. For more
+   * information, see [Learn about custom emojis in Google
+   * Chat](https://support.google.com/chat/answer/12800149) and
+   * [Manage custom emoji
+   * permissions](https://support.google.com/a/answer/12850085).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the custom emoji to delete.
+   *
+   *   Format: `customEmojis/{customEmoji}`
+   *
+   *   You can use the emoji name as an alias for `{customEmoji}`. For example,
+   *   `customEmojis/:example-emoji:` where `:example-emoji:` is the emoji name
+   *   for a custom emoji.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.delete_custom_emoji.js</caption>
+   * region_tag:chat_v1_generated_ChatService_DeleteCustomEmoji_async
+   */
+  deleteCustomEmoji(
+    request?: protos.google.chat.v1.IDeleteCustomEmojiRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.chat.v1.IDeleteCustomEmojiRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteCustomEmoji(
+    request: protos.google.chat.v1.IDeleteCustomEmojiRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.chat.v1.IDeleteCustomEmojiRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCustomEmoji(
+    request: protos.google.chat.v1.IDeleteCustomEmojiRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.chat.v1.IDeleteCustomEmojiRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCustomEmoji(
+    request?: protos.google.chat.v1.IDeleteCustomEmojiRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteCustomEmojiRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.chat.v1.IDeleteCustomEmojiRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.chat.v1.IDeleteCustomEmojiRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteCustomEmoji request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteCustomEmojiRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteCustomEmoji response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteCustomEmoji(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteCustomEmojiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCustomEmoji response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
    * Returns details about a user's read state within a space, used to identify
    * read and unread messages. For an example, see [Get details about a user's
    * space read
@@ -5885,8 +6265,7 @@ export class ChatServiceClient {
    *   AND user.name = "users/{user}"
    *   ```
    *
-   *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
-   *   error.
+   *   Invalid queries are rejected with an `INVALID_ARGUMENT` error.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6055,8 +6434,7 @@ export class ChatServiceClient {
    *   AND user.name = "users/{user}"
    *   ```
    *
-   *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
-   *   error.
+   *   Invalid queries are rejected with an `INVALID_ARGUMENT` error.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -6158,8 +6536,7 @@ export class ChatServiceClient {
    *   AND user.name = "users/{user}"
    *   ```
    *
-   *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
-   *   error.
+   *   Invalid queries are rejected with an `INVALID_ARGUMENT` error.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -6195,6 +6572,280 @@ export class ChatServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.chat.v1.IReaction>;
+  }
+  /**
+   * Lists custom emojis visible to the authenticated user.
+   *
+   * Custom emojis are only available for Google Workspace accounts, and the
+   * administrator must turn custom emojis on for the organization. For more
+   * information, see [Learn about custom emojis in Google
+   * Chat](https://support.google.com/chat/answer/12800149) and
+   * [Manage custom emoji
+   * permissions](https://support.google.com/a/answer/12850085).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of custom emojis returned. The service can
+   *   return fewer custom emojis than this value. If unspecified, the default
+   *   value is 25. The maximum value is 200; values above 200 are changed to 200.
+   * @param {string} [request.pageToken]
+   *   Optional. (If resuming from a previous query.)
+   *
+   *   A page token received from a previous list custom emoji call. Provide this
+   *   to retrieve the subsequent page.
+   *
+   *   When paginating, the filter value should match the call that provided the
+   *   page token. Passing a different value might lead to unexpected results.
+   * @param {string} [request.filter]
+   *   Optional. A query filter.
+   *
+   *   Supports filtering by creator.
+   *
+   *   To filter by creator, you must specify a valid value. Currently only
+   *   `creator("users/me")` and `NOT creator("users/me")` are accepted to filter
+   *   custom emojis by whether they were created by the calling user or not.
+   *
+   *   For example, the following query returns custom emojis created by the
+   *   caller:
+   *   ```
+   *   creator("users/me")
+   *   ```
+   *
+   *   Invalid queries are rejected with an `INVALID_ARGUMENT` error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.chat.v1.CustomEmoji|CustomEmoji}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCustomEmojisAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listCustomEmojis(
+    request?: protos.google.chat.v1.IListCustomEmojisRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ICustomEmoji[],
+      protos.google.chat.v1.IListCustomEmojisRequest | null,
+      protos.google.chat.v1.IListCustomEmojisResponse,
+    ]
+  >;
+  listCustomEmojis(
+    request: protos.google.chat.v1.IListCustomEmojisRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.chat.v1.IListCustomEmojisRequest,
+      protos.google.chat.v1.IListCustomEmojisResponse | null | undefined,
+      protos.google.chat.v1.ICustomEmoji
+    >
+  ): void;
+  listCustomEmojis(
+    request: protos.google.chat.v1.IListCustomEmojisRequest,
+    callback: PaginationCallback<
+      protos.google.chat.v1.IListCustomEmojisRequest,
+      protos.google.chat.v1.IListCustomEmojisResponse | null | undefined,
+      protos.google.chat.v1.ICustomEmoji
+    >
+  ): void;
+  listCustomEmojis(
+    request?: protos.google.chat.v1.IListCustomEmojisRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.chat.v1.IListCustomEmojisRequest,
+          protos.google.chat.v1.IListCustomEmojisResponse | null | undefined,
+          protos.google.chat.v1.ICustomEmoji
+        >,
+    callback?: PaginationCallback<
+      protos.google.chat.v1.IListCustomEmojisRequest,
+      protos.google.chat.v1.IListCustomEmojisResponse | null | undefined,
+      protos.google.chat.v1.ICustomEmoji
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ICustomEmoji[],
+      protos.google.chat.v1.IListCustomEmojisRequest | null,
+      protos.google.chat.v1.IListCustomEmojisResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.chat.v1.IListCustomEmojisRequest,
+          protos.google.chat.v1.IListCustomEmojisResponse | null | undefined,
+          protos.google.chat.v1.ICustomEmoji
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCustomEmojis values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCustomEmojis request %j', request);
+    return this.innerApiCalls
+      .listCustomEmojis(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.chat.v1.ICustomEmoji[],
+          protos.google.chat.v1.IListCustomEmojisRequest | null,
+          protos.google.chat.v1.IListCustomEmojisResponse,
+        ]) => {
+          this._log.info('listCustomEmojis values %j', response);
+          return [response, input, output];
+        }
+      );
+  }
+
+  /**
+   * Equivalent to `listCustomEmojis`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of custom emojis returned. The service can
+   *   return fewer custom emojis than this value. If unspecified, the default
+   *   value is 25. The maximum value is 200; values above 200 are changed to 200.
+   * @param {string} [request.pageToken]
+   *   Optional. (If resuming from a previous query.)
+   *
+   *   A page token received from a previous list custom emoji call. Provide this
+   *   to retrieve the subsequent page.
+   *
+   *   When paginating, the filter value should match the call that provided the
+   *   page token. Passing a different value might lead to unexpected results.
+   * @param {string} [request.filter]
+   *   Optional. A query filter.
+   *
+   *   Supports filtering by creator.
+   *
+   *   To filter by creator, you must specify a valid value. Currently only
+   *   `creator("users/me")` and `NOT creator("users/me")` are accepted to filter
+   *   custom emojis by whether they were created by the calling user or not.
+   *
+   *   For example, the following query returns custom emojis created by the
+   *   caller:
+   *   ```
+   *   creator("users/me")
+   *   ```
+   *
+   *   Invalid queries are rejected with an `INVALID_ARGUMENT` error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.chat.v1.CustomEmoji|CustomEmoji} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCustomEmojisAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listCustomEmojisStream(
+    request?: protos.google.chat.v1.IListCustomEmojisRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listCustomEmojis'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCustomEmojis stream %j', request);
+    return this.descriptors.page.listCustomEmojis.createStream(
+      this.innerApiCalls.listCustomEmojis as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listCustomEmojis`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of custom emojis returned. The service can
+   *   return fewer custom emojis than this value. If unspecified, the default
+   *   value is 25. The maximum value is 200; values above 200 are changed to 200.
+   * @param {string} [request.pageToken]
+   *   Optional. (If resuming from a previous query.)
+   *
+   *   A page token received from a previous list custom emoji call. Provide this
+   *   to retrieve the subsequent page.
+   *
+   *   When paginating, the filter value should match the call that provided the
+   *   page token. Passing a different value might lead to unexpected results.
+   * @param {string} [request.filter]
+   *   Optional. A query filter.
+   *
+   *   Supports filtering by creator.
+   *
+   *   To filter by creator, you must specify a valid value. Currently only
+   *   `creator("users/me")` and `NOT creator("users/me")` are accepted to filter
+   *   custom emojis by whether they were created by the calling user or not.
+   *
+   *   For example, the following query returns custom emojis created by the
+   *   caller:
+   *   ```
+   *   creator("users/me")
+   *   ```
+   *
+   *   Invalid queries are rejected with an `INVALID_ARGUMENT` error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.chat.v1.CustomEmoji|CustomEmoji}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.list_custom_emojis.js</caption>
+   * region_tag:chat_v1_generated_ChatService_ListCustomEmojis_async
+   */
+  listCustomEmojisAsync(
+    request?: protos.google.chat.v1.IListCustomEmojisRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.chat.v1.ICustomEmoji> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listCustomEmojis'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listCustomEmojis iterate %j', request);
+    return this.descriptors.page.listCustomEmojis.asyncIterate(
+      this.innerApiCalls['listCustomEmojis'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.chat.v1.ICustomEmoji>;
   }
   /**
    * Lists events from a Google Chat space. For each event, the
@@ -6668,6 +7319,30 @@ export class ChatServiceClient {
   matchAttachmentFromAttachmentName(attachmentName: string) {
     return this.pathTemplates.attachmentPathTemplate.match(attachmentName)
       .attachment;
+  }
+
+  /**
+   * Return a fully-qualified customEmoji resource name string.
+   *
+   * @param {string} custom_emoji
+   * @returns {string} Resource name string.
+   */
+  customEmojiPath(customEmoji: string) {
+    return this.pathTemplates.customEmojiPathTemplate.render({
+      custom_emoji: customEmoji,
+    });
+  }
+
+  /**
+   * Parse the custom_emoji from CustomEmoji resource.
+   *
+   * @param {string} customEmojiName
+   *   A fully-qualified path representing CustomEmoji resource.
+   * @returns {string} A string representing the custom_emoji.
+   */
+  matchCustomEmojiFromCustomEmojiName(customEmojiName: string) {
+    return this.pathTemplates.customEmojiPathTemplate.match(customEmojiName)
+      .custom_emoji;
   }
 
   /**
