@@ -284,9 +284,14 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
         throw err;
       });
       assert(client.marketingplatformAdminServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -298,9 +303,14 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
           }
         );
       assert.strictEqual(client.marketingplatformAdminServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -481,7 +491,9 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getOrganization(request), expectedError);
     });
   });
@@ -627,7 +639,9 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createAnalyticsAccountLink(request),
         expectedError
@@ -776,7 +790,9 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteAnalyticsAccountLink(request),
         expectedError
@@ -925,7 +941,9 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
       );
       request.analyticsAccountLink = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.setPropertyServiceLevel(request),
         expectedError

@@ -45,9 +45,69 @@
                 "getManagedFolder"
               ]
             },
+            "DisableAnywhereCache": {
+              "methods": [
+                "disableAnywhereCache"
+              ]
+            },
+            "PauseAnywhereCache": {
+              "methods": [
+                "pauseAnywhereCache"
+              ]
+            },
+            "ResumeAnywhereCache": {
+              "methods": [
+                "resumeAnywhereCache"
+              ]
+            },
+            "GetAnywhereCache": {
+              "methods": [
+                "getAnywhereCache"
+              ]
+            },
+            "GetProjectIntelligenceConfig": {
+              "methods": [
+                "getProjectIntelligenceConfig"
+              ]
+            },
+            "UpdateProjectIntelligenceConfig": {
+              "methods": [
+                "updateProjectIntelligenceConfig"
+              ]
+            },
+            "GetFolderIntelligenceConfig": {
+              "methods": [
+                "getFolderIntelligenceConfig"
+              ]
+            },
+            "UpdateFolderIntelligenceConfig": {
+              "methods": [
+                "updateFolderIntelligenceConfig"
+              ]
+            },
+            "GetOrganizationIntelligenceConfig": {
+              "methods": [
+                "getOrganizationIntelligenceConfig"
+              ]
+            },
+            "UpdateOrganizationIntelligenceConfig": {
+              "methods": [
+                "updateOrganizationIntelligenceConfig"
+              ]
+            },
             "RenameFolder": {
               "methods": [
                 "renameFolder"
+              ]
+            },
+            "CreateAnywhereCache": {
+              "methods": [
+                "createAnywhereCache"
+              ]
+            },
+            "UpdateAnywhereCache": {
+              "methods": [
+                "updateAnywhereCache"
               ]
             },
             "ListFolders": {
@@ -62,6 +122,13 @@
                 "listManagedFolders",
                 "listManagedFoldersStream",
                 "listManagedFoldersAsync"
+              ]
+            },
+            "ListAnywhereCaches": {
+              "methods": [
+                "listAnywhereCaches",
+                "listAnywhereCachesStream",
+                "listAnywhereCachesAsync"
               ]
             }
           }
@@ -104,9 +171,69 @@
                 "getManagedFolder"
               ]
             },
+            "DisableAnywhereCache": {
+              "methods": [
+                "disableAnywhereCache"
+              ]
+            },
+            "PauseAnywhereCache": {
+              "methods": [
+                "pauseAnywhereCache"
+              ]
+            },
+            "ResumeAnywhereCache": {
+              "methods": [
+                "resumeAnywhereCache"
+              ]
+            },
+            "GetAnywhereCache": {
+              "methods": [
+                "getAnywhereCache"
+              ]
+            },
+            "GetProjectIntelligenceConfig": {
+              "methods": [
+                "getProjectIntelligenceConfig"
+              ]
+            },
+            "UpdateProjectIntelligenceConfig": {
+              "methods": [
+                "updateProjectIntelligenceConfig"
+              ]
+            },
+            "GetFolderIntelligenceConfig": {
+              "methods": [
+                "getFolderIntelligenceConfig"
+              ]
+            },
+            "UpdateFolderIntelligenceConfig": {
+              "methods": [
+                "updateFolderIntelligenceConfig"
+              ]
+            },
+            "GetOrganizationIntelligenceConfig": {
+              "methods": [
+                "getOrganizationIntelligenceConfig"
+              ]
+            },
+            "UpdateOrganizationIntelligenceConfig": {
+              "methods": [
+                "updateOrganizationIntelligenceConfig"
+              ]
+            },
             "RenameFolder": {
               "methods": [
                 "renameFolder"
+              ]
+            },
+            "CreateAnywhereCache": {
+              "methods": [
+                "createAnywhereCache"
+              ]
+            },
+            "UpdateAnywhereCache": {
+              "methods": [
+                "updateAnywhereCache"
               ]
             },
             "ListFolders": {
@@ -121,6 +248,13 @@
                 "listManagedFolders",
                 "listManagedFoldersStream",
                 "listManagedFoldersAsync"
+              ]
+            },
+            "ListAnywhereCaches": {
+              "methods": [
+                "listAnywhereCaches",
+                "listAnywhereCachesStream",
+                "listAnywhereCachesAsync"
               ]
             }
           }

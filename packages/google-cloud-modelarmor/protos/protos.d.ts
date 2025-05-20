@@ -2914,6 +2914,9 @@ export namespace google {
 
                         /** SanitizationMetadata errorMessage */
                         errorMessage?: (string|null);
+
+                        /** SanitizationMetadata ignorePartialInvocationFailures */
+                        ignorePartialInvocationFailures?: (boolean|null);
                     }
 
                     /** Represents a SanitizationMetadata. */
@@ -2930,6 +2933,9 @@ export namespace google {
 
                         /** SanitizationMetadata errorMessage. */
                         public errorMessage: string;
+
+                        /** SanitizationMetadata ignorePartialInvocationFailures. */
+                        public ignorePartialInvocationFailures: boolean;
 
                         /**
                          * Creates a new SanitizationMetadata instance using the specified properties.
@@ -3809,7 +3815,10 @@ export namespace google {
                     enum ByteItemType {
                         BYTE_ITEM_TYPE_UNSPECIFIED = 0,
                         PLAINTEXT_UTF8 = 1,
-                        PDF = 2
+                        PDF = 2,
+                        WORD_DOCUMENT = 3,
+                        EXCEL_DOCUMENT = 4,
+                        POWERPOINT_DOCUMENT = 5
                     }
                 }
 

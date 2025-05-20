@@ -214,9 +214,14 @@ describe('v2.RoutesClient', () => {
         throw err;
       });
       assert(client.routesStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -225,9 +230,14 @@ describe('v2.RoutesClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.routesStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -343,7 +353,9 @@ describe('v2.RoutesClient', () => {
         new protos.google.maps.routing.v2.ComputeRoutesRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.computeRoutes(request), expectedError);
     });
   });
@@ -449,7 +461,9 @@ describe('v2.RoutesClient', () => {
         new protos.google.maps.routing.v2.ComputeRouteMatrixRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       const stream = client.computeRouteMatrix(request, {
         retryRequestOptions: {noResponseRetries: 0},
       });

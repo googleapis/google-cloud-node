@@ -196,9 +196,14 @@ describe('v1beta.TextServiceClient', () => {
         throw err;
       });
       assert(client.textServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -207,9 +212,14 @@ describe('v1beta.TextServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.textServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -372,7 +382,9 @@ describe('v1beta.TextServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.generateText(request), expectedError);
     });
   });
@@ -499,7 +511,9 @@ describe('v1beta.TextServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.embedText(request), expectedError);
     });
   });
@@ -629,7 +643,9 @@ describe('v1beta.TextServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchEmbedText(request), expectedError);
     });
   });
@@ -759,7 +775,9 @@ describe('v1beta.TextServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.countTextTokens(request), expectedError);
     });
   });

@@ -1,0 +1,431 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.chronicle.v1",
+  "libraryPackage": "@google-cloud/chronicle",
+  "services": {
+    "DataAccessControlService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataAccessControlServiceClient",
+          "rpcs": {
+            "CreateDataAccessLabel": {
+              "methods": [
+                "createDataAccessLabel"
+              ]
+            },
+            "GetDataAccessLabel": {
+              "methods": [
+                "getDataAccessLabel"
+              ]
+            },
+            "UpdateDataAccessLabel": {
+              "methods": [
+                "updateDataAccessLabel"
+              ]
+            },
+            "DeleteDataAccessLabel": {
+              "methods": [
+                "deleteDataAccessLabel"
+              ]
+            },
+            "CreateDataAccessScope": {
+              "methods": [
+                "createDataAccessScope"
+              ]
+            },
+            "GetDataAccessScope": {
+              "methods": [
+                "getDataAccessScope"
+              ]
+            },
+            "UpdateDataAccessScope": {
+              "methods": [
+                "updateDataAccessScope"
+              ]
+            },
+            "DeleteDataAccessScope": {
+              "methods": [
+                "deleteDataAccessScope"
+              ]
+            },
+            "ListDataAccessLabels": {
+              "methods": [
+                "listDataAccessLabels",
+                "listDataAccessLabelsStream",
+                "listDataAccessLabelsAsync"
+              ]
+            },
+            "ListDataAccessScopes": {
+              "methods": [
+                "listDataAccessScopes",
+                "listDataAccessScopesStream",
+                "listDataAccessScopesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataAccessControlServiceClient",
+          "rpcs": {
+            "CreateDataAccessLabel": {
+              "methods": [
+                "createDataAccessLabel"
+              ]
+            },
+            "GetDataAccessLabel": {
+              "methods": [
+                "getDataAccessLabel"
+              ]
+            },
+            "UpdateDataAccessLabel": {
+              "methods": [
+                "updateDataAccessLabel"
+              ]
+            },
+            "DeleteDataAccessLabel": {
+              "methods": [
+                "deleteDataAccessLabel"
+              ]
+            },
+            "CreateDataAccessScope": {
+              "methods": [
+                "createDataAccessScope"
+              ]
+            },
+            "GetDataAccessScope": {
+              "methods": [
+                "getDataAccessScope"
+              ]
+            },
+            "UpdateDataAccessScope": {
+              "methods": [
+                "updateDataAccessScope"
+              ]
+            },
+            "DeleteDataAccessScope": {
+              "methods": [
+                "deleteDataAccessScope"
+              ]
+            },
+            "ListDataAccessLabels": {
+              "methods": [
+                "listDataAccessLabels",
+                "listDataAccessLabelsStream",
+                "listDataAccessLabelsAsync"
+              ]
+            },
+            "ListDataAccessScopes": {
+              "methods": [
+                "listDataAccessScopes",
+                "listDataAccessScopesStream",
+                "listDataAccessScopesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "EntityService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EntityServiceClient",
+          "rpcs": {
+            "GetWatchlist": {
+              "methods": [
+                "getWatchlist"
+              ]
+            },
+            "CreateWatchlist": {
+              "methods": [
+                "createWatchlist"
+              ]
+            },
+            "UpdateWatchlist": {
+              "methods": [
+                "updateWatchlist"
+              ]
+            },
+            "DeleteWatchlist": {
+              "methods": [
+                "deleteWatchlist"
+              ]
+            },
+            "ListWatchlists": {
+              "methods": [
+                "listWatchlists",
+                "listWatchlistsStream",
+                "listWatchlistsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EntityServiceClient",
+          "rpcs": {
+            "GetWatchlist": {
+              "methods": [
+                "getWatchlist"
+              ]
+            },
+            "CreateWatchlist": {
+              "methods": [
+                "createWatchlist"
+              ]
+            },
+            "UpdateWatchlist": {
+              "methods": [
+                "updateWatchlist"
+              ]
+            },
+            "DeleteWatchlist": {
+              "methods": [
+                "deleteWatchlist"
+              ]
+            },
+            "ListWatchlists": {
+              "methods": [
+                "listWatchlists",
+                "listWatchlistsStream",
+                "listWatchlistsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InstanceService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InstanceServiceClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InstanceServiceClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ReferenceListService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReferenceListServiceClient",
+          "rpcs": {
+            "GetReferenceList": {
+              "methods": [
+                "getReferenceList"
+              ]
+            },
+            "CreateReferenceList": {
+              "methods": [
+                "createReferenceList"
+              ]
+            },
+            "UpdateReferenceList": {
+              "methods": [
+                "updateReferenceList"
+              ]
+            },
+            "ListReferenceLists": {
+              "methods": [
+                "listReferenceLists",
+                "listReferenceListsStream",
+                "listReferenceListsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReferenceListServiceClient",
+          "rpcs": {
+            "GetReferenceList": {
+              "methods": [
+                "getReferenceList"
+              ]
+            },
+            "CreateReferenceList": {
+              "methods": [
+                "createReferenceList"
+              ]
+            },
+            "UpdateReferenceList": {
+              "methods": [
+                "updateReferenceList"
+              ]
+            },
+            "ListReferenceLists": {
+              "methods": [
+                "listReferenceLists",
+                "listReferenceListsStream",
+                "listReferenceListsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RuleService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RuleServiceClient",
+          "rpcs": {
+            "CreateRule": {
+              "methods": [
+                "createRule"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "getRule"
+              ]
+            },
+            "UpdateRule": {
+              "methods": [
+                "updateRule"
+              ]
+            },
+            "DeleteRule": {
+              "methods": [
+                "deleteRule"
+              ]
+            },
+            "GetRetrohunt": {
+              "methods": [
+                "getRetrohunt"
+              ]
+            },
+            "GetRuleDeployment": {
+              "methods": [
+                "getRuleDeployment"
+              ]
+            },
+            "UpdateRuleDeployment": {
+              "methods": [
+                "updateRuleDeployment"
+              ]
+            },
+            "CreateRetrohunt": {
+              "methods": [
+                "createRetrohunt"
+              ]
+            },
+            "ListRules": {
+              "methods": [
+                "listRules",
+                "listRulesStream",
+                "listRulesAsync"
+              ]
+            },
+            "ListRuleRevisions": {
+              "methods": [
+                "listRuleRevisions",
+                "listRuleRevisionsStream",
+                "listRuleRevisionsAsync"
+              ]
+            },
+            "ListRetrohunts": {
+              "methods": [
+                "listRetrohunts",
+                "listRetrohuntsStream",
+                "listRetrohuntsAsync"
+              ]
+            },
+            "ListRuleDeployments": {
+              "methods": [
+                "listRuleDeployments",
+                "listRuleDeploymentsStream",
+                "listRuleDeploymentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RuleServiceClient",
+          "rpcs": {
+            "CreateRule": {
+              "methods": [
+                "createRule"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "getRule"
+              ]
+            },
+            "UpdateRule": {
+              "methods": [
+                "updateRule"
+              ]
+            },
+            "DeleteRule": {
+              "methods": [
+                "deleteRule"
+              ]
+            },
+            "GetRetrohunt": {
+              "methods": [
+                "getRetrohunt"
+              ]
+            },
+            "GetRuleDeployment": {
+              "methods": [
+                "getRuleDeployment"
+              ]
+            },
+            "UpdateRuleDeployment": {
+              "methods": [
+                "updateRuleDeployment"
+              ]
+            },
+            "CreateRetrohunt": {
+              "methods": [
+                "createRetrohunt"
+              ]
+            },
+            "ListRules": {
+              "methods": [
+                "listRules",
+                "listRulesStream",
+                "listRulesAsync"
+              ]
+            },
+            "ListRuleRevisions": {
+              "methods": [
+                "listRuleRevisions",
+                "listRuleRevisionsStream",
+                "listRuleRevisionsAsync"
+              ]
+            },
+            "ListRetrohunts": {
+              "methods": [
+                "listRetrohunts",
+                "listRetrohuntsStream",
+                "listRetrohuntsAsync"
+              ]
+            },
+            "ListRuleDeployments": {
+              "methods": [
+                "listRuleDeployments",
+                "listRuleDeploymentsStream",
+                "listRuleDeploymentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

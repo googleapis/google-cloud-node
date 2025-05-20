@@ -22,6 +22,7 @@ import {mkdirSync, readdirSync, readFileSync} from 'fs';
 // eslint-disable-next-line node/no-unpublished-import
 import snapshot from 'snap-shot-it';
 import * as assert from 'assert';
+import {TemplateVars} from '../src/get-bootstrap-template-vars';
 
 describe('tests for templates', () => {
   let templateDirRead: string;
@@ -30,7 +31,7 @@ describe('tests for templates', () => {
     templateDirRead = join(
       __dirname,
       '../../',
-      'templates/bootstrap-templates'
+      'templates/bootstrap-templates',
     );
     templateDirWrite = join(__dirname, 'temp');
     try {
@@ -63,20 +64,20 @@ describe('tests for templates', () => {
 
     snapshot(readFileSync(join(templateDirWrite, '.OwlBot.yaml'), 'utf8'));
     snapshot(
-      readFileSync(join(templateDirWrite, '.repo-metadata.json'), 'utf8')
+      readFileSync(join(templateDirWrite, '.repo-metadata.json'), 'utf8'),
     );
     snapshot(
-      readFileSync(join(templateDirWrite, 'samples', 'package.json'), 'utf8')
+      readFileSync(join(templateDirWrite, 'samples', 'package.json'), 'utf8'),
     );
     snapshot(
       readFileSync(
         join(templateDirWrite, 'samples', 'test', 'quickstart.js'),
-        'utf8'
-      )
+        'utf8',
+      ),
     );
     snapshot(readFileSync(join(templateDirWrite, 'LICENSE'), 'utf8'));
     const packageJson = JSON.parse(
-      readFileSync(join(templateDirWrite, 'package.json'), 'utf8')
+      readFileSync(join(templateDirWrite, 'package.json'), 'utf8'),
     );
 
     assert.ok(packageJson.name, '@google-cloud/kms');
@@ -84,15 +85,15 @@ describe('tests for templates', () => {
     assert.ok(packageJson.main, 'build/src/index.js');
     assert.ok(
       packageJson.description,
-      'Key Management Service client for Node.js'
+      'Key Management Service client for Node.js',
     );
     assert.ok(
       packageJson.homepage,
-      'https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-keymanagement'
+      'https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-keymanagement',
     );
     assert.ok(
       packageJson.repository.directory,
-      'packages/google-cloud-keymanagement'
+      'packages/google-cloud-keymanagement',
     );
 
     assert.deepStrictEqual(readdirSync(templateDirRead), [
@@ -110,5 +111,28 @@ describe('tests for templates', () => {
       'package.json',
       'samples',
     ]);
+  });
+
+  it('it should overwrite and not error if the template exists in part', async () => {
+    const templateVars: TemplateVars = {
+      name: 'kms',
+      namePretty: 'Key Management Service',
+      productDocumentation: 'https://cloud.google.com/kms',
+      language: 'nodejs',
+      distributionName: '@google-cloud/kms',
+      monoRepoName: 'google-cloud-node',
+      apiId: 'google.cloud.kms.v1',
+      apiPath: 'google/cloud/kms',
+      apiPathDashes: 'google-cloud-kms',
+      version: 'v1',
+      serviceName: 'KeyManagementService',
+      hostName: 'kms.googleapis.com',
+      folderName: 'google-cloud-keymanagement',
+    };
+
+    // first run
+    await compileTemplates(templateDirRead, templateDirWrite, templateVars);
+    // duplicate
+    await compileTemplates(templateDirRead, templateDirWrite, templateVars);
   });
 });
