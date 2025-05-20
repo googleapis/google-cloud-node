@@ -232,6 +232,11 @@ export class GenerativeServiceClient {
         !!opts.fallback,
         !!opts.gaxServerStreamingRetries
       ),
+      bidiGenerateContent: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.BIDI_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -291,6 +296,7 @@ export class GenerativeServiceClient {
       'embedContent',
       'batchEmbedContents',
       'countTokens',
+      'bidiGenerateContent',
     ];
     for (const methodName of generativeServiceStubMethods) {
       const callPromise = this.generativeServiceStub.then(
@@ -793,8 +799,8 @@ export class GenerativeServiceClient {
    *   Required. The content to embed. Only the `parts.text` fields will be
    *   counted.
    * @param {google.ai.generativelanguage.v1beta.TaskType} [request.taskType]
-   *   Optional. Optional task type for which the embeddings will be used. Can
-   *   only be set for `models/embedding-001`.
+   *   Optional. Optional task type for which the embeddings will be used. Not
+   *   supported on earlier models (`models/embedding-001`).
    * @param {string} [request.title]
    *   Optional. An optional title for the text. Only applicable when TaskType is
    *   `RETRIEVAL_DOCUMENT`.
@@ -1298,6 +1304,29 @@ export class GenerativeServiceClient {
     });
     this._log.info('streamGenerateContent stream %j', options);
     return this.innerApiCalls.streamGenerateContent(request, options);
+  }
+
+  /**
+   * Low-Latency bidirectional streaming API that supports audio and video
+   * streaming inputs can produce multimodal output streams (audio and text).
+   *
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which is both readable and writable. It accepts objects
+   *   representing {@link protos.google.ai.generativelanguage.v1beta.BidiGenerateContentClientMessage|BidiGenerateContentClientMessage} for write() method, and
+   *   will emit objects representing {@link protos.google.ai.generativelanguage.v1beta.BidiGenerateContentServerMessage|BidiGenerateContentServerMessage} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/generative_service.bidi_generate_content.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_GenerativeService_BidiGenerateContent_async
+   */
+  bidiGenerateContent(options?: CallOptions): gax.CancellableStream {
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('bidiGenerateContent stream %j', options);
+    return this.innerApiCalls.bidiGenerateContent(null, options);
   }
 
   // --------------------

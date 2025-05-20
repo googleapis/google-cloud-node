@@ -29,11 +29,11 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The fully qualified name of the Case resource to be escalated.
+   *  Required. The name of the case to be escalated.
    */
   // const name = 'abc123'
   /**
-   *  The escalation object to be sent with the escalation request.
+   *  The escalation information to be sent with the escalation request.
    */
   // const escalation = {}
 

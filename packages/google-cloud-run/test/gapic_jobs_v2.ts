@@ -291,9 +291,14 @@ describe('v2.JobsClient', () => {
         throw err;
       });
       assert(client.jobsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -302,9 +307,14 @@ describe('v2.JobsClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.jobsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -452,7 +462,9 @@ describe('v2.JobsClient', () => {
       // path template: projects/*/locations/{location=*}/**
       request.name = 'projects/value/locations/value/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getJob(request), expectedError);
     });
   });
@@ -582,7 +594,9 @@ describe('v2.JobsClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -712,7 +726,9 @@ describe('v2.JobsClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -843,7 +859,9 @@ describe('v2.JobsClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
@@ -2071,20 +2089,24 @@ describe('v2.JobsClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -2151,20 +2173,24 @@ describe('v2.JobsClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -2231,20 +2257,24 @@ describe('v2.JobsClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);

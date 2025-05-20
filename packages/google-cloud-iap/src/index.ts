@@ -19,26 +19,12 @@
 import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
-const IdentityAwareProxyAdminServiceClient =
-  v1.IdentityAwareProxyAdminServiceClient;
-type IdentityAwareProxyAdminServiceClient =
-  v1.IdentityAwareProxyAdminServiceClient;
-const IdentityAwareProxyOAuthServiceClient =
-  v1.IdentityAwareProxyOAuthServiceClient;
-type IdentityAwareProxyOAuthServiceClient =
-  v1.IdentityAwareProxyOAuthServiceClient;
+const IdentityAwareProxyAdminServiceClient = v1.IdentityAwareProxyAdminServiceClient;
+type IdentityAwareProxyAdminServiceClient = v1.IdentityAwareProxyAdminServiceClient;
+const IdentityAwareProxyOAuthServiceClient = v1.IdentityAwareProxyOAuthServiceClient;
+type IdentityAwareProxyOAuthServiceClient = v1.IdentityAwareProxyOAuthServiceClient;
 
-export {
-  v1,
-  v1beta1,
-  IdentityAwareProxyAdminServiceClient,
-  IdentityAwareProxyOAuthServiceClient,
-};
-export default {
-  v1,
-  v1beta1,
-  IdentityAwareProxyAdminServiceClient,
-  IdentityAwareProxyOAuthServiceClient,
-};
+export {v1, v1beta1, IdentityAwareProxyAdminServiceClient, IdentityAwareProxyOAuthServiceClient};
+export default {v1, v1beta1, IdentityAwareProxyAdminServiceClient, IdentityAwareProxyOAuthServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
