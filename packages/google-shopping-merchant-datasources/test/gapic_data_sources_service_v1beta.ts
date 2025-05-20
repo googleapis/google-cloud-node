@@ -267,9 +267,14 @@ describe('v1beta.DataSourcesServiceClient', () => {
         throw err;
       });
       assert(client.dataSourcesServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -279,9 +284,14 @@ describe('v1beta.DataSourcesServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataSourcesServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -450,7 +460,9 @@ describe('v1beta.DataSourcesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDataSource(request), expectedError);
     });
   });
@@ -584,7 +596,9 @@ describe('v1beta.DataSourcesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDataSource(request), expectedError);
     });
   });
@@ -722,7 +736,9 @@ describe('v1beta.DataSourcesServiceClient', () => {
       );
       request.dataSource.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDataSource(request), expectedError);
     });
   });
@@ -856,7 +872,9 @@ describe('v1beta.DataSourcesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteDataSource(request), expectedError);
     });
   });
@@ -990,7 +1008,9 @@ describe('v1beta.DataSourcesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.fetchDataSource(request), expectedError);
     });
   });

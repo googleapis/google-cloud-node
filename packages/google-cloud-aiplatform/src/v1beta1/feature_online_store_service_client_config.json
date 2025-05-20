@@ -31,6 +31,10 @@
         "SearchNearestEntities": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "FeatureViewDirectWrite": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -15,8 +18,8 @@
                     "java_package": "com.google.cloud.dataform.v1beta1",
                     "php_namespace": "Google\\Cloud\\Dataform\\V1beta1",
                     "ruby_package": "Google::Cloud::Dataform::V1beta1",
-                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKeyVersion",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
+                    "(google.api.resource_definition).type": "aiplatform.googleapis.com/NotebookRuntimeTemplate",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}"
                   },
                   "nested": {
                     "Dataform": {
@@ -2755,6 +2758,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "builtinAssertionNamePrefix": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "defaultNotebookRuntimeOptions": {
                           "type": "NotebookRuntimeOptions",
                           "id": 9,
@@ -2778,6 +2788,14 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "aiPlatformNotebookRuntimeTemplate": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/NotebookRuntimeTemplate"
                           }
                         }
                       }
@@ -2942,7 +2960,8 @@
                             "operations",
                             "assertion",
                             "declaration",
-                            "notebook"
+                            "notebook",
+                            "dataPreparation"
                           ]
                         },
                         "_internalMetadata": {
@@ -2971,6 +2990,10 @@
                         "notebook": {
                           "type": "Notebook",
                           "id": 8
+                        },
+                        "dataPreparation": {
+                          "type": "DataPreparation",
+                          "id": 9
                         },
                         "target": {
                           "type": "Target",
@@ -3192,6 +3215,111 @@
                               "id": 4
                             }
                           }
+                        },
+                        "DataPreparation": {
+                          "oneofs": {
+                            "definition": {
+                              "oneof": [
+                                "contentsYaml",
+                                "contentsSql"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "contentsYaml": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "contentsSql": {
+                              "type": "SqlDefinition",
+                              "id": 6
+                            },
+                            "dependencyTargets": {
+                              "rule": "repeated",
+                              "type": "Target",
+                              "id": 1
+                            },
+                            "disabled": {
+                              "type": "bool",
+                              "id": 2
+                            },
+                            "tags": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "SqlDefinition": {
+                              "fields": {
+                                "query": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "errorTable": {
+                                  "type": "ErrorTable",
+                                  "id": 2
+                                },
+                                "load": {
+                                  "type": "LoadConfig",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "ErrorTable": {
+                              "fields": {
+                                "target": {
+                                  "type": "Target",
+                                  "id": 1
+                                },
+                                "retentionDays": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "LoadConfig": {
+                          "oneofs": {
+                            "mode": {
+                              "oneof": [
+                                "replace",
+                                "append",
+                                "maximum",
+                                "unique"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "replace": {
+                              "type": "SimpleLoadMode",
+                              "id": 1
+                            },
+                            "append": {
+                              "type": "SimpleLoadMode",
+                              "id": 2
+                            },
+                            "maximum": {
+                              "type": "IncrementalLoadMode",
+                              "id": 3
+                            },
+                            "unique": {
+                              "type": "IncrementalLoadMode",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "SimpleLoadMode": {
+                          "fields": {}
+                        },
+                        "IncrementalLoadMode": {
+                          "fields": {
+                            "column": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
@@ -3298,6 +3426,13 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "disabled": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "createTime": {
@@ -3739,7 +3874,8 @@
                         "action": {
                           "oneof": [
                             "bigqueryAction",
-                            "notebookAction"
+                            "notebookAction",
+                            "dataPreparationAction"
                           ]
                         },
                         "_internalMetadata": {
@@ -3759,6 +3895,13 @@
                         "notebookAction": {
                           "type": "NotebookAction",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dataPreparationAction": {
+                          "type": "DataPreparationAction",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3840,6 +3983,114 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "DataPreparationAction": {
+                          "oneofs": {
+                            "definition": {
+                              "oneof": [
+                                "contentsYaml",
+                                "contentsSql"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "contentsYaml": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "contentsSql": {
+                              "type": "ActionSqlDefinition",
+                              "id": 6
+                            },
+                            "generatedSql": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "jobId": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ActionSqlDefinition": {
+                              "fields": {
+                                "query": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "errorTable": {
+                                  "type": "ActionErrorTable",
+                                  "id": 2
+                                },
+                                "loadConfig": {
+                                  "type": "ActionLoadConfig",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "ActionErrorTable": {
+                              "fields": {
+                                "target": {
+                                  "type": "Target",
+                                  "id": 1
+                                },
+                                "retentionDays": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "ActionLoadConfig": {
+                              "oneofs": {
+                                "mode": {
+                                  "oneof": [
+                                    "replace",
+                                    "append",
+                                    "maximum",
+                                    "unique"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "replace": {
+                                  "type": "ActionSimpleLoadMode",
+                                  "id": 1
+                                },
+                                "append": {
+                                  "type": "ActionSimpleLoadMode",
+                                  "id": 2
+                                },
+                                "maximum": {
+                                  "type": "ActionIncrementalLoadMode",
+                                  "id": 3
+                                },
+                                "unique": {
+                                  "type": "ActionIncrementalLoadMode",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "ActionSimpleLoadMode": {
+                              "fields": {}
+                            },
+                            "ActionIncrementalLoadMode": {
+                              "fields": {
+                                "column": {
+                                  "type": "string",
+                                  "id": 1
+                                }
                               }
                             }
                           }

@@ -20,10 +20,10 @@ import * as path from 'path';
 export async function compileTemplates(
   dirNameReadAbsolute: string,
   dirNameWriteAbsolute: string,
-  vars: TemplateVars
+  vars: TemplateVars,
 ) {
   console.log(
-    `copying from ${dirNameReadAbsolute} to ${dirNameWriteAbsolute}...`
+    `copying from ${dirNameReadAbsolute} to ${dirNameWriteAbsolute}...`,
   );
   const files = fs.readdirSync(dirNameReadAbsolute);
   files.forEach(file => {
@@ -34,7 +34,7 @@ export async function compileTemplates(
     const writeName = path.join(dirNameWriteAbsolute, fileName);
     console.log(writeName);
     if (fs.statSync(readName).isDirectory()) {
-      fs.mkdirSync(writeName);
+      fs.mkdirSync(writeName, {recursive: true});
       console.log(writeName + ' generated');
       compileTemplates(readName, writeName, vars);
     } else {

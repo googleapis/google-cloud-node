@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -144,7 +147,7 @@
                           "type": "string",
                           "id": 15,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "existingHardware": {
@@ -153,6 +156,27 @@
                           "id": 16,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deploymentType": {
+                          "type": "DeploymentType",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "actualInstallationDate": {
+                          "type": "google.type.Date",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "estimatedInstallationDate": {
+                          "type": "google.type.Date",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       },
@@ -175,10 +199,23 @@
                           }
                         },
                         "Type": {
+                          "options": {
+                            "allow_alias": true
+                          },
                           "values": {
                             "TYPE_UNSPECIFIED": 0,
                             "PAID": 1,
-                            "POC": 2
+                            "POC": 2,
+                            "UNPAID": 2
+                          }
+                        },
+                        "DeploymentType": {
+                          "values": {
+                            "DEPLOYMENT_TYPE_UNSPECIFIED": 0,
+                            "FULL_PRODUCTION": 1,
+                            "PROOF_OF_CONCEPT": 2,
+                            "INTERNAL": 3,
+                            "CUSTOMER_LAB": 4
                           }
                         }
                       }
@@ -824,9 +861,29 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "hardwareCountRanges": {
+                          "rule": "repeated",
+                          "type": "Range",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
+                        "Range": {
+                          "fields": {
+                            "min": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "max": {
+                              "type": "int32",
+                              "id": 2
+                            }
+                          }
+                        },
                         "Type": {
                           "values": {
                             "TYPE_UNSPECIFIED": 0,
@@ -939,6 +996,7 @@
                             "ADDITIONAL_INFO_NEEDED": 1,
                             "PREPARING": 2,
                             "READY_FOR_CUSTOMER_FACTORY_TURNUP_CHECKS": 5,
+                            "CUSTOMER_FACTORY_TURNUP_CHECKS_STARTED": 8,
                             "READY_FOR_SITE_TURNUP": 6,
                             "CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED": 7,
                             "ACTIVE": 3,
@@ -3319,6 +3377,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "step": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "details": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3333,6 +3405,7 @@
                           },
                           "values": {
                             "STATE_SIGNAL_UNSPECIFIED": 0,
+                            "FACTORY_TURNUP_CHECKS_STARTED": 3,
                             "FACTORY_TURNUP_CHECKS_PASSED": 1,
                             "READY_FOR_SITE_TURNUP": 1,
                             "FACTORY_TURNUP_CHECKS_FAILED": 2

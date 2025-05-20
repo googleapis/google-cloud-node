@@ -122,6 +122,9 @@
                          * @property {google.protobuf.ITimestamp|null} [submitTime] Order submitTime
                          * @property {string|null} [billingId] Order billingId
                          * @property {Array.<google.cloud.gdchardwaremanagement.v1alpha.IHardwareLocation>|null} [existingHardware] Order existingHardware
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.Order.DeploymentType|null} [deploymentType] Order deploymentType
+                         * @property {google.type.IDate|null} [actualInstallationDate] Order actualInstallationDate
+                         * @property {google.type.IDate|null} [estimatedInstallationDate] Order estimatedInstallationDate
                          */
     
                         /**
@@ -271,6 +274,30 @@
                         Order.prototype.existingHardware = $util.emptyArray;
     
                         /**
+                         * Order deploymentType.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.Order.DeploymentType} deploymentType
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
+                         * @instance
+                         */
+                        Order.prototype.deploymentType = 0;
+    
+                        /**
+                         * Order actualInstallationDate.
+                         * @member {google.type.IDate|null|undefined} actualInstallationDate
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
+                         * @instance
+                         */
+                        Order.prototype.actualInstallationDate = null;
+    
+                        /**
+                         * Order estimatedInstallationDate.
+                         * @member {google.type.IDate|null|undefined} estimatedInstallationDate
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
+                         * @instance
+                         */
+                        Order.prototype.estimatedInstallationDate = null;
+    
+                        /**
                          * Creates a new Order instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
@@ -329,6 +356,12 @@
                             if (message.existingHardware != null && message.existingHardware.length)
                                 for (var i = 0; i < message.existingHardware.length; ++i)
                                     $root.google.cloud.gdchardwaremanagement.v1alpha.HardwareLocation.encode(message.existingHardware[i], writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.deploymentType != null && Object.hasOwnProperty.call(message, "deploymentType"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).int32(message.deploymentType);
+                            if (message.actualInstallationDate != null && Object.hasOwnProperty.call(message, "actualInstallationDate"))
+                                $root.google.type.Date.encode(message.actualInstallationDate, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.estimatedInstallationDate != null && Object.hasOwnProperty.call(message, "estimatedInstallationDate"))
+                                $root.google.type.Date.encode(message.estimatedInstallationDate, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             return writer;
                         };
     
@@ -450,6 +483,18 @@
                                         message.existingHardware.push($root.google.cloud.gdchardwaremanagement.v1alpha.HardwareLocation.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 18: {
+                                        message.deploymentType = reader.int32();
+                                        break;
+                                    }
+                                case 19: {
+                                        message.actualInstallationDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 20: {
+                                        message.estimatedInstallationDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -561,6 +606,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 2:
                                     break;
                                 }
                             if (message.submitTime != null && message.hasOwnProperty("submitTime")) {
@@ -579,6 +625,27 @@
                                     if (error)
                                         return "existingHardware." + error;
                                 }
+                            }
+                            if (message.deploymentType != null && message.hasOwnProperty("deploymentType"))
+                                switch (message.deploymentType) {
+                                default:
+                                    return "deploymentType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.actualInstallationDate != null && message.hasOwnProperty("actualInstallationDate")) {
+                                var error = $root.google.type.Date.verify(message.actualInstallationDate);
+                                if (error)
+                                    return "actualInstallationDate." + error;
+                            }
+                            if (message.estimatedInstallationDate != null && message.hasOwnProperty("estimatedInstallationDate")) {
+                                var error = $root.google.type.Date.verify(message.estimatedInstallationDate);
+                                if (error)
+                                    return "estimatedInstallationDate." + error;
                             }
                             return null;
                         };
@@ -718,6 +785,10 @@
                             case 2:
                                 message.type = 2;
                                 break;
+                            case "UNPAID":
+                            case 2:
+                                message.type = 2;
+                                break;
                             }
                             if (object.submitTime != null) {
                                 if (typeof object.submitTime !== "object")
@@ -735,6 +806,44 @@
                                         throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Order.existingHardware: object expected");
                                     message.existingHardware[i] = $root.google.cloud.gdchardwaremanagement.v1alpha.HardwareLocation.fromObject(object.existingHardware[i]);
                                 }
+                            }
+                            switch (object.deploymentType) {
+                            default:
+                                if (typeof object.deploymentType === "number") {
+                                    message.deploymentType = object.deploymentType;
+                                    break;
+                                }
+                                break;
+                            case "DEPLOYMENT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.deploymentType = 0;
+                                break;
+                            case "FULL_PRODUCTION":
+                            case 1:
+                                message.deploymentType = 1;
+                                break;
+                            case "PROOF_OF_CONCEPT":
+                            case 2:
+                                message.deploymentType = 2;
+                                break;
+                            case "INTERNAL":
+                            case 3:
+                                message.deploymentType = 3;
+                                break;
+                            case "CUSTOMER_LAB":
+                            case 4:
+                                message.deploymentType = 4;
+                                break;
+                            }
+                            if (object.actualInstallationDate != null) {
+                                if (typeof object.actualInstallationDate !== "object")
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Order.actualInstallationDate: object expected");
+                                message.actualInstallationDate = $root.google.type.Date.fromObject(object.actualInstallationDate);
+                            }
+                            if (object.estimatedInstallationDate != null) {
+                                if (typeof object.estimatedInstallationDate !== "object")
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Order.estimatedInstallationDate: object expected");
+                                message.estimatedInstallationDate = $root.google.type.Date.fromObject(object.estimatedInstallationDate);
                             }
                             return message;
                         };
@@ -772,6 +881,9 @@
                                 object.displayName = "";
                                 object.submitTime = null;
                                 object.billingId = "";
+                                object.deploymentType = options.enums === String ? "DEPLOYMENT_TYPE_UNSPECIFIED" : 0;
+                                object.actualInstallationDate = null;
+                                object.estimatedInstallationDate = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -815,6 +927,12 @@
                                 for (var j = 0; j < message.existingHardware.length; ++j)
                                     object.existingHardware[j] = $root.google.cloud.gdchardwaremanagement.v1alpha.HardwareLocation.toObject(message.existingHardware[j], options);
                             }
+                            if (message.deploymentType != null && message.hasOwnProperty("deploymentType"))
+                                object.deploymentType = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.Order.DeploymentType[message.deploymentType] === undefined ? message.deploymentType : $root.google.cloud.gdchardwaremanagement.v1alpha.Order.DeploymentType[message.deploymentType] : message.deploymentType;
+                            if (message.actualInstallationDate != null && message.hasOwnProperty("actualInstallationDate"))
+                                object.actualInstallationDate = $root.google.type.Date.toObject(message.actualInstallationDate, options);
+                            if (message.estimatedInstallationDate != null && message.hasOwnProperty("estimatedInstallationDate"))
+                                object.estimatedInstallationDate = $root.google.type.Date.toObject(message.estimatedInstallationDate, options);
                             return object;
                         };
     
@@ -887,12 +1005,34 @@
                          * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
                          * @property {number} PAID=1 PAID value
                          * @property {number} POC=2 POC value
+                         * @property {number} UNPAID=2 UNPAID value
                          */
                         Order.Type = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "PAID"] = 1;
                             values[valuesById[2] = "POC"] = 2;
+                            values["UNPAID"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * DeploymentType enum.
+                         * @name google.cloud.gdchardwaremanagement.v1alpha.Order.DeploymentType
+                         * @enum {number}
+                         * @property {number} DEPLOYMENT_TYPE_UNSPECIFIED=0 DEPLOYMENT_TYPE_UNSPECIFIED value
+                         * @property {number} FULL_PRODUCTION=1 FULL_PRODUCTION value
+                         * @property {number} PROOF_OF_CONCEPT=2 PROOF_OF_CONCEPT value
+                         * @property {number} INTERNAL=3 INTERNAL value
+                         * @property {number} CUSTOMER_LAB=4 CUSTOMER_LAB value
+                         */
+                        Order.DeploymentType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DEPLOYMENT_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FULL_PRODUCTION"] = 1;
+                            values[valuesById[2] = "PROOF_OF_CONCEPT"] = 2;
+                            values[valuesById[3] = "INTERNAL"] = 3;
+                            values[valuesById[4] = "CUSTOMER_LAB"] = 4;
                             return values;
                         })();
     
@@ -4390,6 +4530,7 @@
                          * @property {boolean|null} [isActive] Sku isActive
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.Sku.Type|null} [type] Sku type
                          * @property {number|null} [vcpuCount] Sku vcpuCount
+                         * @property {Array.<google.cloud.gdchardwaremanagement.v1alpha.Sku.IRange>|null} [hardwareCountRanges] Sku hardwareCountRanges
                          */
     
                         /**
@@ -4402,6 +4543,7 @@
                          */
                         function Sku(properties) {
                             this.instances = [];
+                            this.hardwareCountRanges = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -4497,6 +4639,14 @@
                         Sku.prototype.vcpuCount = 0;
     
                         /**
+                         * Sku hardwareCountRanges.
+                         * @member {Array.<google.cloud.gdchardwaremanagement.v1alpha.Sku.IRange>} hardwareCountRanges
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku
+                         * @instance
+                         */
+                        Sku.prototype.hardwareCountRanges = $util.emptyArray;
+    
+                        /**
                          * Creates a new Sku instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku
@@ -4543,6 +4693,9 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).int32(message.type);
                             if (message.vcpuCount != null && Object.hasOwnProperty.call(message, "vcpuCount"))
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.vcpuCount);
+                            if (message.hardwareCountRanges != null && message.hardwareCountRanges.length)
+                                for (var i = 0; i < message.hardwareCountRanges.length; ++i)
+                                    $root.google.cloud.gdchardwaremanagement.v1alpha.Sku.Range.encode(message.hardwareCountRanges[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -4621,6 +4774,12 @@
                                     }
                                 case 12: {
                                         message.vcpuCount = reader.int32();
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.hardwareCountRanges && message.hardwareCountRanges.length))
+                                            message.hardwareCountRanges = [];
+                                        message.hardwareCountRanges.push($root.google.cloud.gdchardwaremanagement.v1alpha.Sku.Range.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -4709,6 +4868,15 @@
                             if (message.vcpuCount != null && message.hasOwnProperty("vcpuCount"))
                                 if (!$util.isInteger(message.vcpuCount))
                                     return "vcpuCount: integer expected";
+                            if (message.hardwareCountRanges != null && message.hasOwnProperty("hardwareCountRanges")) {
+                                if (!Array.isArray(message.hardwareCountRanges))
+                                    return "hardwareCountRanges: array expected";
+                                for (var i = 0; i < message.hardwareCountRanges.length; ++i) {
+                                    var error = $root.google.cloud.gdchardwaremanagement.v1alpha.Sku.Range.verify(message.hardwareCountRanges[i]);
+                                    if (error)
+                                        return "hardwareCountRanges." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -4781,6 +4949,16 @@
                             }
                             if (object.vcpuCount != null)
                                 message.vcpuCount = object.vcpuCount | 0;
+                            if (object.hardwareCountRanges) {
+                                if (!Array.isArray(object.hardwareCountRanges))
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Sku.hardwareCountRanges: array expected");
+                                message.hardwareCountRanges = [];
+                                for (var i = 0; i < object.hardwareCountRanges.length; ++i) {
+                                    if (typeof object.hardwareCountRanges[i] !== "object")
+                                        throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Sku.hardwareCountRanges: object expected");
+                                    message.hardwareCountRanges[i] = $root.google.cloud.gdchardwaremanagement.v1alpha.Sku.Range.fromObject(object.hardwareCountRanges[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -4797,8 +4975,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.instances = [];
+                                object.hardwareCountRanges = [];
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.displayName = "";
@@ -4836,6 +5016,11 @@
                                 object.type = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.Sku.Type[message.type] === undefined ? message.type : $root.google.cloud.gdchardwaremanagement.v1alpha.Sku.Type[message.type] : message.type;
                             if (message.vcpuCount != null && message.hasOwnProperty("vcpuCount"))
                                 object.vcpuCount = message.vcpuCount;
+                            if (message.hardwareCountRanges && message.hardwareCountRanges.length) {
+                                object.hardwareCountRanges = [];
+                                for (var j = 0; j < message.hardwareCountRanges.length; ++j)
+                                    object.hardwareCountRanges[j] = $root.google.cloud.gdchardwaremanagement.v1alpha.Sku.Range.toObject(message.hardwareCountRanges[j], options);
+                            }
                             return object;
                         };
     
@@ -4864,6 +5049,233 @@
                             }
                             return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.Sku";
                         };
+    
+                        Sku.Range = (function() {
+    
+                            /**
+                             * Properties of a Range.
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku
+                             * @interface IRange
+                             * @property {number|null} [min] Range min
+                             * @property {number|null} [max] Range max
+                             */
+    
+                            /**
+                             * Constructs a new Range.
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku
+                             * @classdesc Represents a Range.
+                             * @implements IRange
+                             * @constructor
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Sku.IRange=} [properties] Properties to set
+                             */
+                            function Range(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Range min.
+                             * @member {number} min
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku.Range
+                             * @instance
+                             */
+                            Range.prototype.min = 0;
+    
+                            /**
+                             * Range max.
+                             * @member {number} max
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku.Range
+                             * @instance
+                             */
+                            Range.prototype.max = 0;
+    
+                            /**
+                             * Creates a new Range instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku.Range
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Sku.IRange=} [properties] Properties to set
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Sku.Range} Range instance
+                             */
+                            Range.create = function create(properties) {
+                                return new Range(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Range message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Sku.Range.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku.Range
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Sku.IRange} message Range message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Range.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.min != null && Object.hasOwnProperty.call(message, "min"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.min);
+                                if (message.max != null && Object.hasOwnProperty.call(message, "max"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.max);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Range message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Sku.Range.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku.Range
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Sku.IRange} message Range message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Range.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Range message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku.Range
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Sku.Range} Range
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Range.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gdchardwaremanagement.v1alpha.Sku.Range();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.min = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.max = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Range message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku.Range
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Sku.Range} Range
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Range.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Range message.
+                             * @function verify
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku.Range
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Range.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.min != null && message.hasOwnProperty("min"))
+                                    if (!$util.isInteger(message.min))
+                                        return "min: integer expected";
+                                if (message.max != null && message.hasOwnProperty("max"))
+                                    if (!$util.isInteger(message.max))
+                                        return "max: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Range message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku.Range
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.gdchardwaremanagement.v1alpha.Sku.Range} Range
+                             */
+                            Range.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.gdchardwaremanagement.v1alpha.Sku.Range)
+                                    return object;
+                                var message = new $root.google.cloud.gdchardwaremanagement.v1alpha.Sku.Range();
+                                if (object.min != null)
+                                    message.min = object.min | 0;
+                                if (object.max != null)
+                                    message.max = object.max | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Range message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku.Range
+                             * @static
+                             * @param {google.cloud.gdchardwaremanagement.v1alpha.Sku.Range} message Range
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Range.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.min = 0;
+                                    object.max = 0;
+                                }
+                                if (message.min != null && message.hasOwnProperty("min"))
+                                    object.min = message.min;
+                                if (message.max != null && message.hasOwnProperty("max"))
+                                    object.max = message.max;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Range to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku.Range
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Range.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Range
+                             * @function getTypeUrl
+                             * @memberof google.cloud.gdchardwaremanagement.v1alpha.Sku.Range
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Range.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.Sku.Range";
+                            };
+    
+                            return Range;
+                        })();
     
                         /**
                          * Type enum.
@@ -5241,6 +5653,7 @@
                                 case 1:
                                 case 2:
                                 case 5:
+                                case 8:
                                 case 6:
                                 case 7:
                                 case 3:
@@ -5344,6 +5757,10 @@
                             case "READY_FOR_CUSTOMER_FACTORY_TURNUP_CHECKS":
                             case 5:
                                 message.state = 5;
+                                break;
+                            case "CUSTOMER_FACTORY_TURNUP_CHECKS_STARTED":
+                            case 8:
+                                message.state = 8;
                                 break;
                             case "READY_FOR_SITE_TURNUP":
                             case 6:
@@ -5519,6 +5936,7 @@
                          * @property {number} ADDITIONAL_INFO_NEEDED=1 ADDITIONAL_INFO_NEEDED value
                          * @property {number} PREPARING=2 PREPARING value
                          * @property {number} READY_FOR_CUSTOMER_FACTORY_TURNUP_CHECKS=5 READY_FOR_CUSTOMER_FACTORY_TURNUP_CHECKS value
+                         * @property {number} CUSTOMER_FACTORY_TURNUP_CHECKS_STARTED=8 CUSTOMER_FACTORY_TURNUP_CHECKS_STARTED value
                          * @property {number} READY_FOR_SITE_TURNUP=6 READY_FOR_SITE_TURNUP value
                          * @property {number} CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED=7 CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED value
                          * @property {number} ACTIVE=3 ACTIVE value
@@ -5530,6 +5948,7 @@
                             values[valuesById[1] = "ADDITIONAL_INFO_NEEDED"] = 1;
                             values[valuesById[2] = "PREPARING"] = 2;
                             values[valuesById[5] = "READY_FOR_CUSTOMER_FACTORY_TURNUP_CHECKS"] = 5;
+                            values[valuesById[8] = "CUSTOMER_FACTORY_TURNUP_CHECKS_STARTED"] = 8;
                             values[valuesById[6] = "READY_FOR_SITE_TURNUP"] = 6;
                             values[valuesById[7] = "CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED"] = 7;
                             values[valuesById[3] = "ACTIVE"] = 3;
@@ -22012,6 +22431,8 @@
                          * @property {string|null} [requestId] SignalZoneStateRequest requestId
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal|null} [stateSignal] SignalZoneStateRequest stateSignal
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal|null} [provisioningStateSignal] SignalZoneStateRequest provisioningStateSignal
+                         * @property {string|null} [step] SignalZoneStateRequest step
+                         * @property {string|null} [details] SignalZoneStateRequest details
                          */
     
                         /**
@@ -22062,6 +22483,22 @@
                         SignalZoneStateRequest.prototype.provisioningStateSignal = 0;
     
                         /**
+                         * SignalZoneStateRequest step.
+                         * @member {string} step
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest
+                         * @instance
+                         */
+                        SignalZoneStateRequest.prototype.step = "";
+    
+                        /**
+                         * SignalZoneStateRequest details.
+                         * @member {string} details
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest
+                         * @instance
+                         */
+                        SignalZoneStateRequest.prototype.details = "";
+    
+                        /**
                          * Creates a new SignalZoneStateRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest
@@ -22093,6 +22530,10 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.stateSignal);
                             if (message.provisioningStateSignal != null && Object.hasOwnProperty.call(message, "provisioningStateSignal"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.provisioningStateSignal);
+                            if (message.step != null && Object.hasOwnProperty.call(message, "step"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.step);
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.details);
                             return writer;
                         };
     
@@ -22143,6 +22584,14 @@
                                         message.provisioningStateSignal = reader.int32();
                                         break;
                                     }
+                                case 5: {
+                                        message.step = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.details = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22189,6 +22638,7 @@
                                 default:
                                     return "stateSignal: enum value expected";
                                 case 0:
+                                case 3:
                                 case 1:
                                 case 1:
                                 case 2:
@@ -22203,6 +22653,12 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.step != null && message.hasOwnProperty("step"))
+                                if (!$util.isString(message.step))
+                                    return "step: string expected";
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                if (!$util.isString(message.details))
+                                    return "details: string expected";
                             return null;
                         };
     
@@ -22232,6 +22688,10 @@
                             case "STATE_SIGNAL_UNSPECIFIED":
                             case 0:
                                 message.stateSignal = 0;
+                                break;
+                            case "FACTORY_TURNUP_CHECKS_STARTED":
+                            case 3:
+                                message.stateSignal = 3;
                                 break;
                             case "FACTORY_TURNUP_CHECKS_PASSED":
                             case 1:
@@ -22266,6 +22726,10 @@
                                 message.provisioningStateSignal = 2;
                                 break;
                             }
+                            if (object.step != null)
+                                message.step = String(object.step);
+                            if (object.details != null)
+                                message.details = String(object.details);
                             return message;
                         };
     
@@ -22287,6 +22751,8 @@
                                 object.requestId = "";
                                 object.stateSignal = options.enums === String ? "STATE_SIGNAL_UNSPECIFIED" : 0;
                                 object.provisioningStateSignal = options.enums === String ? "PROVISIONING_STATE_SIGNAL_UNSPECIFIED" : 0;
+                                object.step = "";
+                                object.details = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -22296,6 +22762,10 @@
                                 object.stateSignal = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal[message.stateSignal] === undefined ? message.stateSignal : $root.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal[message.stateSignal] : message.stateSignal;
                             if (message.provisioningStateSignal != null && message.hasOwnProperty("provisioningStateSignal"))
                                 object.provisioningStateSignal = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal[message.provisioningStateSignal] === undefined ? message.provisioningStateSignal : $root.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal[message.provisioningStateSignal] : message.provisioningStateSignal;
+                            if (message.step != null && message.hasOwnProperty("step"))
+                                object.step = message.step;
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                object.details = message.details;
                             return object;
                         };
     
@@ -22330,6 +22800,7 @@
                          * @name google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal
                          * @enum {number}
                          * @property {number} STATE_SIGNAL_UNSPECIFIED=0 STATE_SIGNAL_UNSPECIFIED value
+                         * @property {number} FACTORY_TURNUP_CHECKS_STARTED=3 FACTORY_TURNUP_CHECKS_STARTED value
                          * @property {number} FACTORY_TURNUP_CHECKS_PASSED=1 FACTORY_TURNUP_CHECKS_PASSED value
                          * @property {number} READY_FOR_SITE_TURNUP=1 READY_FOR_SITE_TURNUP value
                          * @property {number} FACTORY_TURNUP_CHECKS_FAILED=2 FACTORY_TURNUP_CHECKS_FAILED value
@@ -22337,6 +22808,7 @@
                         SignalZoneStateRequest.StateSignal = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "STATE_SIGNAL_UNSPECIFIED"] = 0;
+                            values[valuesById[3] = "FACTORY_TURNUP_CHECKS_STARTED"] = 3;
                             values[valuesById[1] = "FACTORY_TURNUP_CHECKS_PASSED"] = 1;
                             values["READY_FOR_SITE_TURNUP"] = 1;
                             values[valuesById[2] = "FACTORY_TURNUP_CHECKS_FAILED"] = 2;
