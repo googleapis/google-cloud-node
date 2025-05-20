@@ -53,6 +53,10 @@ function main() {
    *  contains this job.
    */
   // const location = 'abc123'
+  /**
+   *  Optional. The job name.
+   */
+  // const name = 'abc123'
 
   // Imports the Dataflow library
   const {JobsV1Beta3Client} = require('@google-cloud/dataflow').v1beta3;

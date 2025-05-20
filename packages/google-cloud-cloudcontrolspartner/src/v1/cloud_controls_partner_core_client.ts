@@ -306,6 +306,9 @@ export class CloudControlsPartnerCoreClient {
       'getPartnerPermissions',
       'listAccessApprovalRequests',
       'getPartner',
+      'createCustomer',
+      'updateCustomer',
+      'deleteCustomer',
     ];
     for (const methodName of cloudControlsPartnerCoreStubMethods) {
       const callPromise = this.cloudControlsPartnerCoreStub.then(
@@ -1056,6 +1059,399 @@ export class CloudControlsPartnerCoreClient {
           {} | undefined,
         ]) => {
           this._log.info('getPartner response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Creates a new customer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource
+   *   Format: `organizations/{organization}/locations/{location}`
+   * @param {google.cloud.cloudcontrolspartner.v1.Customer} request.customer
+   *   Required. The customer to create.
+   * @param {string} request.customerId
+   *   Required. The customer id to use for the customer, which will become the
+   *   final component of the customer's resource name. The specified value must
+   *   be a valid Google cloud organization id.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1.Customer|Customer}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_controls_partner_core.create_customer.js</caption>
+   * region_tag:cloudcontrolspartner_v1_generated_CloudControlsPartnerCore_CreateCustomer_async
+   */
+  createCustomer(
+    request?: protos.google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+      (
+        | protos.google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createCustomer(
+    request: protos.google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+      | protos.google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCustomer(
+    request: protos.google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest,
+    callback: Callback<
+      protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+      | protos.google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCustomer(
+    request?: protos.google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+          | protos.google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+      | protos.google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+      (
+        | protos.google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createCustomer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+          | protos.google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCustomer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCustomer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+          (
+            | protos.google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCustomer response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Update details of a single customer
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.cloudcontrolspartner.v1.Customer} request.customer
+   *   Required. The customer to update
+   *   Format:
+   *   `organizations/{organization}/locations/{location}/customers/{customer}`
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1.Customer|Customer}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_controls_partner_core.update_customer.js</caption>
+   * region_tag:cloudcontrolspartner_v1_generated_CloudControlsPartnerCore_UpdateCustomer_async
+   */
+  updateCustomer(
+    request?: protos.google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+      (
+        | protos.google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateCustomer(
+    request: protos.google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+      | protos.google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCustomer(
+    request: protos.google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest,
+    callback: Callback<
+      protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+      | protos.google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCustomer(
+    request?: protos.google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+          | protos.google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+      | protos.google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+      (
+        | protos.google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'customer.name': request.customer!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateCustomer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+          | protos.google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCustomer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCustomer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudcontrolspartner.v1.ICustomer,
+          (
+            | protos.google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCustomer response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Delete details of a single customer
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. name of the resource to be deleted
+   *   format: name=organizations/* /locations/* /customers/*
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_controls_partner_core.delete_customer.js</caption>
+   * region_tag:cloudcontrolspartner_v1_generated_CloudControlsPartnerCore_DeleteCustomer_async
+   */
+  deleteCustomer(
+    request?: protos.google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteCustomer(
+    request: protos.google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCustomer(
+    request: protos.google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCustomer(
+    request?: protos.google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteCustomer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteCustomer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteCustomer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCustomer response %j', response);
           return [response, options, rawResponse];
         }
       );

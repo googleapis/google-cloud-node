@@ -1,5 +1,6 @@
 [
   "../../protos/google/geo/type/viewport.proto",
+  "../../protos/google/maps/places/v1/address_descriptor.proto",
   "../../protos/google/maps/places/v1/attribution.proto",
   "../../protos/google/maps/places/v1/content_block.proto",
   "../../protos/google/maps/places/v1/contextual_content.proto",

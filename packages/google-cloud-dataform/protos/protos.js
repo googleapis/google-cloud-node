@@ -22380,6 +22380,7 @@
                          * @property {string|null} [databaseSuffix] CodeCompilationConfig databaseSuffix
                          * @property {string|null} [schemaSuffix] CodeCompilationConfig schemaSuffix
                          * @property {string|null} [tablePrefix] CodeCompilationConfig tablePrefix
+                         * @property {string|null} [builtinAssertionNamePrefix] CodeCompilationConfig builtinAssertionNamePrefix
                          * @property {google.cloud.dataform.v1beta1.INotebookRuntimeOptions|null} [defaultNotebookRuntimeOptions] CodeCompilationConfig defaultNotebookRuntimeOptions
                          */
     
@@ -22464,6 +22465,14 @@
                         CodeCompilationConfig.prototype.tablePrefix = "";
     
                         /**
+                         * CodeCompilationConfig builtinAssertionNamePrefix.
+                         * @member {string} builtinAssertionNamePrefix
+                         * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
+                         * @instance
+                         */
+                        CodeCompilationConfig.prototype.builtinAssertionNamePrefix = "";
+    
+                        /**
                          * CodeCompilationConfig defaultNotebookRuntimeOptions.
                          * @member {google.cloud.dataform.v1beta1.INotebookRuntimeOptions|null|undefined} defaultNotebookRuntimeOptions
                          * @memberof google.cloud.dataform.v1beta1.CodeCompilationConfig
@@ -22514,6 +22523,8 @@
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.defaultLocation);
                             if (message.defaultNotebookRuntimeOptions != null && Object.hasOwnProperty.call(message, "defaultNotebookRuntimeOptions"))
                                 $root.google.cloud.dataform.v1beta1.NotebookRuntimeOptions.encode(message.defaultNotebookRuntimeOptions, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.builtinAssertionNamePrefix != null && Object.hasOwnProperty.call(message, "builtinAssertionNamePrefix"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.builtinAssertionNamePrefix);
                             return writer;
                         };
     
@@ -22599,6 +22610,10 @@
                                         message.tablePrefix = reader.string();
                                         break;
                                     }
+                                case 10: {
+                                        message.builtinAssertionNamePrefix = reader.string();
+                                        break;
+                                    }
                                 case 9: {
                                         message.defaultNotebookRuntimeOptions = $root.google.cloud.dataform.v1beta1.NotebookRuntimeOptions.decode(reader, reader.uint32());
                                         break;
@@ -22667,6 +22682,9 @@
                             if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
                                 if (!$util.isString(message.tablePrefix))
                                     return "tablePrefix: string expected";
+                            if (message.builtinAssertionNamePrefix != null && message.hasOwnProperty("builtinAssertionNamePrefix"))
+                                if (!$util.isString(message.builtinAssertionNamePrefix))
+                                    return "builtinAssertionNamePrefix: string expected";
                             if (message.defaultNotebookRuntimeOptions != null && message.hasOwnProperty("defaultNotebookRuntimeOptions")) {
                                 var error = $root.google.cloud.dataform.v1beta1.NotebookRuntimeOptions.verify(message.defaultNotebookRuntimeOptions);
                                 if (error)
@@ -22708,6 +22726,8 @@
                                 message.schemaSuffix = String(object.schemaSuffix);
                             if (object.tablePrefix != null)
                                 message.tablePrefix = String(object.tablePrefix);
+                            if (object.builtinAssertionNamePrefix != null)
+                                message.builtinAssertionNamePrefix = String(object.builtinAssertionNamePrefix);
                             if (object.defaultNotebookRuntimeOptions != null) {
                                 if (typeof object.defaultNotebookRuntimeOptions !== "object")
                                     throw TypeError(".google.cloud.dataform.v1beta1.CodeCompilationConfig.defaultNotebookRuntimeOptions: object expected");
@@ -22740,6 +22760,7 @@
                                 object.tablePrefix = "";
                                 object.defaultLocation = "";
                                 object.defaultNotebookRuntimeOptions = null;
+                                object.builtinAssertionNamePrefix = "";
                             }
                             if (message.defaultDatabase != null && message.hasOwnProperty("defaultDatabase"))
                                 object.defaultDatabase = message.defaultDatabase;
@@ -22763,6 +22784,8 @@
                                 object.defaultLocation = message.defaultLocation;
                             if (message.defaultNotebookRuntimeOptions != null && message.hasOwnProperty("defaultNotebookRuntimeOptions"))
                                 object.defaultNotebookRuntimeOptions = $root.google.cloud.dataform.v1beta1.NotebookRuntimeOptions.toObject(message.defaultNotebookRuntimeOptions, options);
+                            if (message.builtinAssertionNamePrefix != null && message.hasOwnProperty("builtinAssertionNamePrefix"))
+                                object.builtinAssertionNamePrefix = message.builtinAssertionNamePrefix;
                             return object;
                         };
     
@@ -22802,6 +22825,7 @@
                          * @memberof google.cloud.dataform.v1beta1
                          * @interface INotebookRuntimeOptions
                          * @property {string|null} [gcsOutputBucket] NotebookRuntimeOptions gcsOutputBucket
+                         * @property {string|null} [aiPlatformNotebookRuntimeTemplate] NotebookRuntimeOptions aiPlatformNotebookRuntimeTemplate
                          */
     
                         /**
@@ -22826,6 +22850,14 @@
                          * @instance
                          */
                         NotebookRuntimeOptions.prototype.gcsOutputBucket = null;
+    
+                        /**
+                         * NotebookRuntimeOptions aiPlatformNotebookRuntimeTemplate.
+                         * @member {string} aiPlatformNotebookRuntimeTemplate
+                         * @memberof google.cloud.dataform.v1beta1.NotebookRuntimeOptions
+                         * @instance
+                         */
+                        NotebookRuntimeOptions.prototype.aiPlatformNotebookRuntimeTemplate = "";
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -22867,6 +22899,8 @@
                                 writer = $Writer.create();
                             if (message.gcsOutputBucket != null && Object.hasOwnProperty.call(message, "gcsOutputBucket"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.gcsOutputBucket);
+                            if (message.aiPlatformNotebookRuntimeTemplate != null && Object.hasOwnProperty.call(message, "aiPlatformNotebookRuntimeTemplate"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.aiPlatformNotebookRuntimeTemplate);
                             return writer;
                         };
     
@@ -22903,6 +22937,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.gcsOutputBucket = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.aiPlatformNotebookRuntimeTemplate = reader.string();
                                         break;
                                     }
                                 default:
@@ -22946,6 +22984,9 @@
                                 if (!$util.isString(message.gcsOutputBucket))
                                     return "gcsOutputBucket: string expected";
                             }
+                            if (message.aiPlatformNotebookRuntimeTemplate != null && message.hasOwnProperty("aiPlatformNotebookRuntimeTemplate"))
+                                if (!$util.isString(message.aiPlatformNotebookRuntimeTemplate))
+                                    return "aiPlatformNotebookRuntimeTemplate: string expected";
                             return null;
                         };
     
@@ -22963,6 +23004,8 @@
                             var message = new $root.google.cloud.dataform.v1beta1.NotebookRuntimeOptions();
                             if (object.gcsOutputBucket != null)
                                 message.gcsOutputBucket = String(object.gcsOutputBucket);
+                            if (object.aiPlatformNotebookRuntimeTemplate != null)
+                                message.aiPlatformNotebookRuntimeTemplate = String(object.aiPlatformNotebookRuntimeTemplate);
                             return message;
                         };
     
@@ -22979,11 +23022,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.aiPlatformNotebookRuntimeTemplate = "";
                             if (message.gcsOutputBucket != null && message.hasOwnProperty("gcsOutputBucket")) {
                                 object.gcsOutputBucket = message.gcsOutputBucket;
                                 if (options.oneofs)
                                     object.executionSink = "gcsOutputBucket";
                             }
+                            if (message.aiPlatformNotebookRuntimeTemplate != null && message.hasOwnProperty("aiPlatformNotebookRuntimeTemplate"))
+                                object.aiPlatformNotebookRuntimeTemplate = message.aiPlatformNotebookRuntimeTemplate;
                             return object;
                         };
     
@@ -24886,6 +24933,7 @@
                          * @property {google.cloud.dataform.v1beta1.CompilationResultAction.IAssertion|null} [assertion] CompilationResultAction assertion
                          * @property {google.cloud.dataform.v1beta1.CompilationResultAction.IDeclaration|null} [declaration] CompilationResultAction declaration
                          * @property {google.cloud.dataform.v1beta1.CompilationResultAction.INotebook|null} [notebook] CompilationResultAction notebook
+                         * @property {google.cloud.dataform.v1beta1.CompilationResultAction.IDataPreparation|null} [dataPreparation] CompilationResultAction dataPreparation
                          * @property {google.cloud.dataform.v1beta1.ITarget|null} [target] CompilationResultAction target
                          * @property {google.cloud.dataform.v1beta1.ITarget|null} [canonicalTarget] CompilationResultAction canonicalTarget
                          * @property {string|null} [filePath] CompilationResultAction filePath
@@ -24948,6 +24996,14 @@
                         CompilationResultAction.prototype.notebook = null;
     
                         /**
+                         * CompilationResultAction dataPreparation.
+                         * @member {google.cloud.dataform.v1beta1.CompilationResultAction.IDataPreparation|null|undefined} dataPreparation
+                         * @memberof google.cloud.dataform.v1beta1.CompilationResultAction
+                         * @instance
+                         */
+                        CompilationResultAction.prototype.dataPreparation = null;
+    
+                        /**
                          * CompilationResultAction target.
                          * @member {google.cloud.dataform.v1beta1.ITarget|null|undefined} target
                          * @memberof google.cloud.dataform.v1beta1.CompilationResultAction
@@ -24984,12 +25040,12 @@
     
                         /**
                          * CompilationResultAction compiledObject.
-                         * @member {"relation"|"operations"|"assertion"|"declaration"|"notebook"|undefined} compiledObject
+                         * @member {"relation"|"operations"|"assertion"|"declaration"|"notebook"|"dataPreparation"|undefined} compiledObject
                          * @memberof google.cloud.dataform.v1beta1.CompilationResultAction
                          * @instance
                          */
                         Object.defineProperty(CompilationResultAction.prototype, "compiledObject", {
-                            get: $util.oneOfGetter($oneOfFields = ["relation", "operations", "assertion", "declaration", "notebook"]),
+                            get: $util.oneOfGetter($oneOfFields = ["relation", "operations", "assertion", "declaration", "notebook", "dataPreparation"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -25044,6 +25100,8 @@
                                 $root.google.cloud.dataform.v1beta1.CompilationResultAction.Declaration.encode(message.declaration, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.notebook != null && Object.hasOwnProperty.call(message, "notebook"))
                                 $root.google.cloud.dataform.v1beta1.CompilationResultAction.Notebook.encode(message.notebook, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.dataPreparation != null && Object.hasOwnProperty.call(message, "dataPreparation"))
+                                $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.encode(message.dataPreparation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.internalMetadata != null && Object.hasOwnProperty.call(message, "internalMetadata"))
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.internalMetadata);
                             return writer;
@@ -25098,6 +25156,10 @@
                                     }
                                 case 8: {
                                         message.notebook = $root.google.cloud.dataform.v1beta1.CompilationResultAction.Notebook.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.dataPreparation = $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -25200,6 +25262,16 @@
                                         return "notebook." + error;
                                 }
                             }
+                            if (message.dataPreparation != null && message.hasOwnProperty("dataPreparation")) {
+                                if (properties.compiledObject === 1)
+                                    return "compiledObject: multiple values";
+                                properties.compiledObject = 1;
+                                {
+                                    var error = $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.verify(message.dataPreparation);
+                                    if (error)
+                                        return "dataPreparation." + error;
+                                }
+                            }
                             if (message.target != null && message.hasOwnProperty("target")) {
                                 var error = $root.google.cloud.dataform.v1beta1.Target.verify(message.target);
                                 if (error)
@@ -25257,6 +25329,11 @@
                                 if (typeof object.notebook !== "object")
                                     throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.notebook: object expected");
                                 message.notebook = $root.google.cloud.dataform.v1beta1.CompilationResultAction.Notebook.fromObject(object.notebook);
+                            }
+                            if (object.dataPreparation != null) {
+                                if (typeof object.dataPreparation !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.dataPreparation: object expected");
+                                message.dataPreparation = $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.fromObject(object.dataPreparation);
                             }
                             if (object.target != null) {
                                 if (typeof object.target !== "object")
@@ -25323,6 +25400,11 @@
                                 object.notebook = $root.google.cloud.dataform.v1beta1.CompilationResultAction.Notebook.toObject(message.notebook, options);
                                 if (options.oneofs)
                                     object.compiledObject = "notebook";
+                            }
+                            if (message.dataPreparation != null && message.hasOwnProperty("dataPreparation")) {
+                                object.dataPreparation = $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.toObject(message.dataPreparation, options);
+                                if (options.oneofs)
+                                    object.compiledObject = "dataPreparation";
                             }
                             if (message.internalMetadata != null && message.hasOwnProperty("internalMetadata")) {
                                 object.internalMetadata = message.internalMetadata;
@@ -27684,6 +27766,1573 @@
                             return Notebook;
                         })();
     
+                        CompilationResultAction.DataPreparation = (function() {
+    
+                            /**
+                             * Properties of a DataPreparation.
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction
+                             * @interface IDataPreparation
+                             * @property {string|null} [contentsYaml] DataPreparation contentsYaml
+                             * @property {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ISqlDefinition|null} [contentsSql] DataPreparation contentsSql
+                             * @property {Array.<google.cloud.dataform.v1beta1.ITarget>|null} [dependencyTargets] DataPreparation dependencyTargets
+                             * @property {boolean|null} [disabled] DataPreparation disabled
+                             * @property {Array.<string>|null} [tags] DataPreparation tags
+                             */
+    
+                            /**
+                             * Constructs a new DataPreparation.
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction
+                             * @classdesc Represents a DataPreparation.
+                             * @implements IDataPreparation
+                             * @constructor
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.IDataPreparation=} [properties] Properties to set
+                             */
+                            function DataPreparation(properties) {
+                                this.dependencyTargets = [];
+                                this.tags = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataPreparation contentsYaml.
+                             * @member {string|null|undefined} contentsYaml
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @instance
+                             */
+                            DataPreparation.prototype.contentsYaml = null;
+    
+                            /**
+                             * DataPreparation contentsSql.
+                             * @member {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ISqlDefinition|null|undefined} contentsSql
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @instance
+                             */
+                            DataPreparation.prototype.contentsSql = null;
+    
+                            /**
+                             * DataPreparation dependencyTargets.
+                             * @member {Array.<google.cloud.dataform.v1beta1.ITarget>} dependencyTargets
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @instance
+                             */
+                            DataPreparation.prototype.dependencyTargets = $util.emptyArray;
+    
+                            /**
+                             * DataPreparation disabled.
+                             * @member {boolean} disabled
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @instance
+                             */
+                            DataPreparation.prototype.disabled = false;
+    
+                            /**
+                             * DataPreparation tags.
+                             * @member {Array.<string>} tags
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @instance
+                             */
+                            DataPreparation.prototype.tags = $util.emptyArray;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * DataPreparation definition.
+                             * @member {"contentsYaml"|"contentsSql"|undefined} definition
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @instance
+                             */
+                            Object.defineProperty(DataPreparation.prototype, "definition", {
+                                get: $util.oneOfGetter($oneOfFields = ["contentsYaml", "contentsSql"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new DataPreparation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.IDataPreparation=} [properties] Properties to set
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation} DataPreparation instance
+                             */
+                            DataPreparation.create = function create(properties) {
+                                return new DataPreparation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataPreparation message. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.IDataPreparation} message DataPreparation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataPreparation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dependencyTargets != null && message.dependencyTargets.length)
+                                    for (var i = 0; i < message.dependencyTargets.length; ++i)
+                                        $root.google.cloud.dataform.v1beta1.Target.encode(message.dependencyTargets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.disabled != null && Object.hasOwnProperty.call(message, "disabled"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.disabled);
+                                if (message.tags != null && message.tags.length)
+                                    for (var i = 0; i < message.tags.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.tags[i]);
+                                if (message.contentsYaml != null && Object.hasOwnProperty.call(message, "contentsYaml"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.contentsYaml);
+                                if (message.contentsSql != null && Object.hasOwnProperty.call(message, "contentsSql"))
+                                    $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition.encode(message.contentsSql, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataPreparation message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.IDataPreparation} message DataPreparation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataPreparation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataPreparation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation} DataPreparation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataPreparation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 5: {
+                                            message.contentsYaml = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.contentsSql = $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            if (!(message.dependencyTargets && message.dependencyTargets.length))
+                                                message.dependencyTargets = [];
+                                            message.dependencyTargets.push($root.google.cloud.dataform.v1beta1.Target.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.disabled = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.tags && message.tags.length))
+                                                message.tags = [];
+                                            message.tags.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataPreparation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation} DataPreparation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataPreparation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataPreparation message.
+                             * @function verify
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataPreparation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.contentsYaml != null && message.hasOwnProperty("contentsYaml")) {
+                                    properties.definition = 1;
+                                    if (!$util.isString(message.contentsYaml))
+                                        return "contentsYaml: string expected";
+                                }
+                                if (message.contentsSql != null && message.hasOwnProperty("contentsSql")) {
+                                    if (properties.definition === 1)
+                                        return "definition: multiple values";
+                                    properties.definition = 1;
+                                    {
+                                        var error = $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition.verify(message.contentsSql);
+                                        if (error)
+                                            return "contentsSql." + error;
+                                    }
+                                }
+                                if (message.dependencyTargets != null && message.hasOwnProperty("dependencyTargets")) {
+                                    if (!Array.isArray(message.dependencyTargets))
+                                        return "dependencyTargets: array expected";
+                                    for (var i = 0; i < message.dependencyTargets.length; ++i) {
+                                        var error = $root.google.cloud.dataform.v1beta1.Target.verify(message.dependencyTargets[i]);
+                                        if (error)
+                                            return "dependencyTargets." + error;
+                                    }
+                                }
+                                if (message.disabled != null && message.hasOwnProperty("disabled"))
+                                    if (typeof message.disabled !== "boolean")
+                                        return "disabled: boolean expected";
+                                if (message.tags != null && message.hasOwnProperty("tags")) {
+                                    if (!Array.isArray(message.tags))
+                                        return "tags: array expected";
+                                    for (var i = 0; i < message.tags.length; ++i)
+                                        if (!$util.isString(message.tags[i]))
+                                            return "tags: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataPreparation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation} DataPreparation
+                             */
+                            DataPreparation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation)
+                                    return object;
+                                var message = new $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation();
+                                if (object.contentsYaml != null)
+                                    message.contentsYaml = String(object.contentsYaml);
+                                if (object.contentsSql != null) {
+                                    if (typeof object.contentsSql !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.contentsSql: object expected");
+                                    message.contentsSql = $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition.fromObject(object.contentsSql);
+                                }
+                                if (object.dependencyTargets) {
+                                    if (!Array.isArray(object.dependencyTargets))
+                                        throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.dependencyTargets: array expected");
+                                    message.dependencyTargets = [];
+                                    for (var i = 0; i < object.dependencyTargets.length; ++i) {
+                                        if (typeof object.dependencyTargets[i] !== "object")
+                                            throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.dependencyTargets: object expected");
+                                        message.dependencyTargets[i] = $root.google.cloud.dataform.v1beta1.Target.fromObject(object.dependencyTargets[i]);
+                                    }
+                                }
+                                if (object.disabled != null)
+                                    message.disabled = Boolean(object.disabled);
+                                if (object.tags) {
+                                    if (!Array.isArray(object.tags))
+                                        throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.tags: array expected");
+                                    message.tags = [];
+                                    for (var i = 0; i < object.tags.length; ++i)
+                                        message.tags[i] = String(object.tags[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataPreparation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation} message DataPreparation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataPreparation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.dependencyTargets = [];
+                                    object.tags = [];
+                                }
+                                if (options.defaults)
+                                    object.disabled = false;
+                                if (message.dependencyTargets && message.dependencyTargets.length) {
+                                    object.dependencyTargets = [];
+                                    for (var j = 0; j < message.dependencyTargets.length; ++j)
+                                        object.dependencyTargets[j] = $root.google.cloud.dataform.v1beta1.Target.toObject(message.dependencyTargets[j], options);
+                                }
+                                if (message.disabled != null && message.hasOwnProperty("disabled"))
+                                    object.disabled = message.disabled;
+                                if (message.tags && message.tags.length) {
+                                    object.tags = [];
+                                    for (var j = 0; j < message.tags.length; ++j)
+                                        object.tags[j] = message.tags[j];
+                                }
+                                if (message.contentsYaml != null && message.hasOwnProperty("contentsYaml")) {
+                                    object.contentsYaml = message.contentsYaml;
+                                    if (options.oneofs)
+                                        object.definition = "contentsYaml";
+                                }
+                                if (message.contentsSql != null && message.hasOwnProperty("contentsSql")) {
+                                    object.contentsSql = $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition.toObject(message.contentsSql, options);
+                                    if (options.oneofs)
+                                        object.definition = "contentsSql";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataPreparation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataPreparation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataPreparation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataPreparation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation";
+                            };
+    
+                            DataPreparation.SqlDefinition = (function() {
+    
+                                /**
+                                 * Properties of a SqlDefinition.
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                                 * @interface ISqlDefinition
+                                 * @property {string|null} [query] SqlDefinition query
+                                 * @property {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.IErrorTable|null} [errorTable] SqlDefinition errorTable
+                                 * @property {google.cloud.dataform.v1beta1.CompilationResultAction.ILoadConfig|null} [load] SqlDefinition load
+                                 */
+    
+                                /**
+                                 * Constructs a new SqlDefinition.
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                                 * @classdesc Represents a SqlDefinition.
+                                 * @implements ISqlDefinition
+                                 * @constructor
+                                 * @param {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ISqlDefinition=} [properties] Properties to set
+                                 */
+                                function SqlDefinition(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SqlDefinition query.
+                                 * @member {string} query
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @instance
+                                 */
+                                SqlDefinition.prototype.query = "";
+    
+                                /**
+                                 * SqlDefinition errorTable.
+                                 * @member {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.IErrorTable|null|undefined} errorTable
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @instance
+                                 */
+                                SqlDefinition.prototype.errorTable = null;
+    
+                                /**
+                                 * SqlDefinition load.
+                                 * @member {google.cloud.dataform.v1beta1.CompilationResultAction.ILoadConfig|null|undefined} load
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @instance
+                                 */
+                                SqlDefinition.prototype.load = null;
+    
+                                /**
+                                 * Creates a new SqlDefinition instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ISqlDefinition=} [properties] Properties to set
+                                 * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition} SqlDefinition instance
+                                 */
+                                SqlDefinition.create = function create(properties) {
+                                    return new SqlDefinition(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SqlDefinition message. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ISqlDefinition} message SqlDefinition message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SqlDefinition.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.query);
+                                    if (message.errorTable != null && Object.hasOwnProperty.call(message, "errorTable"))
+                                        $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable.encode(message.errorTable, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.load != null && Object.hasOwnProperty.call(message, "load"))
+                                        $root.google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig.encode(message.load, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SqlDefinition message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ISqlDefinition} message SqlDefinition message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SqlDefinition.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SqlDefinition message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition} SqlDefinition
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SqlDefinition.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.query = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.errorTable = $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.load = $root.google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SqlDefinition message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition} SqlDefinition
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SqlDefinition.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SqlDefinition message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SqlDefinition.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.query != null && message.hasOwnProperty("query"))
+                                        if (!$util.isString(message.query))
+                                            return "query: string expected";
+                                    if (message.errorTable != null && message.hasOwnProperty("errorTable")) {
+                                        var error = $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable.verify(message.errorTable);
+                                        if (error)
+                                            return "errorTable." + error;
+                                    }
+                                    if (message.load != null && message.hasOwnProperty("load")) {
+                                        var error = $root.google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig.verify(message.load);
+                                        if (error)
+                                            return "load." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SqlDefinition message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition} SqlDefinition
+                                 */
+                                SqlDefinition.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition)
+                                        return object;
+                                    var message = new $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition();
+                                    if (object.query != null)
+                                        message.query = String(object.query);
+                                    if (object.errorTable != null) {
+                                        if (typeof object.errorTable !== "object")
+                                            throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition.errorTable: object expected");
+                                        message.errorTable = $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable.fromObject(object.errorTable);
+                                    }
+                                    if (object.load != null) {
+                                        if (typeof object.load !== "object")
+                                            throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition.load: object expected");
+                                        message.load = $root.google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig.fromObject(object.load);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SqlDefinition message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition} message SqlDefinition
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SqlDefinition.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.query = "";
+                                        object.errorTable = null;
+                                        object.load = null;
+                                    }
+                                    if (message.query != null && message.hasOwnProperty("query"))
+                                        object.query = message.query;
+                                    if (message.errorTable != null && message.hasOwnProperty("errorTable"))
+                                        object.errorTable = $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable.toObject(message.errorTable, options);
+                                    if (message.load != null && message.hasOwnProperty("load"))
+                                        object.load = $root.google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig.toObject(message.load, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SqlDefinition to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SqlDefinition.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SqlDefinition
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SqlDefinition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.SqlDefinition";
+                                };
+    
+                                return SqlDefinition;
+                            })();
+    
+                            DataPreparation.ErrorTable = (function() {
+    
+                                /**
+                                 * Properties of an ErrorTable.
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                                 * @interface IErrorTable
+                                 * @property {google.cloud.dataform.v1beta1.ITarget|null} [target] ErrorTable target
+                                 * @property {number|null} [retentionDays] ErrorTable retentionDays
+                                 */
+    
+                                /**
+                                 * Constructs a new ErrorTable.
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation
+                                 * @classdesc Represents an ErrorTable.
+                                 * @implements IErrorTable
+                                 * @constructor
+                                 * @param {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.IErrorTable=} [properties] Properties to set
+                                 */
+                                function ErrorTable(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ErrorTable target.
+                                 * @member {google.cloud.dataform.v1beta1.ITarget|null|undefined} target
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable
+                                 * @instance
+                                 */
+                                ErrorTable.prototype.target = null;
+    
+                                /**
+                                 * ErrorTable retentionDays.
+                                 * @member {number} retentionDays
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable
+                                 * @instance
+                                 */
+                                ErrorTable.prototype.retentionDays = 0;
+    
+                                /**
+                                 * Creates a new ErrorTable instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.IErrorTable=} [properties] Properties to set
+                                 * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable} ErrorTable instance
+                                 */
+                                ErrorTable.create = function create(properties) {
+                                    return new ErrorTable(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ErrorTable message. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.IErrorTable} message ErrorTable message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ErrorTable.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                        $root.google.cloud.dataform.v1beta1.Target.encode(message.target, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.retentionDays != null && Object.hasOwnProperty.call(message, "retentionDays"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.retentionDays);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ErrorTable message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.IErrorTable} message ErrorTable message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ErrorTable.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ErrorTable message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable} ErrorTable
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ErrorTable.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.target = $root.google.cloud.dataform.v1beta1.Target.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.retentionDays = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ErrorTable message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable} ErrorTable
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ErrorTable.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ErrorTable message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ErrorTable.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.target != null && message.hasOwnProperty("target")) {
+                                        var error = $root.google.cloud.dataform.v1beta1.Target.verify(message.target);
+                                        if (error)
+                                            return "target." + error;
+                                    }
+                                    if (message.retentionDays != null && message.hasOwnProperty("retentionDays"))
+                                        if (!$util.isInteger(message.retentionDays))
+                                            return "retentionDays: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ErrorTable message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable} ErrorTable
+                                 */
+                                ErrorTable.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable)
+                                        return object;
+                                    var message = new $root.google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable();
+                                    if (object.target != null) {
+                                        if (typeof object.target !== "object")
+                                            throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable.target: object expected");
+                                        message.target = $root.google.cloud.dataform.v1beta1.Target.fromObject(object.target);
+                                    }
+                                    if (object.retentionDays != null)
+                                        message.retentionDays = object.retentionDays | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ErrorTable message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable} message ErrorTable
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ErrorTable.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.target = null;
+                                        object.retentionDays = 0;
+                                    }
+                                    if (message.target != null && message.hasOwnProperty("target"))
+                                        object.target = $root.google.cloud.dataform.v1beta1.Target.toObject(message.target, options);
+                                    if (message.retentionDays != null && message.hasOwnProperty("retentionDays"))
+                                        object.retentionDays = message.retentionDays;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ErrorTable to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ErrorTable.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ErrorTable
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ErrorTable.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CompilationResultAction.DataPreparation.ErrorTable";
+                                };
+    
+                                return ErrorTable;
+                            })();
+    
+                            return DataPreparation;
+                        })();
+    
+                        CompilationResultAction.LoadConfig = (function() {
+    
+                            /**
+                             * Properties of a LoadConfig.
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction
+                             * @interface ILoadConfig
+                             * @property {google.cloud.dataform.v1beta1.CompilationResultAction.ISimpleLoadMode|null} [replace] LoadConfig replace
+                             * @property {google.cloud.dataform.v1beta1.CompilationResultAction.ISimpleLoadMode|null} [append] LoadConfig append
+                             * @property {google.cloud.dataform.v1beta1.CompilationResultAction.IIncrementalLoadMode|null} [maximum] LoadConfig maximum
+                             * @property {google.cloud.dataform.v1beta1.CompilationResultAction.IIncrementalLoadMode|null} [unique] LoadConfig unique
+                             */
+    
+                            /**
+                             * Constructs a new LoadConfig.
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction
+                             * @classdesc Represents a LoadConfig.
+                             * @implements ILoadConfig
+                             * @constructor
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.ILoadConfig=} [properties] Properties to set
+                             */
+                            function LoadConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LoadConfig replace.
+                             * @member {google.cloud.dataform.v1beta1.CompilationResultAction.ISimpleLoadMode|null|undefined} replace
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @instance
+                             */
+                            LoadConfig.prototype.replace = null;
+    
+                            /**
+                             * LoadConfig append.
+                             * @member {google.cloud.dataform.v1beta1.CompilationResultAction.ISimpleLoadMode|null|undefined} append
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @instance
+                             */
+                            LoadConfig.prototype.append = null;
+    
+                            /**
+                             * LoadConfig maximum.
+                             * @member {google.cloud.dataform.v1beta1.CompilationResultAction.IIncrementalLoadMode|null|undefined} maximum
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @instance
+                             */
+                            LoadConfig.prototype.maximum = null;
+    
+                            /**
+                             * LoadConfig unique.
+                             * @member {google.cloud.dataform.v1beta1.CompilationResultAction.IIncrementalLoadMode|null|undefined} unique
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @instance
+                             */
+                            LoadConfig.prototype.unique = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * LoadConfig mode.
+                             * @member {"replace"|"append"|"maximum"|"unique"|undefined} mode
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @instance
+                             */
+                            Object.defineProperty(LoadConfig.prototype, "mode", {
+                                get: $util.oneOfGetter($oneOfFields = ["replace", "append", "maximum", "unique"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new LoadConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.ILoadConfig=} [properties] Properties to set
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig} LoadConfig instance
+                             */
+                            LoadConfig.create = function create(properties) {
+                                return new LoadConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LoadConfig message. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.ILoadConfig} message LoadConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LoadConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.replace != null && Object.hasOwnProperty.call(message, "replace"))
+                                    $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode.encode(message.replace, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.append != null && Object.hasOwnProperty.call(message, "append"))
+                                    $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode.encode(message.append, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.maximum != null && Object.hasOwnProperty.call(message, "maximum"))
+                                    $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode.encode(message.maximum, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.unique != null && Object.hasOwnProperty.call(message, "unique"))
+                                    $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode.encode(message.unique, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LoadConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.ILoadConfig} message LoadConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LoadConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LoadConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig} LoadConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LoadConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.replace = $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.append = $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.maximum = $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.unique = $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LoadConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig} LoadConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LoadConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LoadConfig message.
+                             * @function verify
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LoadConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.replace != null && message.hasOwnProperty("replace")) {
+                                    properties.mode = 1;
+                                    {
+                                        var error = $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode.verify(message.replace);
+                                        if (error)
+                                            return "replace." + error;
+                                    }
+                                }
+                                if (message.append != null && message.hasOwnProperty("append")) {
+                                    if (properties.mode === 1)
+                                        return "mode: multiple values";
+                                    properties.mode = 1;
+                                    {
+                                        var error = $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode.verify(message.append);
+                                        if (error)
+                                            return "append." + error;
+                                    }
+                                }
+                                if (message.maximum != null && message.hasOwnProperty("maximum")) {
+                                    if (properties.mode === 1)
+                                        return "mode: multiple values";
+                                    properties.mode = 1;
+                                    {
+                                        var error = $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode.verify(message.maximum);
+                                        if (error)
+                                            return "maximum." + error;
+                                    }
+                                }
+                                if (message.unique != null && message.hasOwnProperty("unique")) {
+                                    if (properties.mode === 1)
+                                        return "mode: multiple values";
+                                    properties.mode = 1;
+                                    {
+                                        var error = $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode.verify(message.unique);
+                                        if (error)
+                                            return "unique." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LoadConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig} LoadConfig
+                             */
+                            LoadConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig)
+                                    return object;
+                                var message = new $root.google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig();
+                                if (object.replace != null) {
+                                    if (typeof object.replace !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig.replace: object expected");
+                                    message.replace = $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode.fromObject(object.replace);
+                                }
+                                if (object.append != null) {
+                                    if (typeof object.append !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig.append: object expected");
+                                    message.append = $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode.fromObject(object.append);
+                                }
+                                if (object.maximum != null) {
+                                    if (typeof object.maximum !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig.maximum: object expected");
+                                    message.maximum = $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode.fromObject(object.maximum);
+                                }
+                                if (object.unique != null) {
+                                    if (typeof object.unique !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig.unique: object expected");
+                                    message.unique = $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode.fromObject(object.unique);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LoadConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig} message LoadConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LoadConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.replace != null && message.hasOwnProperty("replace")) {
+                                    object.replace = $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode.toObject(message.replace, options);
+                                    if (options.oneofs)
+                                        object.mode = "replace";
+                                }
+                                if (message.append != null && message.hasOwnProperty("append")) {
+                                    object.append = $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode.toObject(message.append, options);
+                                    if (options.oneofs)
+                                        object.mode = "append";
+                                }
+                                if (message.maximum != null && message.hasOwnProperty("maximum")) {
+                                    object.maximum = $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode.toObject(message.maximum, options);
+                                    if (options.oneofs)
+                                        object.mode = "maximum";
+                                }
+                                if (message.unique != null && message.hasOwnProperty("unique")) {
+                                    object.unique = $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode.toObject(message.unique, options);
+                                    if (options.oneofs)
+                                        object.mode = "unique";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LoadConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LoadConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LoadConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LoadConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CompilationResultAction.LoadConfig";
+                            };
+    
+                            return LoadConfig;
+                        })();
+    
+                        CompilationResultAction.SimpleLoadMode = (function() {
+    
+                            /**
+                             * Properties of a SimpleLoadMode.
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction
+                             * @interface ISimpleLoadMode
+                             */
+    
+                            /**
+                             * Constructs a new SimpleLoadMode.
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction
+                             * @classdesc Represents a SimpleLoadMode.
+                             * @implements ISimpleLoadMode
+                             * @constructor
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.ISimpleLoadMode=} [properties] Properties to set
+                             */
+                            function SimpleLoadMode(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new SimpleLoadMode instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.ISimpleLoadMode=} [properties] Properties to set
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode} SimpleLoadMode instance
+                             */
+                            SimpleLoadMode.create = function create(properties) {
+                                return new SimpleLoadMode(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SimpleLoadMode message. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.ISimpleLoadMode} message SimpleLoadMode message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SimpleLoadMode.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SimpleLoadMode message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.ISimpleLoadMode} message SimpleLoadMode message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SimpleLoadMode.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SimpleLoadMode message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode} SimpleLoadMode
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SimpleLoadMode.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SimpleLoadMode message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode} SimpleLoadMode
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SimpleLoadMode.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SimpleLoadMode message.
+                             * @function verify
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SimpleLoadMode.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SimpleLoadMode message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode} SimpleLoadMode
+                             */
+                            SimpleLoadMode.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode)
+                                    return object;
+                                return new $root.google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode();
+                            };
+    
+                            /**
+                             * Creates a plain object from a SimpleLoadMode message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode} message SimpleLoadMode
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SimpleLoadMode.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this SimpleLoadMode to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SimpleLoadMode.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SimpleLoadMode
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SimpleLoadMode.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CompilationResultAction.SimpleLoadMode";
+                            };
+    
+                            return SimpleLoadMode;
+                        })();
+    
+                        CompilationResultAction.IncrementalLoadMode = (function() {
+    
+                            /**
+                             * Properties of an IncrementalLoadMode.
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction
+                             * @interface IIncrementalLoadMode
+                             * @property {string|null} [column] IncrementalLoadMode column
+                             */
+    
+                            /**
+                             * Constructs a new IncrementalLoadMode.
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction
+                             * @classdesc Represents an IncrementalLoadMode.
+                             * @implements IIncrementalLoadMode
+                             * @constructor
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.IIncrementalLoadMode=} [properties] Properties to set
+                             */
+                            function IncrementalLoadMode(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * IncrementalLoadMode column.
+                             * @member {string} column
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode
+                             * @instance
+                             */
+                            IncrementalLoadMode.prototype.column = "";
+    
+                            /**
+                             * Creates a new IncrementalLoadMode instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.IIncrementalLoadMode=} [properties] Properties to set
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode} IncrementalLoadMode instance
+                             */
+                            IncrementalLoadMode.create = function create(properties) {
+                                return new IncrementalLoadMode(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified IncrementalLoadMode message. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.IIncrementalLoadMode} message IncrementalLoadMode message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            IncrementalLoadMode.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.column != null && Object.hasOwnProperty.call(message, "column"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.column);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified IncrementalLoadMode message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.IIncrementalLoadMode} message IncrementalLoadMode message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            IncrementalLoadMode.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an IncrementalLoadMode message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode} IncrementalLoadMode
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            IncrementalLoadMode.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.column = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an IncrementalLoadMode message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode} IncrementalLoadMode
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            IncrementalLoadMode.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an IncrementalLoadMode message.
+                             * @function verify
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            IncrementalLoadMode.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.column != null && message.hasOwnProperty("column"))
+                                    if (!$util.isString(message.column))
+                                        return "column: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an IncrementalLoadMode message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode} IncrementalLoadMode
+                             */
+                            IncrementalLoadMode.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode)
+                                    return object;
+                                var message = new $root.google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode();
+                                if (object.column != null)
+                                    message.column = String(object.column);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an IncrementalLoadMode message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode} message IncrementalLoadMode
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            IncrementalLoadMode.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.column = "";
+                                if (message.column != null && message.hasOwnProperty("column"))
+                                    object.column = message.column;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this IncrementalLoadMode to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            IncrementalLoadMode.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for IncrementalLoadMode
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            IncrementalLoadMode.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataform.v1beta1.CompilationResultAction.IncrementalLoadMode";
+                            };
+    
+                            return IncrementalLoadMode;
+                        })();
+    
                         return CompilationResultAction;
                     })();
     
@@ -28220,6 +29869,7 @@
                          * @property {string|null} [cronSchedule] WorkflowConfig cronSchedule
                          * @property {string|null} [timeZone] WorkflowConfig timeZone
                          * @property {Array.<google.cloud.dataform.v1beta1.WorkflowConfig.IScheduledExecutionRecord>|null} [recentScheduledExecutionRecords] WorkflowConfig recentScheduledExecutionRecords
+                         * @property {boolean|null} [disabled] WorkflowConfig disabled
                          * @property {google.protobuf.ITimestamp|null} [createTime] WorkflowConfig createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] WorkflowConfig updateTime
                          * @property {string|null} [internalMetadata] WorkflowConfig internalMetadata
@@ -28288,6 +29938,14 @@
                          * @instance
                          */
                         WorkflowConfig.prototype.recentScheduledExecutionRecords = $util.emptyArray;
+    
+                        /**
+                         * WorkflowConfig disabled.
+                         * @member {boolean} disabled
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowConfig
+                         * @instance
+                         */
+                        WorkflowConfig.prototype.disabled = false;
     
                         /**
                          * WorkflowConfig createTime.
@@ -28364,6 +30022,8 @@
                                     $root.google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord.encode(message.recentScheduledExecutionRecords[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.timeZone);
+                            if (message.disabled != null && Object.hasOwnProperty.call(message, "disabled"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.disabled);
                             if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
@@ -28428,6 +30088,10 @@
                                         if (!(message.recentScheduledExecutionRecords && message.recentScheduledExecutionRecords.length))
                                             message.recentScheduledExecutionRecords = [];
                                         message.recentScheduledExecutionRecords.push($root.google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 8: {
+                                        message.disabled = reader.bool();
                                         break;
                                     }
                                 case 9: {
@@ -28504,6 +30168,9 @@
                                         return "recentScheduledExecutionRecords." + error;
                                 }
                             }
+                            if (message.disabled != null && message.hasOwnProperty("disabled"))
+                                if (typeof message.disabled !== "boolean")
+                                    return "disabled: boolean expected";
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime);
                                 if (error)
@@ -28557,6 +30224,8 @@
                                     message.recentScheduledExecutionRecords[i] = $root.google.cloud.dataform.v1beta1.WorkflowConfig.ScheduledExecutionRecord.fromObject(object.recentScheduledExecutionRecords[i]);
                                 }
                             }
+                            if (object.disabled != null)
+                                message.disabled = Boolean(object.disabled);
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
                                     throw TypeError(".google.cloud.dataform.v1beta1.WorkflowConfig.createTime: object expected");
@@ -28593,6 +30262,7 @@
                                 object.invocationConfig = null;
                                 object.cronSchedule = "";
                                 object.timeZone = "";
+                                object.disabled = false;
                                 object.createTime = null;
                                 object.updateTime = null;
                             }
@@ -28611,6 +30281,8 @@
                             }
                             if (message.timeZone != null && message.hasOwnProperty("timeZone"))
                                 object.timeZone = message.timeZone;
+                            if (message.disabled != null && message.hasOwnProperty("disabled"))
+                                object.disabled = message.disabled;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
@@ -32843,6 +34515,7 @@
                          * @interface IWorkflowInvocationAction
                          * @property {google.cloud.dataform.v1beta1.WorkflowInvocationAction.IBigQueryAction|null} [bigqueryAction] WorkflowInvocationAction bigqueryAction
                          * @property {google.cloud.dataform.v1beta1.WorkflowInvocationAction.INotebookAction|null} [notebookAction] WorkflowInvocationAction notebookAction
+                         * @property {google.cloud.dataform.v1beta1.WorkflowInvocationAction.IDataPreparationAction|null} [dataPreparationAction] WorkflowInvocationAction dataPreparationAction
                          * @property {google.cloud.dataform.v1beta1.ITarget|null} [target] WorkflowInvocationAction target
                          * @property {google.cloud.dataform.v1beta1.ITarget|null} [canonicalTarget] WorkflowInvocationAction canonicalTarget
                          * @property {google.cloud.dataform.v1beta1.WorkflowInvocationAction.State|null} [state] WorkflowInvocationAction state
@@ -32881,6 +34554,14 @@
                          * @instance
                          */
                         WorkflowInvocationAction.prototype.notebookAction = null;
+    
+                        /**
+                         * WorkflowInvocationAction dataPreparationAction.
+                         * @member {google.cloud.dataform.v1beta1.WorkflowInvocationAction.IDataPreparationAction|null|undefined} dataPreparationAction
+                         * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction
+                         * @instance
+                         */
+                        WorkflowInvocationAction.prototype.dataPreparationAction = null;
     
                         /**
                          * WorkflowInvocationAction target.
@@ -32935,12 +34616,12 @@
     
                         /**
                          * WorkflowInvocationAction action.
-                         * @member {"bigqueryAction"|"notebookAction"|undefined} action
+                         * @member {"bigqueryAction"|"notebookAction"|"dataPreparationAction"|undefined} action
                          * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction
                          * @instance
                          */
                         Object.defineProperty(WorkflowInvocationAction.prototype, "action", {
-                            get: $util.oneOfGetter($oneOfFields = ["bigqueryAction", "notebookAction"]),
+                            get: $util.oneOfGetter($oneOfFields = ["bigqueryAction", "notebookAction", "dataPreparationAction"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -32993,6 +34674,8 @@
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.failureReason);
                             if (message.notebookAction != null && Object.hasOwnProperty.call(message, "notebookAction"))
                                 $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.NotebookAction.encode(message.notebookAction, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.dataPreparationAction != null && Object.hasOwnProperty.call(message, "dataPreparationAction"))
+                                $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.encode(message.dataPreparationAction, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.internalMetadata != null && Object.hasOwnProperty.call(message, "internalMetadata"))
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.internalMetadata);
                             return writer;
@@ -33035,6 +34718,10 @@
                                     }
                                 case 8: {
                                         message.notebookAction = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.NotebookAction.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.dataPreparationAction = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -33115,6 +34802,16 @@
                                         return "notebookAction." + error;
                                 }
                             }
+                            if (message.dataPreparationAction != null && message.hasOwnProperty("dataPreparationAction")) {
+                                if (properties.action === 1)
+                                    return "action: multiple values";
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.verify(message.dataPreparationAction);
+                                    if (error)
+                                        return "dataPreparationAction." + error;
+                                }
+                            }
                             if (message.target != null && message.hasOwnProperty("target")) {
                                 var error = $root.google.cloud.dataform.v1beta1.Target.verify(message.target);
                                 if (error)
@@ -33175,6 +34872,11 @@
                                 if (typeof object.notebookAction !== "object")
                                     throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocationAction.notebookAction: object expected");
                                 message.notebookAction = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.NotebookAction.fromObject(object.notebookAction);
+                            }
+                            if (object.dataPreparationAction != null) {
+                                if (typeof object.dataPreparationAction !== "object")
+                                    throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocationAction.dataPreparationAction: object expected");
+                                message.dataPreparationAction = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.fromObject(object.dataPreparationAction);
                             }
                             if (object.target != null) {
                                 if (typeof object.target !== "object")
@@ -33273,6 +34975,11 @@
                                 object.notebookAction = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.NotebookAction.toObject(message.notebookAction, options);
                                 if (options.oneofs)
                                     object.action = "notebookAction";
+                            }
+                            if (message.dataPreparationAction != null && message.hasOwnProperty("dataPreparationAction")) {
+                                object.dataPreparationAction = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.toObject(message.dataPreparationAction, options);
+                                if (options.oneofs)
+                                    object.action = "dataPreparationAction";
                             }
                             if (message.internalMetadata != null && message.hasOwnProperty("internalMetadata")) {
                                 object.internalMetadata = message.internalMetadata;
@@ -33760,6 +35467,1512 @@
                             };
     
                             return NotebookAction;
+                        })();
+    
+                        WorkflowInvocationAction.DataPreparationAction = (function() {
+    
+                            /**
+                             * Properties of a DataPreparationAction.
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction
+                             * @interface IDataPreparationAction
+                             * @property {string|null} [contentsYaml] DataPreparationAction contentsYaml
+                             * @property {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSqlDefinition|null} [contentsSql] DataPreparationAction contentsSql
+                             * @property {string|null} [generatedSql] DataPreparationAction generatedSql
+                             * @property {string|null} [jobId] DataPreparationAction jobId
+                             */
+    
+                            /**
+                             * Constructs a new DataPreparationAction.
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction
+                             * @classdesc Represents a DataPreparationAction.
+                             * @implements IDataPreparationAction
+                             * @constructor
+                             * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.IDataPreparationAction=} [properties] Properties to set
+                             */
+                            function DataPreparationAction(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataPreparationAction contentsYaml.
+                             * @member {string|null|undefined} contentsYaml
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @instance
+                             */
+                            DataPreparationAction.prototype.contentsYaml = null;
+    
+                            /**
+                             * DataPreparationAction contentsSql.
+                             * @member {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSqlDefinition|null|undefined} contentsSql
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @instance
+                             */
+                            DataPreparationAction.prototype.contentsSql = null;
+    
+                            /**
+                             * DataPreparationAction generatedSql.
+                             * @member {string} generatedSql
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @instance
+                             */
+                            DataPreparationAction.prototype.generatedSql = "";
+    
+                            /**
+                             * DataPreparationAction jobId.
+                             * @member {string} jobId
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @instance
+                             */
+                            DataPreparationAction.prototype.jobId = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * DataPreparationAction definition.
+                             * @member {"contentsYaml"|"contentsSql"|undefined} definition
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @instance
+                             */
+                            Object.defineProperty(DataPreparationAction.prototype, "definition", {
+                                get: $util.oneOfGetter($oneOfFields = ["contentsYaml", "contentsSql"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new DataPreparationAction instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.IDataPreparationAction=} [properties] Properties to set
+                             * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction} DataPreparationAction instance
+                             */
+                            DataPreparationAction.create = function create(properties) {
+                                return new DataPreparationAction(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataPreparationAction message. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.IDataPreparationAction} message DataPreparationAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataPreparationAction.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.contentsYaml != null && Object.hasOwnProperty.call(message, "contentsYaml"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.contentsYaml);
+                                if (message.generatedSql != null && Object.hasOwnProperty.call(message, "generatedSql"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.generatedSql);
+                                if (message.jobId != null && Object.hasOwnProperty.call(message, "jobId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.jobId);
+                                if (message.contentsSql != null && Object.hasOwnProperty.call(message, "contentsSql"))
+                                    $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition.encode(message.contentsSql, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataPreparationAction message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.IDataPreparationAction} message DataPreparationAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataPreparationAction.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataPreparationAction message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction} DataPreparationAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataPreparationAction.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.contentsYaml = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.contentsSql = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.generatedSql = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.jobId = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataPreparationAction message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction} DataPreparationAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataPreparationAction.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataPreparationAction message.
+                             * @function verify
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataPreparationAction.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.contentsYaml != null && message.hasOwnProperty("contentsYaml")) {
+                                    properties.definition = 1;
+                                    if (!$util.isString(message.contentsYaml))
+                                        return "contentsYaml: string expected";
+                                }
+                                if (message.contentsSql != null && message.hasOwnProperty("contentsSql")) {
+                                    if (properties.definition === 1)
+                                        return "definition: multiple values";
+                                    properties.definition = 1;
+                                    {
+                                        var error = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition.verify(message.contentsSql);
+                                        if (error)
+                                            return "contentsSql." + error;
+                                    }
+                                }
+                                if (message.generatedSql != null && message.hasOwnProperty("generatedSql"))
+                                    if (!$util.isString(message.generatedSql))
+                                        return "generatedSql: string expected";
+                                if (message.jobId != null && message.hasOwnProperty("jobId"))
+                                    if (!$util.isString(message.jobId))
+                                        return "jobId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataPreparationAction message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction} DataPreparationAction
+                             */
+                            DataPreparationAction.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction)
+                                    return object;
+                                var message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction();
+                                if (object.contentsYaml != null)
+                                    message.contentsYaml = String(object.contentsYaml);
+                                if (object.contentsSql != null) {
+                                    if (typeof object.contentsSql !== "object")
+                                        throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.contentsSql: object expected");
+                                    message.contentsSql = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition.fromObject(object.contentsSql);
+                                }
+                                if (object.generatedSql != null)
+                                    message.generatedSql = String(object.generatedSql);
+                                if (object.jobId != null)
+                                    message.jobId = String(object.jobId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataPreparationAction message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @static
+                             * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction} message DataPreparationAction
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataPreparationAction.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.generatedSql = "";
+                                    object.jobId = "";
+                                }
+                                if (message.contentsYaml != null && message.hasOwnProperty("contentsYaml")) {
+                                    object.contentsYaml = message.contentsYaml;
+                                    if (options.oneofs)
+                                        object.definition = "contentsYaml";
+                                }
+                                if (message.generatedSql != null && message.hasOwnProperty("generatedSql"))
+                                    object.generatedSql = message.generatedSql;
+                                if (message.jobId != null && message.hasOwnProperty("jobId"))
+                                    object.jobId = message.jobId;
+                                if (message.contentsSql != null && message.hasOwnProperty("contentsSql")) {
+                                    object.contentsSql = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition.toObject(message.contentsSql, options);
+                                    if (options.oneofs)
+                                        object.definition = "contentsSql";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataPreparationAction to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataPreparationAction.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataPreparationAction
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataPreparationAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction";
+                            };
+    
+                            DataPreparationAction.ActionSqlDefinition = (function() {
+    
+                                /**
+                                 * Properties of an ActionSqlDefinition.
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                                 * @interface IActionSqlDefinition
+                                 * @property {string|null} [query] ActionSqlDefinition query
+                                 * @property {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionErrorTable|null} [errorTable] ActionSqlDefinition errorTable
+                                 * @property {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionLoadConfig|null} [loadConfig] ActionSqlDefinition loadConfig
+                                 */
+    
+                                /**
+                                 * Constructs a new ActionSqlDefinition.
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                                 * @classdesc Represents an ActionSqlDefinition.
+                                 * @implements IActionSqlDefinition
+                                 * @constructor
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSqlDefinition=} [properties] Properties to set
+                                 */
+                                function ActionSqlDefinition(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ActionSqlDefinition query.
+                                 * @member {string} query
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @instance
+                                 */
+                                ActionSqlDefinition.prototype.query = "";
+    
+                                /**
+                                 * ActionSqlDefinition errorTable.
+                                 * @member {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionErrorTable|null|undefined} errorTable
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @instance
+                                 */
+                                ActionSqlDefinition.prototype.errorTable = null;
+    
+                                /**
+                                 * ActionSqlDefinition loadConfig.
+                                 * @member {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionLoadConfig|null|undefined} loadConfig
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @instance
+                                 */
+                                ActionSqlDefinition.prototype.loadConfig = null;
+    
+                                /**
+                                 * Creates a new ActionSqlDefinition instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSqlDefinition=} [properties] Properties to set
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition} ActionSqlDefinition instance
+                                 */
+                                ActionSqlDefinition.create = function create(properties) {
+                                    return new ActionSqlDefinition(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ActionSqlDefinition message. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSqlDefinition} message ActionSqlDefinition message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ActionSqlDefinition.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.query);
+                                    if (message.errorTable != null && Object.hasOwnProperty.call(message, "errorTable"))
+                                        $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable.encode(message.errorTable, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.loadConfig != null && Object.hasOwnProperty.call(message, "loadConfig"))
+                                        $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig.encode(message.loadConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ActionSqlDefinition message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSqlDefinition} message ActionSqlDefinition message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ActionSqlDefinition.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ActionSqlDefinition message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition} ActionSqlDefinition
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ActionSqlDefinition.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.query = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.errorTable = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.loadConfig = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ActionSqlDefinition message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition} ActionSqlDefinition
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ActionSqlDefinition.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ActionSqlDefinition message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ActionSqlDefinition.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.query != null && message.hasOwnProperty("query"))
+                                        if (!$util.isString(message.query))
+                                            return "query: string expected";
+                                    if (message.errorTable != null && message.hasOwnProperty("errorTable")) {
+                                        var error = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable.verify(message.errorTable);
+                                        if (error)
+                                            return "errorTable." + error;
+                                    }
+                                    if (message.loadConfig != null && message.hasOwnProperty("loadConfig")) {
+                                        var error = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig.verify(message.loadConfig);
+                                        if (error)
+                                            return "loadConfig." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ActionSqlDefinition message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition} ActionSqlDefinition
+                                 */
+                                ActionSqlDefinition.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition)
+                                        return object;
+                                    var message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition();
+                                    if (object.query != null)
+                                        message.query = String(object.query);
+                                    if (object.errorTable != null) {
+                                        if (typeof object.errorTable !== "object")
+                                            throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition.errorTable: object expected");
+                                        message.errorTable = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable.fromObject(object.errorTable);
+                                    }
+                                    if (object.loadConfig != null) {
+                                        if (typeof object.loadConfig !== "object")
+                                            throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition.loadConfig: object expected");
+                                        message.loadConfig = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig.fromObject(object.loadConfig);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ActionSqlDefinition message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition} message ActionSqlDefinition
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ActionSqlDefinition.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.query = "";
+                                        object.errorTable = null;
+                                        object.loadConfig = null;
+                                    }
+                                    if (message.query != null && message.hasOwnProperty("query"))
+                                        object.query = message.query;
+                                    if (message.errorTable != null && message.hasOwnProperty("errorTable"))
+                                        object.errorTable = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable.toObject(message.errorTable, options);
+                                    if (message.loadConfig != null && message.hasOwnProperty("loadConfig"))
+                                        object.loadConfig = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig.toObject(message.loadConfig, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ActionSqlDefinition to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ActionSqlDefinition.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ActionSqlDefinition
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ActionSqlDefinition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSqlDefinition";
+                                };
+    
+                                return ActionSqlDefinition;
+                            })();
+    
+                            DataPreparationAction.ActionErrorTable = (function() {
+    
+                                /**
+                                 * Properties of an ActionErrorTable.
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                                 * @interface IActionErrorTable
+                                 * @property {google.cloud.dataform.v1beta1.ITarget|null} [target] ActionErrorTable target
+                                 * @property {number|null} [retentionDays] ActionErrorTable retentionDays
+                                 */
+    
+                                /**
+                                 * Constructs a new ActionErrorTable.
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                                 * @classdesc Represents an ActionErrorTable.
+                                 * @implements IActionErrorTable
+                                 * @constructor
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionErrorTable=} [properties] Properties to set
+                                 */
+                                function ActionErrorTable(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ActionErrorTable target.
+                                 * @member {google.cloud.dataform.v1beta1.ITarget|null|undefined} target
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable
+                                 * @instance
+                                 */
+                                ActionErrorTable.prototype.target = null;
+    
+                                /**
+                                 * ActionErrorTable retentionDays.
+                                 * @member {number} retentionDays
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable
+                                 * @instance
+                                 */
+                                ActionErrorTable.prototype.retentionDays = 0;
+    
+                                /**
+                                 * Creates a new ActionErrorTable instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionErrorTable=} [properties] Properties to set
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable} ActionErrorTable instance
+                                 */
+                                ActionErrorTable.create = function create(properties) {
+                                    return new ActionErrorTable(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ActionErrorTable message. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionErrorTable} message ActionErrorTable message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ActionErrorTable.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                        $root.google.cloud.dataform.v1beta1.Target.encode(message.target, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.retentionDays != null && Object.hasOwnProperty.call(message, "retentionDays"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.retentionDays);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ActionErrorTable message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionErrorTable} message ActionErrorTable message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ActionErrorTable.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ActionErrorTable message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable} ActionErrorTable
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ActionErrorTable.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.target = $root.google.cloud.dataform.v1beta1.Target.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.retentionDays = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ActionErrorTable message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable} ActionErrorTable
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ActionErrorTable.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ActionErrorTable message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ActionErrorTable.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.target != null && message.hasOwnProperty("target")) {
+                                        var error = $root.google.cloud.dataform.v1beta1.Target.verify(message.target);
+                                        if (error)
+                                            return "target." + error;
+                                    }
+                                    if (message.retentionDays != null && message.hasOwnProperty("retentionDays"))
+                                        if (!$util.isInteger(message.retentionDays))
+                                            return "retentionDays: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ActionErrorTable message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable} ActionErrorTable
+                                 */
+                                ActionErrorTable.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable)
+                                        return object;
+                                    var message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable();
+                                    if (object.target != null) {
+                                        if (typeof object.target !== "object")
+                                            throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable.target: object expected");
+                                        message.target = $root.google.cloud.dataform.v1beta1.Target.fromObject(object.target);
+                                    }
+                                    if (object.retentionDays != null)
+                                        message.retentionDays = object.retentionDays | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ActionErrorTable message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable} message ActionErrorTable
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ActionErrorTable.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.target = null;
+                                        object.retentionDays = 0;
+                                    }
+                                    if (message.target != null && message.hasOwnProperty("target"))
+                                        object.target = $root.google.cloud.dataform.v1beta1.Target.toObject(message.target, options);
+                                    if (message.retentionDays != null && message.hasOwnProperty("retentionDays"))
+                                        object.retentionDays = message.retentionDays;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ActionErrorTable to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ActionErrorTable.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ActionErrorTable
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ActionErrorTable.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionErrorTable";
+                                };
+    
+                                return ActionErrorTable;
+                            })();
+    
+                            DataPreparationAction.ActionLoadConfig = (function() {
+    
+                                /**
+                                 * Properties of an ActionLoadConfig.
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                                 * @interface IActionLoadConfig
+                                 * @property {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSimpleLoadMode|null} [replace] ActionLoadConfig replace
+                                 * @property {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSimpleLoadMode|null} [append] ActionLoadConfig append
+                                 * @property {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionIncrementalLoadMode|null} [maximum] ActionLoadConfig maximum
+                                 * @property {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionIncrementalLoadMode|null} [unique] ActionLoadConfig unique
+                                 */
+    
+                                /**
+                                 * Constructs a new ActionLoadConfig.
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                                 * @classdesc Represents an ActionLoadConfig.
+                                 * @implements IActionLoadConfig
+                                 * @constructor
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionLoadConfig=} [properties] Properties to set
+                                 */
+                                function ActionLoadConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ActionLoadConfig replace.
+                                 * @member {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSimpleLoadMode|null|undefined} replace
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @instance
+                                 */
+                                ActionLoadConfig.prototype.replace = null;
+    
+                                /**
+                                 * ActionLoadConfig append.
+                                 * @member {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSimpleLoadMode|null|undefined} append
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @instance
+                                 */
+                                ActionLoadConfig.prototype.append = null;
+    
+                                /**
+                                 * ActionLoadConfig maximum.
+                                 * @member {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionIncrementalLoadMode|null|undefined} maximum
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @instance
+                                 */
+                                ActionLoadConfig.prototype.maximum = null;
+    
+                                /**
+                                 * ActionLoadConfig unique.
+                                 * @member {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionIncrementalLoadMode|null|undefined} unique
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @instance
+                                 */
+                                ActionLoadConfig.prototype.unique = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * ActionLoadConfig mode.
+                                 * @member {"replace"|"append"|"maximum"|"unique"|undefined} mode
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @instance
+                                 */
+                                Object.defineProperty(ActionLoadConfig.prototype, "mode", {
+                                    get: $util.oneOfGetter($oneOfFields = ["replace", "append", "maximum", "unique"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new ActionLoadConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionLoadConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig} ActionLoadConfig instance
+                                 */
+                                ActionLoadConfig.create = function create(properties) {
+                                    return new ActionLoadConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ActionLoadConfig message. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionLoadConfig} message ActionLoadConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ActionLoadConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.replace != null && Object.hasOwnProperty.call(message, "replace"))
+                                        $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode.encode(message.replace, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.append != null && Object.hasOwnProperty.call(message, "append"))
+                                        $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode.encode(message.append, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.maximum != null && Object.hasOwnProperty.call(message, "maximum"))
+                                        $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode.encode(message.maximum, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.unique != null && Object.hasOwnProperty.call(message, "unique"))
+                                        $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode.encode(message.unique, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ActionLoadConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionLoadConfig} message ActionLoadConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ActionLoadConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ActionLoadConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig} ActionLoadConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ActionLoadConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.replace = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.append = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.maximum = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.unique = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ActionLoadConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig} ActionLoadConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ActionLoadConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ActionLoadConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ActionLoadConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.replace != null && message.hasOwnProperty("replace")) {
+                                        properties.mode = 1;
+                                        {
+                                            var error = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode.verify(message.replace);
+                                            if (error)
+                                                return "replace." + error;
+                                        }
+                                    }
+                                    if (message.append != null && message.hasOwnProperty("append")) {
+                                        if (properties.mode === 1)
+                                            return "mode: multiple values";
+                                        properties.mode = 1;
+                                        {
+                                            var error = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode.verify(message.append);
+                                            if (error)
+                                                return "append." + error;
+                                        }
+                                    }
+                                    if (message.maximum != null && message.hasOwnProperty("maximum")) {
+                                        if (properties.mode === 1)
+                                            return "mode: multiple values";
+                                        properties.mode = 1;
+                                        {
+                                            var error = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode.verify(message.maximum);
+                                            if (error)
+                                                return "maximum." + error;
+                                        }
+                                    }
+                                    if (message.unique != null && message.hasOwnProperty("unique")) {
+                                        if (properties.mode === 1)
+                                            return "mode: multiple values";
+                                        properties.mode = 1;
+                                        {
+                                            var error = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode.verify(message.unique);
+                                            if (error)
+                                                return "unique." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ActionLoadConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig} ActionLoadConfig
+                                 */
+                                ActionLoadConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig();
+                                    if (object.replace != null) {
+                                        if (typeof object.replace !== "object")
+                                            throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig.replace: object expected");
+                                        message.replace = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode.fromObject(object.replace);
+                                    }
+                                    if (object.append != null) {
+                                        if (typeof object.append !== "object")
+                                            throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig.append: object expected");
+                                        message.append = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode.fromObject(object.append);
+                                    }
+                                    if (object.maximum != null) {
+                                        if (typeof object.maximum !== "object")
+                                            throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig.maximum: object expected");
+                                        message.maximum = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode.fromObject(object.maximum);
+                                    }
+                                    if (object.unique != null) {
+                                        if (typeof object.unique !== "object")
+                                            throw TypeError(".google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig.unique: object expected");
+                                        message.unique = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode.fromObject(object.unique);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ActionLoadConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig} message ActionLoadConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ActionLoadConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.replace != null && message.hasOwnProperty("replace")) {
+                                        object.replace = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode.toObject(message.replace, options);
+                                        if (options.oneofs)
+                                            object.mode = "replace";
+                                    }
+                                    if (message.append != null && message.hasOwnProperty("append")) {
+                                        object.append = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode.toObject(message.append, options);
+                                        if (options.oneofs)
+                                            object.mode = "append";
+                                    }
+                                    if (message.maximum != null && message.hasOwnProperty("maximum")) {
+                                        object.maximum = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode.toObject(message.maximum, options);
+                                        if (options.oneofs)
+                                            object.mode = "maximum";
+                                    }
+                                    if (message.unique != null && message.hasOwnProperty("unique")) {
+                                        object.unique = $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode.toObject(message.unique, options);
+                                        if (options.oneofs)
+                                            object.mode = "unique";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ActionLoadConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ActionLoadConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ActionLoadConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ActionLoadConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionLoadConfig";
+                                };
+    
+                                return ActionLoadConfig;
+                            })();
+    
+                            DataPreparationAction.ActionSimpleLoadMode = (function() {
+    
+                                /**
+                                 * Properties of an ActionSimpleLoadMode.
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                                 * @interface IActionSimpleLoadMode
+                                 */
+    
+                                /**
+                                 * Constructs a new ActionSimpleLoadMode.
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                                 * @classdesc Represents an ActionSimpleLoadMode.
+                                 * @implements IActionSimpleLoadMode
+                                 * @constructor
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSimpleLoadMode=} [properties] Properties to set
+                                 */
+                                function ActionSimpleLoadMode(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new ActionSimpleLoadMode instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSimpleLoadMode=} [properties] Properties to set
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode} ActionSimpleLoadMode instance
+                                 */
+                                ActionSimpleLoadMode.create = function create(properties) {
+                                    return new ActionSimpleLoadMode(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ActionSimpleLoadMode message. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSimpleLoadMode} message ActionSimpleLoadMode message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ActionSimpleLoadMode.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ActionSimpleLoadMode message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionSimpleLoadMode} message ActionSimpleLoadMode message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ActionSimpleLoadMode.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ActionSimpleLoadMode message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode} ActionSimpleLoadMode
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ActionSimpleLoadMode.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ActionSimpleLoadMode message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode} ActionSimpleLoadMode
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ActionSimpleLoadMode.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ActionSimpleLoadMode message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ActionSimpleLoadMode.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ActionSimpleLoadMode message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode} ActionSimpleLoadMode
+                                 */
+                                ActionSimpleLoadMode.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode)
+                                        return object;
+                                    return new $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode();
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ActionSimpleLoadMode message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode} message ActionSimpleLoadMode
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ActionSimpleLoadMode.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this ActionSimpleLoadMode to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ActionSimpleLoadMode.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ActionSimpleLoadMode
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ActionSimpleLoadMode.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionSimpleLoadMode";
+                                };
+    
+                                return ActionSimpleLoadMode;
+                            })();
+    
+                            DataPreparationAction.ActionIncrementalLoadMode = (function() {
+    
+                                /**
+                                 * Properties of an ActionIncrementalLoadMode.
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                                 * @interface IActionIncrementalLoadMode
+                                 * @property {string|null} [column] ActionIncrementalLoadMode column
+                                 */
+    
+                                /**
+                                 * Constructs a new ActionIncrementalLoadMode.
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction
+                                 * @classdesc Represents an ActionIncrementalLoadMode.
+                                 * @implements IActionIncrementalLoadMode
+                                 * @constructor
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionIncrementalLoadMode=} [properties] Properties to set
+                                 */
+                                function ActionIncrementalLoadMode(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ActionIncrementalLoadMode column.
+                                 * @member {string} column
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode
+                                 * @instance
+                                 */
+                                ActionIncrementalLoadMode.prototype.column = "";
+    
+                                /**
+                                 * Creates a new ActionIncrementalLoadMode instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionIncrementalLoadMode=} [properties] Properties to set
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode} ActionIncrementalLoadMode instance
+                                 */
+                                ActionIncrementalLoadMode.create = function create(properties) {
+                                    return new ActionIncrementalLoadMode(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ActionIncrementalLoadMode message. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionIncrementalLoadMode} message ActionIncrementalLoadMode message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ActionIncrementalLoadMode.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.column != null && Object.hasOwnProperty.call(message, "column"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.column);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ActionIncrementalLoadMode message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.IActionIncrementalLoadMode} message ActionIncrementalLoadMode message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ActionIncrementalLoadMode.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ActionIncrementalLoadMode message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode} ActionIncrementalLoadMode
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ActionIncrementalLoadMode.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.column = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ActionIncrementalLoadMode message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode} ActionIncrementalLoadMode
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ActionIncrementalLoadMode.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ActionIncrementalLoadMode message.
+                                 * @function verify
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ActionIncrementalLoadMode.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.column != null && message.hasOwnProperty("column"))
+                                        if (!$util.isString(message.column))
+                                            return "column: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ActionIncrementalLoadMode message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode} ActionIncrementalLoadMode
+                                 */
+                                ActionIncrementalLoadMode.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode)
+                                        return object;
+                                    var message = new $root.google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode();
+                                    if (object.column != null)
+                                        message.column = String(object.column);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ActionIncrementalLoadMode message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode
+                                 * @static
+                                 * @param {google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode} message ActionIncrementalLoadMode
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ActionIncrementalLoadMode.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.column = "";
+                                    if (message.column != null && message.hasOwnProperty("column"))
+                                        object.column = message.column;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ActionIncrementalLoadMode to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ActionIncrementalLoadMode.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ActionIncrementalLoadMode
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ActionIncrementalLoadMode.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dataform.v1beta1.WorkflowInvocationAction.DataPreparationAction.ActionIncrementalLoadMode";
+                                };
+    
+                                return ActionIncrementalLoadMode;
+                            })();
+    
+                            return DataPreparationAction;
                         })();
     
                         /**

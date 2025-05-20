@@ -275,9 +275,14 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
         throw err;
       });
       assert(client.regionalInventoryServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -289,9 +294,14 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
           }
         );
       assert.strictEqual(client.regionalInventoryServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -476,7 +486,9 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.insertRegionalInventory(request),
         expectedError
@@ -625,7 +637,9 @@ describe('v1beta.RegionalInventoryServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteRegionalInventory(request),
         expectedError

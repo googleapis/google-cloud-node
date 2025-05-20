@@ -37,6 +37,9 @@ export namespace google {
 
                     /** Actor googleSupport */
                     googleSupport?: (boolean|null);
+
+                    /** Actor username */
+                    username?: (string|null);
                 }
 
                 /** Represents an Actor. */
@@ -56,6 +59,9 @@ export namespace google {
 
                     /** Actor googleSupport. */
                     public googleSupport: boolean;
+
+                    /** Actor username. */
+                    public username: string;
 
                     /**
                      * Creates a new Actor instance using the specified properties.
@@ -2779,6 +2785,3517 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
+            /** Namespace v2beta. */
+            namespace v2beta {
+
+                /** Properties of an Actor. */
+                interface IActor {
+
+                    /** Actor displayName */
+                    displayName?: (string|null);
+
+                    /** Actor email */
+                    email?: (string|null);
+
+                    /** Actor googleSupport */
+                    googleSupport?: (boolean|null);
+
+                    /** Actor username */
+                    username?: (string|null);
+                }
+
+                /** Represents an Actor. */
+                class Actor implements IActor {
+
+                    /**
+                     * Constructs a new Actor.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IActor);
+
+                    /** Actor displayName. */
+                    public displayName: string;
+
+                    /** Actor email. */
+                    public email: string;
+
+                    /** Actor googleSupport. */
+                    public googleSupport: boolean;
+
+                    /** Actor username. */
+                    public username: string;
+
+                    /**
+                     * Creates a new Actor instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Actor instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IActor): google.cloud.support.v2beta.Actor;
+
+                    /**
+                     * Encodes the specified Actor message. Does not implicitly {@link google.cloud.support.v2beta.Actor.verify|verify} messages.
+                     * @param message Actor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IActor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Actor message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.Actor.verify|verify} messages.
+                     * @param message Actor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IActor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Actor message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Actor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.Actor;
+
+                    /**
+                     * Decodes an Actor message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Actor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.Actor;
+
+                    /**
+                     * Verifies an Actor message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Actor message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Actor
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.Actor;
+
+                    /**
+                     * Creates a plain object from an Actor message. Also converts values to other types if specified.
+                     * @param message Actor
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.Actor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Actor to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Actor
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Attachment. */
+                interface IAttachment {
+
+                    /** Attachment name */
+                    name?: (string|null);
+
+                    /** Attachment createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Attachment creator */
+                    creator?: (google.cloud.support.v2beta.IActor|null);
+
+                    /** Attachment filename */
+                    filename?: (string|null);
+
+                    /** Attachment mimeType */
+                    mimeType?: (string|null);
+
+                    /** Attachment sizeBytes */
+                    sizeBytes?: (number|Long|string|null);
+                }
+
+                /** Represents an Attachment. */
+                class Attachment implements IAttachment {
+
+                    /**
+                     * Constructs a new Attachment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IAttachment);
+
+                    /** Attachment name. */
+                    public name: string;
+
+                    /** Attachment createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Attachment creator. */
+                    public creator?: (google.cloud.support.v2beta.IActor|null);
+
+                    /** Attachment filename. */
+                    public filename: string;
+
+                    /** Attachment mimeType. */
+                    public mimeType: string;
+
+                    /** Attachment sizeBytes. */
+                    public sizeBytes: (number|Long|string);
+
+                    /**
+                     * Creates a new Attachment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Attachment instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IAttachment): google.cloud.support.v2beta.Attachment;
+
+                    /**
+                     * Encodes the specified Attachment message. Does not implicitly {@link google.cloud.support.v2beta.Attachment.verify|verify} messages.
+                     * @param message Attachment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Attachment message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.Attachment.verify|verify} messages.
+                     * @param message Attachment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Attachment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Attachment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.Attachment;
+
+                    /**
+                     * Decodes an Attachment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Attachment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.Attachment;
+
+                    /**
+                     * Verifies an Attachment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Attachment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Attachment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.Attachment;
+
+                    /**
+                     * Creates a plain object from an Attachment message. Also converts values to other types if specified.
+                     * @param message Attachment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.Attachment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Attachment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Attachment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a CaseAttachmentService */
+                class CaseAttachmentService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new CaseAttachmentService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CaseAttachmentService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CaseAttachmentService;
+
+                    /**
+                     * Calls ListAttachments.
+                     * @param request ListAttachmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAttachmentsResponse
+                     */
+                    public listAttachments(request: google.cloud.support.v2beta.IListAttachmentsRequest, callback: google.cloud.support.v2beta.CaseAttachmentService.ListAttachmentsCallback): void;
+
+                    /**
+                     * Calls ListAttachments.
+                     * @param request ListAttachmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAttachments(request: google.cloud.support.v2beta.IListAttachmentsRequest): Promise<google.cloud.support.v2beta.ListAttachmentsResponse>;
+                }
+
+                namespace CaseAttachmentService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CaseAttachmentService|listAttachments}.
+                     * @param error Error, if any
+                     * @param [response] ListAttachmentsResponse
+                     */
+                    type ListAttachmentsCallback = (error: (Error|null), response?: google.cloud.support.v2beta.ListAttachmentsResponse) => void;
+                }
+
+                /** Properties of a ListAttachmentsRequest. */
+                interface IListAttachmentsRequest {
+
+                    /** ListAttachmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAttachmentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAttachmentsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAttachmentsRequest. */
+                class ListAttachmentsRequest implements IListAttachmentsRequest {
+
+                    /**
+                     * Constructs a new ListAttachmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IListAttachmentsRequest);
+
+                    /** ListAttachmentsRequest parent. */
+                    public parent: string;
+
+                    /** ListAttachmentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAttachmentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAttachmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAttachmentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IListAttachmentsRequest): google.cloud.support.v2beta.ListAttachmentsRequest;
+
+                    /**
+                     * Encodes the specified ListAttachmentsRequest message. Does not implicitly {@link google.cloud.support.v2beta.ListAttachmentsRequest.verify|verify} messages.
+                     * @param message ListAttachmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IListAttachmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAttachmentsRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ListAttachmentsRequest.verify|verify} messages.
+                     * @param message ListAttachmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IListAttachmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAttachmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAttachmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.ListAttachmentsRequest;
+
+                    /**
+                     * Decodes a ListAttachmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAttachmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.ListAttachmentsRequest;
+
+                    /**
+                     * Verifies a ListAttachmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAttachmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAttachmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.ListAttachmentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAttachmentsRequest message. Also converts values to other types if specified.
+                     * @param message ListAttachmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.ListAttachmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAttachmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAttachmentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAttachmentsResponse. */
+                interface IListAttachmentsResponse {
+
+                    /** ListAttachmentsResponse attachments */
+                    attachments?: (google.cloud.support.v2beta.IAttachment[]|null);
+
+                    /** ListAttachmentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAttachmentsResponse. */
+                class ListAttachmentsResponse implements IListAttachmentsResponse {
+
+                    /**
+                     * Constructs a new ListAttachmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IListAttachmentsResponse);
+
+                    /** ListAttachmentsResponse attachments. */
+                    public attachments: google.cloud.support.v2beta.IAttachment[];
+
+                    /** ListAttachmentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAttachmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAttachmentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IListAttachmentsResponse): google.cloud.support.v2beta.ListAttachmentsResponse;
+
+                    /**
+                     * Encodes the specified ListAttachmentsResponse message. Does not implicitly {@link google.cloud.support.v2beta.ListAttachmentsResponse.verify|verify} messages.
+                     * @param message ListAttachmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IListAttachmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAttachmentsResponse message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ListAttachmentsResponse.verify|verify} messages.
+                     * @param message ListAttachmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IListAttachmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAttachmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAttachmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.ListAttachmentsResponse;
+
+                    /**
+                     * Decodes a ListAttachmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAttachmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.ListAttachmentsResponse;
+
+                    /**
+                     * Verifies a ListAttachmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAttachmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAttachmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.ListAttachmentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAttachmentsResponse message. Also converts values to other types if specified.
+                     * @param message ListAttachmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.ListAttachmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAttachmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAttachmentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** ProductLine enum. */
+                enum ProductLine {
+                    PRODUCT_LINE_UNSPECIFIED = 0,
+                    GOOGLE_CLOUD = 1,
+                    GOOGLE_MAPS = 2
+                }
+
+                /** Properties of a Case. */
+                interface ICase {
+
+                    /** Case name */
+                    name?: (string|null);
+
+                    /** Case displayName */
+                    displayName?: (string|null);
+
+                    /** Case description */
+                    description?: (string|null);
+
+                    /** Case classification */
+                    classification?: (google.cloud.support.v2beta.ICaseClassification|null);
+
+                    /** Case timeZone */
+                    timeZone?: (string|null);
+
+                    /** Case subscriberEmailAddresses */
+                    subscriberEmailAddresses?: (string[]|null);
+
+                    /** Case state */
+                    state?: (google.cloud.support.v2beta.Case.State|keyof typeof google.cloud.support.v2beta.Case.State|null);
+
+                    /** Case createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Case updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Case creator */
+                    creator?: (google.cloud.support.v2beta.IActor|null);
+
+                    /** Case contactEmail */
+                    contactEmail?: (string|null);
+
+                    /** Case escalated */
+                    escalated?: (boolean|null);
+
+                    /** Case testCase */
+                    testCase?: (boolean|null);
+
+                    /** Case languageCode */
+                    languageCode?: (string|null);
+
+                    /** Case priority */
+                    priority?: (google.cloud.support.v2beta.Case.Priority|keyof typeof google.cloud.support.v2beta.Case.Priority|null);
+                }
+
+                /** Represents a Case. */
+                class Case implements ICase {
+
+                    /**
+                     * Constructs a new Case.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.ICase);
+
+                    /** Case name. */
+                    public name: string;
+
+                    /** Case displayName. */
+                    public displayName: string;
+
+                    /** Case description. */
+                    public description: string;
+
+                    /** Case classification. */
+                    public classification?: (google.cloud.support.v2beta.ICaseClassification|null);
+
+                    /** Case timeZone. */
+                    public timeZone: string;
+
+                    /** Case subscriberEmailAddresses. */
+                    public subscriberEmailAddresses: string[];
+
+                    /** Case state. */
+                    public state: (google.cloud.support.v2beta.Case.State|keyof typeof google.cloud.support.v2beta.Case.State);
+
+                    /** Case createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Case updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Case creator. */
+                    public creator?: (google.cloud.support.v2beta.IActor|null);
+
+                    /** Case contactEmail. */
+                    public contactEmail: string;
+
+                    /** Case escalated. */
+                    public escalated: boolean;
+
+                    /** Case testCase. */
+                    public testCase: boolean;
+
+                    /** Case languageCode. */
+                    public languageCode: string;
+
+                    /** Case priority. */
+                    public priority: (google.cloud.support.v2beta.Case.Priority|keyof typeof google.cloud.support.v2beta.Case.Priority);
+
+                    /**
+                     * Creates a new Case instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Case instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.ICase): google.cloud.support.v2beta.Case;
+
+                    /**
+                     * Encodes the specified Case message. Does not implicitly {@link google.cloud.support.v2beta.Case.verify|verify} messages.
+                     * @param message Case message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.ICase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Case message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.Case.verify|verify} messages.
+                     * @param message Case message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.ICase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Case message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Case
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.Case;
+
+                    /**
+                     * Decodes a Case message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Case
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.Case;
+
+                    /**
+                     * Verifies a Case message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Case message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Case
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.Case;
+
+                    /**
+                     * Creates a plain object from a Case message. Also converts values to other types if specified.
+                     * @param message Case
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.Case, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Case to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Case
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Case {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        NEW = 1,
+                        IN_PROGRESS_GOOGLE_SUPPORT = 2,
+                        ACTION_REQUIRED = 3,
+                        SOLUTION_PROVIDED = 4,
+                        CLOSED = 5
+                    }
+
+                    /** Priority enum. */
+                    enum Priority {
+                        PRIORITY_UNSPECIFIED = 0,
+                        P0 = 1,
+                        P1 = 2,
+                        P2 = 3,
+                        P3 = 4,
+                        P4 = 5
+                    }
+                }
+
+                /** Properties of a CaseClassification. */
+                interface ICaseClassification {
+
+                    /** CaseClassification id */
+                    id?: (string|null);
+
+                    /** CaseClassification displayName */
+                    displayName?: (string|null);
+
+                    /** CaseClassification product */
+                    product?: (google.cloud.support.v2beta.IProduct|null);
+                }
+
+                /** Represents a CaseClassification. */
+                class CaseClassification implements ICaseClassification {
+
+                    /**
+                     * Constructs a new CaseClassification.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.ICaseClassification);
+
+                    /** CaseClassification id. */
+                    public id: string;
+
+                    /** CaseClassification displayName. */
+                    public displayName: string;
+
+                    /** CaseClassification product. */
+                    public product?: (google.cloud.support.v2beta.IProduct|null);
+
+                    /**
+                     * Creates a new CaseClassification instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CaseClassification instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.ICaseClassification): google.cloud.support.v2beta.CaseClassification;
+
+                    /**
+                     * Encodes the specified CaseClassification message. Does not implicitly {@link google.cloud.support.v2beta.CaseClassification.verify|verify} messages.
+                     * @param message CaseClassification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.ICaseClassification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CaseClassification message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.CaseClassification.verify|verify} messages.
+                     * @param message CaseClassification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.ICaseClassification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CaseClassification message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CaseClassification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.CaseClassification;
+
+                    /**
+                     * Decodes a CaseClassification message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CaseClassification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.CaseClassification;
+
+                    /**
+                     * Verifies a CaseClassification message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CaseClassification message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CaseClassification
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.CaseClassification;
+
+                    /**
+                     * Creates a plain object from a CaseClassification message. Also converts values to other types if specified.
+                     * @param message CaseClassification
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.CaseClassification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CaseClassification to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CaseClassification
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Product. */
+                interface IProduct {
+
+                    /** Product productLine */
+                    productLine?: (google.cloud.support.v2beta.ProductLine|keyof typeof google.cloud.support.v2beta.ProductLine|null);
+                }
+
+                /** Represents a Product. */
+                class Product implements IProduct {
+
+                    /**
+                     * Constructs a new Product.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IProduct);
+
+                    /** Product productLine. */
+                    public productLine: (google.cloud.support.v2beta.ProductLine|keyof typeof google.cloud.support.v2beta.ProductLine);
+
+                    /**
+                     * Creates a new Product instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Product instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IProduct): google.cloud.support.v2beta.Product;
+
+                    /**
+                     * Encodes the specified Product message. Does not implicitly {@link google.cloud.support.v2beta.Product.verify|verify} messages.
+                     * @param message Product message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IProduct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Product message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.Product.verify|verify} messages.
+                     * @param message Product message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IProduct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Product message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Product
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.Product;
+
+                    /**
+                     * Decodes a Product message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Product
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.Product;
+
+                    /**
+                     * Verifies a Product message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Product message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Product
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.Product;
+
+                    /**
+                     * Creates a plain object from a Product message. Also converts values to other types if specified.
+                     * @param message Product
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.Product, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Product to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Product
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a CaseService */
+                class CaseService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new CaseService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CaseService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CaseService;
+
+                    /**
+                     * Calls GetCase.
+                     * @param request GetCaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Case
+                     */
+                    public getCase(request: google.cloud.support.v2beta.IGetCaseRequest, callback: google.cloud.support.v2beta.CaseService.GetCaseCallback): void;
+
+                    /**
+                     * Calls GetCase.
+                     * @param request GetCaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getCase(request: google.cloud.support.v2beta.IGetCaseRequest): Promise<google.cloud.support.v2beta.Case>;
+
+                    /**
+                     * Calls ListCases.
+                     * @param request ListCasesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListCasesResponse
+                     */
+                    public listCases(request: google.cloud.support.v2beta.IListCasesRequest, callback: google.cloud.support.v2beta.CaseService.ListCasesCallback): void;
+
+                    /**
+                     * Calls ListCases.
+                     * @param request ListCasesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listCases(request: google.cloud.support.v2beta.IListCasesRequest): Promise<google.cloud.support.v2beta.ListCasesResponse>;
+
+                    /**
+                     * Calls SearchCases.
+                     * @param request SearchCasesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchCasesResponse
+                     */
+                    public searchCases(request: google.cloud.support.v2beta.ISearchCasesRequest, callback: google.cloud.support.v2beta.CaseService.SearchCasesCallback): void;
+
+                    /**
+                     * Calls SearchCases.
+                     * @param request SearchCasesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public searchCases(request: google.cloud.support.v2beta.ISearchCasesRequest): Promise<google.cloud.support.v2beta.SearchCasesResponse>;
+
+                    /**
+                     * Calls CreateCase.
+                     * @param request CreateCaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Case
+                     */
+                    public createCase(request: google.cloud.support.v2beta.ICreateCaseRequest, callback: google.cloud.support.v2beta.CaseService.CreateCaseCallback): void;
+
+                    /**
+                     * Calls CreateCase.
+                     * @param request CreateCaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCase(request: google.cloud.support.v2beta.ICreateCaseRequest): Promise<google.cloud.support.v2beta.Case>;
+
+                    /**
+                     * Calls UpdateCase.
+                     * @param request UpdateCaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Case
+                     */
+                    public updateCase(request: google.cloud.support.v2beta.IUpdateCaseRequest, callback: google.cloud.support.v2beta.CaseService.UpdateCaseCallback): void;
+
+                    /**
+                     * Calls UpdateCase.
+                     * @param request UpdateCaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCase(request: google.cloud.support.v2beta.IUpdateCaseRequest): Promise<google.cloud.support.v2beta.Case>;
+
+                    /**
+                     * Calls EscalateCase.
+                     * @param request EscalateCaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Case
+                     */
+                    public escalateCase(request: google.cloud.support.v2beta.IEscalateCaseRequest, callback: google.cloud.support.v2beta.CaseService.EscalateCaseCallback): void;
+
+                    /**
+                     * Calls EscalateCase.
+                     * @param request EscalateCaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public escalateCase(request: google.cloud.support.v2beta.IEscalateCaseRequest): Promise<google.cloud.support.v2beta.Case>;
+
+                    /**
+                     * Calls CloseCase.
+                     * @param request CloseCaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Case
+                     */
+                    public closeCase(request: google.cloud.support.v2beta.ICloseCaseRequest, callback: google.cloud.support.v2beta.CaseService.CloseCaseCallback): void;
+
+                    /**
+                     * Calls CloseCase.
+                     * @param request CloseCaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public closeCase(request: google.cloud.support.v2beta.ICloseCaseRequest): Promise<google.cloud.support.v2beta.Case>;
+
+                    /**
+                     * Calls SearchCaseClassifications.
+                     * @param request SearchCaseClassificationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchCaseClassificationsResponse
+                     */
+                    public searchCaseClassifications(request: google.cloud.support.v2beta.ISearchCaseClassificationsRequest, callback: google.cloud.support.v2beta.CaseService.SearchCaseClassificationsCallback): void;
+
+                    /**
+                     * Calls SearchCaseClassifications.
+                     * @param request SearchCaseClassificationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public searchCaseClassifications(request: google.cloud.support.v2beta.ISearchCaseClassificationsRequest): Promise<google.cloud.support.v2beta.SearchCaseClassificationsResponse>;
+                }
+
+                namespace CaseService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CaseService|getCase}.
+                     * @param error Error, if any
+                     * @param [response] Case
+                     */
+                    type GetCaseCallback = (error: (Error|null), response?: google.cloud.support.v2beta.Case) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CaseService|listCases}.
+                     * @param error Error, if any
+                     * @param [response] ListCasesResponse
+                     */
+                    type ListCasesCallback = (error: (Error|null), response?: google.cloud.support.v2beta.ListCasesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CaseService|searchCases}.
+                     * @param error Error, if any
+                     * @param [response] SearchCasesResponse
+                     */
+                    type SearchCasesCallback = (error: (Error|null), response?: google.cloud.support.v2beta.SearchCasesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CaseService|createCase}.
+                     * @param error Error, if any
+                     * @param [response] Case
+                     */
+                    type CreateCaseCallback = (error: (Error|null), response?: google.cloud.support.v2beta.Case) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CaseService|updateCase}.
+                     * @param error Error, if any
+                     * @param [response] Case
+                     */
+                    type UpdateCaseCallback = (error: (Error|null), response?: google.cloud.support.v2beta.Case) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CaseService|escalateCase}.
+                     * @param error Error, if any
+                     * @param [response] Case
+                     */
+                    type EscalateCaseCallback = (error: (Error|null), response?: google.cloud.support.v2beta.Case) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CaseService|closeCase}.
+                     * @param error Error, if any
+                     * @param [response] Case
+                     */
+                    type CloseCaseCallback = (error: (Error|null), response?: google.cloud.support.v2beta.Case) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CaseService|searchCaseClassifications}.
+                     * @param error Error, if any
+                     * @param [response] SearchCaseClassificationsResponse
+                     */
+                    type SearchCaseClassificationsCallback = (error: (Error|null), response?: google.cloud.support.v2beta.SearchCaseClassificationsResponse) => void;
+                }
+
+                /** Properties of a GetCaseRequest. */
+                interface IGetCaseRequest {
+
+                    /** GetCaseRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCaseRequest. */
+                class GetCaseRequest implements IGetCaseRequest {
+
+                    /**
+                     * Constructs a new GetCaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IGetCaseRequest);
+
+                    /** GetCaseRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IGetCaseRequest): google.cloud.support.v2beta.GetCaseRequest;
+
+                    /**
+                     * Encodes the specified GetCaseRequest message. Does not implicitly {@link google.cloud.support.v2beta.GetCaseRequest.verify|verify} messages.
+                     * @param message GetCaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IGetCaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCaseRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.GetCaseRequest.verify|verify} messages.
+                     * @param message GetCaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IGetCaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.GetCaseRequest;
+
+                    /**
+                     * Decodes a GetCaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.GetCaseRequest;
+
+                    /**
+                     * Verifies a GetCaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.GetCaseRequest;
+
+                    /**
+                     * Creates a plain object from a GetCaseRequest message. Also converts values to other types if specified.
+                     * @param message GetCaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.GetCaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateCaseRequest. */
+                interface ICreateCaseRequest {
+
+                    /** CreateCaseRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateCaseRequest case */
+                    "case"?: (google.cloud.support.v2beta.ICase|null);
+                }
+
+                /** Represents a CreateCaseRequest. */
+                class CreateCaseRequest implements ICreateCaseRequest {
+
+                    /**
+                     * Constructs a new CreateCaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.ICreateCaseRequest);
+
+                    /** CreateCaseRequest parent. */
+                    public parent: string;
+
+                    /** CreateCaseRequest case. */
+                    public case?: (google.cloud.support.v2beta.ICase|null);
+
+                    /**
+                     * Creates a new CreateCaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.ICreateCaseRequest): google.cloud.support.v2beta.CreateCaseRequest;
+
+                    /**
+                     * Encodes the specified CreateCaseRequest message. Does not implicitly {@link google.cloud.support.v2beta.CreateCaseRequest.verify|verify} messages.
+                     * @param message CreateCaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.ICreateCaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCaseRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.CreateCaseRequest.verify|verify} messages.
+                     * @param message CreateCaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.ICreateCaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.CreateCaseRequest;
+
+                    /**
+                     * Decodes a CreateCaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.CreateCaseRequest;
+
+                    /**
+                     * Verifies a CreateCaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.CreateCaseRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCaseRequest message. Also converts values to other types if specified.
+                     * @param message CreateCaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.CreateCaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCasesRequest. */
+                interface IListCasesRequest {
+
+                    /** ListCasesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListCasesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListCasesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListCasesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListCasesRequest productLine */
+                    productLine?: (google.cloud.support.v2beta.ProductLine|keyof typeof google.cloud.support.v2beta.ProductLine|null);
+                }
+
+                /** Represents a ListCasesRequest. */
+                class ListCasesRequest implements IListCasesRequest {
+
+                    /**
+                     * Constructs a new ListCasesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IListCasesRequest);
+
+                    /** ListCasesRequest parent. */
+                    public parent: string;
+
+                    /** ListCasesRequest filter. */
+                    public filter: string;
+
+                    /** ListCasesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListCasesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListCasesRequest productLine. */
+                    public productLine?: (google.cloud.support.v2beta.ProductLine|keyof typeof google.cloud.support.v2beta.ProductLine|null);
+
+                    /** ListCasesRequest _productLine. */
+                    public _productLine?: "productLine";
+
+                    /**
+                     * Creates a new ListCasesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCasesRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IListCasesRequest): google.cloud.support.v2beta.ListCasesRequest;
+
+                    /**
+                     * Encodes the specified ListCasesRequest message. Does not implicitly {@link google.cloud.support.v2beta.ListCasesRequest.verify|verify} messages.
+                     * @param message ListCasesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IListCasesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCasesRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ListCasesRequest.verify|verify} messages.
+                     * @param message ListCasesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IListCasesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCasesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCasesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.ListCasesRequest;
+
+                    /**
+                     * Decodes a ListCasesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCasesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.ListCasesRequest;
+
+                    /**
+                     * Verifies a ListCasesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCasesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCasesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.ListCasesRequest;
+
+                    /**
+                     * Creates a plain object from a ListCasesRequest message. Also converts values to other types if specified.
+                     * @param message ListCasesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.ListCasesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCasesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCasesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCasesResponse. */
+                interface IListCasesResponse {
+
+                    /** ListCasesResponse cases */
+                    cases?: (google.cloud.support.v2beta.ICase[]|null);
+
+                    /** ListCasesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListCasesResponse. */
+                class ListCasesResponse implements IListCasesResponse {
+
+                    /**
+                     * Constructs a new ListCasesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IListCasesResponse);
+
+                    /** ListCasesResponse cases. */
+                    public cases: google.cloud.support.v2beta.ICase[];
+
+                    /** ListCasesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListCasesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCasesResponse instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IListCasesResponse): google.cloud.support.v2beta.ListCasesResponse;
+
+                    /**
+                     * Encodes the specified ListCasesResponse message. Does not implicitly {@link google.cloud.support.v2beta.ListCasesResponse.verify|verify} messages.
+                     * @param message ListCasesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IListCasesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCasesResponse message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ListCasesResponse.verify|verify} messages.
+                     * @param message ListCasesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IListCasesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCasesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCasesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.ListCasesResponse;
+
+                    /**
+                     * Decodes a ListCasesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCasesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.ListCasesResponse;
+
+                    /**
+                     * Verifies a ListCasesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCasesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCasesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.ListCasesResponse;
+
+                    /**
+                     * Creates a plain object from a ListCasesResponse message. Also converts values to other types if specified.
+                     * @param message ListCasesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.ListCasesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCasesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCasesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchCasesRequest. */
+                interface ISearchCasesRequest {
+
+                    /** SearchCasesRequest parent */
+                    parent?: (string|null);
+
+                    /** SearchCasesRequest query */
+                    query?: (string|null);
+
+                    /** SearchCasesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** SearchCasesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a SearchCasesRequest. */
+                class SearchCasesRequest implements ISearchCasesRequest {
+
+                    /**
+                     * Constructs a new SearchCasesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.ISearchCasesRequest);
+
+                    /** SearchCasesRequest parent. */
+                    public parent: string;
+
+                    /** SearchCasesRequest query. */
+                    public query: string;
+
+                    /** SearchCasesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** SearchCasesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new SearchCasesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchCasesRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.ISearchCasesRequest): google.cloud.support.v2beta.SearchCasesRequest;
+
+                    /**
+                     * Encodes the specified SearchCasesRequest message. Does not implicitly {@link google.cloud.support.v2beta.SearchCasesRequest.verify|verify} messages.
+                     * @param message SearchCasesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.ISearchCasesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchCasesRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.SearchCasesRequest.verify|verify} messages.
+                     * @param message SearchCasesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.ISearchCasesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchCasesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchCasesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.SearchCasesRequest;
+
+                    /**
+                     * Decodes a SearchCasesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchCasesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.SearchCasesRequest;
+
+                    /**
+                     * Verifies a SearchCasesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchCasesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchCasesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.SearchCasesRequest;
+
+                    /**
+                     * Creates a plain object from a SearchCasesRequest message. Also converts values to other types if specified.
+                     * @param message SearchCasesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.SearchCasesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchCasesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchCasesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchCasesResponse. */
+                interface ISearchCasesResponse {
+
+                    /** SearchCasesResponse cases */
+                    cases?: (google.cloud.support.v2beta.ICase[]|null);
+
+                    /** SearchCasesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a SearchCasesResponse. */
+                class SearchCasesResponse implements ISearchCasesResponse {
+
+                    /**
+                     * Constructs a new SearchCasesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.ISearchCasesResponse);
+
+                    /** SearchCasesResponse cases. */
+                    public cases: google.cloud.support.v2beta.ICase[];
+
+                    /** SearchCasesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new SearchCasesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchCasesResponse instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.ISearchCasesResponse): google.cloud.support.v2beta.SearchCasesResponse;
+
+                    /**
+                     * Encodes the specified SearchCasesResponse message. Does not implicitly {@link google.cloud.support.v2beta.SearchCasesResponse.verify|verify} messages.
+                     * @param message SearchCasesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.ISearchCasesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchCasesResponse message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.SearchCasesResponse.verify|verify} messages.
+                     * @param message SearchCasesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.ISearchCasesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchCasesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchCasesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.SearchCasesResponse;
+
+                    /**
+                     * Decodes a SearchCasesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchCasesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.SearchCasesResponse;
+
+                    /**
+                     * Verifies a SearchCasesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchCasesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchCasesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.SearchCasesResponse;
+
+                    /**
+                     * Creates a plain object from a SearchCasesResponse message. Also converts values to other types if specified.
+                     * @param message SearchCasesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.SearchCasesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchCasesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchCasesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EscalateCaseRequest. */
+                interface IEscalateCaseRequest {
+
+                    /** EscalateCaseRequest name */
+                    name?: (string|null);
+
+                    /** EscalateCaseRequest escalation */
+                    escalation?: (google.cloud.support.v2beta.IEscalation|null);
+                }
+
+                /** Represents an EscalateCaseRequest. */
+                class EscalateCaseRequest implements IEscalateCaseRequest {
+
+                    /**
+                     * Constructs a new EscalateCaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IEscalateCaseRequest);
+
+                    /** EscalateCaseRequest name. */
+                    public name: string;
+
+                    /** EscalateCaseRequest escalation. */
+                    public escalation?: (google.cloud.support.v2beta.IEscalation|null);
+
+                    /**
+                     * Creates a new EscalateCaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EscalateCaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IEscalateCaseRequest): google.cloud.support.v2beta.EscalateCaseRequest;
+
+                    /**
+                     * Encodes the specified EscalateCaseRequest message. Does not implicitly {@link google.cloud.support.v2beta.EscalateCaseRequest.verify|verify} messages.
+                     * @param message EscalateCaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IEscalateCaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EscalateCaseRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.EscalateCaseRequest.verify|verify} messages.
+                     * @param message EscalateCaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IEscalateCaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EscalateCaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EscalateCaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.EscalateCaseRequest;
+
+                    /**
+                     * Decodes an EscalateCaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EscalateCaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.EscalateCaseRequest;
+
+                    /**
+                     * Verifies an EscalateCaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EscalateCaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EscalateCaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.EscalateCaseRequest;
+
+                    /**
+                     * Creates a plain object from an EscalateCaseRequest message. Also converts values to other types if specified.
+                     * @param message EscalateCaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.EscalateCaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EscalateCaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EscalateCaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateCaseRequest. */
+                interface IUpdateCaseRequest {
+
+                    /** UpdateCaseRequest case */
+                    "case"?: (google.cloud.support.v2beta.ICase|null);
+
+                    /** UpdateCaseRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateCaseRequest. */
+                class UpdateCaseRequest implements IUpdateCaseRequest {
+
+                    /**
+                     * Constructs a new UpdateCaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IUpdateCaseRequest);
+
+                    /** UpdateCaseRequest case. */
+                    public case?: (google.cloud.support.v2beta.ICase|null);
+
+                    /** UpdateCaseRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateCaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IUpdateCaseRequest): google.cloud.support.v2beta.UpdateCaseRequest;
+
+                    /**
+                     * Encodes the specified UpdateCaseRequest message. Does not implicitly {@link google.cloud.support.v2beta.UpdateCaseRequest.verify|verify} messages.
+                     * @param message UpdateCaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IUpdateCaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCaseRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.UpdateCaseRequest.verify|verify} messages.
+                     * @param message UpdateCaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IUpdateCaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.UpdateCaseRequest;
+
+                    /**
+                     * Decodes an UpdateCaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.UpdateCaseRequest;
+
+                    /**
+                     * Verifies an UpdateCaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.UpdateCaseRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCaseRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.UpdateCaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloseCaseRequest. */
+                interface ICloseCaseRequest {
+
+                    /** CloseCaseRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a CloseCaseRequest. */
+                class CloseCaseRequest implements ICloseCaseRequest {
+
+                    /**
+                     * Constructs a new CloseCaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.ICloseCaseRequest);
+
+                    /** CloseCaseRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new CloseCaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloseCaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.ICloseCaseRequest): google.cloud.support.v2beta.CloseCaseRequest;
+
+                    /**
+                     * Encodes the specified CloseCaseRequest message. Does not implicitly {@link google.cloud.support.v2beta.CloseCaseRequest.verify|verify} messages.
+                     * @param message CloseCaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.ICloseCaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloseCaseRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.CloseCaseRequest.verify|verify} messages.
+                     * @param message CloseCaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.ICloseCaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloseCaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloseCaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.CloseCaseRequest;
+
+                    /**
+                     * Decodes a CloseCaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloseCaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.CloseCaseRequest;
+
+                    /**
+                     * Verifies a CloseCaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloseCaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloseCaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.CloseCaseRequest;
+
+                    /**
+                     * Creates a plain object from a CloseCaseRequest message. Also converts values to other types if specified.
+                     * @param message CloseCaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.CloseCaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloseCaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloseCaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchCaseClassificationsRequest. */
+                interface ISearchCaseClassificationsRequest {
+
+                    /** SearchCaseClassificationsRequest query */
+                    query?: (string|null);
+
+                    /** SearchCaseClassificationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** SearchCaseClassificationsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** SearchCaseClassificationsRequest product */
+                    product?: (google.cloud.support.v2beta.IProduct|null);
+                }
+
+                /** Represents a SearchCaseClassificationsRequest. */
+                class SearchCaseClassificationsRequest implements ISearchCaseClassificationsRequest {
+
+                    /**
+                     * Constructs a new SearchCaseClassificationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.ISearchCaseClassificationsRequest);
+
+                    /** SearchCaseClassificationsRequest query. */
+                    public query: string;
+
+                    /** SearchCaseClassificationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** SearchCaseClassificationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** SearchCaseClassificationsRequest product. */
+                    public product?: (google.cloud.support.v2beta.IProduct|null);
+
+                    /**
+                     * Creates a new SearchCaseClassificationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchCaseClassificationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.ISearchCaseClassificationsRequest): google.cloud.support.v2beta.SearchCaseClassificationsRequest;
+
+                    /**
+                     * Encodes the specified SearchCaseClassificationsRequest message. Does not implicitly {@link google.cloud.support.v2beta.SearchCaseClassificationsRequest.verify|verify} messages.
+                     * @param message SearchCaseClassificationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.ISearchCaseClassificationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchCaseClassificationsRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.SearchCaseClassificationsRequest.verify|verify} messages.
+                     * @param message SearchCaseClassificationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.ISearchCaseClassificationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchCaseClassificationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchCaseClassificationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.SearchCaseClassificationsRequest;
+
+                    /**
+                     * Decodes a SearchCaseClassificationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchCaseClassificationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.SearchCaseClassificationsRequest;
+
+                    /**
+                     * Verifies a SearchCaseClassificationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchCaseClassificationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchCaseClassificationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.SearchCaseClassificationsRequest;
+
+                    /**
+                     * Creates a plain object from a SearchCaseClassificationsRequest message. Also converts values to other types if specified.
+                     * @param message SearchCaseClassificationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.SearchCaseClassificationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchCaseClassificationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchCaseClassificationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchCaseClassificationsResponse. */
+                interface ISearchCaseClassificationsResponse {
+
+                    /** SearchCaseClassificationsResponse caseClassifications */
+                    caseClassifications?: (google.cloud.support.v2beta.ICaseClassification[]|null);
+
+                    /** SearchCaseClassificationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a SearchCaseClassificationsResponse. */
+                class SearchCaseClassificationsResponse implements ISearchCaseClassificationsResponse {
+
+                    /**
+                     * Constructs a new SearchCaseClassificationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.ISearchCaseClassificationsResponse);
+
+                    /** SearchCaseClassificationsResponse caseClassifications. */
+                    public caseClassifications: google.cloud.support.v2beta.ICaseClassification[];
+
+                    /** SearchCaseClassificationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new SearchCaseClassificationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchCaseClassificationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.ISearchCaseClassificationsResponse): google.cloud.support.v2beta.SearchCaseClassificationsResponse;
+
+                    /**
+                     * Encodes the specified SearchCaseClassificationsResponse message. Does not implicitly {@link google.cloud.support.v2beta.SearchCaseClassificationsResponse.verify|verify} messages.
+                     * @param message SearchCaseClassificationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.ISearchCaseClassificationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchCaseClassificationsResponse message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.SearchCaseClassificationsResponse.verify|verify} messages.
+                     * @param message SearchCaseClassificationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.ISearchCaseClassificationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchCaseClassificationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchCaseClassificationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.SearchCaseClassificationsResponse;
+
+                    /**
+                     * Decodes a SearchCaseClassificationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchCaseClassificationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.SearchCaseClassificationsResponse;
+
+                    /**
+                     * Verifies a SearchCaseClassificationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchCaseClassificationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchCaseClassificationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.SearchCaseClassificationsResponse;
+
+                    /**
+                     * Creates a plain object from a SearchCaseClassificationsResponse message. Also converts values to other types if specified.
+                     * @param message SearchCaseClassificationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.SearchCaseClassificationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchCaseClassificationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchCaseClassificationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Escalation. */
+                interface IEscalation {
+
+                    /** Escalation reason */
+                    reason?: (google.cloud.support.v2beta.Escalation.Reason|keyof typeof google.cloud.support.v2beta.Escalation.Reason|null);
+
+                    /** Escalation justification */
+                    justification?: (string|null);
+                }
+
+                /** Represents an Escalation. */
+                class Escalation implements IEscalation {
+
+                    /**
+                     * Constructs a new Escalation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IEscalation);
+
+                    /** Escalation reason. */
+                    public reason: (google.cloud.support.v2beta.Escalation.Reason|keyof typeof google.cloud.support.v2beta.Escalation.Reason);
+
+                    /** Escalation justification. */
+                    public justification: string;
+
+                    /**
+                     * Creates a new Escalation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Escalation instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IEscalation): google.cloud.support.v2beta.Escalation;
+
+                    /**
+                     * Encodes the specified Escalation message. Does not implicitly {@link google.cloud.support.v2beta.Escalation.verify|verify} messages.
+                     * @param message Escalation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IEscalation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Escalation message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.Escalation.verify|verify} messages.
+                     * @param message Escalation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IEscalation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Escalation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Escalation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.Escalation;
+
+                    /**
+                     * Decodes an Escalation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Escalation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.Escalation;
+
+                    /**
+                     * Verifies an Escalation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Escalation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Escalation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.Escalation;
+
+                    /**
+                     * Creates a plain object from an Escalation message. Also converts values to other types if specified.
+                     * @param message Escalation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.Escalation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Escalation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Escalation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Escalation {
+
+                    /** Reason enum. */
+                    enum Reason {
+                        REASON_UNSPECIFIED = 0,
+                        RESOLUTION_TIME = 1,
+                        TECHNICAL_EXPERTISE = 2,
+                        BUSINESS_IMPACT = 3
+                    }
+                }
+
+                /** Properties of a Comment. */
+                interface IComment {
+
+                    /** Comment name */
+                    name?: (string|null);
+
+                    /** Comment createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Comment creator */
+                    creator?: (google.cloud.support.v2beta.IActor|null);
+
+                    /** Comment body */
+                    body?: (string|null);
+
+                    /** Comment plainTextBody */
+                    plainTextBody?: (string|null);
+                }
+
+                /** Represents a Comment. */
+                class Comment implements IComment {
+
+                    /**
+                     * Constructs a new Comment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IComment);
+
+                    /** Comment name. */
+                    public name: string;
+
+                    /** Comment createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Comment creator. */
+                    public creator?: (google.cloud.support.v2beta.IActor|null);
+
+                    /** Comment body. */
+                    public body: string;
+
+                    /** Comment plainTextBody. */
+                    public plainTextBody: string;
+
+                    /**
+                     * Creates a new Comment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Comment instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IComment): google.cloud.support.v2beta.Comment;
+
+                    /**
+                     * Encodes the specified Comment message. Does not implicitly {@link google.cloud.support.v2beta.Comment.verify|verify} messages.
+                     * @param message Comment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IComment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Comment message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.Comment.verify|verify} messages.
+                     * @param message Comment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IComment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Comment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Comment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.Comment;
+
+                    /**
+                     * Decodes a Comment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Comment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.Comment;
+
+                    /**
+                     * Verifies a Comment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Comment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Comment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.Comment;
+
+                    /**
+                     * Creates a plain object from a Comment message. Also converts values to other types if specified.
+                     * @param message Comment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.Comment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Comment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Comment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a CommentService */
+                class CommentService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new CommentService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CommentService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CommentService;
+
+                    /**
+                     * Calls ListComments.
+                     * @param request ListCommentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListCommentsResponse
+                     */
+                    public listComments(request: google.cloud.support.v2beta.IListCommentsRequest, callback: google.cloud.support.v2beta.CommentService.ListCommentsCallback): void;
+
+                    /**
+                     * Calls ListComments.
+                     * @param request ListCommentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listComments(request: google.cloud.support.v2beta.IListCommentsRequest): Promise<google.cloud.support.v2beta.ListCommentsResponse>;
+
+                    /**
+                     * Calls CreateComment.
+                     * @param request CreateCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Comment
+                     */
+                    public createComment(request: google.cloud.support.v2beta.ICreateCommentRequest, callback: google.cloud.support.v2beta.CommentService.CreateCommentCallback): void;
+
+                    /**
+                     * Calls CreateComment.
+                     * @param request CreateCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createComment(request: google.cloud.support.v2beta.ICreateCommentRequest): Promise<google.cloud.support.v2beta.Comment>;
+                }
+
+                namespace CommentService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CommentService|listComments}.
+                     * @param error Error, if any
+                     * @param [response] ListCommentsResponse
+                     */
+                    type ListCommentsCallback = (error: (Error|null), response?: google.cloud.support.v2beta.ListCommentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CommentService|createComment}.
+                     * @param error Error, if any
+                     * @param [response] Comment
+                     */
+                    type CreateCommentCallback = (error: (Error|null), response?: google.cloud.support.v2beta.Comment) => void;
+                }
+
+                /** Properties of a ListCommentsRequest. */
+                interface IListCommentsRequest {
+
+                    /** ListCommentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListCommentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListCommentsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListCommentsRequest. */
+                class ListCommentsRequest implements IListCommentsRequest {
+
+                    /**
+                     * Constructs a new ListCommentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IListCommentsRequest);
+
+                    /** ListCommentsRequest parent. */
+                    public parent: string;
+
+                    /** ListCommentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListCommentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListCommentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCommentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IListCommentsRequest): google.cloud.support.v2beta.ListCommentsRequest;
+
+                    /**
+                     * Encodes the specified ListCommentsRequest message. Does not implicitly {@link google.cloud.support.v2beta.ListCommentsRequest.verify|verify} messages.
+                     * @param message ListCommentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IListCommentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCommentsRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ListCommentsRequest.verify|verify} messages.
+                     * @param message ListCommentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IListCommentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCommentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCommentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.ListCommentsRequest;
+
+                    /**
+                     * Decodes a ListCommentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCommentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.ListCommentsRequest;
+
+                    /**
+                     * Verifies a ListCommentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCommentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCommentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.ListCommentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListCommentsRequest message. Also converts values to other types if specified.
+                     * @param message ListCommentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.ListCommentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCommentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCommentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCommentsResponse. */
+                interface IListCommentsResponse {
+
+                    /** ListCommentsResponse comments */
+                    comments?: (google.cloud.support.v2beta.IComment[]|null);
+
+                    /** ListCommentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListCommentsResponse. */
+                class ListCommentsResponse implements IListCommentsResponse {
+
+                    /**
+                     * Constructs a new ListCommentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IListCommentsResponse);
+
+                    /** ListCommentsResponse comments. */
+                    public comments: google.cloud.support.v2beta.IComment[];
+
+                    /** ListCommentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListCommentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCommentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IListCommentsResponse): google.cloud.support.v2beta.ListCommentsResponse;
+
+                    /**
+                     * Encodes the specified ListCommentsResponse message. Does not implicitly {@link google.cloud.support.v2beta.ListCommentsResponse.verify|verify} messages.
+                     * @param message ListCommentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IListCommentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCommentsResponse message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ListCommentsResponse.verify|verify} messages.
+                     * @param message ListCommentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IListCommentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCommentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCommentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.ListCommentsResponse;
+
+                    /**
+                     * Decodes a ListCommentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCommentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.ListCommentsResponse;
+
+                    /**
+                     * Verifies a ListCommentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCommentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCommentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.ListCommentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListCommentsResponse message. Also converts values to other types if specified.
+                     * @param message ListCommentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.ListCommentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCommentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCommentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateCommentRequest. */
+                interface ICreateCommentRequest {
+
+                    /** CreateCommentRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateCommentRequest comment */
+                    comment?: (google.cloud.support.v2beta.IComment|null);
+                }
+
+                /** Represents a CreateCommentRequest. */
+                class CreateCommentRequest implements ICreateCommentRequest {
+
+                    /**
+                     * Constructs a new CreateCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.ICreateCommentRequest);
+
+                    /** CreateCommentRequest parent. */
+                    public parent: string;
+
+                    /** CreateCommentRequest comment. */
+                    public comment?: (google.cloud.support.v2beta.IComment|null);
+
+                    /**
+                     * Creates a new CreateCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.ICreateCommentRequest): google.cloud.support.v2beta.CreateCommentRequest;
+
+                    /**
+                     * Encodes the specified CreateCommentRequest message. Does not implicitly {@link google.cloud.support.v2beta.CreateCommentRequest.verify|verify} messages.
+                     * @param message CreateCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.ICreateCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCommentRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.CreateCommentRequest.verify|verify} messages.
+                     * @param message CreateCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.ICreateCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.CreateCommentRequest;
+
+                    /**
+                     * Decodes a CreateCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.CreateCommentRequest;
+
+                    /**
+                     * Verifies a CreateCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.CreateCommentRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCommentRequest message. Also converts values to other types if specified.
+                     * @param message CreateCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.CreateCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TextContent. */
+                interface ITextContent {
+
+                    /** TextContent plainText */
+                    plainText?: (string|null);
+                }
+
+                /** Represents a TextContent. */
+                class TextContent implements ITextContent {
+
+                    /**
+                     * Constructs a new TextContent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.ITextContent);
+
+                    /** TextContent plainText. */
+                    public plainText: string;
+
+                    /**
+                     * Creates a new TextContent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TextContent instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.ITextContent): google.cloud.support.v2beta.TextContent;
+
+                    /**
+                     * Encodes the specified TextContent message. Does not implicitly {@link google.cloud.support.v2beta.TextContent.verify|verify} messages.
+                     * @param message TextContent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.ITextContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TextContent message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.TextContent.verify|verify} messages.
+                     * @param message TextContent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.ITextContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TextContent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TextContent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.TextContent;
+
+                    /**
+                     * Decodes a TextContent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TextContent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.TextContent;
+
+                    /**
+                     * Verifies a TextContent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TextContent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TextContent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.TextContent;
+
+                    /**
+                     * Creates a plain object from a TextContent message. Also converts values to other types if specified.
+                     * @param message TextContent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.TextContent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TextContent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TextContent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EmailMessage. */
+                interface IEmailMessage {
+
+                    /** EmailMessage name */
+                    name?: (string|null);
+
+                    /** EmailMessage createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** EmailMessage actor */
+                    actor?: (google.cloud.support.v2beta.IActor|null);
+
+                    /** EmailMessage subject */
+                    subject?: (string|null);
+
+                    /** EmailMessage recipientEmailAddresses */
+                    recipientEmailAddresses?: (string[]|null);
+
+                    /** EmailMessage ccEmailAddresses */
+                    ccEmailAddresses?: (string[]|null);
+
+                    /** EmailMessage bodyContent */
+                    bodyContent?: (google.cloud.support.v2beta.ITextContent|null);
+                }
+
+                /** Represents an EmailMessage. */
+                class EmailMessage implements IEmailMessage {
+
+                    /**
+                     * Constructs a new EmailMessage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IEmailMessage);
+
+                    /** EmailMessage name. */
+                    public name: string;
+
+                    /** EmailMessage createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** EmailMessage actor. */
+                    public actor?: (google.cloud.support.v2beta.IActor|null);
+
+                    /** EmailMessage subject. */
+                    public subject: string;
+
+                    /** EmailMessage recipientEmailAddresses. */
+                    public recipientEmailAddresses: string[];
+
+                    /** EmailMessage ccEmailAddresses. */
+                    public ccEmailAddresses: string[];
+
+                    /** EmailMessage bodyContent. */
+                    public bodyContent?: (google.cloud.support.v2beta.ITextContent|null);
+
+                    /**
+                     * Creates a new EmailMessage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EmailMessage instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IEmailMessage): google.cloud.support.v2beta.EmailMessage;
+
+                    /**
+                     * Encodes the specified EmailMessage message. Does not implicitly {@link google.cloud.support.v2beta.EmailMessage.verify|verify} messages.
+                     * @param message EmailMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IEmailMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EmailMessage message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.EmailMessage.verify|verify} messages.
+                     * @param message EmailMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IEmailMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EmailMessage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EmailMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.EmailMessage;
+
+                    /**
+                     * Decodes an EmailMessage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EmailMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.EmailMessage;
+
+                    /**
+                     * Verifies an EmailMessage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EmailMessage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EmailMessage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.EmailMessage;
+
+                    /**
+                     * Creates a plain object from an EmailMessage message. Also converts values to other types if specified.
+                     * @param message EmailMessage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.EmailMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EmailMessage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EmailMessage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FeedItem. */
+                interface IFeedItem {
+
+                    /** FeedItem comment */
+                    comment?: (google.cloud.support.v2beta.IComment|null);
+
+                    /** FeedItem attachment */
+                    attachment?: (google.cloud.support.v2beta.IAttachment|null);
+
+                    /** FeedItem emailMessage */
+                    emailMessage?: (google.cloud.support.v2beta.IEmailMessage|null);
+
+                    /** FeedItem deletedAttachment */
+                    deletedAttachment?: (google.cloud.support.v2beta.IAttachment|null);
+
+                    /** FeedItem eventTime */
+                    eventTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a FeedItem. */
+                class FeedItem implements IFeedItem {
+
+                    /**
+                     * Constructs a new FeedItem.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IFeedItem);
+
+                    /** FeedItem comment. */
+                    public comment?: (google.cloud.support.v2beta.IComment|null);
+
+                    /** FeedItem attachment. */
+                    public attachment?: (google.cloud.support.v2beta.IAttachment|null);
+
+                    /** FeedItem emailMessage. */
+                    public emailMessage?: (google.cloud.support.v2beta.IEmailMessage|null);
+
+                    /** FeedItem deletedAttachment. */
+                    public deletedAttachment?: (google.cloud.support.v2beta.IAttachment|null);
+
+                    /** FeedItem eventTime. */
+                    public eventTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FeedItem eventObject. */
+                    public eventObject?: ("comment"|"attachment"|"emailMessage"|"deletedAttachment");
+
+                    /**
+                     * Creates a new FeedItem instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FeedItem instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IFeedItem): google.cloud.support.v2beta.FeedItem;
+
+                    /**
+                     * Encodes the specified FeedItem message. Does not implicitly {@link google.cloud.support.v2beta.FeedItem.verify|verify} messages.
+                     * @param message FeedItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IFeedItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FeedItem message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.FeedItem.verify|verify} messages.
+                     * @param message FeedItem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IFeedItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FeedItem message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FeedItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.FeedItem;
+
+                    /**
+                     * Decodes a FeedItem message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FeedItem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.FeedItem;
+
+                    /**
+                     * Verifies a FeedItem message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FeedItem message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FeedItem
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.FeedItem;
+
+                    /**
+                     * Creates a plain object from a FeedItem message. Also converts values to other types if specified.
+                     * @param message FeedItem
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.FeedItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FeedItem to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FeedItem
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a FeedService */
+                class FeedService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new FeedService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new FeedService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): FeedService;
+
+                    /**
+                     * Calls ShowFeed.
+                     * @param request ShowFeedRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ShowFeedResponse
+                     */
+                    public showFeed(request: google.cloud.support.v2beta.IShowFeedRequest, callback: google.cloud.support.v2beta.FeedService.ShowFeedCallback): void;
+
+                    /**
+                     * Calls ShowFeed.
+                     * @param request ShowFeedRequest message or plain object
+                     * @returns Promise
+                     */
+                    public showFeed(request: google.cloud.support.v2beta.IShowFeedRequest): Promise<google.cloud.support.v2beta.ShowFeedResponse>;
+                }
+
+                namespace FeedService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.FeedService|showFeed}.
+                     * @param error Error, if any
+                     * @param [response] ShowFeedResponse
+                     */
+                    type ShowFeedCallback = (error: (Error|null), response?: google.cloud.support.v2beta.ShowFeedResponse) => void;
+                }
+
+                /** Properties of a ShowFeedRequest. */
+                interface IShowFeedRequest {
+
+                    /** ShowFeedRequest parent */
+                    parent?: (string|null);
+
+                    /** ShowFeedRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ShowFeedRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ShowFeedRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ShowFeedRequest. */
+                class ShowFeedRequest implements IShowFeedRequest {
+
+                    /**
+                     * Constructs a new ShowFeedRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IShowFeedRequest);
+
+                    /** ShowFeedRequest parent. */
+                    public parent: string;
+
+                    /** ShowFeedRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ShowFeedRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ShowFeedRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ShowFeedRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShowFeedRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IShowFeedRequest): google.cloud.support.v2beta.ShowFeedRequest;
+
+                    /**
+                     * Encodes the specified ShowFeedRequest message. Does not implicitly {@link google.cloud.support.v2beta.ShowFeedRequest.verify|verify} messages.
+                     * @param message ShowFeedRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IShowFeedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShowFeedRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ShowFeedRequest.verify|verify} messages.
+                     * @param message ShowFeedRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IShowFeedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShowFeedRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShowFeedRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.ShowFeedRequest;
+
+                    /**
+                     * Decodes a ShowFeedRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShowFeedRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.ShowFeedRequest;
+
+                    /**
+                     * Verifies a ShowFeedRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShowFeedRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShowFeedRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.ShowFeedRequest;
+
+                    /**
+                     * Creates a plain object from a ShowFeedRequest message. Also converts values to other types if specified.
+                     * @param message ShowFeedRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.ShowFeedRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShowFeedRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ShowFeedRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ShowFeedResponse. */
+                interface IShowFeedResponse {
+
+                    /** ShowFeedResponse feedItems */
+                    feedItems?: (google.cloud.support.v2beta.IFeedItem[]|null);
+
+                    /** ShowFeedResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ShowFeedResponse. */
+                class ShowFeedResponse implements IShowFeedResponse {
+
+                    /**
+                     * Constructs a new ShowFeedResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IShowFeedResponse);
+
+                    /** ShowFeedResponse feedItems. */
+                    public feedItems: google.cloud.support.v2beta.IFeedItem[];
+
+                    /** ShowFeedResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ShowFeedResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShowFeedResponse instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IShowFeedResponse): google.cloud.support.v2beta.ShowFeedResponse;
+
+                    /**
+                     * Encodes the specified ShowFeedResponse message. Does not implicitly {@link google.cloud.support.v2beta.ShowFeedResponse.verify|verify} messages.
+                     * @param message ShowFeedResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IShowFeedResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShowFeedResponse message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ShowFeedResponse.verify|verify} messages.
+                     * @param message ShowFeedResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IShowFeedResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShowFeedResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShowFeedResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.ShowFeedResponse;
+
+                    /**
+                     * Decodes a ShowFeedResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShowFeedResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.ShowFeedResponse;
+
+                    /**
+                     * Verifies a ShowFeedResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShowFeedResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShowFeedResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.ShowFeedResponse;
+
+                    /**
+                     * Creates a plain object from a ShowFeedResponse message. Also converts values to other types if specified.
+                     * @param message ShowFeedResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.ShowFeedResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShowFeedResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ShowFeedResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
