@@ -30,7 +30,7 @@ function main(organization) {
    */
   /**
    *  Required. The organization resource path of the projects containing
-   *  DataExchanges. e.g. `organizations/myorg/locations/US`.
+   *  DataExchanges. e.g. `organizations/myorg/locations/us`.
    */
   // const organization = 'abc123'
   /**

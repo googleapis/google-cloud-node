@@ -30,9 +30,15 @@ function main(name) {
    */
   /**
    *  Required. Resource name of the subscription to revoke.
-   *  e.g. projects/123/locations/US/subscriptions/456
+   *  e.g. projects/123/locations/us/subscriptions/456
    */
   // const name = 'abc123'
+  /**
+   *  Optional. If the subscription is commercial then this field must be set to
+   *  true, otherwise a failure is thrown. This acts as a safety guard to avoid
+   *  revoking commercial subscriptions accidentally.
+   */
+  // const revokeCommercial = true
 
   // Imports the Analyticshub library
   const {AnalyticsHubServiceClient} = require('@google-cloud/bigquery-analyticshub').v1;

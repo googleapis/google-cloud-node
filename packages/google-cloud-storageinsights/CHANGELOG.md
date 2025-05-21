@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/storageinsights-v2.0.1...storageinsights-v2.1.0) (2025-05-20)
+
+
+### Features
+
+* [storageinsights] Add Client Libraries for Datasets ([#6351](https://github.com/googleapis/google-cloud-node/issues/6351)) ([756187e](https://github.com/googleapis/google-cloud-node/commit/756187e34ac6bb5f253e432a77b18f4fdd65006e))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/storageinsights-v2.0.0...storageinsights-v2.0.1) (2025-03-19)
 
 

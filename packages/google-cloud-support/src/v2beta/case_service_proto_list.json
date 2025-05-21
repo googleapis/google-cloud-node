@@ -1,0 +1,14 @@
+[
+  "../../protos/google/cloud/support/v2beta/actor.proto",
+  "../../protos/google/cloud/support/v2beta/attachment.proto",
+  "../../protos/google/cloud/support/v2beta/attachment_service.proto",
+  "../../protos/google/cloud/support/v2beta/case.proto",
+  "../../protos/google/cloud/support/v2beta/case_service.proto",
+  "../../protos/google/cloud/support/v2beta/comment.proto",
+  "../../protos/google/cloud/support/v2beta/comment_service.proto",
+  "../../protos/google/cloud/support/v2beta/content.proto",
+  "../../protos/google/cloud/support/v2beta/email_message.proto",
+  "../../protos/google/cloud/support/v2beta/escalation.proto",
+  "../../protos/google/cloud/support/v2beta/feed_item.proto",
+  "../../protos/google/cloud/support/v2beta/feed_service.proto"
+]
