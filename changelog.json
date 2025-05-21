@@ -11,6 +11,97 @@
         },
         {
           "type": "feat",
+          "sha": "d448dd0ffe1216d8564c0eba1c19f64049adf17b",
+          "message": "Add initial files for google.cloud.financialservices.v1",
+          "issues": [
+            "6270"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/financialservices",
+      "id": "b9267e5d-cdfc-43e7-98e3-05c6f07951d4",
+      "createTime": "2025-05-20T15:49:29.910Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "756187e34ac6bb5f253e432a77b18f4fdd65006e",
+          "message": "[storageinsights] Add Client Libraries for Datasets",
+          "issues": [
+            "6351"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "dff857a4-6b62-4d97-a540-a92ef59833b4",
+      "createTime": "2025-05-20T15:49:29.894Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "350da9c145847f9aa376653b94e6aa7e0fcdd2cd",
+          "message": "[run] support GPU zonal redundancy setting in Cloud Run services",
+          "issues": [
+            "6349"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "6ce09e89-0bbd-4f97-8a72-3c59be698647",
+      "createTime": "2025-05-20T15:49:29.872Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "efa38775edbbb8a078b79e61b924a0041b2a6f6a",
+          "message": "Add initial files for google.cloud.dataform.v1beta1",
+          "issues": [
+            "6364"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "c9f68411-4ab0-41be-a591-2261b9ffdb83",
+      "createTime": "2025-05-20T15:49:29.855Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e88f290fd76cdb8a721a0c4ed9592e6f020cadc",
+          "message": "[bigquery-analyticshub] Add support for Analytics Hub & Marketplace Integration",
+          "issues": [
+            "6347"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "d5fec990-f941-4862-8c58-87a3d271508d",
+      "createTime": "2025-05-20T15:49:29.837Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
+          "message": "Multiple ai-platform updates",
+          "issues": []
+        },
+        {
+          "type": "feat",
           "sha": "c33de56c0c797598a48a8e0ee07b625de1b082b3",
           "message": "Add initial files for google.cloud.devicestreaming.v1",
           "issues": [
@@ -50632,5 +50723,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-05-09T01:02:58.759Z"
+  "updateTime": "2025-05-20T15:49:29.910Z"
 }
