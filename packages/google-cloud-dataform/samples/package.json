@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/dataform": "0.0.0"
+    "@google-cloud/dataform": "^2.1.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",
