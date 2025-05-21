@@ -47,6 +47,15 @@ function main() {
    *  contains this job.
    */
   // const location = 'abc123'
+  /**
+   *  The list of fields to update relative to Job. If empty, only
+   *  RequestedJobState will be considered for update. If the FieldMask is not
+   *  empty and RequestedJobState is none/empty, The fields specified in the
+   *  update mask will be the only ones considered for update. If both
+   *  RequestedJobState and update_mask are specified, an error will be returned
+   *  as we cannot update both state and mask.
+   */
+  // const updateMask = {}
 
   // Imports the Dataflow library
   const {JobsV1Beta3Client} = require('@google-cloud/dataflow').v1beta3;

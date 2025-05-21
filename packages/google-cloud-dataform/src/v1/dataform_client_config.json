@@ -1,0 +1,242 @@
+{
+  "interfaces": {
+    "google.cloud.dataform.v1.Dataform": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "ListRepositories": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetRepository": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateRepository": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateRepository": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteRepository": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CommitRepositoryChanges": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ReadRepositoryFile": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "QueryRepositoryDirectoryContents": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchRepositoryHistory": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ComputeRepositoryAccessTokenStatus": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchRemoteBranches": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListWorkspaces": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetWorkspace": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateWorkspace": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteWorkspace": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "InstallNpmPackages": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PullGitCommits": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PushGitCommits": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchFileGitStatuses": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchGitAheadBehind": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CommitWorkspaceChanges": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ResetWorkspaceChanges": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchFileDiff": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "QueryDirectoryContents": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SearchFiles": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "MakeDirectory": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RemoveDirectory": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "MoveDirectory": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ReadFile": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RemoveFile": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "MoveFile": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "WriteFile": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListReleaseConfigs": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetReleaseConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateReleaseConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateReleaseConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteReleaseConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListCompilationResults": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetCompilationResult": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateCompilationResult": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "QueryCompilationResultActions": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListWorkflowConfigs": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetWorkflowConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateWorkflowConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateWorkflowConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteWorkflowConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListWorkflowInvocations": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetWorkflowInvocation": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateWorkflowInvocation": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteWorkflowInvocation": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CancelWorkflowInvocation": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "QueryWorkflowInvocationActions": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        }
+      }
+    }
+  }
+}

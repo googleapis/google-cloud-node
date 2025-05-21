@@ -33,7 +33,25 @@ type DataTaxonomyServiceClient = v1.DataTaxonomyServiceClient;
 const MetadataServiceClient = v1.MetadataServiceClient;
 type MetadataServiceClient = v1.MetadataServiceClient;
 
-export {v1, CatalogServiceClient, CmekServiceClient, ContentServiceClient, DataplexServiceClient, DataScanServiceClient, DataTaxonomyServiceClient, MetadataServiceClient};
-export default {v1, CatalogServiceClient, CmekServiceClient, ContentServiceClient, DataplexServiceClient, DataScanServiceClient, DataTaxonomyServiceClient, MetadataServiceClient};
+export {
+  v1,
+  CatalogServiceClient,
+  CmekServiceClient,
+  ContentServiceClient,
+  DataplexServiceClient,
+  DataScanServiceClient,
+  DataTaxonomyServiceClient,
+  MetadataServiceClient,
+};
+export default {
+  v1,
+  CatalogServiceClient,
+  CmekServiceClient,
+  ContentServiceClient,
+  DataplexServiceClient,
+  DataScanServiceClient,
+  DataTaxonomyServiceClient,
+  MetadataServiceClient,
+};
 import * as protos from '../protos/protos';
 export {protos};

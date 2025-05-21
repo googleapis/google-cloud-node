@@ -30,12 +30,12 @@ function main(name, destination, subscription) {
    */
   /**
    *  Required. Resource name of the Data Exchange.
-   *  e.g. `projects/publisherproject/locations/US/dataExchanges/123`
+   *  e.g. `projects/publisherproject/locations/us/dataExchanges/123`
    */
   // const name = 'abc123'
   /**
    *  Required. The parent resource path of the Subscription.
-   *  e.g. `projects/subscriberproject/locations/US`
+   *  e.g. `projects/subscriberproject/locations/us`
    */
   // const destination = 'abc123'
   /**

@@ -80,6 +80,8 @@
                      * @property {string|null} [workerZone] Environment workerZone
                      * @property {google.dataflow.v1beta3.ShuffleMode|null} [shuffleMode] Environment shuffleMode
                      * @property {google.dataflow.v1beta3.IDebugOptions|null} [debugOptions] Environment debugOptions
+                     * @property {boolean|null} [useStreamingEngineResourceBasedBilling] Environment useStreamingEngineResourceBasedBilling
+                     * @property {google.dataflow.v1beta3.StreamingMode|null} [streamingMode] Environment streamingMode
                      */
     
                     /**
@@ -237,6 +239,22 @@
                     Environment.prototype.debugOptions = null;
     
                     /**
+                     * Environment useStreamingEngineResourceBasedBilling.
+                     * @member {boolean} useStreamingEngineResourceBasedBilling
+                     * @memberof google.dataflow.v1beta3.Environment
+                     * @instance
+                     */
+                    Environment.prototype.useStreamingEngineResourceBasedBilling = false;
+    
+                    /**
+                     * Environment streamingMode.
+                     * @member {google.dataflow.v1beta3.StreamingMode} streamingMode
+                     * @memberof google.dataflow.v1beta3.Environment
+                     * @instance
+                     */
+                    Environment.prototype.streamingMode = 0;
+    
+                    /**
                      * Creates a new Environment instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.Environment
@@ -297,6 +315,10 @@
                                 writer.uint32(/* id 16, wireType 2 =*/130).string(message.serviceOptions[i]);
                         if (message.debugOptions != null && Object.hasOwnProperty.call(message, "debugOptions"))
                             $root.google.dataflow.v1beta3.DebugOptions.encode(message.debugOptions, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                        if (message.useStreamingEngineResourceBasedBilling != null && Object.hasOwnProperty.call(message, "useStreamingEngineResourceBasedBilling"))
+                            writer.uint32(/* id 18, wireType 0 =*/144).bool(message.useStreamingEngineResourceBasedBilling);
+                        if (message.streamingMode != null && Object.hasOwnProperty.call(message, "streamingMode"))
+                            writer.uint32(/* id 19, wireType 0 =*/152).int32(message.streamingMode);
                         return writer;
                     };
     
@@ -403,6 +425,14 @@
                                 }
                             case 17: {
                                     message.debugOptions = $root.google.dataflow.v1beta3.DebugOptions.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 18: {
+                                    message.useStreamingEngineResourceBasedBilling = reader.bool();
+                                    break;
+                                }
+                            case 19: {
+                                    message.streamingMode = reader.int32();
                                     break;
                                 }
                             default:
@@ -527,6 +557,18 @@
                             if (error)
                                 return "debugOptions." + error;
                         }
+                        if (message.useStreamingEngineResourceBasedBilling != null && message.hasOwnProperty("useStreamingEngineResourceBasedBilling"))
+                            if (typeof message.useStreamingEngineResourceBasedBilling !== "boolean")
+                                return "useStreamingEngineResourceBasedBilling: boolean expected";
+                        if (message.streamingMode != null && message.hasOwnProperty("streamingMode"))
+                            switch (message.streamingMode) {
+                            default:
+                                return "streamingMode: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -645,6 +687,28 @@
                                 throw TypeError(".google.dataflow.v1beta3.Environment.debugOptions: object expected");
                             message.debugOptions = $root.google.dataflow.v1beta3.DebugOptions.fromObject(object.debugOptions);
                         }
+                        if (object.useStreamingEngineResourceBasedBilling != null)
+                            message.useStreamingEngineResourceBasedBilling = Boolean(object.useStreamingEngineResourceBasedBilling);
+                        switch (object.streamingMode) {
+                        default:
+                            if (typeof object.streamingMode === "number") {
+                                message.streamingMode = object.streamingMode;
+                                break;
+                            }
+                            break;
+                        case "STREAMING_MODE_UNSPECIFIED":
+                        case 0:
+                            message.streamingMode = 0;
+                            break;
+                        case "STREAMING_MODE_EXACTLY_ONCE":
+                        case 1:
+                            message.streamingMode = 1;
+                            break;
+                        case "STREAMING_MODE_AT_LEAST_ONCE":
+                        case 2:
+                            message.streamingMode = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -681,6 +745,8 @@
                             object.workerZone = "";
                             object.shuffleMode = options.enums === String ? "SHUFFLE_MODE_UNSPECIFIED" : 0;
                             object.debugOptions = null;
+                            object.useStreamingEngineResourceBasedBilling = false;
+                            object.streamingMode = options.enums === String ? "STREAMING_MODE_UNSPECIFIED" : 0;
                         }
                         if (message.tempStoragePrefix != null && message.hasOwnProperty("tempStoragePrefix"))
                             object.tempStoragePrefix = message.tempStoragePrefix;
@@ -725,6 +791,10 @@
                         }
                         if (message.debugOptions != null && message.hasOwnProperty("debugOptions"))
                             object.debugOptions = $root.google.dataflow.v1beta3.DebugOptions.toObject(message.debugOptions, options);
+                        if (message.useStreamingEngineResourceBasedBilling != null && message.hasOwnProperty("useStreamingEngineResourceBasedBilling"))
+                            object.useStreamingEngineResourceBasedBilling = message.useStreamingEngineResourceBasedBilling;
+                        if (message.streamingMode != null && message.hasOwnProperty("streamingMode"))
+                            object.streamingMode = options.enums === String ? $root.google.dataflow.v1beta3.StreamingMode[message.streamingMode] === undefined ? message.streamingMode : $root.google.dataflow.v1beta3.StreamingMode[message.streamingMode] : message.streamingMode;
                         return object;
                     };
     
@@ -3735,6 +3805,280 @@
                     return values;
                 })();
     
+                v1beta3.DataSamplingConfig = (function() {
+    
+                    /**
+                     * Properties of a DataSamplingConfig.
+                     * @memberof google.dataflow.v1beta3
+                     * @interface IDataSamplingConfig
+                     * @property {Array.<google.dataflow.v1beta3.DataSamplingConfig.DataSamplingBehavior>|null} [behaviors] DataSamplingConfig behaviors
+                     */
+    
+                    /**
+                     * Constructs a new DataSamplingConfig.
+                     * @memberof google.dataflow.v1beta3
+                     * @classdesc Represents a DataSamplingConfig.
+                     * @implements IDataSamplingConfig
+                     * @constructor
+                     * @param {google.dataflow.v1beta3.IDataSamplingConfig=} [properties] Properties to set
+                     */
+                    function DataSamplingConfig(properties) {
+                        this.behaviors = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DataSamplingConfig behaviors.
+                     * @member {Array.<google.dataflow.v1beta3.DataSamplingConfig.DataSamplingBehavior>} behaviors
+                     * @memberof google.dataflow.v1beta3.DataSamplingConfig
+                     * @instance
+                     */
+                    DataSamplingConfig.prototype.behaviors = $util.emptyArray;
+    
+                    /**
+                     * Creates a new DataSamplingConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.dataflow.v1beta3.DataSamplingConfig
+                     * @static
+                     * @param {google.dataflow.v1beta3.IDataSamplingConfig=} [properties] Properties to set
+                     * @returns {google.dataflow.v1beta3.DataSamplingConfig} DataSamplingConfig instance
+                     */
+                    DataSamplingConfig.create = function create(properties) {
+                        return new DataSamplingConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DataSamplingConfig message. Does not implicitly {@link google.dataflow.v1beta3.DataSamplingConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.dataflow.v1beta3.DataSamplingConfig
+                     * @static
+                     * @param {google.dataflow.v1beta3.IDataSamplingConfig} message DataSamplingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DataSamplingConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.behaviors != null && message.behaviors.length) {
+                            writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                            for (var i = 0; i < message.behaviors.length; ++i)
+                                writer.int32(message.behaviors[i]);
+                            writer.ldelim();
+                        }
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DataSamplingConfig message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.DataSamplingConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.dataflow.v1beta3.DataSamplingConfig
+                     * @static
+                     * @param {google.dataflow.v1beta3.IDataSamplingConfig} message DataSamplingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DataSamplingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DataSamplingConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.dataflow.v1beta3.DataSamplingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.dataflow.v1beta3.DataSamplingConfig} DataSamplingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DataSamplingConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.DataSamplingConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.behaviors && message.behaviors.length))
+                                        message.behaviors = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.behaviors.push(reader.int32());
+                                    } else
+                                        message.behaviors.push(reader.int32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DataSamplingConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.dataflow.v1beta3.DataSamplingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.dataflow.v1beta3.DataSamplingConfig} DataSamplingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DataSamplingConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DataSamplingConfig message.
+                     * @function verify
+                     * @memberof google.dataflow.v1beta3.DataSamplingConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DataSamplingConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.behaviors != null && message.hasOwnProperty("behaviors")) {
+                            if (!Array.isArray(message.behaviors))
+                                return "behaviors: array expected";
+                            for (var i = 0; i < message.behaviors.length; ++i)
+                                switch (message.behaviors[i]) {
+                                default:
+                                    return "behaviors: enum value[] expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DataSamplingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.dataflow.v1beta3.DataSamplingConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.dataflow.v1beta3.DataSamplingConfig} DataSamplingConfig
+                     */
+                    DataSamplingConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.dataflow.v1beta3.DataSamplingConfig)
+                            return object;
+                        var message = new $root.google.dataflow.v1beta3.DataSamplingConfig();
+                        if (object.behaviors) {
+                            if (!Array.isArray(object.behaviors))
+                                throw TypeError(".google.dataflow.v1beta3.DataSamplingConfig.behaviors: array expected");
+                            message.behaviors = [];
+                            for (var i = 0; i < object.behaviors.length; ++i)
+                                switch (object.behaviors[i]) {
+                                default:
+                                    if (typeof object.behaviors[i] === "number") {
+                                        message.behaviors[i] = object.behaviors[i];
+                                        break;
+                                    }
+                                case "DATA_SAMPLING_BEHAVIOR_UNSPECIFIED":
+                                case 0:
+                                    message.behaviors[i] = 0;
+                                    break;
+                                case "DISABLED":
+                                case 1:
+                                    message.behaviors[i] = 1;
+                                    break;
+                                case "ALWAYS_ON":
+                                case 2:
+                                    message.behaviors[i] = 2;
+                                    break;
+                                case "EXCEPTIONS":
+                                case 3:
+                                    message.behaviors[i] = 3;
+                                    break;
+                                }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DataSamplingConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.dataflow.v1beta3.DataSamplingConfig
+                     * @static
+                     * @param {google.dataflow.v1beta3.DataSamplingConfig} message DataSamplingConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DataSamplingConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.behaviors = [];
+                        if (message.behaviors && message.behaviors.length) {
+                            object.behaviors = [];
+                            for (var j = 0; j < message.behaviors.length; ++j)
+                                object.behaviors[j] = options.enums === String ? $root.google.dataflow.v1beta3.DataSamplingConfig.DataSamplingBehavior[message.behaviors[j]] === undefined ? message.behaviors[j] : $root.google.dataflow.v1beta3.DataSamplingConfig.DataSamplingBehavior[message.behaviors[j]] : message.behaviors[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DataSamplingConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.dataflow.v1beta3.DataSamplingConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DataSamplingConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DataSamplingConfig
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.DataSamplingConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DataSamplingConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.DataSamplingConfig";
+                    };
+    
+                    /**
+                     * DataSamplingBehavior enum.
+                     * @name google.dataflow.v1beta3.DataSamplingConfig.DataSamplingBehavior
+                     * @enum {number}
+                     * @property {number} DATA_SAMPLING_BEHAVIOR_UNSPECIFIED=0 DATA_SAMPLING_BEHAVIOR_UNSPECIFIED value
+                     * @property {number} DISABLED=1 DISABLED value
+                     * @property {number} ALWAYS_ON=2 ALWAYS_ON value
+                     * @property {number} EXCEPTIONS=3 EXCEPTIONS value
+                     */
+                    DataSamplingConfig.DataSamplingBehavior = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DATA_SAMPLING_BEHAVIOR_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DISABLED"] = 1;
+                        values[valuesById[2] = "ALWAYS_ON"] = 2;
+                        values[valuesById[3] = "EXCEPTIONS"] = 3;
+                        return values;
+                    })();
+    
+                    return DataSamplingConfig;
+                })();
+    
                 v1beta3.DebugOptions = (function() {
     
                     /**
@@ -3742,6 +4086,7 @@
                      * @memberof google.dataflow.v1beta3
                      * @interface IDebugOptions
                      * @property {boolean|null} [enableHotKeyLogging] DebugOptions enableHotKeyLogging
+                     * @property {google.dataflow.v1beta3.IDataSamplingConfig|null} [dataSampling] DebugOptions dataSampling
                      */
     
                     /**
@@ -3766,6 +4111,14 @@
                      * @instance
                      */
                     DebugOptions.prototype.enableHotKeyLogging = false;
+    
+                    /**
+                     * DebugOptions dataSampling.
+                     * @member {google.dataflow.v1beta3.IDataSamplingConfig|null|undefined} dataSampling
+                     * @memberof google.dataflow.v1beta3.DebugOptions
+                     * @instance
+                     */
+                    DebugOptions.prototype.dataSampling = null;
     
                     /**
                      * Creates a new DebugOptions instance using the specified properties.
@@ -3793,6 +4146,8 @@
                             writer = $Writer.create();
                         if (message.enableHotKeyLogging != null && Object.hasOwnProperty.call(message, "enableHotKeyLogging"))
                             writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableHotKeyLogging);
+                        if (message.dataSampling != null && Object.hasOwnProperty.call(message, "dataSampling"))
+                            $root.google.dataflow.v1beta3.DataSamplingConfig.encode(message.dataSampling, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         return writer;
                     };
     
@@ -3829,6 +4184,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.enableHotKeyLogging = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.dataSampling = $root.google.dataflow.v1beta3.DataSamplingConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -3869,6 +4228,11 @@
                         if (message.enableHotKeyLogging != null && message.hasOwnProperty("enableHotKeyLogging"))
                             if (typeof message.enableHotKeyLogging !== "boolean")
                                 return "enableHotKeyLogging: boolean expected";
+                        if (message.dataSampling != null && message.hasOwnProperty("dataSampling")) {
+                            var error = $root.google.dataflow.v1beta3.DataSamplingConfig.verify(message.dataSampling);
+                            if (error)
+                                return "dataSampling." + error;
+                        }
                         return null;
                     };
     
@@ -3886,6 +4250,11 @@
                         var message = new $root.google.dataflow.v1beta3.DebugOptions();
                         if (object.enableHotKeyLogging != null)
                             message.enableHotKeyLogging = Boolean(object.enableHotKeyLogging);
+                        if (object.dataSampling != null) {
+                            if (typeof object.dataSampling !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.DebugOptions.dataSampling: object expected");
+                            message.dataSampling = $root.google.dataflow.v1beta3.DataSamplingConfig.fromObject(object.dataSampling);
+                        }
                         return message;
                     };
     
@@ -3902,10 +4271,14 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.enableHotKeyLogging = false;
+                            object.dataSampling = null;
+                        }
                         if (message.enableHotKeyLogging != null && message.hasOwnProperty("enableHotKeyLogging"))
                             object.enableHotKeyLogging = message.enableHotKeyLogging;
+                        if (message.dataSampling != null && message.hasOwnProperty("dataSampling"))
+                            object.dataSampling = $root.google.dataflow.v1beta3.DataSamplingConfig.toObject(message.dataSampling, options);
                         return object;
                     };
     
@@ -3936,6 +4309,22 @@
                     };
     
                     return DebugOptions;
+                })();
+    
+                /**
+                 * StreamingMode enum.
+                 * @name google.dataflow.v1beta3.StreamingMode
+                 * @enum {number}
+                 * @property {number} STREAMING_MODE_UNSPECIFIED=0 STREAMING_MODE_UNSPECIFIED value
+                 * @property {number} STREAMING_MODE_EXACTLY_ONCE=1 STREAMING_MODE_EXACTLY_ONCE value
+                 * @property {number} STREAMING_MODE_AT_LEAST_ONCE=2 STREAMING_MODE_AT_LEAST_ONCE value
+                 */
+                v1beta3.StreamingMode = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STREAMING_MODE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "STREAMING_MODE_EXACTLY_ONCE"] = 1;
+                    values[valuesById[2] = "STREAMING_MODE_AT_LEAST_ONCE"] = 2;
+                    return values;
                 })();
     
                 v1beta3.JobsV1Beta3 = (function() {
@@ -4235,6 +4624,9 @@
                      * @property {google.protobuf.ITimestamp|null} [startTime] Job startTime
                      * @property {string|null} [createdFromSnapshotId] Job createdFromSnapshotId
                      * @property {boolean|null} [satisfiesPzs] Job satisfiesPzs
+                     * @property {google.dataflow.v1beta3.IRuntimeUpdatableParams|null} [runtimeUpdatableParams] Job runtimeUpdatableParams
+                     * @property {boolean|null} [satisfiesPzi] Job satisfiesPzi
+                     * @property {google.dataflow.v1beta3.IServiceResources|null} [serviceResources] Job serviceResources
                      */
     
                     /**
@@ -4458,6 +4850,66 @@
                     Job.prototype.satisfiesPzs = false;
     
                     /**
+                     * Job runtimeUpdatableParams.
+                     * @member {google.dataflow.v1beta3.IRuntimeUpdatableParams|null|undefined} runtimeUpdatableParams
+                     * @memberof google.dataflow.v1beta3.Job
+                     * @instance
+                     */
+                    Job.prototype.runtimeUpdatableParams = null;
+    
+                    /**
+                     * Job satisfiesPzi.
+                     * @member {boolean|null|undefined} satisfiesPzi
+                     * @memberof google.dataflow.v1beta3.Job
+                     * @instance
+                     */
+                    Job.prototype.satisfiesPzi = null;
+    
+                    /**
+                     * Job serviceResources.
+                     * @member {google.dataflow.v1beta3.IServiceResources|null|undefined} serviceResources
+                     * @memberof google.dataflow.v1beta3.Job
+                     * @instance
+                     */
+                    Job.prototype.serviceResources = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * Job _runtimeUpdatableParams.
+                     * @member {"runtimeUpdatableParams"|undefined} _runtimeUpdatableParams
+                     * @memberof google.dataflow.v1beta3.Job
+                     * @instance
+                     */
+                    Object.defineProperty(Job.prototype, "_runtimeUpdatableParams", {
+                        get: $util.oneOfGetter($oneOfFields = ["runtimeUpdatableParams"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Job _satisfiesPzi.
+                     * @member {"satisfiesPzi"|undefined} _satisfiesPzi
+                     * @memberof google.dataflow.v1beta3.Job
+                     * @instance
+                     */
+                    Object.defineProperty(Job.prototype, "_satisfiesPzi", {
+                        get: $util.oneOfGetter($oneOfFields = ["satisfiesPzi"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Job _serviceResources.
+                     * @member {"serviceResources"|undefined} _serviceResources
+                     * @memberof google.dataflow.v1beta3.Job
+                     * @instance
+                     */
+                    Object.defineProperty(Job.prototype, "_serviceResources", {
+                        get: $util.oneOfGetter($oneOfFields = ["serviceResources"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
                      * Creates a new Job instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.Job
@@ -4536,6 +4988,12 @@
                             writer.uint32(/* id 24, wireType 2 =*/194).string(message.stepsLocation);
                         if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                             writer.uint32(/* id 25, wireType 0 =*/200).bool(message.satisfiesPzs);
+                        if (message.runtimeUpdatableParams != null && Object.hasOwnProperty.call(message, "runtimeUpdatableParams"))
+                            $root.google.dataflow.v1beta3.RuntimeUpdatableParams.encode(message.runtimeUpdatableParams, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                        if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                            writer.uint32(/* id 27, wireType 0 =*/216).bool(message.satisfiesPzi);
+                        if (message.serviceResources != null && Object.hasOwnProperty.call(message, "serviceResources"))
+                            $root.google.dataflow.v1beta3.ServiceResources.encode(message.serviceResources, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                         return writer;
                     };
     
@@ -4714,6 +5172,18 @@
                                     message.satisfiesPzs = reader.bool();
                                     break;
                                 }
+                            case 26: {
+                                    message.runtimeUpdatableParams = $root.google.dataflow.v1beta3.RuntimeUpdatableParams.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 27: {
+                                    message.satisfiesPzi = reader.bool();
+                                    break;
+                                }
+                            case 28: {
+                                    message.serviceResources = $root.google.dataflow.v1beta3.ServiceResources.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -4749,6 +5219,7 @@
                     Job.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        var properties = {};
                         if (message.id != null && message.hasOwnProperty("id"))
                             if (!$util.isString(message.id))
                                 return "id: string expected";
@@ -4902,6 +5373,27 @@
                         if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                             if (typeof message.satisfiesPzs !== "boolean")
                                 return "satisfiesPzs: boolean expected";
+                        if (message.runtimeUpdatableParams != null && message.hasOwnProperty("runtimeUpdatableParams")) {
+                            properties._runtimeUpdatableParams = 1;
+                            {
+                                var error = $root.google.dataflow.v1beta3.RuntimeUpdatableParams.verify(message.runtimeUpdatableParams);
+                                if (error)
+                                    return "runtimeUpdatableParams." + error;
+                            }
+                        }
+                        if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi")) {
+                            properties._satisfiesPzi = 1;
+                            if (typeof message.satisfiesPzi !== "boolean")
+                                return "satisfiesPzi: boolean expected";
+                        }
+                        if (message.serviceResources != null && message.hasOwnProperty("serviceResources")) {
+                            properties._serviceResources = 1;
+                            {
+                                var error = $root.google.dataflow.v1beta3.ServiceResources.verify(message.serviceResources);
+                                if (error)
+                                    return "serviceResources." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -5153,6 +5645,18 @@
                             message.createdFromSnapshotId = String(object.createdFromSnapshotId);
                         if (object.satisfiesPzs != null)
                             message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                        if (object.runtimeUpdatableParams != null) {
+                            if (typeof object.runtimeUpdatableParams !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.Job.runtimeUpdatableParams: object expected");
+                            message.runtimeUpdatableParams = $root.google.dataflow.v1beta3.RuntimeUpdatableParams.fromObject(object.runtimeUpdatableParams);
+                        }
+                        if (object.satisfiesPzi != null)
+                            message.satisfiesPzi = Boolean(object.satisfiesPzi);
+                        if (object.serviceResources != null) {
+                            if (typeof object.serviceResources !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.Job.serviceResources: object expected");
+                            message.serviceResources = $root.google.dataflow.v1beta3.ServiceResources.fromObject(object.serviceResources);
+                        }
                         return message;
                     };
     
@@ -5266,6 +5770,21 @@
                             object.stepsLocation = message.stepsLocation;
                         if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                             object.satisfiesPzs = message.satisfiesPzs;
+                        if (message.runtimeUpdatableParams != null && message.hasOwnProperty("runtimeUpdatableParams")) {
+                            object.runtimeUpdatableParams = $root.google.dataflow.v1beta3.RuntimeUpdatableParams.toObject(message.runtimeUpdatableParams, options);
+                            if (options.oneofs)
+                                object._runtimeUpdatableParams = "runtimeUpdatableParams";
+                        }
+                        if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi")) {
+                            object.satisfiesPzi = message.satisfiesPzi;
+                            if (options.oneofs)
+                                object._satisfiesPzi = "satisfiesPzi";
+                        }
+                        if (message.serviceResources != null && message.hasOwnProperty("serviceResources")) {
+                            object.serviceResources = $root.google.dataflow.v1beta3.ServiceResources.toObject(message.serviceResources, options);
+                            if (options.oneofs)
+                                object._serviceResources = "serviceResources";
+                        }
                         return object;
                     };
     
@@ -5296,6 +5815,522 @@
                     };
     
                     return Job;
+                })();
+    
+                v1beta3.ServiceResources = (function() {
+    
+                    /**
+                     * Properties of a ServiceResources.
+                     * @memberof google.dataflow.v1beta3
+                     * @interface IServiceResources
+                     * @property {Array.<string>|null} [zones] ServiceResources zones
+                     */
+    
+                    /**
+                     * Constructs a new ServiceResources.
+                     * @memberof google.dataflow.v1beta3
+                     * @classdesc Represents a ServiceResources.
+                     * @implements IServiceResources
+                     * @constructor
+                     * @param {google.dataflow.v1beta3.IServiceResources=} [properties] Properties to set
+                     */
+                    function ServiceResources(properties) {
+                        this.zones = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ServiceResources zones.
+                     * @member {Array.<string>} zones
+                     * @memberof google.dataflow.v1beta3.ServiceResources
+                     * @instance
+                     */
+                    ServiceResources.prototype.zones = $util.emptyArray;
+    
+                    /**
+                     * Creates a new ServiceResources instance using the specified properties.
+                     * @function create
+                     * @memberof google.dataflow.v1beta3.ServiceResources
+                     * @static
+                     * @param {google.dataflow.v1beta3.IServiceResources=} [properties] Properties to set
+                     * @returns {google.dataflow.v1beta3.ServiceResources} ServiceResources instance
+                     */
+                    ServiceResources.create = function create(properties) {
+                        return new ServiceResources(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ServiceResources message. Does not implicitly {@link google.dataflow.v1beta3.ServiceResources.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.dataflow.v1beta3.ServiceResources
+                     * @static
+                     * @param {google.dataflow.v1beta3.IServiceResources} message ServiceResources message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ServiceResources.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.zones != null && message.zones.length)
+                            for (var i = 0; i < message.zones.length; ++i)
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.zones[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ServiceResources message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.ServiceResources.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.dataflow.v1beta3.ServiceResources
+                     * @static
+                     * @param {google.dataflow.v1beta3.IServiceResources} message ServiceResources message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ServiceResources.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ServiceResources message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.dataflow.v1beta3.ServiceResources
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.dataflow.v1beta3.ServiceResources} ServiceResources
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ServiceResources.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.ServiceResources();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.zones && message.zones.length))
+                                        message.zones = [];
+                                    message.zones.push(reader.string());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ServiceResources message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.dataflow.v1beta3.ServiceResources
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.dataflow.v1beta3.ServiceResources} ServiceResources
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ServiceResources.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ServiceResources message.
+                     * @function verify
+                     * @memberof google.dataflow.v1beta3.ServiceResources
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ServiceResources.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.zones != null && message.hasOwnProperty("zones")) {
+                            if (!Array.isArray(message.zones))
+                                return "zones: array expected";
+                            for (var i = 0; i < message.zones.length; ++i)
+                                if (!$util.isString(message.zones[i]))
+                                    return "zones: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ServiceResources message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.dataflow.v1beta3.ServiceResources
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.dataflow.v1beta3.ServiceResources} ServiceResources
+                     */
+                    ServiceResources.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.dataflow.v1beta3.ServiceResources)
+                            return object;
+                        var message = new $root.google.dataflow.v1beta3.ServiceResources();
+                        if (object.zones) {
+                            if (!Array.isArray(object.zones))
+                                throw TypeError(".google.dataflow.v1beta3.ServiceResources.zones: array expected");
+                            message.zones = [];
+                            for (var i = 0; i < object.zones.length; ++i)
+                                message.zones[i] = String(object.zones[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ServiceResources message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.dataflow.v1beta3.ServiceResources
+                     * @static
+                     * @param {google.dataflow.v1beta3.ServiceResources} message ServiceResources
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ServiceResources.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.zones = [];
+                        if (message.zones && message.zones.length) {
+                            object.zones = [];
+                            for (var j = 0; j < message.zones.length; ++j)
+                                object.zones[j] = message.zones[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ServiceResources to JSON.
+                     * @function toJSON
+                     * @memberof google.dataflow.v1beta3.ServiceResources
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ServiceResources.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ServiceResources
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ServiceResources
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ServiceResources.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ServiceResources";
+                    };
+    
+                    return ServiceResources;
+                })();
+    
+                v1beta3.RuntimeUpdatableParams = (function() {
+    
+                    /**
+                     * Properties of a RuntimeUpdatableParams.
+                     * @memberof google.dataflow.v1beta3
+                     * @interface IRuntimeUpdatableParams
+                     * @property {number|null} [maxNumWorkers] RuntimeUpdatableParams maxNumWorkers
+                     * @property {number|null} [minNumWorkers] RuntimeUpdatableParams minNumWorkers
+                     * @property {number|null} [workerUtilizationHint] RuntimeUpdatableParams workerUtilizationHint
+                     */
+    
+                    /**
+                     * Constructs a new RuntimeUpdatableParams.
+                     * @memberof google.dataflow.v1beta3
+                     * @classdesc Represents a RuntimeUpdatableParams.
+                     * @implements IRuntimeUpdatableParams
+                     * @constructor
+                     * @param {google.dataflow.v1beta3.IRuntimeUpdatableParams=} [properties] Properties to set
+                     */
+                    function RuntimeUpdatableParams(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * RuntimeUpdatableParams maxNumWorkers.
+                     * @member {number|null|undefined} maxNumWorkers
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @instance
+                     */
+                    RuntimeUpdatableParams.prototype.maxNumWorkers = null;
+    
+                    /**
+                     * RuntimeUpdatableParams minNumWorkers.
+                     * @member {number|null|undefined} minNumWorkers
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @instance
+                     */
+                    RuntimeUpdatableParams.prototype.minNumWorkers = null;
+    
+                    /**
+                     * RuntimeUpdatableParams workerUtilizationHint.
+                     * @member {number|null|undefined} workerUtilizationHint
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @instance
+                     */
+                    RuntimeUpdatableParams.prototype.workerUtilizationHint = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * RuntimeUpdatableParams _maxNumWorkers.
+                     * @member {"maxNumWorkers"|undefined} _maxNumWorkers
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @instance
+                     */
+                    Object.defineProperty(RuntimeUpdatableParams.prototype, "_maxNumWorkers", {
+                        get: $util.oneOfGetter($oneOfFields = ["maxNumWorkers"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * RuntimeUpdatableParams _minNumWorkers.
+                     * @member {"minNumWorkers"|undefined} _minNumWorkers
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @instance
+                     */
+                    Object.defineProperty(RuntimeUpdatableParams.prototype, "_minNumWorkers", {
+                        get: $util.oneOfGetter($oneOfFields = ["minNumWorkers"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * RuntimeUpdatableParams _workerUtilizationHint.
+                     * @member {"workerUtilizationHint"|undefined} _workerUtilizationHint
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @instance
+                     */
+                    Object.defineProperty(RuntimeUpdatableParams.prototype, "_workerUtilizationHint", {
+                        get: $util.oneOfGetter($oneOfFields = ["workerUtilizationHint"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new RuntimeUpdatableParams instance using the specified properties.
+                     * @function create
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @static
+                     * @param {google.dataflow.v1beta3.IRuntimeUpdatableParams=} [properties] Properties to set
+                     * @returns {google.dataflow.v1beta3.RuntimeUpdatableParams} RuntimeUpdatableParams instance
+                     */
+                    RuntimeUpdatableParams.create = function create(properties) {
+                        return new RuntimeUpdatableParams(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified RuntimeUpdatableParams message. Does not implicitly {@link google.dataflow.v1beta3.RuntimeUpdatableParams.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @static
+                     * @param {google.dataflow.v1beta3.IRuntimeUpdatableParams} message RuntimeUpdatableParams message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RuntimeUpdatableParams.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.maxNumWorkers != null && Object.hasOwnProperty.call(message, "maxNumWorkers"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.maxNumWorkers);
+                        if (message.minNumWorkers != null && Object.hasOwnProperty.call(message, "minNumWorkers"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minNumWorkers);
+                        if (message.workerUtilizationHint != null && Object.hasOwnProperty.call(message, "workerUtilizationHint"))
+                            writer.uint32(/* id 3, wireType 1 =*/25).double(message.workerUtilizationHint);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified RuntimeUpdatableParams message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.RuntimeUpdatableParams.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @static
+                     * @param {google.dataflow.v1beta3.IRuntimeUpdatableParams} message RuntimeUpdatableParams message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RuntimeUpdatableParams.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a RuntimeUpdatableParams message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.dataflow.v1beta3.RuntimeUpdatableParams} RuntimeUpdatableParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RuntimeUpdatableParams.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.RuntimeUpdatableParams();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.maxNumWorkers = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.minNumWorkers = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.workerUtilizationHint = reader.double();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a RuntimeUpdatableParams message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.dataflow.v1beta3.RuntimeUpdatableParams} RuntimeUpdatableParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RuntimeUpdatableParams.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a RuntimeUpdatableParams message.
+                     * @function verify
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    RuntimeUpdatableParams.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.maxNumWorkers != null && message.hasOwnProperty("maxNumWorkers")) {
+                            properties._maxNumWorkers = 1;
+                            if (!$util.isInteger(message.maxNumWorkers))
+                                return "maxNumWorkers: integer expected";
+                        }
+                        if (message.minNumWorkers != null && message.hasOwnProperty("minNumWorkers")) {
+                            properties._minNumWorkers = 1;
+                            if (!$util.isInteger(message.minNumWorkers))
+                                return "minNumWorkers: integer expected";
+                        }
+                        if (message.workerUtilizationHint != null && message.hasOwnProperty("workerUtilizationHint")) {
+                            properties._workerUtilizationHint = 1;
+                            if (typeof message.workerUtilizationHint !== "number")
+                                return "workerUtilizationHint: number expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a RuntimeUpdatableParams message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.dataflow.v1beta3.RuntimeUpdatableParams} RuntimeUpdatableParams
+                     */
+                    RuntimeUpdatableParams.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.dataflow.v1beta3.RuntimeUpdatableParams)
+                            return object;
+                        var message = new $root.google.dataflow.v1beta3.RuntimeUpdatableParams();
+                        if (object.maxNumWorkers != null)
+                            message.maxNumWorkers = object.maxNumWorkers | 0;
+                        if (object.minNumWorkers != null)
+                            message.minNumWorkers = object.minNumWorkers | 0;
+                        if (object.workerUtilizationHint != null)
+                            message.workerUtilizationHint = Number(object.workerUtilizationHint);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a RuntimeUpdatableParams message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @static
+                     * @param {google.dataflow.v1beta3.RuntimeUpdatableParams} message RuntimeUpdatableParams
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    RuntimeUpdatableParams.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.maxNumWorkers != null && message.hasOwnProperty("maxNumWorkers")) {
+                            object.maxNumWorkers = message.maxNumWorkers;
+                            if (options.oneofs)
+                                object._maxNumWorkers = "maxNumWorkers";
+                        }
+                        if (message.minNumWorkers != null && message.hasOwnProperty("minNumWorkers")) {
+                            object.minNumWorkers = message.minNumWorkers;
+                            if (options.oneofs)
+                                object._minNumWorkers = "minNumWorkers";
+                        }
+                        if (message.workerUtilizationHint != null && message.hasOwnProperty("workerUtilizationHint")) {
+                            object.workerUtilizationHint = options.json && !isFinite(message.workerUtilizationHint) ? String(message.workerUtilizationHint) : message.workerUtilizationHint;
+                            if (options.oneofs)
+                                object._workerUtilizationHint = "workerUtilizationHint";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this RuntimeUpdatableParams to JSON.
+                     * @function toJSON
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    RuntimeUpdatableParams.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for RuntimeUpdatableParams
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.RuntimeUpdatableParams
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    RuntimeUpdatableParams.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.RuntimeUpdatableParams";
+                    };
+    
+                    return RuntimeUpdatableParams;
                 })();
     
                 v1beta3.DatastoreIODetails = (function() {
@@ -6737,6 +7772,7 @@
                      * @property {string|null} [version] SdkVersion version
                      * @property {string|null} [versionDisplayName] SdkVersion versionDisplayName
                      * @property {google.dataflow.v1beta3.SdkVersion.SdkSupportStatus|null} [sdkSupportStatus] SdkVersion sdkSupportStatus
+                     * @property {Array.<google.dataflow.v1beta3.ISdkBug>|null} [bugs] SdkVersion bugs
                      */
     
                     /**
@@ -6748,6 +7784,7 @@
                      * @param {google.dataflow.v1beta3.ISdkVersion=} [properties] Properties to set
                      */
                     function SdkVersion(properties) {
+                        this.bugs = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -6779,6 +7816,14 @@
                     SdkVersion.prototype.sdkSupportStatus = 0;
     
                     /**
+                     * SdkVersion bugs.
+                     * @member {Array.<google.dataflow.v1beta3.ISdkBug>} bugs
+                     * @memberof google.dataflow.v1beta3.SdkVersion
+                     * @instance
+                     */
+                    SdkVersion.prototype.bugs = $util.emptyArray;
+    
+                    /**
                      * Creates a new SdkVersion instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.SdkVersion
@@ -6808,6 +7853,9 @@
                             writer.uint32(/* id 2, wireType 2 =*/18).string(message.versionDisplayName);
                         if (message.sdkSupportStatus != null && Object.hasOwnProperty.call(message, "sdkSupportStatus"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.sdkSupportStatus);
+                        if (message.bugs != null && message.bugs.length)
+                            for (var i = 0; i < message.bugs.length; ++i)
+                                $root.google.dataflow.v1beta3.SdkBug.encode(message.bugs[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                         return writer;
                     };
     
@@ -6852,6 +7900,12 @@
                                 }
                             case 3: {
                                     message.sdkSupportStatus = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.bugs && message.bugs.length))
+                                        message.bugs = [];
+                                    message.bugs.push($root.google.dataflow.v1beta3.SdkBug.decode(reader, reader.uint32()));
                                     break;
                                 }
                             default:
@@ -6906,6 +7960,15 @@
                             case 4:
                                 break;
                             }
+                        if (message.bugs != null && message.hasOwnProperty("bugs")) {
+                            if (!Array.isArray(message.bugs))
+                                return "bugs: array expected";
+                            for (var i = 0; i < message.bugs.length; ++i) {
+                                var error = $root.google.dataflow.v1beta3.SdkBug.verify(message.bugs[i]);
+                                if (error)
+                                    return "bugs." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -6953,6 +8016,16 @@
                             message.sdkSupportStatus = 4;
                             break;
                         }
+                        if (object.bugs) {
+                            if (!Array.isArray(object.bugs))
+                                throw TypeError(".google.dataflow.v1beta3.SdkVersion.bugs: array expected");
+                            message.bugs = [];
+                            for (var i = 0; i < object.bugs.length; ++i) {
+                                if (typeof object.bugs[i] !== "object")
+                                    throw TypeError(".google.dataflow.v1beta3.SdkVersion.bugs: object expected");
+                                message.bugs[i] = $root.google.dataflow.v1beta3.SdkBug.fromObject(object.bugs[i]);
+                            }
+                        }
                         return message;
                     };
     
@@ -6969,6 +8042,8 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.arrays || options.defaults)
+                            object.bugs = [];
                         if (options.defaults) {
                             object.version = "";
                             object.versionDisplayName = "";
@@ -6980,6 +8055,11 @@
                             object.versionDisplayName = message.versionDisplayName;
                         if (message.sdkSupportStatus != null && message.hasOwnProperty("sdkSupportStatus"))
                             object.sdkSupportStatus = options.enums === String ? $root.google.dataflow.v1beta3.SdkVersion.SdkSupportStatus[message.sdkSupportStatus] === undefined ? message.sdkSupportStatus : $root.google.dataflow.v1beta3.SdkVersion.SdkSupportStatus[message.sdkSupportStatus] : message.sdkSupportStatus;
+                        if (message.bugs && message.bugs.length) {
+                            object.bugs = [];
+                            for (var j = 0; j < message.bugs.length; ++j)
+                                object.bugs[j] = $root.google.dataflow.v1beta3.SdkBug.toObject(message.bugs[j], options);
+                        }
                         return object;
                     };
     
@@ -7032,6 +8112,350 @@
                     return SdkVersion;
                 })();
     
+                v1beta3.SdkBug = (function() {
+    
+                    /**
+                     * Properties of a SdkBug.
+                     * @memberof google.dataflow.v1beta3
+                     * @interface ISdkBug
+                     * @property {google.dataflow.v1beta3.SdkBug.Type|null} [type] SdkBug type
+                     * @property {google.dataflow.v1beta3.SdkBug.Severity|null} [severity] SdkBug severity
+                     * @property {string|null} [uri] SdkBug uri
+                     */
+    
+                    /**
+                     * Constructs a new SdkBug.
+                     * @memberof google.dataflow.v1beta3
+                     * @classdesc Represents a SdkBug.
+                     * @implements ISdkBug
+                     * @constructor
+                     * @param {google.dataflow.v1beta3.ISdkBug=} [properties] Properties to set
+                     */
+                    function SdkBug(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SdkBug type.
+                     * @member {google.dataflow.v1beta3.SdkBug.Type} type
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @instance
+                     */
+                    SdkBug.prototype.type = 0;
+    
+                    /**
+                     * SdkBug severity.
+                     * @member {google.dataflow.v1beta3.SdkBug.Severity} severity
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @instance
+                     */
+                    SdkBug.prototype.severity = 0;
+    
+                    /**
+                     * SdkBug uri.
+                     * @member {string} uri
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @instance
+                     */
+                    SdkBug.prototype.uri = "";
+    
+                    /**
+                     * Creates a new SdkBug instance using the specified properties.
+                     * @function create
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @static
+                     * @param {google.dataflow.v1beta3.ISdkBug=} [properties] Properties to set
+                     * @returns {google.dataflow.v1beta3.SdkBug} SdkBug instance
+                     */
+                    SdkBug.create = function create(properties) {
+                        return new SdkBug(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SdkBug message. Does not implicitly {@link google.dataflow.v1beta3.SdkBug.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @static
+                     * @param {google.dataflow.v1beta3.ISdkBug} message SdkBug message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SdkBug.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                        if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.severity);
+                        if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.uri);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SdkBug message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.SdkBug.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @static
+                     * @param {google.dataflow.v1beta3.ISdkBug} message SdkBug message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SdkBug.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SdkBug message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.dataflow.v1beta3.SdkBug} SdkBug
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SdkBug.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.SdkBug();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.type = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.severity = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.uri = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SdkBug message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.dataflow.v1beta3.SdkBug} SdkBug
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SdkBug.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SdkBug message.
+                     * @function verify
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SdkBug.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            switch (message.type) {
+                            default:
+                                return "type: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        if (message.severity != null && message.hasOwnProperty("severity"))
+                            switch (message.severity) {
+                            default:
+                                return "severity: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        if (message.uri != null && message.hasOwnProperty("uri"))
+                            if (!$util.isString(message.uri))
+                                return "uri: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SdkBug message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.dataflow.v1beta3.SdkBug} SdkBug
+                     */
+                    SdkBug.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.dataflow.v1beta3.SdkBug)
+                            return object;
+                        var message = new $root.google.dataflow.v1beta3.SdkBug();
+                        switch (object.type) {
+                        default:
+                            if (typeof object.type === "number") {
+                                message.type = object.type;
+                                break;
+                            }
+                            break;
+                        case "TYPE_UNSPECIFIED":
+                        case 0:
+                            message.type = 0;
+                            break;
+                        case "GENERAL":
+                        case 1:
+                            message.type = 1;
+                            break;
+                        case "PERFORMANCE":
+                        case 2:
+                            message.type = 2;
+                            break;
+                        case "DATALOSS":
+                        case 3:
+                            message.type = 3;
+                            break;
+                        }
+                        switch (object.severity) {
+                        default:
+                            if (typeof object.severity === "number") {
+                                message.severity = object.severity;
+                                break;
+                            }
+                            break;
+                        case "SEVERITY_UNSPECIFIED":
+                        case 0:
+                            message.severity = 0;
+                            break;
+                        case "NOTICE":
+                        case 1:
+                            message.severity = 1;
+                            break;
+                        case "WARNING":
+                        case 2:
+                            message.severity = 2;
+                            break;
+                        case "SEVERE":
+                        case 3:
+                            message.severity = 3;
+                            break;
+                        }
+                        if (object.uri != null)
+                            message.uri = String(object.uri);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SdkBug message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @static
+                     * @param {google.dataflow.v1beta3.SdkBug} message SdkBug
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SdkBug.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
+                            object.uri = "";
+                        }
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            object.type = options.enums === String ? $root.google.dataflow.v1beta3.SdkBug.Type[message.type] === undefined ? message.type : $root.google.dataflow.v1beta3.SdkBug.Type[message.type] : message.type;
+                        if (message.severity != null && message.hasOwnProperty("severity"))
+                            object.severity = options.enums === String ? $root.google.dataflow.v1beta3.SdkBug.Severity[message.severity] === undefined ? message.severity : $root.google.dataflow.v1beta3.SdkBug.Severity[message.severity] : message.severity;
+                        if (message.uri != null && message.hasOwnProperty("uri"))
+                            object.uri = message.uri;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SdkBug to JSON.
+                     * @function toJSON
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SdkBug.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SdkBug
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.SdkBug
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SdkBug.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.SdkBug";
+                    };
+    
+                    /**
+                     * Type enum.
+                     * @name google.dataflow.v1beta3.SdkBug.Type
+                     * @enum {number}
+                     * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                     * @property {number} GENERAL=1 GENERAL value
+                     * @property {number} PERFORMANCE=2 PERFORMANCE value
+                     * @property {number} DATALOSS=3 DATALOSS value
+                     */
+                    SdkBug.Type = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "GENERAL"] = 1;
+                        values[valuesById[2] = "PERFORMANCE"] = 2;
+                        values[valuesById[3] = "DATALOSS"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * Severity enum.
+                     * @name google.dataflow.v1beta3.SdkBug.Severity
+                     * @enum {number}
+                     * @property {number} SEVERITY_UNSPECIFIED=0 SEVERITY_UNSPECIFIED value
+                     * @property {number} NOTICE=1 NOTICE value
+                     * @property {number} WARNING=2 WARNING value
+                     * @property {number} SEVERE=3 SEVERE value
+                     */
+                    SdkBug.Severity = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SEVERITY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NOTICE"] = 1;
+                        values[valuesById[2] = "WARNING"] = 2;
+                        values[valuesById[3] = "SEVERE"] = 3;
+                        return values;
+                    })();
+    
+                    return SdkBug;
+                })();
+    
                 v1beta3.JobMetadata = (function() {
     
                     /**
@@ -7045,6 +8469,7 @@
                      * @property {Array.<google.dataflow.v1beta3.IPubSubIODetails>|null} [pubsubDetails] JobMetadata pubsubDetails
                      * @property {Array.<google.dataflow.v1beta3.IFileIODetails>|null} [fileDetails] JobMetadata fileDetails
                      * @property {Array.<google.dataflow.v1beta3.IDatastoreIODetails>|null} [datastoreDetails] JobMetadata datastoreDetails
+                     * @property {Object.<string,string>|null} [userDisplayProperties] JobMetadata userDisplayProperties
                      */
     
                     /**
@@ -7062,6 +8487,7 @@
                         this.pubsubDetails = [];
                         this.fileDetails = [];
                         this.datastoreDetails = [];
+                        this.userDisplayProperties = {};
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -7125,6 +8551,14 @@
                     JobMetadata.prototype.datastoreDetails = $util.emptyArray;
     
                     /**
+                     * JobMetadata userDisplayProperties.
+                     * @member {Object.<string,string>} userDisplayProperties
+                     * @memberof google.dataflow.v1beta3.JobMetadata
+                     * @instance
+                     */
+                    JobMetadata.prototype.userDisplayProperties = $util.emptyObject;
+    
+                    /**
                      * Creates a new JobMetadata instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.JobMetadata
@@ -7168,6 +8602,9 @@
                         if (message.datastoreDetails != null && message.datastoreDetails.length)
                             for (var i = 0; i < message.datastoreDetails.length; ++i)
                                 $root.google.dataflow.v1beta3.DatastoreIODetails.encode(message.datastoreDetails[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.userDisplayProperties != null && Object.hasOwnProperty.call(message, "userDisplayProperties"))
+                            for (var keys = Object.keys(message.userDisplayProperties), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.userDisplayProperties[keys[i]]).ldelim();
                         return writer;
                     };
     
@@ -7198,7 +8635,7 @@
                     JobMetadata.decode = function decode(reader, length) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.JobMetadata();
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.JobMetadata(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
                             switch (tag >>> 3) {
@@ -7240,6 +8677,29 @@
                                     if (!(message.datastoreDetails && message.datastoreDetails.length))
                                         message.datastoreDetails = [];
                                     message.datastoreDetails.push($root.google.dataflow.v1beta3.DatastoreIODetails.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 8: {
+                                    if (message.userDisplayProperties === $util.emptyObject)
+                                        message.userDisplayProperties = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.userDisplayProperties[key] = value;
                                     break;
                                 }
                             default:
@@ -7336,6 +8796,14 @@
                                     return "datastoreDetails." + error;
                             }
                         }
+                        if (message.userDisplayProperties != null && message.hasOwnProperty("userDisplayProperties")) {
+                            if (!$util.isObject(message.userDisplayProperties))
+                                return "userDisplayProperties: object expected";
+                            var key = Object.keys(message.userDisplayProperties);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.userDisplayProperties[key[i]]))
+                                    return "userDisplayProperties: string{k:string} expected";
+                        }
                         return null;
                     };
     
@@ -7416,6 +8884,13 @@
                                 message.datastoreDetails[i] = $root.google.dataflow.v1beta3.DatastoreIODetails.fromObject(object.datastoreDetails[i]);
                             }
                         }
+                        if (object.userDisplayProperties) {
+                            if (typeof object.userDisplayProperties !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.JobMetadata.userDisplayProperties: object expected");
+                            message.userDisplayProperties = {};
+                            for (var keys = Object.keys(object.userDisplayProperties), i = 0; i < keys.length; ++i)
+                                message.userDisplayProperties[keys[i]] = String(object.userDisplayProperties[keys[i]]);
+                        }
                         return message;
                     };
     
@@ -7440,6 +8915,8 @@
                             object.fileDetails = [];
                             object.datastoreDetails = [];
                         }
+                        if (options.objects || options.defaults)
+                            object.userDisplayProperties = {};
                         if (options.defaults)
                             object.sdkVersion = null;
                         if (message.sdkVersion != null && message.hasOwnProperty("sdkVersion"))
@@ -7473,6 +8950,12 @@
                             object.datastoreDetails = [];
                             for (var j = 0; j < message.datastoreDetails.length; ++j)
                                 object.datastoreDetails[j] = $root.google.dataflow.v1beta3.DatastoreIODetails.toObject(message.datastoreDetails[j], options);
+                        }
+                        var keys2;
+                        if (message.userDisplayProperties && (keys2 = Object.keys(message.userDisplayProperties)).length) {
+                            object.userDisplayProperties = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.userDisplayProperties[keys2[j]] = message.userDisplayProperties[keys2[j]];
                         }
                         return object;
                     };
@@ -7844,6 +9327,7 @@
                      * @property {Array.<google.dataflow.v1beta3.ITransformSummary>|null} [originalPipelineTransform] PipelineDescription originalPipelineTransform
                      * @property {Array.<google.dataflow.v1beta3.IExecutionStageSummary>|null} [executionPipelineStage] PipelineDescription executionPipelineStage
                      * @property {Array.<google.dataflow.v1beta3.IDisplayData>|null} [displayData] PipelineDescription displayData
+                     * @property {string|null} [stepNamesHash] PipelineDescription stepNamesHash
                      */
     
                     /**
@@ -7889,6 +9373,14 @@
                     PipelineDescription.prototype.displayData = $util.emptyArray;
     
                     /**
+                     * PipelineDescription stepNamesHash.
+                     * @member {string} stepNamesHash
+                     * @memberof google.dataflow.v1beta3.PipelineDescription
+                     * @instance
+                     */
+                    PipelineDescription.prototype.stepNamesHash = "";
+    
+                    /**
                      * Creates a new PipelineDescription instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.PipelineDescription
@@ -7921,6 +9413,8 @@
                         if (message.displayData != null && message.displayData.length)
                             for (var i = 0; i < message.displayData.length; ++i)
                                 $root.google.dataflow.v1beta3.DisplayData.encode(message.displayData[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.stepNamesHash != null && Object.hasOwnProperty.call(message, "stepNamesHash"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.stepNamesHash);
                         return writer;
                     };
     
@@ -7971,6 +9465,10 @@
                                     if (!(message.displayData && message.displayData.length))
                                         message.displayData = [];
                                     message.displayData.push($root.google.dataflow.v1beta3.DisplayData.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 4: {
+                                    message.stepNamesHash = reader.string();
                                     break;
                                 }
                             default:
@@ -8035,6 +9533,9 @@
                                     return "displayData." + error;
                             }
                         }
+                        if (message.stepNamesHash != null && message.hasOwnProperty("stepNamesHash"))
+                            if (!$util.isString(message.stepNamesHash))
+                                return "stepNamesHash: string expected";
                         return null;
                     };
     
@@ -8080,6 +9581,8 @@
                                 message.displayData[i] = $root.google.dataflow.v1beta3.DisplayData.fromObject(object.displayData[i]);
                             }
                         }
+                        if (object.stepNamesHash != null)
+                            message.stepNamesHash = String(object.stepNamesHash);
                         return message;
                     };
     
@@ -8101,6 +9604,8 @@
                             object.executionPipelineStage = [];
                             object.displayData = [];
                         }
+                        if (options.defaults)
+                            object.stepNamesHash = "";
                         if (message.originalPipelineTransform && message.originalPipelineTransform.length) {
                             object.originalPipelineTransform = [];
                             for (var j = 0; j < message.originalPipelineTransform.length; ++j)
@@ -8116,6 +9621,8 @@
                             for (var j = 0; j < message.displayData.length; ++j)
                                 object.displayData[j] = $root.google.dataflow.v1beta3.DisplayData.toObject(message.displayData[j], options);
                         }
+                        if (message.stepNamesHash != null && message.hasOwnProperty("stepNamesHash"))
+                            object.stepNamesHash = message.stepNamesHash;
                         return object;
                     };
     
@@ -11861,6 +13368,7 @@
                      * @property {string|null} [jobId] UpdateJobRequest jobId
                      * @property {google.dataflow.v1beta3.IJob|null} [job] UpdateJobRequest job
                      * @property {string|null} [location] UpdateJobRequest location
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateJobRequest updateMask
                      */
     
                     /**
@@ -11911,6 +13419,28 @@
                     UpdateJobRequest.prototype.location = "";
     
                     /**
+                     * UpdateJobRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.dataflow.v1beta3.UpdateJobRequest
+                     * @instance
+                     */
+                    UpdateJobRequest.prototype.updateMask = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * UpdateJobRequest _updateMask.
+                     * @member {"updateMask"|undefined} _updateMask
+                     * @memberof google.dataflow.v1beta3.UpdateJobRequest
+                     * @instance
+                     */
+                    Object.defineProperty(UpdateJobRequest.prototype, "_updateMask", {
+                        get: $util.oneOfGetter($oneOfFields = ["updateMask"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
                      * Creates a new UpdateJobRequest instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.UpdateJobRequest
@@ -11942,6 +13472,8 @@
                             $root.google.dataflow.v1beta3.Job.encode(message.job, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.location);
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -11992,6 +13524,10 @@
                                     message.location = reader.string();
                                     break;
                                 }
+                            case 5: {
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -12027,6 +13563,7 @@
                     UpdateJobRequest.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        var properties = {};
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             if (!$util.isString(message.projectId))
                                 return "projectId: string expected";
@@ -12041,6 +13578,14 @@
                         if (message.location != null && message.hasOwnProperty("location"))
                             if (!$util.isString(message.location))
                                 return "location: string expected";
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            properties._updateMask = 1;
+                            {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -12067,6 +13612,11 @@
                         }
                         if (object.location != null)
                             message.location = String(object.location);
+                        if (object.updateMask != null) {
+                            if (typeof object.updateMask !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.UpdateJobRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                        }
                         return message;
                     };
     
@@ -12097,6 +13647,11 @@
                             object.job = $root.google.dataflow.v1beta3.Job.toObject(message.job, options);
                         if (message.location != null && message.hasOwnProperty("location"))
                             object.location = message.location;
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (options.oneofs)
+                                object._updateMask = "updateMask";
+                        }
                         return object;
                     };
     
@@ -12141,6 +13696,7 @@
                      * @property {number|null} [pageSize] ListJobsRequest pageSize
                      * @property {string|null} [pageToken] ListJobsRequest pageToken
                      * @property {string|null} [location] ListJobsRequest location
+                     * @property {string|null} [name] ListJobsRequest name
                      */
     
                     /**
@@ -12207,6 +13763,28 @@
                     ListJobsRequest.prototype.location = "";
     
                     /**
+                     * ListJobsRequest name.
+                     * @member {string|null|undefined} name
+                     * @memberof google.dataflow.v1beta3.ListJobsRequest
+                     * @instance
+                     */
+                    ListJobsRequest.prototype.name = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * ListJobsRequest _name.
+                     * @member {"name"|undefined} _name
+                     * @memberof google.dataflow.v1beta3.ListJobsRequest
+                     * @instance
+                     */
+                    Object.defineProperty(ListJobsRequest.prototype, "_name", {
+                        get: $util.oneOfGetter($oneOfFields = ["name"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
                      * Creates a new ListJobsRequest instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.ListJobsRequest
@@ -12240,6 +13818,8 @@
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
                         if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                             writer.uint32(/* id 5, wireType 0 =*/40).int32(message.filter);
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 11, wireType 2 =*/90).string(message.name);
                         if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                             writer.uint32(/* id 17, wireType 2 =*/138).string(message.location);
                         return writer;
@@ -12300,6 +13880,10 @@
                                     message.location = reader.string();
                                     break;
                                 }
+                            case 11: {
+                                    message.name = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -12335,6 +13919,7 @@
                     ListJobsRequest.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        var properties = {};
                         if (message.filter != null && message.hasOwnProperty("filter"))
                             switch (message.filter) {
                             default:
@@ -12367,6 +13952,11 @@
                         if (message.location != null && message.hasOwnProperty("location"))
                             if (!$util.isString(message.location))
                                 return "location: string expected";
+                        if (message.name != null && message.hasOwnProperty("name")) {
+                            properties._name = 1;
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        }
                         return null;
                     };
     
@@ -12438,6 +14028,8 @@
                             message.pageToken = String(object.pageToken);
                         if (object.location != null)
                             message.location = String(object.location);
+                        if (object.name != null)
+                            message.name = String(object.name);
                         return message;
                     };
     
@@ -12472,6 +14064,11 @@
                             object.pageToken = message.pageToken;
                         if (message.filter != null && message.hasOwnProperty("filter"))
                             object.filter = options.enums === String ? $root.google.dataflow.v1beta3.ListJobsRequest.Filter[message.filter] === undefined ? message.filter : $root.google.dataflow.v1beta3.ListJobsRequest.Filter[message.filter] : message.filter;
+                        if (message.name != null && message.hasOwnProperty("name")) {
+                            object.name = message.name;
+                            if (options.oneofs)
+                                object._name = "name";
+                        }
                         if (message.location != null && message.hasOwnProperty("location"))
                             object.location = message.location;
                         return object;
@@ -18268,6 +19865,7 @@
                      * @property {google.protobuf.IValue|null} [meanSum] MetricUpdate meanSum
                      * @property {google.protobuf.IValue|null} [meanCount] MetricUpdate meanCount
                      * @property {google.protobuf.IValue|null} [set] MetricUpdate set
+                     * @property {google.protobuf.IValue|null} [trie] MetricUpdate trie
                      * @property {google.protobuf.IValue|null} [distribution] MetricUpdate distribution
                      * @property {google.protobuf.IValue|null} [gauge] MetricUpdate gauge
                      * @property {google.protobuf.IValue|null} [internal] MetricUpdate internal
@@ -18344,6 +19942,14 @@
                      * @instance
                      */
                     MetricUpdate.prototype.set = null;
+    
+                    /**
+                     * MetricUpdate trie.
+                     * @member {google.protobuf.IValue|null|undefined} trie
+                     * @memberof google.dataflow.v1beta3.MetricUpdate
+                     * @instance
+                     */
+                    MetricUpdate.prototype.trie = null;
     
                     /**
                      * MetricUpdate distribution.
@@ -18423,6 +20029,8 @@
                             $root.google.protobuf.Value.encode(message.distribution, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                         if (message.gauge != null && Object.hasOwnProperty.call(message, "gauge"))
                             $root.google.protobuf.Value.encode(message.gauge, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                        if (message.trie != null && Object.hasOwnProperty.call(message, "trie"))
+                            $root.google.protobuf.Value.encode(message.trie, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                         return writer;
                     };
     
@@ -18483,6 +20091,10 @@
                                 }
                             case 7: {
                                     message.set = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 13: {
+                                    message.trie = $root.google.protobuf.Value.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 11: {
@@ -18567,6 +20179,11 @@
                             if (error)
                                 return "set." + error;
                         }
+                        if (message.trie != null && message.hasOwnProperty("trie")) {
+                            var error = $root.google.protobuf.Value.verify(message.trie);
+                            if (error)
+                                return "trie." + error;
+                        }
                         if (message.distribution != null && message.hasOwnProperty("distribution")) {
                             var error = $root.google.protobuf.Value.verify(message.distribution);
                             if (error)
@@ -18631,6 +20248,11 @@
                                 throw TypeError(".google.dataflow.v1beta3.MetricUpdate.set: object expected");
                             message.set = $root.google.protobuf.Value.fromObject(object.set);
                         }
+                        if (object.trie != null) {
+                            if (typeof object.trie !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.MetricUpdate.trie: object expected");
+                            message.trie = $root.google.protobuf.Value.fromObject(object.trie);
+                        }
                         if (object.distribution != null) {
                             if (typeof object.distribution !== "object")
                                 throw TypeError(".google.dataflow.v1beta3.MetricUpdate.distribution: object expected");
@@ -18679,6 +20301,7 @@
                             object.updateTime = null;
                             object.distribution = null;
                             object.gauge = null;
+                            object.trie = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = $root.google.dataflow.v1beta3.MetricStructuredName.toObject(message.name, options);
@@ -18702,6 +20325,8 @@
                             object.distribution = $root.google.protobuf.Value.toObject(message.distribution, options);
                         if (message.gauge != null && message.hasOwnProperty("gauge"))
                             object.gauge = $root.google.protobuf.Value.toObject(message.gauge, options);
+                        if (message.trie != null && message.hasOwnProperty("trie"))
+                            object.trie = $root.google.protobuf.Value.toObject(message.trie, options);
                         return object;
                     };
     
@@ -20041,6 +21666,1920 @@
                     return ProgressTimeseries;
                 })();
     
+                v1beta3.StragglerInfo = (function() {
+    
+                    /**
+                     * Properties of a StragglerInfo.
+                     * @memberof google.dataflow.v1beta3
+                     * @interface IStragglerInfo
+                     * @property {google.protobuf.ITimestamp|null} [startTime] StragglerInfo startTime
+                     * @property {Object.<string,google.dataflow.v1beta3.StragglerInfo.IStragglerDebuggingInfo>|null} [causes] StragglerInfo causes
+                     */
+    
+                    /**
+                     * Constructs a new StragglerInfo.
+                     * @memberof google.dataflow.v1beta3
+                     * @classdesc Represents a StragglerInfo.
+                     * @implements IStragglerInfo
+                     * @constructor
+                     * @param {google.dataflow.v1beta3.IStragglerInfo=} [properties] Properties to set
+                     */
+                    function StragglerInfo(properties) {
+                        this.causes = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * StragglerInfo startTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                     * @memberof google.dataflow.v1beta3.StragglerInfo
+                     * @instance
+                     */
+                    StragglerInfo.prototype.startTime = null;
+    
+                    /**
+                     * StragglerInfo causes.
+                     * @member {Object.<string,google.dataflow.v1beta3.StragglerInfo.IStragglerDebuggingInfo>} causes
+                     * @memberof google.dataflow.v1beta3.StragglerInfo
+                     * @instance
+                     */
+                    StragglerInfo.prototype.causes = $util.emptyObject;
+    
+                    /**
+                     * Creates a new StragglerInfo instance using the specified properties.
+                     * @function create
+                     * @memberof google.dataflow.v1beta3.StragglerInfo
+                     * @static
+                     * @param {google.dataflow.v1beta3.IStragglerInfo=} [properties] Properties to set
+                     * @returns {google.dataflow.v1beta3.StragglerInfo} StragglerInfo instance
+                     */
+                    StragglerInfo.create = function create(properties) {
+                        return new StragglerInfo(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified StragglerInfo message. Does not implicitly {@link google.dataflow.v1beta3.StragglerInfo.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.dataflow.v1beta3.StragglerInfo
+                     * @static
+                     * @param {google.dataflow.v1beta3.IStragglerInfo} message StragglerInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    StragglerInfo.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                            $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.causes != null && Object.hasOwnProperty.call(message, "causes"))
+                            for (var keys = Object.keys(message.causes), i = 0; i < keys.length; ++i) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                $root.google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo.encode(message.causes[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                            }
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified StragglerInfo message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.StragglerInfo.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.dataflow.v1beta3.StragglerInfo
+                     * @static
+                     * @param {google.dataflow.v1beta3.IStragglerInfo} message StragglerInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    StragglerInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a StragglerInfo message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.dataflow.v1beta3.StragglerInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.dataflow.v1beta3.StragglerInfo} StragglerInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    StragglerInfo.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.StragglerInfo(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    if (message.causes === $util.emptyObject)
+                                        message.causes = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.causes[key] = value;
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a StragglerInfo message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.dataflow.v1beta3.StragglerInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.dataflow.v1beta3.StragglerInfo} StragglerInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    StragglerInfo.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a StragglerInfo message.
+                     * @function verify
+                     * @memberof google.dataflow.v1beta3.StragglerInfo
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    StragglerInfo.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                            if (error)
+                                return "startTime." + error;
+                        }
+                        if (message.causes != null && message.hasOwnProperty("causes")) {
+                            if (!$util.isObject(message.causes))
+                                return "causes: object expected";
+                            var key = Object.keys(message.causes);
+                            for (var i = 0; i < key.length; ++i) {
+                                var error = $root.google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo.verify(message.causes[key[i]]);
+                                if (error)
+                                    return "causes." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a StragglerInfo message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.dataflow.v1beta3.StragglerInfo
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.dataflow.v1beta3.StragglerInfo} StragglerInfo
+                     */
+                    StragglerInfo.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.dataflow.v1beta3.StragglerInfo)
+                            return object;
+                        var message = new $root.google.dataflow.v1beta3.StragglerInfo();
+                        if (object.startTime != null) {
+                            if (typeof object.startTime !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.StragglerInfo.startTime: object expected");
+                            message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                        }
+                        if (object.causes) {
+                            if (typeof object.causes !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.StragglerInfo.causes: object expected");
+                            message.causes = {};
+                            for (var keys = Object.keys(object.causes), i = 0; i < keys.length; ++i) {
+                                if (typeof object.causes[keys[i]] !== "object")
+                                    throw TypeError(".google.dataflow.v1beta3.StragglerInfo.causes: object expected");
+                                message.causes[keys[i]] = $root.google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo.fromObject(object.causes[keys[i]]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a StragglerInfo message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.dataflow.v1beta3.StragglerInfo
+                     * @static
+                     * @param {google.dataflow.v1beta3.StragglerInfo} message StragglerInfo
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    StragglerInfo.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.causes = {};
+                        if (options.defaults)
+                            object.startTime = null;
+                        if (message.startTime != null && message.hasOwnProperty("startTime"))
+                            object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                        var keys2;
+                        if (message.causes && (keys2 = Object.keys(message.causes)).length) {
+                            object.causes = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.causes[keys2[j]] = $root.google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo.toObject(message.causes[keys2[j]], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this StragglerInfo to JSON.
+                     * @function toJSON
+                     * @memberof google.dataflow.v1beta3.StragglerInfo
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    StragglerInfo.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for StragglerInfo
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.StragglerInfo
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    StragglerInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.StragglerInfo";
+                    };
+    
+                    StragglerInfo.StragglerDebuggingInfo = (function() {
+    
+                        /**
+                         * Properties of a StragglerDebuggingInfo.
+                         * @memberof google.dataflow.v1beta3.StragglerInfo
+                         * @interface IStragglerDebuggingInfo
+                         * @property {google.dataflow.v1beta3.IHotKeyDebuggingInfo|null} [hotKey] StragglerDebuggingInfo hotKey
+                         */
+    
+                        /**
+                         * Constructs a new StragglerDebuggingInfo.
+                         * @memberof google.dataflow.v1beta3.StragglerInfo
+                         * @classdesc Represents a StragglerDebuggingInfo.
+                         * @implements IStragglerDebuggingInfo
+                         * @constructor
+                         * @param {google.dataflow.v1beta3.StragglerInfo.IStragglerDebuggingInfo=} [properties] Properties to set
+                         */
+                        function StragglerDebuggingInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StragglerDebuggingInfo hotKey.
+                         * @member {google.dataflow.v1beta3.IHotKeyDebuggingInfo|null|undefined} hotKey
+                         * @memberof google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo
+                         * @instance
+                         */
+                        StragglerDebuggingInfo.prototype.hotKey = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * StragglerDebuggingInfo stragglerDebuggingInfoValue.
+                         * @member {"hotKey"|undefined} stragglerDebuggingInfoValue
+                         * @memberof google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo
+                         * @instance
+                         */
+                        Object.defineProperty(StragglerDebuggingInfo.prototype, "stragglerDebuggingInfoValue", {
+                            get: $util.oneOfGetter($oneOfFields = ["hotKey"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new StragglerDebuggingInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo
+                         * @static
+                         * @param {google.dataflow.v1beta3.StragglerInfo.IStragglerDebuggingInfo=} [properties] Properties to set
+                         * @returns {google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo} StragglerDebuggingInfo instance
+                         */
+                        StragglerDebuggingInfo.create = function create(properties) {
+                            return new StragglerDebuggingInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StragglerDebuggingInfo message. Does not implicitly {@link google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo
+                         * @static
+                         * @param {google.dataflow.v1beta3.StragglerInfo.IStragglerDebuggingInfo} message StragglerDebuggingInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StragglerDebuggingInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hotKey != null && Object.hasOwnProperty.call(message, "hotKey"))
+                                $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.encode(message.hotKey, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StragglerDebuggingInfo message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo
+                         * @static
+                         * @param {google.dataflow.v1beta3.StragglerInfo.IStragglerDebuggingInfo} message StragglerDebuggingInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StragglerDebuggingInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StragglerDebuggingInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo} StragglerDebuggingInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StragglerDebuggingInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.hotKey = $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StragglerDebuggingInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo} StragglerDebuggingInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StragglerDebuggingInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StragglerDebuggingInfo message.
+                         * @function verify
+                         * @memberof google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StragglerDebuggingInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.hotKey != null && message.hasOwnProperty("hotKey")) {
+                                properties.stragglerDebuggingInfoValue = 1;
+                                {
+                                    var error = $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.verify(message.hotKey);
+                                    if (error)
+                                        return "hotKey." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StragglerDebuggingInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo} StragglerDebuggingInfo
+                         */
+                        StragglerDebuggingInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo)
+                                return object;
+                            var message = new $root.google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo();
+                            if (object.hotKey != null) {
+                                if (typeof object.hotKey !== "object")
+                                    throw TypeError(".google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo.hotKey: object expected");
+                                message.hotKey = $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.fromObject(object.hotKey);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StragglerDebuggingInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo
+                         * @static
+                         * @param {google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo} message StragglerDebuggingInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StragglerDebuggingInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.hotKey != null && message.hasOwnProperty("hotKey")) {
+                                object.hotKey = $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.toObject(message.hotKey, options);
+                                if (options.oneofs)
+                                    object.stragglerDebuggingInfoValue = "hotKey";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StragglerDebuggingInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StragglerDebuggingInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StragglerDebuggingInfo
+                         * @function getTypeUrl
+                         * @memberof google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StragglerDebuggingInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo";
+                        };
+    
+                        return StragglerDebuggingInfo;
+                    })();
+    
+                    return StragglerInfo;
+                })();
+    
+                v1beta3.StreamingStragglerInfo = (function() {
+    
+                    /**
+                     * Properties of a StreamingStragglerInfo.
+                     * @memberof google.dataflow.v1beta3
+                     * @interface IStreamingStragglerInfo
+                     * @property {google.protobuf.ITimestamp|null} [startTime] StreamingStragglerInfo startTime
+                     * @property {google.protobuf.ITimestamp|null} [endTime] StreamingStragglerInfo endTime
+                     * @property {string|null} [workerName] StreamingStragglerInfo workerName
+                     * @property {google.protobuf.IDuration|null} [dataWatermarkLag] StreamingStragglerInfo dataWatermarkLag
+                     * @property {google.protobuf.IDuration|null} [systemWatermarkLag] StreamingStragglerInfo systemWatermarkLag
+                     */
+    
+                    /**
+                     * Constructs a new StreamingStragglerInfo.
+                     * @memberof google.dataflow.v1beta3
+                     * @classdesc Represents a StreamingStragglerInfo.
+                     * @implements IStreamingStragglerInfo
+                     * @constructor
+                     * @param {google.dataflow.v1beta3.IStreamingStragglerInfo=} [properties] Properties to set
+                     */
+                    function StreamingStragglerInfo(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * StreamingStragglerInfo startTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @instance
+                     */
+                    StreamingStragglerInfo.prototype.startTime = null;
+    
+                    /**
+                     * StreamingStragglerInfo endTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @instance
+                     */
+                    StreamingStragglerInfo.prototype.endTime = null;
+    
+                    /**
+                     * StreamingStragglerInfo workerName.
+                     * @member {string} workerName
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @instance
+                     */
+                    StreamingStragglerInfo.prototype.workerName = "";
+    
+                    /**
+                     * StreamingStragglerInfo dataWatermarkLag.
+                     * @member {google.protobuf.IDuration|null|undefined} dataWatermarkLag
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @instance
+                     */
+                    StreamingStragglerInfo.prototype.dataWatermarkLag = null;
+    
+                    /**
+                     * StreamingStragglerInfo systemWatermarkLag.
+                     * @member {google.protobuf.IDuration|null|undefined} systemWatermarkLag
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @instance
+                     */
+                    StreamingStragglerInfo.prototype.systemWatermarkLag = null;
+    
+                    /**
+                     * Creates a new StreamingStragglerInfo instance using the specified properties.
+                     * @function create
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @static
+                     * @param {google.dataflow.v1beta3.IStreamingStragglerInfo=} [properties] Properties to set
+                     * @returns {google.dataflow.v1beta3.StreamingStragglerInfo} StreamingStragglerInfo instance
+                     */
+                    StreamingStragglerInfo.create = function create(properties) {
+                        return new StreamingStragglerInfo(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified StreamingStragglerInfo message. Does not implicitly {@link google.dataflow.v1beta3.StreamingStragglerInfo.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @static
+                     * @param {google.dataflow.v1beta3.IStreamingStragglerInfo} message StreamingStragglerInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    StreamingStragglerInfo.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                            $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                            $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.workerName != null && Object.hasOwnProperty.call(message, "workerName"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.workerName);
+                        if (message.dataWatermarkLag != null && Object.hasOwnProperty.call(message, "dataWatermarkLag"))
+                            $root.google.protobuf.Duration.encode(message.dataWatermarkLag, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.systemWatermarkLag != null && Object.hasOwnProperty.call(message, "systemWatermarkLag"))
+                            $root.google.protobuf.Duration.encode(message.systemWatermarkLag, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified StreamingStragglerInfo message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.StreamingStragglerInfo.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @static
+                     * @param {google.dataflow.v1beta3.IStreamingStragglerInfo} message StreamingStragglerInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    StreamingStragglerInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a StreamingStragglerInfo message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.dataflow.v1beta3.StreamingStragglerInfo} StreamingStragglerInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    StreamingStragglerInfo.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.StreamingStragglerInfo();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.workerName = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.dataWatermarkLag = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.systemWatermarkLag = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a StreamingStragglerInfo message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.dataflow.v1beta3.StreamingStragglerInfo} StreamingStragglerInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    StreamingStragglerInfo.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a StreamingStragglerInfo message.
+                     * @function verify
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    StreamingStragglerInfo.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                            if (error)
+                                return "startTime." + error;
+                        }
+                        if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                            if (error)
+                                return "endTime." + error;
+                        }
+                        if (message.workerName != null && message.hasOwnProperty("workerName"))
+                            if (!$util.isString(message.workerName))
+                                return "workerName: string expected";
+                        if (message.dataWatermarkLag != null && message.hasOwnProperty("dataWatermarkLag")) {
+                            var error = $root.google.protobuf.Duration.verify(message.dataWatermarkLag);
+                            if (error)
+                                return "dataWatermarkLag." + error;
+                        }
+                        if (message.systemWatermarkLag != null && message.hasOwnProperty("systemWatermarkLag")) {
+                            var error = $root.google.protobuf.Duration.verify(message.systemWatermarkLag);
+                            if (error)
+                                return "systemWatermarkLag." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a StreamingStragglerInfo message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.dataflow.v1beta3.StreamingStragglerInfo} StreamingStragglerInfo
+                     */
+                    StreamingStragglerInfo.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.dataflow.v1beta3.StreamingStragglerInfo)
+                            return object;
+                        var message = new $root.google.dataflow.v1beta3.StreamingStragglerInfo();
+                        if (object.startTime != null) {
+                            if (typeof object.startTime !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.StreamingStragglerInfo.startTime: object expected");
+                            message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                        }
+                        if (object.endTime != null) {
+                            if (typeof object.endTime !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.StreamingStragglerInfo.endTime: object expected");
+                            message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                        }
+                        if (object.workerName != null)
+                            message.workerName = String(object.workerName);
+                        if (object.dataWatermarkLag != null) {
+                            if (typeof object.dataWatermarkLag !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.StreamingStragglerInfo.dataWatermarkLag: object expected");
+                            message.dataWatermarkLag = $root.google.protobuf.Duration.fromObject(object.dataWatermarkLag);
+                        }
+                        if (object.systemWatermarkLag != null) {
+                            if (typeof object.systemWatermarkLag !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.StreamingStragglerInfo.systemWatermarkLag: object expected");
+                            message.systemWatermarkLag = $root.google.protobuf.Duration.fromObject(object.systemWatermarkLag);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a StreamingStragglerInfo message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @static
+                     * @param {google.dataflow.v1beta3.StreamingStragglerInfo} message StreamingStragglerInfo
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    StreamingStragglerInfo.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.startTime = null;
+                            object.endTime = null;
+                            object.workerName = "";
+                            object.dataWatermarkLag = null;
+                            object.systemWatermarkLag = null;
+                        }
+                        if (message.startTime != null && message.hasOwnProperty("startTime"))
+                            object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                        if (message.endTime != null && message.hasOwnProperty("endTime"))
+                            object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                        if (message.workerName != null && message.hasOwnProperty("workerName"))
+                            object.workerName = message.workerName;
+                        if (message.dataWatermarkLag != null && message.hasOwnProperty("dataWatermarkLag"))
+                            object.dataWatermarkLag = $root.google.protobuf.Duration.toObject(message.dataWatermarkLag, options);
+                        if (message.systemWatermarkLag != null && message.hasOwnProperty("systemWatermarkLag"))
+                            object.systemWatermarkLag = $root.google.protobuf.Duration.toObject(message.systemWatermarkLag, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this StreamingStragglerInfo to JSON.
+                     * @function toJSON
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    StreamingStragglerInfo.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for StreamingStragglerInfo
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.StreamingStragglerInfo
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    StreamingStragglerInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.StreamingStragglerInfo";
+                    };
+    
+                    return StreamingStragglerInfo;
+                })();
+    
+                v1beta3.Straggler = (function() {
+    
+                    /**
+                     * Properties of a Straggler.
+                     * @memberof google.dataflow.v1beta3
+                     * @interface IStraggler
+                     * @property {google.dataflow.v1beta3.IStragglerInfo|null} [batchStraggler] Straggler batchStraggler
+                     * @property {google.dataflow.v1beta3.IStreamingStragglerInfo|null} [streamingStraggler] Straggler streamingStraggler
+                     */
+    
+                    /**
+                     * Constructs a new Straggler.
+                     * @memberof google.dataflow.v1beta3
+                     * @classdesc Represents a Straggler.
+                     * @implements IStraggler
+                     * @constructor
+                     * @param {google.dataflow.v1beta3.IStraggler=} [properties] Properties to set
+                     */
+                    function Straggler(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Straggler batchStraggler.
+                     * @member {google.dataflow.v1beta3.IStragglerInfo|null|undefined} batchStraggler
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @instance
+                     */
+                    Straggler.prototype.batchStraggler = null;
+    
+                    /**
+                     * Straggler streamingStraggler.
+                     * @member {google.dataflow.v1beta3.IStreamingStragglerInfo|null|undefined} streamingStraggler
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @instance
+                     */
+                    Straggler.prototype.streamingStraggler = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * Straggler stragglerInfo.
+                     * @member {"batchStraggler"|"streamingStraggler"|undefined} stragglerInfo
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @instance
+                     */
+                    Object.defineProperty(Straggler.prototype, "stragglerInfo", {
+                        get: $util.oneOfGetter($oneOfFields = ["batchStraggler", "streamingStraggler"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new Straggler instance using the specified properties.
+                     * @function create
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @static
+                     * @param {google.dataflow.v1beta3.IStraggler=} [properties] Properties to set
+                     * @returns {google.dataflow.v1beta3.Straggler} Straggler instance
+                     */
+                    Straggler.create = function create(properties) {
+                        return new Straggler(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Straggler message. Does not implicitly {@link google.dataflow.v1beta3.Straggler.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @static
+                     * @param {google.dataflow.v1beta3.IStraggler} message Straggler message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Straggler.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.batchStraggler != null && Object.hasOwnProperty.call(message, "batchStraggler"))
+                            $root.google.dataflow.v1beta3.StragglerInfo.encode(message.batchStraggler, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.streamingStraggler != null && Object.hasOwnProperty.call(message, "streamingStraggler"))
+                            $root.google.dataflow.v1beta3.StreamingStragglerInfo.encode(message.streamingStraggler, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Straggler message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.Straggler.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @static
+                     * @param {google.dataflow.v1beta3.IStraggler} message Straggler message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Straggler.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Straggler message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.dataflow.v1beta3.Straggler} Straggler
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Straggler.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.Straggler();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.batchStraggler = $root.google.dataflow.v1beta3.StragglerInfo.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.streamingStraggler = $root.google.dataflow.v1beta3.StreamingStragglerInfo.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Straggler message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.dataflow.v1beta3.Straggler} Straggler
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Straggler.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Straggler message.
+                     * @function verify
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Straggler.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.batchStraggler != null && message.hasOwnProperty("batchStraggler")) {
+                            properties.stragglerInfo = 1;
+                            {
+                                var error = $root.google.dataflow.v1beta3.StragglerInfo.verify(message.batchStraggler);
+                                if (error)
+                                    return "batchStraggler." + error;
+                            }
+                        }
+                        if (message.streamingStraggler != null && message.hasOwnProperty("streamingStraggler")) {
+                            if (properties.stragglerInfo === 1)
+                                return "stragglerInfo: multiple values";
+                            properties.stragglerInfo = 1;
+                            {
+                                var error = $root.google.dataflow.v1beta3.StreamingStragglerInfo.verify(message.streamingStraggler);
+                                if (error)
+                                    return "streamingStraggler." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Straggler message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.dataflow.v1beta3.Straggler} Straggler
+                     */
+                    Straggler.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.dataflow.v1beta3.Straggler)
+                            return object;
+                        var message = new $root.google.dataflow.v1beta3.Straggler();
+                        if (object.batchStraggler != null) {
+                            if (typeof object.batchStraggler !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.Straggler.batchStraggler: object expected");
+                            message.batchStraggler = $root.google.dataflow.v1beta3.StragglerInfo.fromObject(object.batchStraggler);
+                        }
+                        if (object.streamingStraggler != null) {
+                            if (typeof object.streamingStraggler !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.Straggler.streamingStraggler: object expected");
+                            message.streamingStraggler = $root.google.dataflow.v1beta3.StreamingStragglerInfo.fromObject(object.streamingStraggler);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Straggler message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @static
+                     * @param {google.dataflow.v1beta3.Straggler} message Straggler
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Straggler.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.batchStraggler != null && message.hasOwnProperty("batchStraggler")) {
+                            object.batchStraggler = $root.google.dataflow.v1beta3.StragglerInfo.toObject(message.batchStraggler, options);
+                            if (options.oneofs)
+                                object.stragglerInfo = "batchStraggler";
+                        }
+                        if (message.streamingStraggler != null && message.hasOwnProperty("streamingStraggler")) {
+                            object.streamingStraggler = $root.google.dataflow.v1beta3.StreamingStragglerInfo.toObject(message.streamingStraggler, options);
+                            if (options.oneofs)
+                                object.stragglerInfo = "streamingStraggler";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Straggler to JSON.
+                     * @function toJSON
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Straggler.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Straggler
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.Straggler
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Straggler.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.Straggler";
+                    };
+    
+                    return Straggler;
+                })();
+    
+                v1beta3.HotKeyDebuggingInfo = (function() {
+    
+                    /**
+                     * Properties of a HotKeyDebuggingInfo.
+                     * @memberof google.dataflow.v1beta3
+                     * @interface IHotKeyDebuggingInfo
+                     * @property {Object.<string,google.dataflow.v1beta3.HotKeyDebuggingInfo.IHotKeyInfo>|null} [detectedHotKeys] HotKeyDebuggingInfo detectedHotKeys
+                     */
+    
+                    /**
+                     * Constructs a new HotKeyDebuggingInfo.
+                     * @memberof google.dataflow.v1beta3
+                     * @classdesc Represents a HotKeyDebuggingInfo.
+                     * @implements IHotKeyDebuggingInfo
+                     * @constructor
+                     * @param {google.dataflow.v1beta3.IHotKeyDebuggingInfo=} [properties] Properties to set
+                     */
+                    function HotKeyDebuggingInfo(properties) {
+                        this.detectedHotKeys = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * HotKeyDebuggingInfo detectedHotKeys.
+                     * @member {Object.<string,google.dataflow.v1beta3.HotKeyDebuggingInfo.IHotKeyInfo>} detectedHotKeys
+                     * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                     * @instance
+                     */
+                    HotKeyDebuggingInfo.prototype.detectedHotKeys = $util.emptyObject;
+    
+                    /**
+                     * Creates a new HotKeyDebuggingInfo instance using the specified properties.
+                     * @function create
+                     * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                     * @static
+                     * @param {google.dataflow.v1beta3.IHotKeyDebuggingInfo=} [properties] Properties to set
+                     * @returns {google.dataflow.v1beta3.HotKeyDebuggingInfo} HotKeyDebuggingInfo instance
+                     */
+                    HotKeyDebuggingInfo.create = function create(properties) {
+                        return new HotKeyDebuggingInfo(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified HotKeyDebuggingInfo message. Does not implicitly {@link google.dataflow.v1beta3.HotKeyDebuggingInfo.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                     * @static
+                     * @param {google.dataflow.v1beta3.IHotKeyDebuggingInfo} message HotKeyDebuggingInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    HotKeyDebuggingInfo.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.detectedHotKeys != null && Object.hasOwnProperty.call(message, "detectedHotKeys"))
+                            for (var keys = Object.keys(message.detectedHotKeys), i = 0; i < keys.length; ++i) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 0 =*/8).uint64(keys[i]);
+                                $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo.encode(message.detectedHotKeys[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                            }
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified HotKeyDebuggingInfo message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.HotKeyDebuggingInfo.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                     * @static
+                     * @param {google.dataflow.v1beta3.IHotKeyDebuggingInfo} message HotKeyDebuggingInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    HotKeyDebuggingInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a HotKeyDebuggingInfo message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.dataflow.v1beta3.HotKeyDebuggingInfo} HotKeyDebuggingInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    HotKeyDebuggingInfo.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.HotKeyDebuggingInfo(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (message.detectedHotKeys === $util.emptyObject)
+                                        message.detectedHotKeys = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = 0;
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.uint64();
+                                            break;
+                                        case 2:
+                                            value = $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.detectedHotKeys[typeof key === "object" ? $util.longToHash(key) : key] = value;
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a HotKeyDebuggingInfo message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.dataflow.v1beta3.HotKeyDebuggingInfo} HotKeyDebuggingInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    HotKeyDebuggingInfo.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a HotKeyDebuggingInfo message.
+                     * @function verify
+                     * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    HotKeyDebuggingInfo.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.detectedHotKeys != null && message.hasOwnProperty("detectedHotKeys")) {
+                            if (!$util.isObject(message.detectedHotKeys))
+                                return "detectedHotKeys: object expected";
+                            var key = Object.keys(message.detectedHotKeys);
+                            for (var i = 0; i < key.length; ++i) {
+                                if (!$util.key64Re.test(key[i]))
+                                    return "detectedHotKeys: integer|Long key{k:uint64} expected";
+                                {
+                                    var error = $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo.verify(message.detectedHotKeys[key[i]]);
+                                    if (error)
+                                        return "detectedHotKeys." + error;
+                                }
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a HotKeyDebuggingInfo message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.dataflow.v1beta3.HotKeyDebuggingInfo} HotKeyDebuggingInfo
+                     */
+                    HotKeyDebuggingInfo.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.dataflow.v1beta3.HotKeyDebuggingInfo)
+                            return object;
+                        var message = new $root.google.dataflow.v1beta3.HotKeyDebuggingInfo();
+                        if (object.detectedHotKeys) {
+                            if (typeof object.detectedHotKeys !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.HotKeyDebuggingInfo.detectedHotKeys: object expected");
+                            message.detectedHotKeys = {};
+                            for (var keys = Object.keys(object.detectedHotKeys), i = 0; i < keys.length; ++i) {
+                                if (typeof object.detectedHotKeys[keys[i]] !== "object")
+                                    throw TypeError(".google.dataflow.v1beta3.HotKeyDebuggingInfo.detectedHotKeys: object expected");
+                                message.detectedHotKeys[keys[i]] = $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo.fromObject(object.detectedHotKeys[keys[i]]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a HotKeyDebuggingInfo message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                     * @static
+                     * @param {google.dataflow.v1beta3.HotKeyDebuggingInfo} message HotKeyDebuggingInfo
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    HotKeyDebuggingInfo.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults)
+                            object.detectedHotKeys = {};
+                        var keys2;
+                        if (message.detectedHotKeys && (keys2 = Object.keys(message.detectedHotKeys)).length) {
+                            object.detectedHotKeys = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.detectedHotKeys[keys2[j]] = $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo.toObject(message.detectedHotKeys[keys2[j]], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this HotKeyDebuggingInfo to JSON.
+                     * @function toJSON
+                     * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    HotKeyDebuggingInfo.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for HotKeyDebuggingInfo
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    HotKeyDebuggingInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.HotKeyDebuggingInfo";
+                    };
+    
+                    HotKeyDebuggingInfo.HotKeyInfo = (function() {
+    
+                        /**
+                         * Properties of a HotKeyInfo.
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                         * @interface IHotKeyInfo
+                         * @property {google.protobuf.IDuration|null} [hotKeyAge] HotKeyInfo hotKeyAge
+                         * @property {string|null} [key] HotKeyInfo key
+                         * @property {boolean|null} [keyTruncated] HotKeyInfo keyTruncated
+                         */
+    
+                        /**
+                         * Constructs a new HotKeyInfo.
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo
+                         * @classdesc Represents a HotKeyInfo.
+                         * @implements IHotKeyInfo
+                         * @constructor
+                         * @param {google.dataflow.v1beta3.HotKeyDebuggingInfo.IHotKeyInfo=} [properties] Properties to set
+                         */
+                        function HotKeyInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HotKeyInfo hotKeyAge.
+                         * @member {google.protobuf.IDuration|null|undefined} hotKeyAge
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @instance
+                         */
+                        HotKeyInfo.prototype.hotKeyAge = null;
+    
+                        /**
+                         * HotKeyInfo key.
+                         * @member {string} key
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @instance
+                         */
+                        HotKeyInfo.prototype.key = "";
+    
+                        /**
+                         * HotKeyInfo keyTruncated.
+                         * @member {boolean} keyTruncated
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @instance
+                         */
+                        HotKeyInfo.prototype.keyTruncated = false;
+    
+                        /**
+                         * Creates a new HotKeyInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @static
+                         * @param {google.dataflow.v1beta3.HotKeyDebuggingInfo.IHotKeyInfo=} [properties] Properties to set
+                         * @returns {google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo} HotKeyInfo instance
+                         */
+                        HotKeyInfo.create = function create(properties) {
+                            return new HotKeyInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HotKeyInfo message. Does not implicitly {@link google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @static
+                         * @param {google.dataflow.v1beta3.HotKeyDebuggingInfo.IHotKeyInfo} message HotKeyInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HotKeyInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hotKeyAge != null && Object.hasOwnProperty.call(message, "hotKeyAge"))
+                                $root.google.protobuf.Duration.encode(message.hotKeyAge, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.key);
+                            if (message.keyTruncated != null && Object.hasOwnProperty.call(message, "keyTruncated"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.keyTruncated);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HotKeyInfo message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @static
+                         * @param {google.dataflow.v1beta3.HotKeyDebuggingInfo.IHotKeyInfo} message HotKeyInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HotKeyInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HotKeyInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo} HotKeyInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HotKeyInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.hotKeyAge = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.key = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.keyTruncated = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HotKeyInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo} HotKeyInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HotKeyInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HotKeyInfo message.
+                         * @function verify
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HotKeyInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.hotKeyAge != null && message.hasOwnProperty("hotKeyAge")) {
+                                var error = $root.google.protobuf.Duration.verify(message.hotKeyAge);
+                                if (error)
+                                    return "hotKeyAge." + error;
+                            }
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                if (!$util.isString(message.key))
+                                    return "key: string expected";
+                            if (message.keyTruncated != null && message.hasOwnProperty("keyTruncated"))
+                                if (typeof message.keyTruncated !== "boolean")
+                                    return "keyTruncated: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HotKeyInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo} HotKeyInfo
+                         */
+                        HotKeyInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo)
+                                return object;
+                            var message = new $root.google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo();
+                            if (object.hotKeyAge != null) {
+                                if (typeof object.hotKeyAge !== "object")
+                                    throw TypeError(".google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo.hotKeyAge: object expected");
+                                message.hotKeyAge = $root.google.protobuf.Duration.fromObject(object.hotKeyAge);
+                            }
+                            if (object.key != null)
+                                message.key = String(object.key);
+                            if (object.keyTruncated != null)
+                                message.keyTruncated = Boolean(object.keyTruncated);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HotKeyInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @static
+                         * @param {google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo} message HotKeyInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HotKeyInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.hotKeyAge = null;
+                                object.key = "";
+                                object.keyTruncated = false;
+                            }
+                            if (message.hotKeyAge != null && message.hasOwnProperty("hotKeyAge"))
+                                object.hotKeyAge = $root.google.protobuf.Duration.toObject(message.hotKeyAge, options);
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                object.key = message.key;
+                            if (message.keyTruncated != null && message.hasOwnProperty("keyTruncated"))
+                                object.keyTruncated = message.keyTruncated;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HotKeyInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HotKeyInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HotKeyInfo
+                         * @function getTypeUrl
+                         * @memberof google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HotKeyInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo";
+                        };
+    
+                        return HotKeyInfo;
+                    })();
+    
+                    return HotKeyDebuggingInfo;
+                })();
+    
+                v1beta3.StragglerSummary = (function() {
+    
+                    /**
+                     * Properties of a StragglerSummary.
+                     * @memberof google.dataflow.v1beta3
+                     * @interface IStragglerSummary
+                     * @property {number|Long|null} [totalStragglerCount] StragglerSummary totalStragglerCount
+                     * @property {Object.<string,number|Long>|null} [stragglerCauseCount] StragglerSummary stragglerCauseCount
+                     * @property {Array.<google.dataflow.v1beta3.IStraggler>|null} [recentStragglers] StragglerSummary recentStragglers
+                     */
+    
+                    /**
+                     * Constructs a new StragglerSummary.
+                     * @memberof google.dataflow.v1beta3
+                     * @classdesc Represents a StragglerSummary.
+                     * @implements IStragglerSummary
+                     * @constructor
+                     * @param {google.dataflow.v1beta3.IStragglerSummary=} [properties] Properties to set
+                     */
+                    function StragglerSummary(properties) {
+                        this.stragglerCauseCount = {};
+                        this.recentStragglers = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * StragglerSummary totalStragglerCount.
+                     * @member {number|Long} totalStragglerCount
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @instance
+                     */
+                    StragglerSummary.prototype.totalStragglerCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * StragglerSummary stragglerCauseCount.
+                     * @member {Object.<string,number|Long>} stragglerCauseCount
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @instance
+                     */
+                    StragglerSummary.prototype.stragglerCauseCount = $util.emptyObject;
+    
+                    /**
+                     * StragglerSummary recentStragglers.
+                     * @member {Array.<google.dataflow.v1beta3.IStraggler>} recentStragglers
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @instance
+                     */
+                    StragglerSummary.prototype.recentStragglers = $util.emptyArray;
+    
+                    /**
+                     * Creates a new StragglerSummary instance using the specified properties.
+                     * @function create
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @static
+                     * @param {google.dataflow.v1beta3.IStragglerSummary=} [properties] Properties to set
+                     * @returns {google.dataflow.v1beta3.StragglerSummary} StragglerSummary instance
+                     */
+                    StragglerSummary.create = function create(properties) {
+                        return new StragglerSummary(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified StragglerSummary message. Does not implicitly {@link google.dataflow.v1beta3.StragglerSummary.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @static
+                     * @param {google.dataflow.v1beta3.IStragglerSummary} message StragglerSummary message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    StragglerSummary.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.totalStragglerCount != null && Object.hasOwnProperty.call(message, "totalStragglerCount"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int64(message.totalStragglerCount);
+                        if (message.stragglerCauseCount != null && Object.hasOwnProperty.call(message, "stragglerCauseCount"))
+                            for (var keys = Object.keys(message.stragglerCauseCount), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).int64(message.stragglerCauseCount[keys[i]]).ldelim();
+                        if (message.recentStragglers != null && message.recentStragglers.length)
+                            for (var i = 0; i < message.recentStragglers.length; ++i)
+                                $root.google.dataflow.v1beta3.Straggler.encode(message.recentStragglers[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified StragglerSummary message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.StragglerSummary.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @static
+                     * @param {google.dataflow.v1beta3.IStragglerSummary} message StragglerSummary message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    StragglerSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a StragglerSummary message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.dataflow.v1beta3.StragglerSummary} StragglerSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    StragglerSummary.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.StragglerSummary(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.totalStragglerCount = reader.int64();
+                                    break;
+                                }
+                            case 2: {
+                                    if (message.stragglerCauseCount === $util.emptyObject)
+                                        message.stragglerCauseCount = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = 0;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.int64();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.stragglerCauseCount[key] = value;
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.recentStragglers && message.recentStragglers.length))
+                                        message.recentStragglers = [];
+                                    message.recentStragglers.push($root.google.dataflow.v1beta3.Straggler.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a StragglerSummary message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.dataflow.v1beta3.StragglerSummary} StragglerSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    StragglerSummary.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a StragglerSummary message.
+                     * @function verify
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    StragglerSummary.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.totalStragglerCount != null && message.hasOwnProperty("totalStragglerCount"))
+                            if (!$util.isInteger(message.totalStragglerCount) && !(message.totalStragglerCount && $util.isInteger(message.totalStragglerCount.low) && $util.isInteger(message.totalStragglerCount.high)))
+                                return "totalStragglerCount: integer|Long expected";
+                        if (message.stragglerCauseCount != null && message.hasOwnProperty("stragglerCauseCount")) {
+                            if (!$util.isObject(message.stragglerCauseCount))
+                                return "stragglerCauseCount: object expected";
+                            var key = Object.keys(message.stragglerCauseCount);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isInteger(message.stragglerCauseCount[key[i]]) && !(message.stragglerCauseCount[key[i]] && $util.isInteger(message.stragglerCauseCount[key[i]].low) && $util.isInteger(message.stragglerCauseCount[key[i]].high)))
+                                    return "stragglerCauseCount: integer|Long{k:string} expected";
+                        }
+                        if (message.recentStragglers != null && message.hasOwnProperty("recentStragglers")) {
+                            if (!Array.isArray(message.recentStragglers))
+                                return "recentStragglers: array expected";
+                            for (var i = 0; i < message.recentStragglers.length; ++i) {
+                                var error = $root.google.dataflow.v1beta3.Straggler.verify(message.recentStragglers[i]);
+                                if (error)
+                                    return "recentStragglers." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a StragglerSummary message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.dataflow.v1beta3.StragglerSummary} StragglerSummary
+                     */
+                    StragglerSummary.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.dataflow.v1beta3.StragglerSummary)
+                            return object;
+                        var message = new $root.google.dataflow.v1beta3.StragglerSummary();
+                        if (object.totalStragglerCount != null)
+                            if ($util.Long)
+                                (message.totalStragglerCount = $util.Long.fromValue(object.totalStragglerCount)).unsigned = false;
+                            else if (typeof object.totalStragglerCount === "string")
+                                message.totalStragglerCount = parseInt(object.totalStragglerCount, 10);
+                            else if (typeof object.totalStragglerCount === "number")
+                                message.totalStragglerCount = object.totalStragglerCount;
+                            else if (typeof object.totalStragglerCount === "object")
+                                message.totalStragglerCount = new $util.LongBits(object.totalStragglerCount.low >>> 0, object.totalStragglerCount.high >>> 0).toNumber();
+                        if (object.stragglerCauseCount) {
+                            if (typeof object.stragglerCauseCount !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.StragglerSummary.stragglerCauseCount: object expected");
+                            message.stragglerCauseCount = {};
+                            for (var keys = Object.keys(object.stragglerCauseCount), i = 0; i < keys.length; ++i)
+                                if ($util.Long)
+                                    (message.stragglerCauseCount[keys[i]] = $util.Long.fromValue(object.stragglerCauseCount[keys[i]])).unsigned = false;
+                                else if (typeof object.stragglerCauseCount[keys[i]] === "string")
+                                    message.stragglerCauseCount[keys[i]] = parseInt(object.stragglerCauseCount[keys[i]], 10);
+                                else if (typeof object.stragglerCauseCount[keys[i]] === "number")
+                                    message.stragglerCauseCount[keys[i]] = object.stragglerCauseCount[keys[i]];
+                                else if (typeof object.stragglerCauseCount[keys[i]] === "object")
+                                    message.stragglerCauseCount[keys[i]] = new $util.LongBits(object.stragglerCauseCount[keys[i]].low >>> 0, object.stragglerCauseCount[keys[i]].high >>> 0).toNumber();
+                        }
+                        if (object.recentStragglers) {
+                            if (!Array.isArray(object.recentStragglers))
+                                throw TypeError(".google.dataflow.v1beta3.StragglerSummary.recentStragglers: array expected");
+                            message.recentStragglers = [];
+                            for (var i = 0; i < object.recentStragglers.length; ++i) {
+                                if (typeof object.recentStragglers[i] !== "object")
+                                    throw TypeError(".google.dataflow.v1beta3.StragglerSummary.recentStragglers: object expected");
+                                message.recentStragglers[i] = $root.google.dataflow.v1beta3.Straggler.fromObject(object.recentStragglers[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a StragglerSummary message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @static
+                     * @param {google.dataflow.v1beta3.StragglerSummary} message StragglerSummary
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    StragglerSummary.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.recentStragglers = [];
+                        if (options.objects || options.defaults)
+                            object.stragglerCauseCount = {};
+                        if (options.defaults)
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.totalStragglerCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.totalStragglerCount = options.longs === String ? "0" : 0;
+                        if (message.totalStragglerCount != null && message.hasOwnProperty("totalStragglerCount"))
+                            if (typeof message.totalStragglerCount === "number")
+                                object.totalStragglerCount = options.longs === String ? String(message.totalStragglerCount) : message.totalStragglerCount;
+                            else
+                                object.totalStragglerCount = options.longs === String ? $util.Long.prototype.toString.call(message.totalStragglerCount) : options.longs === Number ? new $util.LongBits(message.totalStragglerCount.low >>> 0, message.totalStragglerCount.high >>> 0).toNumber() : message.totalStragglerCount;
+                        var keys2;
+                        if (message.stragglerCauseCount && (keys2 = Object.keys(message.stragglerCauseCount)).length) {
+                            object.stragglerCauseCount = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                if (typeof message.stragglerCauseCount[keys2[j]] === "number")
+                                    object.stragglerCauseCount[keys2[j]] = options.longs === String ? String(message.stragglerCauseCount[keys2[j]]) : message.stragglerCauseCount[keys2[j]];
+                                else
+                                    object.stragglerCauseCount[keys2[j]] = options.longs === String ? $util.Long.prototype.toString.call(message.stragglerCauseCount[keys2[j]]) : options.longs === Number ? new $util.LongBits(message.stragglerCauseCount[keys2[j]].low >>> 0, message.stragglerCauseCount[keys2[j]].high >>> 0).toNumber() : message.stragglerCauseCount[keys2[j]];
+                        }
+                        if (message.recentStragglers && message.recentStragglers.length) {
+                            object.recentStragglers = [];
+                            for (var j = 0; j < message.recentStragglers.length; ++j)
+                                object.recentStragglers[j] = $root.google.dataflow.v1beta3.Straggler.toObject(message.recentStragglers[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this StragglerSummary to JSON.
+                     * @function toJSON
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    StragglerSummary.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for StragglerSummary
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.StragglerSummary
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    StragglerSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.StragglerSummary";
+                    };
+    
+                    return StragglerSummary;
+                })();
+    
                 /**
                  * ExecutionState enum.
                  * @name google.dataflow.v1beta3.ExecutionState
@@ -20075,6 +23614,7 @@
                      * @property {google.protobuf.ITimestamp|null} [endTime] StageSummary endTime
                      * @property {google.dataflow.v1beta3.IProgressTimeseries|null} [progress] StageSummary progress
                      * @property {Array.<google.dataflow.v1beta3.IMetricUpdate>|null} [metrics] StageSummary metrics
+                     * @property {google.dataflow.v1beta3.IStragglerSummary|null} [stragglerSummary] StageSummary stragglerSummary
                      */
     
                     /**
@@ -20142,6 +23682,14 @@
                     StageSummary.prototype.metrics = $util.emptyArray;
     
                     /**
+                     * StageSummary stragglerSummary.
+                     * @member {google.dataflow.v1beta3.IStragglerSummary|null|undefined} stragglerSummary
+                     * @memberof google.dataflow.v1beta3.StageSummary
+                     * @instance
+                     */
+                    StageSummary.prototype.stragglerSummary = null;
+    
+                    /**
                      * Creates a new StageSummary instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.StageSummary
@@ -20178,6 +23726,8 @@
                         if (message.metrics != null && message.metrics.length)
                             for (var i = 0; i < message.metrics.length; ++i)
                                 $root.google.dataflow.v1beta3.MetricUpdate.encode(message.metrics[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.stragglerSummary != null && Object.hasOwnProperty.call(message, "stragglerSummary"))
+                            $root.google.dataflow.v1beta3.StragglerSummary.encode(message.stragglerSummary, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                         return writer;
                     };
     
@@ -20236,6 +23786,10 @@
                                     if (!(message.metrics && message.metrics.length))
                                         message.metrics = [];
                                     message.metrics.push($root.google.dataflow.v1beta3.MetricUpdate.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 7: {
+                                    message.stragglerSummary = $root.google.dataflow.v1beta3.StragglerSummary.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -20312,6 +23866,11 @@
                                     return "metrics." + error;
                             }
                         }
+                        if (message.stragglerSummary != null && message.hasOwnProperty("stragglerSummary")) {
+                            var error = $root.google.dataflow.v1beta3.StragglerSummary.verify(message.stragglerSummary);
+                            if (error)
+                                return "stragglerSummary." + error;
+                        }
                         return null;
                     };
     
@@ -20386,6 +23945,11 @@
                                 message.metrics[i] = $root.google.dataflow.v1beta3.MetricUpdate.fromObject(object.metrics[i]);
                             }
                         }
+                        if (object.stragglerSummary != null) {
+                            if (typeof object.stragglerSummary !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.StageSummary.stragglerSummary: object expected");
+                            message.stragglerSummary = $root.google.dataflow.v1beta3.StragglerSummary.fromObject(object.stragglerSummary);
+                        }
                         return message;
                     };
     
@@ -20410,6 +23974,7 @@
                             object.startTime = null;
                             object.endTime = null;
                             object.progress = null;
+                            object.stragglerSummary = null;
                         }
                         if (message.stageId != null && message.hasOwnProperty("stageId"))
                             object.stageId = message.stageId;
@@ -20426,6 +23991,8 @@
                             for (var j = 0; j < message.metrics.length; ++j)
                                 object.metrics[j] = $root.google.dataflow.v1beta3.MetricUpdate.toObject(message.metrics[j], options);
                         }
+                        if (message.stragglerSummary != null && message.hasOwnProperty("stragglerSummary"))
+                            object.stragglerSummary = $root.google.dataflow.v1beta3.StragglerSummary.toObject(message.stragglerSummary, options);
                         return object;
                     };
     
@@ -21094,6 +24661,7 @@
                      * @property {google.dataflow.v1beta3.ExecutionState|null} [state] WorkItemDetails state
                      * @property {google.dataflow.v1beta3.IProgressTimeseries|null} [progress] WorkItemDetails progress
                      * @property {Array.<google.dataflow.v1beta3.IMetricUpdate>|null} [metrics] WorkItemDetails metrics
+                     * @property {google.dataflow.v1beta3.IStragglerInfo|null} [stragglerInfo] WorkItemDetails stragglerInfo
                      */
     
                     /**
@@ -21169,6 +24737,14 @@
                     WorkItemDetails.prototype.metrics = $util.emptyArray;
     
                     /**
+                     * WorkItemDetails stragglerInfo.
+                     * @member {google.dataflow.v1beta3.IStragglerInfo|null|undefined} stragglerInfo
+                     * @memberof google.dataflow.v1beta3.WorkItemDetails
+                     * @instance
+                     */
+                    WorkItemDetails.prototype.stragglerInfo = null;
+    
+                    /**
                      * Creates a new WorkItemDetails instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.WorkItemDetails
@@ -21207,6 +24783,8 @@
                         if (message.metrics != null && message.metrics.length)
                             for (var i = 0; i < message.metrics.length; ++i)
                                 $root.google.dataflow.v1beta3.MetricUpdate.encode(message.metrics[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.stragglerInfo != null && Object.hasOwnProperty.call(message, "stragglerInfo"))
+                            $root.google.dataflow.v1beta3.StragglerInfo.encode(message.stragglerInfo, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                         return writer;
                     };
     
@@ -21269,6 +24847,10 @@
                                     if (!(message.metrics && message.metrics.length))
                                         message.metrics = [];
                                     message.metrics.push($root.google.dataflow.v1beta3.MetricUpdate.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 8: {
+                                    message.stragglerInfo = $root.google.dataflow.v1beta3.StragglerInfo.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -21348,6 +24930,11 @@
                                     return "metrics." + error;
                             }
                         }
+                        if (message.stragglerInfo != null && message.hasOwnProperty("stragglerInfo")) {
+                            var error = $root.google.dataflow.v1beta3.StragglerInfo.verify(message.stragglerInfo);
+                            if (error)
+                                return "stragglerInfo." + error;
+                        }
                         return null;
                     };
     
@@ -21424,6 +25011,11 @@
                                 message.metrics[i] = $root.google.dataflow.v1beta3.MetricUpdate.fromObject(object.metrics[i]);
                             }
                         }
+                        if (object.stragglerInfo != null) {
+                            if (typeof object.stragglerInfo !== "object")
+                                throw TypeError(".google.dataflow.v1beta3.WorkItemDetails.stragglerInfo: object expected");
+                            message.stragglerInfo = $root.google.dataflow.v1beta3.StragglerInfo.fromObject(object.stragglerInfo);
+                        }
                         return message;
                     };
     
@@ -21449,6 +25041,7 @@
                             object.endTime = null;
                             object.state = options.enums === String ? "EXECUTION_STATE_UNKNOWN" : 0;
                             object.progress = null;
+                            object.stragglerInfo = null;
                         }
                         if (message.taskId != null && message.hasOwnProperty("taskId"))
                             object.taskId = message.taskId;
@@ -21467,6 +25060,8 @@
                             for (var j = 0; j < message.metrics.length; ++j)
                                 object.metrics[j] = $root.google.dataflow.v1beta3.MetricUpdate.toObject(message.metrics[j], options);
                         }
+                        if (message.stragglerInfo != null && message.hasOwnProperty("stragglerInfo"))
+                            object.stragglerInfo = $root.google.dataflow.v1beta3.StragglerInfo.toObject(message.stragglerInfo, options);
                         return object;
                     };
     
@@ -22384,6 +25979,7 @@
                      * @property {boolean|null} [dropLateData] PubsubLocation dropLateData
                      * @property {string|null} [trackingSubscription] PubsubLocation trackingSubscription
                      * @property {boolean|null} [withAttributes] PubsubLocation withAttributes
+                     * @property {boolean|null} [dynamicDestinations] PubsubLocation dynamicDestinations
                      */
     
                     /**
@@ -22458,6 +26054,14 @@
                     PubsubLocation.prototype.withAttributes = false;
     
                     /**
+                     * PubsubLocation dynamicDestinations.
+                     * @member {boolean} dynamicDestinations
+                     * @memberof google.dataflow.v1beta3.PubsubLocation
+                     * @instance
+                     */
+                    PubsubLocation.prototype.dynamicDestinations = false;
+    
+                    /**
                      * Creates a new PubsubLocation instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.PubsubLocation
@@ -22495,6 +26099,8 @@
                             writer.uint32(/* id 6, wireType 2 =*/50).string(message.trackingSubscription);
                         if (message.withAttributes != null && Object.hasOwnProperty.call(message, "withAttributes"))
                             writer.uint32(/* id 7, wireType 0 =*/56).bool(message.withAttributes);
+                        if (message.dynamicDestinations != null && Object.hasOwnProperty.call(message, "dynamicDestinations"))
+                            writer.uint32(/* id 8, wireType 0 =*/64).bool(message.dynamicDestinations);
                         return writer;
                     };
     
@@ -22557,6 +26163,10 @@
                                     message.withAttributes = reader.bool();
                                     break;
                                 }
+                            case 8: {
+                                    message.dynamicDestinations = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -22613,6 +26223,9 @@
                         if (message.withAttributes != null && message.hasOwnProperty("withAttributes"))
                             if (typeof message.withAttributes !== "boolean")
                                 return "withAttributes: boolean expected";
+                        if (message.dynamicDestinations != null && message.hasOwnProperty("dynamicDestinations"))
+                            if (typeof message.dynamicDestinations !== "boolean")
+                                return "dynamicDestinations: boolean expected";
                         return null;
                     };
     
@@ -22642,6 +26255,8 @@
                             message.trackingSubscription = String(object.trackingSubscription);
                         if (object.withAttributes != null)
                             message.withAttributes = Boolean(object.withAttributes);
+                        if (object.dynamicDestinations != null)
+                            message.dynamicDestinations = Boolean(object.dynamicDestinations);
                         return message;
                     };
     
@@ -22666,6 +26281,7 @@
                             object.dropLateData = false;
                             object.trackingSubscription = "";
                             object.withAttributes = false;
+                            object.dynamicDestinations = false;
                         }
                         if (message.topic != null && message.hasOwnProperty("topic"))
                             object.topic = message.topic;
@@ -22681,6 +26297,8 @@
                             object.trackingSubscription = message.trackingSubscription;
                         if (message.withAttributes != null && message.hasOwnProperty("withAttributes"))
                             object.withAttributes = message.withAttributes;
+                        if (message.dynamicDestinations != null && message.hasOwnProperty("dynamicDestinations"))
+                            object.dynamicDestinations = message.dynamicDestinations;
                         return object;
                     };
     
@@ -26197,6 +29815,9 @@
                      * @property {google.dataflow.v1beta3.ITemplateMetadata|null} [metadata] ContainerSpec metadata
                      * @property {google.dataflow.v1beta3.ISDKInfo|null} [sdkInfo] ContainerSpec sdkInfo
                      * @property {google.dataflow.v1beta3.IFlexTemplateRuntimeEnvironment|null} [defaultEnvironment] ContainerSpec defaultEnvironment
+                     * @property {string|null} [imageRepositoryUsernameSecretId] ContainerSpec imageRepositoryUsernameSecretId
+                     * @property {string|null} [imageRepositoryPasswordSecretId] ContainerSpec imageRepositoryPasswordSecretId
+                     * @property {string|null} [imageRepositoryCertPath] ContainerSpec imageRepositoryCertPath
                      */
     
                     /**
@@ -26247,6 +29868,30 @@
                     ContainerSpec.prototype.defaultEnvironment = null;
     
                     /**
+                     * ContainerSpec imageRepositoryUsernameSecretId.
+                     * @member {string} imageRepositoryUsernameSecretId
+                     * @memberof google.dataflow.v1beta3.ContainerSpec
+                     * @instance
+                     */
+                    ContainerSpec.prototype.imageRepositoryUsernameSecretId = "";
+    
+                    /**
+                     * ContainerSpec imageRepositoryPasswordSecretId.
+                     * @member {string} imageRepositoryPasswordSecretId
+                     * @memberof google.dataflow.v1beta3.ContainerSpec
+                     * @instance
+                     */
+                    ContainerSpec.prototype.imageRepositoryPasswordSecretId = "";
+    
+                    /**
+                     * ContainerSpec imageRepositoryCertPath.
+                     * @member {string} imageRepositoryCertPath
+                     * @memberof google.dataflow.v1beta3.ContainerSpec
+                     * @instance
+                     */
+                    ContainerSpec.prototype.imageRepositoryCertPath = "";
+    
+                    /**
                      * Creates a new ContainerSpec instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.ContainerSpec
@@ -26278,6 +29923,12 @@
                             $root.google.dataflow.v1beta3.SDKInfo.encode(message.sdkInfo, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         if (message.defaultEnvironment != null && Object.hasOwnProperty.call(message, "defaultEnvironment"))
                             $root.google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment.encode(message.defaultEnvironment, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.imageRepositoryUsernameSecretId != null && Object.hasOwnProperty.call(message, "imageRepositoryUsernameSecretId"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.imageRepositoryUsernameSecretId);
+                        if (message.imageRepositoryPasswordSecretId != null && Object.hasOwnProperty.call(message, "imageRepositoryPasswordSecretId"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.imageRepositoryPasswordSecretId);
+                        if (message.imageRepositoryCertPath != null && Object.hasOwnProperty.call(message, "imageRepositoryCertPath"))
+                            writer.uint32(/* id 7, wireType 2 =*/58).string(message.imageRepositoryCertPath);
                         return writer;
                     };
     
@@ -26326,6 +29977,18 @@
                                 }
                             case 4: {
                                     message.defaultEnvironment = $root.google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.imageRepositoryUsernameSecretId = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.imageRepositoryPasswordSecretId = reader.string();
+                                    break;
+                                }
+                            case 7: {
+                                    message.imageRepositoryCertPath = reader.string();
                                     break;
                                 }
                             default:
@@ -26381,6 +30044,15 @@
                             if (error)
                                 return "defaultEnvironment." + error;
                         }
+                        if (message.imageRepositoryUsernameSecretId != null && message.hasOwnProperty("imageRepositoryUsernameSecretId"))
+                            if (!$util.isString(message.imageRepositoryUsernameSecretId))
+                                return "imageRepositoryUsernameSecretId: string expected";
+                        if (message.imageRepositoryPasswordSecretId != null && message.hasOwnProperty("imageRepositoryPasswordSecretId"))
+                            if (!$util.isString(message.imageRepositoryPasswordSecretId))
+                                return "imageRepositoryPasswordSecretId: string expected";
+                        if (message.imageRepositoryCertPath != null && message.hasOwnProperty("imageRepositoryCertPath"))
+                            if (!$util.isString(message.imageRepositoryCertPath))
+                                return "imageRepositoryCertPath: string expected";
                         return null;
                     };
     
@@ -26413,6 +30085,12 @@
                                 throw TypeError(".google.dataflow.v1beta3.ContainerSpec.defaultEnvironment: object expected");
                             message.defaultEnvironment = $root.google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment.fromObject(object.defaultEnvironment);
                         }
+                        if (object.imageRepositoryUsernameSecretId != null)
+                            message.imageRepositoryUsernameSecretId = String(object.imageRepositoryUsernameSecretId);
+                        if (object.imageRepositoryPasswordSecretId != null)
+                            message.imageRepositoryPasswordSecretId = String(object.imageRepositoryPasswordSecretId);
+                        if (object.imageRepositoryCertPath != null)
+                            message.imageRepositoryCertPath = String(object.imageRepositoryCertPath);
                         return message;
                     };
     
@@ -26434,6 +30112,9 @@
                             object.metadata = null;
                             object.sdkInfo = null;
                             object.defaultEnvironment = null;
+                            object.imageRepositoryUsernameSecretId = "";
+                            object.imageRepositoryPasswordSecretId = "";
+                            object.imageRepositoryCertPath = "";
                         }
                         if (message.image != null && message.hasOwnProperty("image"))
                             object.image = message.image;
@@ -26443,6 +30124,12 @@
                             object.sdkInfo = $root.google.dataflow.v1beta3.SDKInfo.toObject(message.sdkInfo, options);
                         if (message.defaultEnvironment != null && message.hasOwnProperty("defaultEnvironment"))
                             object.defaultEnvironment = $root.google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment.toObject(message.defaultEnvironment, options);
+                        if (message.imageRepositoryUsernameSecretId != null && message.hasOwnProperty("imageRepositoryUsernameSecretId"))
+                            object.imageRepositoryUsernameSecretId = message.imageRepositoryUsernameSecretId;
+                        if (message.imageRepositoryPasswordSecretId != null && message.hasOwnProperty("imageRepositoryPasswordSecretId"))
+                            object.imageRepositoryPasswordSecretId = message.imageRepositoryPasswordSecretId;
+                        if (message.imageRepositoryCertPath != null && message.hasOwnProperty("imageRepositoryCertPath"))
+                            object.imageRepositoryCertPath = message.imageRepositoryCertPath;
                         return object;
                     };
     
@@ -27010,6 +30697,8 @@
                      * @property {boolean|null} [dumpHeapOnOom] FlexTemplateRuntimeEnvironment dumpHeapOnOom
                      * @property {string|null} [saveHeapDumpsToGcsPath] FlexTemplateRuntimeEnvironment saveHeapDumpsToGcsPath
                      * @property {string|null} [launcherMachineType] FlexTemplateRuntimeEnvironment launcherMachineType
+                     * @property {boolean|null} [enableLauncherVmSerialPortLogging] FlexTemplateRuntimeEnvironment enableLauncherVmSerialPortLogging
+                     * @property {google.dataflow.v1beta3.StreamingMode|null} [streamingMode] FlexTemplateRuntimeEnvironment streamingMode
                      */
     
                     /**
@@ -27214,6 +30903,36 @@
                     FlexTemplateRuntimeEnvironment.prototype.launcherMachineType = "";
     
                     /**
+                     * FlexTemplateRuntimeEnvironment enableLauncherVmSerialPortLogging.
+                     * @member {boolean} enableLauncherVmSerialPortLogging
+                     * @memberof google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment
+                     * @instance
+                     */
+                    FlexTemplateRuntimeEnvironment.prototype.enableLauncherVmSerialPortLogging = false;
+    
+                    /**
+                     * FlexTemplateRuntimeEnvironment streamingMode.
+                     * @member {google.dataflow.v1beta3.StreamingMode|null|undefined} streamingMode
+                     * @memberof google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment
+                     * @instance
+                     */
+                    FlexTemplateRuntimeEnvironment.prototype.streamingMode = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * FlexTemplateRuntimeEnvironment _streamingMode.
+                     * @member {"streamingMode"|undefined} _streamingMode
+                     * @memberof google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment
+                     * @instance
+                     */
+                    Object.defineProperty(FlexTemplateRuntimeEnvironment.prototype, "_streamingMode", {
+                        get: $util.oneOfGetter($oneOfFields = ["streamingMode"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
                      * Creates a new FlexTemplateRuntimeEnvironment instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.FlexTemplateRuntimeEnvironment
@@ -27285,6 +31004,10 @@
                             writer.uint32(/* id 23, wireType 2 =*/186).string(message.saveHeapDumpsToGcsPath);
                         if (message.launcherMachineType != null && Object.hasOwnProperty.call(message, "launcherMachineType"))
                             writer.uint32(/* id 24, wireType 2 =*/194).string(message.launcherMachineType);
+                        if (message.enableLauncherVmSerialPortLogging != null && Object.hasOwnProperty.call(message, "enableLauncherVmSerialPortLogging"))
+                            writer.uint32(/* id 25, wireType 0 =*/200).bool(message.enableLauncherVmSerialPortLogging);
+                        if (message.streamingMode != null && Object.hasOwnProperty.call(message, "streamingMode"))
+                            writer.uint32(/* id 26, wireType 0 =*/208).int32(message.streamingMode);
                         return writer;
                     };
     
@@ -27432,6 +31155,14 @@
                                     message.launcherMachineType = reader.string();
                                     break;
                                 }
+                            case 25: {
+                                    message.enableLauncherVmSerialPortLogging = reader.bool();
+                                    break;
+                                }
+                            case 26: {
+                                    message.streamingMode = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -27467,6 +31198,7 @@
                     FlexTemplateRuntimeEnvironment.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        var properties = {};
                         if (message.numWorkers != null && message.hasOwnProperty("numWorkers"))
                             if (!$util.isInteger(message.numWorkers))
                                 return "numWorkers: integer expected";
@@ -27563,6 +31295,20 @@
                         if (message.launcherMachineType != null && message.hasOwnProperty("launcherMachineType"))
                             if (!$util.isString(message.launcherMachineType))
                                 return "launcherMachineType: string expected";
+                        if (message.enableLauncherVmSerialPortLogging != null && message.hasOwnProperty("enableLauncherVmSerialPortLogging"))
+                            if (typeof message.enableLauncherVmSerialPortLogging !== "boolean")
+                                return "enableLauncherVmSerialPortLogging: boolean expected";
+                        if (message.streamingMode != null && message.hasOwnProperty("streamingMode")) {
+                            properties._streamingMode = 1;
+                            switch (message.streamingMode) {
+                            default:
+                                return "streamingMode: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        }
                         return null;
                     };
     
@@ -27688,6 +31434,28 @@
                             message.saveHeapDumpsToGcsPath = String(object.saveHeapDumpsToGcsPath);
                         if (object.launcherMachineType != null)
                             message.launcherMachineType = String(object.launcherMachineType);
+                        if (object.enableLauncherVmSerialPortLogging != null)
+                            message.enableLauncherVmSerialPortLogging = Boolean(object.enableLauncherVmSerialPortLogging);
+                        switch (object.streamingMode) {
+                        default:
+                            if (typeof object.streamingMode === "number") {
+                                message.streamingMode = object.streamingMode;
+                                break;
+                            }
+                            break;
+                        case "STREAMING_MODE_UNSPECIFIED":
+                        case 0:
+                            message.streamingMode = 0;
+                            break;
+                        case "STREAMING_MODE_EXACTLY_ONCE":
+                        case 1:
+                            message.streamingMode = 1;
+                            break;
+                        case "STREAMING_MODE_AT_LEAST_ONCE":
+                        case 2:
+                            message.streamingMode = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -27730,6 +31498,7 @@
                             object.dumpHeapOnOom = false;
                             object.saveHeapDumpsToGcsPath = "";
                             object.launcherMachineType = "";
+                            object.enableLauncherVmSerialPortLogging = false;
                         }
                         if (message.numWorkers != null && message.hasOwnProperty("numWorkers"))
                             object.numWorkers = message.numWorkers;
@@ -27784,6 +31553,13 @@
                             object.saveHeapDumpsToGcsPath = message.saveHeapDumpsToGcsPath;
                         if (message.launcherMachineType != null && message.hasOwnProperty("launcherMachineType"))
                             object.launcherMachineType = message.launcherMachineType;
+                        if (message.enableLauncherVmSerialPortLogging != null && message.hasOwnProperty("enableLauncherVmSerialPortLogging"))
+                            object.enableLauncherVmSerialPortLogging = message.enableLauncherVmSerialPortLogging;
+                        if (message.streamingMode != null && message.hasOwnProperty("streamingMode")) {
+                            object.streamingMode = options.enums === String ? $root.google.dataflow.v1beta3.StreamingMode[message.streamingMode] === undefined ? message.streamingMode : $root.google.dataflow.v1beta3.StreamingMode[message.streamingMode] : message.streamingMode;
+                            if (options.oneofs)
+                                object._streamingMode = "streamingMode";
+                        }
                         return object;
                     };
     
@@ -28116,6 +31892,8 @@
                      * @property {string|null} [workerRegion] RuntimeEnvironment workerRegion
                      * @property {string|null} [workerZone] RuntimeEnvironment workerZone
                      * @property {boolean|null} [enableStreamingEngine] RuntimeEnvironment enableStreamingEngine
+                     * @property {number|null} [diskSizeGb] RuntimeEnvironment diskSizeGb
+                     * @property {google.dataflow.v1beta3.StreamingMode|null} [streamingMode] RuntimeEnvironment streamingMode
                      */
     
                     /**
@@ -28264,6 +32042,36 @@
                     RuntimeEnvironment.prototype.enableStreamingEngine = false;
     
                     /**
+                     * RuntimeEnvironment diskSizeGb.
+                     * @member {number} diskSizeGb
+                     * @memberof google.dataflow.v1beta3.RuntimeEnvironment
+                     * @instance
+                     */
+                    RuntimeEnvironment.prototype.diskSizeGb = 0;
+    
+                    /**
+                     * RuntimeEnvironment streamingMode.
+                     * @member {google.dataflow.v1beta3.StreamingMode|null|undefined} streamingMode
+                     * @memberof google.dataflow.v1beta3.RuntimeEnvironment
+                     * @instance
+                     */
+                    RuntimeEnvironment.prototype.streamingMode = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * RuntimeEnvironment _streamingMode.
+                     * @member {"streamingMode"|undefined} _streamingMode
+                     * @memberof google.dataflow.v1beta3.RuntimeEnvironment
+                     * @instance
+                     */
+                    Object.defineProperty(RuntimeEnvironment.prototype, "_streamingMode", {
+                        get: $util.oneOfGetter($oneOfFields = ["streamingMode"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
                      * Creates a new RuntimeEnvironment instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.RuntimeEnvironment
@@ -28321,6 +32129,10 @@
                             writer.uint32(/* id 16, wireType 2 =*/130).string(message.workerZone);
                         if (message.enableStreamingEngine != null && Object.hasOwnProperty.call(message, "enableStreamingEngine"))
                             writer.uint32(/* id 17, wireType 0 =*/136).bool(message.enableStreamingEngine);
+                        if (message.diskSizeGb != null && Object.hasOwnProperty.call(message, "diskSizeGb"))
+                            writer.uint32(/* id 18, wireType 0 =*/144).int32(message.diskSizeGb);
+                        if (message.streamingMode != null && Object.hasOwnProperty.call(message, "streamingMode"))
+                            writer.uint32(/* id 19, wireType 0 =*/152).int32(message.streamingMode);
                         return writer;
                     };
     
@@ -28440,6 +32252,14 @@
                                     message.enableStreamingEngine = reader.bool();
                                     break;
                                 }
+                            case 18: {
+                                    message.diskSizeGb = reader.int32();
+                                    break;
+                                }
+                            case 19: {
+                                    message.streamingMode = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -28475,6 +32295,7 @@
                     RuntimeEnvironment.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        var properties = {};
                         if (message.numWorkers != null && message.hasOwnProperty("numWorkers"))
                             if (!$util.isInteger(message.numWorkers))
                                 return "numWorkers: integer expected";
@@ -28538,6 +32359,20 @@
                         if (message.enableStreamingEngine != null && message.hasOwnProperty("enableStreamingEngine"))
                             if (typeof message.enableStreamingEngine !== "boolean")
                                 return "enableStreamingEngine: boolean expected";
+                        if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
+                            if (!$util.isInteger(message.diskSizeGb))
+                                return "diskSizeGb: integer expected";
+                        if (message.streamingMode != null && message.hasOwnProperty("streamingMode")) {
+                            properties._streamingMode = 1;
+                            switch (message.streamingMode) {
+                            default:
+                                return "streamingMode: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        }
                         return null;
                     };
     
@@ -28613,6 +32448,28 @@
                             message.workerZone = String(object.workerZone);
                         if (object.enableStreamingEngine != null)
                             message.enableStreamingEngine = Boolean(object.enableStreamingEngine);
+                        if (object.diskSizeGb != null)
+                            message.diskSizeGb = object.diskSizeGb | 0;
+                        switch (object.streamingMode) {
+                        default:
+                            if (typeof object.streamingMode === "number") {
+                                message.streamingMode = object.streamingMode;
+                                break;
+                            }
+                            break;
+                        case "STREAMING_MODE_UNSPECIFIED":
+                        case 0:
+                            message.streamingMode = 0;
+                            break;
+                        case "STREAMING_MODE_EXACTLY_ONCE":
+                        case 1:
+                            message.streamingMode = 1;
+                            break;
+                        case "STREAMING_MODE_AT_LEAST_ONCE":
+                        case 2:
+                            message.streamingMode = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -28648,6 +32505,7 @@
                             object.workerRegion = "";
                             object.workerZone = "";
                             object.enableStreamingEngine = false;
+                            object.diskSizeGb = 0;
                         }
                         if (message.maxWorkers != null && message.hasOwnProperty("maxWorkers"))
                             object.maxWorkers = message.maxWorkers;
@@ -28688,6 +32546,13 @@
                             object.workerZone = message.workerZone;
                         if (message.enableStreamingEngine != null && message.hasOwnProperty("enableStreamingEngine"))
                             object.enableStreamingEngine = message.enableStreamingEngine;
+                        if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
+                            object.diskSizeGb = message.diskSizeGb;
+                        if (message.streamingMode != null && message.hasOwnProperty("streamingMode")) {
+                            object.streamingMode = options.enums === String ? $root.google.dataflow.v1beta3.StreamingMode[message.streamingMode] === undefined ? message.streamingMode : $root.google.dataflow.v1beta3.StreamingMode[message.streamingMode] : message.streamingMode;
+                            if (options.oneofs)
+                                object._streamingMode = "streamingMode";
+                        }
                         return object;
                     };
     
@@ -28720,6 +32585,256 @@
                     return RuntimeEnvironment;
                 })();
     
+                v1beta3.ParameterMetadataEnumOption = (function() {
+    
+                    /**
+                     * Properties of a ParameterMetadataEnumOption.
+                     * @memberof google.dataflow.v1beta3
+                     * @interface IParameterMetadataEnumOption
+                     * @property {string|null} [value] ParameterMetadataEnumOption value
+                     * @property {string|null} [label] ParameterMetadataEnumOption label
+                     * @property {string|null} [description] ParameterMetadataEnumOption description
+                     */
+    
+                    /**
+                     * Constructs a new ParameterMetadataEnumOption.
+                     * @memberof google.dataflow.v1beta3
+                     * @classdesc Represents a ParameterMetadataEnumOption.
+                     * @implements IParameterMetadataEnumOption
+                     * @constructor
+                     * @param {google.dataflow.v1beta3.IParameterMetadataEnumOption=} [properties] Properties to set
+                     */
+                    function ParameterMetadataEnumOption(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ParameterMetadataEnumOption value.
+                     * @member {string} value
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @instance
+                     */
+                    ParameterMetadataEnumOption.prototype.value = "";
+    
+                    /**
+                     * ParameterMetadataEnumOption label.
+                     * @member {string} label
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @instance
+                     */
+                    ParameterMetadataEnumOption.prototype.label = "";
+    
+                    /**
+                     * ParameterMetadataEnumOption description.
+                     * @member {string} description
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @instance
+                     */
+                    ParameterMetadataEnumOption.prototype.description = "";
+    
+                    /**
+                     * Creates a new ParameterMetadataEnumOption instance using the specified properties.
+                     * @function create
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @static
+                     * @param {google.dataflow.v1beta3.IParameterMetadataEnumOption=} [properties] Properties to set
+                     * @returns {google.dataflow.v1beta3.ParameterMetadataEnumOption} ParameterMetadataEnumOption instance
+                     */
+                    ParameterMetadataEnumOption.create = function create(properties) {
+                        return new ParameterMetadataEnumOption(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ParameterMetadataEnumOption message. Does not implicitly {@link google.dataflow.v1beta3.ParameterMetadataEnumOption.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @static
+                     * @param {google.dataflow.v1beta3.IParameterMetadataEnumOption} message ParameterMetadataEnumOption message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ParameterMetadataEnumOption.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                        if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.label);
+                        if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ParameterMetadataEnumOption message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.ParameterMetadataEnumOption.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @static
+                     * @param {google.dataflow.v1beta3.IParameterMetadataEnumOption} message ParameterMetadataEnumOption message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ParameterMetadataEnumOption.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ParameterMetadataEnumOption message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.dataflow.v1beta3.ParameterMetadataEnumOption} ParameterMetadataEnumOption
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ParameterMetadataEnumOption.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.dataflow.v1beta3.ParameterMetadataEnumOption();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.value = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.label = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.description = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ParameterMetadataEnumOption message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.dataflow.v1beta3.ParameterMetadataEnumOption} ParameterMetadataEnumOption
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ParameterMetadataEnumOption.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ParameterMetadataEnumOption message.
+                     * @function verify
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ParameterMetadataEnumOption.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            if (!$util.isString(message.value))
+                                return "value: string expected";
+                        if (message.label != null && message.hasOwnProperty("label"))
+                            if (!$util.isString(message.label))
+                                return "label: string expected";
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            if (!$util.isString(message.description))
+                                return "description: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ParameterMetadataEnumOption message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.dataflow.v1beta3.ParameterMetadataEnumOption} ParameterMetadataEnumOption
+                     */
+                    ParameterMetadataEnumOption.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.dataflow.v1beta3.ParameterMetadataEnumOption)
+                            return object;
+                        var message = new $root.google.dataflow.v1beta3.ParameterMetadataEnumOption();
+                        if (object.value != null)
+                            message.value = String(object.value);
+                        if (object.label != null)
+                            message.label = String(object.label);
+                        if (object.description != null)
+                            message.description = String(object.description);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ParameterMetadataEnumOption message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @static
+                     * @param {google.dataflow.v1beta3.ParameterMetadataEnumOption} message ParameterMetadataEnumOption
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ParameterMetadataEnumOption.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.value = "";
+                            object.label = "";
+                            object.description = "";
+                        }
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            object.value = message.value;
+                        if (message.label != null && message.hasOwnProperty("label"))
+                            object.label = message.label;
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            object.description = message.description;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ParameterMetadataEnumOption to JSON.
+                     * @function toJSON
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ParameterMetadataEnumOption.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ParameterMetadataEnumOption
+                     * @function getTypeUrl
+                     * @memberof google.dataflow.v1beta3.ParameterMetadataEnumOption
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ParameterMetadataEnumOption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.dataflow.v1beta3.ParameterMetadataEnumOption";
+                    };
+    
+                    return ParameterMetadataEnumOption;
+                })();
+    
                 v1beta3.ParameterMetadata = (function() {
     
                     /**
@@ -28733,6 +32848,12 @@
                      * @property {Array.<string>|null} [regexes] ParameterMetadata regexes
                      * @property {google.dataflow.v1beta3.ParameterType|null} [paramType] ParameterMetadata paramType
                      * @property {Object.<string,string>|null} [customMetadata] ParameterMetadata customMetadata
+                     * @property {string|null} [groupName] ParameterMetadata groupName
+                     * @property {string|null} [parentName] ParameterMetadata parentName
+                     * @property {Array.<string>|null} [parentTriggerValues] ParameterMetadata parentTriggerValues
+                     * @property {Array.<google.dataflow.v1beta3.IParameterMetadataEnumOption>|null} [enumOptions] ParameterMetadata enumOptions
+                     * @property {string|null} [defaultValue] ParameterMetadata defaultValue
+                     * @property {boolean|null} [hiddenUi] ParameterMetadata hiddenUi
                      */
     
                     /**
@@ -28746,6 +32867,8 @@
                     function ParameterMetadata(properties) {
                         this.regexes = [];
                         this.customMetadata = {};
+                        this.parentTriggerValues = [];
+                        this.enumOptions = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -28809,6 +32932,54 @@
                     ParameterMetadata.prototype.customMetadata = $util.emptyObject;
     
                     /**
+                     * ParameterMetadata groupName.
+                     * @member {string} groupName
+                     * @memberof google.dataflow.v1beta3.ParameterMetadata
+                     * @instance
+                     */
+                    ParameterMetadata.prototype.groupName = "";
+    
+                    /**
+                     * ParameterMetadata parentName.
+                     * @member {string} parentName
+                     * @memberof google.dataflow.v1beta3.ParameterMetadata
+                     * @instance
+                     */
+                    ParameterMetadata.prototype.parentName = "";
+    
+                    /**
+                     * ParameterMetadata parentTriggerValues.
+                     * @member {Array.<string>} parentTriggerValues
+                     * @memberof google.dataflow.v1beta3.ParameterMetadata
+                     * @instance
+                     */
+                    ParameterMetadata.prototype.parentTriggerValues = $util.emptyArray;
+    
+                    /**
+                     * ParameterMetadata enumOptions.
+                     * @member {Array.<google.dataflow.v1beta3.IParameterMetadataEnumOption>} enumOptions
+                     * @memberof google.dataflow.v1beta3.ParameterMetadata
+                     * @instance
+                     */
+                    ParameterMetadata.prototype.enumOptions = $util.emptyArray;
+    
+                    /**
+                     * ParameterMetadata defaultValue.
+                     * @member {string} defaultValue
+                     * @memberof google.dataflow.v1beta3.ParameterMetadata
+                     * @instance
+                     */
+                    ParameterMetadata.prototype.defaultValue = "";
+    
+                    /**
+                     * ParameterMetadata hiddenUi.
+                     * @member {boolean} hiddenUi
+                     * @memberof google.dataflow.v1beta3.ParameterMetadata
+                     * @instance
+                     */
+                    ParameterMetadata.prototype.hiddenUi = false;
+    
+                    /**
                      * Creates a new ParameterMetadata instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.ParameterMetadata
@@ -28848,6 +33019,20 @@
                         if (message.customMetadata != null && Object.hasOwnProperty.call(message, "customMetadata"))
                             for (var keys = Object.keys(message.customMetadata), i = 0; i < keys.length; ++i)
                                 writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.customMetadata[keys[i]]).ldelim();
+                        if (message.groupName != null && Object.hasOwnProperty.call(message, "groupName"))
+                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.groupName);
+                        if (message.parentName != null && Object.hasOwnProperty.call(message, "parentName"))
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.parentName);
+                        if (message.parentTriggerValues != null && message.parentTriggerValues.length)
+                            for (var i = 0; i < message.parentTriggerValues.length; ++i)
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.parentTriggerValues[i]);
+                        if (message.enumOptions != null && message.enumOptions.length)
+                            for (var i = 0; i < message.enumOptions.length; ++i)
+                                $root.google.dataflow.v1beta3.ParameterMetadataEnumOption.encode(message.enumOptions[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                        if (message.defaultValue != null && Object.hasOwnProperty.call(message, "defaultValue"))
+                            writer.uint32(/* id 12, wireType 2 =*/98).string(message.defaultValue);
+                        if (message.hiddenUi != null && Object.hasOwnProperty.call(message, "hiddenUi"))
+                            writer.uint32(/* id 13, wireType 0 =*/104).bool(message.hiddenUi);
                         return writer;
                     };
     
@@ -28931,6 +33116,34 @@
                                     message.customMetadata[key] = value;
                                     break;
                                 }
+                            case 8: {
+                                    message.groupName = reader.string();
+                                    break;
+                                }
+                            case 9: {
+                                    message.parentName = reader.string();
+                                    break;
+                                }
+                            case 10: {
+                                    if (!(message.parentTriggerValues && message.parentTriggerValues.length))
+                                        message.parentTriggerValues = [];
+                                    message.parentTriggerValues.push(reader.string());
+                                    break;
+                                }
+                            case 11: {
+                                    if (!(message.enumOptions && message.enumOptions.length))
+                                        message.enumOptions = [];
+                                    message.enumOptions.push($root.google.dataflow.v1beta3.ParameterMetadataEnumOption.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 12: {
+                                    message.defaultValue = reader.string();
+                                    break;
+                                }
+                            case 13: {
+                                    message.hiddenUi = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -28999,6 +33212,19 @@
                             case 7:
                             case 8:
                             case 9:
+                            case 10:
+                            case 11:
+                            case 12:
+                            case 13:
+                            case 14:
+                            case 15:
+                            case 16:
+                            case 17:
+                            case 18:
+                            case 19:
+                            case 20:
+                            case 21:
+                            case 22:
                                 break;
                             }
                         if (message.customMetadata != null && message.hasOwnProperty("customMetadata")) {
@@ -29009,6 +33235,34 @@
                                 if (!$util.isString(message.customMetadata[key[i]]))
                                     return "customMetadata: string{k:string} expected";
                         }
+                        if (message.groupName != null && message.hasOwnProperty("groupName"))
+                            if (!$util.isString(message.groupName))
+                                return "groupName: string expected";
+                        if (message.parentName != null && message.hasOwnProperty("parentName"))
+                            if (!$util.isString(message.parentName))
+                                return "parentName: string expected";
+                        if (message.parentTriggerValues != null && message.hasOwnProperty("parentTriggerValues")) {
+                            if (!Array.isArray(message.parentTriggerValues))
+                                return "parentTriggerValues: array expected";
+                            for (var i = 0; i < message.parentTriggerValues.length; ++i)
+                                if (!$util.isString(message.parentTriggerValues[i]))
+                                    return "parentTriggerValues: string[] expected";
+                        }
+                        if (message.enumOptions != null && message.hasOwnProperty("enumOptions")) {
+                            if (!Array.isArray(message.enumOptions))
+                                return "enumOptions: array expected";
+                            for (var i = 0; i < message.enumOptions.length; ++i) {
+                                var error = $root.google.dataflow.v1beta3.ParameterMetadataEnumOption.verify(message.enumOptions[i]);
+                                if (error)
+                                    return "enumOptions." + error;
+                            }
+                        }
+                        if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
+                            if (!$util.isString(message.defaultValue))
+                                return "defaultValue: string expected";
+                        if (message.hiddenUi != null && message.hasOwnProperty("hiddenUi"))
+                            if (typeof message.hiddenUi !== "boolean")
+                                return "hiddenUi: boolean expected";
                         return null;
                     };
     
@@ -29086,6 +33340,58 @@
                         case 9:
                             message.paramType = 9;
                             break;
+                        case "BIGQUERY_TABLE":
+                        case 10:
+                            message.paramType = 10;
+                            break;
+                        case "JAVASCRIPT_UDF_FILE":
+                        case 11:
+                            message.paramType = 11;
+                            break;
+                        case "SERVICE_ACCOUNT":
+                        case 12:
+                            message.paramType = 12;
+                            break;
+                        case "MACHINE_TYPE":
+                        case 13:
+                            message.paramType = 13;
+                            break;
+                        case "KMS_KEY_NAME":
+                        case 14:
+                            message.paramType = 14;
+                            break;
+                        case "WORKER_REGION":
+                        case 15:
+                            message.paramType = 15;
+                            break;
+                        case "WORKER_ZONE":
+                        case 16:
+                            message.paramType = 16;
+                            break;
+                        case "BOOLEAN":
+                        case 17:
+                            message.paramType = 17;
+                            break;
+                        case "ENUM":
+                        case 18:
+                            message.paramType = 18;
+                            break;
+                        case "NUMBER":
+                        case 19:
+                            message.paramType = 19;
+                            break;
+                        case "KAFKA_TOPIC":
+                        case 20:
+                            message.paramType = 20;
+                            break;
+                        case "KAFKA_READ_TOPIC":
+                        case 21:
+                            message.paramType = 21;
+                            break;
+                        case "KAFKA_WRITE_TOPIC":
+                        case 22:
+                            message.paramType = 22;
+                            break;
                         }
                         if (object.customMetadata) {
                             if (typeof object.customMetadata !== "object")
@@ -29094,6 +33400,31 @@
                             for (var keys = Object.keys(object.customMetadata), i = 0; i < keys.length; ++i)
                                 message.customMetadata[keys[i]] = String(object.customMetadata[keys[i]]);
                         }
+                        if (object.groupName != null)
+                            message.groupName = String(object.groupName);
+                        if (object.parentName != null)
+                            message.parentName = String(object.parentName);
+                        if (object.parentTriggerValues) {
+                            if (!Array.isArray(object.parentTriggerValues))
+                                throw TypeError(".google.dataflow.v1beta3.ParameterMetadata.parentTriggerValues: array expected");
+                            message.parentTriggerValues = [];
+                            for (var i = 0; i < object.parentTriggerValues.length; ++i)
+                                message.parentTriggerValues[i] = String(object.parentTriggerValues[i]);
+                        }
+                        if (object.enumOptions) {
+                            if (!Array.isArray(object.enumOptions))
+                                throw TypeError(".google.dataflow.v1beta3.ParameterMetadata.enumOptions: array expected");
+                            message.enumOptions = [];
+                            for (var i = 0; i < object.enumOptions.length; ++i) {
+                                if (typeof object.enumOptions[i] !== "object")
+                                    throw TypeError(".google.dataflow.v1beta3.ParameterMetadata.enumOptions: object expected");
+                                message.enumOptions[i] = $root.google.dataflow.v1beta3.ParameterMetadataEnumOption.fromObject(object.enumOptions[i]);
+                            }
+                        }
+                        if (object.defaultValue != null)
+                            message.defaultValue = String(object.defaultValue);
+                        if (object.hiddenUi != null)
+                            message.hiddenUi = Boolean(object.hiddenUi);
                         return message;
                     };
     
@@ -29110,8 +33441,11 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.arrays || options.defaults)
+                        if (options.arrays || options.defaults) {
                             object.regexes = [];
+                            object.parentTriggerValues = [];
+                            object.enumOptions = [];
+                        }
                         if (options.objects || options.defaults)
                             object.customMetadata = {};
                         if (options.defaults) {
@@ -29120,6 +33454,10 @@
                             object.helpText = "";
                             object.isOptional = false;
                             object.paramType = options.enums === String ? "DEFAULT" : 0;
+                            object.groupName = "";
+                            object.parentName = "";
+                            object.defaultValue = "";
+                            object.hiddenUi = false;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -29142,6 +33480,24 @@
                             for (var j = 0; j < keys2.length; ++j)
                                 object.customMetadata[keys2[j]] = message.customMetadata[keys2[j]];
                         }
+                        if (message.groupName != null && message.hasOwnProperty("groupName"))
+                            object.groupName = message.groupName;
+                        if (message.parentName != null && message.hasOwnProperty("parentName"))
+                            object.parentName = message.parentName;
+                        if (message.parentTriggerValues && message.parentTriggerValues.length) {
+                            object.parentTriggerValues = [];
+                            for (var j = 0; j < message.parentTriggerValues.length; ++j)
+                                object.parentTriggerValues[j] = message.parentTriggerValues[j];
+                        }
+                        if (message.enumOptions && message.enumOptions.length) {
+                            object.enumOptions = [];
+                            for (var j = 0; j < message.enumOptions.length; ++j)
+                                object.enumOptions[j] = $root.google.dataflow.v1beta3.ParameterMetadataEnumOption.toObject(message.enumOptions[j], options);
+                        }
+                        if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
+                            object.defaultValue = message.defaultValue;
+                        if (message.hiddenUi != null && message.hasOwnProperty("hiddenUi"))
+                            object.hiddenUi = message.hiddenUi;
                         return object;
                     };
     
@@ -29174,36 +33530,6 @@
                     return ParameterMetadata;
                 })();
     
-                /**
-                 * ParameterType enum.
-                 * @name google.dataflow.v1beta3.ParameterType
-                 * @enum {number}
-                 * @property {number} DEFAULT=0 DEFAULT value
-                 * @property {number} TEXT=1 TEXT value
-                 * @property {number} GCS_READ_BUCKET=2 GCS_READ_BUCKET value
-                 * @property {number} GCS_WRITE_BUCKET=3 GCS_WRITE_BUCKET value
-                 * @property {number} GCS_READ_FILE=4 GCS_READ_FILE value
-                 * @property {number} GCS_WRITE_FILE=5 GCS_WRITE_FILE value
-                 * @property {number} GCS_READ_FOLDER=6 GCS_READ_FOLDER value
-                 * @property {number} GCS_WRITE_FOLDER=7 GCS_WRITE_FOLDER value
-                 * @property {number} PUBSUB_TOPIC=8 PUBSUB_TOPIC value
-                 * @property {number} PUBSUB_SUBSCRIPTION=9 PUBSUB_SUBSCRIPTION value
-                 */
-                v1beta3.ParameterType = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "DEFAULT"] = 0;
-                    values[valuesById[1] = "TEXT"] = 1;
-                    values[valuesById[2] = "GCS_READ_BUCKET"] = 2;
-                    values[valuesById[3] = "GCS_WRITE_BUCKET"] = 3;
-                    values[valuesById[4] = "GCS_READ_FILE"] = 4;
-                    values[valuesById[5] = "GCS_WRITE_FILE"] = 5;
-                    values[valuesById[6] = "GCS_READ_FOLDER"] = 6;
-                    values[valuesById[7] = "GCS_WRITE_FOLDER"] = 7;
-                    values[valuesById[8] = "PUBSUB_TOPIC"] = 8;
-                    values[valuesById[9] = "PUBSUB_SUBSCRIPTION"] = 9;
-                    return values;
-                })();
-    
                 v1beta3.TemplateMetadata = (function() {
     
                     /**
@@ -29213,6 +33539,10 @@
                      * @property {string|null} [name] TemplateMetadata name
                      * @property {string|null} [description] TemplateMetadata description
                      * @property {Array.<google.dataflow.v1beta3.IParameterMetadata>|null} [parameters] TemplateMetadata parameters
+                     * @property {boolean|null} [streaming] TemplateMetadata streaming
+                     * @property {boolean|null} [supportsAtLeastOnce] TemplateMetadata supportsAtLeastOnce
+                     * @property {boolean|null} [supportsExactlyOnce] TemplateMetadata supportsExactlyOnce
+                     * @property {string|null} [defaultStreamingMode] TemplateMetadata defaultStreamingMode
                      */
     
                     /**
@@ -29256,6 +33586,38 @@
                     TemplateMetadata.prototype.parameters = $util.emptyArray;
     
                     /**
+                     * TemplateMetadata streaming.
+                     * @member {boolean} streaming
+                     * @memberof google.dataflow.v1beta3.TemplateMetadata
+                     * @instance
+                     */
+                    TemplateMetadata.prototype.streaming = false;
+    
+                    /**
+                     * TemplateMetadata supportsAtLeastOnce.
+                     * @member {boolean} supportsAtLeastOnce
+                     * @memberof google.dataflow.v1beta3.TemplateMetadata
+                     * @instance
+                     */
+                    TemplateMetadata.prototype.supportsAtLeastOnce = false;
+    
+                    /**
+                     * TemplateMetadata supportsExactlyOnce.
+                     * @member {boolean} supportsExactlyOnce
+                     * @memberof google.dataflow.v1beta3.TemplateMetadata
+                     * @instance
+                     */
+                    TemplateMetadata.prototype.supportsExactlyOnce = false;
+    
+                    /**
+                     * TemplateMetadata defaultStreamingMode.
+                     * @member {string} defaultStreamingMode
+                     * @memberof google.dataflow.v1beta3.TemplateMetadata
+                     * @instance
+                     */
+                    TemplateMetadata.prototype.defaultStreamingMode = "";
+    
+                    /**
                      * Creates a new TemplateMetadata instance using the specified properties.
                      * @function create
                      * @memberof google.dataflow.v1beta3.TemplateMetadata
@@ -29286,6 +33648,14 @@
                         if (message.parameters != null && message.parameters.length)
                             for (var i = 0; i < message.parameters.length; ++i)
                                 $root.google.dataflow.v1beta3.ParameterMetadata.encode(message.parameters[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.streaming != null && Object.hasOwnProperty.call(message, "streaming"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.streaming);
+                        if (message.supportsAtLeastOnce != null && Object.hasOwnProperty.call(message, "supportsAtLeastOnce"))
+                            writer.uint32(/* id 6, wireType 0 =*/48).bool(message.supportsAtLeastOnce);
+                        if (message.supportsExactlyOnce != null && Object.hasOwnProperty.call(message, "supportsExactlyOnce"))
+                            writer.uint32(/* id 7, wireType 0 =*/56).bool(message.supportsExactlyOnce);
+                        if (message.defaultStreamingMode != null && Object.hasOwnProperty.call(message, "defaultStreamingMode"))
+                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.defaultStreamingMode);
                         return writer;
                     };
     
@@ -29332,6 +33702,22 @@
                                     if (!(message.parameters && message.parameters.length))
                                         message.parameters = [];
                                     message.parameters.push($root.google.dataflow.v1beta3.ParameterMetadata.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 5: {
+                                    message.streaming = reader.bool();
+                                    break;
+                                }
+                            case 6: {
+                                    message.supportsAtLeastOnce = reader.bool();
+                                    break;
+                                }
+                            case 7: {
+                                    message.supportsExactlyOnce = reader.bool();
+                                    break;
+                                }
+                            case 8: {
+                                    message.defaultStreamingMode = reader.string();
                                     break;
                                 }
                             default:
@@ -29384,6 +33770,18 @@
                                     return "parameters." + error;
                             }
                         }
+                        if (message.streaming != null && message.hasOwnProperty("streaming"))
+                            if (typeof message.streaming !== "boolean")
+                                return "streaming: boolean expected";
+                        if (message.supportsAtLeastOnce != null && message.hasOwnProperty("supportsAtLeastOnce"))
+                            if (typeof message.supportsAtLeastOnce !== "boolean")
+                                return "supportsAtLeastOnce: boolean expected";
+                        if (message.supportsExactlyOnce != null && message.hasOwnProperty("supportsExactlyOnce"))
+                            if (typeof message.supportsExactlyOnce !== "boolean")
+                                return "supportsExactlyOnce: boolean expected";
+                        if (message.defaultStreamingMode != null && message.hasOwnProperty("defaultStreamingMode"))
+                            if (!$util.isString(message.defaultStreamingMode))
+                                return "defaultStreamingMode: string expected";
                         return null;
                     };
     
@@ -29413,6 +33811,14 @@
                                 message.parameters[i] = $root.google.dataflow.v1beta3.ParameterMetadata.fromObject(object.parameters[i]);
                             }
                         }
+                        if (object.streaming != null)
+                            message.streaming = Boolean(object.streaming);
+                        if (object.supportsAtLeastOnce != null)
+                            message.supportsAtLeastOnce = Boolean(object.supportsAtLeastOnce);
+                        if (object.supportsExactlyOnce != null)
+                            message.supportsExactlyOnce = Boolean(object.supportsExactlyOnce);
+                        if (object.defaultStreamingMode != null)
+                            message.defaultStreamingMode = String(object.defaultStreamingMode);
                         return message;
                     };
     
@@ -29434,6 +33840,10 @@
                         if (options.defaults) {
                             object.name = "";
                             object.description = "";
+                            object.streaming = false;
+                            object.supportsAtLeastOnce = false;
+                            object.supportsExactlyOnce = false;
+                            object.defaultStreamingMode = "";
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -29444,6 +33854,14 @@
                             for (var j = 0; j < message.parameters.length; ++j)
                                 object.parameters[j] = $root.google.dataflow.v1beta3.ParameterMetadata.toObject(message.parameters[j], options);
                         }
+                        if (message.streaming != null && message.hasOwnProperty("streaming"))
+                            object.streaming = message.streaming;
+                        if (message.supportsAtLeastOnce != null && message.hasOwnProperty("supportsAtLeastOnce"))
+                            object.supportsAtLeastOnce = message.supportsAtLeastOnce;
+                        if (message.supportsExactlyOnce != null && message.hasOwnProperty("supportsExactlyOnce"))
+                            object.supportsExactlyOnce = message.supportsExactlyOnce;
+                        if (message.defaultStreamingMode != null && message.hasOwnProperty("defaultStreamingMode"))
+                            object.defaultStreamingMode = message.defaultStreamingMode;
                         return object;
                     };
     
@@ -29629,6 +34047,7 @@
                             case 0:
                             case 1:
                             case 2:
+                            case 3:
                                 break;
                             }
                         if (message.version != null && message.hasOwnProperty("version"))
@@ -29667,6 +34086,10 @@
                         case "PYTHON":
                         case 2:
                             message.language = 2;
+                            break;
+                        case "GO":
+                        case 3:
+                            message.language = 3;
                             break;
                         }
                         if (object.version != null)
@@ -29731,12 +34154,14 @@
                      * @property {number} UNKNOWN=0 UNKNOWN value
                      * @property {number} JAVA=1 JAVA value
                      * @property {number} PYTHON=2 PYTHON value
+                     * @property {number} GO=3 GO value
                      */
                     SDKInfo.Language = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "UNKNOWN"] = 0;
                         values[valuesById[1] = "JAVA"] = 1;
                         values[valuesById[2] = "PYTHON"] = 2;
+                        values[valuesById[3] = "GO"] = 3;
                         return values;
                     })();
     
@@ -32632,6 +37057,62 @@
                     };
     
                     return DynamicTemplateLaunchParams;
+                })();
+    
+                /**
+                 * ParameterType enum.
+                 * @name google.dataflow.v1beta3.ParameterType
+                 * @enum {number}
+                 * @property {number} DEFAULT=0 DEFAULT value
+                 * @property {number} TEXT=1 TEXT value
+                 * @property {number} GCS_READ_BUCKET=2 GCS_READ_BUCKET value
+                 * @property {number} GCS_WRITE_BUCKET=3 GCS_WRITE_BUCKET value
+                 * @property {number} GCS_READ_FILE=4 GCS_READ_FILE value
+                 * @property {number} GCS_WRITE_FILE=5 GCS_WRITE_FILE value
+                 * @property {number} GCS_READ_FOLDER=6 GCS_READ_FOLDER value
+                 * @property {number} GCS_WRITE_FOLDER=7 GCS_WRITE_FOLDER value
+                 * @property {number} PUBSUB_TOPIC=8 PUBSUB_TOPIC value
+                 * @property {number} PUBSUB_SUBSCRIPTION=9 PUBSUB_SUBSCRIPTION value
+                 * @property {number} BIGQUERY_TABLE=10 BIGQUERY_TABLE value
+                 * @property {number} JAVASCRIPT_UDF_FILE=11 JAVASCRIPT_UDF_FILE value
+                 * @property {number} SERVICE_ACCOUNT=12 SERVICE_ACCOUNT value
+                 * @property {number} MACHINE_TYPE=13 MACHINE_TYPE value
+                 * @property {number} KMS_KEY_NAME=14 KMS_KEY_NAME value
+                 * @property {number} WORKER_REGION=15 WORKER_REGION value
+                 * @property {number} WORKER_ZONE=16 WORKER_ZONE value
+                 * @property {number} BOOLEAN=17 BOOLEAN value
+                 * @property {number} ENUM=18 ENUM value
+                 * @property {number} NUMBER=19 NUMBER value
+                 * @property {number} KAFKA_TOPIC=20 KAFKA_TOPIC value
+                 * @property {number} KAFKA_READ_TOPIC=21 KAFKA_READ_TOPIC value
+                 * @property {number} KAFKA_WRITE_TOPIC=22 KAFKA_WRITE_TOPIC value
+                 */
+                v1beta3.ParameterType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "DEFAULT"] = 0;
+                    values[valuesById[1] = "TEXT"] = 1;
+                    values[valuesById[2] = "GCS_READ_BUCKET"] = 2;
+                    values[valuesById[3] = "GCS_WRITE_BUCKET"] = 3;
+                    values[valuesById[4] = "GCS_READ_FILE"] = 4;
+                    values[valuesById[5] = "GCS_WRITE_FILE"] = 5;
+                    values[valuesById[6] = "GCS_READ_FOLDER"] = 6;
+                    values[valuesById[7] = "GCS_WRITE_FOLDER"] = 7;
+                    values[valuesById[8] = "PUBSUB_TOPIC"] = 8;
+                    values[valuesById[9] = "PUBSUB_SUBSCRIPTION"] = 9;
+                    values[valuesById[10] = "BIGQUERY_TABLE"] = 10;
+                    values[valuesById[11] = "JAVASCRIPT_UDF_FILE"] = 11;
+                    values[valuesById[12] = "SERVICE_ACCOUNT"] = 12;
+                    values[valuesById[13] = "MACHINE_TYPE"] = 13;
+                    values[valuesById[14] = "KMS_KEY_NAME"] = 14;
+                    values[valuesById[15] = "WORKER_REGION"] = 15;
+                    values[valuesById[16] = "WORKER_ZONE"] = 16;
+                    values[valuesById[17] = "BOOLEAN"] = 17;
+                    values[valuesById[18] = "ENUM"] = 18;
+                    values[valuesById[19] = "NUMBER"] = 19;
+                    values[valuesById[20] = "KAFKA_TOPIC"] = 20;
+                    values[valuesById[21] = "KAFKA_READ_TOPIC"] = 21;
+                    values[valuesById[22] = "KAFKA_WRITE_TOPIC"] = 22;
+                    return values;
                 })();
     
                 return v1beta3;
@@ -51057,6 +55538,225 @@
                 };
     
                 return Timestamp;
+            })();
+    
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
             })();
     
             return protobuf;
