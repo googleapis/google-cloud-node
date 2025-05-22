@@ -3491,6 +3491,84 @@ describe('v1.ManagedKafkaConnectClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('acl', async () => {
+      const fakePath = '/rendered/path/acl';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cluster: 'clusterValue',
+        acl: 'aclValue',
+      };
+      const client = new managedkafkaconnectModule.v1.ManagedKafkaConnectClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      await client.initialize();
+      client.pathTemplates.aclPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.aclPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('aclPath', () => {
+        const result = client.aclPath(
+          'projectValue',
+          'locationValue',
+          'clusterValue',
+          'aclValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.aclPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAclName', () => {
+        const result = client.matchProjectFromAclName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.aclPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAclName', () => {
+        const result = client.matchLocationFromAclName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.aclPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchClusterFromAclName', () => {
+        const result = client.matchClusterFromAclName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.aclPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAclFromAclName', () => {
+        const result = client.matchAclFromAclName(fakePath);
+        assert.strictEqual(result, 'aclValue');
+        assert(
+          (client.pathTemplates.aclPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('cluster', async () => {
       const fakePath = '/rendered/path/cluster';
       const expectedParameters = {
