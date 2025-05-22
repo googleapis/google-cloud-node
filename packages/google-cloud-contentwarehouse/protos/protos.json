@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -3065,6 +3068,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "docid": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "mimeType": {
                           "type": "string",
                           "id": 3
@@ -4154,6 +4164,10 @@
                                 "pageSpan": {
                                   "type": "LayoutPageSpan",
                                   "id": 5
+                                },
+                                "boundingBox": {
+                                  "type": "BoundingPoly",
+                                  "id": 6
                                 }
                               },
                               "nested": {

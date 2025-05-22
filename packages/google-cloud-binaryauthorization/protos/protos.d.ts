@@ -11944,7 +11944,8 @@ export namespace grafeas {
             COMPLIANCE = 9,
             DSSE_ATTESTATION = 10,
             VULNERABILITY_ASSESSMENT = 11,
-            SBOM_REFERENCE = 12
+            SBOM_REFERENCE = 12,
+            SECRET = 13
         }
 
         /** Properties of a RelatedUrl. */
@@ -12370,6 +12371,9 @@ export namespace grafeas {
 
             /** FileLocation filePath */
             filePath?: (string|null);
+
+            /** FileLocation layerDetails */
+            layerDetails?: (grafeas.v1.ILayerDetails|null);
         }
 
         /** Represents a FileLocation. */
@@ -12383,6 +12387,9 @@ export namespace grafeas {
 
             /** FileLocation filePath. */
             public filePath: string;
+
+            /** FileLocation layerDetails. */
+            public layerDetails?: (grafeas.v1.ILayerDetails|null);
 
             /**
              * Creates a new FileLocation instance using the specified properties.
@@ -12456,6 +12463,236 @@ export namespace grafeas {
 
             /**
              * Gets the default type url for FileLocation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BaseImage. */
+        interface IBaseImage {
+
+            /** BaseImage name */
+            name?: (string|null);
+
+            /** BaseImage repository */
+            repository?: (string|null);
+
+            /** BaseImage layerCount */
+            layerCount?: (number|null);
+        }
+
+        /** Represents a BaseImage. */
+        class BaseImage implements IBaseImage {
+
+            /**
+             * Constructs a new BaseImage.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IBaseImage);
+
+            /** BaseImage name. */
+            public name: string;
+
+            /** BaseImage repository. */
+            public repository: string;
+
+            /** BaseImage layerCount. */
+            public layerCount: number;
+
+            /**
+             * Creates a new BaseImage instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BaseImage instance
+             */
+            public static create(properties?: grafeas.v1.IBaseImage): grafeas.v1.BaseImage;
+
+            /**
+             * Encodes the specified BaseImage message. Does not implicitly {@link grafeas.v1.BaseImage.verify|verify} messages.
+             * @param message BaseImage message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IBaseImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BaseImage message, length delimited. Does not implicitly {@link grafeas.v1.BaseImage.verify|verify} messages.
+             * @param message BaseImage message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IBaseImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BaseImage message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BaseImage
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.BaseImage;
+
+            /**
+             * Decodes a BaseImage message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BaseImage
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.BaseImage;
+
+            /**
+             * Verifies a BaseImage message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BaseImage message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BaseImage
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.BaseImage;
+
+            /**
+             * Creates a plain object from a BaseImage message. Also converts values to other types if specified.
+             * @param message BaseImage
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.BaseImage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BaseImage to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BaseImage
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a LayerDetails. */
+        interface ILayerDetails {
+
+            /** LayerDetails index */
+            index?: (number|null);
+
+            /** LayerDetails diffId */
+            diffId?: (string|null);
+
+            /** LayerDetails chainId */
+            chainId?: (string|null);
+
+            /** LayerDetails command */
+            command?: (string|null);
+
+            /** LayerDetails baseImages */
+            baseImages?: (grafeas.v1.IBaseImage[]|null);
+        }
+
+        /** Represents a LayerDetails. */
+        class LayerDetails implements ILayerDetails {
+
+            /**
+             * Constructs a new LayerDetails.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.ILayerDetails);
+
+            /** LayerDetails index. */
+            public index: number;
+
+            /** LayerDetails diffId. */
+            public diffId: string;
+
+            /** LayerDetails chainId. */
+            public chainId: string;
+
+            /** LayerDetails command. */
+            public command: string;
+
+            /** LayerDetails baseImages. */
+            public baseImages: grafeas.v1.IBaseImage[];
+
+            /**
+             * Creates a new LayerDetails instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns LayerDetails instance
+             */
+            public static create(properties?: grafeas.v1.ILayerDetails): grafeas.v1.LayerDetails;
+
+            /**
+             * Encodes the specified LayerDetails message. Does not implicitly {@link grafeas.v1.LayerDetails.verify|verify} messages.
+             * @param message LayerDetails message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.ILayerDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified LayerDetails message, length delimited. Does not implicitly {@link grafeas.v1.LayerDetails.verify|verify} messages.
+             * @param message LayerDetails message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.ILayerDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a LayerDetails message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns LayerDetails
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.LayerDetails;
+
+            /**
+             * Decodes a LayerDetails message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns LayerDetails
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.LayerDetails;
+
+            /**
+             * Verifies a LayerDetails message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a LayerDetails message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns LayerDetails
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.LayerDetails;
+
+            /**
+             * Creates a plain object from a LayerDetails message. Also converts values to other types if specified.
+             * @param message LayerDetails
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.LayerDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this LayerDetails to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for LayerDetails
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

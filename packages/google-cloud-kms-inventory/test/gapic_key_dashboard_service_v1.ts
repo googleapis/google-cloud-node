@@ -270,9 +270,14 @@ describe('v1.KeyDashboardServiceClient', () => {
         throw err;
       });
       assert(client.keyDashboardServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -283,9 +288,14 @@ describe('v1.KeyDashboardServiceClient', () => {
         }
       );
       assert.strictEqual(client.keyDashboardServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {

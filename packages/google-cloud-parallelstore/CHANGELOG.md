@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.8.1...parallelstore-v0.9.0) (2025-05-09)
+
+
+### Features
+
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [0.8.1](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.8.0...parallelstore-v0.8.1) (2025-03-21)
 
 

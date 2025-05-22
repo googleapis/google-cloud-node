@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The full name of the data exchange resource that you want to
-   *  delete. For example, `projects/myproject/locations/US/dataExchanges/123`.
+   *  delete. For example, `projects/myproject/locations/us/dataExchanges/123`.
    */
   // const name = 'abc123'
 
