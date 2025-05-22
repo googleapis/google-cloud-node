@@ -259,9 +259,14 @@ describe('v1beta.CacheServiceClient', () => {
         throw err;
       });
       assert(client.cacheServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -270,9 +275,14 @@ describe('v1beta.CacheServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.cacheServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -389,7 +399,9 @@ describe('v1beta.CacheServiceClient', () => {
         new protos.google.ai.generativelanguage.v1beta.CreateCachedContentRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createCachedContent(request), expectedError);
     });
   });
@@ -519,7 +531,9 @@ describe('v1beta.CacheServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCachedContent(request), expectedError);
     });
   });
@@ -654,7 +668,9 @@ describe('v1beta.CacheServiceClient', () => {
       );
       request.cachedContent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateCachedContent(request), expectedError);
     });
   });
@@ -785,7 +801,9 @@ describe('v1beta.CacheServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteCachedContent(request), expectedError);
     });
   });

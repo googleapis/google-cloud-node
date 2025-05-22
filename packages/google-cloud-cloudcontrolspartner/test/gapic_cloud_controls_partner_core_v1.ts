@@ -272,9 +272,14 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         throw err;
       });
       assert(client.cloudControlsPartnerCoreStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -284,9 +289,14 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.cloudControlsPartnerCoreStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -455,7 +465,9 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getWorkload(request), expectedError);
     });
   });
@@ -589,7 +601,9 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCustomer(request), expectedError);
     });
   });
@@ -723,7 +737,9 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEkmConnections(request), expectedError);
     });
   });
@@ -861,7 +877,9 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getPartnerPermissions(request),
         expectedError
@@ -998,8 +1016,422 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPartner(request), expectedError);
+    });
+  });
+
+  describe('createCustomer', () => {
+    it('invokes createCustomer without error', async () => {
+      const client =
+        new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.Customer()
+      );
+      client.innerApiCalls.createCustomer = stubSimpleCall(expectedResponse);
+      const [response] = await client.createCustomer(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCustomer without error using callback', async () => {
+      const client =
+        new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.Customer()
+      );
+      client.innerApiCalls.createCustomer =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createCustomer(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.cloudcontrolspartner.v1.ICustomer | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCustomer with error', async () => {
+      const client =
+        new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createCustomer = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createCustomer(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createCustomer with closed client', async () => {
+      const client =
+        new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createCustomer(request), expectedError);
+    });
+  });
+
+  describe('updateCustomer', () => {
+    it('invokes updateCustomer without error', async () => {
+      const client =
+        new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest()
+      );
+      request.customer ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest',
+        ['customer', 'name']
+      );
+      request.customer.name = defaultValue1;
+      const expectedHeaderRequestParams = `customer.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.Customer()
+      );
+      client.innerApiCalls.updateCustomer = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateCustomer(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCustomer without error using callback', async () => {
+      const client =
+        new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest()
+      );
+      request.customer ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest',
+        ['customer', 'name']
+      );
+      request.customer.name = defaultValue1;
+      const expectedHeaderRequestParams = `customer.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.Customer()
+      );
+      client.innerApiCalls.updateCustomer =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateCustomer(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.cloudcontrolspartner.v1.ICustomer | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCustomer with error', async () => {
+      const client =
+        new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest()
+      );
+      request.customer ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest',
+        ['customer', 'name']
+      );
+      request.customer.name = defaultValue1;
+      const expectedHeaderRequestParams = `customer.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateCustomer = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateCustomer(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateCustomer with closed client', async () => {
+      const client =
+        new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest()
+      );
+      request.customer ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest',
+        ['customer', 'name']
+      );
+      request.customer.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updateCustomer(request), expectedError);
+    });
+  });
+
+  describe('deleteCustomer', () => {
+    it('invokes deleteCustomer without error', async () => {
+      const client =
+        new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteCustomer = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteCustomer(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCustomer without error using callback', async () => {
+      const client =
+        new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteCustomer =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteCustomer(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCustomer with error', async () => {
+      const client =
+        new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteCustomer = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteCustomer(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCustomer with closed client', async () => {
+      const client =
+        new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.deleteCustomer(request), expectedError);
     });
   });
 

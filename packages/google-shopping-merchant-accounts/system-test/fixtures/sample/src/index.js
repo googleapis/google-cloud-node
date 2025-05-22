@@ -32,7 +32,11 @@ function main() {
   const businessInfoServiceClient = new accounts.BusinessInfoServiceClient();
   const emailPreferencesServiceClient =
     new accounts.EmailPreferencesServiceClient();
+  const gbpAccountsServiceClient = new accounts.GbpAccountsServiceClient();
   const homepageServiceClient = new accounts.HomepageServiceClient();
+  const lfpProvidersServiceClient = new accounts.LfpProvidersServiceClient();
+  const omnichannelSettingsServiceClient =
+    new accounts.OmnichannelSettingsServiceClient();
   const onlineReturnPolicyServiceClient =
     new accounts.OnlineReturnPolicyServiceClient();
   const programsServiceClient = new accounts.ProgramsServiceClient();

@@ -48,6 +48,17 @@ function main(name) {
    *  state_signal or provisioning_state_signal must be set, but not both.
    */
   // const provisioningStateSignal = {}
+  /**
+   *  Optional. The step being executed. Provides a finer grained status when the
+   *  state_signal is FACTORY_TURNUP_CHECKS_STARTED or
+   *  FACTORY_TURNUP_CHECKS_FAILED.
+   */
+  // const step = 'abc123'
+  /**
+   *  Optional. Additional details, such as an error message when state_signal is
+   *  FACTORY_TURNUP_CHECKS_FAILED.
+   */
+  // const details = 'abc123'
 
   // Imports the Gdchardwaremanagement library
   const {GDCHardwareManagementClient} = require('@google-cloud/gdchardwaremanagement').v1alpha;

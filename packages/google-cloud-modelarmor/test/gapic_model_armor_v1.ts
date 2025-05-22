@@ -254,9 +254,14 @@ describe('v1.ModelArmorClient', () => {
         throw err;
       });
       assert(client.modelArmorStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -265,9 +270,14 @@ describe('v1.ModelArmorClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.modelArmorStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -430,7 +440,9 @@ describe('v1.ModelArmorClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTemplate(request), expectedError);
     });
   });
@@ -560,7 +572,9 @@ describe('v1.ModelArmorClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createTemplate(request), expectedError);
     });
   });
@@ -694,7 +708,9 @@ describe('v1.ModelArmorClient', () => {
       );
       request.template.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateTemplate(request), expectedError);
     });
   });
@@ -824,7 +840,9 @@ describe('v1.ModelArmorClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteTemplate(request), expectedError);
     });
   });
@@ -954,7 +972,9 @@ describe('v1.ModelArmorClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getFloorSetting(request), expectedError);
     });
   });
@@ -1089,7 +1109,9 @@ describe('v1.ModelArmorClient', () => {
       );
       request.floorSetting.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateFloorSetting(request), expectedError);
     });
   });
@@ -1220,7 +1242,9 @@ describe('v1.ModelArmorClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.sanitizeUserPrompt(request), expectedError);
     });
   });
@@ -1354,7 +1378,9 @@ describe('v1.ModelArmorClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.sanitizeModelResponse(request),
         expectedError

@@ -76,6 +76,12 @@ export namespace google {
 
                 /** Environment debugOptions */
                 debugOptions?: (google.dataflow.v1beta3.IDebugOptions|null);
+
+                /** Environment useStreamingEngineResourceBasedBilling */
+                useStreamingEngineResourceBasedBilling?: (boolean|null);
+
+                /** Environment streamingMode */
+                streamingMode?: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode|null);
             }
 
             /** Represents an Environment. */
@@ -137,6 +143,12 @@ export namespace google {
 
                 /** Environment debugOptions. */
                 public debugOptions?: (google.dataflow.v1beta3.IDebugOptions|null);
+
+                /** Environment useStreamingEngineResourceBasedBilling. */
+                public useStreamingEngineResourceBasedBilling: boolean;
+
+                /** Environment streamingMode. */
+                public streamingMode: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode);
 
                 /**
                  * Creates a new Environment instance using the specified properties.
@@ -1252,11 +1264,122 @@ export namespace google {
                 SERVICE_BASED = 2
             }
 
+            /** Properties of a DataSamplingConfig. */
+            interface IDataSamplingConfig {
+
+                /** DataSamplingConfig behaviors */
+                behaviors?: (google.dataflow.v1beta3.DataSamplingConfig.DataSamplingBehavior[]|null);
+            }
+
+            /** Represents a DataSamplingConfig. */
+            class DataSamplingConfig implements IDataSamplingConfig {
+
+                /**
+                 * Constructs a new DataSamplingConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.dataflow.v1beta3.IDataSamplingConfig);
+
+                /** DataSamplingConfig behaviors. */
+                public behaviors: google.dataflow.v1beta3.DataSamplingConfig.DataSamplingBehavior[];
+
+                /**
+                 * Creates a new DataSamplingConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DataSamplingConfig instance
+                 */
+                public static create(properties?: google.dataflow.v1beta3.IDataSamplingConfig): google.dataflow.v1beta3.DataSamplingConfig;
+
+                /**
+                 * Encodes the specified DataSamplingConfig message. Does not implicitly {@link google.dataflow.v1beta3.DataSamplingConfig.verify|verify} messages.
+                 * @param message DataSamplingConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.dataflow.v1beta3.IDataSamplingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DataSamplingConfig message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.DataSamplingConfig.verify|verify} messages.
+                 * @param message DataSamplingConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.dataflow.v1beta3.IDataSamplingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DataSamplingConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DataSamplingConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.dataflow.v1beta3.DataSamplingConfig;
+
+                /**
+                 * Decodes a DataSamplingConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DataSamplingConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.dataflow.v1beta3.DataSamplingConfig;
+
+                /**
+                 * Verifies a DataSamplingConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DataSamplingConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DataSamplingConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.dataflow.v1beta3.DataSamplingConfig;
+
+                /**
+                 * Creates a plain object from a DataSamplingConfig message. Also converts values to other types if specified.
+                 * @param message DataSamplingConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.dataflow.v1beta3.DataSamplingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DataSamplingConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DataSamplingConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace DataSamplingConfig {
+
+                /** DataSamplingBehavior enum. */
+                enum DataSamplingBehavior {
+                    DATA_SAMPLING_BEHAVIOR_UNSPECIFIED = 0,
+                    DISABLED = 1,
+                    ALWAYS_ON = 2,
+                    EXCEPTIONS = 3
+                }
+            }
+
             /** Properties of a DebugOptions. */
             interface IDebugOptions {
 
                 /** DebugOptions enableHotKeyLogging */
                 enableHotKeyLogging?: (boolean|null);
+
+                /** DebugOptions dataSampling */
+                dataSampling?: (google.dataflow.v1beta3.IDataSamplingConfig|null);
             }
 
             /** Represents a DebugOptions. */
@@ -1270,6 +1393,9 @@ export namespace google {
 
                 /** DebugOptions enableHotKeyLogging. */
                 public enableHotKeyLogging: boolean;
+
+                /** DebugOptions dataSampling. */
+                public dataSampling?: (google.dataflow.v1beta3.IDataSamplingConfig|null);
 
                 /**
                  * Creates a new DebugOptions instance using the specified properties.
@@ -1347,6 +1473,13 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** StreamingMode enum. */
+            enum StreamingMode {
+                STREAMING_MODE_UNSPECIFIED = 0,
+                STREAMING_MODE_EXACTLY_ONCE = 1,
+                STREAMING_MODE_AT_LEAST_ONCE = 2
             }
 
             /** Represents a JobsV1Beta3 */
@@ -1597,6 +1730,15 @@ export namespace google {
 
                 /** Job satisfiesPzs */
                 satisfiesPzs?: (boolean|null);
+
+                /** Job runtimeUpdatableParams */
+                runtimeUpdatableParams?: (google.dataflow.v1beta3.IRuntimeUpdatableParams|null);
+
+                /** Job satisfiesPzi */
+                satisfiesPzi?: (boolean|null);
+
+                /** Job serviceResources */
+                serviceResources?: (google.dataflow.v1beta3.IServiceResources|null);
             }
 
             /** Represents a Job. */
@@ -1683,6 +1825,24 @@ export namespace google {
                 /** Job satisfiesPzs. */
                 public satisfiesPzs: boolean;
 
+                /** Job runtimeUpdatableParams. */
+                public runtimeUpdatableParams?: (google.dataflow.v1beta3.IRuntimeUpdatableParams|null);
+
+                /** Job satisfiesPzi. */
+                public satisfiesPzi?: (boolean|null);
+
+                /** Job serviceResources. */
+                public serviceResources?: (google.dataflow.v1beta3.IServiceResources|null);
+
+                /** Job _runtimeUpdatableParams. */
+                public _runtimeUpdatableParams?: "runtimeUpdatableParams";
+
+                /** Job _satisfiesPzi. */
+                public _satisfiesPzi?: "satisfiesPzi";
+
+                /** Job _serviceResources. */
+                public _serviceResources?: "serviceResources";
+
                 /**
                  * Creates a new Job instance using the specified properties.
                  * @param [properties] Properties to set
@@ -1755,6 +1915,221 @@ export namespace google {
 
                 /**
                  * Gets the default type url for Job
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ServiceResources. */
+            interface IServiceResources {
+
+                /** ServiceResources zones */
+                zones?: (string[]|null);
+            }
+
+            /** Represents a ServiceResources. */
+            class ServiceResources implements IServiceResources {
+
+                /**
+                 * Constructs a new ServiceResources.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.dataflow.v1beta3.IServiceResources);
+
+                /** ServiceResources zones. */
+                public zones: string[];
+
+                /**
+                 * Creates a new ServiceResources instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ServiceResources instance
+                 */
+                public static create(properties?: google.dataflow.v1beta3.IServiceResources): google.dataflow.v1beta3.ServiceResources;
+
+                /**
+                 * Encodes the specified ServiceResources message. Does not implicitly {@link google.dataflow.v1beta3.ServiceResources.verify|verify} messages.
+                 * @param message ServiceResources message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.dataflow.v1beta3.IServiceResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ServiceResources message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.ServiceResources.verify|verify} messages.
+                 * @param message ServiceResources message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.dataflow.v1beta3.IServiceResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ServiceResources message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ServiceResources
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.dataflow.v1beta3.ServiceResources;
+
+                /**
+                 * Decodes a ServiceResources message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ServiceResources
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.dataflow.v1beta3.ServiceResources;
+
+                /**
+                 * Verifies a ServiceResources message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ServiceResources message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ServiceResources
+                 */
+                public static fromObject(object: { [k: string]: any }): google.dataflow.v1beta3.ServiceResources;
+
+                /**
+                 * Creates a plain object from a ServiceResources message. Also converts values to other types if specified.
+                 * @param message ServiceResources
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.dataflow.v1beta3.ServiceResources, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ServiceResources to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ServiceResources
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a RuntimeUpdatableParams. */
+            interface IRuntimeUpdatableParams {
+
+                /** RuntimeUpdatableParams maxNumWorkers */
+                maxNumWorkers?: (number|null);
+
+                /** RuntimeUpdatableParams minNumWorkers */
+                minNumWorkers?: (number|null);
+
+                /** RuntimeUpdatableParams workerUtilizationHint */
+                workerUtilizationHint?: (number|null);
+            }
+
+            /** Represents a RuntimeUpdatableParams. */
+            class RuntimeUpdatableParams implements IRuntimeUpdatableParams {
+
+                /**
+                 * Constructs a new RuntimeUpdatableParams.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.dataflow.v1beta3.IRuntimeUpdatableParams);
+
+                /** RuntimeUpdatableParams maxNumWorkers. */
+                public maxNumWorkers?: (number|null);
+
+                /** RuntimeUpdatableParams minNumWorkers. */
+                public minNumWorkers?: (number|null);
+
+                /** RuntimeUpdatableParams workerUtilizationHint. */
+                public workerUtilizationHint?: (number|null);
+
+                /** RuntimeUpdatableParams _maxNumWorkers. */
+                public _maxNumWorkers?: "maxNumWorkers";
+
+                /** RuntimeUpdatableParams _minNumWorkers. */
+                public _minNumWorkers?: "minNumWorkers";
+
+                /** RuntimeUpdatableParams _workerUtilizationHint. */
+                public _workerUtilizationHint?: "workerUtilizationHint";
+
+                /**
+                 * Creates a new RuntimeUpdatableParams instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RuntimeUpdatableParams instance
+                 */
+                public static create(properties?: google.dataflow.v1beta3.IRuntimeUpdatableParams): google.dataflow.v1beta3.RuntimeUpdatableParams;
+
+                /**
+                 * Encodes the specified RuntimeUpdatableParams message. Does not implicitly {@link google.dataflow.v1beta3.RuntimeUpdatableParams.verify|verify} messages.
+                 * @param message RuntimeUpdatableParams message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.dataflow.v1beta3.IRuntimeUpdatableParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RuntimeUpdatableParams message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.RuntimeUpdatableParams.verify|verify} messages.
+                 * @param message RuntimeUpdatableParams message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.dataflow.v1beta3.IRuntimeUpdatableParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RuntimeUpdatableParams message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RuntimeUpdatableParams
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.dataflow.v1beta3.RuntimeUpdatableParams;
+
+                /**
+                 * Decodes a RuntimeUpdatableParams message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RuntimeUpdatableParams
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.dataflow.v1beta3.RuntimeUpdatableParams;
+
+                /**
+                 * Verifies a RuntimeUpdatableParams message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RuntimeUpdatableParams message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RuntimeUpdatableParams
+                 */
+                public static fromObject(object: { [k: string]: any }): google.dataflow.v1beta3.RuntimeUpdatableParams;
+
+                /**
+                 * Creates a plain object from a RuntimeUpdatableParams message. Also converts values to other types if specified.
+                 * @param message RuntimeUpdatableParams
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.dataflow.v1beta3.RuntimeUpdatableParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RuntimeUpdatableParams to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RuntimeUpdatableParams
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -2408,6 +2783,9 @@ export namespace google {
 
                 /** SdkVersion sdkSupportStatus */
                 sdkSupportStatus?: (google.dataflow.v1beta3.SdkVersion.SdkSupportStatus|keyof typeof google.dataflow.v1beta3.SdkVersion.SdkSupportStatus|null);
+
+                /** SdkVersion bugs */
+                bugs?: (google.dataflow.v1beta3.ISdkBug[]|null);
             }
 
             /** Represents a SdkVersion. */
@@ -2427,6 +2805,9 @@ export namespace google {
 
                 /** SdkVersion sdkSupportStatus. */
                 public sdkSupportStatus: (google.dataflow.v1beta3.SdkVersion.SdkSupportStatus|keyof typeof google.dataflow.v1beta3.SdkVersion.SdkSupportStatus);
+
+                /** SdkVersion bugs. */
+                public bugs: google.dataflow.v1beta3.ISdkBug[];
 
                 /**
                  * Creates a new SdkVersion instance using the specified properties.
@@ -2518,6 +2899,134 @@ export namespace google {
                 }
             }
 
+            /** Properties of a SdkBug. */
+            interface ISdkBug {
+
+                /** SdkBug type */
+                type?: (google.dataflow.v1beta3.SdkBug.Type|keyof typeof google.dataflow.v1beta3.SdkBug.Type|null);
+
+                /** SdkBug severity */
+                severity?: (google.dataflow.v1beta3.SdkBug.Severity|keyof typeof google.dataflow.v1beta3.SdkBug.Severity|null);
+
+                /** SdkBug uri */
+                uri?: (string|null);
+            }
+
+            /** Represents a SdkBug. */
+            class SdkBug implements ISdkBug {
+
+                /**
+                 * Constructs a new SdkBug.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.dataflow.v1beta3.ISdkBug);
+
+                /** SdkBug type. */
+                public type: (google.dataflow.v1beta3.SdkBug.Type|keyof typeof google.dataflow.v1beta3.SdkBug.Type);
+
+                /** SdkBug severity. */
+                public severity: (google.dataflow.v1beta3.SdkBug.Severity|keyof typeof google.dataflow.v1beta3.SdkBug.Severity);
+
+                /** SdkBug uri. */
+                public uri: string;
+
+                /**
+                 * Creates a new SdkBug instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SdkBug instance
+                 */
+                public static create(properties?: google.dataflow.v1beta3.ISdkBug): google.dataflow.v1beta3.SdkBug;
+
+                /**
+                 * Encodes the specified SdkBug message. Does not implicitly {@link google.dataflow.v1beta3.SdkBug.verify|verify} messages.
+                 * @param message SdkBug message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.dataflow.v1beta3.ISdkBug, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SdkBug message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.SdkBug.verify|verify} messages.
+                 * @param message SdkBug message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.dataflow.v1beta3.ISdkBug, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SdkBug message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SdkBug
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.dataflow.v1beta3.SdkBug;
+
+                /**
+                 * Decodes a SdkBug message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SdkBug
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.dataflow.v1beta3.SdkBug;
+
+                /**
+                 * Verifies a SdkBug message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SdkBug message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SdkBug
+                 */
+                public static fromObject(object: { [k: string]: any }): google.dataflow.v1beta3.SdkBug;
+
+                /**
+                 * Creates a plain object from a SdkBug message. Also converts values to other types if specified.
+                 * @param message SdkBug
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.dataflow.v1beta3.SdkBug, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SdkBug to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SdkBug
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace SdkBug {
+
+                /** Type enum. */
+                enum Type {
+                    TYPE_UNSPECIFIED = 0,
+                    GENERAL = 1,
+                    PERFORMANCE = 2,
+                    DATALOSS = 3
+                }
+
+                /** Severity enum. */
+                enum Severity {
+                    SEVERITY_UNSPECIFIED = 0,
+                    NOTICE = 1,
+                    WARNING = 2,
+                    SEVERE = 3
+                }
+            }
+
             /** Properties of a JobMetadata. */
             interface IJobMetadata {
 
@@ -2541,6 +3050,9 @@ export namespace google {
 
                 /** JobMetadata datastoreDetails */
                 datastoreDetails?: (google.dataflow.v1beta3.IDatastoreIODetails[]|null);
+
+                /** JobMetadata userDisplayProperties */
+                userDisplayProperties?: ({ [k: string]: string }|null);
             }
 
             /** Represents a JobMetadata. */
@@ -2572,6 +3084,9 @@ export namespace google {
 
                 /** JobMetadata datastoreDetails. */
                 public datastoreDetails: google.dataflow.v1beta3.IDatastoreIODetails[];
+
+                /** JobMetadata userDisplayProperties. */
+                public userDisplayProperties: { [k: string]: string };
 
                 /**
                  * Creates a new JobMetadata instance using the specified properties.
@@ -2771,6 +3286,9 @@ export namespace google {
 
                 /** PipelineDescription displayData */
                 displayData?: (google.dataflow.v1beta3.IDisplayData[]|null);
+
+                /** PipelineDescription stepNamesHash */
+                stepNamesHash?: (string|null);
             }
 
             /** Represents a PipelineDescription. */
@@ -2790,6 +3308,9 @@ export namespace google {
 
                 /** PipelineDescription displayData. */
                 public displayData: google.dataflow.v1beta3.IDisplayData[];
+
+                /** PipelineDescription stepNamesHash. */
+                public stepNamesHash: string;
 
                 /**
                  * Creates a new PipelineDescription instance using the specified properties.
@@ -4228,6 +4749,9 @@ export namespace google {
 
                 /** UpdateJobRequest location */
                 location?: (string|null);
+
+                /** UpdateJobRequest updateMask */
+                updateMask?: (google.protobuf.IFieldMask|null);
             }
 
             /** Represents an UpdateJobRequest. */
@@ -4250,6 +4774,12 @@ export namespace google {
 
                 /** UpdateJobRequest location. */
                 public location: string;
+
+                /** UpdateJobRequest updateMask. */
+                public updateMask?: (google.protobuf.IFieldMask|null);
+
+                /** UpdateJobRequest _updateMask. */
+                public _updateMask?: "updateMask";
 
                 /**
                  * Creates a new UpdateJobRequest instance using the specified properties.
@@ -4349,6 +4879,9 @@ export namespace google {
 
                 /** ListJobsRequest location */
                 location?: (string|null);
+
+                /** ListJobsRequest name */
+                name?: (string|null);
             }
 
             /** Represents a ListJobsRequest. */
@@ -4377,6 +4910,12 @@ export namespace google {
 
                 /** ListJobsRequest location. */
                 public location: string;
+
+                /** ListJobsRequest name. */
+                public name?: (string|null);
+
+                /** ListJobsRequest _name. */
+                public _name?: "name";
 
                 /**
                  * Creates a new ListJobsRequest instance using the specified properties.
@@ -6858,6 +7397,9 @@ export namespace google {
                 /** MetricUpdate set */
                 set?: (google.protobuf.IValue|null);
 
+                /** MetricUpdate trie */
+                trie?: (google.protobuf.IValue|null);
+
                 /** MetricUpdate distribution */
                 distribution?: (google.protobuf.IValue|null);
 
@@ -6900,6 +7442,9 @@ export namespace google {
 
                 /** MetricUpdate set. */
                 public set?: (google.protobuf.IValue|null);
+
+                /** MetricUpdate trie. */
+                public trie?: (google.protobuf.IValue|null);
 
                 /** MetricUpdate distribution. */
                 public distribution?: (google.protobuf.IValue|null);
@@ -7539,6 +8084,757 @@ export namespace google {
                 }
             }
 
+            /** Properties of a StragglerInfo. */
+            interface IStragglerInfo {
+
+                /** StragglerInfo startTime */
+                startTime?: (google.protobuf.ITimestamp|null);
+
+                /** StragglerInfo causes */
+                causes?: ({ [k: string]: google.dataflow.v1beta3.StragglerInfo.IStragglerDebuggingInfo }|null);
+            }
+
+            /** Represents a StragglerInfo. */
+            class StragglerInfo implements IStragglerInfo {
+
+                /**
+                 * Constructs a new StragglerInfo.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.dataflow.v1beta3.IStragglerInfo);
+
+                /** StragglerInfo startTime. */
+                public startTime?: (google.protobuf.ITimestamp|null);
+
+                /** StragglerInfo causes. */
+                public causes: { [k: string]: google.dataflow.v1beta3.StragglerInfo.IStragglerDebuggingInfo };
+
+                /**
+                 * Creates a new StragglerInfo instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns StragglerInfo instance
+                 */
+                public static create(properties?: google.dataflow.v1beta3.IStragglerInfo): google.dataflow.v1beta3.StragglerInfo;
+
+                /**
+                 * Encodes the specified StragglerInfo message. Does not implicitly {@link google.dataflow.v1beta3.StragglerInfo.verify|verify} messages.
+                 * @param message StragglerInfo message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.dataflow.v1beta3.IStragglerInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified StragglerInfo message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.StragglerInfo.verify|verify} messages.
+                 * @param message StragglerInfo message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.dataflow.v1beta3.IStragglerInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a StragglerInfo message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns StragglerInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.dataflow.v1beta3.StragglerInfo;
+
+                /**
+                 * Decodes a StragglerInfo message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns StragglerInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.dataflow.v1beta3.StragglerInfo;
+
+                /**
+                 * Verifies a StragglerInfo message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a StragglerInfo message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns StragglerInfo
+                 */
+                public static fromObject(object: { [k: string]: any }): google.dataflow.v1beta3.StragglerInfo;
+
+                /**
+                 * Creates a plain object from a StragglerInfo message. Also converts values to other types if specified.
+                 * @param message StragglerInfo
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.dataflow.v1beta3.StragglerInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this StragglerInfo to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for StragglerInfo
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace StragglerInfo {
+
+                /** Properties of a StragglerDebuggingInfo. */
+                interface IStragglerDebuggingInfo {
+
+                    /** StragglerDebuggingInfo hotKey */
+                    hotKey?: (google.dataflow.v1beta3.IHotKeyDebuggingInfo|null);
+                }
+
+                /** Represents a StragglerDebuggingInfo. */
+                class StragglerDebuggingInfo implements IStragglerDebuggingInfo {
+
+                    /**
+                     * Constructs a new StragglerDebuggingInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.dataflow.v1beta3.StragglerInfo.IStragglerDebuggingInfo);
+
+                    /** StragglerDebuggingInfo hotKey. */
+                    public hotKey?: (google.dataflow.v1beta3.IHotKeyDebuggingInfo|null);
+
+                    /** StragglerDebuggingInfo stragglerDebuggingInfoValue. */
+                    public stragglerDebuggingInfoValue?: "hotKey";
+
+                    /**
+                     * Creates a new StragglerDebuggingInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StragglerDebuggingInfo instance
+                     */
+                    public static create(properties?: google.dataflow.v1beta3.StragglerInfo.IStragglerDebuggingInfo): google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo;
+
+                    /**
+                     * Encodes the specified StragglerDebuggingInfo message. Does not implicitly {@link google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo.verify|verify} messages.
+                     * @param message StragglerDebuggingInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.dataflow.v1beta3.StragglerInfo.IStragglerDebuggingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StragglerDebuggingInfo message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo.verify|verify} messages.
+                     * @param message StragglerDebuggingInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.dataflow.v1beta3.StragglerInfo.IStragglerDebuggingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StragglerDebuggingInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StragglerDebuggingInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo;
+
+                    /**
+                     * Decodes a StragglerDebuggingInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StragglerDebuggingInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo;
+
+                    /**
+                     * Verifies a StragglerDebuggingInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StragglerDebuggingInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StragglerDebuggingInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo;
+
+                    /**
+                     * Creates a plain object from a StragglerDebuggingInfo message. Also converts values to other types if specified.
+                     * @param message StragglerDebuggingInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.dataflow.v1beta3.StragglerInfo.StragglerDebuggingInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StragglerDebuggingInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StragglerDebuggingInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
+            /** Properties of a StreamingStragglerInfo. */
+            interface IStreamingStragglerInfo {
+
+                /** StreamingStragglerInfo startTime */
+                startTime?: (google.protobuf.ITimestamp|null);
+
+                /** StreamingStragglerInfo endTime */
+                endTime?: (google.protobuf.ITimestamp|null);
+
+                /** StreamingStragglerInfo workerName */
+                workerName?: (string|null);
+
+                /** StreamingStragglerInfo dataWatermarkLag */
+                dataWatermarkLag?: (google.protobuf.IDuration|null);
+
+                /** StreamingStragglerInfo systemWatermarkLag */
+                systemWatermarkLag?: (google.protobuf.IDuration|null);
+            }
+
+            /** Represents a StreamingStragglerInfo. */
+            class StreamingStragglerInfo implements IStreamingStragglerInfo {
+
+                /**
+                 * Constructs a new StreamingStragglerInfo.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.dataflow.v1beta3.IStreamingStragglerInfo);
+
+                /** StreamingStragglerInfo startTime. */
+                public startTime?: (google.protobuf.ITimestamp|null);
+
+                /** StreamingStragglerInfo endTime. */
+                public endTime?: (google.protobuf.ITimestamp|null);
+
+                /** StreamingStragglerInfo workerName. */
+                public workerName: string;
+
+                /** StreamingStragglerInfo dataWatermarkLag. */
+                public dataWatermarkLag?: (google.protobuf.IDuration|null);
+
+                /** StreamingStragglerInfo systemWatermarkLag. */
+                public systemWatermarkLag?: (google.protobuf.IDuration|null);
+
+                /**
+                 * Creates a new StreamingStragglerInfo instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns StreamingStragglerInfo instance
+                 */
+                public static create(properties?: google.dataflow.v1beta3.IStreamingStragglerInfo): google.dataflow.v1beta3.StreamingStragglerInfo;
+
+                /**
+                 * Encodes the specified StreamingStragglerInfo message. Does not implicitly {@link google.dataflow.v1beta3.StreamingStragglerInfo.verify|verify} messages.
+                 * @param message StreamingStragglerInfo message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.dataflow.v1beta3.IStreamingStragglerInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified StreamingStragglerInfo message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.StreamingStragglerInfo.verify|verify} messages.
+                 * @param message StreamingStragglerInfo message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.dataflow.v1beta3.IStreamingStragglerInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a StreamingStragglerInfo message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns StreamingStragglerInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.dataflow.v1beta3.StreamingStragglerInfo;
+
+                /**
+                 * Decodes a StreamingStragglerInfo message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns StreamingStragglerInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.dataflow.v1beta3.StreamingStragglerInfo;
+
+                /**
+                 * Verifies a StreamingStragglerInfo message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a StreamingStragglerInfo message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns StreamingStragglerInfo
+                 */
+                public static fromObject(object: { [k: string]: any }): google.dataflow.v1beta3.StreamingStragglerInfo;
+
+                /**
+                 * Creates a plain object from a StreamingStragglerInfo message. Also converts values to other types if specified.
+                 * @param message StreamingStragglerInfo
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.dataflow.v1beta3.StreamingStragglerInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this StreamingStragglerInfo to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for StreamingStragglerInfo
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a Straggler. */
+            interface IStraggler {
+
+                /** Straggler batchStraggler */
+                batchStraggler?: (google.dataflow.v1beta3.IStragglerInfo|null);
+
+                /** Straggler streamingStraggler */
+                streamingStraggler?: (google.dataflow.v1beta3.IStreamingStragglerInfo|null);
+            }
+
+            /** Represents a Straggler. */
+            class Straggler implements IStraggler {
+
+                /**
+                 * Constructs a new Straggler.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.dataflow.v1beta3.IStraggler);
+
+                /** Straggler batchStraggler. */
+                public batchStraggler?: (google.dataflow.v1beta3.IStragglerInfo|null);
+
+                /** Straggler streamingStraggler. */
+                public streamingStraggler?: (google.dataflow.v1beta3.IStreamingStragglerInfo|null);
+
+                /** Straggler stragglerInfo. */
+                public stragglerInfo?: ("batchStraggler"|"streamingStraggler");
+
+                /**
+                 * Creates a new Straggler instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Straggler instance
+                 */
+                public static create(properties?: google.dataflow.v1beta3.IStraggler): google.dataflow.v1beta3.Straggler;
+
+                /**
+                 * Encodes the specified Straggler message. Does not implicitly {@link google.dataflow.v1beta3.Straggler.verify|verify} messages.
+                 * @param message Straggler message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.dataflow.v1beta3.IStraggler, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Straggler message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.Straggler.verify|verify} messages.
+                 * @param message Straggler message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.dataflow.v1beta3.IStraggler, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Straggler message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Straggler
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.dataflow.v1beta3.Straggler;
+
+                /**
+                 * Decodes a Straggler message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Straggler
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.dataflow.v1beta3.Straggler;
+
+                /**
+                 * Verifies a Straggler message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Straggler message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Straggler
+                 */
+                public static fromObject(object: { [k: string]: any }): google.dataflow.v1beta3.Straggler;
+
+                /**
+                 * Creates a plain object from a Straggler message. Also converts values to other types if specified.
+                 * @param message Straggler
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.dataflow.v1beta3.Straggler, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Straggler to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Straggler
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a HotKeyDebuggingInfo. */
+            interface IHotKeyDebuggingInfo {
+
+                /** HotKeyDebuggingInfo detectedHotKeys */
+                detectedHotKeys?: ({ [k: string]: google.dataflow.v1beta3.HotKeyDebuggingInfo.IHotKeyInfo }|null);
+            }
+
+            /** Represents a HotKeyDebuggingInfo. */
+            class HotKeyDebuggingInfo implements IHotKeyDebuggingInfo {
+
+                /**
+                 * Constructs a new HotKeyDebuggingInfo.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.dataflow.v1beta3.IHotKeyDebuggingInfo);
+
+                /** HotKeyDebuggingInfo detectedHotKeys. */
+                public detectedHotKeys: { [k: string]: google.dataflow.v1beta3.HotKeyDebuggingInfo.IHotKeyInfo };
+
+                /**
+                 * Creates a new HotKeyDebuggingInfo instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns HotKeyDebuggingInfo instance
+                 */
+                public static create(properties?: google.dataflow.v1beta3.IHotKeyDebuggingInfo): google.dataflow.v1beta3.HotKeyDebuggingInfo;
+
+                /**
+                 * Encodes the specified HotKeyDebuggingInfo message. Does not implicitly {@link google.dataflow.v1beta3.HotKeyDebuggingInfo.verify|verify} messages.
+                 * @param message HotKeyDebuggingInfo message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.dataflow.v1beta3.IHotKeyDebuggingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified HotKeyDebuggingInfo message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.HotKeyDebuggingInfo.verify|verify} messages.
+                 * @param message HotKeyDebuggingInfo message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.dataflow.v1beta3.IHotKeyDebuggingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a HotKeyDebuggingInfo message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns HotKeyDebuggingInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.dataflow.v1beta3.HotKeyDebuggingInfo;
+
+                /**
+                 * Decodes a HotKeyDebuggingInfo message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns HotKeyDebuggingInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.dataflow.v1beta3.HotKeyDebuggingInfo;
+
+                /**
+                 * Verifies a HotKeyDebuggingInfo message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a HotKeyDebuggingInfo message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns HotKeyDebuggingInfo
+                 */
+                public static fromObject(object: { [k: string]: any }): google.dataflow.v1beta3.HotKeyDebuggingInfo;
+
+                /**
+                 * Creates a plain object from a HotKeyDebuggingInfo message. Also converts values to other types if specified.
+                 * @param message HotKeyDebuggingInfo
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.dataflow.v1beta3.HotKeyDebuggingInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this HotKeyDebuggingInfo to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for HotKeyDebuggingInfo
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace HotKeyDebuggingInfo {
+
+                /** Properties of a HotKeyInfo. */
+                interface IHotKeyInfo {
+
+                    /** HotKeyInfo hotKeyAge */
+                    hotKeyAge?: (google.protobuf.IDuration|null);
+
+                    /** HotKeyInfo key */
+                    key?: (string|null);
+
+                    /** HotKeyInfo keyTruncated */
+                    keyTruncated?: (boolean|null);
+                }
+
+                /** Represents a HotKeyInfo. */
+                class HotKeyInfo implements IHotKeyInfo {
+
+                    /**
+                     * Constructs a new HotKeyInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.dataflow.v1beta3.HotKeyDebuggingInfo.IHotKeyInfo);
+
+                    /** HotKeyInfo hotKeyAge. */
+                    public hotKeyAge?: (google.protobuf.IDuration|null);
+
+                    /** HotKeyInfo key. */
+                    public key: string;
+
+                    /** HotKeyInfo keyTruncated. */
+                    public keyTruncated: boolean;
+
+                    /**
+                     * Creates a new HotKeyInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HotKeyInfo instance
+                     */
+                    public static create(properties?: google.dataflow.v1beta3.HotKeyDebuggingInfo.IHotKeyInfo): google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo;
+
+                    /**
+                     * Encodes the specified HotKeyInfo message. Does not implicitly {@link google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo.verify|verify} messages.
+                     * @param message HotKeyInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.dataflow.v1beta3.HotKeyDebuggingInfo.IHotKeyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HotKeyInfo message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo.verify|verify} messages.
+                     * @param message HotKeyInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.dataflow.v1beta3.HotKeyDebuggingInfo.IHotKeyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HotKeyInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HotKeyInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo;
+
+                    /**
+                     * Decodes a HotKeyInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HotKeyInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo;
+
+                    /**
+                     * Verifies a HotKeyInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HotKeyInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HotKeyInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo;
+
+                    /**
+                     * Creates a plain object from a HotKeyInfo message. Also converts values to other types if specified.
+                     * @param message HotKeyInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.dataflow.v1beta3.HotKeyDebuggingInfo.HotKeyInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HotKeyInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for HotKeyInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
+            /** Properties of a StragglerSummary. */
+            interface IStragglerSummary {
+
+                /** StragglerSummary totalStragglerCount */
+                totalStragglerCount?: (number|Long|string|null);
+
+                /** StragglerSummary stragglerCauseCount */
+                stragglerCauseCount?: ({ [k: string]: (number|Long|string) }|null);
+
+                /** StragglerSummary recentStragglers */
+                recentStragglers?: (google.dataflow.v1beta3.IStraggler[]|null);
+            }
+
+            /** Represents a StragglerSummary. */
+            class StragglerSummary implements IStragglerSummary {
+
+                /**
+                 * Constructs a new StragglerSummary.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.dataflow.v1beta3.IStragglerSummary);
+
+                /** StragglerSummary totalStragglerCount. */
+                public totalStragglerCount: (number|Long|string);
+
+                /** StragglerSummary stragglerCauseCount. */
+                public stragglerCauseCount: { [k: string]: (number|Long|string) };
+
+                /** StragglerSummary recentStragglers. */
+                public recentStragglers: google.dataflow.v1beta3.IStraggler[];
+
+                /**
+                 * Creates a new StragglerSummary instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns StragglerSummary instance
+                 */
+                public static create(properties?: google.dataflow.v1beta3.IStragglerSummary): google.dataflow.v1beta3.StragglerSummary;
+
+                /**
+                 * Encodes the specified StragglerSummary message. Does not implicitly {@link google.dataflow.v1beta3.StragglerSummary.verify|verify} messages.
+                 * @param message StragglerSummary message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.dataflow.v1beta3.IStragglerSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified StragglerSummary message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.StragglerSummary.verify|verify} messages.
+                 * @param message StragglerSummary message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.dataflow.v1beta3.IStragglerSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a StragglerSummary message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns StragglerSummary
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.dataflow.v1beta3.StragglerSummary;
+
+                /**
+                 * Decodes a StragglerSummary message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns StragglerSummary
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.dataflow.v1beta3.StragglerSummary;
+
+                /**
+                 * Verifies a StragglerSummary message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a StragglerSummary message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns StragglerSummary
+                 */
+                public static fromObject(object: { [k: string]: any }): google.dataflow.v1beta3.StragglerSummary;
+
+                /**
+                 * Creates a plain object from a StragglerSummary message. Also converts values to other types if specified.
+                 * @param message StragglerSummary
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.dataflow.v1beta3.StragglerSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this StragglerSummary to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for StragglerSummary
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** ExecutionState enum. */
             enum ExecutionState {
                 EXECUTION_STATE_UNKNOWN = 0,
@@ -7569,6 +8865,9 @@ export namespace google {
 
                 /** StageSummary metrics */
                 metrics?: (google.dataflow.v1beta3.IMetricUpdate[]|null);
+
+                /** StageSummary stragglerSummary */
+                stragglerSummary?: (google.dataflow.v1beta3.IStragglerSummary|null);
             }
 
             /** Represents a StageSummary. */
@@ -7597,6 +8896,9 @@ export namespace google {
 
                 /** StageSummary metrics. */
                 public metrics: google.dataflow.v1beta3.IMetricUpdate[];
+
+                /** StageSummary stragglerSummary. */
+                public stragglerSummary?: (google.dataflow.v1beta3.IStragglerSummary|null);
 
                 /**
                  * Creates a new StageSummary instance using the specified properties.
@@ -7941,6 +9243,9 @@ export namespace google {
 
                 /** WorkItemDetails metrics */
                 metrics?: (google.dataflow.v1beta3.IMetricUpdate[]|null);
+
+                /** WorkItemDetails stragglerInfo */
+                stragglerInfo?: (google.dataflow.v1beta3.IStragglerInfo|null);
             }
 
             /** Represents a WorkItemDetails. */
@@ -7972,6 +9277,9 @@ export namespace google {
 
                 /** WorkItemDetails metrics. */
                 public metrics: google.dataflow.v1beta3.IMetricUpdate[];
+
+                /** WorkItemDetails stragglerInfo. */
+                public stragglerInfo?: (google.dataflow.v1beta3.IStragglerInfo|null);
 
                 /**
                  * Creates a new WorkItemDetails instance using the specified properties.
@@ -8401,6 +9709,9 @@ export namespace google {
 
                 /** PubsubLocation withAttributes */
                 withAttributes?: (boolean|null);
+
+                /** PubsubLocation dynamicDestinations */
+                dynamicDestinations?: (boolean|null);
             }
 
             /** Represents a PubsubLocation. */
@@ -8432,6 +9743,9 @@ export namespace google {
 
                 /** PubsubLocation withAttributes. */
                 public withAttributes: boolean;
+
+                /** PubsubLocation dynamicDestinations. */
+                public dynamicDestinations: boolean;
 
                 /**
                  * Creates a new PubsubLocation instance using the specified properties.
@@ -10035,6 +11349,15 @@ export namespace google {
 
                 /** ContainerSpec defaultEnvironment */
                 defaultEnvironment?: (google.dataflow.v1beta3.IFlexTemplateRuntimeEnvironment|null);
+
+                /** ContainerSpec imageRepositoryUsernameSecretId */
+                imageRepositoryUsernameSecretId?: (string|null);
+
+                /** ContainerSpec imageRepositoryPasswordSecretId */
+                imageRepositoryPasswordSecretId?: (string|null);
+
+                /** ContainerSpec imageRepositoryCertPath */
+                imageRepositoryCertPath?: (string|null);
             }
 
             /** Represents a ContainerSpec. */
@@ -10057,6 +11380,15 @@ export namespace google {
 
                 /** ContainerSpec defaultEnvironment. */
                 public defaultEnvironment?: (google.dataflow.v1beta3.IFlexTemplateRuntimeEnvironment|null);
+
+                /** ContainerSpec imageRepositoryUsernameSecretId. */
+                public imageRepositoryUsernameSecretId: string;
+
+                /** ContainerSpec imageRepositoryPasswordSecretId. */
+                public imageRepositoryPasswordSecretId: string;
+
+                /** ContainerSpec imageRepositoryCertPath. */
+                public imageRepositoryCertPath: string;
 
                 /**
                  * Creates a new ContainerSpec instance using the specified properties.
@@ -10349,6 +11681,12 @@ export namespace google {
 
                 /** FlexTemplateRuntimeEnvironment launcherMachineType */
                 launcherMachineType?: (string|null);
+
+                /** FlexTemplateRuntimeEnvironment enableLauncherVmSerialPortLogging */
+                enableLauncherVmSerialPortLogging?: (boolean|null);
+
+                /** FlexTemplateRuntimeEnvironment streamingMode */
+                streamingMode?: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode|null);
             }
 
             /** Represents a FlexTemplateRuntimeEnvironment. */
@@ -10428,6 +11766,15 @@ export namespace google {
 
                 /** FlexTemplateRuntimeEnvironment launcherMachineType. */
                 public launcherMachineType: string;
+
+                /** FlexTemplateRuntimeEnvironment enableLauncherVmSerialPortLogging. */
+                public enableLauncherVmSerialPortLogging: boolean;
+
+                /** FlexTemplateRuntimeEnvironment streamingMode. */
+                public streamingMode?: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode|null);
+
+                /** FlexTemplateRuntimeEnvironment _streamingMode. */
+                public _streamingMode?: "streamingMode";
 
                 /**
                  * Creates a new FlexTemplateRuntimeEnvironment instance using the specified properties.
@@ -10672,6 +12019,12 @@ export namespace google {
 
                 /** RuntimeEnvironment enableStreamingEngine */
                 enableStreamingEngine?: (boolean|null);
+
+                /** RuntimeEnvironment diskSizeGb */
+                diskSizeGb?: (number|null);
+
+                /** RuntimeEnvironment streamingMode */
+                streamingMode?: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode|null);
             }
 
             /** Represents a RuntimeEnvironment. */
@@ -10730,6 +12083,15 @@ export namespace google {
 
                 /** RuntimeEnvironment enableStreamingEngine. */
                 public enableStreamingEngine: boolean;
+
+                /** RuntimeEnvironment diskSizeGb. */
+                public diskSizeGb: number;
+
+                /** RuntimeEnvironment streamingMode. */
+                public streamingMode?: (google.dataflow.v1beta3.StreamingMode|keyof typeof google.dataflow.v1beta3.StreamingMode|null);
+
+                /** RuntimeEnvironment _streamingMode. */
+                public _streamingMode?: "streamingMode";
 
                 /**
                  * Creates a new RuntimeEnvironment instance using the specified properties.
@@ -10809,6 +12171,115 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a ParameterMetadataEnumOption. */
+            interface IParameterMetadataEnumOption {
+
+                /** ParameterMetadataEnumOption value */
+                value?: (string|null);
+
+                /** ParameterMetadataEnumOption label */
+                label?: (string|null);
+
+                /** ParameterMetadataEnumOption description */
+                description?: (string|null);
+            }
+
+            /** Represents a ParameterMetadataEnumOption. */
+            class ParameterMetadataEnumOption implements IParameterMetadataEnumOption {
+
+                /**
+                 * Constructs a new ParameterMetadataEnumOption.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.dataflow.v1beta3.IParameterMetadataEnumOption);
+
+                /** ParameterMetadataEnumOption value. */
+                public value: string;
+
+                /** ParameterMetadataEnumOption label. */
+                public label: string;
+
+                /** ParameterMetadataEnumOption description. */
+                public description: string;
+
+                /**
+                 * Creates a new ParameterMetadataEnumOption instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ParameterMetadataEnumOption instance
+                 */
+                public static create(properties?: google.dataflow.v1beta3.IParameterMetadataEnumOption): google.dataflow.v1beta3.ParameterMetadataEnumOption;
+
+                /**
+                 * Encodes the specified ParameterMetadataEnumOption message. Does not implicitly {@link google.dataflow.v1beta3.ParameterMetadataEnumOption.verify|verify} messages.
+                 * @param message ParameterMetadataEnumOption message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.dataflow.v1beta3.IParameterMetadataEnumOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ParameterMetadataEnumOption message, length delimited. Does not implicitly {@link google.dataflow.v1beta3.ParameterMetadataEnumOption.verify|verify} messages.
+                 * @param message ParameterMetadataEnumOption message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.dataflow.v1beta3.IParameterMetadataEnumOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ParameterMetadataEnumOption message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ParameterMetadataEnumOption
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.dataflow.v1beta3.ParameterMetadataEnumOption;
+
+                /**
+                 * Decodes a ParameterMetadataEnumOption message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ParameterMetadataEnumOption
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.dataflow.v1beta3.ParameterMetadataEnumOption;
+
+                /**
+                 * Verifies a ParameterMetadataEnumOption message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ParameterMetadataEnumOption message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ParameterMetadataEnumOption
+                 */
+                public static fromObject(object: { [k: string]: any }): google.dataflow.v1beta3.ParameterMetadataEnumOption;
+
+                /**
+                 * Creates a plain object from a ParameterMetadataEnumOption message. Also converts values to other types if specified.
+                 * @param message ParameterMetadataEnumOption
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.dataflow.v1beta3.ParameterMetadataEnumOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ParameterMetadataEnumOption to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ParameterMetadataEnumOption
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a ParameterMetadata. */
             interface IParameterMetadata {
 
@@ -10832,6 +12303,24 @@ export namespace google {
 
                 /** ParameterMetadata customMetadata */
                 customMetadata?: ({ [k: string]: string }|null);
+
+                /** ParameterMetadata groupName */
+                groupName?: (string|null);
+
+                /** ParameterMetadata parentName */
+                parentName?: (string|null);
+
+                /** ParameterMetadata parentTriggerValues */
+                parentTriggerValues?: (string[]|null);
+
+                /** ParameterMetadata enumOptions */
+                enumOptions?: (google.dataflow.v1beta3.IParameterMetadataEnumOption[]|null);
+
+                /** ParameterMetadata defaultValue */
+                defaultValue?: (string|null);
+
+                /** ParameterMetadata hiddenUi */
+                hiddenUi?: (boolean|null);
             }
 
             /** Represents a ParameterMetadata. */
@@ -10863,6 +12352,24 @@ export namespace google {
 
                 /** ParameterMetadata customMetadata. */
                 public customMetadata: { [k: string]: string };
+
+                /** ParameterMetadata groupName. */
+                public groupName: string;
+
+                /** ParameterMetadata parentName. */
+                public parentName: string;
+
+                /** ParameterMetadata parentTriggerValues. */
+                public parentTriggerValues: string[];
+
+                /** ParameterMetadata enumOptions. */
+                public enumOptions: google.dataflow.v1beta3.IParameterMetadataEnumOption[];
+
+                /** ParameterMetadata defaultValue. */
+                public defaultValue: string;
+
+                /** ParameterMetadata hiddenUi. */
+                public hiddenUi: boolean;
 
                 /**
                  * Creates a new ParameterMetadata instance using the specified properties.
@@ -10942,20 +12449,6 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            /** ParameterType enum. */
-            enum ParameterType {
-                DEFAULT = 0,
-                TEXT = 1,
-                GCS_READ_BUCKET = 2,
-                GCS_WRITE_BUCKET = 3,
-                GCS_READ_FILE = 4,
-                GCS_WRITE_FILE = 5,
-                GCS_READ_FOLDER = 6,
-                GCS_WRITE_FOLDER = 7,
-                PUBSUB_TOPIC = 8,
-                PUBSUB_SUBSCRIPTION = 9
-            }
-
             /** Properties of a TemplateMetadata. */
             interface ITemplateMetadata {
 
@@ -10967,6 +12460,18 @@ export namespace google {
 
                 /** TemplateMetadata parameters */
                 parameters?: (google.dataflow.v1beta3.IParameterMetadata[]|null);
+
+                /** TemplateMetadata streaming */
+                streaming?: (boolean|null);
+
+                /** TemplateMetadata supportsAtLeastOnce */
+                supportsAtLeastOnce?: (boolean|null);
+
+                /** TemplateMetadata supportsExactlyOnce */
+                supportsExactlyOnce?: (boolean|null);
+
+                /** TemplateMetadata defaultStreamingMode */
+                defaultStreamingMode?: (string|null);
             }
 
             /** Represents a TemplateMetadata. */
@@ -10986,6 +12491,18 @@ export namespace google {
 
                 /** TemplateMetadata parameters. */
                 public parameters: google.dataflow.v1beta3.IParameterMetadata[];
+
+                /** TemplateMetadata streaming. */
+                public streaming: boolean;
+
+                /** TemplateMetadata supportsAtLeastOnce. */
+                public supportsAtLeastOnce: boolean;
+
+                /** TemplateMetadata supportsExactlyOnce. */
+                public supportsExactlyOnce: boolean;
+
+                /** TemplateMetadata defaultStreamingMode. */
+                public defaultStreamingMode: string;
 
                 /**
                  * Creates a new TemplateMetadata instance using the specified properties.
@@ -11174,7 +12691,8 @@ export namespace google {
                 enum Language {
                     UNKNOWN = 0,
                     JAVA = 1,
-                    PYTHON = 2
+                    PYTHON = 2,
+                    GO = 3
                 }
             }
 
@@ -12314,6 +13832,33 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** ParameterType enum. */
+            enum ParameterType {
+                DEFAULT = 0,
+                TEXT = 1,
+                GCS_READ_BUCKET = 2,
+                GCS_WRITE_BUCKET = 3,
+                GCS_READ_FILE = 4,
+                GCS_WRITE_FILE = 5,
+                GCS_READ_FOLDER = 6,
+                GCS_WRITE_FOLDER = 7,
+                PUBSUB_TOPIC = 8,
+                PUBSUB_SUBSCRIPTION = 9,
+                BIGQUERY_TABLE = 10,
+                JAVASCRIPT_UDF_FILE = 11,
+                SERVICE_ACCOUNT = 12,
+                MACHINE_TYPE = 13,
+                KMS_KEY_NAME = 14,
+                WORKER_REGION = 15,
+                WORKER_ZONE = 16,
+                BOOLEAN = 17,
+                ENUM = 18,
+                NUMBER = 19,
+                KAFKA_TOPIC = 20,
+                KAFKA_READ_TOPIC = 21,
+                KAFKA_WRITE_TOPIC = 22
             }
         }
     }
@@ -18910,6 +20455,103 @@ export namespace google {
 
             /**
              * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

@@ -91,6 +91,15 @@ export namespace google {
 
                     /** Order existingHardware */
                     existingHardware?: (google.cloud.gdchardwaremanagement.v1alpha.IHardwareLocation[]|null);
+
+                    /** Order deploymentType */
+                    deploymentType?: (google.cloud.gdchardwaremanagement.v1alpha.Order.DeploymentType|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.Order.DeploymentType|null);
+
+                    /** Order actualInstallationDate */
+                    actualInstallationDate?: (google.type.IDate|null);
+
+                    /** Order estimatedInstallationDate */
+                    estimatedInstallationDate?: (google.type.IDate|null);
                 }
 
                 /** Represents an Order. */
@@ -149,6 +158,15 @@ export namespace google {
 
                     /** Order existingHardware. */
                     public existingHardware: google.cloud.gdchardwaremanagement.v1alpha.IHardwareLocation[];
+
+                    /** Order deploymentType. */
+                    public deploymentType: (google.cloud.gdchardwaremanagement.v1alpha.Order.DeploymentType|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.Order.DeploymentType);
+
+                    /** Order actualInstallationDate. */
+                    public actualInstallationDate?: (google.type.IDate|null);
+
+                    /** Order estimatedInstallationDate. */
+                    public estimatedInstallationDate?: (google.type.IDate|null);
 
                     /**
                      * Creates a new Order instance using the specified properties.
@@ -251,7 +269,17 @@ export namespace google {
                     enum Type {
                         TYPE_UNSPECIFIED = 0,
                         PAID = 1,
-                        POC = 2
+                        POC = 2,
+                        UNPAID = 2
+                    }
+
+                    /** DeploymentType enum. */
+                    enum DeploymentType {
+                        DEPLOYMENT_TYPE_UNSPECIFIED = 0,
+                        FULL_PRODUCTION = 1,
+                        PROOF_OF_CONCEPT = 2,
+                        INTERNAL = 3,
+                        CUSTOMER_LAB = 4
                     }
                 }
 
@@ -1436,6 +1464,9 @@ export namespace google {
 
                     /** Sku vcpuCount */
                     vcpuCount?: (number|null);
+
+                    /** Sku hardwareCountRanges */
+                    hardwareCountRanges?: (google.cloud.gdchardwaremanagement.v1alpha.Sku.IRange[]|null);
                 }
 
                 /** Represents a Sku. */
@@ -1479,6 +1510,9 @@ export namespace google {
 
                     /** Sku vcpuCount. */
                     public vcpuCount: number;
+
+                    /** Sku hardwareCountRanges. */
+                    public hardwareCountRanges: google.cloud.gdchardwaremanagement.v1alpha.Sku.IRange[];
 
                     /**
                      * Creates a new Sku instance using the specified properties.
@@ -1559,6 +1593,109 @@ export namespace google {
                 }
 
                 namespace Sku {
+
+                    /** Properties of a Range. */
+                    interface IRange {
+
+                        /** Range min */
+                        min?: (number|null);
+
+                        /** Range max */
+                        max?: (number|null);
+                    }
+
+                    /** Represents a Range. */
+                    class Range implements IRange {
+
+                        /**
+                         * Constructs a new Range.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gdchardwaremanagement.v1alpha.Sku.IRange);
+
+                        /** Range min. */
+                        public min: number;
+
+                        /** Range max. */
+                        public max: number;
+
+                        /**
+                         * Creates a new Range instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Range instance
+                         */
+                        public static create(properties?: google.cloud.gdchardwaremanagement.v1alpha.Sku.IRange): google.cloud.gdchardwaremanagement.v1alpha.Sku.Range;
+
+                        /**
+                         * Encodes the specified Range message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Sku.Range.verify|verify} messages.
+                         * @param message Range message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gdchardwaremanagement.v1alpha.Sku.IRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Range message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Sku.Range.verify|verify} messages.
+                         * @param message Range message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gdchardwaremanagement.v1alpha.Sku.IRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Range message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Range
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gdchardwaremanagement.v1alpha.Sku.Range;
+
+                        /**
+                         * Decodes a Range message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Range
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gdchardwaremanagement.v1alpha.Sku.Range;
+
+                        /**
+                         * Verifies a Range message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Range message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Range
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gdchardwaremanagement.v1alpha.Sku.Range;
+
+                        /**
+                         * Creates a plain object from a Range message. Also converts values to other types if specified.
+                         * @param message Range
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gdchardwaremanagement.v1alpha.Sku.Range, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Range to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Range
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** Type enum. */
                     enum Type {
@@ -1739,6 +1876,7 @@ export namespace google {
                         ADDITIONAL_INFO_NEEDED = 1,
                         PREPARING = 2,
                         READY_FOR_CUSTOMER_FACTORY_TURNUP_CHECKS = 5,
+                        CUSTOMER_FACTORY_TURNUP_CHECKS_STARTED = 8,
                         READY_FOR_SITE_TURNUP = 6,
                         CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED = 7,
                         ACTIVE = 3,
@@ -8782,6 +8920,12 @@ export namespace google {
 
                     /** SignalZoneStateRequest provisioningStateSignal */
                     provisioningStateSignal?: (google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal|null);
+
+                    /** SignalZoneStateRequest step */
+                    step?: (string|null);
+
+                    /** SignalZoneStateRequest details */
+                    details?: (string|null);
                 }
 
                 /** Represents a SignalZoneStateRequest. */
@@ -8804,6 +8948,12 @@ export namespace google {
 
                     /** SignalZoneStateRequest provisioningStateSignal. */
                     public provisioningStateSignal: (google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal);
+
+                    /** SignalZoneStateRequest step. */
+                    public step: string;
+
+                    /** SignalZoneStateRequest details. */
+                    public details: string;
 
                     /**
                      * Creates a new SignalZoneStateRequest instance using the specified properties.
@@ -8888,6 +9038,7 @@ export namespace google {
                     /** StateSignal enum. */
                     enum StateSignal {
                         STATE_SIGNAL_UNSPECIFIED = 0,
+                        FACTORY_TURNUP_CHECKS_STARTED = 3,
                         FACTORY_TURNUP_CHECKS_PASSED = 1,
                         READY_FOR_SITE_TURNUP = 1,
                         FACTORY_TURNUP_CHECKS_FAILED = 2

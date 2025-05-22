@@ -628,6 +628,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public getPartner(request: google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest): Promise<google.cloud.cloudcontrolspartner.v1.Partner>;
+
+                    /**
+                     * Calls CreateCustomer.
+                     * @param request CreateCustomerRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Customer
+                     */
+                    public createCustomer(request: google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.CreateCustomerCallback): void;
+
+                    /**
+                     * Calls CreateCustomer.
+                     * @param request CreateCustomerRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCustomer(request: google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest): Promise<google.cloud.cloudcontrolspartner.v1.Customer>;
+
+                    /**
+                     * Calls UpdateCustomer.
+                     * @param request UpdateCustomerRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Customer
+                     */
+                    public updateCustomer(request: google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.UpdateCustomerCallback): void;
+
+                    /**
+                     * Calls UpdateCustomer.
+                     * @param request UpdateCustomerRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCustomer(request: google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest): Promise<google.cloud.cloudcontrolspartner.v1.Customer>;
+
+                    /**
+                     * Calls DeleteCustomer.
+                     * @param request DeleteCustomerRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteCustomer(request: google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.DeleteCustomerCallback): void;
+
+                    /**
+                     * Calls DeleteCustomer.
+                     * @param request DeleteCustomerRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCustomer(request: google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest): Promise<google.protobuf.Empty>;
                 }
 
                 namespace CloudControlsPartnerCore {
@@ -687,6 +729,27 @@ export namespace google {
                      * @param [response] Partner
                      */
                     type GetPartnerCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.Partner) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|createCustomer}.
+                     * @param error Error, if any
+                     * @param [response] Customer
+                     */
+                    type CreateCustomerCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.Customer) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|updateCustomer}.
+                     * @param error Error, if any
+                     * @param [response] Customer
+                     */
+                    type UpdateCustomerCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.Customer) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|deleteCustomer}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteCustomerCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of an OperationMetadata. */
@@ -1544,6 +1607,9 @@ export namespace google {
 
                     /** Customer isOnboarded */
                     isOnboarded?: (boolean|null);
+
+                    /** Customer organizationDomain */
+                    organizationDomain?: (string|null);
                 }
 
                 /** Represents a Customer. */
@@ -1566,6 +1632,9 @@ export namespace google {
 
                     /** Customer isOnboarded. */
                     public isOnboarded: boolean;
+
+                    /** Customer organizationDomain. */
+                    public organizationDomain: string;
 
                     /**
                      * Creates a new Customer instance using the specified properties.
@@ -1869,6 +1938,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListCustomersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateCustomerRequest. */
+                interface ICreateCustomerRequest {
+
+                    /** CreateCustomerRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateCustomerRequest customer */
+                    customer?: (google.cloud.cloudcontrolspartner.v1.ICustomer|null);
+
+                    /** CreateCustomerRequest customerId */
+                    customerId?: (string|null);
+                }
+
+                /** Represents a CreateCustomerRequest. */
+                class CreateCustomerRequest implements ICreateCustomerRequest {
+
+                    /**
+                     * Constructs a new CreateCustomerRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest);
+
+                    /** CreateCustomerRequest parent. */
+                    public parent: string;
+
+                    /** CreateCustomerRequest customer. */
+                    public customer?: (google.cloud.cloudcontrolspartner.v1.ICustomer|null);
+
+                    /** CreateCustomerRequest customerId. */
+                    public customerId: string;
+
+                    /**
+                     * Creates a new CreateCustomerRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCustomerRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest): google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest;
+
+                    /**
+                     * Encodes the specified CreateCustomerRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest.verify|verify} messages.
+                     * @param message CreateCustomerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCustomerRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest.verify|verify} messages.
+                     * @param message CreateCustomerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.ICreateCustomerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCustomerRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCustomerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest;
+
+                    /**
+                     * Decodes a CreateCustomerRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCustomerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest;
+
+                    /**
+                     * Verifies a CreateCustomerRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCustomerRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCustomerRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCustomerRequest message. Also converts values to other types if specified.
+                     * @param message CreateCustomerRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.CreateCustomerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCustomerRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCustomerRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -2192,6 +2370,206 @@ export namespace google {
                         KAJ_ENROLLMENT = 1,
                         CUSTOMER_ENVIRONMENT = 2
                     }
+                }
+
+                /** Properties of an UpdateCustomerRequest. */
+                interface IUpdateCustomerRequest {
+
+                    /** UpdateCustomerRequest customer */
+                    customer?: (google.cloud.cloudcontrolspartner.v1.ICustomer|null);
+
+                    /** UpdateCustomerRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateCustomerRequest. */
+                class UpdateCustomerRequest implements IUpdateCustomerRequest {
+
+                    /**
+                     * Constructs a new UpdateCustomerRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest);
+
+                    /** UpdateCustomerRequest customer. */
+                    public customer?: (google.cloud.cloudcontrolspartner.v1.ICustomer|null);
+
+                    /** UpdateCustomerRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateCustomerRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCustomerRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest): google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest;
+
+                    /**
+                     * Encodes the specified UpdateCustomerRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest.verify|verify} messages.
+                     * @param message UpdateCustomerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCustomerRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest.verify|verify} messages.
+                     * @param message UpdateCustomerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IUpdateCustomerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCustomerRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCustomerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest;
+
+                    /**
+                     * Decodes an UpdateCustomerRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCustomerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest;
+
+                    /**
+                     * Verifies an UpdateCustomerRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCustomerRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCustomerRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCustomerRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCustomerRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.UpdateCustomerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCustomerRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCustomerRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCustomerRequest. */
+                interface IDeleteCustomerRequest {
+
+                    /** DeleteCustomerRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteCustomerRequest. */
+                class DeleteCustomerRequest implements IDeleteCustomerRequest {
+
+                    /**
+                     * Constructs a new DeleteCustomerRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest);
+
+                    /** DeleteCustomerRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteCustomerRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCustomerRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest): google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest;
+
+                    /**
+                     * Encodes the specified DeleteCustomerRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest.verify|verify} messages.
+                     * @param message DeleteCustomerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCustomerRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest.verify|verify} messages.
+                     * @param message DeleteCustomerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IDeleteCustomerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCustomerRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCustomerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest;
+
+                    /**
+                     * Decodes a DeleteCustomerRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCustomerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest;
+
+                    /**
+                     * Verifies a DeleteCustomerRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCustomerRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCustomerRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCustomerRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCustomerRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.DeleteCustomerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCustomerRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCustomerRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an EkmConnections. */
