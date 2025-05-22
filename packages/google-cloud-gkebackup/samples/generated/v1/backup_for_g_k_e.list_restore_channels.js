@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START gkebackup_v1_generated_BackupForGKE_ListBackups_async]
+  // [START gkebackup_v1_generated_BackupForGKE_ListRestoreChannels_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The BackupPlan that contains the Backups to list.
-   *  Format: `projects/* /locations/* /backupPlans/*`
+   *  Required. The location that contains the RestoreChannels to list.
+   *  Format: `projects/* /locations/*`
    */
   // const parent = 'abc123'
   /**
@@ -38,17 +38,18 @@ function main(parent) {
    *  If not specified, a default value will be chosen by the service.
    *  Note that the response may include a partial list and a caller should
    *  only rely on the response's
-   *  next_page_token google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token 
+   *  next_page_token google.cloud.gkebackup.v1.ListRestoreChannelsResponse.next_page_token 
    *  to determine if there are more instances left to be queried.
    */
   // const pageSize = 1234
   /**
    *  Optional. The value of
-   *  next_page_token google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token 
-   *  received from a previous `ListBackups` call.
+   *  next_page_token google.cloud.gkebackup.v1.ListRestoreChannelsResponse.next_page_token 
+   *  received from a previous `ListRestoreChannels` call.
    *  Provide this to retrieve the subsequent page in a multi-page list of
    *  results. When paginating, all other parameters provided to
-   *  `ListBackups` must match the call that provided the page token.
+   *  `ListRestoreChannels` must match the call that provided the page
+   *  token.
    */
   // const pageToken = 'abc123'
   /**
@@ -59,11 +60,6 @@ function main(parent) {
    *  Optional. Field by which to sort the results.
    */
   // const orderBy = 'abc123'
-  /**
-   *  Optional. If set to true, the response will return partial results when
-   *  some regions are unreachable and the unreachable field will be populated.
-   */
-  // const returnPartialSuccess = true
 
   // Imports the Gkebackup library
   const {BackupForGKEClient} = require('@google-cloud/gke-backup').v1;
@@ -71,21 +67,21 @@ function main(parent) {
   // Instantiates a client
   const gkebackupClient = new BackupForGKEClient();
 
-  async function callListBackups() {
+  async function callListRestoreChannels() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = gkebackupClient.listBackupsAsync(request);
+    const iterable = gkebackupClient.listRestoreChannelsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListBackups();
-  // [END gkebackup_v1_generated_BackupForGKE_ListBackups_async]
+  callListRestoreChannels();
+  // [END gkebackup_v1_generated_BackupForGKE_ListRestoreChannels_async]
 }
 
 process.on('unhandledRejection', err => {
