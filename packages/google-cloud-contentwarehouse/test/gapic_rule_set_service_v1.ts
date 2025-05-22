@@ -259,9 +259,14 @@ describe('v1.RuleSetServiceClient', () => {
         throw err;
       });
       assert(client.ruleSetServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -270,9 +275,14 @@ describe('v1.RuleSetServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.ruleSetServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -435,7 +445,9 @@ describe('v1.RuleSetServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createRuleSet(request), expectedError);
     });
   });
@@ -565,7 +577,9 @@ describe('v1.RuleSetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRuleSet(request), expectedError);
     });
   });
@@ -695,7 +709,9 @@ describe('v1.RuleSetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateRuleSet(request), expectedError);
     });
   });
@@ -825,7 +841,9 @@ describe('v1.RuleSetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteRuleSet(request), expectedError);
     });
   });
