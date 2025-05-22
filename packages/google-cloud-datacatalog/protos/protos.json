@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -2678,6 +2681,10 @@
                         "catalogUiExperience": {
                           "type": "CatalogUIExperience",
                           "id": 2
+                        },
+                        "templateMigrationEnabledTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
                         }
                       }
                     },
