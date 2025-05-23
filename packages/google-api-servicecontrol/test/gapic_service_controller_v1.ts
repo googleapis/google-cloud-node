@@ -197,9 +197,14 @@ describe('v1.ServiceControllerClient', () => {
         throw err;
       });
       assert(client.serviceControllerStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -208,9 +213,14 @@ describe('v1.ServiceControllerClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.serviceControllerStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -366,7 +376,9 @@ describe('v1.ServiceControllerClient', () => {
       );
       request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.check(request), expectedError);
     });
   });
@@ -493,7 +505,9 @@ describe('v1.ServiceControllerClient', () => {
       );
       request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.report(request), expectedError);
     });
   });

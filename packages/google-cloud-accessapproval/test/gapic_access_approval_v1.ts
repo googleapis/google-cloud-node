@@ -259,9 +259,14 @@ describe('v1.AccessApprovalClient', () => {
         throw err;
       });
       assert(client.accessApprovalStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -270,9 +275,14 @@ describe('v1.AccessApprovalClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.accessApprovalStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -436,7 +446,9 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getApprovalRequest(request), expectedError);
     });
   });
@@ -570,7 +582,9 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.approveApprovalRequest(request),
         expectedError
@@ -707,7 +721,9 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.dismissApprovalRequest(request),
         expectedError
@@ -844,7 +860,9 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.invalidateApprovalRequest(request),
         expectedError
@@ -981,7 +999,9 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getAccessApprovalSettings(request),
         expectedError
@@ -1122,7 +1142,9 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.settings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateAccessApprovalSettings(request),
         expectedError
@@ -1259,7 +1281,9 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteAccessApprovalSettings(request),
         expectedError
@@ -1396,7 +1420,9 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getAccessApprovalServiceAccount(request),
         expectedError

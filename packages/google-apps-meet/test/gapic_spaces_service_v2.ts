@@ -193,9 +193,14 @@ describe('v2.SpacesServiceClient', () => {
         throw err;
       });
       assert(client.spacesServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -204,9 +209,14 @@ describe('v2.SpacesServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.spacesServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -322,7 +332,9 @@ describe('v2.SpacesServiceClient', () => {
         new protos.google.apps.meet.v2.CreateSpaceRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createSpace(request), expectedError);
     });
   });
@@ -449,7 +461,9 @@ describe('v2.SpacesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSpace(request), expectedError);
     });
   });
@@ -583,7 +597,9 @@ describe('v2.SpacesServiceClient', () => {
       );
       request.space.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateSpace(request), expectedError);
     });
   });
@@ -714,7 +730,9 @@ describe('v2.SpacesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.endActiveConference(request), expectedError);
     });
   });

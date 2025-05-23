@@ -257,9 +257,14 @@ describe('v1.RegistryClient', () => {
         throw err;
       });
       assert(client.registryStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -268,9 +273,14 @@ describe('v1.RegistryClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.registryStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -430,7 +440,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getApi(request), expectedError);
     });
   });
@@ -557,7 +569,9 @@ describe('v1.RegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createApi(request), expectedError);
     });
   });
@@ -688,7 +702,9 @@ describe('v1.RegistryClient', () => {
       );
       request.api.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateApi(request), expectedError);
     });
   });
@@ -815,7 +831,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteApi(request), expectedError);
     });
   });
@@ -945,7 +963,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getApiVersion(request), expectedError);
     });
   });
@@ -1075,7 +1095,9 @@ describe('v1.RegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createApiVersion(request), expectedError);
     });
   });
@@ -1209,7 +1231,9 @@ describe('v1.RegistryClient', () => {
       );
       request.apiVersion.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateApiVersion(request), expectedError);
     });
   });
@@ -1339,7 +1363,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteApiVersion(request), expectedError);
     });
   });
@@ -1469,7 +1495,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getApiSpec(request), expectedError);
     });
   });
@@ -1597,7 +1625,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getApiSpecContents(request), expectedError);
     });
   });
@@ -1727,7 +1757,9 @@ describe('v1.RegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createApiSpec(request), expectedError);
     });
   });
@@ -1861,7 +1893,9 @@ describe('v1.RegistryClient', () => {
       );
       request.apiSpec.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateApiSpec(request), expectedError);
     });
   });
@@ -1991,7 +2025,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteApiSpec(request), expectedError);
     });
   });
@@ -2122,7 +2158,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.tagApiSpecRevision(request), expectedError);
     });
   });
@@ -2252,7 +2290,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.rollbackApiSpec(request), expectedError);
     });
   });
@@ -2386,7 +2426,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteApiSpecRevision(request),
         expectedError
@@ -2519,7 +2561,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getApiDeployment(request), expectedError);
     });
   });
@@ -2650,7 +2694,9 @@ describe('v1.RegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createApiDeployment(request), expectedError);
     });
   });
@@ -2785,7 +2831,9 @@ describe('v1.RegistryClient', () => {
       );
       request.apiDeployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateApiDeployment(request), expectedError);
     });
   });
@@ -2916,7 +2964,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteApiDeployment(request), expectedError);
     });
   });
@@ -3050,7 +3100,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.tagApiDeploymentRevision(request),
         expectedError
@@ -3187,7 +3239,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.rollbackApiDeployment(request),
         expectedError
@@ -3324,7 +3378,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteApiDeploymentRevision(request),
         expectedError
@@ -3457,7 +3513,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getArtifact(request), expectedError);
     });
   });
@@ -3585,7 +3643,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getArtifactContents(request), expectedError);
     });
   });
@@ -3715,7 +3775,9 @@ describe('v1.RegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createArtifact(request), expectedError);
     });
   });
@@ -3849,7 +3911,9 @@ describe('v1.RegistryClient', () => {
       );
       request.artifact.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.replaceArtifact(request), expectedError);
     });
   });
@@ -3979,7 +4043,9 @@ describe('v1.RegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteArtifact(request), expectedError);
     });
   });
@@ -6332,20 +6398,24 @@ describe('v1.RegistryClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .getIamPolicy(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.Policy | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -6438,20 +6508,24 @@ describe('v1.RegistryClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .setIamPolicy(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.Policy | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -6547,20 +6621,24 @@ describe('v1.RegistryClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .testIamPermissions(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
