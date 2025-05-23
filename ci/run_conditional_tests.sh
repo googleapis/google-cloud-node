@@ -82,58 +82,95 @@ RETVAL=0
 
 tests_with_credentials="packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
 
-for subdir in ${subdirs[@]}; do
-    for d in `ls -d ${subdir}/*/`; do
-        should_test=false
-        if [ -n "${GIT_DIFF_ARG}" ]; then
-            echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} ${d}'"
-            set +e
-            git diff --quiet ${GIT_DIFF_ARG} ${d}
-            changed=$?
-            set -e
-            if [[ "${changed}" -eq 0 ]]; then
-                echo "no change detected in ${d}, skipping"
+# Need to create a separate workflow for aiplatform since its tests are so big
+if [ -n "${IS_AI_PLATFORM}" ]; then
+    should_test=false
+    if [ -n "${GIT_DIFF_ARG}" ]; then
+        echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} packages/google-cloud-aiplatform'"
+        set +e
+        git diff --quiet ${GIT_DIFF_ARG} packages/google-cloud-aiplatform
+        changed=$?
+        set -e
+    fi
+    if [[ "${changed}" -eq 0 ]]; then
+        echo "no change detected in ${d}, skipping"
+    else
+        if [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
+            echo "change detected in packages/google-cloud-aiplatform for system test"
+            should_test=true
+        elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+            echo "change detected in packages/google-cloud-aiplatform"
+            should_test=true
+        fi
+    fi
+    if [ "${should_test}" = true ]; then
+        echo "running test in packages/google-cloud-aiplatform"
+        pushd packages/google-cloud-aiplatform
+        # Temporarily allow failure.
+        set +e
+        ${test_script}
+        ret=$?
+        set -e
+        RETVAL=${ret}
+        popd
+    fi
+else
+    for subdir in "${subdirs[@]}"; do
+        for d in `ls -d ${subdir}/*/`; do
+            should_test=false
+            if [ "${d}" == "packages/google-cloud-aiplatform/" ]; then
+                continue
+            fi
+            if [ -n "${GIT_DIFF_ARG}" ]; then
+                echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} ${d}'"
+                set +e
+                git diff --quiet ${GIT_DIFF_ARG} ${d}
+                changed=$?
+                set -e
+                if [[ "${changed}" -eq 0 ]]; then
+                    echo "no change detected in ${d}, skipping"
+                else
+                    if [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
+                        echo "change detected in ${d} for system test"
+                        should_test=true
+                    elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                        echo "change detected in ${d} in a directory that needs credentials"
+                        should_test=true
+                    elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                        echo "change detected in ${d}"
+                        should_test=true
+                    fi
+                fi
             else
+                # If GIT_DIFF_ARG is empty, run all the tests.
                 if [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
-                    echo "change detected in ${d} for system test"
+                    echo "run system test for ${d}"
                     should_test=true
                 elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                    echo "change detected in ${d} in a directory that needs credentials"
+                    echo "run tests with credentials in ${d}"
                     should_test=true
                 elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                    echo "change detected in ${d}"
+                    echo "run tests in ${d}"
                     should_test=true
                 fi
             fi
-        else
-            # If GIT_DIFF_ARG is empty, run all the tests.
-            if [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
-                echo "run system test for ${d}"
-                should_test=true
-            elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                echo "run tests with credentials in ${d}"
-                should_test=true
-            elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                echo "run tests in ${d}"
-                should_test=true
+            if [ "${should_test}" = true ]; then
+                echo "running test in ${d}"
+                pushd ${d}
+                # Temporarily allow failure.
+                set +e
+                ${test_script}
+                ret=$?
+                set -e
+                if [ ${ret} -ne 0 ]; then
+                    RETVAL=${ret}
+                    # Since there are so many APIs, we should exit early if there's an error
+                    break
+                fi
+                popd
             fi
-        fi
-        if [ "${should_test}" = true ]; then
-            echo "running test in ${d}"
-            pushd ${d}
-            # Temporarily allow failure.
-            set +e
-            ${test_script}
-            ret=$?
-            set -e
-            if [ ${ret} -ne 0 ]; then
-                RETVAL=${ret}
-                # Since there are so many APIs, we should exit early if there's an error
-                break
-            fi
-            popd
-        fi
+        done
     done
-done
+fi
 
 exit ${RETVAL}
