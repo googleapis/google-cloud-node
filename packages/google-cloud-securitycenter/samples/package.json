@@ -13,7 +13,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/pubsub": "^4.0.0",
+    "@google-cloud/pubsub": "^5.0.0",
     "@google-cloud/security-center": "^9.0.1"
   },
   "devDependencies": {
