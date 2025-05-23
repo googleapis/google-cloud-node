@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/commerce/consumer/procurement/v1/license_management_service.proto",
+  "../../protos/google/cloud/commerce/consumer/procurement/v1/order.proto",
+  "../../protos/google/cloud/commerce/consumer/procurement/v1/procurement_service.proto"
+]
