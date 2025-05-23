@@ -20,6 +20,7 @@ import {
   CaseAttachmentServiceClient,
   CaseServiceClient,
   CommentServiceClient,
+  FeedServiceClient,
 } from '@google-cloud/support';
 
 // check that the client class type name can be used
@@ -34,6 +35,9 @@ function doStuffWithCaseServiceClient(client: CaseServiceClient) {
 function doStuffWithCommentServiceClient(client: CommentServiceClient) {
   client.close();
 }
+function doStuffWithFeedServiceClient(client: FeedServiceClient) {
+  client.close();
+}
 
 function main() {
   // check that the client instance can be created
@@ -45,6 +49,9 @@ function main() {
   // check that the client instance can be created
   const commentServiceClient = new CommentServiceClient();
   doStuffWithCommentServiceClient(commentServiceClient);
+  // check that the client instance can be created
+  const feedServiceClient = new FeedServiceClient();
+  doStuffWithFeedServiceClient(feedServiceClient);
 }
 
 main();

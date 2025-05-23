@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/support",
-  "version": "2.0.1",
+  "version": "0.0.0",
   "description": "Google Cloud Support API client for Node.js",
   "repository": {
     "type": "git",
@@ -65,6 +65,6 @@
     "typescript": "^5.8.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=18.0.0"
   }
 }
