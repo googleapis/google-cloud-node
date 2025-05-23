@@ -5,6 +5,74 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "6d7aab56caabb08b8ff2ee68f599d6c63112622e",
+          "message": "[merchantapi] A new method_signature `parent,online_return_policy` is added to method `CreateOnlineReturnPolicy` in service `OnlineReturnPolicyService`",
+          "issues": [
+            "6367"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "69271852-da59-40ba-ac78-14e7a5971581",
+      "createTime": "2025-05-23T20:01:23.548Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0e789bac8803a06904ec0870f3a8c35826c1f161",
+          "message": "[managedkafka] add Managed Kafka ACL API",
+          "issues": [
+            "6372"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "3977e260-423d-4f39-86fb-906092e6ee05",
+      "createTime": "2025-05-23T20:01:23.514Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b4c3a92160aafd066212afb113a6f014dcdc9af7",
+          "message": "[gkebackup] Add BackupChannel field in BackupPlan",
+          "issues": [
+            "6290"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "0876f248-e331-41cf-bc04-897418e8da17",
+      "createTime": "2025-05-23T20:01:23.492Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "18185f8a2318aeac3207c8daebe020dcbaa9bbb0",
+          "message": "[documentai] Added config options to enable table annotation and image extraction",
+          "issues": [
+            "6287"
+          ]
+        }
+      ],
+      "version": "9.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "e27ed159-df7f-48e3-bcd4-4b0bb7c5d2d7",
+      "createTime": "2025-05-23T20:01:23.464Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "0b8b1a75f33bdf94000321d239834b9b10757862",
           "message": "Multiple ai-platform updates",
           "issues": []
@@ -50723,5 +50791,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-05-20T15:49:29.910Z"
+  "updateTime": "2025-05-23T20:01:23.548Z"
 }
