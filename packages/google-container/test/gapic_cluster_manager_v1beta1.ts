@@ -257,9 +257,14 @@ describe('v1beta1.ClusterManagerClient', () => {
         throw err;
       });
       assert(client.clusterManagerStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -268,9 +273,14 @@ describe('v1beta1.ClusterManagerClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.clusterManagerStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -473,7 +483,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listClusters(request), expectedError);
     });
   });
@@ -663,7 +675,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getCluster(request), expectedError);
     });
   });
@@ -833,7 +847,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createCluster(request), expectedError);
     });
   });
@@ -1023,7 +1039,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateCluster(request), expectedError);
     });
   });
@@ -1233,7 +1251,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateNodePool(request), expectedError);
     });
   });
@@ -1447,7 +1467,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.setNodePoolAutoscaling(request),
         expectedError
@@ -1640,7 +1662,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setLoggingService(request), expectedError);
     });
   });
@@ -1831,7 +1855,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setMonitoringService(request), expectedError);
     });
   });
@@ -2021,7 +2047,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setAddonsConfig(request), expectedError);
     });
   });
@@ -2218,7 +2246,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setLocations(request), expectedError);
       assert(stub.calledOnce);
     });
@@ -2409,7 +2439,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateMaster(request), expectedError);
     });
   });
@@ -2599,7 +2631,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setMasterAuth(request), expectedError);
     });
   });
@@ -2789,7 +2823,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteCluster(request), expectedError);
     });
   });
@@ -2959,7 +2995,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listOperations(request), expectedError);
     });
   });
@@ -3149,7 +3187,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.operationId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getOperation(request), expectedError);
     });
   });
@@ -3339,7 +3379,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.operationId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.cancelOperation(request), expectedError);
     });
   });
@@ -3509,7 +3551,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getServerConfig(request), expectedError);
     });
   });
@@ -3639,7 +3683,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getJSONWebKeys(request), expectedError);
     });
   });
@@ -3829,7 +3875,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listNodePools(request), expectedError);
     });
   });
@@ -4039,7 +4087,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getNodePool(request), expectedError);
     });
   });
@@ -4229,7 +4279,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createNodePool(request), expectedError);
     });
   });
@@ -4439,7 +4491,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteNodePool(request), expectedError);
     });
   });
@@ -4573,7 +4627,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.completeNodePoolUpgrade(request),
         expectedError
@@ -4790,7 +4846,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.rollbackNodePoolUpgrade(request),
         expectedError
@@ -5007,7 +5065,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.setNodePoolManagement(request),
         expectedError
@@ -5197,7 +5257,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setLabels(request), expectedError);
     });
   });
@@ -5387,7 +5449,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setLegacyAbac(request), expectedError);
     });
   });
@@ -5577,7 +5641,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.startIPRotation(request), expectedError);
     });
   });
@@ -5768,7 +5834,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.completeIPRotation(request), expectedError);
     });
   });
@@ -5978,7 +6046,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setNodePoolSize(request), expectedError);
     });
   });
@@ -6168,7 +6238,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setNetworkPolicy(request), expectedError);
     });
   });
@@ -6359,7 +6431,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setMaintenancePolicy(request), expectedError);
     });
   });
@@ -6493,7 +6567,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.checkAutopilotCompatibility(request),
         expectedError
@@ -6626,7 +6702,9 @@ describe('v1beta1.ClusterManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listLocations(request), expectedError);
     });
   });

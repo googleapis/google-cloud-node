@@ -175,6 +175,16 @@
                 "checkAutopilotCompatibility"
               ]
             },
+            "FetchClusterUpgradeInfo": {
+              "methods": [
+                "fetchClusterUpgradeInfo"
+              ]
+            },
+            "FetchNodePoolUpgradeInfo": {
+              "methods": [
+                "fetchNodePoolUpgradeInfo"
+              ]
+            },
             "ListUsableSubnetworks": {
               "methods": [
                 "listUsableSubnetworks",
@@ -350,6 +360,16 @@
             "CheckAutopilotCompatibility": {
               "methods": [
                 "checkAutopilotCompatibility"
+              ]
+            },
+            "FetchClusterUpgradeInfo": {
+              "methods": [
+                "fetchClusterUpgradeInfo"
+              ]
+            },
+            "FetchNodePoolUpgradeInfo": {
+              "methods": [
+                "fetchNodePoolUpgradeInfo"
               ]
             },
             "ListUsableSubnetworks": {
