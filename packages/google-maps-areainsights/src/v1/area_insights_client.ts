@@ -38,7 +38,7 @@ import * as gapicConfig from './area_insights_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service definition for the Places Insights API.
+ *  Service definition for the Places Aggregate RPC.
  * @class
  * @memberof v1
  */
@@ -367,9 +367,7 @@ export class AreaInsightsClient {
   // -- Service calls --
   // -------------------
   /**
-   * Compute Insights RPC
-   *
-   * This method lets you retrieve insights about areas using a variaty of
+   * This method lets you retrieve insights about areas using a variety of
    * filter such as: area, place type, operating status, price level
    * and ratings. Currently "count" and "places" insights are supported. With
    * "count" insights you can answer questions such as "How many restaurant are
