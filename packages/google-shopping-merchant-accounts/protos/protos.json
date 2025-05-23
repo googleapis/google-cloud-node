@@ -2896,7 +2896,7 @@
                               "options": {
                                 "(google.api.http).post": "/accounts/v1beta/{parent=accounts/*}/onlineReturnPolicies",
                                 "(google.api.http).body": "online_return_policy",
-                                "(google.api.method_signature)": "parent"
+                                "(google.api.method_signature)": "parent,online_return_policy"
                               },
                               "parsedOptions": [
                                 {
@@ -2907,6 +2907,9 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "parent"
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,online_return_policy"
                                 }
                               ]
                             },
@@ -2962,32 +2965,6 @@
                             }
                           }
                         },
-                        "ListOnlineReturnPoliciesRequest": {
-                          "fields": {
-                            "parent": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).child_type": "merchantapi.googleapis.com/OnlineReturnPolicy"
-                              }
-                            },
-                            "pageSize": {
-                              "type": "int32",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "pageToken": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
                         "CreateOnlineReturnPolicyRequest": {
                           "fields": {
                             "parent": {
@@ -3018,7 +2995,10 @@
                             },
                             "updateMask": {
                               "type": "google.protobuf.FieldMask",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -3030,6 +3010,32 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "merchantapi.googleapis.com/OnlineReturnPolicy"
+                              }
+                            }
+                          }
+                        },
+                        "ListOnlineReturnPoliciesRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "merchantapi.googleapis.com/OnlineReturnPolicy"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -3162,6 +3168,7 @@
                               "type": "bool",
                               "id": 11,
                               "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
                             },
@@ -3169,6 +3176,7 @@
                               "type": "int32",
                               "id": 12,
                               "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
                             },
@@ -3176,6 +3184,7 @@
                               "type": "bool",
                               "id": 13,
                               "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
                             },
@@ -3183,6 +3192,7 @@
                               "type": "ReturnLabelSource",
                               "id": 15,
                               "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
                             }
