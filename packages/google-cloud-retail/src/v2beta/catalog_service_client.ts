@@ -617,14 +617,15 @@ export class CatalogServiceClient {
    *
    * Using multiple branches can be useful when developers would like
    * to have a staging branch to test and verify for future usage. When it
-   * becomes ready, developers switch on the staging branch using this API while
-   * keeping using `projects/* /locations/* /catalogs/* /branches/default_branch`
-   * as {@link protos.google.cloud.retail.v2beta.SearchRequest.branch|SearchRequest.branch}
-   * to route the traffic to this staging branch.
+   * becomes ready, developers switch on the staging branch using this API
+   * while keeping using
+   * `projects/* /locations/* /catalogs/* /branches/default_branch` as
+   * {@link protos.google.cloud.retail.v2beta.SearchRequest.branch|SearchRequest.branch} to
+   * route the traffic to this staging branch.
    *
    * CAUTION: If you have live predict/search traffic, switching the default
-   * branch could potentially cause outages if the ID space of the new branch is
-   * very different from the old one.
+   * branch could potentially cause outages if the ID space of the new branch
+   * is very different from the old one.
    *
    * More specifically:
    *
@@ -3140,8 +3141,10 @@ export class CatalogServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();
