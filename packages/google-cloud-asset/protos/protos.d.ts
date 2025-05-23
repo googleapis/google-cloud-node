@@ -26,6 +26,103 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Properties of a ResourceOwners. */
+                interface IResourceOwners {
+
+                    /** ResourceOwners resourceOwners */
+                    resourceOwners?: (string[]|null);
+                }
+
+                /** Represents a ResourceOwners. */
+                class ResourceOwners implements IResourceOwners {
+
+                    /**
+                     * Constructs a new ResourceOwners.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IResourceOwners);
+
+                    /** ResourceOwners resourceOwners. */
+                    public resourceOwners: string[];
+
+                    /**
+                     * Creates a new ResourceOwners instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceOwners instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IResourceOwners): google.cloud.asset.v1.ResourceOwners;
+
+                    /**
+                     * Encodes the specified ResourceOwners message. Does not implicitly {@link google.cloud.asset.v1.ResourceOwners.verify|verify} messages.
+                     * @param message ResourceOwners message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IResourceOwners, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceOwners message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ResourceOwners.verify|verify} messages.
+                     * @param message ResourceOwners message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IResourceOwners, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceOwners message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceOwners
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.ResourceOwners;
+
+                    /**
+                     * Decodes a ResourceOwners message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceOwners
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.ResourceOwners;
+
+                    /**
+                     * Verifies a ResourceOwners message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceOwners message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceOwners
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.ResourceOwners;
+
+                    /**
+                     * Creates a plain object from a ResourceOwners message. Also converts values to other types if specified.
+                     * @param message ResourceOwners
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.ResourceOwners, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceOwners to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResourceOwners
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents an AssetService */
                 class AssetService extends $protobuf.rpc.Service {
 
@@ -8438,7 +8535,9 @@ export namespace google {
                             METHOD_TYPE_UNSPECIFIED = 0,
                             CREATE = 1,
                             UPDATE = 2,
-                            DELETE = 3
+                            DELETE = 3,
+                            REMOVE_GRANT = 4,
+                            GOVERN_TAGS = 5
                         }
 
                         /** ActionType enum. */
@@ -10043,6 +10142,106 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an AssetEnrichment. */
+                interface IAssetEnrichment {
+
+                    /** AssetEnrichment resourceOwners */
+                    resourceOwners?: (google.cloud.asset.v1.IResourceOwners|null);
+                }
+
+                /** Represents an AssetEnrichment. */
+                class AssetEnrichment implements IAssetEnrichment {
+
+                    /**
+                     * Constructs a new AssetEnrichment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IAssetEnrichment);
+
+                    /** AssetEnrichment resourceOwners. */
+                    public resourceOwners?: (google.cloud.asset.v1.IResourceOwners|null);
+
+                    /** AssetEnrichment EnrichmentData. */
+                    public EnrichmentData?: "resourceOwners";
+
+                    /**
+                     * Creates a new AssetEnrichment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AssetEnrichment instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IAssetEnrichment): google.cloud.asset.v1.AssetEnrichment;
+
+                    /**
+                     * Encodes the specified AssetEnrichment message. Does not implicitly {@link google.cloud.asset.v1.AssetEnrichment.verify|verify} messages.
+                     * @param message AssetEnrichment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IAssetEnrichment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AssetEnrichment message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AssetEnrichment.verify|verify} messages.
+                     * @param message AssetEnrichment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IAssetEnrichment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AssetEnrichment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AssetEnrichment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.AssetEnrichment;
+
+                    /**
+                     * Decodes an AssetEnrichment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AssetEnrichment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.AssetEnrichment;
+
+                    /**
+                     * Verifies an AssetEnrichment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AssetEnrichment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AssetEnrichment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.AssetEnrichment;
+
+                    /**
+                     * Creates a plain object from an AssetEnrichment message. Also converts values to other types if specified.
+                     * @param message AssetEnrichment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.AssetEnrichment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AssetEnrichment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AssetEnrichment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an Asset. */
                 interface IAsset {
 
@@ -10992,6 +11191,9 @@ export namespace google {
                     /** ResourceSearchResult effectiveTags */
                     effectiveTags?: (google.cloud.asset.v1.IEffectiveTagDetails[]|null);
 
+                    /** ResourceSearchResult enrichments */
+                    enrichments?: (google.cloud.asset.v1.IAssetEnrichment[]|null);
+
                     /** ResourceSearchResult parentAssetType */
                     parentAssetType?: (string|null);
 
@@ -11082,6 +11284,9 @@ export namespace google {
 
                     /** ResourceSearchResult effectiveTags. */
                     public effectiveTags: google.cloud.asset.v1.IEffectiveTagDetails[];
+
+                    /** ResourceSearchResult enrichments. */
+                    public enrichments: google.cloud.asset.v1.IAssetEnrichment[];
 
                     /** ResourceSearchResult parentAssetType. */
                     public parentAssetType: string;

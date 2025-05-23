@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -13,10 +16,18 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
                     "java_package": "com.google.cloud.asset.v1",
-                    "php_namespace": "Google\\Cloud\\Asset\\V1",
-                    "cc_enable_arenas": true
+                    "php_namespace": "Google\\Cloud\\Asset\\V1"
                   },
                   "nested": {
+                    "ResourceOwners": {
+                      "fields": {
+                        "resourceOwners": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "AssetService": {
                       "options": {
                         "(google.api.default_host)": "cloudasset.googleapis.com",
@@ -2046,7 +2057,9 @@
                                 "METHOD_TYPE_UNSPECIFIED": 0,
                                 "CREATE": 1,
                                 "UPDATE": 2,
-                                "DELETE": 3
+                                "DELETE": 3,
+                                "REMOVE_GRANT": 4,
+                                "GOVERN_TAGS": 5
                               }
                             },
                             "ActionType": {
@@ -2452,6 +2465,21 @@
                         }
                       }
                     },
+                    "AssetEnrichment": {
+                      "oneofs": {
+                        "EnrichmentData": {
+                          "oneof": [
+                            "resourceOwners"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "resourceOwners": {
+                          "type": "ResourceOwners",
+                          "id": 7
+                        }
+                      }
+                    },
                     "Asset": {
                       "options": {
                         "(google.api.resource).type": "cloudasset.googleapis.com/Asset",
@@ -2823,6 +2851,11 @@
                           "rule": "repeated",
                           "type": "EffectiveTagDetails",
                           "id": 30
+                        },
+                        "enrichments": {
+                          "rule": "repeated",
+                          "type": "AssetEnrichment",
+                          "id": 31
                         },
                         "parentAssetType": {
                           "type": "string",
