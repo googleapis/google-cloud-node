@@ -254,9 +254,14 @@ describe('v1.ChatServiceClient', () => {
         throw err;
       });
       assert(client.chatServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -265,9 +270,14 @@ describe('v1.ChatServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.chatServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -430,7 +440,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createMessage(request), expectedError);
     });
   });
@@ -560,7 +572,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getMembership(request), expectedError);
     });
   });
@@ -690,7 +704,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getMessage(request), expectedError);
     });
   });
@@ -824,7 +840,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.message.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateMessage(request), expectedError);
     });
   });
@@ -954,7 +972,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteMessage(request), expectedError);
     });
   });
@@ -1084,7 +1104,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAttachment(request), expectedError);
     });
   });
@@ -1214,7 +1236,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.uploadAttachment(request), expectedError);
     });
   });
@@ -1341,7 +1365,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSpace(request), expectedError);
     });
   });
@@ -1424,7 +1450,9 @@ describe('v1.ChatServiceClient', () => {
         new protos.google.chat.v1.CreateSpaceRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createSpace(request), expectedError);
     });
   });
@@ -1507,7 +1535,9 @@ describe('v1.ChatServiceClient', () => {
         new protos.google.chat.v1.SetUpSpaceRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setUpSpace(request), expectedError);
     });
   });
@@ -1641,7 +1671,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.space.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateSpace(request), expectedError);
     });
   });
@@ -1771,7 +1803,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteSpace(request), expectedError);
     });
   });
@@ -1902,7 +1936,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.completeImportSpace(request), expectedError);
     });
   });
@@ -1985,7 +2021,9 @@ describe('v1.ChatServiceClient', () => {
         new protos.google.chat.v1.FindDirectMessageRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.findDirectMessage(request), expectedError);
     });
   });
@@ -2115,7 +2153,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createMembership(request), expectedError);
     });
   });
@@ -2249,7 +2289,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.membership.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateMembership(request), expectedError);
     });
   });
@@ -2379,7 +2421,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteMembership(request), expectedError);
     });
   });
@@ -2509,7 +2553,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createReaction(request), expectedError);
     });
   });
@@ -2639,8 +2685,359 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteReaction(request), expectedError);
+    });
+  });
+
+  describe('createCustomEmoji', () => {
+    it('invokes createCustomEmoji without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.CreateCustomEmojiRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.CustomEmoji()
+      );
+      client.innerApiCalls.createCustomEmoji = stubSimpleCall(expectedResponse);
+      const [response] = await client.createCustomEmoji(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes createCustomEmoji without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.CreateCustomEmojiRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.CustomEmoji()
+      );
+      client.innerApiCalls.createCustomEmoji =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createCustomEmoji(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.ICustomEmoji | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes createCustomEmoji with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.CreateCustomEmojiRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createCustomEmoji = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createCustomEmoji(request), expectedError);
+    });
+
+    it('invokes createCustomEmoji with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.CreateCustomEmojiRequest()
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.createCustomEmoji(request), expectedError);
+    });
+  });
+
+  describe('getCustomEmoji', () => {
+    it('invokes getCustomEmoji without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetCustomEmojiRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetCustomEmojiRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.CustomEmoji()
+      );
+      client.innerApiCalls.getCustomEmoji = stubSimpleCall(expectedResponse);
+      const [response] = await client.getCustomEmoji(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getCustomEmoji as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomEmoji as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getCustomEmoji without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetCustomEmojiRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetCustomEmojiRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.CustomEmoji()
+      );
+      client.innerApiCalls.getCustomEmoji =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getCustomEmoji(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.ICustomEmoji | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getCustomEmoji as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomEmoji as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getCustomEmoji with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetCustomEmojiRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetCustomEmojiRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getCustomEmoji = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getCustomEmoji(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getCustomEmoji as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomEmoji as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getCustomEmoji with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetCustomEmojiRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetCustomEmojiRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getCustomEmoji(request), expectedError);
+    });
+  });
+
+  describe('deleteCustomEmoji', () => {
+    it('invokes deleteCustomEmoji without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.DeleteCustomEmojiRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.DeleteCustomEmojiRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteCustomEmoji = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteCustomEmoji(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomEmoji as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomEmoji as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCustomEmoji without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.DeleteCustomEmojiRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.DeleteCustomEmojiRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteCustomEmoji =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteCustomEmoji(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomEmoji as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomEmoji as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCustomEmoji with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.DeleteCustomEmojiRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.DeleteCustomEmojiRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteCustomEmoji = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteCustomEmoji(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomEmoji as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomEmoji as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteCustomEmoji with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.DeleteCustomEmojiRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.DeleteCustomEmojiRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.deleteCustomEmoji(request), expectedError);
     });
   });
 
@@ -2769,7 +3166,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSpaceReadState(request), expectedError);
     });
   });
@@ -2904,7 +3303,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.spaceReadState.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateSpaceReadState(request), expectedError);
     });
   });
@@ -3035,7 +3436,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getThreadReadState(request), expectedError);
     });
   });
@@ -3165,7 +3568,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getSpaceEvent(request), expectedError);
     });
   });
@@ -3299,7 +3704,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getSpaceNotificationSetting(request),
         expectedError
@@ -3440,7 +3847,9 @@ describe('v1.ChatServiceClient', () => {
       );
       request.spaceNotificationSetting.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateSpaceNotificationSetting(request),
         expectedError
@@ -4743,6 +5152,207 @@ describe('v1.ChatServiceClient', () => {
     });
   });
 
+  describe('listCustomEmojis', () => {
+    it('invokes listCustomEmojis without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListCustomEmojisRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.CustomEmoji()),
+        generateSampleMessage(new protos.google.chat.v1.CustomEmoji()),
+        generateSampleMessage(new protos.google.chat.v1.CustomEmoji()),
+      ];
+      client.innerApiCalls.listCustomEmojis = stubSimpleCall(expectedResponse);
+      const [response] = await client.listCustomEmojis(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes listCustomEmojis without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListCustomEmojisRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.CustomEmoji()),
+        generateSampleMessage(new protos.google.chat.v1.CustomEmoji()),
+        generateSampleMessage(new protos.google.chat.v1.CustomEmoji()),
+      ];
+      client.innerApiCalls.listCustomEmojis =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listCustomEmojis(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.ICustomEmoji[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes listCustomEmojis with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListCustomEmojisRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listCustomEmojis = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listCustomEmojis(request), expectedError);
+    });
+
+    it('invokes listCustomEmojisStream without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListCustomEmojisRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.CustomEmoji()),
+        generateSampleMessage(new protos.google.chat.v1.CustomEmoji()),
+        generateSampleMessage(new protos.google.chat.v1.CustomEmoji()),
+      ];
+      client.descriptors.page.listCustomEmojis.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listCustomEmojisStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.chat.v1.CustomEmoji[] = [];
+        stream.on('data', (response: protos.google.chat.v1.CustomEmoji) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listCustomEmojis.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listCustomEmojis, request)
+      );
+    });
+
+    it('invokes listCustomEmojisStream with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListCustomEmojisRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listCustomEmojis.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listCustomEmojisStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.chat.v1.CustomEmoji[] = [];
+        stream.on('data', (response: protos.google.chat.v1.CustomEmoji) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listCustomEmojis.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listCustomEmojis, request)
+      );
+    });
+
+    it('uses async iteration with listCustomEmojis without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListCustomEmojisRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.CustomEmoji()),
+        generateSampleMessage(new protos.google.chat.v1.CustomEmoji()),
+        generateSampleMessage(new protos.google.chat.v1.CustomEmoji()),
+      ];
+      client.descriptors.page.listCustomEmojis.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.chat.v1.ICustomEmoji[] = [];
+      const iterable = client.listCustomEmojisAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listCustomEmojis.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+
+    it('uses async iteration with listCustomEmojis with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListCustomEmojisRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listCustomEmojis.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listCustomEmojisAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.chat.v1.ICustomEmoji[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listCustomEmojis.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
+
   describe('listSpaceEvents', () => {
     it('invokes listSpaceEvents without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
@@ -5097,6 +5707,44 @@ describe('v1.ChatServiceClient', () => {
         assert.strictEqual(result, 'attachmentValue');
         assert(
           (client.pathTemplates.attachmentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('customEmoji', async () => {
+      const fakePath = '/rendered/path/customEmoji';
+      const expectedParameters = {
+        custom_emoji: 'customEmojiValue',
+      };
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.customEmojiPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.customEmojiPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('customEmojiPath', () => {
+        const result = client.customEmojiPath('customEmojiValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.customEmojiPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchCustomEmojiFromCustomEmojiName', () => {
+        const result = client.matchCustomEmojiFromCustomEmojiName(fakePath);
+        assert.strictEqual(result, 'customEmojiValue');
+        assert(
+          (client.pathTemplates.customEmojiPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

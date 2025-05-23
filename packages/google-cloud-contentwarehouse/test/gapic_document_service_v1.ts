@@ -259,9 +259,14 @@ describe('v1.DocumentServiceClient', () => {
         throw err;
       });
       assert(client.documentServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -270,9 +275,14 @@ describe('v1.DocumentServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.documentServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -435,7 +445,9 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDocument(request), expectedError);
     });
   });
@@ -565,7 +577,9 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDocument(request), expectedError);
     });
   });
@@ -695,7 +709,9 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDocument(request), expectedError);
     });
   });
@@ -825,7 +841,9 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteDocument(request), expectedError);
     });
   });
@@ -955,7 +973,9 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.lockDocument(request), expectedError);
     });
   });
@@ -1082,7 +1102,9 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.fetchAcl(request), expectedError);
     });
   });
@@ -1209,7 +1231,9 @@ describe('v1.DocumentServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setAcl(request), expectedError);
     });
   });

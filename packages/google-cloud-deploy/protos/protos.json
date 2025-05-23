@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -13,7 +16,7 @@
                     "java_outer_classname": "TargetNotificationPayloadProto",
                     "java_package": "com.google.cloud.deploy.v1",
                     "(google.api.resource_definition).type": "run.googleapis.com/Revision",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/revisions/{revision}"
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/services/{service}/revisions/{revision}"
                   },
                   "nested": {
                     "AutomationEvent": {

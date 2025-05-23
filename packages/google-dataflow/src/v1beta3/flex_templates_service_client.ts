@@ -38,7 +38,7 @@ import * as gapicConfig from './flex_templates_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Provides a service for Flex templates. This feature is not ready yet.
+ *  Provides a service for Flex templates.
  * @class
  * @memberof v1beta3
  */
@@ -339,8 +339,6 @@ export class FlexTemplatesServiceClient {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/compute.readonly',
-      'https://www.googleapis.com/auth/userinfo.email',
     ];
   }
 

@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -3301,7 +3304,8 @@
                 "COMPLIANCE": 9,
                 "DSSE_ATTESTATION": 10,
                 "VULNERABILITY_ASSESSMENT": 11,
-                "SBOM_REFERENCE": 12
+                "SBOM_REFERENCE": 12,
+                "SECRET": 13
               }
             },
             "RelatedUrl": {
@@ -3362,6 +3366,51 @@
                 "filePath": {
                   "type": "string",
                   "id": 1
+                },
+                "layerDetails": {
+                  "type": "LayerDetails",
+                  "id": 2
+                }
+              }
+            },
+            "BaseImage": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "repository": {
+                  "type": "string",
+                  "id": 2
+                },
+                "layerCount": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
+            },
+            "LayerDetails": {
+              "fields": {
+                "index": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "diffId": {
+                  "type": "string",
+                  "id": 2
+                },
+                "chainId": {
+                  "type": "string",
+                  "id": 5
+                },
+                "command": {
+                  "type": "string",
+                  "id": 3
+                },
+                "baseImages": {
+                  "rule": "repeated",
+                  "type": "BaseImage",
+                  "id": 4
                 }
               }
             },

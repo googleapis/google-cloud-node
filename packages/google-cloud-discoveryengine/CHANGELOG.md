@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.0.1...discoveryengine-v2.1.0) (2025-05-09)
+
+
+### Features
+
+* [discoveryengine] move serving config update API to GA ([#6211](https://github.com/googleapis/google-cloud-node/issues/6211)) ([2fcdb39](https://github.com/googleapis/google-cloud-node/commit/2fcdb39efdd799850847756f2dcf128d1262e1a0))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.0.0...discoveryengine-v2.0.1) (2025-03-21)
 
 

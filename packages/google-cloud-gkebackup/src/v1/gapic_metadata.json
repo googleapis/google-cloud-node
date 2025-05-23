@@ -15,6 +15,16 @@
                 "getBackupPlan"
               ]
             },
+            "GetBackupChannel": {
+              "methods": [
+                "getBackupChannel"
+              ]
+            },
+            "GetBackupPlanBinding": {
+              "methods": [
+                "getBackupPlanBinding"
+              ]
+            },
             "GetBackup": {
               "methods": [
                 "getBackup"
@@ -28,6 +38,16 @@
             "GetRestorePlan": {
               "methods": [
                 "getRestorePlan"
+              ]
+            },
+            "GetRestoreChannel": {
+              "methods": [
+                "getRestoreChannel"
+              ]
+            },
+            "GetRestorePlanBinding": {
+              "methods": [
+                "getRestorePlanBinding"
               ]
             },
             "GetRestore": {
@@ -60,6 +80,21 @@
                 "deleteBackupPlan"
               ]
             },
+            "CreateBackupChannel": {
+              "methods": [
+                "createBackupChannel"
+              ]
+            },
+            "UpdateBackupChannel": {
+              "methods": [
+                "updateBackupChannel"
+              ]
+            },
+            "DeleteBackupChannel": {
+              "methods": [
+                "deleteBackupChannel"
+              ]
+            },
             "CreateBackup": {
               "methods": [
                 "createBackup"
@@ -90,6 +125,21 @@
                 "deleteRestorePlan"
               ]
             },
+            "CreateRestoreChannel": {
+              "methods": [
+                "createRestoreChannel"
+              ]
+            },
+            "UpdateRestoreChannel": {
+              "methods": [
+                "updateRestoreChannel"
+              ]
+            },
+            "DeleteRestoreChannel": {
+              "methods": [
+                "deleteRestoreChannel"
+              ]
+            },
             "CreateRestore": {
               "methods": [
                 "createRestore"
@@ -112,6 +162,20 @@
                 "listBackupPlansAsync"
               ]
             },
+            "ListBackupChannels": {
+              "methods": [
+                "listBackupChannels",
+                "listBackupChannelsStream",
+                "listBackupChannelsAsync"
+              ]
+            },
+            "ListBackupPlanBindings": {
+              "methods": [
+                "listBackupPlanBindings",
+                "listBackupPlanBindingsStream",
+                "listBackupPlanBindingsAsync"
+              ]
+            },
             "ListBackups": {
               "methods": [
                 "listBackups",
@@ -131,6 +195,20 @@
                 "listRestorePlans",
                 "listRestorePlansStream",
                 "listRestorePlansAsync"
+              ]
+            },
+            "ListRestoreChannels": {
+              "methods": [
+                "listRestoreChannels",
+                "listRestoreChannelsStream",
+                "listRestoreChannelsAsync"
+              ]
+            },
+            "ListRestorePlanBindings": {
+              "methods": [
+                "listRestorePlanBindings",
+                "listRestorePlanBindingsStream",
+                "listRestorePlanBindingsAsync"
               ]
             },
             "ListRestores": {
@@ -157,6 +235,16 @@
                 "getBackupPlan"
               ]
             },
+            "GetBackupChannel": {
+              "methods": [
+                "getBackupChannel"
+              ]
+            },
+            "GetBackupPlanBinding": {
+              "methods": [
+                "getBackupPlanBinding"
+              ]
+            },
             "GetBackup": {
               "methods": [
                 "getBackup"
@@ -170,6 +258,16 @@
             "GetRestorePlan": {
               "methods": [
                 "getRestorePlan"
+              ]
+            },
+            "GetRestoreChannel": {
+              "methods": [
+                "getRestoreChannel"
+              ]
+            },
+            "GetRestorePlanBinding": {
+              "methods": [
+                "getRestorePlanBinding"
               ]
             },
             "GetRestore": {
@@ -202,6 +300,21 @@
                 "deleteBackupPlan"
               ]
             },
+            "CreateBackupChannel": {
+              "methods": [
+                "createBackupChannel"
+              ]
+            },
+            "UpdateBackupChannel": {
+              "methods": [
+                "updateBackupChannel"
+              ]
+            },
+            "DeleteBackupChannel": {
+              "methods": [
+                "deleteBackupChannel"
+              ]
+            },
             "CreateBackup": {
               "methods": [
                 "createBackup"
@@ -232,6 +345,21 @@
                 "deleteRestorePlan"
               ]
             },
+            "CreateRestoreChannel": {
+              "methods": [
+                "createRestoreChannel"
+              ]
+            },
+            "UpdateRestoreChannel": {
+              "methods": [
+                "updateRestoreChannel"
+              ]
+            },
+            "DeleteRestoreChannel": {
+              "methods": [
+                "deleteRestoreChannel"
+              ]
+            },
             "CreateRestore": {
               "methods": [
                 "createRestore"
@@ -254,6 +382,20 @@
                 "listBackupPlansAsync"
               ]
             },
+            "ListBackupChannels": {
+              "methods": [
+                "listBackupChannels",
+                "listBackupChannelsStream",
+                "listBackupChannelsAsync"
+              ]
+            },
+            "ListBackupPlanBindings": {
+              "methods": [
+                "listBackupPlanBindings",
+                "listBackupPlanBindingsStream",
+                "listBackupPlanBindingsAsync"
+              ]
+            },
             "ListBackups": {
               "methods": [
                 "listBackups",
@@ -273,6 +415,20 @@
                 "listRestorePlans",
                 "listRestorePlansStream",
                 "listRestorePlansAsync"
+              ]
+            },
+            "ListRestoreChannels": {
+              "methods": [
+                "listRestoreChannels",
+                "listRestoreChannelsStream",
+                "listRestoreChannelsAsync"
+              ]
+            },
+            "ListRestorePlanBindings": {
+              "methods": [
+                "listRestorePlanBindings",
+                "listRestorePlanBindingsStream",
+                "listRestorePlanBindingsAsync"
               ]
             },
             "ListRestores": {

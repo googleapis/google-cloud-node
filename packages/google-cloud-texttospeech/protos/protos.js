@@ -1733,6 +1733,8 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
                             }
@@ -1776,6 +1778,14 @@
                             case "PHONETIC_ENCODING_X_SAMPA":
                             case 2:
                                 message.phoneticEncoding = 2;
+                                break;
+                            case "PHONETIC_ENCODING_JAPANESE_YOMIGANA":
+                            case 3:
+                                message.phoneticEncoding = 3;
+                                break;
+                            case "PHONETIC_ENCODING_PINYIN":
+                            case 4:
+                                message.phoneticEncoding = 4;
                                 break;
                             }
                             if (object.pronunciation != null)
@@ -1847,12 +1857,16 @@
                          * @property {number} PHONETIC_ENCODING_UNSPECIFIED=0 PHONETIC_ENCODING_UNSPECIFIED value
                          * @property {number} PHONETIC_ENCODING_IPA=1 PHONETIC_ENCODING_IPA value
                          * @property {number} PHONETIC_ENCODING_X_SAMPA=2 PHONETIC_ENCODING_X_SAMPA value
+                         * @property {number} PHONETIC_ENCODING_JAPANESE_YOMIGANA=3 PHONETIC_ENCODING_JAPANESE_YOMIGANA value
+                         * @property {number} PHONETIC_ENCODING_PINYIN=4 PHONETIC_ENCODING_PINYIN value
                          */
                         CustomPronunciationParams.PhoneticEncoding = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "PHONETIC_ENCODING_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "PHONETIC_ENCODING_IPA"] = 1;
                             values[valuesById[2] = "PHONETIC_ENCODING_X_SAMPA"] = 2;
+                            values[valuesById[3] = "PHONETIC_ENCODING_JAPANESE_YOMIGANA"] = 3;
+                            values[valuesById[4] = "PHONETIC_ENCODING_PINYIN"] = 4;
                             return values;
                         })();
     
@@ -2541,6 +2555,7 @@
                          * @memberof google.cloud.texttospeech.v1
                          * @interface ISynthesisInput
                          * @property {string|null} [text] SynthesisInput text
+                         * @property {string|null} [markup] SynthesisInput markup
                          * @property {string|null} [ssml] SynthesisInput ssml
                          * @property {google.cloud.texttospeech.v1.IMultiSpeakerMarkup|null} [multiSpeakerMarkup] SynthesisInput multiSpeakerMarkup
                          * @property {google.cloud.texttospeech.v1.ICustomPronunciations|null} [customPronunciations] SynthesisInput customPronunciations
@@ -2568,6 +2583,14 @@
                          * @instance
                          */
                         SynthesisInput.prototype.text = null;
+    
+                        /**
+                         * SynthesisInput markup.
+                         * @member {string|null|undefined} markup
+                         * @memberof google.cloud.texttospeech.v1.SynthesisInput
+                         * @instance
+                         */
+                        SynthesisInput.prototype.markup = null;
     
                         /**
                          * SynthesisInput ssml.
@@ -2598,12 +2621,12 @@
     
                         /**
                          * SynthesisInput inputSource.
-                         * @member {"text"|"ssml"|"multiSpeakerMarkup"|undefined} inputSource
+                         * @member {"text"|"markup"|"ssml"|"multiSpeakerMarkup"|undefined} inputSource
                          * @memberof google.cloud.texttospeech.v1.SynthesisInput
                          * @instance
                          */
                         Object.defineProperty(SynthesisInput.prototype, "inputSource", {
-                            get: $util.oneOfGetter($oneOfFields = ["text", "ssml", "multiSpeakerMarkup"]),
+                            get: $util.oneOfGetter($oneOfFields = ["text", "markup", "ssml", "multiSpeakerMarkup"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2639,6 +2662,8 @@
                                 $root.google.cloud.texttospeech.v1.CustomPronunciations.encode(message.customPronunciations, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.multiSpeakerMarkup != null && Object.hasOwnProperty.call(message, "multiSpeakerMarkup"))
                                 $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.encode(message.multiSpeakerMarkup, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.markup != null && Object.hasOwnProperty.call(message, "markup"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.markup);
                             return writer;
                         };
     
@@ -2675,6 +2700,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.text = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.markup = reader.string();
                                         break;
                                     }
                                 case 2: {
@@ -2730,6 +2759,13 @@
                                 if (!$util.isString(message.text))
                                     return "text: string expected";
                             }
+                            if (message.markup != null && message.hasOwnProperty("markup")) {
+                                if (properties.inputSource === 1)
+                                    return "inputSource: multiple values";
+                                properties.inputSource = 1;
+                                if (!$util.isString(message.markup))
+                                    return "markup: string expected";
+                            }
                             if (message.ssml != null && message.hasOwnProperty("ssml")) {
                                 if (properties.inputSource === 1)
                                     return "inputSource: multiple values";
@@ -2769,6 +2805,8 @@
                             var message = new $root.google.cloud.texttospeech.v1.SynthesisInput();
                             if (object.text != null)
                                 message.text = String(object.text);
+                            if (object.markup != null)
+                                message.markup = String(object.markup);
                             if (object.ssml != null)
                                 message.ssml = String(object.ssml);
                             if (object.multiSpeakerMarkup != null) {
@@ -2815,6 +2853,11 @@
                                 object.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.toObject(message.multiSpeakerMarkup, options);
                                 if (options.oneofs)
                                     object.inputSource = "multiSpeakerMarkup";
+                            }
+                            if (message.markup != null && message.hasOwnProperty("markup")) {
+                                object.markup = message.markup;
+                                if (options.oneofs)
+                                    object.inputSource = "markup";
                             }
                             return object;
                         };
@@ -4811,6 +4854,7 @@
                          * @memberof google.cloud.texttospeech.v1
                          * @interface IStreamingSynthesisInput
                          * @property {string|null} [text] StreamingSynthesisInput text
+                         * @property {string|null} [markup] StreamingSynthesisInput markup
                          */
     
                         /**
@@ -4836,17 +4880,25 @@
                          */
                         StreamingSynthesisInput.prototype.text = null;
     
+                        /**
+                         * StreamingSynthesisInput markup.
+                         * @member {string|null|undefined} markup
+                         * @memberof google.cloud.texttospeech.v1.StreamingSynthesisInput
+                         * @instance
+                         */
+                        StreamingSynthesisInput.prototype.markup = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * StreamingSynthesisInput inputSource.
-                         * @member {"text"|undefined} inputSource
+                         * @member {"text"|"markup"|undefined} inputSource
                          * @memberof google.cloud.texttospeech.v1.StreamingSynthesisInput
                          * @instance
                          */
                         Object.defineProperty(StreamingSynthesisInput.prototype, "inputSource", {
-                            get: $util.oneOfGetter($oneOfFields = ["text"]),
+                            get: $util.oneOfGetter($oneOfFields = ["text", "markup"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4876,6 +4928,8 @@
                                 writer = $Writer.create();
                             if (message.text != null && Object.hasOwnProperty.call(message, "text"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                            if (message.markup != null && Object.hasOwnProperty.call(message, "markup"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.markup);
                             return writer;
                         };
     
@@ -4912,6 +4966,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.text = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.markup = reader.string();
                                         break;
                                     }
                                 default:
@@ -4955,6 +5013,13 @@
                                 if (!$util.isString(message.text))
                                     return "text: string expected";
                             }
+                            if (message.markup != null && message.hasOwnProperty("markup")) {
+                                if (properties.inputSource === 1)
+                                    return "inputSource: multiple values";
+                                properties.inputSource = 1;
+                                if (!$util.isString(message.markup))
+                                    return "markup: string expected";
+                            }
                             return null;
                         };
     
@@ -4972,6 +5037,8 @@
                             var message = new $root.google.cloud.texttospeech.v1.StreamingSynthesisInput();
                             if (object.text != null)
                                 message.text = String(object.text);
+                            if (object.markup != null)
+                                message.markup = String(object.markup);
                             return message;
                         };
     
@@ -4992,6 +5059,11 @@
                                 object.text = message.text;
                                 if (options.oneofs)
                                     object.inputSource = "text";
+                            }
+                            if (message.markup != null && message.hasOwnProperty("markup")) {
+                                object.markup = message.markup;
+                                if (options.oneofs)
+                                    object.inputSource = "markup";
                             }
                             return object;
                         };

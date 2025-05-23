@@ -112,6 +112,12 @@ export namespace google {
 
                     /** Backup permissiveMode */
                     permissiveMode?: (boolean|null);
+
+                    /** Backup satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** Backup satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
                 }
 
                 /** Represents a Backup. */
@@ -206,6 +212,12 @@ export namespace google {
 
                     /** Backup permissiveMode. */
                     public permissiveMode: boolean;
+
+                    /** Backup satisfiesPzs. */
+                    public satisfiesPzs: boolean;
+
+                    /** Backup satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /** Backup backupScope. */
                     public backupScope?: ("allNamespaces"|"selectedNamespaces"|"selectedApplications");
@@ -919,6 +931,151 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a BackupChannel. */
+                interface IBackupChannel {
+
+                    /** BackupChannel name */
+                    name?: (string|null);
+
+                    /** BackupChannel destinationProject */
+                    destinationProject?: (string|null);
+
+                    /** BackupChannel uid */
+                    uid?: (string|null);
+
+                    /** BackupChannel createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackupChannel updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackupChannel labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** BackupChannel description */
+                    description?: (string|null);
+
+                    /** BackupChannel etag */
+                    etag?: (string|null);
+
+                    /** BackupChannel destinationProjectId */
+                    destinationProjectId?: (string|null);
+                }
+
+                /** Represents a BackupChannel. */
+                class BackupChannel implements IBackupChannel {
+
+                    /**
+                     * Constructs a new BackupChannel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IBackupChannel);
+
+                    /** BackupChannel name. */
+                    public name: string;
+
+                    /** BackupChannel destinationProject. */
+                    public destinationProject: string;
+
+                    /** BackupChannel uid. */
+                    public uid: string;
+
+                    /** BackupChannel createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackupChannel updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackupChannel labels. */
+                    public labels: { [k: string]: string };
+
+                    /** BackupChannel description. */
+                    public description: string;
+
+                    /** BackupChannel etag. */
+                    public etag: string;
+
+                    /** BackupChannel destinationProjectId. */
+                    public destinationProjectId: string;
+
+                    /**
+                     * Creates a new BackupChannel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackupChannel instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IBackupChannel): google.cloud.gkebackup.v1.BackupChannel;
+
+                    /**
+                     * Encodes the specified BackupChannel message. Does not implicitly {@link google.cloud.gkebackup.v1.BackupChannel.verify|verify} messages.
+                     * @param message BackupChannel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IBackupChannel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackupChannel message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.BackupChannel.verify|verify} messages.
+                     * @param message BackupChannel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IBackupChannel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackupChannel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackupChannel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.BackupChannel;
+
+                    /**
+                     * Decodes a BackupChannel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackupChannel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.BackupChannel;
+
+                    /**
+                     * Verifies a BackupChannel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackupChannel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackupChannel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.BackupChannel;
+
+                    /**
+                     * Creates a plain object from a BackupChannel message. Also converts values to other types if specified.
+                     * @param message BackupChannel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.BackupChannel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackupChannel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackupChannel
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a BackupPlan. */
                 interface IBackupPlan {
 
@@ -972,6 +1129,12 @@ export namespace google {
 
                     /** BackupPlan rpoRiskReason */
                     rpoRiskReason?: (string|null);
+
+                    /** BackupPlan backupChannel */
+                    backupChannel?: (string|null);
+
+                    /** BackupPlan lastSuccessfulBackupTime */
+                    lastSuccessfulBackupTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a BackupPlan. */
@@ -1033,6 +1196,12 @@ export namespace google {
 
                     /** BackupPlan rpoRiskReason. */
                     public rpoRiskReason: string;
+
+                    /** BackupPlan backupChannel. */
+                    public backupChannel: string;
+
+                    /** BackupPlan lastSuccessfulBackupTime. */
+                    public lastSuccessfulBackupTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new BackupPlan instance using the specified properties.
@@ -1813,6 +1982,534 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a BackupPlanBinding. */
+                interface IBackupPlanBinding {
+
+                    /** BackupPlanBinding name */
+                    name?: (string|null);
+
+                    /** BackupPlanBinding uid */
+                    uid?: (string|null);
+
+                    /** BackupPlanBinding createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackupPlanBinding updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackupPlanBinding backupPlan */
+                    backupPlan?: (string|null);
+
+                    /** BackupPlanBinding cluster */
+                    cluster?: (string|null);
+
+                    /** BackupPlanBinding backupPlanDetails */
+                    backupPlanDetails?: (google.cloud.gkebackup.v1.BackupPlanBinding.IBackupPlanDetails|null);
+
+                    /** BackupPlanBinding etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a BackupPlanBinding. */
+                class BackupPlanBinding implements IBackupPlanBinding {
+
+                    /**
+                     * Constructs a new BackupPlanBinding.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IBackupPlanBinding);
+
+                    /** BackupPlanBinding name. */
+                    public name: string;
+
+                    /** BackupPlanBinding uid. */
+                    public uid: string;
+
+                    /** BackupPlanBinding createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackupPlanBinding updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BackupPlanBinding backupPlan. */
+                    public backupPlan: string;
+
+                    /** BackupPlanBinding cluster. */
+                    public cluster: string;
+
+                    /** BackupPlanBinding backupPlanDetails. */
+                    public backupPlanDetails?: (google.cloud.gkebackup.v1.BackupPlanBinding.IBackupPlanDetails|null);
+
+                    /** BackupPlanBinding etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new BackupPlanBinding instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackupPlanBinding instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IBackupPlanBinding): google.cloud.gkebackup.v1.BackupPlanBinding;
+
+                    /**
+                     * Encodes the specified BackupPlanBinding message. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.verify|verify} messages.
+                     * @param message BackupPlanBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IBackupPlanBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackupPlanBinding message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.verify|verify} messages.
+                     * @param message BackupPlanBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IBackupPlanBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackupPlanBinding message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackupPlanBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.BackupPlanBinding;
+
+                    /**
+                     * Decodes a BackupPlanBinding message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackupPlanBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.BackupPlanBinding;
+
+                    /**
+                     * Verifies a BackupPlanBinding message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackupPlanBinding message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackupPlanBinding
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.BackupPlanBinding;
+
+                    /**
+                     * Creates a plain object from a BackupPlanBinding message. Also converts values to other types if specified.
+                     * @param message BackupPlanBinding
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.BackupPlanBinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackupPlanBinding to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackupPlanBinding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BackupPlanBinding {
+
+                    /** Properties of a BackupPlanDetails. */
+                    interface IBackupPlanDetails {
+
+                        /** BackupPlanDetails protectedPodCount */
+                        protectedPodCount?: (number|null);
+
+                        /** BackupPlanDetails state */
+                        state?: (google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.State|keyof typeof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.State|null);
+
+                        /** BackupPlanDetails lastSuccessfulBackupTime */
+                        lastSuccessfulBackupTime?: (google.protobuf.ITimestamp|null);
+
+                        /** BackupPlanDetails nextScheduledBackupTime */
+                        nextScheduledBackupTime?: (google.protobuf.ITimestamp|null);
+
+                        /** BackupPlanDetails rpoRiskLevel */
+                        rpoRiskLevel?: (number|null);
+
+                        /** BackupPlanDetails lastSuccessfulBackup */
+                        lastSuccessfulBackup?: (string|null);
+
+                        /** BackupPlanDetails backupConfigDetails */
+                        backupConfigDetails?: (google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails|null);
+
+                        /** BackupPlanDetails retentionPolicyDetails */
+                        retentionPolicyDetails?: (google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails|null);
+                    }
+
+                    /** Represents a BackupPlanDetails. */
+                    class BackupPlanDetails implements IBackupPlanDetails {
+
+                        /**
+                         * Constructs a new BackupPlanDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkebackup.v1.BackupPlanBinding.IBackupPlanDetails);
+
+                        /** BackupPlanDetails protectedPodCount. */
+                        public protectedPodCount: number;
+
+                        /** BackupPlanDetails state. */
+                        public state: (google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.State|keyof typeof google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.State);
+
+                        /** BackupPlanDetails lastSuccessfulBackupTime. */
+                        public lastSuccessfulBackupTime?: (google.protobuf.ITimestamp|null);
+
+                        /** BackupPlanDetails nextScheduledBackupTime. */
+                        public nextScheduledBackupTime?: (google.protobuf.ITimestamp|null);
+
+                        /** BackupPlanDetails rpoRiskLevel. */
+                        public rpoRiskLevel: number;
+
+                        /** BackupPlanDetails lastSuccessfulBackup. */
+                        public lastSuccessfulBackup: string;
+
+                        /** BackupPlanDetails backupConfigDetails. */
+                        public backupConfigDetails?: (google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails|null);
+
+                        /** BackupPlanDetails retentionPolicyDetails. */
+                        public retentionPolicyDetails?: (google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails|null);
+
+                        /**
+                         * Creates a new BackupPlanDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BackupPlanDetails instance
+                         */
+                        public static create(properties?: google.cloud.gkebackup.v1.BackupPlanBinding.IBackupPlanDetails): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails;
+
+                        /**
+                         * Encodes the specified BackupPlanDetails message. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.verify|verify} messages.
+                         * @param message BackupPlanDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkebackup.v1.BackupPlanBinding.IBackupPlanDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BackupPlanDetails message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.verify|verify} messages.
+                         * @param message BackupPlanDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkebackup.v1.BackupPlanBinding.IBackupPlanDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BackupPlanDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BackupPlanDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails;
+
+                        /**
+                         * Decodes a BackupPlanDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BackupPlanDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails;
+
+                        /**
+                         * Verifies a BackupPlanDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BackupPlanDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BackupPlanDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails;
+
+                        /**
+                         * Creates a plain object from a BackupPlanDetails message. Also converts values to other types if specified.
+                         * @param message BackupPlanDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BackupPlanDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BackupPlanDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace BackupPlanDetails {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            CLUSTER_PENDING = 1,
+                            PROVISIONING = 2,
+                            READY = 3,
+                            FAILED = 4,
+                            DEACTIVATED = 5,
+                            DELETING = 6
+                        }
+
+                        /** Properties of a BackupConfigDetails. */
+                        interface IBackupConfigDetails {
+
+                            /** BackupConfigDetails allNamespaces */
+                            allNamespaces?: (boolean|null);
+
+                            /** BackupConfigDetails selectedNamespaces */
+                            selectedNamespaces?: (google.cloud.gkebackup.v1.INamespaces|null);
+
+                            /** BackupConfigDetails selectedApplications */
+                            selectedApplications?: (google.cloud.gkebackup.v1.INamespacedNames|null);
+
+                            /** BackupConfigDetails includeVolumeData */
+                            includeVolumeData?: (boolean|null);
+
+                            /** BackupConfigDetails includeSecrets */
+                            includeSecrets?: (boolean|null);
+
+                            /** BackupConfigDetails encryptionKey */
+                            encryptionKey?: (google.cloud.gkebackup.v1.IEncryptionKey|null);
+                        }
+
+                        /** Represents a BackupConfigDetails. */
+                        class BackupConfigDetails implements IBackupConfigDetails {
+
+                            /**
+                             * Constructs a new BackupConfigDetails.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails);
+
+                            /** BackupConfigDetails allNamespaces. */
+                            public allNamespaces?: (boolean|null);
+
+                            /** BackupConfigDetails selectedNamespaces. */
+                            public selectedNamespaces?: (google.cloud.gkebackup.v1.INamespaces|null);
+
+                            /** BackupConfigDetails selectedApplications. */
+                            public selectedApplications?: (google.cloud.gkebackup.v1.INamespacedNames|null);
+
+                            /** BackupConfigDetails includeVolumeData. */
+                            public includeVolumeData: boolean;
+
+                            /** BackupConfigDetails includeSecrets. */
+                            public includeSecrets: boolean;
+
+                            /** BackupConfigDetails encryptionKey. */
+                            public encryptionKey?: (google.cloud.gkebackup.v1.IEncryptionKey|null);
+
+                            /** BackupConfigDetails backupScope. */
+                            public backupScope?: ("allNamespaces"|"selectedNamespaces"|"selectedApplications");
+
+                            /**
+                             * Creates a new BackupConfigDetails instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns BackupConfigDetails instance
+                             */
+                            public static create(properties?: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails;
+
+                            /**
+                             * Encodes the specified BackupConfigDetails message. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.verify|verify} messages.
+                             * @param message BackupConfigDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified BackupConfigDetails message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails.verify|verify} messages.
+                             * @param message BackupConfigDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IBackupConfigDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a BackupConfigDetails message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns BackupConfigDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails;
+
+                            /**
+                             * Decodes a BackupConfigDetails message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns BackupConfigDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails;
+
+                            /**
+                             * Verifies a BackupConfigDetails message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a BackupConfigDetails message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns BackupConfigDetails
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails;
+
+                            /**
+                             * Creates a plain object from a BackupConfigDetails message. Also converts values to other types if specified.
+                             * @param message BackupConfigDetails
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.BackupConfigDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this BackupConfigDetails to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for BackupConfigDetails
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a RetentionPolicyDetails. */
+                        interface IRetentionPolicyDetails {
+
+                            /** RetentionPolicyDetails backupDeleteLockDays */
+                            backupDeleteLockDays?: (number|null);
+
+                            /** RetentionPolicyDetails backupRetainDays */
+                            backupRetainDays?: (number|null);
+                        }
+
+                        /** Represents a RetentionPolicyDetails. */
+                        class RetentionPolicyDetails implements IRetentionPolicyDetails {
+
+                            /**
+                             * Constructs a new RetentionPolicyDetails.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails);
+
+                            /** RetentionPolicyDetails backupDeleteLockDays. */
+                            public backupDeleteLockDays: number;
+
+                            /** RetentionPolicyDetails backupRetainDays. */
+                            public backupRetainDays: number;
+
+                            /**
+                             * Creates a new RetentionPolicyDetails instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RetentionPolicyDetails instance
+                             */
+                            public static create(properties?: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails;
+
+                            /**
+                             * Encodes the specified RetentionPolicyDetails message. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails.verify|verify} messages.
+                             * @param message RetentionPolicyDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RetentionPolicyDetails message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails.verify|verify} messages.
+                             * @param message RetentionPolicyDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.IRetentionPolicyDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RetentionPolicyDetails message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RetentionPolicyDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails;
+
+                            /**
+                             * Decodes a RetentionPolicyDetails message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RetentionPolicyDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails;
+
+                            /**
+                             * Verifies a RetentionPolicyDetails message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RetentionPolicyDetails message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RetentionPolicyDetails
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails;
+
+                            /**
+                             * Creates a plain object from a RetentionPolicyDetails message. Also converts values to other types if specified.
+                             * @param message RetentionPolicyDetails
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.gkebackup.v1.BackupPlanBinding.BackupPlanDetails.RetentionPolicyDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RetentionPolicyDetails to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RetentionPolicyDetails
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
                 /** Represents a BackupForGKE */
                 class BackupForGKE extends $protobuf.rpc.Service {
 
@@ -1902,6 +2599,104 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteBackupPlan(request: google.cloud.gkebackup.v1.IDeleteBackupPlanRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateBackupChannel.
+                     * @param request CreateBackupChannelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createBackupChannel(request: google.cloud.gkebackup.v1.ICreateBackupChannelRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.CreateBackupChannelCallback): void;
+
+                    /**
+                     * Calls CreateBackupChannel.
+                     * @param request CreateBackupChannelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createBackupChannel(request: google.cloud.gkebackup.v1.ICreateBackupChannelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListBackupChannels.
+                     * @param request ListBackupChannelsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBackupChannelsResponse
+                     */
+                    public listBackupChannels(request: google.cloud.gkebackup.v1.IListBackupChannelsRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.ListBackupChannelsCallback): void;
+
+                    /**
+                     * Calls ListBackupChannels.
+                     * @param request ListBackupChannelsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBackupChannels(request: google.cloud.gkebackup.v1.IListBackupChannelsRequest): Promise<google.cloud.gkebackup.v1.ListBackupChannelsResponse>;
+
+                    /**
+                     * Calls GetBackupChannel.
+                     * @param request GetBackupChannelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BackupChannel
+                     */
+                    public getBackupChannel(request: google.cloud.gkebackup.v1.IGetBackupChannelRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.GetBackupChannelCallback): void;
+
+                    /**
+                     * Calls GetBackupChannel.
+                     * @param request GetBackupChannelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBackupChannel(request: google.cloud.gkebackup.v1.IGetBackupChannelRequest): Promise<google.cloud.gkebackup.v1.BackupChannel>;
+
+                    /**
+                     * Calls UpdateBackupChannel.
+                     * @param request UpdateBackupChannelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateBackupChannel(request: google.cloud.gkebackup.v1.IUpdateBackupChannelRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.UpdateBackupChannelCallback): void;
+
+                    /**
+                     * Calls UpdateBackupChannel.
+                     * @param request UpdateBackupChannelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateBackupChannel(request: google.cloud.gkebackup.v1.IUpdateBackupChannelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteBackupChannel.
+                     * @param request DeleteBackupChannelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteBackupChannel(request: google.cloud.gkebackup.v1.IDeleteBackupChannelRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.DeleteBackupChannelCallback): void;
+
+                    /**
+                     * Calls DeleteBackupChannel.
+                     * @param request DeleteBackupChannelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteBackupChannel(request: google.cloud.gkebackup.v1.IDeleteBackupChannelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListBackupPlanBindings.
+                     * @param request ListBackupPlanBindingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBackupPlanBindingsResponse
+                     */
+                    public listBackupPlanBindings(request: google.cloud.gkebackup.v1.IListBackupPlanBindingsRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.ListBackupPlanBindingsCallback): void;
+
+                    /**
+                     * Calls ListBackupPlanBindings.
+                     * @param request ListBackupPlanBindingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBackupPlanBindings(request: google.cloud.gkebackup.v1.IListBackupPlanBindingsRequest): Promise<google.cloud.gkebackup.v1.ListBackupPlanBindingsResponse>;
+
+                    /**
+                     * Calls GetBackupPlanBinding.
+                     * @param request GetBackupPlanBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BackupPlanBinding
+                     */
+                    public getBackupPlanBinding(request: google.cloud.gkebackup.v1.IGetBackupPlanBindingRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.GetBackupPlanBindingCallback): void;
+
+                    /**
+                     * Calls GetBackupPlanBinding.
+                     * @param request GetBackupPlanBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBackupPlanBinding(request: google.cloud.gkebackup.v1.IGetBackupPlanBindingRequest): Promise<google.cloud.gkebackup.v1.BackupPlanBinding>;
 
                     /**
                      * Calls CreateBackup.
@@ -2072,6 +2867,104 @@ export namespace google {
                     public deleteRestorePlan(request: google.cloud.gkebackup.v1.IDeleteRestorePlanRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls CreateRestoreChannel.
+                     * @param request CreateRestoreChannelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createRestoreChannel(request: google.cloud.gkebackup.v1.ICreateRestoreChannelRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.CreateRestoreChannelCallback): void;
+
+                    /**
+                     * Calls CreateRestoreChannel.
+                     * @param request CreateRestoreChannelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createRestoreChannel(request: google.cloud.gkebackup.v1.ICreateRestoreChannelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListRestoreChannels.
+                     * @param request ListRestoreChannelsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRestoreChannelsResponse
+                     */
+                    public listRestoreChannels(request: google.cloud.gkebackup.v1.IListRestoreChannelsRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.ListRestoreChannelsCallback): void;
+
+                    /**
+                     * Calls ListRestoreChannels.
+                     * @param request ListRestoreChannelsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRestoreChannels(request: google.cloud.gkebackup.v1.IListRestoreChannelsRequest): Promise<google.cloud.gkebackup.v1.ListRestoreChannelsResponse>;
+
+                    /**
+                     * Calls GetRestoreChannel.
+                     * @param request GetRestoreChannelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestoreChannel
+                     */
+                    public getRestoreChannel(request: google.cloud.gkebackup.v1.IGetRestoreChannelRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.GetRestoreChannelCallback): void;
+
+                    /**
+                     * Calls GetRestoreChannel.
+                     * @param request GetRestoreChannelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRestoreChannel(request: google.cloud.gkebackup.v1.IGetRestoreChannelRequest): Promise<google.cloud.gkebackup.v1.RestoreChannel>;
+
+                    /**
+                     * Calls UpdateRestoreChannel.
+                     * @param request UpdateRestoreChannelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateRestoreChannel(request: google.cloud.gkebackup.v1.IUpdateRestoreChannelRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.UpdateRestoreChannelCallback): void;
+
+                    /**
+                     * Calls UpdateRestoreChannel.
+                     * @param request UpdateRestoreChannelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateRestoreChannel(request: google.cloud.gkebackup.v1.IUpdateRestoreChannelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteRestoreChannel.
+                     * @param request DeleteRestoreChannelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteRestoreChannel(request: google.cloud.gkebackup.v1.IDeleteRestoreChannelRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.DeleteRestoreChannelCallback): void;
+
+                    /**
+                     * Calls DeleteRestoreChannel.
+                     * @param request DeleteRestoreChannelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteRestoreChannel(request: google.cloud.gkebackup.v1.IDeleteRestoreChannelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListRestorePlanBindings.
+                     * @param request ListRestorePlanBindingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRestorePlanBindingsResponse
+                     */
+                    public listRestorePlanBindings(request: google.cloud.gkebackup.v1.IListRestorePlanBindingsRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.ListRestorePlanBindingsCallback): void;
+
+                    /**
+                     * Calls ListRestorePlanBindings.
+                     * @param request ListRestorePlanBindingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRestorePlanBindings(request: google.cloud.gkebackup.v1.IListRestorePlanBindingsRequest): Promise<google.cloud.gkebackup.v1.ListRestorePlanBindingsResponse>;
+
+                    /**
+                     * Calls GetRestorePlanBinding.
+                     * @param request GetRestorePlanBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RestorePlanBinding
+                     */
+                    public getRestorePlanBinding(request: google.cloud.gkebackup.v1.IGetRestorePlanBindingRequest, callback: google.cloud.gkebackup.v1.BackupForGKE.GetRestorePlanBindingCallback): void;
+
+                    /**
+                     * Calls GetRestorePlanBinding.
+                     * @param request GetRestorePlanBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRestorePlanBinding(request: google.cloud.gkebackup.v1.IGetRestorePlanBindingRequest): Promise<google.cloud.gkebackup.v1.RestorePlanBinding>;
+
+                    /**
                      * Calls CreateRestore.
                      * @param request CreateRestoreRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -2222,6 +3115,55 @@ export namespace google {
                     type DeleteBackupPlanCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|createBackupChannel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateBackupChannelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|listBackupChannels}.
+                     * @param error Error, if any
+                     * @param [response] ListBackupChannelsResponse
+                     */
+                    type ListBackupChannelsCallback = (error: (Error|null), response?: google.cloud.gkebackup.v1.ListBackupChannelsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|getBackupChannel}.
+                     * @param error Error, if any
+                     * @param [response] BackupChannel
+                     */
+                    type GetBackupChannelCallback = (error: (Error|null), response?: google.cloud.gkebackup.v1.BackupChannel) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|updateBackupChannel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateBackupChannelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|deleteBackupChannel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteBackupChannelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|listBackupPlanBindings}.
+                     * @param error Error, if any
+                     * @param [response] ListBackupPlanBindingsResponse
+                     */
+                    type ListBackupPlanBindingsCallback = (error: (Error|null), response?: google.cloud.gkebackup.v1.ListBackupPlanBindingsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|getBackupPlanBinding}.
+                     * @param error Error, if any
+                     * @param [response] BackupPlanBinding
+                     */
+                    type GetBackupPlanBindingCallback = (error: (Error|null), response?: google.cloud.gkebackup.v1.BackupPlanBinding) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|createBackup}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -2304,6 +3246,55 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteRestorePlanCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|createRestoreChannel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateRestoreChannelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|listRestoreChannels}.
+                     * @param error Error, if any
+                     * @param [response] ListRestoreChannelsResponse
+                     */
+                    type ListRestoreChannelsCallback = (error: (Error|null), response?: google.cloud.gkebackup.v1.ListRestoreChannelsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|getRestoreChannel}.
+                     * @param error Error, if any
+                     * @param [response] RestoreChannel
+                     */
+                    type GetRestoreChannelCallback = (error: (Error|null), response?: google.cloud.gkebackup.v1.RestoreChannel) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|updateRestoreChannel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateRestoreChannelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|deleteRestoreChannel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteRestoreChannelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|listRestorePlanBindings}.
+                     * @param error Error, if any
+                     * @param [response] ListRestorePlanBindingsResponse
+                     */
+                    type ListRestorePlanBindingsCallback = (error: (Error|null), response?: google.cloud.gkebackup.v1.ListRestorePlanBindingsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|getRestorePlanBinding}.
+                     * @param error Error, if any
+                     * @param [response] RestorePlanBinding
+                     */
+                    type GetRestorePlanBindingCallback = (error: (Error|null), response?: google.cloud.gkebackup.v1.RestorePlanBinding) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.gkebackup.v1.BackupForGKE|createRestore}.
@@ -3137,6 +4128,981 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreateBackupChannelRequest. */
+                interface ICreateBackupChannelRequest {
+
+                    /** CreateBackupChannelRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateBackupChannelRequest backupChannel */
+                    backupChannel?: (google.cloud.gkebackup.v1.IBackupChannel|null);
+
+                    /** CreateBackupChannelRequest backupChannelId */
+                    backupChannelId?: (string|null);
+                }
+
+                /** Represents a CreateBackupChannelRequest. */
+                class CreateBackupChannelRequest implements ICreateBackupChannelRequest {
+
+                    /**
+                     * Constructs a new CreateBackupChannelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.ICreateBackupChannelRequest);
+
+                    /** CreateBackupChannelRequest parent. */
+                    public parent: string;
+
+                    /** CreateBackupChannelRequest backupChannel. */
+                    public backupChannel?: (google.cloud.gkebackup.v1.IBackupChannel|null);
+
+                    /** CreateBackupChannelRequest backupChannelId. */
+                    public backupChannelId: string;
+
+                    /**
+                     * Creates a new CreateBackupChannelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateBackupChannelRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.ICreateBackupChannelRequest): google.cloud.gkebackup.v1.CreateBackupChannelRequest;
+
+                    /**
+                     * Encodes the specified CreateBackupChannelRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.CreateBackupChannelRequest.verify|verify} messages.
+                     * @param message CreateBackupChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.ICreateBackupChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateBackupChannelRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.CreateBackupChannelRequest.verify|verify} messages.
+                     * @param message CreateBackupChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.ICreateBackupChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateBackupChannelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateBackupChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.CreateBackupChannelRequest;
+
+                    /**
+                     * Decodes a CreateBackupChannelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateBackupChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.CreateBackupChannelRequest;
+
+                    /**
+                     * Verifies a CreateBackupChannelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateBackupChannelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateBackupChannelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.CreateBackupChannelRequest;
+
+                    /**
+                     * Creates a plain object from a CreateBackupChannelRequest message. Also converts values to other types if specified.
+                     * @param message CreateBackupChannelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.CreateBackupChannelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateBackupChannelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateBackupChannelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBackupChannelsRequest. */
+                interface IListBackupChannelsRequest {
+
+                    /** ListBackupChannelsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListBackupChannelsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListBackupChannelsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListBackupChannelsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListBackupChannelsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListBackupChannelsRequest. */
+                class ListBackupChannelsRequest implements IListBackupChannelsRequest {
+
+                    /**
+                     * Constructs a new ListBackupChannelsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IListBackupChannelsRequest);
+
+                    /** ListBackupChannelsRequest parent. */
+                    public parent: string;
+
+                    /** ListBackupChannelsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListBackupChannelsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListBackupChannelsRequest filter. */
+                    public filter: string;
+
+                    /** ListBackupChannelsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListBackupChannelsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBackupChannelsRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IListBackupChannelsRequest): google.cloud.gkebackup.v1.ListBackupChannelsRequest;
+
+                    /**
+                     * Encodes the specified ListBackupChannelsRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.ListBackupChannelsRequest.verify|verify} messages.
+                     * @param message ListBackupChannelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IListBackupChannelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBackupChannelsRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.ListBackupChannelsRequest.verify|verify} messages.
+                     * @param message ListBackupChannelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IListBackupChannelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBackupChannelsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBackupChannelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.ListBackupChannelsRequest;
+
+                    /**
+                     * Decodes a ListBackupChannelsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBackupChannelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.ListBackupChannelsRequest;
+
+                    /**
+                     * Verifies a ListBackupChannelsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBackupChannelsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBackupChannelsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.ListBackupChannelsRequest;
+
+                    /**
+                     * Creates a plain object from a ListBackupChannelsRequest message. Also converts values to other types if specified.
+                     * @param message ListBackupChannelsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.ListBackupChannelsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBackupChannelsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBackupChannelsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBackupChannelsResponse. */
+                interface IListBackupChannelsResponse {
+
+                    /** ListBackupChannelsResponse backupChannels */
+                    backupChannels?: (google.cloud.gkebackup.v1.IBackupChannel[]|null);
+
+                    /** ListBackupChannelsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListBackupChannelsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListBackupChannelsResponse. */
+                class ListBackupChannelsResponse implements IListBackupChannelsResponse {
+
+                    /**
+                     * Constructs a new ListBackupChannelsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IListBackupChannelsResponse);
+
+                    /** ListBackupChannelsResponse backupChannels. */
+                    public backupChannels: google.cloud.gkebackup.v1.IBackupChannel[];
+
+                    /** ListBackupChannelsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListBackupChannelsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListBackupChannelsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBackupChannelsResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IListBackupChannelsResponse): google.cloud.gkebackup.v1.ListBackupChannelsResponse;
+
+                    /**
+                     * Encodes the specified ListBackupChannelsResponse message. Does not implicitly {@link google.cloud.gkebackup.v1.ListBackupChannelsResponse.verify|verify} messages.
+                     * @param message ListBackupChannelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IListBackupChannelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBackupChannelsResponse message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.ListBackupChannelsResponse.verify|verify} messages.
+                     * @param message ListBackupChannelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IListBackupChannelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBackupChannelsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBackupChannelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.ListBackupChannelsResponse;
+
+                    /**
+                     * Decodes a ListBackupChannelsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBackupChannelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.ListBackupChannelsResponse;
+
+                    /**
+                     * Verifies a ListBackupChannelsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBackupChannelsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBackupChannelsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.ListBackupChannelsResponse;
+
+                    /**
+                     * Creates a plain object from a ListBackupChannelsResponse message. Also converts values to other types if specified.
+                     * @param message ListBackupChannelsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.ListBackupChannelsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBackupChannelsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBackupChannelsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetBackupChannelRequest. */
+                interface IGetBackupChannelRequest {
+
+                    /** GetBackupChannelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetBackupChannelRequest. */
+                class GetBackupChannelRequest implements IGetBackupChannelRequest {
+
+                    /**
+                     * Constructs a new GetBackupChannelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IGetBackupChannelRequest);
+
+                    /** GetBackupChannelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetBackupChannelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetBackupChannelRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IGetBackupChannelRequest): google.cloud.gkebackup.v1.GetBackupChannelRequest;
+
+                    /**
+                     * Encodes the specified GetBackupChannelRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.GetBackupChannelRequest.verify|verify} messages.
+                     * @param message GetBackupChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IGetBackupChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetBackupChannelRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.GetBackupChannelRequest.verify|verify} messages.
+                     * @param message GetBackupChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IGetBackupChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetBackupChannelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetBackupChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.GetBackupChannelRequest;
+
+                    /**
+                     * Decodes a GetBackupChannelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetBackupChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.GetBackupChannelRequest;
+
+                    /**
+                     * Verifies a GetBackupChannelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetBackupChannelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetBackupChannelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.GetBackupChannelRequest;
+
+                    /**
+                     * Creates a plain object from a GetBackupChannelRequest message. Also converts values to other types if specified.
+                     * @param message GetBackupChannelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.GetBackupChannelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetBackupChannelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetBackupChannelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateBackupChannelRequest. */
+                interface IUpdateBackupChannelRequest {
+
+                    /** UpdateBackupChannelRequest backupChannel */
+                    backupChannel?: (google.cloud.gkebackup.v1.IBackupChannel|null);
+
+                    /** UpdateBackupChannelRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateBackupChannelRequest. */
+                class UpdateBackupChannelRequest implements IUpdateBackupChannelRequest {
+
+                    /**
+                     * Constructs a new UpdateBackupChannelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IUpdateBackupChannelRequest);
+
+                    /** UpdateBackupChannelRequest backupChannel. */
+                    public backupChannel?: (google.cloud.gkebackup.v1.IBackupChannel|null);
+
+                    /** UpdateBackupChannelRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateBackupChannelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateBackupChannelRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IUpdateBackupChannelRequest): google.cloud.gkebackup.v1.UpdateBackupChannelRequest;
+
+                    /**
+                     * Encodes the specified UpdateBackupChannelRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.UpdateBackupChannelRequest.verify|verify} messages.
+                     * @param message UpdateBackupChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IUpdateBackupChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateBackupChannelRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.UpdateBackupChannelRequest.verify|verify} messages.
+                     * @param message UpdateBackupChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IUpdateBackupChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateBackupChannelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateBackupChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.UpdateBackupChannelRequest;
+
+                    /**
+                     * Decodes an UpdateBackupChannelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateBackupChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.UpdateBackupChannelRequest;
+
+                    /**
+                     * Verifies an UpdateBackupChannelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateBackupChannelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateBackupChannelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.UpdateBackupChannelRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateBackupChannelRequest message. Also converts values to other types if specified.
+                     * @param message UpdateBackupChannelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.UpdateBackupChannelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateBackupChannelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateBackupChannelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteBackupChannelRequest. */
+                interface IDeleteBackupChannelRequest {
+
+                    /** DeleteBackupChannelRequest name */
+                    name?: (string|null);
+
+                    /** DeleteBackupChannelRequest etag */
+                    etag?: (string|null);
+
+                    /** DeleteBackupChannelRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteBackupChannelRequest. */
+                class DeleteBackupChannelRequest implements IDeleteBackupChannelRequest {
+
+                    /**
+                     * Constructs a new DeleteBackupChannelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IDeleteBackupChannelRequest);
+
+                    /** DeleteBackupChannelRequest name. */
+                    public name: string;
+
+                    /** DeleteBackupChannelRequest etag. */
+                    public etag: string;
+
+                    /** DeleteBackupChannelRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteBackupChannelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteBackupChannelRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IDeleteBackupChannelRequest): google.cloud.gkebackup.v1.DeleteBackupChannelRequest;
+
+                    /**
+                     * Encodes the specified DeleteBackupChannelRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.DeleteBackupChannelRequest.verify|verify} messages.
+                     * @param message DeleteBackupChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IDeleteBackupChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteBackupChannelRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.DeleteBackupChannelRequest.verify|verify} messages.
+                     * @param message DeleteBackupChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IDeleteBackupChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteBackupChannelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteBackupChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.DeleteBackupChannelRequest;
+
+                    /**
+                     * Decodes a DeleteBackupChannelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteBackupChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.DeleteBackupChannelRequest;
+
+                    /**
+                     * Verifies a DeleteBackupChannelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteBackupChannelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteBackupChannelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.DeleteBackupChannelRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteBackupChannelRequest message. Also converts values to other types if specified.
+                     * @param message DeleteBackupChannelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.DeleteBackupChannelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteBackupChannelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteBackupChannelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBackupPlanBindingsRequest. */
+                interface IListBackupPlanBindingsRequest {
+
+                    /** ListBackupPlanBindingsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListBackupPlanBindingsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListBackupPlanBindingsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListBackupPlanBindingsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListBackupPlanBindingsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListBackupPlanBindingsRequest. */
+                class ListBackupPlanBindingsRequest implements IListBackupPlanBindingsRequest {
+
+                    /**
+                     * Constructs a new ListBackupPlanBindingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IListBackupPlanBindingsRequest);
+
+                    /** ListBackupPlanBindingsRequest parent. */
+                    public parent: string;
+
+                    /** ListBackupPlanBindingsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListBackupPlanBindingsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListBackupPlanBindingsRequest filter. */
+                    public filter: string;
+
+                    /** ListBackupPlanBindingsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListBackupPlanBindingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBackupPlanBindingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IListBackupPlanBindingsRequest): google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest;
+
+                    /**
+                     * Encodes the specified ListBackupPlanBindingsRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest.verify|verify} messages.
+                     * @param message ListBackupPlanBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IListBackupPlanBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBackupPlanBindingsRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest.verify|verify} messages.
+                     * @param message ListBackupPlanBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IListBackupPlanBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBackupPlanBindingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBackupPlanBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest;
+
+                    /**
+                     * Decodes a ListBackupPlanBindingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBackupPlanBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest;
+
+                    /**
+                     * Verifies a ListBackupPlanBindingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBackupPlanBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBackupPlanBindingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest;
+
+                    /**
+                     * Creates a plain object from a ListBackupPlanBindingsRequest message. Also converts values to other types if specified.
+                     * @param message ListBackupPlanBindingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBackupPlanBindingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBackupPlanBindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBackupPlanBindingsResponse. */
+                interface IListBackupPlanBindingsResponse {
+
+                    /** ListBackupPlanBindingsResponse backupPlanBindings */
+                    backupPlanBindings?: (google.cloud.gkebackup.v1.IBackupPlanBinding[]|null);
+
+                    /** ListBackupPlanBindingsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListBackupPlanBindingsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListBackupPlanBindingsResponse. */
+                class ListBackupPlanBindingsResponse implements IListBackupPlanBindingsResponse {
+
+                    /**
+                     * Constructs a new ListBackupPlanBindingsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IListBackupPlanBindingsResponse);
+
+                    /** ListBackupPlanBindingsResponse backupPlanBindings. */
+                    public backupPlanBindings: google.cloud.gkebackup.v1.IBackupPlanBinding[];
+
+                    /** ListBackupPlanBindingsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListBackupPlanBindingsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListBackupPlanBindingsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBackupPlanBindingsResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IListBackupPlanBindingsResponse): google.cloud.gkebackup.v1.ListBackupPlanBindingsResponse;
+
+                    /**
+                     * Encodes the specified ListBackupPlanBindingsResponse message. Does not implicitly {@link google.cloud.gkebackup.v1.ListBackupPlanBindingsResponse.verify|verify} messages.
+                     * @param message ListBackupPlanBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IListBackupPlanBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBackupPlanBindingsResponse message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.ListBackupPlanBindingsResponse.verify|verify} messages.
+                     * @param message ListBackupPlanBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IListBackupPlanBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBackupPlanBindingsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBackupPlanBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.ListBackupPlanBindingsResponse;
+
+                    /**
+                     * Decodes a ListBackupPlanBindingsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBackupPlanBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.ListBackupPlanBindingsResponse;
+
+                    /**
+                     * Verifies a ListBackupPlanBindingsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBackupPlanBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBackupPlanBindingsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.ListBackupPlanBindingsResponse;
+
+                    /**
+                     * Creates a plain object from a ListBackupPlanBindingsResponse message. Also converts values to other types if specified.
+                     * @param message ListBackupPlanBindingsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.ListBackupPlanBindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBackupPlanBindingsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBackupPlanBindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetBackupPlanBindingRequest. */
+                interface IGetBackupPlanBindingRequest {
+
+                    /** GetBackupPlanBindingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetBackupPlanBindingRequest. */
+                class GetBackupPlanBindingRequest implements IGetBackupPlanBindingRequest {
+
+                    /**
+                     * Constructs a new GetBackupPlanBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IGetBackupPlanBindingRequest);
+
+                    /** GetBackupPlanBindingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetBackupPlanBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetBackupPlanBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IGetBackupPlanBindingRequest): google.cloud.gkebackup.v1.GetBackupPlanBindingRequest;
+
+                    /**
+                     * Encodes the specified GetBackupPlanBindingRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.GetBackupPlanBindingRequest.verify|verify} messages.
+                     * @param message GetBackupPlanBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IGetBackupPlanBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetBackupPlanBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.GetBackupPlanBindingRequest.verify|verify} messages.
+                     * @param message GetBackupPlanBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IGetBackupPlanBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetBackupPlanBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetBackupPlanBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.GetBackupPlanBindingRequest;
+
+                    /**
+                     * Decodes a GetBackupPlanBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetBackupPlanBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.GetBackupPlanBindingRequest;
+
+                    /**
+                     * Verifies a GetBackupPlanBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetBackupPlanBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetBackupPlanBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.GetBackupPlanBindingRequest;
+
+                    /**
+                     * Creates a plain object from a GetBackupPlanBindingRequest message. Also converts values to other types if specified.
+                     * @param message GetBackupPlanBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.GetBackupPlanBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetBackupPlanBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetBackupPlanBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CreateBackupRequest. */
                 interface ICreateBackupRequest {
 
@@ -3263,6 +5229,9 @@ export namespace google {
 
                     /** ListBackupsRequest orderBy */
                     orderBy?: (string|null);
+
+                    /** ListBackupsRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListBackupsRequest. */
@@ -3288,6 +5257,9 @@ export namespace google {
 
                     /** ListBackupsRequest orderBy. */
                     public orderBy: string;
+
+                    /** ListBackupsRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
 
                     /**
                      * Creates a new ListBackupsRequest instance using the specified properties.
@@ -3375,6 +5347,9 @@ export namespace google {
 
                     /** ListBackupsResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListBackupsResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListBackupsResponse. */
@@ -3391,6 +5366,9 @@ export namespace google {
 
                     /** ListBackupsResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListBackupsResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListBackupsResponse instance using the specified properties.
@@ -4742,6 +6720,975 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteRestorePlanRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateRestoreChannelRequest. */
+                interface ICreateRestoreChannelRequest {
+
+                    /** CreateRestoreChannelRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateRestoreChannelRequest restoreChannel */
+                    restoreChannel?: (google.cloud.gkebackup.v1.IRestoreChannel|null);
+
+                    /** CreateRestoreChannelRequest restoreChannelId */
+                    restoreChannelId?: (string|null);
+                }
+
+                /** Represents a CreateRestoreChannelRequest. */
+                class CreateRestoreChannelRequest implements ICreateRestoreChannelRequest {
+
+                    /**
+                     * Constructs a new CreateRestoreChannelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.ICreateRestoreChannelRequest);
+
+                    /** CreateRestoreChannelRequest parent. */
+                    public parent: string;
+
+                    /** CreateRestoreChannelRequest restoreChannel. */
+                    public restoreChannel?: (google.cloud.gkebackup.v1.IRestoreChannel|null);
+
+                    /** CreateRestoreChannelRequest restoreChannelId. */
+                    public restoreChannelId: string;
+
+                    /**
+                     * Creates a new CreateRestoreChannelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateRestoreChannelRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.ICreateRestoreChannelRequest): google.cloud.gkebackup.v1.CreateRestoreChannelRequest;
+
+                    /**
+                     * Encodes the specified CreateRestoreChannelRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.CreateRestoreChannelRequest.verify|verify} messages.
+                     * @param message CreateRestoreChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.ICreateRestoreChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateRestoreChannelRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.CreateRestoreChannelRequest.verify|verify} messages.
+                     * @param message CreateRestoreChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.ICreateRestoreChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateRestoreChannelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateRestoreChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.CreateRestoreChannelRequest;
+
+                    /**
+                     * Decodes a CreateRestoreChannelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateRestoreChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.CreateRestoreChannelRequest;
+
+                    /**
+                     * Verifies a CreateRestoreChannelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateRestoreChannelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateRestoreChannelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.CreateRestoreChannelRequest;
+
+                    /**
+                     * Creates a plain object from a CreateRestoreChannelRequest message. Also converts values to other types if specified.
+                     * @param message CreateRestoreChannelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.CreateRestoreChannelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateRestoreChannelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateRestoreChannelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreChannelsRequest. */
+                interface IListRestoreChannelsRequest {
+
+                    /** ListRestoreChannelsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRestoreChannelsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRestoreChannelsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRestoreChannelsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRestoreChannelsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRestoreChannelsRequest. */
+                class ListRestoreChannelsRequest implements IListRestoreChannelsRequest {
+
+                    /**
+                     * Constructs a new ListRestoreChannelsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IListRestoreChannelsRequest);
+
+                    /** ListRestoreChannelsRequest parent. */
+                    public parent: string;
+
+                    /** ListRestoreChannelsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRestoreChannelsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRestoreChannelsRequest filter. */
+                    public filter: string;
+
+                    /** ListRestoreChannelsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRestoreChannelsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreChannelsRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IListRestoreChannelsRequest): google.cloud.gkebackup.v1.ListRestoreChannelsRequest;
+
+                    /**
+                     * Encodes the specified ListRestoreChannelsRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.ListRestoreChannelsRequest.verify|verify} messages.
+                     * @param message ListRestoreChannelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IListRestoreChannelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreChannelsRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.ListRestoreChannelsRequest.verify|verify} messages.
+                     * @param message ListRestoreChannelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IListRestoreChannelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreChannelsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreChannelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.ListRestoreChannelsRequest;
+
+                    /**
+                     * Decodes a ListRestoreChannelsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreChannelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.ListRestoreChannelsRequest;
+
+                    /**
+                     * Verifies a ListRestoreChannelsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreChannelsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreChannelsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.ListRestoreChannelsRequest;
+
+                    /**
+                     * Creates a plain object from a ListRestoreChannelsRequest message. Also converts values to other types if specified.
+                     * @param message ListRestoreChannelsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.ListRestoreChannelsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreChannelsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreChannelsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestoreChannelsResponse. */
+                interface IListRestoreChannelsResponse {
+
+                    /** ListRestoreChannelsResponse restoreChannels */
+                    restoreChannels?: (google.cloud.gkebackup.v1.IRestoreChannel[]|null);
+
+                    /** ListRestoreChannelsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRestoreChannelsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRestoreChannelsResponse. */
+                class ListRestoreChannelsResponse implements IListRestoreChannelsResponse {
+
+                    /**
+                     * Constructs a new ListRestoreChannelsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IListRestoreChannelsResponse);
+
+                    /** ListRestoreChannelsResponse restoreChannels. */
+                    public restoreChannels: google.cloud.gkebackup.v1.IRestoreChannel[];
+
+                    /** ListRestoreChannelsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRestoreChannelsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRestoreChannelsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestoreChannelsResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IListRestoreChannelsResponse): google.cloud.gkebackup.v1.ListRestoreChannelsResponse;
+
+                    /**
+                     * Encodes the specified ListRestoreChannelsResponse message. Does not implicitly {@link google.cloud.gkebackup.v1.ListRestoreChannelsResponse.verify|verify} messages.
+                     * @param message ListRestoreChannelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IListRestoreChannelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestoreChannelsResponse message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.ListRestoreChannelsResponse.verify|verify} messages.
+                     * @param message ListRestoreChannelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IListRestoreChannelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestoreChannelsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestoreChannelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.ListRestoreChannelsResponse;
+
+                    /**
+                     * Decodes a ListRestoreChannelsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestoreChannelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.ListRestoreChannelsResponse;
+
+                    /**
+                     * Verifies a ListRestoreChannelsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestoreChannelsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestoreChannelsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.ListRestoreChannelsResponse;
+
+                    /**
+                     * Creates a plain object from a ListRestoreChannelsResponse message. Also converts values to other types if specified.
+                     * @param message ListRestoreChannelsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.ListRestoreChannelsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestoreChannelsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestoreChannelsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRestoreChannelRequest. */
+                interface IGetRestoreChannelRequest {
+
+                    /** GetRestoreChannelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRestoreChannelRequest. */
+                class GetRestoreChannelRequest implements IGetRestoreChannelRequest {
+
+                    /**
+                     * Constructs a new GetRestoreChannelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IGetRestoreChannelRequest);
+
+                    /** GetRestoreChannelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRestoreChannelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRestoreChannelRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IGetRestoreChannelRequest): google.cloud.gkebackup.v1.GetRestoreChannelRequest;
+
+                    /**
+                     * Encodes the specified GetRestoreChannelRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.GetRestoreChannelRequest.verify|verify} messages.
+                     * @param message GetRestoreChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IGetRestoreChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRestoreChannelRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.GetRestoreChannelRequest.verify|verify} messages.
+                     * @param message GetRestoreChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IGetRestoreChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRestoreChannelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRestoreChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.GetRestoreChannelRequest;
+
+                    /**
+                     * Decodes a GetRestoreChannelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRestoreChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.GetRestoreChannelRequest;
+
+                    /**
+                     * Verifies a GetRestoreChannelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRestoreChannelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRestoreChannelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.GetRestoreChannelRequest;
+
+                    /**
+                     * Creates a plain object from a GetRestoreChannelRequest message. Also converts values to other types if specified.
+                     * @param message GetRestoreChannelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.GetRestoreChannelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRestoreChannelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRestoreChannelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateRestoreChannelRequest. */
+                interface IUpdateRestoreChannelRequest {
+
+                    /** UpdateRestoreChannelRequest restoreChannel */
+                    restoreChannel?: (google.cloud.gkebackup.v1.IRestoreChannel|null);
+
+                    /** UpdateRestoreChannelRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateRestoreChannelRequest. */
+                class UpdateRestoreChannelRequest implements IUpdateRestoreChannelRequest {
+
+                    /**
+                     * Constructs a new UpdateRestoreChannelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IUpdateRestoreChannelRequest);
+
+                    /** UpdateRestoreChannelRequest restoreChannel. */
+                    public restoreChannel?: (google.cloud.gkebackup.v1.IRestoreChannel|null);
+
+                    /** UpdateRestoreChannelRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateRestoreChannelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateRestoreChannelRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IUpdateRestoreChannelRequest): google.cloud.gkebackup.v1.UpdateRestoreChannelRequest;
+
+                    /**
+                     * Encodes the specified UpdateRestoreChannelRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.UpdateRestoreChannelRequest.verify|verify} messages.
+                     * @param message UpdateRestoreChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IUpdateRestoreChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateRestoreChannelRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.UpdateRestoreChannelRequest.verify|verify} messages.
+                     * @param message UpdateRestoreChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IUpdateRestoreChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateRestoreChannelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateRestoreChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.UpdateRestoreChannelRequest;
+
+                    /**
+                     * Decodes an UpdateRestoreChannelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateRestoreChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.UpdateRestoreChannelRequest;
+
+                    /**
+                     * Verifies an UpdateRestoreChannelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateRestoreChannelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateRestoreChannelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.UpdateRestoreChannelRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateRestoreChannelRequest message. Also converts values to other types if specified.
+                     * @param message UpdateRestoreChannelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.UpdateRestoreChannelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateRestoreChannelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRestoreChannelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteRestoreChannelRequest. */
+                interface IDeleteRestoreChannelRequest {
+
+                    /** DeleteRestoreChannelRequest name */
+                    name?: (string|null);
+
+                    /** DeleteRestoreChannelRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteRestoreChannelRequest. */
+                class DeleteRestoreChannelRequest implements IDeleteRestoreChannelRequest {
+
+                    /**
+                     * Constructs a new DeleteRestoreChannelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IDeleteRestoreChannelRequest);
+
+                    /** DeleteRestoreChannelRequest name. */
+                    public name: string;
+
+                    /** DeleteRestoreChannelRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteRestoreChannelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteRestoreChannelRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IDeleteRestoreChannelRequest): google.cloud.gkebackup.v1.DeleteRestoreChannelRequest;
+
+                    /**
+                     * Encodes the specified DeleteRestoreChannelRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.DeleteRestoreChannelRequest.verify|verify} messages.
+                     * @param message DeleteRestoreChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IDeleteRestoreChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteRestoreChannelRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.DeleteRestoreChannelRequest.verify|verify} messages.
+                     * @param message DeleteRestoreChannelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IDeleteRestoreChannelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteRestoreChannelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteRestoreChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.DeleteRestoreChannelRequest;
+
+                    /**
+                     * Decodes a DeleteRestoreChannelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteRestoreChannelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.DeleteRestoreChannelRequest;
+
+                    /**
+                     * Verifies a DeleteRestoreChannelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteRestoreChannelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteRestoreChannelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.DeleteRestoreChannelRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteRestoreChannelRequest message. Also converts values to other types if specified.
+                     * @param message DeleteRestoreChannelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.DeleteRestoreChannelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteRestoreChannelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteRestoreChannelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestorePlanBindingsRequest. */
+                interface IListRestorePlanBindingsRequest {
+
+                    /** ListRestorePlanBindingsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRestorePlanBindingsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRestorePlanBindingsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRestorePlanBindingsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRestorePlanBindingsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListRestorePlanBindingsRequest. */
+                class ListRestorePlanBindingsRequest implements IListRestorePlanBindingsRequest {
+
+                    /**
+                     * Constructs a new ListRestorePlanBindingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IListRestorePlanBindingsRequest);
+
+                    /** ListRestorePlanBindingsRequest parent. */
+                    public parent: string;
+
+                    /** ListRestorePlanBindingsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRestorePlanBindingsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRestorePlanBindingsRequest filter. */
+                    public filter: string;
+
+                    /** ListRestorePlanBindingsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListRestorePlanBindingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestorePlanBindingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IListRestorePlanBindingsRequest): google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest;
+
+                    /**
+                     * Encodes the specified ListRestorePlanBindingsRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest.verify|verify} messages.
+                     * @param message ListRestorePlanBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IListRestorePlanBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestorePlanBindingsRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest.verify|verify} messages.
+                     * @param message ListRestorePlanBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IListRestorePlanBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestorePlanBindingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestorePlanBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest;
+
+                    /**
+                     * Decodes a ListRestorePlanBindingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestorePlanBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest;
+
+                    /**
+                     * Verifies a ListRestorePlanBindingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestorePlanBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestorePlanBindingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest;
+
+                    /**
+                     * Creates a plain object from a ListRestorePlanBindingsRequest message. Also converts values to other types if specified.
+                     * @param message ListRestorePlanBindingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestorePlanBindingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestorePlanBindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRestorePlanBindingsResponse. */
+                interface IListRestorePlanBindingsResponse {
+
+                    /** ListRestorePlanBindingsResponse restorePlanBindings */
+                    restorePlanBindings?: (google.cloud.gkebackup.v1.IRestorePlanBinding[]|null);
+
+                    /** ListRestorePlanBindingsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRestorePlanBindingsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListRestorePlanBindingsResponse. */
+                class ListRestorePlanBindingsResponse implements IListRestorePlanBindingsResponse {
+
+                    /**
+                     * Constructs a new ListRestorePlanBindingsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IListRestorePlanBindingsResponse);
+
+                    /** ListRestorePlanBindingsResponse restorePlanBindings. */
+                    public restorePlanBindings: google.cloud.gkebackup.v1.IRestorePlanBinding[];
+
+                    /** ListRestorePlanBindingsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRestorePlanBindingsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListRestorePlanBindingsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRestorePlanBindingsResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IListRestorePlanBindingsResponse): google.cloud.gkebackup.v1.ListRestorePlanBindingsResponse;
+
+                    /**
+                     * Encodes the specified ListRestorePlanBindingsResponse message. Does not implicitly {@link google.cloud.gkebackup.v1.ListRestorePlanBindingsResponse.verify|verify} messages.
+                     * @param message ListRestorePlanBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IListRestorePlanBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRestorePlanBindingsResponse message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.ListRestorePlanBindingsResponse.verify|verify} messages.
+                     * @param message ListRestorePlanBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IListRestorePlanBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRestorePlanBindingsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRestorePlanBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.ListRestorePlanBindingsResponse;
+
+                    /**
+                     * Decodes a ListRestorePlanBindingsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRestorePlanBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.ListRestorePlanBindingsResponse;
+
+                    /**
+                     * Verifies a ListRestorePlanBindingsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRestorePlanBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRestorePlanBindingsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.ListRestorePlanBindingsResponse;
+
+                    /**
+                     * Creates a plain object from a ListRestorePlanBindingsResponse message. Also converts values to other types if specified.
+                     * @param message ListRestorePlanBindingsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.ListRestorePlanBindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRestorePlanBindingsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRestorePlanBindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRestorePlanBindingRequest. */
+                interface IGetRestorePlanBindingRequest {
+
+                    /** GetRestorePlanBindingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRestorePlanBindingRequest. */
+                class GetRestorePlanBindingRequest implements IGetRestorePlanBindingRequest {
+
+                    /**
+                     * Constructs a new GetRestorePlanBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IGetRestorePlanBindingRequest);
+
+                    /** GetRestorePlanBindingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRestorePlanBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRestorePlanBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IGetRestorePlanBindingRequest): google.cloud.gkebackup.v1.GetRestorePlanBindingRequest;
+
+                    /**
+                     * Encodes the specified GetRestorePlanBindingRequest message. Does not implicitly {@link google.cloud.gkebackup.v1.GetRestorePlanBindingRequest.verify|verify} messages.
+                     * @param message GetRestorePlanBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IGetRestorePlanBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRestorePlanBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.GetRestorePlanBindingRequest.verify|verify} messages.
+                     * @param message GetRestorePlanBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IGetRestorePlanBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRestorePlanBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRestorePlanBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.GetRestorePlanBindingRequest;
+
+                    /**
+                     * Decodes a GetRestorePlanBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRestorePlanBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.GetRestorePlanBindingRequest;
+
+                    /**
+                     * Verifies a GetRestorePlanBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRestorePlanBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRestorePlanBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.GetRestorePlanBindingRequest;
+
+                    /**
+                     * Creates a plain object from a GetRestorePlanBindingRequest message. Also converts values to other types if specified.
+                     * @param message GetRestorePlanBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.GetRestorePlanBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRestorePlanBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRestorePlanBindingRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -6125,7 +9072,8 @@ export namespace google {
                         IN_PROGRESS = 2,
                         SUCCEEDED = 3,
                         FAILED = 4,
-                        DELETING = 5
+                        DELETING = 5,
+                        VALIDATING = 6
                     }
 
                     /** Properties of a Filter. */
@@ -7648,6 +10596,151 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RestoreChannel. */
+                interface IRestoreChannel {
+
+                    /** RestoreChannel name */
+                    name?: (string|null);
+
+                    /** RestoreChannel destinationProject */
+                    destinationProject?: (string|null);
+
+                    /** RestoreChannel uid */
+                    uid?: (string|null);
+
+                    /** RestoreChannel createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreChannel updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreChannel labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** RestoreChannel description */
+                    description?: (string|null);
+
+                    /** RestoreChannel etag */
+                    etag?: (string|null);
+
+                    /** RestoreChannel destinationProjectId */
+                    destinationProjectId?: (string|null);
+                }
+
+                /** Represents a RestoreChannel. */
+                class RestoreChannel implements IRestoreChannel {
+
+                    /**
+                     * Constructs a new RestoreChannel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IRestoreChannel);
+
+                    /** RestoreChannel name. */
+                    public name: string;
+
+                    /** RestoreChannel destinationProject. */
+                    public destinationProject: string;
+
+                    /** RestoreChannel uid. */
+                    public uid: string;
+
+                    /** RestoreChannel createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreChannel updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestoreChannel labels. */
+                    public labels: { [k: string]: string };
+
+                    /** RestoreChannel description. */
+                    public description: string;
+
+                    /** RestoreChannel etag. */
+                    public etag: string;
+
+                    /** RestoreChannel destinationProjectId. */
+                    public destinationProjectId: string;
+
+                    /**
+                     * Creates a new RestoreChannel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreChannel instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IRestoreChannel): google.cloud.gkebackup.v1.RestoreChannel;
+
+                    /**
+                     * Encodes the specified RestoreChannel message. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreChannel.verify|verify} messages.
+                     * @param message RestoreChannel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IRestoreChannel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreChannel message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.RestoreChannel.verify|verify} messages.
+                     * @param message RestoreChannel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IRestoreChannel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreChannel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreChannel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.RestoreChannel;
+
+                    /**
+                     * Decodes a RestoreChannel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreChannel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.RestoreChannel;
+
+                    /**
+                     * Verifies a RestoreChannel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreChannel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreChannel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.RestoreChannel;
+
+                    /**
+                     * Creates a plain object from a RestoreChannel message. Also converts values to other types if specified.
+                     * @param message RestoreChannel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.RestoreChannel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreChannel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreChannel
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a RestorePlan. */
                 interface IRestorePlan {
 
@@ -7686,6 +10779,9 @@ export namespace google {
 
                     /** RestorePlan stateReason */
                     stateReason?: (string|null);
+
+                    /** RestorePlan restoreChannel */
+                    restoreChannel?: (string|null);
                 }
 
                 /** Represents a RestorePlan. */
@@ -7732,6 +10828,9 @@ export namespace google {
 
                     /** RestorePlan stateReason. */
                     public stateReason: string;
+
+                    /** RestorePlan restoreChannel. */
+                    public restoreChannel: string;
 
                     /**
                      * Creates a new RestorePlan instance using the specified properties.
@@ -7823,6 +10922,139 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a RestorePlanBinding. */
+                interface IRestorePlanBinding {
+
+                    /** RestorePlanBinding name */
+                    name?: (string|null);
+
+                    /** RestorePlanBinding uid */
+                    uid?: (string|null);
+
+                    /** RestorePlanBinding createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestorePlanBinding updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestorePlanBinding restorePlan */
+                    restorePlan?: (string|null);
+
+                    /** RestorePlanBinding etag */
+                    etag?: (string|null);
+
+                    /** RestorePlanBinding backupPlan */
+                    backupPlan?: (string|null);
+                }
+
+                /** Represents a RestorePlanBinding. */
+                class RestorePlanBinding implements IRestorePlanBinding {
+
+                    /**
+                     * Constructs a new RestorePlanBinding.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkebackup.v1.IRestorePlanBinding);
+
+                    /** RestorePlanBinding name. */
+                    public name: string;
+
+                    /** RestorePlanBinding uid. */
+                    public uid: string;
+
+                    /** RestorePlanBinding createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestorePlanBinding updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RestorePlanBinding restorePlan. */
+                    public restorePlan: string;
+
+                    /** RestorePlanBinding etag. */
+                    public etag: string;
+
+                    /** RestorePlanBinding backupPlan. */
+                    public backupPlan: string;
+
+                    /**
+                     * Creates a new RestorePlanBinding instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestorePlanBinding instance
+                     */
+                    public static create(properties?: google.cloud.gkebackup.v1.IRestorePlanBinding): google.cloud.gkebackup.v1.RestorePlanBinding;
+
+                    /**
+                     * Encodes the specified RestorePlanBinding message. Does not implicitly {@link google.cloud.gkebackup.v1.RestorePlanBinding.verify|verify} messages.
+                     * @param message RestorePlanBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkebackup.v1.IRestorePlanBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestorePlanBinding message, length delimited. Does not implicitly {@link google.cloud.gkebackup.v1.RestorePlanBinding.verify|verify} messages.
+                     * @param message RestorePlanBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkebackup.v1.IRestorePlanBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestorePlanBinding message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestorePlanBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkebackup.v1.RestorePlanBinding;
+
+                    /**
+                     * Decodes a RestorePlanBinding message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestorePlanBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkebackup.v1.RestorePlanBinding;
+
+                    /**
+                     * Verifies a RestorePlanBinding message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestorePlanBinding message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestorePlanBinding
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkebackup.v1.RestorePlanBinding;
+
+                    /**
+                     * Creates a plain object from a RestorePlanBinding message. Also converts values to other types if specified.
+                     * @param message RestorePlanBinding
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkebackup.v1.RestorePlanBinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestorePlanBinding to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestorePlanBinding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a VolumeBackup. */
                 interface IVolumeBackup {
 
@@ -7864,6 +11096,12 @@ export namespace google {
 
                     /** VolumeBackup etag */
                     etag?: (string|null);
+
+                    /** VolumeBackup satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** VolumeBackup satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
                 }
 
                 /** Represents a VolumeBackup. */
@@ -7913,6 +11151,12 @@ export namespace google {
 
                     /** VolumeBackup etag. */
                     public etag: string;
+
+                    /** VolumeBackup satisfiesPzs. */
+                    public satisfiesPzs: boolean;
+
+                    /** VolumeBackup satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /**
                      * Creates a new VolumeBackup instance using the specified properties.
@@ -8008,7 +11252,8 @@ export namespace google {
                         UPLOADING = 3,
                         SUCCEEDED = 4,
                         FAILED = 5,
-                        DELETING = 6
+                        DELETING = 6,
+                        CLEANED_UP = 7
                     }
                 }
 
@@ -8463,6 +11708,115 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
         }
 
         /** Properties of a Http. */
@@ -12485,6 +15839,9 @@ export namespace google {
 
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
         }
 
         /** Represents a FieldOptions. */

@@ -294,9 +294,14 @@ describe('v1.LivestreamServiceClient', () => {
         throw err;
       });
       assert(client.livestreamServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -305,9 +310,14 @@ describe('v1.LivestreamServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.livestreamServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -470,7 +480,9 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getChannel(request), expectedError);
     });
   });
@@ -597,7 +609,9 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getInput(request), expectedError);
     });
   });
@@ -727,7 +741,9 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createEvent(request), expectedError);
     });
   });
@@ -854,7 +870,9 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEvent(request), expectedError);
     });
   });
@@ -984,7 +1002,9 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteEvent(request), expectedError);
     });
   });
@@ -1111,8 +1131,142 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getClip(request), expectedError);
+    });
+  });
+
+  describe('getDvrSession', () => {
+    it('invokes getDvrSession without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetDvrSessionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetDvrSessionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DvrSession()
+      );
+      client.innerApiCalls.getDvrSession = stubSimpleCall(expectedResponse);
+      const [response] = await client.getDvrSession(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDvrSession without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetDvrSessionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetDvrSessionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DvrSession()
+      );
+      client.innerApiCalls.getDvrSession =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDvrSession(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.video.livestream.v1.IDvrSession | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDvrSession with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetDvrSessionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetDvrSessionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDvrSession = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getDvrSession(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDvrSession with closed client', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetDvrSessionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetDvrSessionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getDvrSession(request), expectedError);
     });
   });
 
@@ -1238,7 +1392,9 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAsset(request), expectedError);
     });
   });
@@ -1365,7 +1521,9 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPool(request), expectedError);
     });
   });
@@ -3290,6 +3448,592 @@ describe('v1.LivestreamServiceClient', () => {
     });
   });
 
+  describe('createDvrSession', () => {
+    it('invokes createDvrSession without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.CreateDvrSessionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateDvrSessionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createDvrSession =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createDvrSession(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createDvrSession without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.CreateDvrSessionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateDvrSessionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createDvrSession =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createDvrSession(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.video.livestream.v1.IDvrSession,
+              protos.google.cloud.video.livestream.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.video.livestream.v1.IDvrSession,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createDvrSession with call error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.CreateDvrSessionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateDvrSessionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createDvrSession = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createDvrSession(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createDvrSession with LRO error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.CreateDvrSessionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateDvrSessionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createDvrSession = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createDvrSession(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateDvrSessionProgress without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateDvrSessionProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateDvrSessionProgress with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateDvrSessionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteDvrSession', () => {
+    it('invokes deleteDvrSession without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DeleteDvrSessionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteDvrSessionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteDvrSession =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteDvrSession(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDvrSession without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DeleteDvrSessionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteDvrSessionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteDvrSession =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteDvrSession(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.video.livestream.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDvrSession with call error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DeleteDvrSessionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteDvrSessionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteDvrSession = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteDvrSession(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDvrSession with LRO error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DeleteDvrSessionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteDvrSessionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteDvrSession = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteDvrSession(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteDvrSessionProgress without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteDvrSessionProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteDvrSessionProgress with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteDvrSessionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateDvrSession', () => {
+    it('invokes updateDvrSession without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.UpdateDvrSessionRequest()
+      );
+      request.dvrSession ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdateDvrSessionRequest',
+        ['dvrSession', 'name']
+      );
+      request.dvrSession.name = defaultValue1;
+      const expectedHeaderRequestParams = `dvr_session.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateDvrSession =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateDvrSession(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDvrSession without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.UpdateDvrSessionRequest()
+      );
+      request.dvrSession ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdateDvrSessionRequest',
+        ['dvrSession', 'name']
+      );
+      request.dvrSession.name = defaultValue1;
+      const expectedHeaderRequestParams = `dvr_session.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateDvrSession =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateDvrSession(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.video.livestream.v1.IDvrSession,
+              protos.google.cloud.video.livestream.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.video.livestream.v1.IDvrSession,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDvrSession with call error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.UpdateDvrSessionRequest()
+      );
+      request.dvrSession ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdateDvrSessionRequest',
+        ['dvrSession', 'name']
+      );
+      request.dvrSession.name = defaultValue1;
+      const expectedHeaderRequestParams = `dvr_session.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateDvrSession = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateDvrSession(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDvrSession with LRO error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.UpdateDvrSessionRequest()
+      );
+      request.dvrSession ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.UpdateDvrSessionRequest',
+        ['dvrSession', 'name']
+      );
+      request.dvrSession.name = defaultValue1;
+      const expectedHeaderRequestParams = `dvr_session.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateDvrSession = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateDvrSession(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateDvrSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDvrSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateDvrSessionProgress without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateDvrSessionProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateDvrSessionProgress with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateDvrSessionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('createAsset', () => {
     it('invokes createAsset without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
@@ -5174,6 +5918,337 @@ describe('v1.LivestreamServiceClient', () => {
     });
   });
 
+  describe('listDvrSessions', () => {
+    it('invokes listDvrSessions without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListDvrSessionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListDvrSessionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.DvrSession()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.DvrSession()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.DvrSession()
+        ),
+      ];
+      client.innerApiCalls.listDvrSessions = stubSimpleCall(expectedResponse);
+      const [response] = await client.listDvrSessions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDvrSessions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDvrSessions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDvrSessions without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListDvrSessionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListDvrSessionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.DvrSession()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.DvrSession()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.DvrSession()
+        ),
+      ];
+      client.innerApiCalls.listDvrSessions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listDvrSessions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.video.livestream.v1.IDvrSession[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDvrSessions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDvrSessions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDvrSessions with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListDvrSessionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListDvrSessionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listDvrSessions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listDvrSessions(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listDvrSessions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDvrSessions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDvrSessionsStream without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListDvrSessionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListDvrSessionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.DvrSession()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.DvrSession()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.DvrSession()
+        ),
+      ];
+      client.descriptors.page.listDvrSessions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listDvrSessionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.video.livestream.v1.DvrSession[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.video.livestream.v1.DvrSession) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listDvrSessions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDvrSessions, request)
+      );
+      assert(
+        (client.descriptors.page.listDvrSessions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listDvrSessionsStream with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListDvrSessionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListDvrSessionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDvrSessions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listDvrSessionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.video.livestream.v1.DvrSession[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.video.livestream.v1.DvrSession) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listDvrSessions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDvrSessions, request)
+      );
+      assert(
+        (client.descriptors.page.listDvrSessions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listDvrSessions without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListDvrSessionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListDvrSessionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.DvrSession()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.DvrSession()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.DvrSession()
+        ),
+      ];
+      client.descriptors.page.listDvrSessions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.video.livestream.v1.IDvrSession[] =
+        [];
+      const iterable = client.listDvrSessionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDvrSessions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listDvrSessions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listDvrSessions with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListDvrSessionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListDvrSessionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDvrSessions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listDvrSessionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.video.livestream.v1.IDvrSession[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDvrSessions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listDvrSessions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
   describe('listAssets', () => {
     it('invokes listAssets without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
@@ -5737,20 +6812,24 @@ describe('v1.LivestreamServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -5817,20 +6896,24 @@ describe('v1.LivestreamServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -5897,20 +6980,24 @@ describe('v1.LivestreamServiceClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -6203,6 +7290,82 @@ describe('v1.LivestreamServiceClient', () => {
         assert.strictEqual(result, 'clipValue');
         assert(
           (client.pathTemplates.clipPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('dvrSession', async () => {
+      const fakePath = '/rendered/path/dvrSession';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        channel: 'channelValue',
+        dvr_session: 'dvrSessionValue',
+      };
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dvrSessionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dvrSessionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dvrSessionPath', () => {
+        const result = client.dvrSessionPath(
+          'projectValue',
+          'locationValue',
+          'channelValue',
+          'dvrSessionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dvrSessionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDvrSessionName', () => {
+        const result = client.matchProjectFromDvrSessionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dvrSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDvrSessionName', () => {
+        const result = client.matchLocationFromDvrSessionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dvrSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchChannelFromDvrSessionName', () => {
+        const result = client.matchChannelFromDvrSessionName(fakePath);
+        assert.strictEqual(result, 'channelValue');
+        assert(
+          (client.pathTemplates.dvrSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDvrSessionFromDvrSessionName', () => {
+        const result = client.matchDvrSessionFromDvrSessionName(fakePath);
+        assert.strictEqual(result, 'dvrSessionValue');
+        assert(
+          (client.pathTemplates.dvrSessionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

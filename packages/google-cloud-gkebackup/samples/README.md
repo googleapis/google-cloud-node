@@ -13,29 +13,43 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Backup_for_g_k_e.create_backup](#backup_for_g_k_e.create_backup)
+  * [Backup_for_g_k_e.create_backup_channel](#backup_for_g_k_e.create_backup_channel)
   * [Backup_for_g_k_e.create_backup_plan](#backup_for_g_k_e.create_backup_plan)
   * [Backup_for_g_k_e.create_restore](#backup_for_g_k_e.create_restore)
+  * [Backup_for_g_k_e.create_restore_channel](#backup_for_g_k_e.create_restore_channel)
   * [Backup_for_g_k_e.create_restore_plan](#backup_for_g_k_e.create_restore_plan)
   * [Backup_for_g_k_e.delete_backup](#backup_for_g_k_e.delete_backup)
+  * [Backup_for_g_k_e.delete_backup_channel](#backup_for_g_k_e.delete_backup_channel)
   * [Backup_for_g_k_e.delete_backup_plan](#backup_for_g_k_e.delete_backup_plan)
   * [Backup_for_g_k_e.delete_restore](#backup_for_g_k_e.delete_restore)
+  * [Backup_for_g_k_e.delete_restore_channel](#backup_for_g_k_e.delete_restore_channel)
   * [Backup_for_g_k_e.delete_restore_plan](#backup_for_g_k_e.delete_restore_plan)
   * [Backup_for_g_k_e.get_backup](#backup_for_g_k_e.get_backup)
+  * [Backup_for_g_k_e.get_backup_channel](#backup_for_g_k_e.get_backup_channel)
   * [Backup_for_g_k_e.get_backup_index_download_url](#backup_for_g_k_e.get_backup_index_download_url)
   * [Backup_for_g_k_e.get_backup_plan](#backup_for_g_k_e.get_backup_plan)
+  * [Backup_for_g_k_e.get_backup_plan_binding](#backup_for_g_k_e.get_backup_plan_binding)
   * [Backup_for_g_k_e.get_restore](#backup_for_g_k_e.get_restore)
+  * [Backup_for_g_k_e.get_restore_channel](#backup_for_g_k_e.get_restore_channel)
   * [Backup_for_g_k_e.get_restore_plan](#backup_for_g_k_e.get_restore_plan)
+  * [Backup_for_g_k_e.get_restore_plan_binding](#backup_for_g_k_e.get_restore_plan_binding)
   * [Backup_for_g_k_e.get_volume_backup](#backup_for_g_k_e.get_volume_backup)
   * [Backup_for_g_k_e.get_volume_restore](#backup_for_g_k_e.get_volume_restore)
+  * [Backup_for_g_k_e.list_backup_channels](#backup_for_g_k_e.list_backup_channels)
+  * [Backup_for_g_k_e.list_backup_plan_bindings](#backup_for_g_k_e.list_backup_plan_bindings)
   * [Backup_for_g_k_e.list_backup_plans](#backup_for_g_k_e.list_backup_plans)
   * [Backup_for_g_k_e.list_backups](#backup_for_g_k_e.list_backups)
+  * [Backup_for_g_k_e.list_restore_channels](#backup_for_g_k_e.list_restore_channels)
+  * [Backup_for_g_k_e.list_restore_plan_bindings](#backup_for_g_k_e.list_restore_plan_bindings)
   * [Backup_for_g_k_e.list_restore_plans](#backup_for_g_k_e.list_restore_plans)
   * [Backup_for_g_k_e.list_restores](#backup_for_g_k_e.list_restores)
   * [Backup_for_g_k_e.list_volume_backups](#backup_for_g_k_e.list_volume_backups)
   * [Backup_for_g_k_e.list_volume_restores](#backup_for_g_k_e.list_volume_restores)
   * [Backup_for_g_k_e.update_backup](#backup_for_g_k_e.update_backup)
+  * [Backup_for_g_k_e.update_backup_channel](#backup_for_g_k_e.update_backup_channel)
   * [Backup_for_g_k_e.update_backup_plan](#backup_for_g_k_e.update_backup_plan)
   * [Backup_for_g_k_e.update_restore](#backup_for_g_k_e.update_restore)
+  * [Backup_for_g_k_e.update_restore_channel](#backup_for_g_k_e.update_restore_channel)
   * [Backup_for_g_k_e.update_restore_plan](#backup_for_g_k_e.update_restore_plan)
   * [Quickstart](#quickstart)
 
@@ -64,6 +78,23 @@ __Usage:__
 
 
 `node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_backup.js`
+
+
+-----
+
+
+
+
+### Backup_for_g_k_e.create_backup_channel
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_backup_channel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_backup_channel.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_backup_channel.js`
 
 
 -----
@@ -105,6 +136,23 @@ __Usage:__
 
 
 
+### Backup_for_g_k_e.create_restore_channel
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_restore_channel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_restore_channel.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_restore_channel.js`
+
+
+-----
+
+
+
+
 ### Backup_for_g_k_e.create_restore_plan
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.create_restore_plan.js).
@@ -132,6 +180,23 @@ __Usage:__
 
 
 `node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_backup.js`
+
+
+-----
+
+
+
+
+### Backup_for_g_k_e.delete_backup_channel
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_backup_channel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_backup_channel.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_backup_channel.js`
 
 
 -----
@@ -173,6 +238,23 @@ __Usage:__
 
 
 
+### Backup_for_g_k_e.delete_restore_channel
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_restore_channel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_restore_channel.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_restore_channel.js`
+
+
+-----
+
+
+
+
 ### Backup_for_g_k_e.delete_restore_plan
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.delete_restore_plan.js).
@@ -200,6 +282,23 @@ __Usage:__
 
 
 `node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup.js`
+
+
+-----
+
+
+
+
+### Backup_for_g_k_e.get_backup_channel
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup_channel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup_channel.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup_channel.js`
 
 
 -----
@@ -241,6 +340,23 @@ __Usage:__
 
 
 
+### Backup_for_g_k_e.get_backup_plan_binding
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup_plan_binding.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup_plan_binding.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_backup_plan_binding.js`
+
+
+-----
+
+
+
+
 ### Backup_for_g_k_e.get_restore
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore.js).
@@ -258,6 +374,23 @@ __Usage:__
 
 
 
+### Backup_for_g_k_e.get_restore_channel
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore_channel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore_channel.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore_channel.js`
+
+
+-----
+
+
+
+
 ### Backup_for_g_k_e.get_restore_plan
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore_plan.js).
@@ -268,6 +401,23 @@ __Usage:__
 
 
 `node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore_plan.js`
+
+
+-----
+
+
+
+
+### Backup_for_g_k_e.get_restore_plan_binding
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore_plan_binding.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore_plan_binding.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.get_restore_plan_binding.js`
 
 
 -----
@@ -309,6 +459,40 @@ __Usage:__
 
 
 
+### Backup_for_g_k_e.list_backup_channels
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backup_channels.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backup_channels.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backup_channels.js`
+
+
+-----
+
+
+
+
+### Backup_for_g_k_e.list_backup_plan_bindings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backup_plan_bindings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backup_plan_bindings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backup_plan_bindings.js`
+
+
+-----
+
+
+
+
 ### Backup_for_g_k_e.list_backup_plans
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backup_plans.js).
@@ -336,6 +520,40 @@ __Usage:__
 
 
 `node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_backups.js`
+
+
+-----
+
+
+
+
+### Backup_for_g_k_e.list_restore_channels
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_restore_channels.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_restore_channels.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_restore_channels.js`
+
+
+-----
+
+
+
+
+### Backup_for_g_k_e.list_restore_plan_bindings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_restore_plan_bindings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_restore_plan_bindings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.list_restore_plan_bindings.js`
 
 
 -----
@@ -428,6 +646,23 @@ __Usage:__
 
 
 
+### Backup_for_g_k_e.update_backup_channel
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_backup_channel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_backup_channel.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_backup_channel.js`
+
+
+-----
+
+
+
+
 ### Backup_for_g_k_e.update_backup_plan
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_backup_plan.js).
@@ -455,6 +690,23 @@ __Usage:__
 
 
 `node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore.js`
+
+
+-----
+
+
+
+
+### Backup_for_g_k_e.update_restore_channel
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore_channel.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore_channel.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore_channel.js`
 
 
 -----
