@@ -185,6 +185,14 @@
         "CheckAutopilotCompatibility": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "FetchClusterUpgradeInfo": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchNodePoolUpgradeInfo": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }
