@@ -1669,6 +1669,11 @@
                 "createIndex"
               ]
             },
+            "ImportIndex": {
+              "methods": [
+                "importIndex"
+              ]
+            },
             "UpdateIndex": {
               "methods": [
                 "updateIndex"
@@ -1709,6 +1714,11 @@
             "CreateIndex": {
               "methods": [
                 "createIndex"
+              ]
+            },
+            "ImportIndex": {
+              "methods": [
+                "importIndex"
               ]
             },
             "UpdateIndex": {

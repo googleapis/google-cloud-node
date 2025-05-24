@@ -25045,6 +25045,30 @@
                             }
                           ]
                         },
+                        "ImportIndex": {
+                          "requestType": "ImportIndexRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/indexes/*}:import",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Index",
+                            "(google.longrunning.operation_info).metadata_type": "ImportIndexOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/indexes/*}:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Index",
+                                "metadata_type": "ImportIndexOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ListIndexes": {
                           "requestType": "ListIndexesRequest",
                           "responseType": "ListIndexesResponse",
@@ -25262,6 +25286,183 @@
                         }
                       }
                     },
+                    "ImportIndexRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Index"
+                          }
+                        },
+                        "isCompleteOverwrite": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "config": {
+                          "type": "ConnectorConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ConnectorConfig": {
+                          "oneofs": {
+                            "source": {
+                              "oneof": [
+                                "bigQuerySourceConfig"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "bigQuerySourceConfig": {
+                              "type": "BigQuerySourceConfig",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "DatapointFieldMapping": {
+                              "fields": {
+                                "idColumn": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "embeddingColumn": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "restricts": {
+                                  "rule": "repeated",
+                                  "type": "Restrict",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "numericRestricts": {
+                                  "rule": "repeated",
+                                  "type": "NumericRestrict",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "metadataColumns": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "Restrict": {
+                                  "fields": {
+                                    "namespace": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "allowColumn": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "denyColumn": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                },
+                                "NumericRestrict": {
+                                  "fields": {
+                                    "namespace": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "valueColumn": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "valueType": {
+                                      "type": "ValueType",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    }
+                                  },
+                                  "nested": {
+                                    "ValueType": {
+                                      "values": {
+                                        "VALUE_TYPE_UNSPECIFIED": 0,
+                                        "INT": 1,
+                                        "FLOAT": 2,
+                                        "DOUBLE": 3
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "BigQuerySourceConfig": {
+                              "fields": {
+                                "tablePath": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "datapointFieldMapping": {
+                                  "type": "DatapointFieldMapping",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ImportIndexOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
                     "DeleteIndexRequest": {
                       "fields": {
                         "name": {
@@ -25377,7 +25578,9 @@
                                 "INVALID_SPARSE_DIMENSIONS": 14,
                                 "INVALID_TOKEN_VALUE": 15,
                                 "INVALID_SPARSE_EMBEDDING": 16,
-                                "INVALID_EMBEDDING": 17
+                                "INVALID_EMBEDDING": 17,
+                                "INVALID_EMBEDDING_METADATA": 18,
+                                "EMBEDDING_METADATA_EXCEEDS_SIZE_LIMIT": 19
                               }
                             }
                           }
