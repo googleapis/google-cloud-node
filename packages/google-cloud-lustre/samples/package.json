@@ -1,0 +1,24 @@
+{
+  "name": "lustre-samples",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "*.js"
+  ],
+  "scripts": {
+    "test": "c8 mocha --timeout 600000 test/*.js",
+    "publish": "echo 'sample test; do not publish'"
+  },
+  "dependencies": {
+    "@google-cloud/lustre": "0.0.0"
+  },
+  "devDependencies": {
+    "c8": "^9.0.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.0.0"
+  }
+}
