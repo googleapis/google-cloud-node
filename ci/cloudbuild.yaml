@@ -26,7 +26,7 @@ logsBucket: 'gs://${_LOGS_BUCKET}/logs/google-cloud-node/${_BUILD_TYPE}/${COMMIT
 timeout: 32400s
 
 steps:
-  - name: 'gcr.io/kaniko-project/executor:v1.23.2'
+  - name: 'gcr.io/kaniko-project/executor:v1.24.0'
     args: [
       '--log-format=text',
       '--context=dir:///workspace/testing',
