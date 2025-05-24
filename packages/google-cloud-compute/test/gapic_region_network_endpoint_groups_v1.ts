@@ -288,9 +288,14 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         throw err;
       });
       assert(client.regionNetworkEndpointGroupsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -302,9 +307,14 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
           }
         );
       assert.strictEqual(client.regionNetworkEndpointGroupsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -529,7 +539,9 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
       );
       request.networkEndpointGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.attachNetworkEndpoints(request),
         expectedError
@@ -711,7 +723,9 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
       );
       request.networkEndpointGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -897,7 +911,9 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
       );
       request.networkEndpointGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.detachNetworkEndpoints(request),
         expectedError
@@ -1075,7 +1091,9 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
       );
       request.networkEndpointGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -1234,7 +1252,9 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
       );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });

@@ -304,9 +304,14 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         throw err;
       });
       assert(client.dataLabelingServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -316,9 +321,14 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataLabelingServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -487,7 +497,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDataset(request), expectedError);
     });
   });
@@ -621,7 +633,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDataset(request), expectedError);
     });
   });
@@ -755,7 +769,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteDataset(request), expectedError);
     });
   });
@@ -889,7 +905,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDataItem(request), expectedError);
     });
   });
@@ -1024,7 +1042,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAnnotatedDataset(request), expectedError);
     });
   });
@@ -1162,7 +1182,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteAnnotatedDataset(request),
         expectedError
@@ -1299,7 +1321,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getExample(request), expectedError);
     });
   });
@@ -1437,7 +1461,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createAnnotationSpecSet(request),
         expectedError
@@ -1575,7 +1601,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getAnnotationSpecSet(request), expectedError);
     });
   });
@@ -1713,7 +1741,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteAnnotationSpecSet(request),
         expectedError
@@ -1850,7 +1880,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getInstruction(request), expectedError);
     });
   });
@@ -1984,7 +2016,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteInstruction(request), expectedError);
     });
   });
@@ -2118,7 +2152,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEvaluation(request), expectedError);
     });
   });
@@ -2253,7 +2289,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createEvaluationJob(request), expectedError);
     });
   });
@@ -2392,7 +2430,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.evaluationJob.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateEvaluationJob(request), expectedError);
     });
   });
@@ -2526,7 +2566,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getEvaluationJob(request), expectedError);
     });
   });
@@ -2661,7 +2703,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.pauseEvaluationJob(request), expectedError);
     });
   });
@@ -2796,7 +2840,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.resumeEvaluationJob(request), expectedError);
     });
   });
@@ -2931,7 +2977,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteEvaluationJob(request), expectedError);
     });
   });

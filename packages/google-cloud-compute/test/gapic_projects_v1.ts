@@ -267,9 +267,14 @@ describe('v1.ProjectsClient', () => {
         throw err;
       });
       assert(client.projectsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -278,9 +283,14 @@ describe('v1.ProjectsClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.projectsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -443,7 +453,9 @@ describe('v1.ProjectsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.disableXpnHost(request), expectedError);
     });
   });
@@ -574,7 +586,9 @@ describe('v1.ProjectsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.disableXpnResource(request), expectedError);
     });
   });
@@ -704,7 +718,9 @@ describe('v1.ProjectsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.enableXpnHost(request), expectedError);
     });
   });
@@ -834,7 +850,9 @@ describe('v1.ProjectsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.enableXpnResource(request), expectedError);
     });
   });
@@ -957,7 +975,9 @@ describe('v1.ProjectsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -1087,7 +1107,9 @@ describe('v1.ProjectsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getXpnHost(request), expectedError);
     });
   });
@@ -1214,7 +1236,9 @@ describe('v1.ProjectsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.moveDisk(request), expectedError);
     });
   });
@@ -1344,7 +1368,9 @@ describe('v1.ProjectsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.moveInstance(request), expectedError);
     });
   });
@@ -1474,7 +1500,9 @@ describe('v1.ProjectsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setCloudArmorTier(request), expectedError);
     });
   });
@@ -1608,7 +1636,9 @@ describe('v1.ProjectsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.setCommonInstanceMetadata(request),
         expectedError
@@ -1745,7 +1775,9 @@ describe('v1.ProjectsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.setDefaultNetworkTier(request),
         expectedError
@@ -1879,7 +1911,9 @@ describe('v1.ProjectsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setUsageExportBucket(request), expectedError);
     });
   });

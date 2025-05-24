@@ -267,9 +267,14 @@ describe('v1.RoutersClient', () => {
         throw err;
       });
       assert(client.routersStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -278,9 +283,14 @@ describe('v1.RoutersClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.routersStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -480,7 +490,9 @@ describe('v1.RoutersClient', () => {
       );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -650,7 +662,9 @@ describe('v1.RoutersClient', () => {
       );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteRoutePolicy(request), expectedError);
     });
   });
@@ -813,7 +827,9 @@ describe('v1.RoutersClient', () => {
       );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -983,7 +999,9 @@ describe('v1.RoutersClient', () => {
       );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getNatIpInfo(request), expectedError);
     });
   });
@@ -1153,7 +1171,9 @@ describe('v1.RoutersClient', () => {
       );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRoutePolicy(request), expectedError);
     });
   });
@@ -1323,7 +1343,9 @@ describe('v1.RoutersClient', () => {
       );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRouterStatus(request), expectedError);
     });
   });
@@ -1470,7 +1492,9 @@ describe('v1.RoutersClient', () => {
       );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -1633,7 +1657,9 @@ describe('v1.RoutersClient', () => {
       );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.patch(request), expectedError);
     });
   });
@@ -1803,7 +1829,9 @@ describe('v1.RoutersClient', () => {
       );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.patchRoutePolicy(request), expectedError);
     });
   });
@@ -1970,7 +1998,9 @@ describe('v1.RoutersClient', () => {
       );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.preview(request), expectedError);
     });
   });
@@ -2137,7 +2167,9 @@ describe('v1.RoutersClient', () => {
       );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.update(request), expectedError);
     });
   });
@@ -2307,7 +2339,9 @@ describe('v1.RoutersClient', () => {
       );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateRoutePolicy(request), expectedError);
     });
   });

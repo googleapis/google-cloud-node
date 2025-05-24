@@ -269,9 +269,14 @@ describe('v1.TargetSslProxiesClient', () => {
         throw err;
       });
       assert(client.targetSslProxiesStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -280,9 +285,14 @@ describe('v1.TargetSslProxiesClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.targetSslProxiesStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -462,7 +472,9 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       request.targetSslProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -605,7 +617,9 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       request.targetSslProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -732,7 +746,9 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -882,7 +898,9 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       request.targetSslProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setBackendService(request), expectedError);
     });
   });
@@ -1032,7 +1050,9 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       request.targetSslProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setCertificateMap(request), expectedError);
     });
   });
@@ -1182,7 +1202,9 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       request.targetSslProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setProxyHeader(request), expectedError);
     });
   });
@@ -1333,7 +1355,9 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       request.targetSslProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setSslCertificates(request), expectedError);
     });
   });
@@ -1483,7 +1507,9 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       request.targetSslProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setSslPolicy(request), expectedError);
     });
   });

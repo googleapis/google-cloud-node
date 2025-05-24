@@ -282,9 +282,14 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         throw err;
       });
       assert(client.regionSecurityPoliciesStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -294,9 +299,14 @@ describe('v1.RegionSecurityPoliciesClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.regionSecurityPoliciesStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -502,7 +512,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
       );
       request.securityPolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addRule(request), expectedError);
     });
   });
@@ -673,7 +685,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
       );
       request.securityPolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -840,7 +854,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
       );
       request.securityPolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -1011,7 +1027,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
       );
       request.securityPolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRule(request), expectedError);
     });
   });
@@ -1162,7 +1180,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
       );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -1329,7 +1349,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
       );
       request.securityPolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.patch(request), expectedError);
     });
   });
@@ -1500,7 +1522,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
       );
       request.securityPolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.patchRule(request), expectedError);
     });
   });
@@ -1674,7 +1698,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
       );
       request.securityPolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.removeRule(request), expectedError);
     });
   });
@@ -1845,7 +1871,9 @@ describe('v1.RegionSecurityPoliciesClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setLabels(request), expectedError);
     });
   });

@@ -269,9 +269,14 @@ describe('v1.BackendBucketsClient', () => {
         throw err;
       });
       assert(client.backendBucketsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -280,9 +285,14 @@ describe('v1.BackendBucketsClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.backendBucketsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -465,7 +475,9 @@ describe('v1.BackendBucketsClient', () => {
       );
       request.backendBucket = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.addSignedUrlKey(request), expectedError);
     });
   });
@@ -612,7 +624,9 @@ describe('v1.BackendBucketsClient', () => {
       );
       request.backendBucket = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -763,7 +777,9 @@ describe('v1.BackendBucketsClient', () => {
       );
       request.backendBucket = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteSignedUrlKey(request), expectedError);
     });
   });
@@ -906,7 +922,9 @@ describe('v1.BackendBucketsClient', () => {
       );
       request.backendBucket = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -1056,7 +1074,9 @@ describe('v1.BackendBucketsClient', () => {
       );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -1183,7 +1203,9 @@ describe('v1.BackendBucketsClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -1326,7 +1348,9 @@ describe('v1.BackendBucketsClient', () => {
       );
       request.backendBucket = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.patch(request), expectedError);
     });
   });
@@ -1480,7 +1504,9 @@ describe('v1.BackendBucketsClient', () => {
       );
       request.backendBucket = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.setEdgeSecurityPolicy(request),
         expectedError
@@ -1633,7 +1659,9 @@ describe('v1.BackendBucketsClient', () => {
       );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -1784,7 +1812,9 @@ describe('v1.BackendBucketsClient', () => {
       );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
@@ -1931,7 +1961,9 @@ describe('v1.BackendBucketsClient', () => {
       );
       request.backendBucket = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.update(request), expectedError);
     });
   });

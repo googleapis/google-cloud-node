@@ -269,9 +269,14 @@ describe('v1.ResourcePoliciesClient', () => {
         throw err;
       });
       assert(client.resourcePoliciesStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -280,9 +285,14 @@ describe('v1.ResourcePoliciesClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.resourcePoliciesStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -482,7 +492,9 @@ describe('v1.ResourcePoliciesClient', () => {
       );
       request.resourcePolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.delete(request), expectedError);
     });
   });
@@ -645,7 +657,9 @@ describe('v1.ResourcePoliciesClient', () => {
       );
       request.resourcePolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });
@@ -815,7 +829,9 @@ describe('v1.ResourcePoliciesClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -962,7 +978,9 @@ describe('v1.ResourcePoliciesClient', () => {
       );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insert(request), expectedError);
     });
   });
@@ -1125,7 +1143,9 @@ describe('v1.ResourcePoliciesClient', () => {
       );
       request.resourcePolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.patch(request), expectedError);
     });
   });
@@ -1295,7 +1315,9 @@ describe('v1.ResourcePoliciesClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -1466,7 +1488,9 @@ describe('v1.ResourcePoliciesClient', () => {
       );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });

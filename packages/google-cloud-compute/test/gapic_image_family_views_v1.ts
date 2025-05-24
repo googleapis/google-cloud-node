@@ -206,9 +206,14 @@ describe('v1.ImageFamilyViewsClient', () => {
         throw err;
       });
       assert(client.imageFamilyViewsStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -217,9 +222,14 @@ describe('v1.ImageFamilyViewsClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.imageFamilyViewsStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -415,7 +425,9 @@ describe('v1.ImageFamilyViewsClient', () => {
       );
       request.family = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.get(request), expectedError);
     });
   });

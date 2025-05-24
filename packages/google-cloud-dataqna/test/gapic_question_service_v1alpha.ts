@@ -195,9 +195,14 @@ describe('v1alpha.QuestionServiceClient', () => {
         throw err;
       });
       assert(client.questionServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -206,9 +211,14 @@ describe('v1alpha.QuestionServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.questionServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -371,7 +381,9 @@ describe('v1alpha.QuestionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getQuestion(request), expectedError);
     });
   });
@@ -501,7 +513,9 @@ describe('v1alpha.QuestionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createQuestion(request), expectedError);
     });
   });
@@ -631,7 +645,9 @@ describe('v1alpha.QuestionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.executeQuestion(request), expectedError);
     });
   });
@@ -761,7 +777,9 @@ describe('v1alpha.QuestionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getUserFeedback(request), expectedError);
     });
   });
@@ -896,7 +914,9 @@ describe('v1alpha.QuestionServiceClient', () => {
       );
       request.userFeedback.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateUserFeedback(request), expectedError);
     });
   });
