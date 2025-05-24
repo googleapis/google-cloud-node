@@ -286,9 +286,14 @@ describe('v1.CloudBuildClient', () => {
         throw err;
       });
       assert(client.cloudBuildStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -297,9 +302,14 @@ describe('v1.CloudBuildClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.cloudBuildStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -447,7 +457,9 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}/builds/*
       request.name = 'projects/value/locations/value/builds/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getBuild(request), expectedError);
     });
   });
@@ -565,7 +577,9 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}/builds/*
       request.name = 'projects/value/locations/value/builds/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.cancelBuild(request), expectedError);
     });
   });
@@ -684,7 +698,9 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}
       request.parent = 'projects/value/locations/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createBuildTrigger(request), expectedError);
     });
   });
@@ -802,7 +818,9 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}/triggers/*
       request.name = 'projects/value/locations/value/triggers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getBuildTrigger(request), expectedError);
     });
   });
@@ -921,7 +939,9 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}/triggers/*
       request.name = 'projects/value/locations/value/triggers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteBuildTrigger(request), expectedError);
     });
   });
@@ -1048,7 +1068,9 @@ describe('v1.CloudBuildClient', () => {
       request.trigger.resourceName =
         'projects/value/locations/value/triggers/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateBuildTrigger(request), expectedError);
     });
   });
@@ -1222,7 +1244,9 @@ describe('v1.CloudBuildClient', () => {
       );
       request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.receiveTriggerWebhook(request),
         expectedError
@@ -1343,7 +1367,9 @@ describe('v1.CloudBuildClient', () => {
       // path template: projects/*/locations/{location=*}/workerPools/*
       request.name = 'projects/value/locations/value/workerPools/value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getWorkerPool(request), expectedError);
     });
   });

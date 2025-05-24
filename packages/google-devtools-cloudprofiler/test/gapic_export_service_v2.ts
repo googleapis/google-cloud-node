@@ -259,9 +259,14 @@ describe('v2.ExportServiceClient', () => {
         throw err;
       });
       assert(client.exportServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -270,9 +275,14 @@ describe('v2.ExportServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.exportServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {

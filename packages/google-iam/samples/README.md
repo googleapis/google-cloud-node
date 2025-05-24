@@ -49,7 +49,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Policies.create_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v2/policies.create_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.create_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v2/policies.create_policy.js,samples/README.md)
 
@@ -66,7 +66,7 @@ __Usage:__
 
 ### Policies.delete_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v2/policies.delete_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.delete_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v2/policies.delete_policy.js,samples/README.md)
 
@@ -83,7 +83,7 @@ __Usage:__
 
 ### Policies.get_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v2/policies.get_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.get_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v2/policies.get_policy.js,samples/README.md)
 
@@ -100,7 +100,7 @@ __Usage:__
 
 ### Policies.list_applicable_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v2/policies.list_applicable_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.list_applicable_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v2/policies.list_applicable_policies.js,samples/README.md)
 
@@ -117,7 +117,7 @@ __Usage:__
 
 ### Policies.list_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v2/policies.list_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.list_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v2/policies.list_policies.js,samples/README.md)
 
@@ -134,7 +134,7 @@ __Usage:__
 
 ### Policies.update_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v2/policies.update_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.update_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v2/policies.update_policy.js,samples/README.md)
 
@@ -151,7 +151,7 @@ __Usage:__
 
 ### Policy_bindings.create_policy_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v3/policy_bindings.create_policy_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/policy_bindings.create_policy_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v3/policy_bindings.create_policy_binding.js,samples/README.md)
 
@@ -168,7 +168,7 @@ __Usage:__
 
 ### Policy_bindings.delete_policy_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v3/policy_bindings.delete_policy_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/policy_bindings.delete_policy_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v3/policy_bindings.delete_policy_binding.js,samples/README.md)
 
@@ -185,7 +185,7 @@ __Usage:__
 
 ### Policy_bindings.get_policy_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v3/policy_bindings.get_policy_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/policy_bindings.get_policy_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v3/policy_bindings.get_policy_binding.js,samples/README.md)
 
@@ -202,7 +202,7 @@ __Usage:__
 
 ### Policy_bindings.list_policy_bindings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v3/policy_bindings.list_policy_bindings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/policy_bindings.list_policy_bindings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v3/policy_bindings.list_policy_bindings.js,samples/README.md)
 
@@ -219,7 +219,7 @@ __Usage:__
 
 ### Policy_bindings.search_target_policy_bindings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v3/policy_bindings.search_target_policy_bindings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/policy_bindings.search_target_policy_bindings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v3/policy_bindings.search_target_policy_bindings.js,samples/README.md)
 
@@ -236,7 +236,7 @@ __Usage:__
 
 ### Policy_bindings.update_policy_binding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v3/policy_bindings.update_policy_binding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/policy_bindings.update_policy_binding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v3/policy_bindings.update_policy_binding.js,samples/README.md)
 
@@ -253,7 +253,7 @@ __Usage:__
 
 ### Principal_access_boundary_policies.create_principal_access_boundary_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.create_principal_access_boundary_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.create_principal_access_boundary_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v3/principal_access_boundary_policies.create_principal_access_boundary_policy.js,samples/README.md)
 
@@ -270,7 +270,7 @@ __Usage:__
 
 ### Principal_access_boundary_policies.delete_principal_access_boundary_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.delete_principal_access_boundary_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.delete_principal_access_boundary_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v3/principal_access_boundary_policies.delete_principal_access_boundary_policy.js,samples/README.md)
 
@@ -287,7 +287,7 @@ __Usage:__
 
 ### Principal_access_boundary_policies.get_principal_access_boundary_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.get_principal_access_boundary_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.get_principal_access_boundary_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v3/principal_access_boundary_policies.get_principal_access_boundary_policy.js,samples/README.md)
 
@@ -304,7 +304,7 @@ __Usage:__
 
 ### Principal_access_boundary_policies.list_principal_access_boundary_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.list_principal_access_boundary_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.list_principal_access_boundary_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v3/principal_access_boundary_policies.list_principal_access_boundary_policies.js,samples/README.md)
 
@@ -321,7 +321,7 @@ __Usage:__
 
 ### Principal_access_boundary_policies.search_principal_access_boundary_policy_bindings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.search_principal_access_boundary_policy_bindings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.search_principal_access_boundary_policy_bindings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v3/principal_access_boundary_policies.search_principal_access_boundary_policy_bindings.js,samples/README.md)
 
@@ -338,7 +338,7 @@ __Usage:__
 
 ### Principal_access_boundary_policies.update_principal_access_boundary_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.update_principal_access_boundary_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.update_principal_access_boundary_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v3/principal_access_boundary_policies.update_principal_access_boundary_policy.js,samples/README.md)
 
@@ -355,7 +355,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-iam/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/quickstart.js,samples/README.md)
 
