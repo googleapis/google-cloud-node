@@ -298,9 +298,14 @@ describe('v2.BareMetalSolutionClient', () => {
         throw err;
       });
       assert(client.bareMetalSolutionStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -309,9 +314,14 @@ describe('v2.BareMetalSolutionClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.bareMetalSolutionStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -474,7 +484,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getInstance(request), expectedError);
     });
   });
@@ -604,7 +616,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.renameInstance(request), expectedError);
     });
   });
@@ -734,7 +748,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createSSHKey(request), expectedError);
     });
   });
@@ -864,7 +880,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteSSHKey(request), expectedError);
     });
   });
@@ -991,7 +1009,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getVolume(request), expectedError);
     });
   });
@@ -1121,7 +1141,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.renameVolume(request), expectedError);
     });
   });
@@ -1251,7 +1273,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listNetworkUsage(request), expectedError);
     });
   });
@@ -1381,7 +1405,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getNetwork(request), expectedError);
     });
   });
@@ -1512,7 +1538,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createVolumeSnapshot(request), expectedError);
     });
   });
@@ -1643,7 +1671,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteVolumeSnapshot(request), expectedError);
     });
   });
@@ -1773,7 +1803,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getVolumeSnapshot(request), expectedError);
     });
   });
@@ -1900,7 +1932,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getLun(request), expectedError);
     });
   });
@@ -2030,7 +2064,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getNfsShare(request), expectedError);
     });
   });
@@ -2160,7 +2196,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.renameNfsShare(request), expectedError);
     });
   });
@@ -2294,7 +2332,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.submitProvisioningConfig(request),
         expectedError
@@ -2431,7 +2471,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getProvisioningConfig(request),
         expectedError
@@ -2568,7 +2610,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createProvisioningConfig(request),
         expectedError
@@ -2709,7 +2753,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.provisioningConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateProvisioningConfig(request),
         expectedError
@@ -2842,7 +2888,9 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.renameNetwork(request), expectedError);
     });
   });
@@ -9001,20 +9049,24 @@ describe('v2.BareMetalSolutionClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getIamPolicy(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .getIamPolicy(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.Policy | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -9107,20 +9159,24 @@ describe('v2.BareMetalSolutionClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.setIamPolicy(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.Policy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .setIamPolicy(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.Policy | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -9216,20 +9272,24 @@ describe('v2.BareMetalSolutionClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.testIamPermissions(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client
+          .testIamPermissions(
+            request,
+            expectedOptions,
+            (
+              err?: Error | null,
+              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -9504,20 +9564,24 @@ describe('v2.BareMetalSolutionClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -9584,20 +9648,24 @@ describe('v2.BareMetalSolutionClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -9664,20 +9732,24 @@ describe('v2.BareMetalSolutionClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
             }
-          }
-        );
+          )
+          .catch(err => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);

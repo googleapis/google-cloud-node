@@ -206,9 +206,14 @@ describe('v1beta1.ConnectionServiceClient', () => {
         throw err;
       });
       assert(client.connectionServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -218,9 +223,14 @@ describe('v1beta1.ConnectionServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.connectionServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -389,7 +399,9 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createConnection(request), expectedError);
     });
   });
@@ -523,7 +535,9 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getConnection(request), expectedError);
     });
   });
@@ -657,7 +671,9 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listConnections(request), expectedError);
     });
   });
@@ -791,7 +807,9 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateConnection(request), expectedError);
     });
   });
@@ -929,7 +947,9 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateConnectionCredential(request),
         expectedError
@@ -1066,7 +1086,9 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteConnection(request), expectedError);
     });
   });
@@ -1200,7 +1222,9 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -1334,7 +1358,9 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -1469,7 +1495,9 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
