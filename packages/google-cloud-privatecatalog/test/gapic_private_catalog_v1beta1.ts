@@ -260,9 +260,14 @@ describe('v1beta1.PrivateCatalogClient', () => {
         throw err;
       });
       assert(client.privateCatalogStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -271,9 +276,14 @@ describe('v1beta1.PrivateCatalogClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.privateCatalogStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {

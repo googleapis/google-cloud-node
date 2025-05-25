@@ -257,9 +257,14 @@ describe('v1beta.OsConfigServiceClient', () => {
         throw err;
       });
       assert(client.osConfigServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -268,9 +273,14 @@ describe('v1beta.OsConfigServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.osConfigServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -433,7 +443,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.executePatchJob(request), expectedError);
     });
   });
@@ -563,7 +575,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPatchJob(request), expectedError);
     });
   });
@@ -693,7 +707,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.cancelPatchJob(request), expectedError);
     });
   });
@@ -827,7 +843,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createPatchDeployment(request),
         expectedError
@@ -961,7 +979,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPatchDeployment(request), expectedError);
     });
   });
@@ -1095,7 +1115,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deletePatchDeployment(request),
         expectedError
@@ -1236,7 +1258,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.patchDeployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updatePatchDeployment(request),
         expectedError
@@ -1370,7 +1394,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.pausePatchDeployment(request), expectedError);
     });
   });
@@ -1504,7 +1530,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.resumePatchDeployment(request),
         expectedError
@@ -1637,7 +1665,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createGuestPolicy(request), expectedError);
     });
   });
@@ -1767,7 +1797,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getGuestPolicy(request), expectedError);
     });
   });
@@ -1901,7 +1933,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.guestPolicy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateGuestPolicy(request), expectedError);
     });
   });
@@ -2031,7 +2065,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteGuestPolicy(request), expectedError);
     });
   });
@@ -2165,7 +2201,9 @@ describe('v1beta.OsConfigServiceClient', () => {
       );
       request.instance = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.lookupEffectiveGuestPolicy(request),
         expectedError
