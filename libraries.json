@@ -2793,6 +2793,24 @@
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientconnectorservices"
   },
   {
+    "name": "chronicle",
+    "name_pretty": "Chronicle API",
+    "product_documentation": "https://cloud.google.com/chronicle/docs/secops/secops-overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/chronicle/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/chronicle",
+    "api_id": "chronicle.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "chronicle",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-chronicle",
+    "support_documentation": "https://cloud.google.com/chronicle/docs/getting-support"
+  },
+  {
     "name": "css",
     "name_pretty": "CSS API",
     "product_documentation": "https://developers.google.com/comparison-shopping-services/api",
@@ -2868,7 +2886,7 @@
   {
     "name": "dataform",
     "name_pretty": "Dataform API",
-    "product_documentation": "https://dataform.co/",
+    "product_documentation": "https://cloud.google.com/dataform/docs/overview",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dataform/latest",
     "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
     "release_level": "preview",
@@ -2881,7 +2899,7 @@
     "library_type": "GAPIC_AUTO",
     "api_shortname": "dataform",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataform",
-    "support_documentation": "https://dataform.co/docs/getting-support"
+    "support_documentation": "https://cloud.google.com/dataform/docs/getting-support"
   },
   {
     "name": "developerconnect",
@@ -2900,6 +2918,42 @@
     "api_shortname": "developerconnect",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-developerconnect",
     "support_documentation": "https://cloud.google.com/developer-connect/docs/getting-support"
+  },
+  {
+    "name": "devicestreaming",
+    "name_pretty": "Device Streaming API",
+    "product_documentation": "https://cloud.google.com/device-streaming/docs",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/devicestreaming/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/devicestreaming",
+    "api_id": "devicestreaming.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "devicestreaming",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-devicestreaming",
+    "support_documentation": "https://cloud.google.com/device-streaming/docs/getting-support"
+  },
+  {
+    "name": "financialservices",
+    "name_pretty": "Financial Services API",
+    "product_documentation": "https://cloud.google.com/financial-services/anti-money-laundering/docs/concepts/overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/financialservices/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/financialservices",
+    "api_id": "financialservices.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "financialservices",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-financialservices",
+    "support_documentation": "https://cloud.google.com/financial-services/anti-money-laundering/docs/getting-support"
   },
   {
     "name": "gdchardwaremanagement",
