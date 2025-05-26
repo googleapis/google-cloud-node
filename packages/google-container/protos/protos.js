@@ -68279,6 +68279,72 @@
                      * @variation 2
                      */
     
+                    /**
+                     * Callback as used by {@link google.container.v1beta1.ClusterManager|fetchClusterUpgradeInfo}.
+                     * @memberof google.container.v1beta1.ClusterManager
+                     * @typedef FetchClusterUpgradeInfoCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.container.v1beta1.ClusterUpgradeInfo} [response] ClusterUpgradeInfo
+                     */
+    
+                    /**
+                     * Calls FetchClusterUpgradeInfo.
+                     * @function fetchClusterUpgradeInfo
+                     * @memberof google.container.v1beta1.ClusterManager
+                     * @instance
+                     * @param {google.container.v1beta1.IFetchClusterUpgradeInfoRequest} request FetchClusterUpgradeInfoRequest message or plain object
+                     * @param {google.container.v1beta1.ClusterManager.FetchClusterUpgradeInfoCallback} callback Node-style callback called with the error, if any, and ClusterUpgradeInfo
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ClusterManager.prototype.fetchClusterUpgradeInfo = function fetchClusterUpgradeInfo(request, callback) {
+                        return this.rpcCall(fetchClusterUpgradeInfo, $root.google.container.v1beta1.FetchClusterUpgradeInfoRequest, $root.google.container.v1beta1.ClusterUpgradeInfo, request, callback);
+                    }, "name", { value: "FetchClusterUpgradeInfo" });
+    
+                    /**
+                     * Calls FetchClusterUpgradeInfo.
+                     * @function fetchClusterUpgradeInfo
+                     * @memberof google.container.v1beta1.ClusterManager
+                     * @instance
+                     * @param {google.container.v1beta1.IFetchClusterUpgradeInfoRequest} request FetchClusterUpgradeInfoRequest message or plain object
+                     * @returns {Promise<google.container.v1beta1.ClusterUpgradeInfo>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.container.v1beta1.ClusterManager|fetchNodePoolUpgradeInfo}.
+                     * @memberof google.container.v1beta1.ClusterManager
+                     * @typedef FetchNodePoolUpgradeInfoCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.container.v1beta1.NodePoolUpgradeInfo} [response] NodePoolUpgradeInfo
+                     */
+    
+                    /**
+                     * Calls FetchNodePoolUpgradeInfo.
+                     * @function fetchNodePoolUpgradeInfo
+                     * @memberof google.container.v1beta1.ClusterManager
+                     * @instance
+                     * @param {google.container.v1beta1.IFetchNodePoolUpgradeInfoRequest} request FetchNodePoolUpgradeInfoRequest message or plain object
+                     * @param {google.container.v1beta1.ClusterManager.FetchNodePoolUpgradeInfoCallback} callback Node-style callback called with the error, if any, and NodePoolUpgradeInfo
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ClusterManager.prototype.fetchNodePoolUpgradeInfo = function fetchNodePoolUpgradeInfo(request, callback) {
+                        return this.rpcCall(fetchNodePoolUpgradeInfo, $root.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest, $root.google.container.v1beta1.NodePoolUpgradeInfo, request, callback);
+                    }, "name", { value: "FetchNodePoolUpgradeInfo" });
+    
+                    /**
+                     * Calls FetchNodePoolUpgradeInfo.
+                     * @function fetchNodePoolUpgradeInfo
+                     * @memberof google.container.v1beta1.ClusterManager
+                     * @instance
+                     * @param {google.container.v1beta1.IFetchNodePoolUpgradeInfoRequest} request FetchNodePoolUpgradeInfoRequest message or plain object
+                     * @returns {Promise<google.container.v1beta1.NodePoolUpgradeInfo>} Promise
+                     * @variation 2
+                     */
+    
                     return ClusterManager;
                 })();
     
@@ -69141,10 +69207,19 @@
                      * @memberof google.container.v1beta1
                      * @interface INodeKubeletConfig
                      * @property {string|null} [cpuManagerPolicy] NodeKubeletConfig cpuManagerPolicy
+                     * @property {google.container.v1beta1.ITopologyManager|null} [topologyManager] NodeKubeletConfig topologyManager
+                     * @property {google.container.v1beta1.IMemoryManager|null} [memoryManager] NodeKubeletConfig memoryManager
                      * @property {google.protobuf.IBoolValue|null} [cpuCfsQuota] NodeKubeletConfig cpuCfsQuota
                      * @property {string|null} [cpuCfsQuotaPeriod] NodeKubeletConfig cpuCfsQuotaPeriod
                      * @property {number|Long|null} [podPidsLimit] NodeKubeletConfig podPidsLimit
                      * @property {boolean|null} [insecureKubeletReadonlyPortEnabled] NodeKubeletConfig insecureKubeletReadonlyPortEnabled
+                     * @property {number|null} [imageGcLowThresholdPercent] NodeKubeletConfig imageGcLowThresholdPercent
+                     * @property {number|null} [imageGcHighThresholdPercent] NodeKubeletConfig imageGcHighThresholdPercent
+                     * @property {string|null} [imageMinimumGcAge] NodeKubeletConfig imageMinimumGcAge
+                     * @property {string|null} [imageMaximumGcAge] NodeKubeletConfig imageMaximumGcAge
+                     * @property {string|null} [containerLogMaxSize] NodeKubeletConfig containerLogMaxSize
+                     * @property {number|null} [containerLogMaxFiles] NodeKubeletConfig containerLogMaxFiles
+                     * @property {Array.<string>|null} [allowedUnsafeSysctls] NodeKubeletConfig allowedUnsafeSysctls
                      */
     
                     /**
@@ -69156,6 +69231,7 @@
                      * @param {google.container.v1beta1.INodeKubeletConfig=} [properties] Properties to set
                      */
                     function NodeKubeletConfig(properties) {
+                        this.allowedUnsafeSysctls = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -69169,6 +69245,22 @@
                      * @instance
                      */
                     NodeKubeletConfig.prototype.cpuManagerPolicy = "";
+    
+                    /**
+                     * NodeKubeletConfig topologyManager.
+                     * @member {google.container.v1beta1.ITopologyManager|null|undefined} topologyManager
+                     * @memberof google.container.v1beta1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.topologyManager = null;
+    
+                    /**
+                     * NodeKubeletConfig memoryManager.
+                     * @member {google.container.v1beta1.IMemoryManager|null|undefined} memoryManager
+                     * @memberof google.container.v1beta1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.memoryManager = null;
     
                     /**
                      * NodeKubeletConfig cpuCfsQuota.
@@ -69201,6 +69293,62 @@
                      * @instance
                      */
                     NodeKubeletConfig.prototype.insecureKubeletReadonlyPortEnabled = null;
+    
+                    /**
+                     * NodeKubeletConfig imageGcLowThresholdPercent.
+                     * @member {number} imageGcLowThresholdPercent
+                     * @memberof google.container.v1beta1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.imageGcLowThresholdPercent = 0;
+    
+                    /**
+                     * NodeKubeletConfig imageGcHighThresholdPercent.
+                     * @member {number} imageGcHighThresholdPercent
+                     * @memberof google.container.v1beta1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.imageGcHighThresholdPercent = 0;
+    
+                    /**
+                     * NodeKubeletConfig imageMinimumGcAge.
+                     * @member {string} imageMinimumGcAge
+                     * @memberof google.container.v1beta1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.imageMinimumGcAge = "";
+    
+                    /**
+                     * NodeKubeletConfig imageMaximumGcAge.
+                     * @member {string} imageMaximumGcAge
+                     * @memberof google.container.v1beta1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.imageMaximumGcAge = "";
+    
+                    /**
+                     * NodeKubeletConfig containerLogMaxSize.
+                     * @member {string} containerLogMaxSize
+                     * @memberof google.container.v1beta1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.containerLogMaxSize = "";
+    
+                    /**
+                     * NodeKubeletConfig containerLogMaxFiles.
+                     * @member {number} containerLogMaxFiles
+                     * @memberof google.container.v1beta1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.containerLogMaxFiles = 0;
+    
+                    /**
+                     * NodeKubeletConfig allowedUnsafeSysctls.
+                     * @member {Array.<string>} allowedUnsafeSysctls
+                     * @memberof google.container.v1beta1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.allowedUnsafeSysctls = $util.emptyArray;
     
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
@@ -69250,6 +69398,25 @@
                             writer.uint32(/* id 4, wireType 0 =*/32).int64(message.podPidsLimit);
                         if (message.insecureKubeletReadonlyPortEnabled != null && Object.hasOwnProperty.call(message, "insecureKubeletReadonlyPortEnabled"))
                             writer.uint32(/* id 7, wireType 0 =*/56).bool(message.insecureKubeletReadonlyPortEnabled);
+                        if (message.topologyManager != null && Object.hasOwnProperty.call(message, "topologyManager"))
+                            $root.google.container.v1beta1.TopologyManager.encode(message.topologyManager, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        if (message.memoryManager != null && Object.hasOwnProperty.call(message, "memoryManager"))
+                            $root.google.container.v1beta1.MemoryManager.encode(message.memoryManager, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                        if (message.imageGcLowThresholdPercent != null && Object.hasOwnProperty.call(message, "imageGcLowThresholdPercent"))
+                            writer.uint32(/* id 10, wireType 0 =*/80).int32(message.imageGcLowThresholdPercent);
+                        if (message.imageGcHighThresholdPercent != null && Object.hasOwnProperty.call(message, "imageGcHighThresholdPercent"))
+                            writer.uint32(/* id 11, wireType 0 =*/88).int32(message.imageGcHighThresholdPercent);
+                        if (message.imageMinimumGcAge != null && Object.hasOwnProperty.call(message, "imageMinimumGcAge"))
+                            writer.uint32(/* id 12, wireType 2 =*/98).string(message.imageMinimumGcAge);
+                        if (message.imageMaximumGcAge != null && Object.hasOwnProperty.call(message, "imageMaximumGcAge"))
+                            writer.uint32(/* id 13, wireType 2 =*/106).string(message.imageMaximumGcAge);
+                        if (message.containerLogMaxSize != null && Object.hasOwnProperty.call(message, "containerLogMaxSize"))
+                            writer.uint32(/* id 14, wireType 2 =*/114).string(message.containerLogMaxSize);
+                        if (message.containerLogMaxFiles != null && Object.hasOwnProperty.call(message, "containerLogMaxFiles"))
+                            writer.uint32(/* id 15, wireType 0 =*/120).int32(message.containerLogMaxFiles);
+                        if (message.allowedUnsafeSysctls != null && message.allowedUnsafeSysctls.length)
+                            for (var i = 0; i < message.allowedUnsafeSysctls.length; ++i)
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.allowedUnsafeSysctls[i]);
                         return writer;
                     };
     
@@ -69288,6 +69455,14 @@
                                     message.cpuManagerPolicy = reader.string();
                                     break;
                                 }
+                            case 8: {
+                                    message.topologyManager = $root.google.container.v1beta1.TopologyManager.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 9: {
+                                    message.memoryManager = $root.google.container.v1beta1.MemoryManager.decode(reader, reader.uint32());
+                                    break;
+                                }
                             case 2: {
                                     message.cpuCfsQuota = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
                                     break;
@@ -69302,6 +69477,36 @@
                                 }
                             case 7: {
                                     message.insecureKubeletReadonlyPortEnabled = reader.bool();
+                                    break;
+                                }
+                            case 10: {
+                                    message.imageGcLowThresholdPercent = reader.int32();
+                                    break;
+                                }
+                            case 11: {
+                                    message.imageGcHighThresholdPercent = reader.int32();
+                                    break;
+                                }
+                            case 12: {
+                                    message.imageMinimumGcAge = reader.string();
+                                    break;
+                                }
+                            case 13: {
+                                    message.imageMaximumGcAge = reader.string();
+                                    break;
+                                }
+                            case 14: {
+                                    message.containerLogMaxSize = reader.string();
+                                    break;
+                                }
+                            case 15: {
+                                    message.containerLogMaxFiles = reader.int32();
+                                    break;
+                                }
+                            case 16: {
+                                    if (!(message.allowedUnsafeSysctls && message.allowedUnsafeSysctls.length))
+                                        message.allowedUnsafeSysctls = [];
+                                    message.allowedUnsafeSysctls.push(reader.string());
                                     break;
                                 }
                             default:
@@ -69343,6 +69548,16 @@
                         if (message.cpuManagerPolicy != null && message.hasOwnProperty("cpuManagerPolicy"))
                             if (!$util.isString(message.cpuManagerPolicy))
                                 return "cpuManagerPolicy: string expected";
+                        if (message.topologyManager != null && message.hasOwnProperty("topologyManager")) {
+                            var error = $root.google.container.v1beta1.TopologyManager.verify(message.topologyManager);
+                            if (error)
+                                return "topologyManager." + error;
+                        }
+                        if (message.memoryManager != null && message.hasOwnProperty("memoryManager")) {
+                            var error = $root.google.container.v1beta1.MemoryManager.verify(message.memoryManager);
+                            if (error)
+                                return "memoryManager." + error;
+                        }
                         if (message.cpuCfsQuota != null && message.hasOwnProperty("cpuCfsQuota")) {
                             var error = $root.google.protobuf.BoolValue.verify(message.cpuCfsQuota);
                             if (error)
@@ -69358,6 +69573,31 @@
                             properties._insecureKubeletReadonlyPortEnabled = 1;
                             if (typeof message.insecureKubeletReadonlyPortEnabled !== "boolean")
                                 return "insecureKubeletReadonlyPortEnabled: boolean expected";
+                        }
+                        if (message.imageGcLowThresholdPercent != null && message.hasOwnProperty("imageGcLowThresholdPercent"))
+                            if (!$util.isInteger(message.imageGcLowThresholdPercent))
+                                return "imageGcLowThresholdPercent: integer expected";
+                        if (message.imageGcHighThresholdPercent != null && message.hasOwnProperty("imageGcHighThresholdPercent"))
+                            if (!$util.isInteger(message.imageGcHighThresholdPercent))
+                                return "imageGcHighThresholdPercent: integer expected";
+                        if (message.imageMinimumGcAge != null && message.hasOwnProperty("imageMinimumGcAge"))
+                            if (!$util.isString(message.imageMinimumGcAge))
+                                return "imageMinimumGcAge: string expected";
+                        if (message.imageMaximumGcAge != null && message.hasOwnProperty("imageMaximumGcAge"))
+                            if (!$util.isString(message.imageMaximumGcAge))
+                                return "imageMaximumGcAge: string expected";
+                        if (message.containerLogMaxSize != null && message.hasOwnProperty("containerLogMaxSize"))
+                            if (!$util.isString(message.containerLogMaxSize))
+                                return "containerLogMaxSize: string expected";
+                        if (message.containerLogMaxFiles != null && message.hasOwnProperty("containerLogMaxFiles"))
+                            if (!$util.isInteger(message.containerLogMaxFiles))
+                                return "containerLogMaxFiles: integer expected";
+                        if (message.allowedUnsafeSysctls != null && message.hasOwnProperty("allowedUnsafeSysctls")) {
+                            if (!Array.isArray(message.allowedUnsafeSysctls))
+                                return "allowedUnsafeSysctls: array expected";
+                            for (var i = 0; i < message.allowedUnsafeSysctls.length; ++i)
+                                if (!$util.isString(message.allowedUnsafeSysctls[i]))
+                                    return "allowedUnsafeSysctls: string[] expected";
                         }
                         return null;
                     };
@@ -69376,6 +69616,16 @@
                         var message = new $root.google.container.v1beta1.NodeKubeletConfig();
                         if (object.cpuManagerPolicy != null)
                             message.cpuManagerPolicy = String(object.cpuManagerPolicy);
+                        if (object.topologyManager != null) {
+                            if (typeof object.topologyManager !== "object")
+                                throw TypeError(".google.container.v1beta1.NodeKubeletConfig.topologyManager: object expected");
+                            message.topologyManager = $root.google.container.v1beta1.TopologyManager.fromObject(object.topologyManager);
+                        }
+                        if (object.memoryManager != null) {
+                            if (typeof object.memoryManager !== "object")
+                                throw TypeError(".google.container.v1beta1.NodeKubeletConfig.memoryManager: object expected");
+                            message.memoryManager = $root.google.container.v1beta1.MemoryManager.fromObject(object.memoryManager);
+                        }
                         if (object.cpuCfsQuota != null) {
                             if (typeof object.cpuCfsQuota !== "object")
                                 throw TypeError(".google.container.v1beta1.NodeKubeletConfig.cpuCfsQuota: object expected");
@@ -69394,6 +69644,25 @@
                                 message.podPidsLimit = new $util.LongBits(object.podPidsLimit.low >>> 0, object.podPidsLimit.high >>> 0).toNumber();
                         if (object.insecureKubeletReadonlyPortEnabled != null)
                             message.insecureKubeletReadonlyPortEnabled = Boolean(object.insecureKubeletReadonlyPortEnabled);
+                        if (object.imageGcLowThresholdPercent != null)
+                            message.imageGcLowThresholdPercent = object.imageGcLowThresholdPercent | 0;
+                        if (object.imageGcHighThresholdPercent != null)
+                            message.imageGcHighThresholdPercent = object.imageGcHighThresholdPercent | 0;
+                        if (object.imageMinimumGcAge != null)
+                            message.imageMinimumGcAge = String(object.imageMinimumGcAge);
+                        if (object.imageMaximumGcAge != null)
+                            message.imageMaximumGcAge = String(object.imageMaximumGcAge);
+                        if (object.containerLogMaxSize != null)
+                            message.containerLogMaxSize = String(object.containerLogMaxSize);
+                        if (object.containerLogMaxFiles != null)
+                            message.containerLogMaxFiles = object.containerLogMaxFiles | 0;
+                        if (object.allowedUnsafeSysctls) {
+                            if (!Array.isArray(object.allowedUnsafeSysctls))
+                                throw TypeError(".google.container.v1beta1.NodeKubeletConfig.allowedUnsafeSysctls: array expected");
+                            message.allowedUnsafeSysctls = [];
+                            for (var i = 0; i < object.allowedUnsafeSysctls.length; ++i)
+                                message.allowedUnsafeSysctls[i] = String(object.allowedUnsafeSysctls[i]);
+                        }
                         return message;
                     };
     
@@ -69410,6 +69679,8 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.arrays || options.defaults)
+                            object.allowedUnsafeSysctls = [];
                         if (options.defaults) {
                             object.cpuManagerPolicy = "";
                             object.cpuCfsQuota = null;
@@ -69419,6 +69690,14 @@
                                 object.podPidsLimit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                             } else
                                 object.podPidsLimit = options.longs === String ? "0" : 0;
+                            object.topologyManager = null;
+                            object.memoryManager = null;
+                            object.imageGcLowThresholdPercent = 0;
+                            object.imageGcHighThresholdPercent = 0;
+                            object.imageMinimumGcAge = "";
+                            object.imageMaximumGcAge = "";
+                            object.containerLogMaxSize = "";
+                            object.containerLogMaxFiles = 0;
                         }
                         if (message.cpuManagerPolicy != null && message.hasOwnProperty("cpuManagerPolicy"))
                             object.cpuManagerPolicy = message.cpuManagerPolicy;
@@ -69435,6 +69714,27 @@
                             object.insecureKubeletReadonlyPortEnabled = message.insecureKubeletReadonlyPortEnabled;
                             if (options.oneofs)
                                 object._insecureKubeletReadonlyPortEnabled = "insecureKubeletReadonlyPortEnabled";
+                        }
+                        if (message.topologyManager != null && message.hasOwnProperty("topologyManager"))
+                            object.topologyManager = $root.google.container.v1beta1.TopologyManager.toObject(message.topologyManager, options);
+                        if (message.memoryManager != null && message.hasOwnProperty("memoryManager"))
+                            object.memoryManager = $root.google.container.v1beta1.MemoryManager.toObject(message.memoryManager, options);
+                        if (message.imageGcLowThresholdPercent != null && message.hasOwnProperty("imageGcLowThresholdPercent"))
+                            object.imageGcLowThresholdPercent = message.imageGcLowThresholdPercent;
+                        if (message.imageGcHighThresholdPercent != null && message.hasOwnProperty("imageGcHighThresholdPercent"))
+                            object.imageGcHighThresholdPercent = message.imageGcHighThresholdPercent;
+                        if (message.imageMinimumGcAge != null && message.hasOwnProperty("imageMinimumGcAge"))
+                            object.imageMinimumGcAge = message.imageMinimumGcAge;
+                        if (message.imageMaximumGcAge != null && message.hasOwnProperty("imageMaximumGcAge"))
+                            object.imageMaximumGcAge = message.imageMaximumGcAge;
+                        if (message.containerLogMaxSize != null && message.hasOwnProperty("containerLogMaxSize"))
+                            object.containerLogMaxSize = message.containerLogMaxSize;
+                        if (message.containerLogMaxFiles != null && message.hasOwnProperty("containerLogMaxFiles"))
+                            object.containerLogMaxFiles = message.containerLogMaxFiles;
+                        if (message.allowedUnsafeSysctls && message.allowedUnsafeSysctls.length) {
+                            object.allowedUnsafeSysctls = [];
+                            for (var j = 0; j < message.allowedUnsafeSysctls.length; ++j)
+                                object.allowedUnsafeSysctls[j] = message.allowedUnsafeSysctls[j];
                         }
                         return object;
                     };
@@ -69466,6 +69766,436 @@
                     };
     
                     return NodeKubeletConfig;
+                })();
+    
+                v1beta1.TopologyManager = (function() {
+    
+                    /**
+                     * Properties of a TopologyManager.
+                     * @memberof google.container.v1beta1
+                     * @interface ITopologyManager
+                     * @property {string|null} [policy] TopologyManager policy
+                     * @property {string|null} [scope] TopologyManager scope
+                     */
+    
+                    /**
+                     * Constructs a new TopologyManager.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a TopologyManager.
+                     * @implements ITopologyManager
+                     * @constructor
+                     * @param {google.container.v1beta1.ITopologyManager=} [properties] Properties to set
+                     */
+                    function TopologyManager(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TopologyManager policy.
+                     * @member {string} policy
+                     * @memberof google.container.v1beta1.TopologyManager
+                     * @instance
+                     */
+                    TopologyManager.prototype.policy = "";
+    
+                    /**
+                     * TopologyManager scope.
+                     * @member {string} scope
+                     * @memberof google.container.v1beta1.TopologyManager
+                     * @instance
+                     */
+                    TopologyManager.prototype.scope = "";
+    
+                    /**
+                     * Creates a new TopologyManager instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.TopologyManager
+                     * @static
+                     * @param {google.container.v1beta1.ITopologyManager=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.TopologyManager} TopologyManager instance
+                     */
+                    TopologyManager.create = function create(properties) {
+                        return new TopologyManager(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TopologyManager message. Does not implicitly {@link google.container.v1beta1.TopologyManager.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.TopologyManager
+                     * @static
+                     * @param {google.container.v1beta1.ITopologyManager} message TopologyManager message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TopologyManager.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.policy);
+                        if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.scope);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TopologyManager message, length delimited. Does not implicitly {@link google.container.v1beta1.TopologyManager.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.TopologyManager
+                     * @static
+                     * @param {google.container.v1beta1.ITopologyManager} message TopologyManager message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TopologyManager.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TopologyManager message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.TopologyManager
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.TopologyManager} TopologyManager
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TopologyManager.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.TopologyManager();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.policy = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.scope = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TopologyManager message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.TopologyManager
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.TopologyManager} TopologyManager
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TopologyManager.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TopologyManager message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.TopologyManager
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TopologyManager.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.policy != null && message.hasOwnProperty("policy"))
+                            if (!$util.isString(message.policy))
+                                return "policy: string expected";
+                        if (message.scope != null && message.hasOwnProperty("scope"))
+                            if (!$util.isString(message.scope))
+                                return "scope: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TopologyManager message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.TopologyManager
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.TopologyManager} TopologyManager
+                     */
+                    TopologyManager.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.TopologyManager)
+                            return object;
+                        var message = new $root.google.container.v1beta1.TopologyManager();
+                        if (object.policy != null)
+                            message.policy = String(object.policy);
+                        if (object.scope != null)
+                            message.scope = String(object.scope);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TopologyManager message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.TopologyManager
+                     * @static
+                     * @param {google.container.v1beta1.TopologyManager} message TopologyManager
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TopologyManager.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.policy = "";
+                            object.scope = "";
+                        }
+                        if (message.policy != null && message.hasOwnProperty("policy"))
+                            object.policy = message.policy;
+                        if (message.scope != null && message.hasOwnProperty("scope"))
+                            object.scope = message.scope;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TopologyManager to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.TopologyManager
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TopologyManager.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for TopologyManager
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.TopologyManager
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    TopologyManager.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.TopologyManager";
+                    };
+    
+                    return TopologyManager;
+                })();
+    
+                v1beta1.MemoryManager = (function() {
+    
+                    /**
+                     * Properties of a MemoryManager.
+                     * @memberof google.container.v1beta1
+                     * @interface IMemoryManager
+                     * @property {string|null} [policy] MemoryManager policy
+                     */
+    
+                    /**
+                     * Constructs a new MemoryManager.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a MemoryManager.
+                     * @implements IMemoryManager
+                     * @constructor
+                     * @param {google.container.v1beta1.IMemoryManager=} [properties] Properties to set
+                     */
+                    function MemoryManager(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MemoryManager policy.
+                     * @member {string} policy
+                     * @memberof google.container.v1beta1.MemoryManager
+                     * @instance
+                     */
+                    MemoryManager.prototype.policy = "";
+    
+                    /**
+                     * Creates a new MemoryManager instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.MemoryManager
+                     * @static
+                     * @param {google.container.v1beta1.IMemoryManager=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.MemoryManager} MemoryManager instance
+                     */
+                    MemoryManager.create = function create(properties) {
+                        return new MemoryManager(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MemoryManager message. Does not implicitly {@link google.container.v1beta1.MemoryManager.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.MemoryManager
+                     * @static
+                     * @param {google.container.v1beta1.IMemoryManager} message MemoryManager message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MemoryManager.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.policy);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MemoryManager message, length delimited. Does not implicitly {@link google.container.v1beta1.MemoryManager.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.MemoryManager
+                     * @static
+                     * @param {google.container.v1beta1.IMemoryManager} message MemoryManager message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MemoryManager.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MemoryManager message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.MemoryManager
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.MemoryManager} MemoryManager
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MemoryManager.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.MemoryManager();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.policy = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MemoryManager message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.MemoryManager
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.MemoryManager} MemoryManager
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MemoryManager.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MemoryManager message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.MemoryManager
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MemoryManager.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.policy != null && message.hasOwnProperty("policy"))
+                            if (!$util.isString(message.policy))
+                                return "policy: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MemoryManager message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.MemoryManager
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.MemoryManager} MemoryManager
+                     */
+                    MemoryManager.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.MemoryManager)
+                            return object;
+                        var message = new $root.google.container.v1beta1.MemoryManager();
+                        if (object.policy != null)
+                            message.policy = String(object.policy);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MemoryManager message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.MemoryManager
+                     * @static
+                     * @param {google.container.v1beta1.MemoryManager} message MemoryManager
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MemoryManager.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.policy = "";
+                        if (message.policy != null && message.hasOwnProperty("policy"))
+                            object.policy = message.policy;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MemoryManager to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.MemoryManager
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MemoryManager.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MemoryManager
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.MemoryManager
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MemoryManager.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.MemoryManager";
+                    };
+    
+                    return MemoryManager;
                 })();
     
                 v1beta1.NodeConfig = (function() {
@@ -69514,7 +70244,12 @@
                      * @property {google.container.v1beta1.IResourceManagerTags|null} [resourceManagerTags] NodeConfig resourceManagerTags
                      * @property {boolean|null} [enableConfidentialStorage] NodeConfig enableConfidentialStorage
                      * @property {Array.<google.container.v1beta1.ISecondaryBootDisk>|null} [secondaryBootDisks] NodeConfig secondaryBootDisks
+                     * @property {Array.<string>|null} [storagePools] NodeConfig storagePools
                      * @property {google.container.v1beta1.ISecondaryBootDiskUpdateStrategy|null} [secondaryBootDiskUpdateStrategy] NodeConfig secondaryBootDiskUpdateStrategy
+                     * @property {google.protobuf.IDuration|null} [maxRunDuration] NodeConfig maxRunDuration
+                     * @property {google.container.v1beta1.NodeConfig.LocalSsdEncryptionMode|null} [localSsdEncryptionMode] NodeConfig localSsdEncryptionMode
+                     * @property {google.container.v1beta1.NodeConfig.EffectiveCgroupMode|null} [effectiveCgroupMode] NodeConfig effectiveCgroupMode
+                     * @property {boolean|null} [flexStart] NodeConfig flexStart
                      */
     
                     /**
@@ -69534,6 +70269,7 @@
                         this.taints = [];
                         this.resourceLabels = {};
                         this.secondaryBootDisks = [];
+                        this.storagePools = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -69861,12 +70597,52 @@
                     NodeConfig.prototype.secondaryBootDisks = $util.emptyArray;
     
                     /**
+                     * NodeConfig storagePools.
+                     * @member {Array.<string>} storagePools
+                     * @memberof google.container.v1beta1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.storagePools = $util.emptyArray;
+    
+                    /**
                      * NodeConfig secondaryBootDiskUpdateStrategy.
                      * @member {google.container.v1beta1.ISecondaryBootDiskUpdateStrategy|null|undefined} secondaryBootDiskUpdateStrategy
                      * @memberof google.container.v1beta1.NodeConfig
                      * @instance
                      */
                     NodeConfig.prototype.secondaryBootDiskUpdateStrategy = null;
+    
+                    /**
+                     * NodeConfig maxRunDuration.
+                     * @member {google.protobuf.IDuration|null|undefined} maxRunDuration
+                     * @memberof google.container.v1beta1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.maxRunDuration = null;
+    
+                    /**
+                     * NodeConfig localSsdEncryptionMode.
+                     * @member {google.container.v1beta1.NodeConfig.LocalSsdEncryptionMode|null|undefined} localSsdEncryptionMode
+                     * @memberof google.container.v1beta1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.localSsdEncryptionMode = null;
+    
+                    /**
+                     * NodeConfig effectiveCgroupMode.
+                     * @member {google.container.v1beta1.NodeConfig.EffectiveCgroupMode} effectiveCgroupMode
+                     * @memberof google.container.v1beta1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.effectiveCgroupMode = 0;
+    
+                    /**
+                     * NodeConfig flexStart.
+                     * @member {boolean|null|undefined} flexStart
+                     * @memberof google.container.v1beta1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.flexStart = null;
     
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
@@ -69890,6 +70666,28 @@
                      */
                     Object.defineProperty(NodeConfig.prototype, "_secondaryBootDiskUpdateStrategy", {
                         get: $util.oneOfGetter($oneOfFields = ["secondaryBootDiskUpdateStrategy"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * NodeConfig _localSsdEncryptionMode.
+                     * @member {"localSsdEncryptionMode"|undefined} _localSsdEncryptionMode
+                     * @memberof google.container.v1beta1.NodeConfig
+                     * @instance
+                     */
+                    Object.defineProperty(NodeConfig.prototype, "_localSsdEncryptionMode", {
+                        get: $util.oneOfGetter($oneOfFields = ["localSsdEncryptionMode"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * NodeConfig _flexStart.
+                     * @member {"flexStart"|undefined} _flexStart
+                     * @memberof google.container.v1beta1.NodeConfig
+                     * @instance
+                     */
+                    Object.defineProperty(NodeConfig.prototype, "_flexStart", {
+                        get: $util.oneOfGetter($oneOfFields = ["flexStart"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -70005,8 +70803,19 @@
                         if (message.secondaryBootDisks != null && message.secondaryBootDisks.length)
                             for (var i = 0; i < message.secondaryBootDisks.length; ++i)
                                 $root.google.container.v1beta1.SecondaryBootDisk.encode(message.secondaryBootDisks[i], writer.uint32(/* id 48, wireType 2 =*/386).fork()).ldelim();
+                        if (message.storagePools != null && message.storagePools.length)
+                            for (var i = 0; i < message.storagePools.length; ++i)
+                                writer.uint32(/* id 49, wireType 2 =*/394).string(message.storagePools[i]);
                         if (message.secondaryBootDiskUpdateStrategy != null && Object.hasOwnProperty.call(message, "secondaryBootDiskUpdateStrategy"))
                             $root.google.container.v1beta1.SecondaryBootDiskUpdateStrategy.encode(message.secondaryBootDiskUpdateStrategy, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
+                        if (message.maxRunDuration != null && Object.hasOwnProperty.call(message, "maxRunDuration"))
+                            $root.google.protobuf.Duration.encode(message.maxRunDuration, writer.uint32(/* id 53, wireType 2 =*/426).fork()).ldelim();
+                        if (message.localSsdEncryptionMode != null && Object.hasOwnProperty.call(message, "localSsdEncryptionMode"))
+                            writer.uint32(/* id 54, wireType 0 =*/432).int32(message.localSsdEncryptionMode);
+                        if (message.effectiveCgroupMode != null && Object.hasOwnProperty.call(message, "effectiveCgroupMode"))
+                            writer.uint32(/* id 55, wireType 0 =*/440).int32(message.effectiveCgroupMode);
+                        if (message.flexStart != null && Object.hasOwnProperty.call(message, "flexStart"))
+                            writer.uint32(/* id 56, wireType 0 =*/448).bool(message.flexStart);
                         return writer;
                     };
     
@@ -70268,8 +71077,30 @@
                                     message.secondaryBootDisks.push($root.google.container.v1beta1.SecondaryBootDisk.decode(reader, reader.uint32()));
                                     break;
                                 }
+                            case 49: {
+                                    if (!(message.storagePools && message.storagePools.length))
+                                        message.storagePools = [];
+                                    message.storagePools.push(reader.string());
+                                    break;
+                                }
                             case 50: {
                                     message.secondaryBootDiskUpdateStrategy = $root.google.container.v1beta1.SecondaryBootDiskUpdateStrategy.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 53: {
+                                    message.maxRunDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 54: {
+                                    message.localSsdEncryptionMode = reader.int32();
+                                    break;
+                                }
+                            case 55: {
+                                    message.effectiveCgroupMode = reader.int32();
+                                    break;
+                                }
+                            case 56: {
+                                    message.flexStart = reader.bool();
                                     break;
                                 }
                             default:
@@ -70512,6 +71343,13 @@
                                     return "secondaryBootDisks." + error;
                             }
                         }
+                        if (message.storagePools != null && message.hasOwnProperty("storagePools")) {
+                            if (!Array.isArray(message.storagePools))
+                                return "storagePools: array expected";
+                            for (var i = 0; i < message.storagePools.length; ++i)
+                                if (!$util.isString(message.storagePools[i]))
+                                    return "storagePools: string[] expected";
+                        }
                         if (message.secondaryBootDiskUpdateStrategy != null && message.hasOwnProperty("secondaryBootDiskUpdateStrategy")) {
                             properties._secondaryBootDiskUpdateStrategy = 1;
                             {
@@ -70519,6 +71357,36 @@
                                 if (error)
                                     return "secondaryBootDiskUpdateStrategy." + error;
                             }
+                        }
+                        if (message.maxRunDuration != null && message.hasOwnProperty("maxRunDuration")) {
+                            var error = $root.google.protobuf.Duration.verify(message.maxRunDuration);
+                            if (error)
+                                return "maxRunDuration." + error;
+                        }
+                        if (message.localSsdEncryptionMode != null && message.hasOwnProperty("localSsdEncryptionMode")) {
+                            properties._localSsdEncryptionMode = 1;
+                            switch (message.localSsdEncryptionMode) {
+                            default:
+                                return "localSsdEncryptionMode: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        }
+                        if (message.effectiveCgroupMode != null && message.hasOwnProperty("effectiveCgroupMode"))
+                            switch (message.effectiveCgroupMode) {
+                            default:
+                                return "effectiveCgroupMode: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.flexStart != null && message.hasOwnProperty("flexStart")) {
+                            properties._flexStart = 1;
+                            if (typeof message.flexStart !== "boolean")
+                                return "flexStart: boolean expected";
                         }
                         return null;
                     };
@@ -70724,11 +71592,65 @@
                                 message.secondaryBootDisks[i] = $root.google.container.v1beta1.SecondaryBootDisk.fromObject(object.secondaryBootDisks[i]);
                             }
                         }
+                        if (object.storagePools) {
+                            if (!Array.isArray(object.storagePools))
+                                throw TypeError(".google.container.v1beta1.NodeConfig.storagePools: array expected");
+                            message.storagePools = [];
+                            for (var i = 0; i < object.storagePools.length; ++i)
+                                message.storagePools[i] = String(object.storagePools[i]);
+                        }
                         if (object.secondaryBootDiskUpdateStrategy != null) {
                             if (typeof object.secondaryBootDiskUpdateStrategy !== "object")
                                 throw TypeError(".google.container.v1beta1.NodeConfig.secondaryBootDiskUpdateStrategy: object expected");
                             message.secondaryBootDiskUpdateStrategy = $root.google.container.v1beta1.SecondaryBootDiskUpdateStrategy.fromObject(object.secondaryBootDiskUpdateStrategy);
                         }
+                        if (object.maxRunDuration != null) {
+                            if (typeof object.maxRunDuration !== "object")
+                                throw TypeError(".google.container.v1beta1.NodeConfig.maxRunDuration: object expected");
+                            message.maxRunDuration = $root.google.protobuf.Duration.fromObject(object.maxRunDuration);
+                        }
+                        switch (object.localSsdEncryptionMode) {
+                        default:
+                            if (typeof object.localSsdEncryptionMode === "number") {
+                                message.localSsdEncryptionMode = object.localSsdEncryptionMode;
+                                break;
+                            }
+                            break;
+                        case "LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED":
+                        case 0:
+                            message.localSsdEncryptionMode = 0;
+                            break;
+                        case "STANDARD_ENCRYPTION":
+                        case 1:
+                            message.localSsdEncryptionMode = 1;
+                            break;
+                        case "EPHEMERAL_KEY_ENCRYPTION":
+                        case 2:
+                            message.localSsdEncryptionMode = 2;
+                            break;
+                        }
+                        switch (object.effectiveCgroupMode) {
+                        default:
+                            if (typeof object.effectiveCgroupMode === "number") {
+                                message.effectiveCgroupMode = object.effectiveCgroupMode;
+                                break;
+                            }
+                            break;
+                        case "EFFECTIVE_CGROUP_MODE_UNSPECIFIED":
+                        case 0:
+                            message.effectiveCgroupMode = 0;
+                            break;
+                        case "EFFECTIVE_CGROUP_MODE_V1":
+                        case 1:
+                            message.effectiveCgroupMode = 1;
+                            break;
+                        case "EFFECTIVE_CGROUP_MODE_V2":
+                        case 2:
+                            message.effectiveCgroupMode = 2;
+                            break;
+                        }
+                        if (object.flexStart != null)
+                            message.flexStart = Boolean(object.flexStart);
                         return message;
                     };
     
@@ -70751,6 +71673,7 @@
                             object.accelerators = [];
                             object.taints = [];
                             object.secondaryBootDisks = [];
+                            object.storagePools = [];
                         }
                         if (options.objects || options.defaults) {
                             object.metadata = {};
@@ -70789,6 +71712,8 @@
                             object.hostMaintenancePolicy = null;
                             object.resourceManagerTags = null;
                             object.enableConfidentialStorage = false;
+                            object.maxRunDuration = null;
+                            object.effectiveCgroupMode = options.enums === String ? "EFFECTIVE_CGROUP_MODE_UNSPECIFIED" : 0;
                         }
                         if (message.machineType != null && message.hasOwnProperty("machineType"))
                             object.machineType = message.machineType;
@@ -70898,10 +71823,29 @@
                             for (var j = 0; j < message.secondaryBootDisks.length; ++j)
                                 object.secondaryBootDisks[j] = $root.google.container.v1beta1.SecondaryBootDisk.toObject(message.secondaryBootDisks[j], options);
                         }
+                        if (message.storagePools && message.storagePools.length) {
+                            object.storagePools = [];
+                            for (var j = 0; j < message.storagePools.length; ++j)
+                                object.storagePools[j] = message.storagePools[j];
+                        }
                         if (message.secondaryBootDiskUpdateStrategy != null && message.hasOwnProperty("secondaryBootDiskUpdateStrategy")) {
                             object.secondaryBootDiskUpdateStrategy = $root.google.container.v1beta1.SecondaryBootDiskUpdateStrategy.toObject(message.secondaryBootDiskUpdateStrategy, options);
                             if (options.oneofs)
                                 object._secondaryBootDiskUpdateStrategy = "secondaryBootDiskUpdateStrategy";
+                        }
+                        if (message.maxRunDuration != null && message.hasOwnProperty("maxRunDuration"))
+                            object.maxRunDuration = $root.google.protobuf.Duration.toObject(message.maxRunDuration, options);
+                        if (message.localSsdEncryptionMode != null && message.hasOwnProperty("localSsdEncryptionMode")) {
+                            object.localSsdEncryptionMode = options.enums === String ? $root.google.container.v1beta1.NodeConfig.LocalSsdEncryptionMode[message.localSsdEncryptionMode] === undefined ? message.localSsdEncryptionMode : $root.google.container.v1beta1.NodeConfig.LocalSsdEncryptionMode[message.localSsdEncryptionMode] : message.localSsdEncryptionMode;
+                            if (options.oneofs)
+                                object._localSsdEncryptionMode = "localSsdEncryptionMode";
+                        }
+                        if (message.effectiveCgroupMode != null && message.hasOwnProperty("effectiveCgroupMode"))
+                            object.effectiveCgroupMode = options.enums === String ? $root.google.container.v1beta1.NodeConfig.EffectiveCgroupMode[message.effectiveCgroupMode] === undefined ? message.effectiveCgroupMode : $root.google.container.v1beta1.NodeConfig.EffectiveCgroupMode[message.effectiveCgroupMode] : message.effectiveCgroupMode;
+                        if (message.flexStart != null && message.hasOwnProperty("flexStart")) {
+                            object.flexStart = message.flexStart;
+                            if (options.oneofs)
+                                object._flexStart = "flexStart";
                         }
                         return object;
                     };
@@ -70932,6 +71876,38 @@
                         return typeUrlPrefix + "/google.container.v1beta1.NodeConfig";
                     };
     
+                    /**
+                     * LocalSsdEncryptionMode enum.
+                     * @name google.container.v1beta1.NodeConfig.LocalSsdEncryptionMode
+                     * @enum {number}
+                     * @property {number} LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED=0 LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED value
+                     * @property {number} STANDARD_ENCRYPTION=1 STANDARD_ENCRYPTION value
+                     * @property {number} EPHEMERAL_KEY_ENCRYPTION=2 EPHEMERAL_KEY_ENCRYPTION value
+                     */
+                    NodeConfig.LocalSsdEncryptionMode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "STANDARD_ENCRYPTION"] = 1;
+                        values[valuesById[2] = "EPHEMERAL_KEY_ENCRYPTION"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * EffectiveCgroupMode enum.
+                     * @name google.container.v1beta1.NodeConfig.EffectiveCgroupMode
+                     * @enum {number}
+                     * @property {number} EFFECTIVE_CGROUP_MODE_UNSPECIFIED=0 EFFECTIVE_CGROUP_MODE_UNSPECIFIED value
+                     * @property {number} EFFECTIVE_CGROUP_MODE_V1=1 EFFECTIVE_CGROUP_MODE_V1 value
+                     * @property {number} EFFECTIVE_CGROUP_MODE_V2=2 EFFECTIVE_CGROUP_MODE_V2 value
+                     */
+                    NodeConfig.EffectiveCgroupMode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "EFFECTIVE_CGROUP_MODE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "EFFECTIVE_CGROUP_MODE_V1"] = 1;
+                        values[valuesById[2] = "EFFECTIVE_CGROUP_MODE_V2"] = 2;
+                        return values;
+                    })();
+    
                     return NodeConfig;
                 })();
     
@@ -70943,6 +71919,7 @@
                      * @interface IAdvancedMachineFeatures
                      * @property {number|Long|null} [threadsPerCore] AdvancedMachineFeatures threadsPerCore
                      * @property {boolean|null} [enableNestedVirtualization] AdvancedMachineFeatures enableNestedVirtualization
+                     * @property {google.container.v1beta1.AdvancedMachineFeatures.PerformanceMonitoringUnit|null} [performanceMonitoringUnit] AdvancedMachineFeatures performanceMonitoringUnit
                      */
     
                     /**
@@ -70976,6 +71953,14 @@
                      */
                     AdvancedMachineFeatures.prototype.enableNestedVirtualization = null;
     
+                    /**
+                     * AdvancedMachineFeatures performanceMonitoringUnit.
+                     * @member {google.container.v1beta1.AdvancedMachineFeatures.PerformanceMonitoringUnit|null|undefined} performanceMonitoringUnit
+                     * @memberof google.container.v1beta1.AdvancedMachineFeatures
+                     * @instance
+                     */
+                    AdvancedMachineFeatures.prototype.performanceMonitoringUnit = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -70998,6 +71983,17 @@
                      */
                     Object.defineProperty(AdvancedMachineFeatures.prototype, "_enableNestedVirtualization", {
                         get: $util.oneOfGetter($oneOfFields = ["enableNestedVirtualization"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * AdvancedMachineFeatures _performanceMonitoringUnit.
+                     * @member {"performanceMonitoringUnit"|undefined} _performanceMonitoringUnit
+                     * @memberof google.container.v1beta1.AdvancedMachineFeatures
+                     * @instance
+                     */
+                    Object.defineProperty(AdvancedMachineFeatures.prototype, "_performanceMonitoringUnit", {
+                        get: $util.oneOfGetter($oneOfFields = ["performanceMonitoringUnit"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -71029,6 +72025,8 @@
                             writer.uint32(/* id 1, wireType 0 =*/8).int64(message.threadsPerCore);
                         if (message.enableNestedVirtualization != null && Object.hasOwnProperty.call(message, "enableNestedVirtualization"))
                             writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableNestedVirtualization);
+                        if (message.performanceMonitoringUnit != null && Object.hasOwnProperty.call(message, "performanceMonitoringUnit"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.performanceMonitoringUnit);
                         return writer;
                     };
     
@@ -71069,6 +72067,10 @@
                                 }
                             case 2: {
                                     message.enableNestedVirtualization = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.performanceMonitoringUnit = reader.int32();
                                     break;
                                 }
                             default:
@@ -71117,6 +72119,18 @@
                             if (typeof message.enableNestedVirtualization !== "boolean")
                                 return "enableNestedVirtualization: boolean expected";
                         }
+                        if (message.performanceMonitoringUnit != null && message.hasOwnProperty("performanceMonitoringUnit")) {
+                            properties._performanceMonitoringUnit = 1;
+                            switch (message.performanceMonitoringUnit) {
+                            default:
+                                return "performanceMonitoringUnit: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        }
                         return null;
                     };
     
@@ -71143,6 +72157,30 @@
                                 message.threadsPerCore = new $util.LongBits(object.threadsPerCore.low >>> 0, object.threadsPerCore.high >>> 0).toNumber();
                         if (object.enableNestedVirtualization != null)
                             message.enableNestedVirtualization = Boolean(object.enableNestedVirtualization);
+                        switch (object.performanceMonitoringUnit) {
+                        default:
+                            if (typeof object.performanceMonitoringUnit === "number") {
+                                message.performanceMonitoringUnit = object.performanceMonitoringUnit;
+                                break;
+                            }
+                            break;
+                        case "PERFORMANCE_MONITORING_UNIT_UNSPECIFIED":
+                        case 0:
+                            message.performanceMonitoringUnit = 0;
+                            break;
+                        case "ARCHITECTURAL":
+                        case 1:
+                            message.performanceMonitoringUnit = 1;
+                            break;
+                        case "STANDARD":
+                        case 2:
+                            message.performanceMonitoringUnit = 2;
+                            break;
+                        case "ENHANCED":
+                        case 3:
+                            message.performanceMonitoringUnit = 3;
+                            break;
+                        }
                         return message;
                     };
     
@@ -71172,6 +72210,11 @@
                             if (options.oneofs)
                                 object._enableNestedVirtualization = "enableNestedVirtualization";
                         }
+                        if (message.performanceMonitoringUnit != null && message.hasOwnProperty("performanceMonitoringUnit")) {
+                            object.performanceMonitoringUnit = options.enums === String ? $root.google.container.v1beta1.AdvancedMachineFeatures.PerformanceMonitoringUnit[message.performanceMonitoringUnit] === undefined ? message.performanceMonitoringUnit : $root.google.container.v1beta1.AdvancedMachineFeatures.PerformanceMonitoringUnit[message.performanceMonitoringUnit] : message.performanceMonitoringUnit;
+                            if (options.oneofs)
+                                object._performanceMonitoringUnit = "performanceMonitoringUnit";
+                        }
                         return object;
                     };
     
@@ -71200,6 +72243,24 @@
                         }
                         return typeUrlPrefix + "/google.container.v1beta1.AdvancedMachineFeatures";
                     };
+    
+                    /**
+                     * PerformanceMonitoringUnit enum.
+                     * @name google.container.v1beta1.AdvancedMachineFeatures.PerformanceMonitoringUnit
+                     * @enum {number}
+                     * @property {number} PERFORMANCE_MONITORING_UNIT_UNSPECIFIED=0 PERFORMANCE_MONITORING_UNIT_UNSPECIFIED value
+                     * @property {number} ARCHITECTURAL=1 ARCHITECTURAL value
+                     * @property {number} STANDARD=2 STANDARD value
+                     * @property {number} ENHANCED=3 ENHANCED value
+                     */
+                    AdvancedMachineFeatures.PerformanceMonitoringUnit = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "PERFORMANCE_MONITORING_UNIT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ARCHITECTURAL"] = 1;
+                        values[valuesById[2] = "STANDARD"] = 2;
+                        values[valuesById[3] = "ENHANCED"] = 3;
+                        return values;
+                    })();
     
                     return AdvancedMachineFeatures;
                 })();
@@ -73394,6 +74455,7 @@
                      * @memberof google.container.v1beta1
                      * @interface IEphemeralStorageLocalSsdConfig
                      * @property {number|null} [localSsdCount] EphemeralStorageLocalSsdConfig localSsdCount
+                     * @property {number|null} [dataCacheCount] EphemeralStorageLocalSsdConfig dataCacheCount
                      */
     
                     /**
@@ -73418,6 +74480,14 @@
                      * @instance
                      */
                     EphemeralStorageLocalSsdConfig.prototype.localSsdCount = 0;
+    
+                    /**
+                     * EphemeralStorageLocalSsdConfig dataCacheCount.
+                     * @member {number} dataCacheCount
+                     * @memberof google.container.v1beta1.EphemeralStorageLocalSsdConfig
+                     * @instance
+                     */
+                    EphemeralStorageLocalSsdConfig.prototype.dataCacheCount = 0;
     
                     /**
                      * Creates a new EphemeralStorageLocalSsdConfig instance using the specified properties.
@@ -73445,6 +74515,8 @@
                             writer = $Writer.create();
                         if (message.localSsdCount != null && Object.hasOwnProperty.call(message, "localSsdCount"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.localSsdCount);
+                        if (message.dataCacheCount != null && Object.hasOwnProperty.call(message, "dataCacheCount"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dataCacheCount);
                         return writer;
                     };
     
@@ -73481,6 +74553,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.localSsdCount = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.dataCacheCount = reader.int32();
                                     break;
                                 }
                             default:
@@ -73521,6 +74597,9 @@
                         if (message.localSsdCount != null && message.hasOwnProperty("localSsdCount"))
                             if (!$util.isInteger(message.localSsdCount))
                                 return "localSsdCount: integer expected";
+                        if (message.dataCacheCount != null && message.hasOwnProperty("dataCacheCount"))
+                            if (!$util.isInteger(message.dataCacheCount))
+                                return "dataCacheCount: integer expected";
                         return null;
                     };
     
@@ -73538,6 +74617,8 @@
                         var message = new $root.google.container.v1beta1.EphemeralStorageLocalSsdConfig();
                         if (object.localSsdCount != null)
                             message.localSsdCount = object.localSsdCount | 0;
+                        if (object.dataCacheCount != null)
+                            message.dataCacheCount = object.dataCacheCount | 0;
                         return message;
                     };
     
@@ -73554,10 +74635,14 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.localSsdCount = 0;
+                            object.dataCacheCount = 0;
+                        }
                         if (message.localSsdCount != null && message.hasOwnProperty("localSsdCount"))
                             object.localSsdCount = message.localSsdCount;
+                        if (message.dataCacheCount != null && message.hasOwnProperty("dataCacheCount"))
+                            object.dataCacheCount = message.dataCacheCount;
                         return object;
                     };
     
@@ -77951,7 +79036,9 @@
                      * @property {google.container.v1beta1.IGkeBackupAgentConfig|null} [gkeBackupAgentConfig] AddonsConfig gkeBackupAgentConfig
                      * @property {google.container.v1beta1.IGcsFuseCsiDriverConfig|null} [gcsFuseCsiDriverConfig] AddonsConfig gcsFuseCsiDriverConfig
                      * @property {google.container.v1beta1.IStatefulHAConfig|null} [statefulHaConfig] AddonsConfig statefulHaConfig
+                     * @property {google.container.v1beta1.IParallelstoreCsiDriverConfig|null} [parallelstoreCsiDriverConfig] AddonsConfig parallelstoreCsiDriverConfig
                      * @property {google.container.v1beta1.IRayOperatorConfig|null} [rayOperatorConfig] AddonsConfig rayOperatorConfig
+                     * @property {google.container.v1beta1.IHighScaleCheckpointingConfig|null} [highScaleCheckpointingConfig] AddonsConfig highScaleCheckpointingConfig
                      */
     
                     /**
@@ -78082,12 +79169,28 @@
                     AddonsConfig.prototype.statefulHaConfig = null;
     
                     /**
+                     * AddonsConfig parallelstoreCsiDriverConfig.
+                     * @member {google.container.v1beta1.IParallelstoreCsiDriverConfig|null|undefined} parallelstoreCsiDriverConfig
+                     * @memberof google.container.v1beta1.AddonsConfig
+                     * @instance
+                     */
+                    AddonsConfig.prototype.parallelstoreCsiDriverConfig = null;
+    
+                    /**
                      * AddonsConfig rayOperatorConfig.
                      * @member {google.container.v1beta1.IRayOperatorConfig|null|undefined} rayOperatorConfig
                      * @memberof google.container.v1beta1.AddonsConfig
                      * @instance
                      */
                     AddonsConfig.prototype.rayOperatorConfig = null;
+    
+                    /**
+                     * AddonsConfig highScaleCheckpointingConfig.
+                     * @member {google.container.v1beta1.IHighScaleCheckpointingConfig|null|undefined} highScaleCheckpointingConfig
+                     * @memberof google.container.v1beta1.AddonsConfig
+                     * @instance
+                     */
+                    AddonsConfig.prototype.highScaleCheckpointingConfig = null;
     
                     /**
                      * Creates a new AddonsConfig instance using the specified properties.
@@ -78141,8 +79244,12 @@
                             $root.google.container.v1beta1.GcsFuseCsiDriverConfig.encode(message.gcsFuseCsiDriverConfig, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                         if (message.statefulHaConfig != null && Object.hasOwnProperty.call(message, "statefulHaConfig"))
                             $root.google.container.v1beta1.StatefulHAConfig.encode(message.statefulHaConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                        if (message.parallelstoreCsiDriverConfig != null && Object.hasOwnProperty.call(message, "parallelstoreCsiDriverConfig"))
+                            $root.google.container.v1beta1.ParallelstoreCsiDriverConfig.encode(message.parallelstoreCsiDriverConfig, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                         if (message.rayOperatorConfig != null && Object.hasOwnProperty.call(message, "rayOperatorConfig"))
                             $root.google.container.v1beta1.RayOperatorConfig.encode(message.rayOperatorConfig, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                        if (message.highScaleCheckpointingConfig != null && Object.hasOwnProperty.call(message, "highScaleCheckpointingConfig"))
+                            $root.google.container.v1beta1.HighScaleCheckpointingConfig.encode(message.highScaleCheckpointingConfig, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                         return writer;
                     };
     
@@ -78233,8 +79340,16 @@
                                     message.statefulHaConfig = $root.google.container.v1beta1.StatefulHAConfig.decode(reader, reader.uint32());
                                     break;
                                 }
+                            case 19: {
+                                    message.parallelstoreCsiDriverConfig = $root.google.container.v1beta1.ParallelstoreCsiDriverConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
                             case 21: {
                                     message.rayOperatorConfig = $root.google.container.v1beta1.RayOperatorConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 22: {
+                                    message.highScaleCheckpointingConfig = $root.google.container.v1beta1.HighScaleCheckpointingConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -78342,10 +79457,20 @@
                             if (error)
                                 return "statefulHaConfig." + error;
                         }
+                        if (message.parallelstoreCsiDriverConfig != null && message.hasOwnProperty("parallelstoreCsiDriverConfig")) {
+                            var error = $root.google.container.v1beta1.ParallelstoreCsiDriverConfig.verify(message.parallelstoreCsiDriverConfig);
+                            if (error)
+                                return "parallelstoreCsiDriverConfig." + error;
+                        }
                         if (message.rayOperatorConfig != null && message.hasOwnProperty("rayOperatorConfig")) {
                             var error = $root.google.container.v1beta1.RayOperatorConfig.verify(message.rayOperatorConfig);
                             if (error)
                                 return "rayOperatorConfig." + error;
+                        }
+                        if (message.highScaleCheckpointingConfig != null && message.hasOwnProperty("highScaleCheckpointingConfig")) {
+                            var error = $root.google.container.v1beta1.HighScaleCheckpointingConfig.verify(message.highScaleCheckpointingConfig);
+                            if (error)
+                                return "highScaleCheckpointingConfig." + error;
                         }
                         return null;
                     };
@@ -78432,10 +79557,20 @@
                                 throw TypeError(".google.container.v1beta1.AddonsConfig.statefulHaConfig: object expected");
                             message.statefulHaConfig = $root.google.container.v1beta1.StatefulHAConfig.fromObject(object.statefulHaConfig);
                         }
+                        if (object.parallelstoreCsiDriverConfig != null) {
+                            if (typeof object.parallelstoreCsiDriverConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.AddonsConfig.parallelstoreCsiDriverConfig: object expected");
+                            message.parallelstoreCsiDriverConfig = $root.google.container.v1beta1.ParallelstoreCsiDriverConfig.fromObject(object.parallelstoreCsiDriverConfig);
+                        }
                         if (object.rayOperatorConfig != null) {
                             if (typeof object.rayOperatorConfig !== "object")
                                 throw TypeError(".google.container.v1beta1.AddonsConfig.rayOperatorConfig: object expected");
                             message.rayOperatorConfig = $root.google.container.v1beta1.RayOperatorConfig.fromObject(object.rayOperatorConfig);
+                        }
+                        if (object.highScaleCheckpointingConfig != null) {
+                            if (typeof object.highScaleCheckpointingConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.AddonsConfig.highScaleCheckpointingConfig: object expected");
+                            message.highScaleCheckpointingConfig = $root.google.container.v1beta1.HighScaleCheckpointingConfig.fromObject(object.highScaleCheckpointingConfig);
                         }
                         return message;
                     };
@@ -78468,7 +79603,9 @@
                             object.gkeBackupAgentConfig = null;
                             object.gcsFuseCsiDriverConfig = null;
                             object.statefulHaConfig = null;
+                            object.parallelstoreCsiDriverConfig = null;
                             object.rayOperatorConfig = null;
+                            object.highScaleCheckpointingConfig = null;
                         }
                         if (message.httpLoadBalancing != null && message.hasOwnProperty("httpLoadBalancing"))
                             object.httpLoadBalancing = $root.google.container.v1beta1.HttpLoadBalancing.toObject(message.httpLoadBalancing, options);
@@ -78498,8 +79635,12 @@
                             object.gcsFuseCsiDriverConfig = $root.google.container.v1beta1.GcsFuseCsiDriverConfig.toObject(message.gcsFuseCsiDriverConfig, options);
                         if (message.statefulHaConfig != null && message.hasOwnProperty("statefulHaConfig"))
                             object.statefulHaConfig = $root.google.container.v1beta1.StatefulHAConfig.toObject(message.statefulHaConfig, options);
+                        if (message.parallelstoreCsiDriverConfig != null && message.hasOwnProperty("parallelstoreCsiDriverConfig"))
+                            object.parallelstoreCsiDriverConfig = $root.google.container.v1beta1.ParallelstoreCsiDriverConfig.toObject(message.parallelstoreCsiDriverConfig, options);
                         if (message.rayOperatorConfig != null && message.hasOwnProperty("rayOperatorConfig"))
                             object.rayOperatorConfig = $root.google.container.v1beta1.RayOperatorConfig.toObject(message.rayOperatorConfig, options);
+                        if (message.highScaleCheckpointingConfig != null && message.hasOwnProperty("highScaleCheckpointingConfig"))
+                            object.highScaleCheckpointingConfig = $root.google.container.v1beta1.HighScaleCheckpointingConfig.toObject(message.highScaleCheckpointingConfig, options);
                         return object;
                     };
     
@@ -80968,6 +82109,412 @@
                     return GcsFuseCsiDriverConfig;
                 })();
     
+                v1beta1.ParallelstoreCsiDriverConfig = (function() {
+    
+                    /**
+                     * Properties of a ParallelstoreCsiDriverConfig.
+                     * @memberof google.container.v1beta1
+                     * @interface IParallelstoreCsiDriverConfig
+                     * @property {boolean|null} [enabled] ParallelstoreCsiDriverConfig enabled
+                     */
+    
+                    /**
+                     * Constructs a new ParallelstoreCsiDriverConfig.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a ParallelstoreCsiDriverConfig.
+                     * @implements IParallelstoreCsiDriverConfig
+                     * @constructor
+                     * @param {google.container.v1beta1.IParallelstoreCsiDriverConfig=} [properties] Properties to set
+                     */
+                    function ParallelstoreCsiDriverConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ParallelstoreCsiDriverConfig enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1beta1.ParallelstoreCsiDriverConfig
+                     * @instance
+                     */
+                    ParallelstoreCsiDriverConfig.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new ParallelstoreCsiDriverConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.ParallelstoreCsiDriverConfig
+                     * @static
+                     * @param {google.container.v1beta1.IParallelstoreCsiDriverConfig=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.ParallelstoreCsiDriverConfig} ParallelstoreCsiDriverConfig instance
+                     */
+                    ParallelstoreCsiDriverConfig.create = function create(properties) {
+                        return new ParallelstoreCsiDriverConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ParallelstoreCsiDriverConfig message. Does not implicitly {@link google.container.v1beta1.ParallelstoreCsiDriverConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.ParallelstoreCsiDriverConfig
+                     * @static
+                     * @param {google.container.v1beta1.IParallelstoreCsiDriverConfig} message ParallelstoreCsiDriverConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ParallelstoreCsiDriverConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ParallelstoreCsiDriverConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.ParallelstoreCsiDriverConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.ParallelstoreCsiDriverConfig
+                     * @static
+                     * @param {google.container.v1beta1.IParallelstoreCsiDriverConfig} message ParallelstoreCsiDriverConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ParallelstoreCsiDriverConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ParallelstoreCsiDriverConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.ParallelstoreCsiDriverConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.ParallelstoreCsiDriverConfig} ParallelstoreCsiDriverConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ParallelstoreCsiDriverConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.ParallelstoreCsiDriverConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.enabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ParallelstoreCsiDriverConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.ParallelstoreCsiDriverConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.ParallelstoreCsiDriverConfig} ParallelstoreCsiDriverConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ParallelstoreCsiDriverConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ParallelstoreCsiDriverConfig message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.ParallelstoreCsiDriverConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ParallelstoreCsiDriverConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ParallelstoreCsiDriverConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.ParallelstoreCsiDriverConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.ParallelstoreCsiDriverConfig} ParallelstoreCsiDriverConfig
+                     */
+                    ParallelstoreCsiDriverConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.ParallelstoreCsiDriverConfig)
+                            return object;
+                        var message = new $root.google.container.v1beta1.ParallelstoreCsiDriverConfig();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ParallelstoreCsiDriverConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.ParallelstoreCsiDriverConfig
+                     * @static
+                     * @param {google.container.v1beta1.ParallelstoreCsiDriverConfig} message ParallelstoreCsiDriverConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ParallelstoreCsiDriverConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ParallelstoreCsiDriverConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.ParallelstoreCsiDriverConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ParallelstoreCsiDriverConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ParallelstoreCsiDriverConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.ParallelstoreCsiDriverConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ParallelstoreCsiDriverConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.ParallelstoreCsiDriverConfig";
+                    };
+    
+                    return ParallelstoreCsiDriverConfig;
+                })();
+    
+                v1beta1.HighScaleCheckpointingConfig = (function() {
+    
+                    /**
+                     * Properties of a HighScaleCheckpointingConfig.
+                     * @memberof google.container.v1beta1
+                     * @interface IHighScaleCheckpointingConfig
+                     * @property {boolean|null} [enabled] HighScaleCheckpointingConfig enabled
+                     */
+    
+                    /**
+                     * Constructs a new HighScaleCheckpointingConfig.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a HighScaleCheckpointingConfig.
+                     * @implements IHighScaleCheckpointingConfig
+                     * @constructor
+                     * @param {google.container.v1beta1.IHighScaleCheckpointingConfig=} [properties] Properties to set
+                     */
+                    function HighScaleCheckpointingConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * HighScaleCheckpointingConfig enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1beta1.HighScaleCheckpointingConfig
+                     * @instance
+                     */
+                    HighScaleCheckpointingConfig.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new HighScaleCheckpointingConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.HighScaleCheckpointingConfig
+                     * @static
+                     * @param {google.container.v1beta1.IHighScaleCheckpointingConfig=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.HighScaleCheckpointingConfig} HighScaleCheckpointingConfig instance
+                     */
+                    HighScaleCheckpointingConfig.create = function create(properties) {
+                        return new HighScaleCheckpointingConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified HighScaleCheckpointingConfig message. Does not implicitly {@link google.container.v1beta1.HighScaleCheckpointingConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.HighScaleCheckpointingConfig
+                     * @static
+                     * @param {google.container.v1beta1.IHighScaleCheckpointingConfig} message HighScaleCheckpointingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    HighScaleCheckpointingConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified HighScaleCheckpointingConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.HighScaleCheckpointingConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.HighScaleCheckpointingConfig
+                     * @static
+                     * @param {google.container.v1beta1.IHighScaleCheckpointingConfig} message HighScaleCheckpointingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    HighScaleCheckpointingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a HighScaleCheckpointingConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.HighScaleCheckpointingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.HighScaleCheckpointingConfig} HighScaleCheckpointingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    HighScaleCheckpointingConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.HighScaleCheckpointingConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.enabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a HighScaleCheckpointingConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.HighScaleCheckpointingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.HighScaleCheckpointingConfig} HighScaleCheckpointingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    HighScaleCheckpointingConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a HighScaleCheckpointingConfig message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.HighScaleCheckpointingConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    HighScaleCheckpointingConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a HighScaleCheckpointingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.HighScaleCheckpointingConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.HighScaleCheckpointingConfig} HighScaleCheckpointingConfig
+                     */
+                    HighScaleCheckpointingConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.HighScaleCheckpointingConfig)
+                            return object;
+                        var message = new $root.google.container.v1beta1.HighScaleCheckpointingConfig();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a HighScaleCheckpointingConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.HighScaleCheckpointingConfig
+                     * @static
+                     * @param {google.container.v1beta1.HighScaleCheckpointingConfig} message HighScaleCheckpointingConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    HighScaleCheckpointingConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this HighScaleCheckpointingConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.HighScaleCheckpointingConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    HighScaleCheckpointingConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for HighScaleCheckpointingConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.HighScaleCheckpointingConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    HighScaleCheckpointingConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.HighScaleCheckpointingConfig";
+                    };
+    
+                    return HighScaleCheckpointingConfig;
+                })();
+    
                 v1beta1.RayOperatorConfig = (function() {
     
                     /**
@@ -82337,6 +83884,7 @@
                      * @property {boolean|null} [enabled] MasterAuthorizedNetworksConfig enabled
                      * @property {Array.<google.container.v1beta1.MasterAuthorizedNetworksConfig.ICidrBlock>|null} [cidrBlocks] MasterAuthorizedNetworksConfig cidrBlocks
                      * @property {boolean|null} [gcpPublicCidrsAccessEnabled] MasterAuthorizedNetworksConfig gcpPublicCidrsAccessEnabled
+                     * @property {boolean|null} [privateEndpointEnforcementEnabled] MasterAuthorizedNetworksConfig privateEndpointEnforcementEnabled
                      */
     
                     /**
@@ -82379,6 +83927,14 @@
                      */
                     MasterAuthorizedNetworksConfig.prototype.gcpPublicCidrsAccessEnabled = null;
     
+                    /**
+                     * MasterAuthorizedNetworksConfig privateEndpointEnforcementEnabled.
+                     * @member {boolean|null|undefined} privateEndpointEnforcementEnabled
+                     * @memberof google.container.v1beta1.MasterAuthorizedNetworksConfig
+                     * @instance
+                     */
+                    MasterAuthorizedNetworksConfig.prototype.privateEndpointEnforcementEnabled = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -82390,6 +83946,17 @@
                      */
                     Object.defineProperty(MasterAuthorizedNetworksConfig.prototype, "_gcpPublicCidrsAccessEnabled", {
                         get: $util.oneOfGetter($oneOfFields = ["gcpPublicCidrsAccessEnabled"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * MasterAuthorizedNetworksConfig _privateEndpointEnforcementEnabled.
+                     * @member {"privateEndpointEnforcementEnabled"|undefined} _privateEndpointEnforcementEnabled
+                     * @memberof google.container.v1beta1.MasterAuthorizedNetworksConfig
+                     * @instance
+                     */
+                    Object.defineProperty(MasterAuthorizedNetworksConfig.prototype, "_privateEndpointEnforcementEnabled", {
+                        get: $util.oneOfGetter($oneOfFields = ["privateEndpointEnforcementEnabled"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -82424,6 +83991,8 @@
                                 $root.google.container.v1beta1.MasterAuthorizedNetworksConfig.CidrBlock.encode(message.cidrBlocks[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.gcpPublicCidrsAccessEnabled != null && Object.hasOwnProperty.call(message, "gcpPublicCidrsAccessEnabled"))
                             writer.uint32(/* id 3, wireType 0 =*/24).bool(message.gcpPublicCidrsAccessEnabled);
+                        if (message.privateEndpointEnforcementEnabled != null && Object.hasOwnProperty.call(message, "privateEndpointEnforcementEnabled"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.privateEndpointEnforcementEnabled);
                         return writer;
                     };
     
@@ -82470,6 +84039,10 @@
                                 }
                             case 3: {
                                     message.gcpPublicCidrsAccessEnabled = reader.bool();
+                                    break;
+                                }
+                            case 5: {
+                                    message.privateEndpointEnforcementEnabled = reader.bool();
                                     break;
                                 }
                             default:
@@ -82525,6 +84098,11 @@
                             if (typeof message.gcpPublicCidrsAccessEnabled !== "boolean")
                                 return "gcpPublicCidrsAccessEnabled: boolean expected";
                         }
+                        if (message.privateEndpointEnforcementEnabled != null && message.hasOwnProperty("privateEndpointEnforcementEnabled")) {
+                            properties._privateEndpointEnforcementEnabled = 1;
+                            if (typeof message.privateEndpointEnforcementEnabled !== "boolean")
+                                return "privateEndpointEnforcementEnabled: boolean expected";
+                        }
                         return null;
                     };
     
@@ -82554,6 +84132,8 @@
                         }
                         if (object.gcpPublicCidrsAccessEnabled != null)
                             message.gcpPublicCidrsAccessEnabled = Boolean(object.gcpPublicCidrsAccessEnabled);
+                        if (object.privateEndpointEnforcementEnabled != null)
+                            message.privateEndpointEnforcementEnabled = Boolean(object.privateEndpointEnforcementEnabled);
                         return message;
                     };
     
@@ -82585,6 +84165,11 @@
                             object.gcpPublicCidrsAccessEnabled = message.gcpPublicCidrsAccessEnabled;
                             if (options.oneofs)
                                 object._gcpPublicCidrsAccessEnabled = "gcpPublicCidrsAccessEnabled";
+                        }
+                        if (message.privateEndpointEnforcementEnabled != null && message.hasOwnProperty("privateEndpointEnforcementEnabled")) {
+                            object.privateEndpointEnforcementEnabled = message.privateEndpointEnforcementEnabled;
+                            if (options.oneofs)
+                                object._privateEndpointEnforcementEnabled = "privateEndpointEnforcementEnabled";
                         }
                         return object;
                     };
@@ -85512,6 +87097,7 @@
                      * @property {Array.<google.container.v1beta1.INodePool>|null} [nodePools] Cluster nodePools
                      * @property {Array.<string>|null} [locations] Cluster locations
                      * @property {boolean|null} [enableKubernetesAlpha] Cluster enableKubernetesAlpha
+                     * @property {Array.<string>|null} [alphaClusterFeatureGates] Cluster alphaClusterFeatureGates
                      * @property {google.container.v1beta1.IK8sBetaAPIConfig|null} [enableK8sBetaApis] Cluster enableK8sBetaApis
                      * @property {Object.<string,string>|null} [resourceLabels] Cluster resourceLabels
                      * @property {string|null} [labelFingerprint] Cluster labelFingerprint
@@ -85570,14 +87156,19 @@
                      * @property {google.container.v1beta1.IMonitoringConfig|null} [monitoringConfig] Cluster monitoringConfig
                      * @property {google.container.v1beta1.INodePoolAutoConfig|null} [nodePoolAutoConfig] Cluster nodePoolAutoConfig
                      * @property {google.container.v1beta1.IProtectConfig|null} [protectConfig] Cluster protectConfig
+                     * @property {google.container.v1beta1.IPodAutoscaling|null} [podAutoscaling] Cluster podAutoscaling
                      * @property {string|null} [etag] Cluster etag
                      * @property {google.container.v1beta1.IFleet|null} [fleet] Cluster fleet
                      * @property {google.container.v1beta1.ISecurityPostureConfig|null} [securityPostureConfig] Cluster securityPostureConfig
+                     * @property {google.container.v1beta1.IControlPlaneEndpointsConfig|null} [controlPlaneEndpointsConfig] Cluster controlPlaneEndpointsConfig
                      * @property {google.container.v1beta1.IEnterpriseConfig|null} [enterpriseConfig] Cluster enterpriseConfig
                      * @property {google.container.v1beta1.ISecretManagerConfig|null} [secretManagerConfig] Cluster secretManagerConfig
                      * @property {google.container.v1beta1.ICompliancePostureConfig|null} [compliancePostureConfig] Cluster compliancePostureConfig
                      * @property {boolean|null} [satisfiesPzs] Cluster satisfiesPzs
                      * @property {boolean|null} [satisfiesPzi] Cluster satisfiesPzi
+                     * @property {google.container.v1beta1.IUserManagedKeysConfig|null} [userManagedKeysConfig] Cluster userManagedKeysConfig
+                     * @property {google.container.v1beta1.IRBACBindingConfig|null} [rbacBindingConfig] Cluster rbacBindingConfig
+                     * @property {google.container.v1beta1.IAnonymousAuthenticationConfig|null} [anonymousAuthenticationConfig] Cluster anonymousAuthenticationConfig
                      */
     
                     /**
@@ -85591,6 +87182,7 @@
                     function Cluster(properties) {
                         this.nodePools = [];
                         this.locations = [];
+                        this.alphaClusterFeatureGates = [];
                         this.resourceLabels = {};
                         this.instanceGroupUrls = [];
                         this.conditions = [];
@@ -85711,6 +87303,14 @@
                      * @instance
                      */
                     Cluster.prototype.enableKubernetesAlpha = false;
+    
+                    /**
+                     * Cluster alphaClusterFeatureGates.
+                     * @member {Array.<string>} alphaClusterFeatureGates
+                     * @memberof google.container.v1beta1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.alphaClusterFeatureGates = $util.emptyArray;
     
                     /**
                      * Cluster enableK8sBetaApis.
@@ -86177,6 +87777,14 @@
                     Cluster.prototype.protectConfig = null;
     
                     /**
+                     * Cluster podAutoscaling.
+                     * @member {google.container.v1beta1.IPodAutoscaling|null|undefined} podAutoscaling
+                     * @memberof google.container.v1beta1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.podAutoscaling = null;
+    
+                    /**
                      * Cluster etag.
                      * @member {string} etag
                      * @memberof google.container.v1beta1.Cluster
@@ -86199,6 +87807,14 @@
                      * @instance
                      */
                     Cluster.prototype.securityPostureConfig = null;
+    
+                    /**
+                     * Cluster controlPlaneEndpointsConfig.
+                     * @member {google.container.v1beta1.IControlPlaneEndpointsConfig|null|undefined} controlPlaneEndpointsConfig
+                     * @memberof google.container.v1beta1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.controlPlaneEndpointsConfig = null;
     
                     /**
                      * Cluster enterpriseConfig.
@@ -86239,6 +87855,30 @@
                      * @instance
                      */
                     Cluster.prototype.satisfiesPzi = null;
+    
+                    /**
+                     * Cluster userManagedKeysConfig.
+                     * @member {google.container.v1beta1.IUserManagedKeysConfig|null|undefined} userManagedKeysConfig
+                     * @memberof google.container.v1beta1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.userManagedKeysConfig = null;
+    
+                    /**
+                     * Cluster rbacBindingConfig.
+                     * @member {google.container.v1beta1.IRBACBindingConfig|null|undefined} rbacBindingConfig
+                     * @memberof google.container.v1beta1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.rbacBindingConfig = null;
+    
+                    /**
+                     * Cluster anonymousAuthenticationConfig.
+                     * @member {google.container.v1beta1.IAnonymousAuthenticationConfig|null|undefined} anonymousAuthenticationConfig
+                     * @memberof google.container.v1beta1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.anonymousAuthenticationConfig = null;
     
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
@@ -86284,6 +87924,28 @@
                      */
                     Object.defineProperty(Cluster.prototype, "_satisfiesPzi", {
                         get: $util.oneOfGetter($oneOfFields = ["satisfiesPzi"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Cluster _userManagedKeysConfig.
+                     * @member {"userManagedKeysConfig"|undefined} _userManagedKeysConfig
+                     * @memberof google.container.v1beta1.Cluster
+                     * @instance
+                     */
+                    Object.defineProperty(Cluster.prototype, "_userManagedKeysConfig", {
+                        get: $util.oneOfGetter($oneOfFields = ["userManagedKeysConfig"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Cluster _rbacBindingConfig.
+                     * @member {"rbacBindingConfig"|undefined} _rbacBindingConfig
+                     * @memberof google.container.v1beta1.Cluster
+                     * @instance
+                     */
+                    Object.defineProperty(Cluster.prototype, "_rbacBindingConfig", {
+                        get: $util.oneOfGetter($oneOfFields = ["rbacBindingConfig"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -86458,6 +88120,8 @@
                             $root.google.container.v1beta1.NodePoolAutoConfig.encode(message.nodePoolAutoConfig, writer.uint32(/* id 136, wireType 2 =*/1090).fork()).ldelim();
                         if (message.protectConfig != null && Object.hasOwnProperty.call(message, "protectConfig"))
                             $root.google.container.v1beta1.ProtectConfig.encode(message.protectConfig, writer.uint32(/* id 137, wireType 2 =*/1098).fork()).ldelim();
+                        if (message.podAutoscaling != null && Object.hasOwnProperty.call(message, "podAutoscaling"))
+                            $root.google.container.v1beta1.PodAutoscaling.encode(message.podAutoscaling, writer.uint32(/* id 138, wireType 2 =*/1106).fork()).ldelim();
                         if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                             writer.uint32(/* id 139, wireType 2 =*/1114).string(message.etag);
                         if (message.fleet != null && Object.hasOwnProperty.call(message, "fleet"))
@@ -86466,6 +88130,8 @@
                             $root.google.container.v1beta1.K8sBetaAPIConfig.encode(message.enableK8sBetaApis, writer.uint32(/* id 143, wireType 2 =*/1146).fork()).ldelim();
                         if (message.securityPostureConfig != null && Object.hasOwnProperty.call(message, "securityPostureConfig"))
                             $root.google.container.v1beta1.SecurityPostureConfig.encode(message.securityPostureConfig, writer.uint32(/* id 145, wireType 2 =*/1162).fork()).ldelim();
+                        if (message.controlPlaneEndpointsConfig != null && Object.hasOwnProperty.call(message, "controlPlaneEndpointsConfig"))
+                            $root.google.container.v1beta1.ControlPlaneEndpointsConfig.encode(message.controlPlaneEndpointsConfig, writer.uint32(/* id 146, wireType 2 =*/1170).fork()).ldelim();
                         if (message.enterpriseConfig != null && Object.hasOwnProperty.call(message, "enterpriseConfig"))
                             $root.google.container.v1beta1.EnterpriseConfig.encode(message.enterpriseConfig, writer.uint32(/* id 149, wireType 2 =*/1194).fork()).ldelim();
                         if (message.secretManagerConfig != null && Object.hasOwnProperty.call(message, "secretManagerConfig"))
@@ -86476,6 +88142,15 @@
                             writer.uint32(/* id 152, wireType 0 =*/1216).bool(message.satisfiesPzs);
                         if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
                             writer.uint32(/* id 153, wireType 0 =*/1224).bool(message.satisfiesPzi);
+                        if (message.userManagedKeysConfig != null && Object.hasOwnProperty.call(message, "userManagedKeysConfig"))
+                            $root.google.container.v1beta1.UserManagedKeysConfig.encode(message.userManagedKeysConfig, writer.uint32(/* id 154, wireType 2 =*/1234).fork()).ldelim();
+                        if (message.rbacBindingConfig != null && Object.hasOwnProperty.call(message, "rbacBindingConfig"))
+                            $root.google.container.v1beta1.RBACBindingConfig.encode(message.rbacBindingConfig, writer.uint32(/* id 156, wireType 2 =*/1250).fork()).ldelim();
+                        if (message.alphaClusterFeatureGates != null && message.alphaClusterFeatureGates.length)
+                            for (var i = 0; i < message.alphaClusterFeatureGates.length; ++i)
+                                writer.uint32(/* id 160, wireType 2 =*/1282).string(message.alphaClusterFeatureGates[i]);
+                        if (message.anonymousAuthenticationConfig != null && Object.hasOwnProperty.call(message, "anonymousAuthenticationConfig"))
+                            $root.google.container.v1beta1.AnonymousAuthenticationConfig.encode(message.anonymousAuthenticationConfig, writer.uint32(/* id 164, wireType 2 =*/1314).fork()).ldelim();
                         return writer;
                     };
     
@@ -86568,6 +88243,12 @@
                                 }
                             case 14: {
                                     message.enableKubernetesAlpha = reader.bool();
+                                    break;
+                                }
+                            case 160: {
+                                    if (!(message.alphaClusterFeatureGates && message.alphaClusterFeatureGates.length))
+                                        message.alphaClusterFeatureGates = [];
+                                    message.alphaClusterFeatureGates.push(reader.string());
                                     break;
                                 }
                             case 143: {
@@ -86825,6 +88506,10 @@
                                     message.protectConfig = $root.google.container.v1beta1.ProtectConfig.decode(reader, reader.uint32());
                                     break;
                                 }
+                            case 138: {
+                                    message.podAutoscaling = $root.google.container.v1beta1.PodAutoscaling.decode(reader, reader.uint32());
+                                    break;
+                                }
                             case 139: {
                                     message.etag = reader.string();
                                     break;
@@ -86835,6 +88520,10 @@
                                 }
                             case 145: {
                                     message.securityPostureConfig = $root.google.container.v1beta1.SecurityPostureConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 146: {
+                                    message.controlPlaneEndpointsConfig = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 149: {
@@ -86855,6 +88544,18 @@
                                 }
                             case 153: {
                                     message.satisfiesPzi = reader.bool();
+                                    break;
+                                }
+                            case 154: {
+                                    message.userManagedKeysConfig = $root.google.container.v1beta1.UserManagedKeysConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 156: {
+                                    message.rbacBindingConfig = $root.google.container.v1beta1.RBACBindingConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 164: {
+                                    message.anonymousAuthenticationConfig = $root.google.container.v1beta1.AnonymousAuthenticationConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -86951,6 +88652,13 @@
                         if (message.enableKubernetesAlpha != null && message.hasOwnProperty("enableKubernetesAlpha"))
                             if (typeof message.enableKubernetesAlpha !== "boolean")
                                 return "enableKubernetesAlpha: boolean expected";
+                        if (message.alphaClusterFeatureGates != null && message.hasOwnProperty("alphaClusterFeatureGates")) {
+                            if (!Array.isArray(message.alphaClusterFeatureGates))
+                                return "alphaClusterFeatureGates: array expected";
+                            for (var i = 0; i < message.alphaClusterFeatureGates.length; ++i)
+                                if (!$util.isString(message.alphaClusterFeatureGates[i]))
+                                    return "alphaClusterFeatureGates: string[] expected";
+                        }
                         if (message.enableK8sBetaApis != null && message.hasOwnProperty("enableK8sBetaApis")) {
                             var error = $root.google.container.v1beta1.K8sBetaAPIConfig.verify(message.enableK8sBetaApis);
                             if (error)
@@ -87226,6 +88934,11 @@
                                     return "protectConfig." + error;
                             }
                         }
+                        if (message.podAutoscaling != null && message.hasOwnProperty("podAutoscaling")) {
+                            var error = $root.google.container.v1beta1.PodAutoscaling.verify(message.podAutoscaling);
+                            if (error)
+                                return "podAutoscaling." + error;
+                        }
                         if (message.etag != null && message.hasOwnProperty("etag"))
                             if (!$util.isString(message.etag))
                                 return "etag: string expected";
@@ -87238,6 +88951,11 @@
                             var error = $root.google.container.v1beta1.SecurityPostureConfig.verify(message.securityPostureConfig);
                             if (error)
                                 return "securityPostureConfig." + error;
+                        }
+                        if (message.controlPlaneEndpointsConfig != null && message.hasOwnProperty("controlPlaneEndpointsConfig")) {
+                            var error = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.verify(message.controlPlaneEndpointsConfig);
+                            if (error)
+                                return "controlPlaneEndpointsConfig." + error;
                         }
                         if (message.enterpriseConfig != null && message.hasOwnProperty("enterpriseConfig")) {
                             var error = $root.google.container.v1beta1.EnterpriseConfig.verify(message.enterpriseConfig);
@@ -87263,6 +88981,27 @@
                             properties._satisfiesPzi = 1;
                             if (typeof message.satisfiesPzi !== "boolean")
                                 return "satisfiesPzi: boolean expected";
+                        }
+                        if (message.userManagedKeysConfig != null && message.hasOwnProperty("userManagedKeysConfig")) {
+                            properties._userManagedKeysConfig = 1;
+                            {
+                                var error = $root.google.container.v1beta1.UserManagedKeysConfig.verify(message.userManagedKeysConfig);
+                                if (error)
+                                    return "userManagedKeysConfig." + error;
+                            }
+                        }
+                        if (message.rbacBindingConfig != null && message.hasOwnProperty("rbacBindingConfig")) {
+                            properties._rbacBindingConfig = 1;
+                            {
+                                var error = $root.google.container.v1beta1.RBACBindingConfig.verify(message.rbacBindingConfig);
+                                if (error)
+                                    return "rbacBindingConfig." + error;
+                            }
+                        }
+                        if (message.anonymousAuthenticationConfig != null && message.hasOwnProperty("anonymousAuthenticationConfig")) {
+                            var error = $root.google.container.v1beta1.AnonymousAuthenticationConfig.verify(message.anonymousAuthenticationConfig);
+                            if (error)
+                                return "anonymousAuthenticationConfig." + error;
                         }
                         return null;
                     };
@@ -87329,6 +89068,13 @@
                         }
                         if (object.enableKubernetesAlpha != null)
                             message.enableKubernetesAlpha = Boolean(object.enableKubernetesAlpha);
+                        if (object.alphaClusterFeatureGates) {
+                            if (!Array.isArray(object.alphaClusterFeatureGates))
+                                throw TypeError(".google.container.v1beta1.Cluster.alphaClusterFeatureGates: array expected");
+                            message.alphaClusterFeatureGates = [];
+                            for (var i = 0; i < object.alphaClusterFeatureGates.length; ++i)
+                                message.alphaClusterFeatureGates[i] = String(object.alphaClusterFeatureGates[i]);
+                        }
                         if (object.enableK8sBetaApis != null) {
                             if (typeof object.enableK8sBetaApis !== "object")
                                 throw TypeError(".google.container.v1beta1.Cluster.enableK8sBetaApis: object expected");
@@ -87602,6 +89348,11 @@
                                 throw TypeError(".google.container.v1beta1.Cluster.protectConfig: object expected");
                             message.protectConfig = $root.google.container.v1beta1.ProtectConfig.fromObject(object.protectConfig);
                         }
+                        if (object.podAutoscaling != null) {
+                            if (typeof object.podAutoscaling !== "object")
+                                throw TypeError(".google.container.v1beta1.Cluster.podAutoscaling: object expected");
+                            message.podAutoscaling = $root.google.container.v1beta1.PodAutoscaling.fromObject(object.podAutoscaling);
+                        }
                         if (object.etag != null)
                             message.etag = String(object.etag);
                         if (object.fleet != null) {
@@ -87613,6 +89364,11 @@
                             if (typeof object.securityPostureConfig !== "object")
                                 throw TypeError(".google.container.v1beta1.Cluster.securityPostureConfig: object expected");
                             message.securityPostureConfig = $root.google.container.v1beta1.SecurityPostureConfig.fromObject(object.securityPostureConfig);
+                        }
+                        if (object.controlPlaneEndpointsConfig != null) {
+                            if (typeof object.controlPlaneEndpointsConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.Cluster.controlPlaneEndpointsConfig: object expected");
+                            message.controlPlaneEndpointsConfig = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.fromObject(object.controlPlaneEndpointsConfig);
                         }
                         if (object.enterpriseConfig != null) {
                             if (typeof object.enterpriseConfig !== "object")
@@ -87633,6 +89389,21 @@
                             message.satisfiesPzs = Boolean(object.satisfiesPzs);
                         if (object.satisfiesPzi != null)
                             message.satisfiesPzi = Boolean(object.satisfiesPzi);
+                        if (object.userManagedKeysConfig != null) {
+                            if (typeof object.userManagedKeysConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.Cluster.userManagedKeysConfig: object expected");
+                            message.userManagedKeysConfig = $root.google.container.v1beta1.UserManagedKeysConfig.fromObject(object.userManagedKeysConfig);
+                        }
+                        if (object.rbacBindingConfig != null) {
+                            if (typeof object.rbacBindingConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.Cluster.rbacBindingConfig: object expected");
+                            message.rbacBindingConfig = $root.google.container.v1beta1.RBACBindingConfig.fromObject(object.rbacBindingConfig);
+                        }
+                        if (object.anonymousAuthenticationConfig != null) {
+                            if (typeof object.anonymousAuthenticationConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.Cluster.anonymousAuthenticationConfig: object expected");
+                            message.anonymousAuthenticationConfig = $root.google.container.v1beta1.AnonymousAuthenticationConfig.fromObject(object.anonymousAuthenticationConfig);
+                        }
                         return message;
                     };
     
@@ -87654,6 +89425,7 @@
                             object.locations = [];
                             object.instanceGroupUrls = [];
                             object.conditions = [];
+                            object.alphaClusterFeatureGates = [];
                         }
                         if (options.objects || options.defaults)
                             object.resourceLabels = {};
@@ -87722,13 +89494,16 @@
                             object.loggingConfig = null;
                             object.monitoringConfig = null;
                             object.nodePoolAutoConfig = null;
+                            object.podAutoscaling = null;
                             object.etag = "";
                             object.fleet = null;
                             object.enableK8sBetaApis = null;
                             object.securityPostureConfig = null;
+                            object.controlPlaneEndpointsConfig = null;
                             object.enterpriseConfig = null;
                             object.secretManagerConfig = null;
                             object.compliancePostureConfig = null;
+                            object.anonymousAuthenticationConfig = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -87894,6 +89669,8 @@
                             if (options.oneofs)
                                 object._protectConfig = "protectConfig";
                         }
+                        if (message.podAutoscaling != null && message.hasOwnProperty("podAutoscaling"))
+                            object.podAutoscaling = $root.google.container.v1beta1.PodAutoscaling.toObject(message.podAutoscaling, options);
                         if (message.etag != null && message.hasOwnProperty("etag"))
                             object.etag = message.etag;
                         if (message.fleet != null && message.hasOwnProperty("fleet"))
@@ -87902,6 +89679,8 @@
                             object.enableK8sBetaApis = $root.google.container.v1beta1.K8sBetaAPIConfig.toObject(message.enableK8sBetaApis, options);
                         if (message.securityPostureConfig != null && message.hasOwnProperty("securityPostureConfig"))
                             object.securityPostureConfig = $root.google.container.v1beta1.SecurityPostureConfig.toObject(message.securityPostureConfig, options);
+                        if (message.controlPlaneEndpointsConfig != null && message.hasOwnProperty("controlPlaneEndpointsConfig"))
+                            object.controlPlaneEndpointsConfig = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.toObject(message.controlPlaneEndpointsConfig, options);
                         if (message.enterpriseConfig != null && message.hasOwnProperty("enterpriseConfig"))
                             object.enterpriseConfig = $root.google.container.v1beta1.EnterpriseConfig.toObject(message.enterpriseConfig, options);
                         if (message.secretManagerConfig != null && message.hasOwnProperty("secretManagerConfig"))
@@ -87918,6 +89697,23 @@
                             if (options.oneofs)
                                 object._satisfiesPzi = "satisfiesPzi";
                         }
+                        if (message.userManagedKeysConfig != null && message.hasOwnProperty("userManagedKeysConfig")) {
+                            object.userManagedKeysConfig = $root.google.container.v1beta1.UserManagedKeysConfig.toObject(message.userManagedKeysConfig, options);
+                            if (options.oneofs)
+                                object._userManagedKeysConfig = "userManagedKeysConfig";
+                        }
+                        if (message.rbacBindingConfig != null && message.hasOwnProperty("rbacBindingConfig")) {
+                            object.rbacBindingConfig = $root.google.container.v1beta1.RBACBindingConfig.toObject(message.rbacBindingConfig, options);
+                            if (options.oneofs)
+                                object._rbacBindingConfig = "rbacBindingConfig";
+                        }
+                        if (message.alphaClusterFeatureGates && message.alphaClusterFeatureGates.length) {
+                            object.alphaClusterFeatureGates = [];
+                            for (var j = 0; j < message.alphaClusterFeatureGates.length; ++j)
+                                object.alphaClusterFeatureGates[j] = message.alphaClusterFeatureGates[j];
+                        }
+                        if (message.anonymousAuthenticationConfig != null && message.hasOwnProperty("anonymousAuthenticationConfig"))
+                            object.anonymousAuthenticationConfig = $root.google.container.v1beta1.AnonymousAuthenticationConfig.toObject(message.anonymousAuthenticationConfig, options);
                         return object;
                     };
     
@@ -87972,6 +89768,839 @@
                     })();
     
                     return Cluster;
+                })();
+    
+                v1beta1.RBACBindingConfig = (function() {
+    
+                    /**
+                     * Properties of a RBACBindingConfig.
+                     * @memberof google.container.v1beta1
+                     * @interface IRBACBindingConfig
+                     * @property {boolean|null} [enableInsecureBindingSystemUnauthenticated] RBACBindingConfig enableInsecureBindingSystemUnauthenticated
+                     * @property {boolean|null} [enableInsecureBindingSystemAuthenticated] RBACBindingConfig enableInsecureBindingSystemAuthenticated
+                     */
+    
+                    /**
+                     * Constructs a new RBACBindingConfig.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a RBACBindingConfig.
+                     * @implements IRBACBindingConfig
+                     * @constructor
+                     * @param {google.container.v1beta1.IRBACBindingConfig=} [properties] Properties to set
+                     */
+                    function RBACBindingConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * RBACBindingConfig enableInsecureBindingSystemUnauthenticated.
+                     * @member {boolean|null|undefined} enableInsecureBindingSystemUnauthenticated
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @instance
+                     */
+                    RBACBindingConfig.prototype.enableInsecureBindingSystemUnauthenticated = null;
+    
+                    /**
+                     * RBACBindingConfig enableInsecureBindingSystemAuthenticated.
+                     * @member {boolean|null|undefined} enableInsecureBindingSystemAuthenticated
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @instance
+                     */
+                    RBACBindingConfig.prototype.enableInsecureBindingSystemAuthenticated = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * RBACBindingConfig _enableInsecureBindingSystemUnauthenticated.
+                     * @member {"enableInsecureBindingSystemUnauthenticated"|undefined} _enableInsecureBindingSystemUnauthenticated
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @instance
+                     */
+                    Object.defineProperty(RBACBindingConfig.prototype, "_enableInsecureBindingSystemUnauthenticated", {
+                        get: $util.oneOfGetter($oneOfFields = ["enableInsecureBindingSystemUnauthenticated"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * RBACBindingConfig _enableInsecureBindingSystemAuthenticated.
+                     * @member {"enableInsecureBindingSystemAuthenticated"|undefined} _enableInsecureBindingSystemAuthenticated
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @instance
+                     */
+                    Object.defineProperty(RBACBindingConfig.prototype, "_enableInsecureBindingSystemAuthenticated", {
+                        get: $util.oneOfGetter($oneOfFields = ["enableInsecureBindingSystemAuthenticated"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new RBACBindingConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @static
+                     * @param {google.container.v1beta1.IRBACBindingConfig=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.RBACBindingConfig} RBACBindingConfig instance
+                     */
+                    RBACBindingConfig.create = function create(properties) {
+                        return new RBACBindingConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified RBACBindingConfig message. Does not implicitly {@link google.container.v1beta1.RBACBindingConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @static
+                     * @param {google.container.v1beta1.IRBACBindingConfig} message RBACBindingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RBACBindingConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enableInsecureBindingSystemUnauthenticated != null && Object.hasOwnProperty.call(message, "enableInsecureBindingSystemUnauthenticated"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableInsecureBindingSystemUnauthenticated);
+                        if (message.enableInsecureBindingSystemAuthenticated != null && Object.hasOwnProperty.call(message, "enableInsecureBindingSystemAuthenticated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableInsecureBindingSystemAuthenticated);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified RBACBindingConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.RBACBindingConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @static
+                     * @param {google.container.v1beta1.IRBACBindingConfig} message RBACBindingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RBACBindingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a RBACBindingConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.RBACBindingConfig} RBACBindingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RBACBindingConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.RBACBindingConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.enableInsecureBindingSystemUnauthenticated = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.enableInsecureBindingSystemAuthenticated = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a RBACBindingConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.RBACBindingConfig} RBACBindingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RBACBindingConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a RBACBindingConfig message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    RBACBindingConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.enableInsecureBindingSystemUnauthenticated != null && message.hasOwnProperty("enableInsecureBindingSystemUnauthenticated")) {
+                            properties._enableInsecureBindingSystemUnauthenticated = 1;
+                            if (typeof message.enableInsecureBindingSystemUnauthenticated !== "boolean")
+                                return "enableInsecureBindingSystemUnauthenticated: boolean expected";
+                        }
+                        if (message.enableInsecureBindingSystemAuthenticated != null && message.hasOwnProperty("enableInsecureBindingSystemAuthenticated")) {
+                            properties._enableInsecureBindingSystemAuthenticated = 1;
+                            if (typeof message.enableInsecureBindingSystemAuthenticated !== "boolean")
+                                return "enableInsecureBindingSystemAuthenticated: boolean expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a RBACBindingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.RBACBindingConfig} RBACBindingConfig
+                     */
+                    RBACBindingConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.RBACBindingConfig)
+                            return object;
+                        var message = new $root.google.container.v1beta1.RBACBindingConfig();
+                        if (object.enableInsecureBindingSystemUnauthenticated != null)
+                            message.enableInsecureBindingSystemUnauthenticated = Boolean(object.enableInsecureBindingSystemUnauthenticated);
+                        if (object.enableInsecureBindingSystemAuthenticated != null)
+                            message.enableInsecureBindingSystemAuthenticated = Boolean(object.enableInsecureBindingSystemAuthenticated);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a RBACBindingConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @static
+                     * @param {google.container.v1beta1.RBACBindingConfig} message RBACBindingConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    RBACBindingConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.enableInsecureBindingSystemUnauthenticated != null && message.hasOwnProperty("enableInsecureBindingSystemUnauthenticated")) {
+                            object.enableInsecureBindingSystemUnauthenticated = message.enableInsecureBindingSystemUnauthenticated;
+                            if (options.oneofs)
+                                object._enableInsecureBindingSystemUnauthenticated = "enableInsecureBindingSystemUnauthenticated";
+                        }
+                        if (message.enableInsecureBindingSystemAuthenticated != null && message.hasOwnProperty("enableInsecureBindingSystemAuthenticated")) {
+                            object.enableInsecureBindingSystemAuthenticated = message.enableInsecureBindingSystemAuthenticated;
+                            if (options.oneofs)
+                                object._enableInsecureBindingSystemAuthenticated = "enableInsecureBindingSystemAuthenticated";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this RBACBindingConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    RBACBindingConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for RBACBindingConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.RBACBindingConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    RBACBindingConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.RBACBindingConfig";
+                    };
+    
+                    return RBACBindingConfig;
+                })();
+    
+                v1beta1.UserManagedKeysConfig = (function() {
+    
+                    /**
+                     * Properties of a UserManagedKeysConfig.
+                     * @memberof google.container.v1beta1
+                     * @interface IUserManagedKeysConfig
+                     * @property {string|null} [clusterCa] UserManagedKeysConfig clusterCa
+                     * @property {string|null} [etcdApiCa] UserManagedKeysConfig etcdApiCa
+                     * @property {string|null} [etcdPeerCa] UserManagedKeysConfig etcdPeerCa
+                     * @property {Array.<string>|null} [serviceAccountSigningKeys] UserManagedKeysConfig serviceAccountSigningKeys
+                     * @property {Array.<string>|null} [serviceAccountVerificationKeys] UserManagedKeysConfig serviceAccountVerificationKeys
+                     * @property {string|null} [aggregationCa] UserManagedKeysConfig aggregationCa
+                     * @property {string|null} [controlPlaneDiskEncryptionKey] UserManagedKeysConfig controlPlaneDiskEncryptionKey
+                     * @property {string|null} [gkeopsEtcdBackupEncryptionKey] UserManagedKeysConfig gkeopsEtcdBackupEncryptionKey
+                     */
+    
+                    /**
+                     * Constructs a new UserManagedKeysConfig.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a UserManagedKeysConfig.
+                     * @implements IUserManagedKeysConfig
+                     * @constructor
+                     * @param {google.container.v1beta1.IUserManagedKeysConfig=} [properties] Properties to set
+                     */
+                    function UserManagedKeysConfig(properties) {
+                        this.serviceAccountSigningKeys = [];
+                        this.serviceAccountVerificationKeys = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UserManagedKeysConfig clusterCa.
+                     * @member {string} clusterCa
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @instance
+                     */
+                    UserManagedKeysConfig.prototype.clusterCa = "";
+    
+                    /**
+                     * UserManagedKeysConfig etcdApiCa.
+                     * @member {string} etcdApiCa
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @instance
+                     */
+                    UserManagedKeysConfig.prototype.etcdApiCa = "";
+    
+                    /**
+                     * UserManagedKeysConfig etcdPeerCa.
+                     * @member {string} etcdPeerCa
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @instance
+                     */
+                    UserManagedKeysConfig.prototype.etcdPeerCa = "";
+    
+                    /**
+                     * UserManagedKeysConfig serviceAccountSigningKeys.
+                     * @member {Array.<string>} serviceAccountSigningKeys
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @instance
+                     */
+                    UserManagedKeysConfig.prototype.serviceAccountSigningKeys = $util.emptyArray;
+    
+                    /**
+                     * UserManagedKeysConfig serviceAccountVerificationKeys.
+                     * @member {Array.<string>} serviceAccountVerificationKeys
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @instance
+                     */
+                    UserManagedKeysConfig.prototype.serviceAccountVerificationKeys = $util.emptyArray;
+    
+                    /**
+                     * UserManagedKeysConfig aggregationCa.
+                     * @member {string} aggregationCa
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @instance
+                     */
+                    UserManagedKeysConfig.prototype.aggregationCa = "";
+    
+                    /**
+                     * UserManagedKeysConfig controlPlaneDiskEncryptionKey.
+                     * @member {string} controlPlaneDiskEncryptionKey
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @instance
+                     */
+                    UserManagedKeysConfig.prototype.controlPlaneDiskEncryptionKey = "";
+    
+                    /**
+                     * UserManagedKeysConfig gkeopsEtcdBackupEncryptionKey.
+                     * @member {string} gkeopsEtcdBackupEncryptionKey
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @instance
+                     */
+                    UserManagedKeysConfig.prototype.gkeopsEtcdBackupEncryptionKey = "";
+    
+                    /**
+                     * Creates a new UserManagedKeysConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @static
+                     * @param {google.container.v1beta1.IUserManagedKeysConfig=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.UserManagedKeysConfig} UserManagedKeysConfig instance
+                     */
+                    UserManagedKeysConfig.create = function create(properties) {
+                        return new UserManagedKeysConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UserManagedKeysConfig message. Does not implicitly {@link google.container.v1beta1.UserManagedKeysConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @static
+                     * @param {google.container.v1beta1.IUserManagedKeysConfig} message UserManagedKeysConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UserManagedKeysConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.clusterCa != null && Object.hasOwnProperty.call(message, "clusterCa"))
+                            writer.uint32(/* id 10, wireType 2 =*/82).string(message.clusterCa);
+                        if (message.etcdApiCa != null && Object.hasOwnProperty.call(message, "etcdApiCa"))
+                            writer.uint32(/* id 11, wireType 2 =*/90).string(message.etcdApiCa);
+                        if (message.etcdPeerCa != null && Object.hasOwnProperty.call(message, "etcdPeerCa"))
+                            writer.uint32(/* id 12, wireType 2 =*/98).string(message.etcdPeerCa);
+                        if (message.serviceAccountSigningKeys != null && message.serviceAccountSigningKeys.length)
+                            for (var i = 0; i < message.serviceAccountSigningKeys.length; ++i)
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.serviceAccountSigningKeys[i]);
+                        if (message.serviceAccountVerificationKeys != null && message.serviceAccountVerificationKeys.length)
+                            for (var i = 0; i < message.serviceAccountVerificationKeys.length; ++i)
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.serviceAccountVerificationKeys[i]);
+                        if (message.aggregationCa != null && Object.hasOwnProperty.call(message, "aggregationCa"))
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.aggregationCa);
+                        if (message.controlPlaneDiskEncryptionKey != null && Object.hasOwnProperty.call(message, "controlPlaneDiskEncryptionKey"))
+                            writer.uint32(/* id 16, wireType 2 =*/130).string(message.controlPlaneDiskEncryptionKey);
+                        if (message.gkeopsEtcdBackupEncryptionKey != null && Object.hasOwnProperty.call(message, "gkeopsEtcdBackupEncryptionKey"))
+                            writer.uint32(/* id 17, wireType 2 =*/138).string(message.gkeopsEtcdBackupEncryptionKey);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UserManagedKeysConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.UserManagedKeysConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @static
+                     * @param {google.container.v1beta1.IUserManagedKeysConfig} message UserManagedKeysConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UserManagedKeysConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a UserManagedKeysConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.UserManagedKeysConfig} UserManagedKeysConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UserManagedKeysConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.UserManagedKeysConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 10: {
+                                    message.clusterCa = reader.string();
+                                    break;
+                                }
+                            case 11: {
+                                    message.etcdApiCa = reader.string();
+                                    break;
+                                }
+                            case 12: {
+                                    message.etcdPeerCa = reader.string();
+                                    break;
+                                }
+                            case 13: {
+                                    if (!(message.serviceAccountSigningKeys && message.serviceAccountSigningKeys.length))
+                                        message.serviceAccountSigningKeys = [];
+                                    message.serviceAccountSigningKeys.push(reader.string());
+                                    break;
+                                }
+                            case 14: {
+                                    if (!(message.serviceAccountVerificationKeys && message.serviceAccountVerificationKeys.length))
+                                        message.serviceAccountVerificationKeys = [];
+                                    message.serviceAccountVerificationKeys.push(reader.string());
+                                    break;
+                                }
+                            case 15: {
+                                    message.aggregationCa = reader.string();
+                                    break;
+                                }
+                            case 16: {
+                                    message.controlPlaneDiskEncryptionKey = reader.string();
+                                    break;
+                                }
+                            case 17: {
+                                    message.gkeopsEtcdBackupEncryptionKey = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a UserManagedKeysConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.UserManagedKeysConfig} UserManagedKeysConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UserManagedKeysConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a UserManagedKeysConfig message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UserManagedKeysConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.clusterCa != null && message.hasOwnProperty("clusterCa"))
+                            if (!$util.isString(message.clusterCa))
+                                return "clusterCa: string expected";
+                        if (message.etcdApiCa != null && message.hasOwnProperty("etcdApiCa"))
+                            if (!$util.isString(message.etcdApiCa))
+                                return "etcdApiCa: string expected";
+                        if (message.etcdPeerCa != null && message.hasOwnProperty("etcdPeerCa"))
+                            if (!$util.isString(message.etcdPeerCa))
+                                return "etcdPeerCa: string expected";
+                        if (message.serviceAccountSigningKeys != null && message.hasOwnProperty("serviceAccountSigningKeys")) {
+                            if (!Array.isArray(message.serviceAccountSigningKeys))
+                                return "serviceAccountSigningKeys: array expected";
+                            for (var i = 0; i < message.serviceAccountSigningKeys.length; ++i)
+                                if (!$util.isString(message.serviceAccountSigningKeys[i]))
+                                    return "serviceAccountSigningKeys: string[] expected";
+                        }
+                        if (message.serviceAccountVerificationKeys != null && message.hasOwnProperty("serviceAccountVerificationKeys")) {
+                            if (!Array.isArray(message.serviceAccountVerificationKeys))
+                                return "serviceAccountVerificationKeys: array expected";
+                            for (var i = 0; i < message.serviceAccountVerificationKeys.length; ++i)
+                                if (!$util.isString(message.serviceAccountVerificationKeys[i]))
+                                    return "serviceAccountVerificationKeys: string[] expected";
+                        }
+                        if (message.aggregationCa != null && message.hasOwnProperty("aggregationCa"))
+                            if (!$util.isString(message.aggregationCa))
+                                return "aggregationCa: string expected";
+                        if (message.controlPlaneDiskEncryptionKey != null && message.hasOwnProperty("controlPlaneDiskEncryptionKey"))
+                            if (!$util.isString(message.controlPlaneDiskEncryptionKey))
+                                return "controlPlaneDiskEncryptionKey: string expected";
+                        if (message.gkeopsEtcdBackupEncryptionKey != null && message.hasOwnProperty("gkeopsEtcdBackupEncryptionKey"))
+                            if (!$util.isString(message.gkeopsEtcdBackupEncryptionKey))
+                                return "gkeopsEtcdBackupEncryptionKey: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a UserManagedKeysConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.UserManagedKeysConfig} UserManagedKeysConfig
+                     */
+                    UserManagedKeysConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.UserManagedKeysConfig)
+                            return object;
+                        var message = new $root.google.container.v1beta1.UserManagedKeysConfig();
+                        if (object.clusterCa != null)
+                            message.clusterCa = String(object.clusterCa);
+                        if (object.etcdApiCa != null)
+                            message.etcdApiCa = String(object.etcdApiCa);
+                        if (object.etcdPeerCa != null)
+                            message.etcdPeerCa = String(object.etcdPeerCa);
+                        if (object.serviceAccountSigningKeys) {
+                            if (!Array.isArray(object.serviceAccountSigningKeys))
+                                throw TypeError(".google.container.v1beta1.UserManagedKeysConfig.serviceAccountSigningKeys: array expected");
+                            message.serviceAccountSigningKeys = [];
+                            for (var i = 0; i < object.serviceAccountSigningKeys.length; ++i)
+                                message.serviceAccountSigningKeys[i] = String(object.serviceAccountSigningKeys[i]);
+                        }
+                        if (object.serviceAccountVerificationKeys) {
+                            if (!Array.isArray(object.serviceAccountVerificationKeys))
+                                throw TypeError(".google.container.v1beta1.UserManagedKeysConfig.serviceAccountVerificationKeys: array expected");
+                            message.serviceAccountVerificationKeys = [];
+                            for (var i = 0; i < object.serviceAccountVerificationKeys.length; ++i)
+                                message.serviceAccountVerificationKeys[i] = String(object.serviceAccountVerificationKeys[i]);
+                        }
+                        if (object.aggregationCa != null)
+                            message.aggregationCa = String(object.aggregationCa);
+                        if (object.controlPlaneDiskEncryptionKey != null)
+                            message.controlPlaneDiskEncryptionKey = String(object.controlPlaneDiskEncryptionKey);
+                        if (object.gkeopsEtcdBackupEncryptionKey != null)
+                            message.gkeopsEtcdBackupEncryptionKey = String(object.gkeopsEtcdBackupEncryptionKey);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a UserManagedKeysConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @static
+                     * @param {google.container.v1beta1.UserManagedKeysConfig} message UserManagedKeysConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UserManagedKeysConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.serviceAccountSigningKeys = [];
+                            object.serviceAccountVerificationKeys = [];
+                        }
+                        if (options.defaults) {
+                            object.clusterCa = "";
+                            object.etcdApiCa = "";
+                            object.etcdPeerCa = "";
+                            object.aggregationCa = "";
+                            object.controlPlaneDiskEncryptionKey = "";
+                            object.gkeopsEtcdBackupEncryptionKey = "";
+                        }
+                        if (message.clusterCa != null && message.hasOwnProperty("clusterCa"))
+                            object.clusterCa = message.clusterCa;
+                        if (message.etcdApiCa != null && message.hasOwnProperty("etcdApiCa"))
+                            object.etcdApiCa = message.etcdApiCa;
+                        if (message.etcdPeerCa != null && message.hasOwnProperty("etcdPeerCa"))
+                            object.etcdPeerCa = message.etcdPeerCa;
+                        if (message.serviceAccountSigningKeys && message.serviceAccountSigningKeys.length) {
+                            object.serviceAccountSigningKeys = [];
+                            for (var j = 0; j < message.serviceAccountSigningKeys.length; ++j)
+                                object.serviceAccountSigningKeys[j] = message.serviceAccountSigningKeys[j];
+                        }
+                        if (message.serviceAccountVerificationKeys && message.serviceAccountVerificationKeys.length) {
+                            object.serviceAccountVerificationKeys = [];
+                            for (var j = 0; j < message.serviceAccountVerificationKeys.length; ++j)
+                                object.serviceAccountVerificationKeys[j] = message.serviceAccountVerificationKeys[j];
+                        }
+                        if (message.aggregationCa != null && message.hasOwnProperty("aggregationCa"))
+                            object.aggregationCa = message.aggregationCa;
+                        if (message.controlPlaneDiskEncryptionKey != null && message.hasOwnProperty("controlPlaneDiskEncryptionKey"))
+                            object.controlPlaneDiskEncryptionKey = message.controlPlaneDiskEncryptionKey;
+                        if (message.gkeopsEtcdBackupEncryptionKey != null && message.hasOwnProperty("gkeopsEtcdBackupEncryptionKey"))
+                            object.gkeopsEtcdBackupEncryptionKey = message.gkeopsEtcdBackupEncryptionKey;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UserManagedKeysConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UserManagedKeysConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for UserManagedKeysConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.UserManagedKeysConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UserManagedKeysConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.UserManagedKeysConfig";
+                    };
+    
+                    return UserManagedKeysConfig;
+                })();
+    
+                v1beta1.AnonymousAuthenticationConfig = (function() {
+    
+                    /**
+                     * Properties of an AnonymousAuthenticationConfig.
+                     * @memberof google.container.v1beta1
+                     * @interface IAnonymousAuthenticationConfig
+                     */
+    
+                    /**
+                     * Constructs a new AnonymousAuthenticationConfig.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents an AnonymousAuthenticationConfig.
+                     * @implements IAnonymousAuthenticationConfig
+                     * @constructor
+                     * @param {google.container.v1beta1.IAnonymousAuthenticationConfig=} [properties] Properties to set
+                     */
+                    function AnonymousAuthenticationConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new AnonymousAuthenticationConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.AnonymousAuthenticationConfig
+                     * @static
+                     * @param {google.container.v1beta1.IAnonymousAuthenticationConfig=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.AnonymousAuthenticationConfig} AnonymousAuthenticationConfig instance
+                     */
+                    AnonymousAuthenticationConfig.create = function create(properties) {
+                        return new AnonymousAuthenticationConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AnonymousAuthenticationConfig message. Does not implicitly {@link google.container.v1beta1.AnonymousAuthenticationConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.AnonymousAuthenticationConfig
+                     * @static
+                     * @param {google.container.v1beta1.IAnonymousAuthenticationConfig} message AnonymousAuthenticationConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AnonymousAuthenticationConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AnonymousAuthenticationConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.AnonymousAuthenticationConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.AnonymousAuthenticationConfig
+                     * @static
+                     * @param {google.container.v1beta1.IAnonymousAuthenticationConfig} message AnonymousAuthenticationConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AnonymousAuthenticationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AnonymousAuthenticationConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.AnonymousAuthenticationConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.AnonymousAuthenticationConfig} AnonymousAuthenticationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AnonymousAuthenticationConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.AnonymousAuthenticationConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AnonymousAuthenticationConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.AnonymousAuthenticationConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.AnonymousAuthenticationConfig} AnonymousAuthenticationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AnonymousAuthenticationConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AnonymousAuthenticationConfig message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.AnonymousAuthenticationConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AnonymousAuthenticationConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AnonymousAuthenticationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.AnonymousAuthenticationConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.AnonymousAuthenticationConfig} AnonymousAuthenticationConfig
+                     */
+                    AnonymousAuthenticationConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.AnonymousAuthenticationConfig)
+                            return object;
+                        return new $root.google.container.v1beta1.AnonymousAuthenticationConfig();
+                    };
+    
+                    /**
+                     * Creates a plain object from an AnonymousAuthenticationConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.AnonymousAuthenticationConfig
+                     * @static
+                     * @param {google.container.v1beta1.AnonymousAuthenticationConfig} message AnonymousAuthenticationConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AnonymousAuthenticationConfig.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this AnonymousAuthenticationConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.AnonymousAuthenticationConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AnonymousAuthenticationConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AnonymousAuthenticationConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.AnonymousAuthenticationConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AnonymousAuthenticationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.AnonymousAuthenticationConfig";
+                    };
+    
+                    return AnonymousAuthenticationConfig;
                 })();
     
                 v1beta1.CompliancePostureConfig = (function() {
@@ -90191,6 +92820,7 @@
                      * @property {google.container.v1beta1.INetworkTags|null} [networkTags] NodePoolAutoConfig networkTags
                      * @property {google.container.v1beta1.IResourceManagerTags|null} [resourceManagerTags] NodePoolAutoConfig resourceManagerTags
                      * @property {google.container.v1beta1.INodeKubeletConfig|null} [nodeKubeletConfig] NodePoolAutoConfig nodeKubeletConfig
+                     * @property {google.container.v1beta1.ILinuxNodeConfig|null} [linuxNodeConfig] NodePoolAutoConfig linuxNodeConfig
                      */
     
                     /**
@@ -90233,6 +92863,14 @@
                     NodePoolAutoConfig.prototype.nodeKubeletConfig = null;
     
                     /**
+                     * NodePoolAutoConfig linuxNodeConfig.
+                     * @member {google.container.v1beta1.ILinuxNodeConfig|null|undefined} linuxNodeConfig
+                     * @memberof google.container.v1beta1.NodePoolAutoConfig
+                     * @instance
+                     */
+                    NodePoolAutoConfig.prototype.linuxNodeConfig = null;
+    
+                    /**
                      * Creates a new NodePoolAutoConfig instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1beta1.NodePoolAutoConfig
@@ -90262,6 +92900,8 @@
                             $root.google.container.v1beta1.ResourceManagerTags.encode(message.resourceManagerTags, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.nodeKubeletConfig != null && Object.hasOwnProperty.call(message, "nodeKubeletConfig"))
                             $root.google.container.v1beta1.NodeKubeletConfig.encode(message.nodeKubeletConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.linuxNodeConfig != null && Object.hasOwnProperty.call(message, "linuxNodeConfig"))
+                            $root.google.container.v1beta1.LinuxNodeConfig.encode(message.linuxNodeConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                         return writer;
                     };
     
@@ -90306,6 +92946,10 @@
                                 }
                             case 3: {
                                     message.nodeKubeletConfig = $root.google.container.v1beta1.NodeKubeletConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.linuxNodeConfig = $root.google.container.v1beta1.LinuxNodeConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -90358,6 +93002,11 @@
                             if (error)
                                 return "nodeKubeletConfig." + error;
                         }
+                        if (message.linuxNodeConfig != null && message.hasOwnProperty("linuxNodeConfig")) {
+                            var error = $root.google.container.v1beta1.LinuxNodeConfig.verify(message.linuxNodeConfig);
+                            if (error)
+                                return "linuxNodeConfig." + error;
+                        }
                         return null;
                     };
     
@@ -90388,6 +93037,11 @@
                                 throw TypeError(".google.container.v1beta1.NodePoolAutoConfig.nodeKubeletConfig: object expected");
                             message.nodeKubeletConfig = $root.google.container.v1beta1.NodeKubeletConfig.fromObject(object.nodeKubeletConfig);
                         }
+                        if (object.linuxNodeConfig != null) {
+                            if (typeof object.linuxNodeConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.NodePoolAutoConfig.linuxNodeConfig: object expected");
+                            message.linuxNodeConfig = $root.google.container.v1beta1.LinuxNodeConfig.fromObject(object.linuxNodeConfig);
+                        }
                         return message;
                     };
     
@@ -90408,6 +93062,7 @@
                             object.networkTags = null;
                             object.resourceManagerTags = null;
                             object.nodeKubeletConfig = null;
+                            object.linuxNodeConfig = null;
                         }
                         if (message.networkTags != null && message.hasOwnProperty("networkTags"))
                             object.networkTags = $root.google.container.v1beta1.NetworkTags.toObject(message.networkTags, options);
@@ -90415,6 +93070,8 @@
                             object.resourceManagerTags = $root.google.container.v1beta1.ResourceManagerTags.toObject(message.resourceManagerTags, options);
                         if (message.nodeKubeletConfig != null && message.hasOwnProperty("nodeKubeletConfig"))
                             object.nodeKubeletConfig = $root.google.container.v1beta1.NodeKubeletConfig.toObject(message.nodeKubeletConfig, options);
+                        if (message.linuxNodeConfig != null && message.hasOwnProperty("linuxNodeConfig"))
+                            object.linuxNodeConfig = $root.google.container.v1beta1.LinuxNodeConfig.toObject(message.linuxNodeConfig, options);
                         return object;
                     };
     
@@ -90495,8 +93152,11 @@
                      * @property {google.container.v1beta1.IMonitoringConfig|null} [desiredMonitoringConfig] ClusterUpdate desiredMonitoringConfig
                      * @property {google.container.v1beta1.IIdentityServiceConfig|null} [desiredIdentityServiceConfig] ClusterUpdate desiredIdentityServiceConfig
                      * @property {boolean|null} [desiredEnablePrivateEndpoint] ClusterUpdate desiredEnablePrivateEndpoint
+                     * @property {boolean|null} [desiredDefaultEnablePrivateNodes] ClusterUpdate desiredDefaultEnablePrivateNodes
+                     * @property {google.container.v1beta1.IControlPlaneEndpointsConfig|null} [desiredControlPlaneEndpointsConfig] ClusterUpdate desiredControlPlaneEndpointsConfig
                      * @property {google.container.v1beta1.INetworkTags|null} [desiredNodePoolAutoConfigNetworkTags] ClusterUpdate desiredNodePoolAutoConfigNetworkTags
                      * @property {google.container.v1beta1.IProtectConfig|null} [desiredProtectConfig] ClusterUpdate desiredProtectConfig
+                     * @property {google.container.v1beta1.IPodAutoscaling|null} [desiredPodAutoscaling] ClusterUpdate desiredPodAutoscaling
                      * @property {google.container.v1beta1.IGatewayAPIConfig|null} [desiredGatewayApiConfig] ClusterUpdate desiredGatewayApiConfig
                      * @property {string|null} [etag] ClusterUpdate etag
                      * @property {google.container.v1beta1.INodePoolLoggingConfig|null} [desiredNodePoolLoggingConfig] ClusterUpdate desiredNodePoolLoggingConfig
@@ -90517,8 +93177,15 @@
                      * @property {google.container.v1beta1.InTransitEncryptionConfig|null} [desiredInTransitEncryptionConfig] ClusterUpdate desiredInTransitEncryptionConfig
                      * @property {boolean|null} [desiredEnableCiliumClusterwideNetworkPolicy] ClusterUpdate desiredEnableCiliumClusterwideNetworkPolicy
                      * @property {google.container.v1beta1.ISecretManagerConfig|null} [desiredSecretManagerConfig] ClusterUpdate desiredSecretManagerConfig
+                     * @property {google.container.v1beta1.ICompliancePostureConfig|null} [desiredCompliancePostureConfig] ClusterUpdate desiredCompliancePostureConfig
                      * @property {google.container.v1beta1.INodeKubeletConfig|null} [desiredNodeKubeletConfig] ClusterUpdate desiredNodeKubeletConfig
                      * @property {google.container.v1beta1.INodeKubeletConfig|null} [desiredNodePoolAutoConfigKubeletConfig] ClusterUpdate desiredNodePoolAutoConfigKubeletConfig
+                     * @property {google.container.v1beta1.IUserManagedKeysConfig|null} [userManagedKeysConfig] ClusterUpdate userManagedKeysConfig
+                     * @property {google.container.v1beta1.IRBACBindingConfig|null} [desiredRbacBindingConfig] ClusterUpdate desiredRbacBindingConfig
+                     * @property {google.container.v1beta1.IDesiredEnterpriseConfig|null} [desiredEnterpriseConfig] ClusterUpdate desiredEnterpriseConfig
+                     * @property {boolean|null} [desiredDisableL4LbFirewallReconciliation] ClusterUpdate desiredDisableL4LbFirewallReconciliation
+                     * @property {google.container.v1beta1.ILinuxNodeConfig|null} [desiredNodePoolAutoConfigLinuxNodeConfig] ClusterUpdate desiredNodePoolAutoConfigLinuxNodeConfig
+                     * @property {google.container.v1beta1.IAnonymousAuthenticationConfig|null} [desiredAnonymousAuthenticationConfig] ClusterUpdate desiredAnonymousAuthenticationConfig
                      */
     
                     /**
@@ -90874,6 +93541,22 @@
                     ClusterUpdate.prototype.desiredEnablePrivateEndpoint = null;
     
                     /**
+                     * ClusterUpdate desiredDefaultEnablePrivateNodes.
+                     * @member {boolean|null|undefined} desiredDefaultEnablePrivateNodes
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredDefaultEnablePrivateNodes = null;
+    
+                    /**
+                     * ClusterUpdate desiredControlPlaneEndpointsConfig.
+                     * @member {google.container.v1beta1.IControlPlaneEndpointsConfig|null|undefined} desiredControlPlaneEndpointsConfig
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredControlPlaneEndpointsConfig = null;
+    
+                    /**
                      * ClusterUpdate desiredNodePoolAutoConfigNetworkTags.
                      * @member {google.container.v1beta1.INetworkTags|null|undefined} desiredNodePoolAutoConfigNetworkTags
                      * @memberof google.container.v1beta1.ClusterUpdate
@@ -90888,6 +93571,14 @@
                      * @instance
                      */
                     ClusterUpdate.prototype.desiredProtectConfig = null;
+    
+                    /**
+                     * ClusterUpdate desiredPodAutoscaling.
+                     * @member {google.container.v1beta1.IPodAutoscaling|null|undefined} desiredPodAutoscaling
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredPodAutoscaling = null;
     
                     /**
                      * ClusterUpdate desiredGatewayApiConfig.
@@ -91050,6 +93741,14 @@
                     ClusterUpdate.prototype.desiredSecretManagerConfig = null;
     
                     /**
+                     * ClusterUpdate desiredCompliancePostureConfig.
+                     * @member {google.container.v1beta1.ICompliancePostureConfig|null|undefined} desiredCompliancePostureConfig
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredCompliancePostureConfig = null;
+    
+                    /**
                      * ClusterUpdate desiredNodeKubeletConfig.
                      * @member {google.container.v1beta1.INodeKubeletConfig|null|undefined} desiredNodeKubeletConfig
                      * @memberof google.container.v1beta1.ClusterUpdate
@@ -91065,6 +93764,54 @@
                      */
                     ClusterUpdate.prototype.desiredNodePoolAutoConfigKubeletConfig = null;
     
+                    /**
+                     * ClusterUpdate userManagedKeysConfig.
+                     * @member {google.container.v1beta1.IUserManagedKeysConfig|null|undefined} userManagedKeysConfig
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.userManagedKeysConfig = null;
+    
+                    /**
+                     * ClusterUpdate desiredRbacBindingConfig.
+                     * @member {google.container.v1beta1.IRBACBindingConfig|null|undefined} desiredRbacBindingConfig
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredRbacBindingConfig = null;
+    
+                    /**
+                     * ClusterUpdate desiredEnterpriseConfig.
+                     * @member {google.container.v1beta1.IDesiredEnterpriseConfig|null|undefined} desiredEnterpriseConfig
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredEnterpriseConfig = null;
+    
+                    /**
+                     * ClusterUpdate desiredDisableL4LbFirewallReconciliation.
+                     * @member {boolean|null|undefined} desiredDisableL4LbFirewallReconciliation
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredDisableL4LbFirewallReconciliation = null;
+    
+                    /**
+                     * ClusterUpdate desiredNodePoolAutoConfigLinuxNodeConfig.
+                     * @member {google.container.v1beta1.ILinuxNodeConfig|null|undefined} desiredNodePoolAutoConfigLinuxNodeConfig
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredNodePoolAutoConfigLinuxNodeConfig = null;
+    
+                    /**
+                     * ClusterUpdate desiredAnonymousAuthenticationConfig.
+                     * @member {google.container.v1beta1.IAnonymousAuthenticationConfig|null|undefined} desiredAnonymousAuthenticationConfig
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredAnonymousAuthenticationConfig = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -91076,6 +93823,17 @@
                      */
                     Object.defineProperty(ClusterUpdate.prototype, "_desiredEnablePrivateEndpoint", {
                         get: $util.oneOfGetter($oneOfFields = ["desiredEnablePrivateEndpoint"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * ClusterUpdate _desiredDefaultEnablePrivateNodes.
+                     * @member {"desiredDefaultEnablePrivateNodes"|undefined} _desiredDefaultEnablePrivateNodes
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    Object.defineProperty(ClusterUpdate.prototype, "_desiredDefaultEnablePrivateNodes", {
+                        get: $util.oneOfGetter($oneOfFields = ["desiredDefaultEnablePrivateNodes"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -91142,6 +93900,39 @@
                      */
                     Object.defineProperty(ClusterUpdate.prototype, "_desiredSecretManagerConfig", {
                         get: $util.oneOfGetter($oneOfFields = ["desiredSecretManagerConfig"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * ClusterUpdate _desiredCompliancePostureConfig.
+                     * @member {"desiredCompliancePostureConfig"|undefined} _desiredCompliancePostureConfig
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    Object.defineProperty(ClusterUpdate.prototype, "_desiredCompliancePostureConfig", {
+                        get: $util.oneOfGetter($oneOfFields = ["desiredCompliancePostureConfig"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * ClusterUpdate _desiredRbacBindingConfig.
+                     * @member {"desiredRbacBindingConfig"|undefined} _desiredRbacBindingConfig
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    Object.defineProperty(ClusterUpdate.prototype, "_desiredRbacBindingConfig", {
+                        get: $util.oneOfGetter($oneOfFields = ["desiredRbacBindingConfig"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * ClusterUpdate _desiredDisableL4LbFirewallReconciliation.
+                     * @member {"desiredDisableL4LbFirewallReconciliation"|undefined} _desiredDisableL4LbFirewallReconciliation
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    Object.defineProperty(ClusterUpdate.prototype, "_desiredDisableL4LbFirewallReconciliation", {
+                        get: $util.oneOfGetter($oneOfFields = ["desiredDisableL4LbFirewallReconciliation"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -91250,6 +94041,10 @@
                             $root.google.container.v1beta1.MeshCertificates.encode(message.desiredMeshCertificates, writer.uint32(/* id 67, wireType 2 =*/538).fork()).ldelim();
                         if (message.desiredEnablePrivateEndpoint != null && Object.hasOwnProperty.call(message, "desiredEnablePrivateEndpoint"))
                             writer.uint32(/* id 71, wireType 0 =*/568).bool(message.desiredEnablePrivateEndpoint);
+                        if (message.desiredDefaultEnablePrivateNodes != null && Object.hasOwnProperty.call(message, "desiredDefaultEnablePrivateNodes"))
+                            writer.uint32(/* id 72, wireType 0 =*/576).bool(message.desiredDefaultEnablePrivateNodes);
+                        if (message.desiredControlPlaneEndpointsConfig != null && Object.hasOwnProperty.call(message, "desiredControlPlaneEndpointsConfig"))
+                            $root.google.container.v1beta1.ControlPlaneEndpointsConfig.encode(message.desiredControlPlaneEndpointsConfig, writer.uint32(/* id 73, wireType 2 =*/586).fork()).ldelim();
                         if (message.desiredMasterVersion != null && Object.hasOwnProperty.call(message, "desiredMasterVersion"))
                             writer.uint32(/* id 100, wireType 2 =*/802).string(message.desiredMasterVersion);
                         if (message.desiredGcfsConfig != null && Object.hasOwnProperty.call(message, "desiredGcfsConfig"))
@@ -91258,6 +94053,8 @@
                             $root.google.container.v1beta1.NetworkTags.encode(message.desiredNodePoolAutoConfigNetworkTags, writer.uint32(/* id 110, wireType 2 =*/882).fork()).ldelim();
                         if (message.desiredProtectConfig != null && Object.hasOwnProperty.call(message, "desiredProtectConfig"))
                             $root.google.container.v1beta1.ProtectConfig.encode(message.desiredProtectConfig, writer.uint32(/* id 112, wireType 2 =*/898).fork()).ldelim();
+                        if (message.desiredPodAutoscaling != null && Object.hasOwnProperty.call(message, "desiredPodAutoscaling"))
+                            $root.google.container.v1beta1.PodAutoscaling.encode(message.desiredPodAutoscaling, writer.uint32(/* id 113, wireType 2 =*/906).fork()).ldelim();
                         if (message.desiredGatewayApiConfig != null && Object.hasOwnProperty.call(message, "desiredGatewayApiConfig"))
                             $root.google.container.v1beta1.GatewayAPIConfig.encode(message.desiredGatewayApiConfig, writer.uint32(/* id 114, wireType 2 =*/914).fork()).ldelim();
                         if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
@@ -91298,10 +94095,24 @@
                             writer.uint32(/* id 138, wireType 0 =*/1104).bool(message.desiredEnableCiliumClusterwideNetworkPolicy);
                         if (message.desiredSecretManagerConfig != null && Object.hasOwnProperty.call(message, "desiredSecretManagerConfig"))
                             $root.google.container.v1beta1.SecretManagerConfig.encode(message.desiredSecretManagerConfig, writer.uint32(/* id 139, wireType 2 =*/1114).fork()).ldelim();
+                        if (message.desiredCompliancePostureConfig != null && Object.hasOwnProperty.call(message, "desiredCompliancePostureConfig"))
+                            $root.google.container.v1beta1.CompliancePostureConfig.encode(message.desiredCompliancePostureConfig, writer.uint32(/* id 140, wireType 2 =*/1122).fork()).ldelim();
                         if (message.desiredNodeKubeletConfig != null && Object.hasOwnProperty.call(message, "desiredNodeKubeletConfig"))
                             $root.google.container.v1beta1.NodeKubeletConfig.encode(message.desiredNodeKubeletConfig, writer.uint32(/* id 141, wireType 2 =*/1130).fork()).ldelim();
                         if (message.desiredNodePoolAutoConfigKubeletConfig != null && Object.hasOwnProperty.call(message, "desiredNodePoolAutoConfigKubeletConfig"))
                             $root.google.container.v1beta1.NodeKubeletConfig.encode(message.desiredNodePoolAutoConfigKubeletConfig, writer.uint32(/* id 142, wireType 2 =*/1138).fork()).ldelim();
+                        if (message.userManagedKeysConfig != null && Object.hasOwnProperty.call(message, "userManagedKeysConfig"))
+                            $root.google.container.v1beta1.UserManagedKeysConfig.encode(message.userManagedKeysConfig, writer.uint32(/* id 143, wireType 2 =*/1146).fork()).ldelim();
+                        if (message.desiredRbacBindingConfig != null && Object.hasOwnProperty.call(message, "desiredRbacBindingConfig"))
+                            $root.google.container.v1beta1.RBACBindingConfig.encode(message.desiredRbacBindingConfig, writer.uint32(/* id 144, wireType 2 =*/1154).fork()).ldelim();
+                        if (message.desiredEnterpriseConfig != null && Object.hasOwnProperty.call(message, "desiredEnterpriseConfig"))
+                            $root.google.container.v1beta1.DesiredEnterpriseConfig.encode(message.desiredEnterpriseConfig, writer.uint32(/* id 147, wireType 2 =*/1178).fork()).ldelim();
+                        if (message.desiredDisableL4LbFirewallReconciliation != null && Object.hasOwnProperty.call(message, "desiredDisableL4LbFirewallReconciliation"))
+                            writer.uint32(/* id 149, wireType 0 =*/1192).bool(message.desiredDisableL4LbFirewallReconciliation);
+                        if (message.desiredNodePoolAutoConfigLinuxNodeConfig != null && Object.hasOwnProperty.call(message, "desiredNodePoolAutoConfigLinuxNodeConfig"))
+                            $root.google.container.v1beta1.LinuxNodeConfig.encode(message.desiredNodePoolAutoConfigLinuxNodeConfig, writer.uint32(/* id 150, wireType 2 =*/1202).fork()).ldelim();
+                        if (message.desiredAnonymousAuthenticationConfig != null && Object.hasOwnProperty.call(message, "desiredAnonymousAuthenticationConfig"))
+                            $root.google.container.v1beta1.AnonymousAuthenticationConfig.encode(message.desiredAnonymousAuthenticationConfig, writer.uint32(/* id 156, wireType 2 =*/1250).fork()).ldelim();
                         return writer;
                     };
     
@@ -91506,12 +94317,24 @@
                                     message.desiredEnablePrivateEndpoint = reader.bool();
                                     break;
                                 }
+                            case 72: {
+                                    message.desiredDefaultEnablePrivateNodes = reader.bool();
+                                    break;
+                                }
+                            case 73: {
+                                    message.desiredControlPlaneEndpointsConfig = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
                             case 110: {
                                     message.desiredNodePoolAutoConfigNetworkTags = $root.google.container.v1beta1.NetworkTags.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 112: {
                                     message.desiredProtectConfig = $root.google.container.v1beta1.ProtectConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 113: {
+                                    message.desiredPodAutoscaling = $root.google.container.v1beta1.PodAutoscaling.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 114: {
@@ -91594,12 +94417,40 @@
                                     message.desiredSecretManagerConfig = $root.google.container.v1beta1.SecretManagerConfig.decode(reader, reader.uint32());
                                     break;
                                 }
+                            case 140: {
+                                    message.desiredCompliancePostureConfig = $root.google.container.v1beta1.CompliancePostureConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
                             case 141: {
                                     message.desiredNodeKubeletConfig = $root.google.container.v1beta1.NodeKubeletConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 142: {
                                     message.desiredNodePoolAutoConfigKubeletConfig = $root.google.container.v1beta1.NodeKubeletConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 143: {
+                                    message.userManagedKeysConfig = $root.google.container.v1beta1.UserManagedKeysConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 144: {
+                                    message.desiredRbacBindingConfig = $root.google.container.v1beta1.RBACBindingConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 147: {
+                                    message.desiredEnterpriseConfig = $root.google.container.v1beta1.DesiredEnterpriseConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 149: {
+                                    message.desiredDisableL4LbFirewallReconciliation = reader.bool();
+                                    break;
+                                }
+                            case 150: {
+                                    message.desiredNodePoolAutoConfigLinuxNodeConfig = $root.google.container.v1beta1.LinuxNodeConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 156: {
+                                    message.desiredAnonymousAuthenticationConfig = $root.google.container.v1beta1.AnonymousAuthenticationConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -91847,6 +94698,16 @@
                             if (typeof message.desiredEnablePrivateEndpoint !== "boolean")
                                 return "desiredEnablePrivateEndpoint: boolean expected";
                         }
+                        if (message.desiredDefaultEnablePrivateNodes != null && message.hasOwnProperty("desiredDefaultEnablePrivateNodes")) {
+                            properties._desiredDefaultEnablePrivateNodes = 1;
+                            if (typeof message.desiredDefaultEnablePrivateNodes !== "boolean")
+                                return "desiredDefaultEnablePrivateNodes: boolean expected";
+                        }
+                        if (message.desiredControlPlaneEndpointsConfig != null && message.hasOwnProperty("desiredControlPlaneEndpointsConfig")) {
+                            var error = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.verify(message.desiredControlPlaneEndpointsConfig);
+                            if (error)
+                                return "desiredControlPlaneEndpointsConfig." + error;
+                        }
                         if (message.desiredNodePoolAutoConfigNetworkTags != null && message.hasOwnProperty("desiredNodePoolAutoConfigNetworkTags")) {
                             var error = $root.google.container.v1beta1.NetworkTags.verify(message.desiredNodePoolAutoConfigNetworkTags);
                             if (error)
@@ -91859,6 +94720,11 @@
                                 if (error)
                                     return "desiredProtectConfig." + error;
                             }
+                        }
+                        if (message.desiredPodAutoscaling != null && message.hasOwnProperty("desiredPodAutoscaling")) {
+                            var error = $root.google.container.v1beta1.PodAutoscaling.verify(message.desiredPodAutoscaling);
+                            if (error)
+                                return "desiredPodAutoscaling." + error;
                         }
                         if (message.desiredGatewayApiConfig != null && message.hasOwnProperty("desiredGatewayApiConfig")) {
                             var error = $root.google.container.v1beta1.GatewayAPIConfig.verify(message.desiredGatewayApiConfig);
@@ -91971,6 +94837,14 @@
                                     return "desiredSecretManagerConfig." + error;
                             }
                         }
+                        if (message.desiredCompliancePostureConfig != null && message.hasOwnProperty("desiredCompliancePostureConfig")) {
+                            properties._desiredCompliancePostureConfig = 1;
+                            {
+                                var error = $root.google.container.v1beta1.CompliancePostureConfig.verify(message.desiredCompliancePostureConfig);
+                                if (error)
+                                    return "desiredCompliancePostureConfig." + error;
+                            }
+                        }
                         if (message.desiredNodeKubeletConfig != null && message.hasOwnProperty("desiredNodeKubeletConfig")) {
                             var error = $root.google.container.v1beta1.NodeKubeletConfig.verify(message.desiredNodeKubeletConfig);
                             if (error)
@@ -91980,6 +94854,39 @@
                             var error = $root.google.container.v1beta1.NodeKubeletConfig.verify(message.desiredNodePoolAutoConfigKubeletConfig);
                             if (error)
                                 return "desiredNodePoolAutoConfigKubeletConfig." + error;
+                        }
+                        if (message.userManagedKeysConfig != null && message.hasOwnProperty("userManagedKeysConfig")) {
+                            var error = $root.google.container.v1beta1.UserManagedKeysConfig.verify(message.userManagedKeysConfig);
+                            if (error)
+                                return "userManagedKeysConfig." + error;
+                        }
+                        if (message.desiredRbacBindingConfig != null && message.hasOwnProperty("desiredRbacBindingConfig")) {
+                            properties._desiredRbacBindingConfig = 1;
+                            {
+                                var error = $root.google.container.v1beta1.RBACBindingConfig.verify(message.desiredRbacBindingConfig);
+                                if (error)
+                                    return "desiredRbacBindingConfig." + error;
+                            }
+                        }
+                        if (message.desiredEnterpriseConfig != null && message.hasOwnProperty("desiredEnterpriseConfig")) {
+                            var error = $root.google.container.v1beta1.DesiredEnterpriseConfig.verify(message.desiredEnterpriseConfig);
+                            if (error)
+                                return "desiredEnterpriseConfig." + error;
+                        }
+                        if (message.desiredDisableL4LbFirewallReconciliation != null && message.hasOwnProperty("desiredDisableL4LbFirewallReconciliation")) {
+                            properties._desiredDisableL4LbFirewallReconciliation = 1;
+                            if (typeof message.desiredDisableL4LbFirewallReconciliation !== "boolean")
+                                return "desiredDisableL4LbFirewallReconciliation: boolean expected";
+                        }
+                        if (message.desiredNodePoolAutoConfigLinuxNodeConfig != null && message.hasOwnProperty("desiredNodePoolAutoConfigLinuxNodeConfig")) {
+                            var error = $root.google.container.v1beta1.LinuxNodeConfig.verify(message.desiredNodePoolAutoConfigLinuxNodeConfig);
+                            if (error)
+                                return "desiredNodePoolAutoConfigLinuxNodeConfig." + error;
+                        }
+                        if (message.desiredAnonymousAuthenticationConfig != null && message.hasOwnProperty("desiredAnonymousAuthenticationConfig")) {
+                            var error = $root.google.container.v1beta1.AnonymousAuthenticationConfig.verify(message.desiredAnonymousAuthenticationConfig);
+                            if (error)
+                                return "desiredAnonymousAuthenticationConfig." + error;
                         }
                         return null;
                     };
@@ -92221,6 +95128,13 @@
                         }
                         if (object.desiredEnablePrivateEndpoint != null)
                             message.desiredEnablePrivateEndpoint = Boolean(object.desiredEnablePrivateEndpoint);
+                        if (object.desiredDefaultEnablePrivateNodes != null)
+                            message.desiredDefaultEnablePrivateNodes = Boolean(object.desiredDefaultEnablePrivateNodes);
+                        if (object.desiredControlPlaneEndpointsConfig != null) {
+                            if (typeof object.desiredControlPlaneEndpointsConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredControlPlaneEndpointsConfig: object expected");
+                            message.desiredControlPlaneEndpointsConfig = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.fromObject(object.desiredControlPlaneEndpointsConfig);
+                        }
                         if (object.desiredNodePoolAutoConfigNetworkTags != null) {
                             if (typeof object.desiredNodePoolAutoConfigNetworkTags !== "object")
                                 throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredNodePoolAutoConfigNetworkTags: object expected");
@@ -92230,6 +95144,11 @@
                             if (typeof object.desiredProtectConfig !== "object")
                                 throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredProtectConfig: object expected");
                             message.desiredProtectConfig = $root.google.container.v1beta1.ProtectConfig.fromObject(object.desiredProtectConfig);
+                        }
+                        if (object.desiredPodAutoscaling != null) {
+                            if (typeof object.desiredPodAutoscaling !== "object")
+                                throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredPodAutoscaling: object expected");
+                            message.desiredPodAutoscaling = $root.google.container.v1beta1.PodAutoscaling.fromObject(object.desiredPodAutoscaling);
                         }
                         if (object.desiredGatewayApiConfig != null) {
                             if (typeof object.desiredGatewayApiConfig !== "object")
@@ -92349,6 +95268,11 @@
                                 throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredSecretManagerConfig: object expected");
                             message.desiredSecretManagerConfig = $root.google.container.v1beta1.SecretManagerConfig.fromObject(object.desiredSecretManagerConfig);
                         }
+                        if (object.desiredCompliancePostureConfig != null) {
+                            if (typeof object.desiredCompliancePostureConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredCompliancePostureConfig: object expected");
+                            message.desiredCompliancePostureConfig = $root.google.container.v1beta1.CompliancePostureConfig.fromObject(object.desiredCompliancePostureConfig);
+                        }
                         if (object.desiredNodeKubeletConfig != null) {
                             if (typeof object.desiredNodeKubeletConfig !== "object")
                                 throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredNodeKubeletConfig: object expected");
@@ -92358,6 +95282,33 @@
                             if (typeof object.desiredNodePoolAutoConfigKubeletConfig !== "object")
                                 throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredNodePoolAutoConfigKubeletConfig: object expected");
                             message.desiredNodePoolAutoConfigKubeletConfig = $root.google.container.v1beta1.NodeKubeletConfig.fromObject(object.desiredNodePoolAutoConfigKubeletConfig);
+                        }
+                        if (object.userManagedKeysConfig != null) {
+                            if (typeof object.userManagedKeysConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.ClusterUpdate.userManagedKeysConfig: object expected");
+                            message.userManagedKeysConfig = $root.google.container.v1beta1.UserManagedKeysConfig.fromObject(object.userManagedKeysConfig);
+                        }
+                        if (object.desiredRbacBindingConfig != null) {
+                            if (typeof object.desiredRbacBindingConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredRbacBindingConfig: object expected");
+                            message.desiredRbacBindingConfig = $root.google.container.v1beta1.RBACBindingConfig.fromObject(object.desiredRbacBindingConfig);
+                        }
+                        if (object.desiredEnterpriseConfig != null) {
+                            if (typeof object.desiredEnterpriseConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredEnterpriseConfig: object expected");
+                            message.desiredEnterpriseConfig = $root.google.container.v1beta1.DesiredEnterpriseConfig.fromObject(object.desiredEnterpriseConfig);
+                        }
+                        if (object.desiredDisableL4LbFirewallReconciliation != null)
+                            message.desiredDisableL4LbFirewallReconciliation = Boolean(object.desiredDisableL4LbFirewallReconciliation);
+                        if (object.desiredNodePoolAutoConfigLinuxNodeConfig != null) {
+                            if (typeof object.desiredNodePoolAutoConfigLinuxNodeConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredNodePoolAutoConfigLinuxNodeConfig: object expected");
+                            message.desiredNodePoolAutoConfigLinuxNodeConfig = $root.google.container.v1beta1.LinuxNodeConfig.fromObject(object.desiredNodePoolAutoConfigLinuxNodeConfig);
+                        }
+                        if (object.desiredAnonymousAuthenticationConfig != null) {
+                            if (typeof object.desiredAnonymousAuthenticationConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredAnonymousAuthenticationConfig: object expected");
+                            message.desiredAnonymousAuthenticationConfig = $root.google.container.v1beta1.AnonymousAuthenticationConfig.fromObject(object.desiredAnonymousAuthenticationConfig);
                         }
                         return message;
                     };
@@ -92416,9 +95367,11 @@
                             object.desiredMonitoringConfig = null;
                             object.desiredIdentityServiceConfig = null;
                             object.desiredMeshCertificates = null;
+                            object.desiredControlPlaneEndpointsConfig = null;
                             object.desiredMasterVersion = "";
                             object.desiredGcfsConfig = null;
                             object.desiredNodePoolAutoConfigNetworkTags = null;
+                            object.desiredPodAutoscaling = null;
                             object.desiredGatewayApiConfig = null;
                             object.etag = "";
                             object.desiredNodePoolLoggingConfig = null;
@@ -92436,6 +95389,10 @@
                             object.desiredNodePoolAutoConfigResourceManagerTags = null;
                             object.desiredNodeKubeletConfig = null;
                             object.desiredNodePoolAutoConfigKubeletConfig = null;
+                            object.userManagedKeysConfig = null;
+                            object.desiredEnterpriseConfig = null;
+                            object.desiredNodePoolAutoConfigLinuxNodeConfig = null;
+                            object.desiredAnonymousAuthenticationConfig = null;
                         }
                         if (message.desiredNodeVersion != null && message.hasOwnProperty("desiredNodeVersion"))
                             object.desiredNodeVersion = message.desiredNodeVersion;
@@ -92523,6 +95480,13 @@
                             if (options.oneofs)
                                 object._desiredEnablePrivateEndpoint = "desiredEnablePrivateEndpoint";
                         }
+                        if (message.desiredDefaultEnablePrivateNodes != null && message.hasOwnProperty("desiredDefaultEnablePrivateNodes")) {
+                            object.desiredDefaultEnablePrivateNodes = message.desiredDefaultEnablePrivateNodes;
+                            if (options.oneofs)
+                                object._desiredDefaultEnablePrivateNodes = "desiredDefaultEnablePrivateNodes";
+                        }
+                        if (message.desiredControlPlaneEndpointsConfig != null && message.hasOwnProperty("desiredControlPlaneEndpointsConfig"))
+                            object.desiredControlPlaneEndpointsConfig = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.toObject(message.desiredControlPlaneEndpointsConfig, options);
                         if (message.desiredMasterVersion != null && message.hasOwnProperty("desiredMasterVersion"))
                             object.desiredMasterVersion = message.desiredMasterVersion;
                         if (message.desiredGcfsConfig != null && message.hasOwnProperty("desiredGcfsConfig"))
@@ -92534,6 +95498,8 @@
                             if (options.oneofs)
                                 object._desiredProtectConfig = "desiredProtectConfig";
                         }
+                        if (message.desiredPodAutoscaling != null && message.hasOwnProperty("desiredPodAutoscaling"))
+                            object.desiredPodAutoscaling = $root.google.container.v1beta1.PodAutoscaling.toObject(message.desiredPodAutoscaling, options);
                         if (message.desiredGatewayApiConfig != null && message.hasOwnProperty("desiredGatewayApiConfig"))
                             object.desiredGatewayApiConfig = $root.google.container.v1beta1.GatewayAPIConfig.toObject(message.desiredGatewayApiConfig, options);
                         if (message.etag != null && message.hasOwnProperty("etag"))
@@ -92589,10 +95555,33 @@
                             if (options.oneofs)
                                 object._desiredSecretManagerConfig = "desiredSecretManagerConfig";
                         }
+                        if (message.desiredCompliancePostureConfig != null && message.hasOwnProperty("desiredCompliancePostureConfig")) {
+                            object.desiredCompliancePostureConfig = $root.google.container.v1beta1.CompliancePostureConfig.toObject(message.desiredCompliancePostureConfig, options);
+                            if (options.oneofs)
+                                object._desiredCompliancePostureConfig = "desiredCompliancePostureConfig";
+                        }
                         if (message.desiredNodeKubeletConfig != null && message.hasOwnProperty("desiredNodeKubeletConfig"))
                             object.desiredNodeKubeletConfig = $root.google.container.v1beta1.NodeKubeletConfig.toObject(message.desiredNodeKubeletConfig, options);
                         if (message.desiredNodePoolAutoConfigKubeletConfig != null && message.hasOwnProperty("desiredNodePoolAutoConfigKubeletConfig"))
                             object.desiredNodePoolAutoConfigKubeletConfig = $root.google.container.v1beta1.NodeKubeletConfig.toObject(message.desiredNodePoolAutoConfigKubeletConfig, options);
+                        if (message.userManagedKeysConfig != null && message.hasOwnProperty("userManagedKeysConfig"))
+                            object.userManagedKeysConfig = $root.google.container.v1beta1.UserManagedKeysConfig.toObject(message.userManagedKeysConfig, options);
+                        if (message.desiredRbacBindingConfig != null && message.hasOwnProperty("desiredRbacBindingConfig")) {
+                            object.desiredRbacBindingConfig = $root.google.container.v1beta1.RBACBindingConfig.toObject(message.desiredRbacBindingConfig, options);
+                            if (options.oneofs)
+                                object._desiredRbacBindingConfig = "desiredRbacBindingConfig";
+                        }
+                        if (message.desiredEnterpriseConfig != null && message.hasOwnProperty("desiredEnterpriseConfig"))
+                            object.desiredEnterpriseConfig = $root.google.container.v1beta1.DesiredEnterpriseConfig.toObject(message.desiredEnterpriseConfig, options);
+                        if (message.desiredDisableL4LbFirewallReconciliation != null && message.hasOwnProperty("desiredDisableL4LbFirewallReconciliation")) {
+                            object.desiredDisableL4LbFirewallReconciliation = message.desiredDisableL4LbFirewallReconciliation;
+                            if (options.oneofs)
+                                object._desiredDisableL4LbFirewallReconciliation = "desiredDisableL4LbFirewallReconciliation";
+                        }
+                        if (message.desiredNodePoolAutoConfigLinuxNodeConfig != null && message.hasOwnProperty("desiredNodePoolAutoConfigLinuxNodeConfig"))
+                            object.desiredNodePoolAutoConfigLinuxNodeConfig = $root.google.container.v1beta1.LinuxNodeConfig.toObject(message.desiredNodePoolAutoConfigLinuxNodeConfig, options);
+                        if (message.desiredAnonymousAuthenticationConfig != null && message.hasOwnProperty("desiredAnonymousAuthenticationConfig"))
+                            object.desiredAnonymousAuthenticationConfig = $root.google.container.v1beta1.AnonymousAuthenticationConfig.toObject(message.desiredAnonymousAuthenticationConfig, options);
                         return object;
                     };
     
@@ -93114,6 +96103,233 @@
                     };
     
                     return RangeInfo;
+                })();
+    
+                v1beta1.DesiredEnterpriseConfig = (function() {
+    
+                    /**
+                     * Properties of a DesiredEnterpriseConfig.
+                     * @memberof google.container.v1beta1
+                     * @interface IDesiredEnterpriseConfig
+                     * @property {google.container.v1beta1.EnterpriseConfig.ClusterTier|null} [desiredTier] DesiredEnterpriseConfig desiredTier
+                     */
+    
+                    /**
+                     * Constructs a new DesiredEnterpriseConfig.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a DesiredEnterpriseConfig.
+                     * @implements IDesiredEnterpriseConfig
+                     * @constructor
+                     * @param {google.container.v1beta1.IDesiredEnterpriseConfig=} [properties] Properties to set
+                     */
+                    function DesiredEnterpriseConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DesiredEnterpriseConfig desiredTier.
+                     * @member {google.container.v1beta1.EnterpriseConfig.ClusterTier} desiredTier
+                     * @memberof google.container.v1beta1.DesiredEnterpriseConfig
+                     * @instance
+                     */
+                    DesiredEnterpriseConfig.prototype.desiredTier = 0;
+    
+                    /**
+                     * Creates a new DesiredEnterpriseConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.DesiredEnterpriseConfig
+                     * @static
+                     * @param {google.container.v1beta1.IDesiredEnterpriseConfig=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.DesiredEnterpriseConfig} DesiredEnterpriseConfig instance
+                     */
+                    DesiredEnterpriseConfig.create = function create(properties) {
+                        return new DesiredEnterpriseConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DesiredEnterpriseConfig message. Does not implicitly {@link google.container.v1beta1.DesiredEnterpriseConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.DesiredEnterpriseConfig
+                     * @static
+                     * @param {google.container.v1beta1.IDesiredEnterpriseConfig} message DesiredEnterpriseConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DesiredEnterpriseConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.desiredTier != null && Object.hasOwnProperty.call(message, "desiredTier"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.desiredTier);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DesiredEnterpriseConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.DesiredEnterpriseConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.DesiredEnterpriseConfig
+                     * @static
+                     * @param {google.container.v1beta1.IDesiredEnterpriseConfig} message DesiredEnterpriseConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DesiredEnterpriseConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DesiredEnterpriseConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.DesiredEnterpriseConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.DesiredEnterpriseConfig} DesiredEnterpriseConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DesiredEnterpriseConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.DesiredEnterpriseConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.desiredTier = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DesiredEnterpriseConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.DesiredEnterpriseConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.DesiredEnterpriseConfig} DesiredEnterpriseConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DesiredEnterpriseConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DesiredEnterpriseConfig message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.DesiredEnterpriseConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DesiredEnterpriseConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.desiredTier != null && message.hasOwnProperty("desiredTier"))
+                            switch (message.desiredTier) {
+                            default:
+                                return "desiredTier: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DesiredEnterpriseConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.DesiredEnterpriseConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.DesiredEnterpriseConfig} DesiredEnterpriseConfig
+                     */
+                    DesiredEnterpriseConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.DesiredEnterpriseConfig)
+                            return object;
+                        var message = new $root.google.container.v1beta1.DesiredEnterpriseConfig();
+                        switch (object.desiredTier) {
+                        default:
+                            if (typeof object.desiredTier === "number") {
+                                message.desiredTier = object.desiredTier;
+                                break;
+                            }
+                            break;
+                        case "CLUSTER_TIER_UNSPECIFIED":
+                        case 0:
+                            message.desiredTier = 0;
+                            break;
+                        case "STANDARD":
+                        case 1:
+                            message.desiredTier = 1;
+                            break;
+                        case "ENTERPRISE":
+                        case 2:
+                            message.desiredTier = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DesiredEnterpriseConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.DesiredEnterpriseConfig
+                     * @static
+                     * @param {google.container.v1beta1.DesiredEnterpriseConfig} message DesiredEnterpriseConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DesiredEnterpriseConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.desiredTier = options.enums === String ? "CLUSTER_TIER_UNSPECIFIED" : 0;
+                        if (message.desiredTier != null && message.hasOwnProperty("desiredTier"))
+                            object.desiredTier = options.enums === String ? $root.google.container.v1beta1.EnterpriseConfig.ClusterTier[message.desiredTier] === undefined ? message.desiredTier : $root.google.container.v1beta1.EnterpriseConfig.ClusterTier[message.desiredTier] : message.desiredTier;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DesiredEnterpriseConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.DesiredEnterpriseConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DesiredEnterpriseConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DesiredEnterpriseConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.DesiredEnterpriseConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DesiredEnterpriseConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.DesiredEnterpriseConfig";
+                    };
+    
+                    return DesiredEnterpriseConfig;
                 })();
     
                 v1beta1.Operation = (function() {
@@ -95455,6 +98671,9 @@
                      * @property {google.container.v1beta1.IResourceManagerTags|null} [resourceManagerTags] UpdateNodePoolRequest resourceManagerTags
                      * @property {google.container.v1beta1.IContainerdConfig|null} [containerdConfig] UpdateNodePoolRequest containerdConfig
                      * @property {google.container.v1beta1.NodePool.IQueuedProvisioning|null} [queuedProvisioning] UpdateNodePoolRequest queuedProvisioning
+                     * @property {Array.<string>|null} [storagePools] UpdateNodePoolRequest storagePools
+                     * @property {google.protobuf.IDuration|null} [maxRunDuration] UpdateNodePoolRequest maxRunDuration
+                     * @property {boolean|null} [flexStart] UpdateNodePoolRequest flexStart
                      */
     
                     /**
@@ -95468,6 +98687,7 @@
                     function UpdateNodePoolRequest(properties) {
                         this.locations = [];
                         this.accelerators = [];
+                        this.storagePools = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -95723,6 +98943,44 @@
                     UpdateNodePoolRequest.prototype.queuedProvisioning = null;
     
                     /**
+                     * UpdateNodePoolRequest storagePools.
+                     * @member {Array.<string>} storagePools
+                     * @memberof google.container.v1beta1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    UpdateNodePoolRequest.prototype.storagePools = $util.emptyArray;
+    
+                    /**
+                     * UpdateNodePoolRequest maxRunDuration.
+                     * @member {google.protobuf.IDuration|null|undefined} maxRunDuration
+                     * @memberof google.container.v1beta1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    UpdateNodePoolRequest.prototype.maxRunDuration = null;
+    
+                    /**
+                     * UpdateNodePoolRequest flexStart.
+                     * @member {boolean|null|undefined} flexStart
+                     * @memberof google.container.v1beta1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    UpdateNodePoolRequest.prototype.flexStart = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * UpdateNodePoolRequest _flexStart.
+                     * @member {"flexStart"|undefined} _flexStart
+                     * @memberof google.container.v1beta1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    Object.defineProperty(UpdateNodePoolRequest.prototype, "_flexStart", {
+                        get: $util.oneOfGetter($oneOfFields = ["flexStart"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
                      * Creates a new UpdateNodePoolRequest instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1beta1.UpdateNodePoolRequest
@@ -95810,6 +99068,13 @@
                             $root.google.container.v1beta1.ContainerdConfig.encode(message.containerdConfig, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
                         if (message.queuedProvisioning != null && Object.hasOwnProperty.call(message, "queuedProvisioning"))
                             $root.google.container.v1beta1.NodePool.QueuedProvisioning.encode(message.queuedProvisioning, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
+                        if (message.storagePools != null && message.storagePools.length)
+                            for (var i = 0; i < message.storagePools.length; ++i)
+                                writer.uint32(/* id 43, wireType 2 =*/346).string(message.storagePools[i]);
+                        if (message.maxRunDuration != null && Object.hasOwnProperty.call(message, "maxRunDuration"))
+                            $root.google.protobuf.Duration.encode(message.maxRunDuration, writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
+                        if (message.flexStart != null && Object.hasOwnProperty.call(message, "flexStart"))
+                            writer.uint32(/* id 46, wireType 0 =*/368).bool(message.flexStart);
                         return writer;
                     };
     
@@ -95972,6 +99237,20 @@
                                     message.queuedProvisioning = $root.google.container.v1beta1.NodePool.QueuedProvisioning.decode(reader, reader.uint32());
                                     break;
                                 }
+                            case 43: {
+                                    if (!(message.storagePools && message.storagePools.length))
+                                        message.storagePools = [];
+                                    message.storagePools.push(reader.string());
+                                    break;
+                                }
+                            case 45: {
+                                    message.maxRunDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 46: {
+                                    message.flexStart = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -96007,6 +99286,7 @@
                     UpdateNodePoolRequest.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        var properties = {};
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             if (!$util.isString(message.projectId))
                                 return "projectId: string expected";
@@ -96145,6 +99425,23 @@
                             var error = $root.google.container.v1beta1.NodePool.QueuedProvisioning.verify(message.queuedProvisioning);
                             if (error)
                                 return "queuedProvisioning." + error;
+                        }
+                        if (message.storagePools != null && message.hasOwnProperty("storagePools")) {
+                            if (!Array.isArray(message.storagePools))
+                                return "storagePools: array expected";
+                            for (var i = 0; i < message.storagePools.length; ++i)
+                                if (!$util.isString(message.storagePools[i]))
+                                    return "storagePools: string[] expected";
+                        }
+                        if (message.maxRunDuration != null && message.hasOwnProperty("maxRunDuration")) {
+                            var error = $root.google.protobuf.Duration.verify(message.maxRunDuration);
+                            if (error)
+                                return "maxRunDuration." + error;
+                        }
+                        if (message.flexStart != null && message.hasOwnProperty("flexStart")) {
+                            properties._flexStart = 1;
+                            if (typeof message.flexStart !== "boolean")
+                                return "flexStart: boolean expected";
                         }
                         return null;
                     };
@@ -96297,6 +99594,20 @@
                                 throw TypeError(".google.container.v1beta1.UpdateNodePoolRequest.queuedProvisioning: object expected");
                             message.queuedProvisioning = $root.google.container.v1beta1.NodePool.QueuedProvisioning.fromObject(object.queuedProvisioning);
                         }
+                        if (object.storagePools) {
+                            if (!Array.isArray(object.storagePools))
+                                throw TypeError(".google.container.v1beta1.UpdateNodePoolRequest.storagePools: array expected");
+                            message.storagePools = [];
+                            for (var i = 0; i < object.storagePools.length; ++i)
+                                message.storagePools[i] = String(object.storagePools[i]);
+                        }
+                        if (object.maxRunDuration != null) {
+                            if (typeof object.maxRunDuration !== "object")
+                                throw TypeError(".google.container.v1beta1.UpdateNodePoolRequest.maxRunDuration: object expected");
+                            message.maxRunDuration = $root.google.protobuf.Duration.fromObject(object.maxRunDuration);
+                        }
+                        if (object.flexStart != null)
+                            message.flexStart = Boolean(object.flexStart);
                         return message;
                     };
     
@@ -96316,6 +99627,7 @@
                         if (options.arrays || options.defaults) {
                             object.locations = [];
                             object.accelerators = [];
+                            object.storagePools = [];
                         }
                         if (options.defaults) {
                             object.projectId = "";
@@ -96351,6 +99663,7 @@
                             object.resourceManagerTags = null;
                             object.containerdConfig = null;
                             object.queuedProvisioning = null;
+                            object.maxRunDuration = null;
                         }
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
@@ -96423,6 +99736,18 @@
                             object.containerdConfig = $root.google.container.v1beta1.ContainerdConfig.toObject(message.containerdConfig, options);
                         if (message.queuedProvisioning != null && message.hasOwnProperty("queuedProvisioning"))
                             object.queuedProvisioning = $root.google.container.v1beta1.NodePool.QueuedProvisioning.toObject(message.queuedProvisioning, options);
+                        if (message.storagePools && message.storagePools.length) {
+                            object.storagePools = [];
+                            for (var j = 0; j < message.storagePools.length; ++j)
+                                object.storagePools[j] = message.storagePools[j];
+                        }
+                        if (message.maxRunDuration != null && message.hasOwnProperty("maxRunDuration"))
+                            object.maxRunDuration = $root.google.protobuf.Duration.toObject(message.maxRunDuration, options);
+                        if (message.flexStart != null && message.hasOwnProperty("flexStart")) {
+                            object.flexStart = message.flexStart;
+                            if (options.oneofs)
+                                object._flexStart = "flexStart";
+                        }
                         return object;
                     };
     
@@ -101212,6 +104537,7 @@
                          * @property {string|null} [defaultVersion] ReleaseChannelConfig defaultVersion
                          * @property {Array.<google.container.v1beta1.ServerConfig.ReleaseChannelConfig.IAvailableVersion>|null} [availableVersions] ReleaseChannelConfig availableVersions
                          * @property {Array.<string>|null} [validVersions] ReleaseChannelConfig validVersions
+                         * @property {string|null} [upgradeTargetVersion] ReleaseChannelConfig upgradeTargetVersion
                          */
     
                         /**
@@ -101264,6 +104590,14 @@
                         ReleaseChannelConfig.prototype.validVersions = $util.emptyArray;
     
                         /**
+                         * ReleaseChannelConfig upgradeTargetVersion.
+                         * @member {string} upgradeTargetVersion
+                         * @memberof google.container.v1beta1.ServerConfig.ReleaseChannelConfig
+                         * @instance
+                         */
+                        ReleaseChannelConfig.prototype.upgradeTargetVersion = "";
+    
+                        /**
                          * Creates a new ReleaseChannelConfig instance using the specified properties.
                          * @function create
                          * @memberof google.container.v1beta1.ServerConfig.ReleaseChannelConfig
@@ -101297,6 +104631,8 @@
                             if (message.validVersions != null && message.validVersions.length)
                                 for (var i = 0; i < message.validVersions.length; ++i)
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.validVersions[i]);
+                            if (message.upgradeTargetVersion != null && Object.hasOwnProperty.call(message, "upgradeTargetVersion"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.upgradeTargetVersion);
                             return writer;
                         };
     
@@ -101349,6 +104685,10 @@
                                         if (!(message.validVersions && message.validVersions.length))
                                             message.validVersions = [];
                                         message.validVersions.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.upgradeTargetVersion = reader.string();
                                         break;
                                     }
                                 default:
@@ -101416,6 +104756,9 @@
                                     if (!$util.isString(message.validVersions[i]))
                                         return "validVersions: string[] expected";
                             }
+                            if (message.upgradeTargetVersion != null && message.hasOwnProperty("upgradeTargetVersion"))
+                                if (!$util.isString(message.upgradeTargetVersion))
+                                    return "upgradeTargetVersion: string expected";
                             return null;
                         };
     
@@ -101478,6 +104821,8 @@
                                 for (var i = 0; i < object.validVersions.length; ++i)
                                     message.validVersions[i] = String(object.validVersions[i]);
                             }
+                            if (object.upgradeTargetVersion != null)
+                                message.upgradeTargetVersion = String(object.upgradeTargetVersion);
                             return message;
                         };
     
@@ -101501,6 +104846,7 @@
                             if (options.defaults) {
                                 object.channel = options.enums === String ? "UNSPECIFIED" : 0;
                                 object.defaultVersion = "";
+                                object.upgradeTargetVersion = "";
                             }
                             if (message.channel != null && message.hasOwnProperty("channel"))
                                 object.channel = options.enums === String ? $root.google.container.v1beta1.ReleaseChannel.Channel[message.channel] === undefined ? message.channel : $root.google.container.v1beta1.ReleaseChannel.Channel[message.channel] : message.channel;
@@ -101516,6 +104862,8 @@
                                 for (var j = 0; j < message.validVersions.length; ++j)
                                     object.validVersions[j] = message.validVersions[j];
                             }
+                            if (message.upgradeTargetVersion != null && message.hasOwnProperty("upgradeTargetVersion"))
+                                object.upgradeTargetVersion = message.upgradeTargetVersion;
                             return object;
                         };
     
@@ -113835,6 +117183,7 @@
                      * @memberof google.container.v1beta1
                      * @interface IManagedPrometheusConfig
                      * @property {boolean|null} [enabled] ManagedPrometheusConfig enabled
+                     * @property {google.container.v1beta1.IAutoMonitoringConfig|null} [autoMonitoringConfig] ManagedPrometheusConfig autoMonitoringConfig
                      */
     
                     /**
@@ -113859,6 +117208,14 @@
                      * @instance
                      */
                     ManagedPrometheusConfig.prototype.enabled = false;
+    
+                    /**
+                     * ManagedPrometheusConfig autoMonitoringConfig.
+                     * @member {google.container.v1beta1.IAutoMonitoringConfig|null|undefined} autoMonitoringConfig
+                     * @memberof google.container.v1beta1.ManagedPrometheusConfig
+                     * @instance
+                     */
+                    ManagedPrometheusConfig.prototype.autoMonitoringConfig = null;
     
                     /**
                      * Creates a new ManagedPrometheusConfig instance using the specified properties.
@@ -113886,6 +117243,8 @@
                             writer = $Writer.create();
                         if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                             writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        if (message.autoMonitoringConfig != null && Object.hasOwnProperty.call(message, "autoMonitoringConfig"))
+                            $root.google.container.v1beta1.AutoMonitoringConfig.encode(message.autoMonitoringConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         return writer;
                     };
     
@@ -113922,6 +117281,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.enabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.autoMonitoringConfig = $root.google.container.v1beta1.AutoMonitoringConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -113962,6 +117325,11 @@
                         if (message.enabled != null && message.hasOwnProperty("enabled"))
                             if (typeof message.enabled !== "boolean")
                                 return "enabled: boolean expected";
+                        if (message.autoMonitoringConfig != null && message.hasOwnProperty("autoMonitoringConfig")) {
+                            var error = $root.google.container.v1beta1.AutoMonitoringConfig.verify(message.autoMonitoringConfig);
+                            if (error)
+                                return "autoMonitoringConfig." + error;
+                        }
                         return null;
                     };
     
@@ -113979,6 +117347,11 @@
                         var message = new $root.google.container.v1beta1.ManagedPrometheusConfig();
                         if (object.enabled != null)
                             message.enabled = Boolean(object.enabled);
+                        if (object.autoMonitoringConfig != null) {
+                            if (typeof object.autoMonitoringConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.ManagedPrometheusConfig.autoMonitoringConfig: object expected");
+                            message.autoMonitoringConfig = $root.google.container.v1beta1.AutoMonitoringConfig.fromObject(object.autoMonitoringConfig);
+                        }
                         return message;
                     };
     
@@ -113995,10 +117368,14 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.enabled = false;
+                            object.autoMonitoringConfig = null;
+                        }
                         if (message.enabled != null && message.hasOwnProperty("enabled"))
                             object.enabled = message.enabled;
+                        if (message.autoMonitoringConfig != null && message.hasOwnProperty("autoMonitoringConfig"))
+                            object.autoMonitoringConfig = $root.google.container.v1beta1.AutoMonitoringConfig.toObject(message.autoMonitoringConfig, options);
                         return object;
                     };
     
@@ -114029,6 +117406,249 @@
                     };
     
                     return ManagedPrometheusConfig;
+                })();
+    
+                v1beta1.AutoMonitoringConfig = (function() {
+    
+                    /**
+                     * Properties of an AutoMonitoringConfig.
+                     * @memberof google.container.v1beta1
+                     * @interface IAutoMonitoringConfig
+                     * @property {google.container.v1beta1.AutoMonitoringConfig.Scope|null} [scope] AutoMonitoringConfig scope
+                     */
+    
+                    /**
+                     * Constructs a new AutoMonitoringConfig.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents an AutoMonitoringConfig.
+                     * @implements IAutoMonitoringConfig
+                     * @constructor
+                     * @param {google.container.v1beta1.IAutoMonitoringConfig=} [properties] Properties to set
+                     */
+                    function AutoMonitoringConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AutoMonitoringConfig scope.
+                     * @member {google.container.v1beta1.AutoMonitoringConfig.Scope} scope
+                     * @memberof google.container.v1beta1.AutoMonitoringConfig
+                     * @instance
+                     */
+                    AutoMonitoringConfig.prototype.scope = 0;
+    
+                    /**
+                     * Creates a new AutoMonitoringConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.AutoMonitoringConfig
+                     * @static
+                     * @param {google.container.v1beta1.IAutoMonitoringConfig=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.AutoMonitoringConfig} AutoMonitoringConfig instance
+                     */
+                    AutoMonitoringConfig.create = function create(properties) {
+                        return new AutoMonitoringConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AutoMonitoringConfig message. Does not implicitly {@link google.container.v1beta1.AutoMonitoringConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.AutoMonitoringConfig
+                     * @static
+                     * @param {google.container.v1beta1.IAutoMonitoringConfig} message AutoMonitoringConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AutoMonitoringConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.scope);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AutoMonitoringConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.AutoMonitoringConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.AutoMonitoringConfig
+                     * @static
+                     * @param {google.container.v1beta1.IAutoMonitoringConfig} message AutoMonitoringConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AutoMonitoringConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AutoMonitoringConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.AutoMonitoringConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.AutoMonitoringConfig} AutoMonitoringConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AutoMonitoringConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.AutoMonitoringConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.scope = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AutoMonitoringConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.AutoMonitoringConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.AutoMonitoringConfig} AutoMonitoringConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AutoMonitoringConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AutoMonitoringConfig message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.AutoMonitoringConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AutoMonitoringConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.scope != null && message.hasOwnProperty("scope"))
+                            switch (message.scope) {
+                            default:
+                                return "scope: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AutoMonitoringConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.AutoMonitoringConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.AutoMonitoringConfig} AutoMonitoringConfig
+                     */
+                    AutoMonitoringConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.AutoMonitoringConfig)
+                            return object;
+                        var message = new $root.google.container.v1beta1.AutoMonitoringConfig();
+                        switch (object.scope) {
+                        default:
+                            if (typeof object.scope === "number") {
+                                message.scope = object.scope;
+                                break;
+                            }
+                            break;
+                        case "SCOPE_UNSPECIFIED":
+                        case 0:
+                            message.scope = 0;
+                            break;
+                        case "ALL":
+                        case 1:
+                            message.scope = 1;
+                            break;
+                        case "NONE":
+                        case 2:
+                            message.scope = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AutoMonitoringConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.AutoMonitoringConfig
+                     * @static
+                     * @param {google.container.v1beta1.AutoMonitoringConfig} message AutoMonitoringConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AutoMonitoringConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.scope = options.enums === String ? "SCOPE_UNSPECIFIED" : 0;
+                        if (message.scope != null && message.hasOwnProperty("scope"))
+                            object.scope = options.enums === String ? $root.google.container.v1beta1.AutoMonitoringConfig.Scope[message.scope] === undefined ? message.scope : $root.google.container.v1beta1.AutoMonitoringConfig.Scope[message.scope] : message.scope;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AutoMonitoringConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.AutoMonitoringConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AutoMonitoringConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AutoMonitoringConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.AutoMonitoringConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AutoMonitoringConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.AutoMonitoringConfig";
+                    };
+    
+                    /**
+                     * Scope enum.
+                     * @name google.container.v1beta1.AutoMonitoringConfig.Scope
+                     * @enum {number}
+                     * @property {number} SCOPE_UNSPECIFIED=0 SCOPE_UNSPECIFIED value
+                     * @property {number} ALL=1 ALL value
+                     * @property {number} NONE=2 NONE value
+                     */
+                    AutoMonitoringConfig.Scope = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SCOPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ALL"] = 1;
+                        values[valuesById[2] = "NONE"] = 2;
+                        return values;
+                    })();
+    
+                    return AutoMonitoringConfig;
                 })();
     
                 v1beta1.WorkloadMetadataConfig = (function() {
@@ -115860,6 +119480,7 @@
                             case 4:
                             case 7:
                             case 9:
+                            case 10:
                                 break;
                             }
                         if (message.message != null && message.hasOwnProperty("message"))
@@ -115937,6 +119558,10 @@
                         case "CA_EXPIRING":
                         case 9:
                             message.code = 9;
+                            break;
+                        case "NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS":
+                        case 10:
+                            message.code = 10;
                             break;
                         }
                         if (object.message != null)
@@ -116084,6 +119709,7 @@
                      * @property {number} SET_BY_OPERATOR=4 SET_BY_OPERATOR value
                      * @property {number} CLOUD_KMS_KEY_ERROR=7 CLOUD_KMS_KEY_ERROR value
                      * @property {number} CA_EXPIRING=9 CA_EXPIRING value
+                     * @property {number} NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS=10 NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS value
                      */
                     StatusCondition.Code = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -116094,6 +119720,7 @@
                         values[valuesById[4] = "SET_BY_OPERATOR"] = 4;
                         values[valuesById[7] = "CLOUD_KMS_KEY_ERROR"] = 7;
                         values[valuesById[9] = "CA_EXPIRING"] = 9;
+                        values[valuesById[10] = "NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS"] = 10;
                         return values;
                     })();
     
@@ -116121,6 +119748,8 @@
                      * @property {boolean|null} [enableFqdnNetworkPolicy] NetworkConfig enableFqdnNetworkPolicy
                      * @property {google.container.v1beta1.InTransitEncryptionConfig|null} [inTransitEncryptionConfig] NetworkConfig inTransitEncryptionConfig
                      * @property {boolean|null} [enableCiliumClusterwideNetworkPolicy] NetworkConfig enableCiliumClusterwideNetworkPolicy
+                     * @property {boolean|null} [defaultEnablePrivateNodes] NetworkConfig defaultEnablePrivateNodes
+                     * @property {boolean|null} [disableL4LbFirewallReconciliation] NetworkConfig disableL4LbFirewallReconciliation
                      */
     
                     /**
@@ -116258,6 +119887,22 @@
                      */
                     NetworkConfig.prototype.enableCiliumClusterwideNetworkPolicy = null;
     
+                    /**
+                     * NetworkConfig defaultEnablePrivateNodes.
+                     * @member {boolean|null|undefined} defaultEnablePrivateNodes
+                     * @memberof google.container.v1beta1.NetworkConfig
+                     * @instance
+                     */
+                    NetworkConfig.prototype.defaultEnablePrivateNodes = null;
+    
+                    /**
+                     * NetworkConfig disableL4LbFirewallReconciliation.
+                     * @member {boolean|null|undefined} disableL4LbFirewallReconciliation
+                     * @memberof google.container.v1beta1.NetworkConfig
+                     * @instance
+                     */
+                    NetworkConfig.prototype.disableL4LbFirewallReconciliation = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -116291,6 +119936,28 @@
                      */
                     Object.defineProperty(NetworkConfig.prototype, "_enableCiliumClusterwideNetworkPolicy", {
                         get: $util.oneOfGetter($oneOfFields = ["enableCiliumClusterwideNetworkPolicy"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * NetworkConfig _defaultEnablePrivateNodes.
+                     * @member {"defaultEnablePrivateNodes"|undefined} _defaultEnablePrivateNodes
+                     * @memberof google.container.v1beta1.NetworkConfig
+                     * @instance
+                     */
+                    Object.defineProperty(NetworkConfig.prototype, "_defaultEnablePrivateNodes", {
+                        get: $util.oneOfGetter($oneOfFields = ["defaultEnablePrivateNodes"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * NetworkConfig _disableL4LbFirewallReconciliation.
+                     * @member {"disableL4LbFirewallReconciliation"|undefined} _disableL4LbFirewallReconciliation
+                     * @memberof google.container.v1beta1.NetworkConfig
+                     * @instance
+                     */
+                    Object.defineProperty(NetworkConfig.prototype, "_disableL4LbFirewallReconciliation", {
+                        get: $util.oneOfGetter($oneOfFields = ["disableL4LbFirewallReconciliation"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -116348,6 +120015,10 @@
                             writer.uint32(/* id 20, wireType 0 =*/160).int32(message.inTransitEncryptionConfig);
                         if (message.enableCiliumClusterwideNetworkPolicy != null && Object.hasOwnProperty.call(message, "enableCiliumClusterwideNetworkPolicy"))
                             writer.uint32(/* id 21, wireType 0 =*/168).bool(message.enableCiliumClusterwideNetworkPolicy);
+                        if (message.defaultEnablePrivateNodes != null && Object.hasOwnProperty.call(message, "defaultEnablePrivateNodes"))
+                            writer.uint32(/* id 22, wireType 0 =*/176).bool(message.defaultEnablePrivateNodes);
+                        if (message.disableL4LbFirewallReconciliation != null && Object.hasOwnProperty.call(message, "disableL4LbFirewallReconciliation"))
+                            writer.uint32(/* id 24, wireType 0 =*/192).bool(message.disableL4LbFirewallReconciliation);
                         return writer;
                     };
     
@@ -116440,6 +120111,14 @@
                                 }
                             case 21: {
                                     message.enableCiliumClusterwideNetworkPolicy = reader.bool();
+                                    break;
+                                }
+                            case 22: {
+                                    message.defaultEnablePrivateNodes = reader.bool();
+                                    break;
+                                }
+                            case 24: {
+                                    message.disableL4LbFirewallReconciliation = reader.bool();
                                     break;
                                 }
                             default:
@@ -116557,6 +120236,16 @@
                             properties._enableCiliumClusterwideNetworkPolicy = 1;
                             if (typeof message.enableCiliumClusterwideNetworkPolicy !== "boolean")
                                 return "enableCiliumClusterwideNetworkPolicy: boolean expected";
+                        }
+                        if (message.defaultEnablePrivateNodes != null && message.hasOwnProperty("defaultEnablePrivateNodes")) {
+                            properties._defaultEnablePrivateNodes = 1;
+                            if (typeof message.defaultEnablePrivateNodes !== "boolean")
+                                return "defaultEnablePrivateNodes: boolean expected";
+                        }
+                        if (message.disableL4LbFirewallReconciliation != null && message.hasOwnProperty("disableL4LbFirewallReconciliation")) {
+                            properties._disableL4LbFirewallReconciliation = 1;
+                            if (typeof message.disableL4LbFirewallReconciliation !== "boolean")
+                                return "disableL4LbFirewallReconciliation: boolean expected";
                         }
                         return null;
                     };
@@ -116676,6 +120365,10 @@
                         }
                         if (object.enableCiliumClusterwideNetworkPolicy != null)
                             message.enableCiliumClusterwideNetworkPolicy = Boolean(object.enableCiliumClusterwideNetworkPolicy);
+                        if (object.defaultEnablePrivateNodes != null)
+                            message.defaultEnablePrivateNodes = Boolean(object.defaultEnablePrivateNodes);
+                        if (object.disableL4LbFirewallReconciliation != null)
+                            message.disableL4LbFirewallReconciliation = Boolean(object.disableL4LbFirewallReconciliation);
                         return message;
                     };
     
@@ -116744,6 +120437,16 @@
                             object.enableCiliumClusterwideNetworkPolicy = message.enableCiliumClusterwideNetworkPolicy;
                             if (options.oneofs)
                                 object._enableCiliumClusterwideNetworkPolicy = "enableCiliumClusterwideNetworkPolicy";
+                        }
+                        if (message.defaultEnablePrivateNodes != null && message.hasOwnProperty("defaultEnablePrivateNodes")) {
+                            object.defaultEnablePrivateNodes = message.defaultEnablePrivateNodes;
+                            if (options.oneofs)
+                                object._defaultEnablePrivateNodes = "defaultEnablePrivateNodes";
+                        }
+                        if (message.disableL4LbFirewallReconciliation != null && message.hasOwnProperty("disableL4LbFirewallReconciliation")) {
+                            object.disableL4LbFirewallReconciliation = message.disableL4LbFirewallReconciliation;
+                            if (options.oneofs)
+                                object._disableL4LbFirewallReconciliation = "disableL4LbFirewallReconciliation";
                         }
                         return object;
                     };
@@ -126569,6 +130272,7 @@
                      * @memberof google.container.v1beta1
                      * @interface IWorkloadPolicyConfig
                      * @property {boolean|null} [allowNetAdmin] WorkloadPolicyConfig allowNetAdmin
+                     * @property {boolean|null} [autopilotCompatibilityAuditingEnabled] WorkloadPolicyConfig autopilotCompatibilityAuditingEnabled
                      */
     
                     /**
@@ -126594,6 +130298,14 @@
                      */
                     WorkloadPolicyConfig.prototype.allowNetAdmin = null;
     
+                    /**
+                     * WorkloadPolicyConfig autopilotCompatibilityAuditingEnabled.
+                     * @member {boolean|null|undefined} autopilotCompatibilityAuditingEnabled
+                     * @memberof google.container.v1beta1.WorkloadPolicyConfig
+                     * @instance
+                     */
+                    WorkloadPolicyConfig.prototype.autopilotCompatibilityAuditingEnabled = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -126605,6 +130317,17 @@
                      */
                     Object.defineProperty(WorkloadPolicyConfig.prototype, "_allowNetAdmin", {
                         get: $util.oneOfGetter($oneOfFields = ["allowNetAdmin"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * WorkloadPolicyConfig _autopilotCompatibilityAuditingEnabled.
+                     * @member {"autopilotCompatibilityAuditingEnabled"|undefined} _autopilotCompatibilityAuditingEnabled
+                     * @memberof google.container.v1beta1.WorkloadPolicyConfig
+                     * @instance
+                     */
+                    Object.defineProperty(WorkloadPolicyConfig.prototype, "_autopilotCompatibilityAuditingEnabled", {
+                        get: $util.oneOfGetter($oneOfFields = ["autopilotCompatibilityAuditingEnabled"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -126634,6 +130357,8 @@
                             writer = $Writer.create();
                         if (message.allowNetAdmin != null && Object.hasOwnProperty.call(message, "allowNetAdmin"))
                             writer.uint32(/* id 1, wireType 0 =*/8).bool(message.allowNetAdmin);
+                        if (message.autopilotCompatibilityAuditingEnabled != null && Object.hasOwnProperty.call(message, "autopilotCompatibilityAuditingEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.autopilotCompatibilityAuditingEnabled);
                         return writer;
                     };
     
@@ -126670,6 +130395,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.allowNetAdmin = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.autopilotCompatibilityAuditingEnabled = reader.bool();
                                     break;
                                 }
                             default:
@@ -126713,6 +130442,11 @@
                             if (typeof message.allowNetAdmin !== "boolean")
                                 return "allowNetAdmin: boolean expected";
                         }
+                        if (message.autopilotCompatibilityAuditingEnabled != null && message.hasOwnProperty("autopilotCompatibilityAuditingEnabled")) {
+                            properties._autopilotCompatibilityAuditingEnabled = 1;
+                            if (typeof message.autopilotCompatibilityAuditingEnabled !== "boolean")
+                                return "autopilotCompatibilityAuditingEnabled: boolean expected";
+                        }
                         return null;
                     };
     
@@ -126730,6 +130464,8 @@
                         var message = new $root.google.container.v1beta1.WorkloadPolicyConfig();
                         if (object.allowNetAdmin != null)
                             message.allowNetAdmin = Boolean(object.allowNetAdmin);
+                        if (object.autopilotCompatibilityAuditingEnabled != null)
+                            message.autopilotCompatibilityAuditingEnabled = Boolean(object.autopilotCompatibilityAuditingEnabled);
                         return message;
                     };
     
@@ -126750,6 +130486,11 @@
                             object.allowNetAdmin = message.allowNetAdmin;
                             if (options.oneofs)
                                 object._allowNetAdmin = "allowNetAdmin";
+                        }
+                        if (message.autopilotCompatibilityAuditingEnabled != null && message.hasOwnProperty("autopilotCompatibilityAuditingEnabled")) {
+                            object.autopilotCompatibilityAuditingEnabled = message.autopilotCompatibilityAuditingEnabled;
+                            if (options.oneofs)
+                                object._autopilotCompatibilityAuditingEnabled = "autopilotCompatibilityAuditingEnabled";
                         }
                         return object;
                     };
@@ -126996,6 +130737,7 @@
                      * @property {number} UPGRADE_AVAILABLE_EVENT=1 UPGRADE_AVAILABLE_EVENT value
                      * @property {number} UPGRADE_EVENT=2 UPGRADE_EVENT value
                      * @property {number} SECURITY_BULLETIN_EVENT=3 SECURITY_BULLETIN_EVENT value
+                     * @property {number} UPGRADE_INFO_EVENT=4 UPGRADE_INFO_EVENT value
                      */
                     NotificationConfig.EventType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -127003,6 +130745,7 @@
                         values[valuesById[1] = "UPGRADE_AVAILABLE_EVENT"] = 1;
                         values[valuesById[2] = "UPGRADE_EVENT"] = 2;
                         values[valuesById[3] = "SECURITY_BULLETIN_EVENT"] = 3;
+                        values[valuesById[4] = "UPGRADE_INFO_EVENT"] = 4;
                         return values;
                     })();
     
@@ -127415,6 +131158,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                         break;
                                     }
                             }
@@ -127459,6 +131203,10 @@
                                     case "SECURITY_BULLETIN_EVENT":
                                     case 3:
                                         message.eventType[i] = 3;
+                                        break;
+                                    case "UPGRADE_INFO_EVENT":
+                                    case 4:
+                                        message.eventType[i] = 4;
                                         break;
                                     }
                             }
@@ -127527,6 +131275,7 @@
                      * @memberof google.container.v1beta1
                      * @interface IConfidentialNodes
                      * @property {boolean|null} [enabled] ConfidentialNodes enabled
+                     * @property {google.container.v1beta1.ConfidentialNodes.ConfidentialInstanceType|null} [confidentialInstanceType] ConfidentialNodes confidentialInstanceType
                      */
     
                     /**
@@ -127551,6 +131300,14 @@
                      * @instance
                      */
                     ConfidentialNodes.prototype.enabled = false;
+    
+                    /**
+                     * ConfidentialNodes confidentialInstanceType.
+                     * @member {google.container.v1beta1.ConfidentialNodes.ConfidentialInstanceType} confidentialInstanceType
+                     * @memberof google.container.v1beta1.ConfidentialNodes
+                     * @instance
+                     */
+                    ConfidentialNodes.prototype.confidentialInstanceType = 0;
     
                     /**
                      * Creates a new ConfidentialNodes instance using the specified properties.
@@ -127578,6 +131335,8 @@
                             writer = $Writer.create();
                         if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                             writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        if (message.confidentialInstanceType != null && Object.hasOwnProperty.call(message, "confidentialInstanceType"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.confidentialInstanceType);
                         return writer;
                     };
     
@@ -127614,6 +131373,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.enabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.confidentialInstanceType = reader.int32();
                                     break;
                                 }
                             default:
@@ -127654,6 +131417,16 @@
                         if (message.enabled != null && message.hasOwnProperty("enabled"))
                             if (typeof message.enabled !== "boolean")
                                 return "enabled: boolean expected";
+                        if (message.confidentialInstanceType != null && message.hasOwnProperty("confidentialInstanceType"))
+                            switch (message.confidentialInstanceType) {
+                            default:
+                                return "confidentialInstanceType: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
                         return null;
                     };
     
@@ -127671,6 +131444,30 @@
                         var message = new $root.google.container.v1beta1.ConfidentialNodes();
                         if (object.enabled != null)
                             message.enabled = Boolean(object.enabled);
+                        switch (object.confidentialInstanceType) {
+                        default:
+                            if (typeof object.confidentialInstanceType === "number") {
+                                message.confidentialInstanceType = object.confidentialInstanceType;
+                                break;
+                            }
+                            break;
+                        case "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.confidentialInstanceType = 0;
+                            break;
+                        case "SEV":
+                        case 1:
+                            message.confidentialInstanceType = 1;
+                            break;
+                        case "SEV_SNP":
+                        case 2:
+                            message.confidentialInstanceType = 2;
+                            break;
+                        case "TDX":
+                        case 3:
+                            message.confidentialInstanceType = 3;
+                            break;
+                        }
                         return message;
                     };
     
@@ -127687,10 +131484,14 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.enabled = false;
+                            object.confidentialInstanceType = options.enums === String ? "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED" : 0;
+                        }
                         if (message.enabled != null && message.hasOwnProperty("enabled"))
                             object.enabled = message.enabled;
+                        if (message.confidentialInstanceType != null && message.hasOwnProperty("confidentialInstanceType"))
+                            object.confidentialInstanceType = options.enums === String ? $root.google.container.v1beta1.ConfidentialNodes.ConfidentialInstanceType[message.confidentialInstanceType] === undefined ? message.confidentialInstanceType : $root.google.container.v1beta1.ConfidentialNodes.ConfidentialInstanceType[message.confidentialInstanceType] : message.confidentialInstanceType;
                         return object;
                     };
     
@@ -127719,6 +131520,24 @@
                         }
                         return typeUrlPrefix + "/google.container.v1beta1.ConfidentialNodes";
                     };
+    
+                    /**
+                     * ConfidentialInstanceType enum.
+                     * @name google.container.v1beta1.ConfidentialNodes.ConfidentialInstanceType
+                     * @enum {number}
+                     * @property {number} CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED=0 CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED value
+                     * @property {number} SEV=1 SEV value
+                     * @property {number} SEV_SNP=2 SEV_SNP value
+                     * @property {number} TDX=3 TDX value
+                     */
+                    ConfidentialNodes.ConfidentialInstanceType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SEV"] = 1;
+                        values[valuesById[2] = "SEV_SNP"] = 2;
+                        values[valuesById[3] = "TDX"] = 3;
+                        return values;
+                    })();
     
                     return ConfidentialNodes;
                 })();
@@ -128087,6 +131906,644 @@
                     return UpgradeEvent;
                 })();
     
+                v1beta1.UpgradeInfoEvent = (function() {
+    
+                    /**
+                     * Properties of an UpgradeInfoEvent.
+                     * @memberof google.container.v1beta1
+                     * @interface IUpgradeInfoEvent
+                     * @property {google.container.v1beta1.UpgradeResourceType|null} [resourceType] UpgradeInfoEvent resourceType
+                     * @property {string|null} [operation] UpgradeInfoEvent operation
+                     * @property {google.protobuf.ITimestamp|null} [startTime] UpgradeInfoEvent startTime
+                     * @property {google.protobuf.ITimestamp|null} [endTime] UpgradeInfoEvent endTime
+                     * @property {string|null} [currentVersion] UpgradeInfoEvent currentVersion
+                     * @property {string|null} [targetVersion] UpgradeInfoEvent targetVersion
+                     * @property {string|null} [resource] UpgradeInfoEvent resource
+                     * @property {google.container.v1beta1.UpgradeInfoEvent.State|null} [state] UpgradeInfoEvent state
+                     * @property {google.protobuf.ITimestamp|null} [standardSupportEndTime] UpgradeInfoEvent standardSupportEndTime
+                     * @property {google.protobuf.ITimestamp|null} [extendedSupportEndTime] UpgradeInfoEvent extendedSupportEndTime
+                     * @property {string|null} [description] UpgradeInfoEvent description
+                     * @property {google.container.v1beta1.UpgradeInfoEvent.EventType|null} [eventType] UpgradeInfoEvent eventType
+                     */
+    
+                    /**
+                     * Constructs a new UpgradeInfoEvent.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents an UpgradeInfoEvent.
+                     * @implements IUpgradeInfoEvent
+                     * @constructor
+                     * @param {google.container.v1beta1.IUpgradeInfoEvent=} [properties] Properties to set
+                     */
+                    function UpgradeInfoEvent(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpgradeInfoEvent resourceType.
+                     * @member {google.container.v1beta1.UpgradeResourceType} resourceType
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.resourceType = 0;
+    
+                    /**
+                     * UpgradeInfoEvent operation.
+                     * @member {string} operation
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.operation = "";
+    
+                    /**
+                     * UpgradeInfoEvent startTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.startTime = null;
+    
+                    /**
+                     * UpgradeInfoEvent endTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.endTime = null;
+    
+                    /**
+                     * UpgradeInfoEvent currentVersion.
+                     * @member {string} currentVersion
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.currentVersion = "";
+    
+                    /**
+                     * UpgradeInfoEvent targetVersion.
+                     * @member {string} targetVersion
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.targetVersion = "";
+    
+                    /**
+                     * UpgradeInfoEvent resource.
+                     * @member {string} resource
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.resource = "";
+    
+                    /**
+                     * UpgradeInfoEvent state.
+                     * @member {google.container.v1beta1.UpgradeInfoEvent.State} state
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.state = 0;
+    
+                    /**
+                     * UpgradeInfoEvent standardSupportEndTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} standardSupportEndTime
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.standardSupportEndTime = null;
+    
+                    /**
+                     * UpgradeInfoEvent extendedSupportEndTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} extendedSupportEndTime
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.extendedSupportEndTime = null;
+    
+                    /**
+                     * UpgradeInfoEvent description.
+                     * @member {string} description
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.description = "";
+    
+                    /**
+                     * UpgradeInfoEvent eventType.
+                     * @member {google.container.v1beta1.UpgradeInfoEvent.EventType} eventType
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.eventType = 0;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * UpgradeInfoEvent _standardSupportEndTime.
+                     * @member {"standardSupportEndTime"|undefined} _standardSupportEndTime
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    Object.defineProperty(UpgradeInfoEvent.prototype, "_standardSupportEndTime", {
+                        get: $util.oneOfGetter($oneOfFields = ["standardSupportEndTime"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * UpgradeInfoEvent _extendedSupportEndTime.
+                     * @member {"extendedSupportEndTime"|undefined} _extendedSupportEndTime
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    Object.defineProperty(UpgradeInfoEvent.prototype, "_extendedSupportEndTime", {
+                        get: $util.oneOfGetter($oneOfFields = ["extendedSupportEndTime"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new UpgradeInfoEvent instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @static
+                     * @param {google.container.v1beta1.IUpgradeInfoEvent=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.UpgradeInfoEvent} UpgradeInfoEvent instance
+                     */
+                    UpgradeInfoEvent.create = function create(properties) {
+                        return new UpgradeInfoEvent(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpgradeInfoEvent message. Does not implicitly {@link google.container.v1beta1.UpgradeInfoEvent.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @static
+                     * @param {google.container.v1beta1.IUpgradeInfoEvent} message UpgradeInfoEvent message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpgradeInfoEvent.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.resourceType);
+                        if (message.operation != null && Object.hasOwnProperty.call(message, "operation"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.operation);
+                        if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                            $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                            $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.currentVersion != null && Object.hasOwnProperty.call(message, "currentVersion"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.currentVersion);
+                        if (message.targetVersion != null && Object.hasOwnProperty.call(message, "targetVersion"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.targetVersion);
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            writer.uint32(/* id 7, wireType 2 =*/58).string(message.resource);
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            writer.uint32(/* id 8, wireType 0 =*/64).int32(message.state);
+                        if (message.standardSupportEndTime != null && Object.hasOwnProperty.call(message, "standardSupportEndTime"))
+                            $root.google.protobuf.Timestamp.encode(message.standardSupportEndTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                        if (message.extendedSupportEndTime != null && Object.hasOwnProperty.call(message, "extendedSupportEndTime"))
+                            $root.google.protobuf.Timestamp.encode(message.extendedSupportEndTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                        if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                            writer.uint32(/* id 11, wireType 2 =*/90).string(message.description);
+                        if (message.eventType != null && Object.hasOwnProperty.call(message, "eventType"))
+                            writer.uint32(/* id 12, wireType 0 =*/96).int32(message.eventType);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpgradeInfoEvent message, length delimited. Does not implicitly {@link google.container.v1beta1.UpgradeInfoEvent.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @static
+                     * @param {google.container.v1beta1.IUpgradeInfoEvent} message UpgradeInfoEvent message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpgradeInfoEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpgradeInfoEvent message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.UpgradeInfoEvent} UpgradeInfoEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpgradeInfoEvent.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.UpgradeInfoEvent();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.resourceType = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.operation = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.currentVersion = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.targetVersion = reader.string();
+                                    break;
+                                }
+                            case 7: {
+                                    message.resource = reader.string();
+                                    break;
+                                }
+                            case 8: {
+                                    message.state = reader.int32();
+                                    break;
+                                }
+                            case 9: {
+                                    message.standardSupportEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 10: {
+                                    message.extendedSupportEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 11: {
+                                    message.description = reader.string();
+                                    break;
+                                }
+                            case 12: {
+                                    message.eventType = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpgradeInfoEvent message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.UpgradeInfoEvent} UpgradeInfoEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpgradeInfoEvent.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpgradeInfoEvent message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpgradeInfoEvent.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                            switch (message.resourceType) {
+                            default:
+                                return "resourceType: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.operation != null && message.hasOwnProperty("operation"))
+                            if (!$util.isString(message.operation))
+                                return "operation: string expected";
+                        if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                            if (error)
+                                return "startTime." + error;
+                        }
+                        if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                            if (error)
+                                return "endTime." + error;
+                        }
+                        if (message.currentVersion != null && message.hasOwnProperty("currentVersion"))
+                            if (!$util.isString(message.currentVersion))
+                                return "currentVersion: string expected";
+                        if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
+                            if (!$util.isString(message.targetVersion))
+                                return "targetVersion: string expected";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            if (!$util.isString(message.resource))
+                                return "resource: string expected";
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            switch (message.state) {
+                            default:
+                                return "state: enum value expected";
+                            case 0:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                                break;
+                            }
+                        if (message.standardSupportEndTime != null && message.hasOwnProperty("standardSupportEndTime")) {
+                            properties._standardSupportEndTime = 1;
+                            {
+                                var error = $root.google.protobuf.Timestamp.verify(message.standardSupportEndTime);
+                                if (error)
+                                    return "standardSupportEndTime." + error;
+                            }
+                        }
+                        if (message.extendedSupportEndTime != null && message.hasOwnProperty("extendedSupportEndTime")) {
+                            properties._extendedSupportEndTime = 1;
+                            {
+                                var error = $root.google.protobuf.Timestamp.verify(message.extendedSupportEndTime);
+                                if (error)
+                                    return "extendedSupportEndTime." + error;
+                            }
+                        }
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            if (!$util.isString(message.description))
+                                return "description: string expected";
+                        if (message.eventType != null && message.hasOwnProperty("eventType"))
+                            switch (message.eventType) {
+                            default:
+                                return "eventType: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpgradeInfoEvent message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.UpgradeInfoEvent} UpgradeInfoEvent
+                     */
+                    UpgradeInfoEvent.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.UpgradeInfoEvent)
+                            return object;
+                        var message = new $root.google.container.v1beta1.UpgradeInfoEvent();
+                        switch (object.resourceType) {
+                        default:
+                            if (typeof object.resourceType === "number") {
+                                message.resourceType = object.resourceType;
+                                break;
+                            }
+                            break;
+                        case "UPGRADE_RESOURCE_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.resourceType = 0;
+                            break;
+                        case "MASTER":
+                        case 1:
+                            message.resourceType = 1;
+                            break;
+                        case "NODE_POOL":
+                        case 2:
+                            message.resourceType = 2;
+                            break;
+                        }
+                        if (object.operation != null)
+                            message.operation = String(object.operation);
+                        if (object.startTime != null) {
+                            if (typeof object.startTime !== "object")
+                                throw TypeError(".google.container.v1beta1.UpgradeInfoEvent.startTime: object expected");
+                            message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                        }
+                        if (object.endTime != null) {
+                            if (typeof object.endTime !== "object")
+                                throw TypeError(".google.container.v1beta1.UpgradeInfoEvent.endTime: object expected");
+                            message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                        }
+                        if (object.currentVersion != null)
+                            message.currentVersion = String(object.currentVersion);
+                        if (object.targetVersion != null)
+                            message.targetVersion = String(object.targetVersion);
+                        if (object.resource != null)
+                            message.resource = String(object.resource);
+                        switch (object.state) {
+                        default:
+                            if (typeof object.state === "number") {
+                                message.state = object.state;
+                                break;
+                            }
+                            break;
+                        case "STATE_UNSPECIFIED":
+                        case 0:
+                            message.state = 0;
+                            break;
+                        case "STARTED":
+                        case 3:
+                            message.state = 3;
+                            break;
+                        case "SUCCEEDED":
+                        case 4:
+                            message.state = 4;
+                            break;
+                        case "FAILED":
+                        case 5:
+                            message.state = 5;
+                            break;
+                        case "CANCELED":
+                        case 6:
+                            message.state = 6;
+                            break;
+                        }
+                        if (object.standardSupportEndTime != null) {
+                            if (typeof object.standardSupportEndTime !== "object")
+                                throw TypeError(".google.container.v1beta1.UpgradeInfoEvent.standardSupportEndTime: object expected");
+                            message.standardSupportEndTime = $root.google.protobuf.Timestamp.fromObject(object.standardSupportEndTime);
+                        }
+                        if (object.extendedSupportEndTime != null) {
+                            if (typeof object.extendedSupportEndTime !== "object")
+                                throw TypeError(".google.container.v1beta1.UpgradeInfoEvent.extendedSupportEndTime: object expected");
+                            message.extendedSupportEndTime = $root.google.protobuf.Timestamp.fromObject(object.extendedSupportEndTime);
+                        }
+                        if (object.description != null)
+                            message.description = String(object.description);
+                        switch (object.eventType) {
+                        default:
+                            if (typeof object.eventType === "number") {
+                                message.eventType = object.eventType;
+                                break;
+                            }
+                            break;
+                        case "EVENT_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.eventType = 0;
+                            break;
+                        case "END_OF_SUPPORT":
+                        case 1:
+                            message.eventType = 1;
+                            break;
+                        case "COS_MILESTONE_VERSION_UPDATE":
+                        case 2:
+                            message.eventType = 2;
+                            break;
+                        case "UPGRADE_LIFECYCLE":
+                        case 3:
+                            message.eventType = 3;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpgradeInfoEvent message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @static
+                     * @param {google.container.v1beta1.UpgradeInfoEvent} message UpgradeInfoEvent
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpgradeInfoEvent.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.resourceType = options.enums === String ? "UPGRADE_RESOURCE_TYPE_UNSPECIFIED" : 0;
+                            object.operation = "";
+                            object.startTime = null;
+                            object.endTime = null;
+                            object.currentVersion = "";
+                            object.targetVersion = "";
+                            object.resource = "";
+                            object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            object.description = "";
+                            object.eventType = options.enums === String ? "EVENT_TYPE_UNSPECIFIED" : 0;
+                        }
+                        if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                            object.resourceType = options.enums === String ? $root.google.container.v1beta1.UpgradeResourceType[message.resourceType] === undefined ? message.resourceType : $root.google.container.v1beta1.UpgradeResourceType[message.resourceType] : message.resourceType;
+                        if (message.operation != null && message.hasOwnProperty("operation"))
+                            object.operation = message.operation;
+                        if (message.startTime != null && message.hasOwnProperty("startTime"))
+                            object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                        if (message.endTime != null && message.hasOwnProperty("endTime"))
+                            object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                        if (message.currentVersion != null && message.hasOwnProperty("currentVersion"))
+                            object.currentVersion = message.currentVersion;
+                        if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
+                            object.targetVersion = message.targetVersion;
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = message.resource;
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            object.state = options.enums === String ? $root.google.container.v1beta1.UpgradeInfoEvent.State[message.state] === undefined ? message.state : $root.google.container.v1beta1.UpgradeInfoEvent.State[message.state] : message.state;
+                        if (message.standardSupportEndTime != null && message.hasOwnProperty("standardSupportEndTime")) {
+                            object.standardSupportEndTime = $root.google.protobuf.Timestamp.toObject(message.standardSupportEndTime, options);
+                            if (options.oneofs)
+                                object._standardSupportEndTime = "standardSupportEndTime";
+                        }
+                        if (message.extendedSupportEndTime != null && message.hasOwnProperty("extendedSupportEndTime")) {
+                            object.extendedSupportEndTime = $root.google.protobuf.Timestamp.toObject(message.extendedSupportEndTime, options);
+                            if (options.oneofs)
+                                object._extendedSupportEndTime = "extendedSupportEndTime";
+                        }
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            object.description = message.description;
+                        if (message.eventType != null && message.hasOwnProperty("eventType"))
+                            object.eventType = options.enums === String ? $root.google.container.v1beta1.UpgradeInfoEvent.EventType[message.eventType] === undefined ? message.eventType : $root.google.container.v1beta1.UpgradeInfoEvent.EventType[message.eventType] : message.eventType;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpgradeInfoEvent to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpgradeInfoEvent.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for UpgradeInfoEvent
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.UpgradeInfoEvent
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UpgradeInfoEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.UpgradeInfoEvent";
+                    };
+    
+                    /**
+                     * State enum.
+                     * @name google.container.v1beta1.UpgradeInfoEvent.State
+                     * @enum {number}
+                     * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                     * @property {number} STARTED=3 STARTED value
+                     * @property {number} SUCCEEDED=4 SUCCEEDED value
+                     * @property {number} FAILED=5 FAILED value
+                     * @property {number} CANCELED=6 CANCELED value
+                     */
+                    UpgradeInfoEvent.State = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[3] = "STARTED"] = 3;
+                        values[valuesById[4] = "SUCCEEDED"] = 4;
+                        values[valuesById[5] = "FAILED"] = 5;
+                        values[valuesById[6] = "CANCELED"] = 6;
+                        return values;
+                    })();
+    
+                    /**
+                     * EventType enum.
+                     * @name google.container.v1beta1.UpgradeInfoEvent.EventType
+                     * @enum {number}
+                     * @property {number} EVENT_TYPE_UNSPECIFIED=0 EVENT_TYPE_UNSPECIFIED value
+                     * @property {number} END_OF_SUPPORT=1 END_OF_SUPPORT value
+                     * @property {number} COS_MILESTONE_VERSION_UPDATE=2 COS_MILESTONE_VERSION_UPDATE value
+                     * @property {number} UPGRADE_LIFECYCLE=3 UPGRADE_LIFECYCLE value
+                     */
+                    UpgradeInfoEvent.EventType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "EVENT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "END_OF_SUPPORT"] = 1;
+                        values[valuesById[2] = "COS_MILESTONE_VERSION_UPDATE"] = 2;
+                        values[valuesById[3] = "UPGRADE_LIFECYCLE"] = 3;
+                        return values;
+                    })();
+    
+                    return UpgradeInfoEvent;
+                })();
+    
                 v1beta1.UpgradeAvailableEvent = (function() {
     
                     /**
@@ -128433,6 +132890,7 @@
                      * @property {Array.<string>|null} [patchedVersions] SecurityBulletinEvent patchedVersions
                      * @property {string|null} [suggestedUpgradeTarget] SecurityBulletinEvent suggestedUpgradeTarget
                      * @property {boolean|null} [manualStepsRequired] SecurityBulletinEvent manualStepsRequired
+                     * @property {Array.<string>|null} [mitigatedVersions] SecurityBulletinEvent mitigatedVersions
                      */
     
                     /**
@@ -128447,6 +132905,7 @@
                         this.cveIds = [];
                         this.affectedSupportedMinors = [];
                         this.patchedVersions = [];
+                        this.mitigatedVersions = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -128534,6 +132993,14 @@
                     SecurityBulletinEvent.prototype.manualStepsRequired = false;
     
                     /**
+                     * SecurityBulletinEvent mitigatedVersions.
+                     * @member {Array.<string>} mitigatedVersions
+                     * @memberof google.container.v1beta1.SecurityBulletinEvent
+                     * @instance
+                     */
+                    SecurityBulletinEvent.prototype.mitigatedVersions = $util.emptyArray;
+    
+                    /**
                      * Creates a new SecurityBulletinEvent instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1beta1.SecurityBulletinEvent
@@ -128580,6 +133047,9 @@
                             writer.uint32(/* id 9, wireType 2 =*/74).string(message.suggestedUpgradeTarget);
                         if (message.manualStepsRequired != null && Object.hasOwnProperty.call(message, "manualStepsRequired"))
                             writer.uint32(/* id 10, wireType 0 =*/80).bool(message.manualStepsRequired);
+                        if (message.mitigatedVersions != null && message.mitigatedVersions.length)
+                            for (var i = 0; i < message.mitigatedVersions.length; ++i)
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.mitigatedVersions[i]);
                         return writer;
                     };
     
@@ -128660,6 +133130,12 @@
                                     message.manualStepsRequired = reader.bool();
                                     break;
                                 }
+                            case 11: {
+                                    if (!(message.mitigatedVersions && message.mitigatedVersions.length))
+                                        message.mitigatedVersions = [];
+                                    message.mitigatedVersions.push(reader.string());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -128737,6 +133213,13 @@
                         if (message.manualStepsRequired != null && message.hasOwnProperty("manualStepsRequired"))
                             if (typeof message.manualStepsRequired !== "boolean")
                                 return "manualStepsRequired: boolean expected";
+                        if (message.mitigatedVersions != null && message.hasOwnProperty("mitigatedVersions")) {
+                            if (!Array.isArray(message.mitigatedVersions))
+                                return "mitigatedVersions: array expected";
+                            for (var i = 0; i < message.mitigatedVersions.length; ++i)
+                                if (!$util.isString(message.mitigatedVersions[i]))
+                                    return "mitigatedVersions: string[] expected";
+                        }
                         return null;
                     };
     
@@ -128787,6 +133270,13 @@
                             message.suggestedUpgradeTarget = String(object.suggestedUpgradeTarget);
                         if (object.manualStepsRequired != null)
                             message.manualStepsRequired = Boolean(object.manualStepsRequired);
+                        if (object.mitigatedVersions) {
+                            if (!Array.isArray(object.mitigatedVersions))
+                                throw TypeError(".google.container.v1beta1.SecurityBulletinEvent.mitigatedVersions: array expected");
+                            message.mitigatedVersions = [];
+                            for (var i = 0; i < object.mitigatedVersions.length; ++i)
+                                message.mitigatedVersions[i] = String(object.mitigatedVersions[i]);
+                        }
                         return message;
                     };
     
@@ -128807,6 +133297,7 @@
                             object.cveIds = [];
                             object.affectedSupportedMinors = [];
                             object.patchedVersions = [];
+                            object.mitigatedVersions = [];
                         }
                         if (options.defaults) {
                             object.resourceTypeAffected = "";
@@ -128846,6 +133337,11 @@
                             object.suggestedUpgradeTarget = message.suggestedUpgradeTarget;
                         if (message.manualStepsRequired != null && message.hasOwnProperty("manualStepsRequired"))
                             object.manualStepsRequired = message.manualStepsRequired;
+                        if (message.mitigatedVersions && message.mitigatedVersions.length) {
+                            object.mitigatedVersions = [];
+                            for (var j = 0; j < message.mitigatedVersions.length; ++j)
+                                object.mitigatedVersions[j] = message.mitigatedVersions[j];
+                        }
                         return object;
                     };
     
@@ -129461,6 +133957,9 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 7:
+                                case 8:
+                                case 9:
                                     break;
                                 }
                         }
@@ -129513,6 +134012,18 @@
                                 case "CONTROLLER_MANAGER":
                                 case 5:
                                     message.enableComponents[i] = 5;
+                                    break;
+                                case "KCP_SSHD":
+                                case 7:
+                                    message.enableComponents[i] = 7;
+                                    break;
+                                case "KCP_CONNECTION":
+                                case 8:
+                                    message.enableComponents[i] = 8;
+                                    break;
+                                case "KCP_HPA":
+                                case 9:
+                                    message.enableComponents[i] = 9;
                                     break;
                                 }
                         }
@@ -129578,6 +134089,9 @@
                      * @property {number} APISERVER=3 APISERVER value
                      * @property {number} SCHEDULER=4 SCHEDULER value
                      * @property {number} CONTROLLER_MANAGER=5 CONTROLLER_MANAGER value
+                     * @property {number} KCP_SSHD=7 KCP_SSHD value
+                     * @property {number} KCP_CONNECTION=8 KCP_CONNECTION value
+                     * @property {number} KCP_HPA=9 KCP_HPA value
                      */
                     LoggingComponentConfig.Component = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -129587,6 +134101,9 @@
                         values[valuesById[3] = "APISERVER"] = 3;
                         values[valuesById[4] = "SCHEDULER"] = 4;
                         values[valuesById[5] = "CONTROLLER_MANAGER"] = 5;
+                        values[valuesById[7] = "KCP_SSHD"] = 7;
+                        values[valuesById[8] = "KCP_CONNECTION"] = 8;
+                        values[valuesById[9] = "KCP_HPA"] = 9;
                         return values;
                     })();
     
@@ -131196,6 +135713,7 @@
                                 case 13:
                                 case 14:
                                 case 15:
+                                case 16:
                                     break;
                                 }
                         }
@@ -131285,6 +135803,10 @@
                                 case 15:
                                     message.enableComponents[i] = 15;
                                     break;
+                                case "JOBSET":
+                                case 16:
+                                    message.enableComponents[i] = 16;
+                                    break;
                                 }
                         }
                         return message;
@@ -131358,6 +135880,7 @@
                      * @property {number} CADVISOR=13 CADVISOR value
                      * @property {number} KUBELET=14 KUBELET value
                      * @property {number} DCGM=15 DCGM value
+                     * @property {number} JOBSET=16 JOBSET value
                      */
                     MonitoringComponentConfig.Component = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -131376,6 +135899,7 @@
                         values[valuesById[13] = "CADVISOR"] = 13;
                         values[valuesById[14] = "KUBELET"] = 14;
                         values[valuesById[15] = "DCGM"] = 15;
+                        values[valuesById[16] = "JOBSET"] = 16;
                         return values;
                     })();
     
@@ -131396,6 +135920,267 @@
                     values[valuesById[1] = "LEGACY_DATAPATH"] = 1;
                     values[valuesById[2] = "ADVANCED_DATAPATH"] = 2;
                     return values;
+                })();
+    
+                v1beta1.PodAutoscaling = (function() {
+    
+                    /**
+                     * Properties of a PodAutoscaling.
+                     * @memberof google.container.v1beta1
+                     * @interface IPodAutoscaling
+                     * @property {google.container.v1beta1.PodAutoscaling.HPAProfile|null} [hpaProfile] PodAutoscaling hpaProfile
+                     */
+    
+                    /**
+                     * Constructs a new PodAutoscaling.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a PodAutoscaling.
+                     * @implements IPodAutoscaling
+                     * @constructor
+                     * @param {google.container.v1beta1.IPodAutoscaling=} [properties] Properties to set
+                     */
+                    function PodAutoscaling(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PodAutoscaling hpaProfile.
+                     * @member {google.container.v1beta1.PodAutoscaling.HPAProfile|null|undefined} hpaProfile
+                     * @memberof google.container.v1beta1.PodAutoscaling
+                     * @instance
+                     */
+                    PodAutoscaling.prototype.hpaProfile = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * PodAutoscaling _hpaProfile.
+                     * @member {"hpaProfile"|undefined} _hpaProfile
+                     * @memberof google.container.v1beta1.PodAutoscaling
+                     * @instance
+                     */
+                    Object.defineProperty(PodAutoscaling.prototype, "_hpaProfile", {
+                        get: $util.oneOfGetter($oneOfFields = ["hpaProfile"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new PodAutoscaling instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.PodAutoscaling
+                     * @static
+                     * @param {google.container.v1beta1.IPodAutoscaling=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.PodAutoscaling} PodAutoscaling instance
+                     */
+                    PodAutoscaling.create = function create(properties) {
+                        return new PodAutoscaling(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PodAutoscaling message. Does not implicitly {@link google.container.v1beta1.PodAutoscaling.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.PodAutoscaling
+                     * @static
+                     * @param {google.container.v1beta1.IPodAutoscaling} message PodAutoscaling message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PodAutoscaling.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.hpaProfile != null && Object.hasOwnProperty.call(message, "hpaProfile"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.hpaProfile);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PodAutoscaling message, length delimited. Does not implicitly {@link google.container.v1beta1.PodAutoscaling.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.PodAutoscaling
+                     * @static
+                     * @param {google.container.v1beta1.IPodAutoscaling} message PodAutoscaling message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PodAutoscaling.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PodAutoscaling message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.PodAutoscaling
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.PodAutoscaling} PodAutoscaling
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PodAutoscaling.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.PodAutoscaling();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 2: {
+                                    message.hpaProfile = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PodAutoscaling message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.PodAutoscaling
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.PodAutoscaling} PodAutoscaling
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PodAutoscaling.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PodAutoscaling message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.PodAutoscaling
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PodAutoscaling.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.hpaProfile != null && message.hasOwnProperty("hpaProfile")) {
+                            properties._hpaProfile = 1;
+                            switch (message.hpaProfile) {
+                            default:
+                                return "hpaProfile: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PodAutoscaling message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.PodAutoscaling
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.PodAutoscaling} PodAutoscaling
+                     */
+                    PodAutoscaling.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.PodAutoscaling)
+                            return object;
+                        var message = new $root.google.container.v1beta1.PodAutoscaling();
+                        switch (object.hpaProfile) {
+                        default:
+                            if (typeof object.hpaProfile === "number") {
+                                message.hpaProfile = object.hpaProfile;
+                                break;
+                            }
+                            break;
+                        case "HPA_PROFILE_UNSPECIFIED":
+                        case 0:
+                            message.hpaProfile = 0;
+                            break;
+                        case "NONE":
+                        case 1:
+                            message.hpaProfile = 1;
+                            break;
+                        case "PERFORMANCE":
+                        case 2:
+                            message.hpaProfile = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PodAutoscaling message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.PodAutoscaling
+                     * @static
+                     * @param {google.container.v1beta1.PodAutoscaling} message PodAutoscaling
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PodAutoscaling.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.hpaProfile != null && message.hasOwnProperty("hpaProfile")) {
+                            object.hpaProfile = options.enums === String ? $root.google.container.v1beta1.PodAutoscaling.HPAProfile[message.hpaProfile] === undefined ? message.hpaProfile : $root.google.container.v1beta1.PodAutoscaling.HPAProfile[message.hpaProfile] : message.hpaProfile;
+                            if (options.oneofs)
+                                object._hpaProfile = "hpaProfile";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PodAutoscaling to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.PodAutoscaling
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PodAutoscaling.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PodAutoscaling
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.PodAutoscaling
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PodAutoscaling.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.PodAutoscaling";
+                    };
+    
+                    /**
+                     * HPAProfile enum.
+                     * @name google.container.v1beta1.PodAutoscaling.HPAProfile
+                     * @enum {number}
+                     * @property {number} HPA_PROFILE_UNSPECIFIED=0 HPA_PROFILE_UNSPECIFIED value
+                     * @property {number} NONE=1 NONE value
+                     * @property {number} PERFORMANCE=2 PERFORMANCE value
+                     */
+                    PodAutoscaling.HPAProfile = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "HPA_PROFILE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NONE"] = 1;
+                        values[valuesById[2] = "PERFORMANCE"] = 2;
+                        return values;
+                    })();
+    
+                    return PodAutoscaling;
                 })();
     
                 v1beta1.Fleet = (function() {
@@ -131664,6 +136449,884 @@
                     return values;
                 })();
     
+                v1beta1.ControlPlaneEndpointsConfig = (function() {
+    
+                    /**
+                     * Properties of a ControlPlaneEndpointsConfig.
+                     * @memberof google.container.v1beta1
+                     * @interface IControlPlaneEndpointsConfig
+                     * @property {google.container.v1beta1.ControlPlaneEndpointsConfig.IDNSEndpointConfig|null} [dnsEndpointConfig] ControlPlaneEndpointsConfig dnsEndpointConfig
+                     * @property {google.container.v1beta1.ControlPlaneEndpointsConfig.IIPEndpointsConfig|null} [ipEndpointsConfig] ControlPlaneEndpointsConfig ipEndpointsConfig
+                     */
+    
+                    /**
+                     * Constructs a new ControlPlaneEndpointsConfig.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a ControlPlaneEndpointsConfig.
+                     * @implements IControlPlaneEndpointsConfig
+                     * @constructor
+                     * @param {google.container.v1beta1.IControlPlaneEndpointsConfig=} [properties] Properties to set
+                     */
+                    function ControlPlaneEndpointsConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ControlPlaneEndpointsConfig dnsEndpointConfig.
+                     * @member {google.container.v1beta1.ControlPlaneEndpointsConfig.IDNSEndpointConfig|null|undefined} dnsEndpointConfig
+                     * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                     * @instance
+                     */
+                    ControlPlaneEndpointsConfig.prototype.dnsEndpointConfig = null;
+    
+                    /**
+                     * ControlPlaneEndpointsConfig ipEndpointsConfig.
+                     * @member {google.container.v1beta1.ControlPlaneEndpointsConfig.IIPEndpointsConfig|null|undefined} ipEndpointsConfig
+                     * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                     * @instance
+                     */
+                    ControlPlaneEndpointsConfig.prototype.ipEndpointsConfig = null;
+    
+                    /**
+                     * Creates a new ControlPlaneEndpointsConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                     * @static
+                     * @param {google.container.v1beta1.IControlPlaneEndpointsConfig=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.ControlPlaneEndpointsConfig} ControlPlaneEndpointsConfig instance
+                     */
+                    ControlPlaneEndpointsConfig.create = function create(properties) {
+                        return new ControlPlaneEndpointsConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ControlPlaneEndpointsConfig message. Does not implicitly {@link google.container.v1beta1.ControlPlaneEndpointsConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                     * @static
+                     * @param {google.container.v1beta1.IControlPlaneEndpointsConfig} message ControlPlaneEndpointsConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ControlPlaneEndpointsConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.dnsEndpointConfig != null && Object.hasOwnProperty.call(message, "dnsEndpointConfig"))
+                            $root.google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig.encode(message.dnsEndpointConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.ipEndpointsConfig != null && Object.hasOwnProperty.call(message, "ipEndpointsConfig"))
+                            $root.google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig.encode(message.ipEndpointsConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ControlPlaneEndpointsConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.ControlPlaneEndpointsConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                     * @static
+                     * @param {google.container.v1beta1.IControlPlaneEndpointsConfig} message ControlPlaneEndpointsConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ControlPlaneEndpointsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ControlPlaneEndpointsConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.ControlPlaneEndpointsConfig} ControlPlaneEndpointsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ControlPlaneEndpointsConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.ControlPlaneEndpointsConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.dnsEndpointConfig = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.ipEndpointsConfig = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ControlPlaneEndpointsConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.ControlPlaneEndpointsConfig} ControlPlaneEndpointsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ControlPlaneEndpointsConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ControlPlaneEndpointsConfig message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ControlPlaneEndpointsConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.dnsEndpointConfig != null && message.hasOwnProperty("dnsEndpointConfig")) {
+                            var error = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig.verify(message.dnsEndpointConfig);
+                            if (error)
+                                return "dnsEndpointConfig." + error;
+                        }
+                        if (message.ipEndpointsConfig != null && message.hasOwnProperty("ipEndpointsConfig")) {
+                            var error = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig.verify(message.ipEndpointsConfig);
+                            if (error)
+                                return "ipEndpointsConfig." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ControlPlaneEndpointsConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.ControlPlaneEndpointsConfig} ControlPlaneEndpointsConfig
+                     */
+                    ControlPlaneEndpointsConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.ControlPlaneEndpointsConfig)
+                            return object;
+                        var message = new $root.google.container.v1beta1.ControlPlaneEndpointsConfig();
+                        if (object.dnsEndpointConfig != null) {
+                            if (typeof object.dnsEndpointConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.ControlPlaneEndpointsConfig.dnsEndpointConfig: object expected");
+                            message.dnsEndpointConfig = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig.fromObject(object.dnsEndpointConfig);
+                        }
+                        if (object.ipEndpointsConfig != null) {
+                            if (typeof object.ipEndpointsConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.ControlPlaneEndpointsConfig.ipEndpointsConfig: object expected");
+                            message.ipEndpointsConfig = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig.fromObject(object.ipEndpointsConfig);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ControlPlaneEndpointsConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                     * @static
+                     * @param {google.container.v1beta1.ControlPlaneEndpointsConfig} message ControlPlaneEndpointsConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ControlPlaneEndpointsConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.dnsEndpointConfig = null;
+                            object.ipEndpointsConfig = null;
+                        }
+                        if (message.dnsEndpointConfig != null && message.hasOwnProperty("dnsEndpointConfig"))
+                            object.dnsEndpointConfig = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig.toObject(message.dnsEndpointConfig, options);
+                        if (message.ipEndpointsConfig != null && message.hasOwnProperty("ipEndpointsConfig"))
+                            object.ipEndpointsConfig = $root.google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig.toObject(message.ipEndpointsConfig, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ControlPlaneEndpointsConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ControlPlaneEndpointsConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ControlPlaneEndpointsConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ControlPlaneEndpointsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.ControlPlaneEndpointsConfig";
+                    };
+    
+                    ControlPlaneEndpointsConfig.DNSEndpointConfig = (function() {
+    
+                        /**
+                         * Properties of a DNSEndpointConfig.
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                         * @interface IDNSEndpointConfig
+                         * @property {string|null} [endpoint] DNSEndpointConfig endpoint
+                         * @property {boolean|null} [allowExternalTraffic] DNSEndpointConfig allowExternalTraffic
+                         */
+    
+                        /**
+                         * Constructs a new DNSEndpointConfig.
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                         * @classdesc Represents a DNSEndpointConfig.
+                         * @implements IDNSEndpointConfig
+                         * @constructor
+                         * @param {google.container.v1beta1.ControlPlaneEndpointsConfig.IDNSEndpointConfig=} [properties] Properties to set
+                         */
+                        function DNSEndpointConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DNSEndpointConfig endpoint.
+                         * @member {string} endpoint
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @instance
+                         */
+                        DNSEndpointConfig.prototype.endpoint = "";
+    
+                        /**
+                         * DNSEndpointConfig allowExternalTraffic.
+                         * @member {boolean|null|undefined} allowExternalTraffic
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @instance
+                         */
+                        DNSEndpointConfig.prototype.allowExternalTraffic = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DNSEndpointConfig _allowExternalTraffic.
+                         * @member {"allowExternalTraffic"|undefined} _allowExternalTraffic
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @instance
+                         */
+                        Object.defineProperty(DNSEndpointConfig.prototype, "_allowExternalTraffic", {
+                            get: $util.oneOfGetter($oneOfFields = ["allowExternalTraffic"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DNSEndpointConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @static
+                         * @param {google.container.v1beta1.ControlPlaneEndpointsConfig.IDNSEndpointConfig=} [properties] Properties to set
+                         * @returns {google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig} DNSEndpointConfig instance
+                         */
+                        DNSEndpointConfig.create = function create(properties) {
+                            return new DNSEndpointConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DNSEndpointConfig message. Does not implicitly {@link google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @static
+                         * @param {google.container.v1beta1.ControlPlaneEndpointsConfig.IDNSEndpointConfig} message DNSEndpointConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DNSEndpointConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.endpoint != null && Object.hasOwnProperty.call(message, "endpoint"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.endpoint);
+                            if (message.allowExternalTraffic != null && Object.hasOwnProperty.call(message, "allowExternalTraffic"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowExternalTraffic);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DNSEndpointConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @static
+                         * @param {google.container.v1beta1.ControlPlaneEndpointsConfig.IDNSEndpointConfig} message DNSEndpointConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DNSEndpointConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DNSEndpointConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig} DNSEndpointConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DNSEndpointConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.endpoint = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.allowExternalTraffic = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DNSEndpointConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig} DNSEndpointConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DNSEndpointConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DNSEndpointConfig message.
+                         * @function verify
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DNSEndpointConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                                if (!$util.isString(message.endpoint))
+                                    return "endpoint: string expected";
+                            if (message.allowExternalTraffic != null && message.hasOwnProperty("allowExternalTraffic")) {
+                                properties._allowExternalTraffic = 1;
+                                if (typeof message.allowExternalTraffic !== "boolean")
+                                    return "allowExternalTraffic: boolean expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DNSEndpointConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig} DNSEndpointConfig
+                         */
+                        DNSEndpointConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig)
+                                return object;
+                            var message = new $root.google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig();
+                            if (object.endpoint != null)
+                                message.endpoint = String(object.endpoint);
+                            if (object.allowExternalTraffic != null)
+                                message.allowExternalTraffic = Boolean(object.allowExternalTraffic);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DNSEndpointConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @static
+                         * @param {google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig} message DNSEndpointConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DNSEndpointConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.endpoint = "";
+                            if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                                object.endpoint = message.endpoint;
+                            if (message.allowExternalTraffic != null && message.hasOwnProperty("allowExternalTraffic")) {
+                                object.allowExternalTraffic = message.allowExternalTraffic;
+                                if (options.oneofs)
+                                    object._allowExternalTraffic = "allowExternalTraffic";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DNSEndpointConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DNSEndpointConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DNSEndpointConfig
+                         * @function getTypeUrl
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DNSEndpointConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.container.v1beta1.ControlPlaneEndpointsConfig.DNSEndpointConfig";
+                        };
+    
+                        return DNSEndpointConfig;
+                    })();
+    
+                    ControlPlaneEndpointsConfig.IPEndpointsConfig = (function() {
+    
+                        /**
+                         * Properties of a IPEndpointsConfig.
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                         * @interface IIPEndpointsConfig
+                         * @property {boolean|null} [enabled] IPEndpointsConfig enabled
+                         * @property {boolean|null} [enablePublicEndpoint] IPEndpointsConfig enablePublicEndpoint
+                         * @property {boolean|null} [globalAccess] IPEndpointsConfig globalAccess
+                         * @property {google.container.v1beta1.IMasterAuthorizedNetworksConfig|null} [authorizedNetworksConfig] IPEndpointsConfig authorizedNetworksConfig
+                         * @property {string|null} [publicEndpoint] IPEndpointsConfig publicEndpoint
+                         * @property {string|null} [privateEndpoint] IPEndpointsConfig privateEndpoint
+                         * @property {string|null} [privateEndpointSubnetwork] IPEndpointsConfig privateEndpointSubnetwork
+                         */
+    
+                        /**
+                         * Constructs a new IPEndpointsConfig.
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig
+                         * @classdesc Represents a IPEndpointsConfig.
+                         * @implements IIPEndpointsConfig
+                         * @constructor
+                         * @param {google.container.v1beta1.ControlPlaneEndpointsConfig.IIPEndpointsConfig=} [properties] Properties to set
+                         */
+                        function IPEndpointsConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IPEndpointsConfig enabled.
+                         * @member {boolean|null|undefined} enabled
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @instance
+                         */
+                        IPEndpointsConfig.prototype.enabled = null;
+    
+                        /**
+                         * IPEndpointsConfig enablePublicEndpoint.
+                         * @member {boolean|null|undefined} enablePublicEndpoint
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @instance
+                         */
+                        IPEndpointsConfig.prototype.enablePublicEndpoint = null;
+    
+                        /**
+                         * IPEndpointsConfig globalAccess.
+                         * @member {boolean|null|undefined} globalAccess
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @instance
+                         */
+                        IPEndpointsConfig.prototype.globalAccess = null;
+    
+                        /**
+                         * IPEndpointsConfig authorizedNetworksConfig.
+                         * @member {google.container.v1beta1.IMasterAuthorizedNetworksConfig|null|undefined} authorizedNetworksConfig
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @instance
+                         */
+                        IPEndpointsConfig.prototype.authorizedNetworksConfig = null;
+    
+                        /**
+                         * IPEndpointsConfig publicEndpoint.
+                         * @member {string} publicEndpoint
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @instance
+                         */
+                        IPEndpointsConfig.prototype.publicEndpoint = "";
+    
+                        /**
+                         * IPEndpointsConfig privateEndpoint.
+                         * @member {string} privateEndpoint
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @instance
+                         */
+                        IPEndpointsConfig.prototype.privateEndpoint = "";
+    
+                        /**
+                         * IPEndpointsConfig privateEndpointSubnetwork.
+                         * @member {string} privateEndpointSubnetwork
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @instance
+                         */
+                        IPEndpointsConfig.prototype.privateEndpointSubnetwork = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * IPEndpointsConfig _enabled.
+                         * @member {"enabled"|undefined} _enabled
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(IPEndpointsConfig.prototype, "_enabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["enabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * IPEndpointsConfig _enablePublicEndpoint.
+                         * @member {"enablePublicEndpoint"|undefined} _enablePublicEndpoint
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(IPEndpointsConfig.prototype, "_enablePublicEndpoint", {
+                            get: $util.oneOfGetter($oneOfFields = ["enablePublicEndpoint"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * IPEndpointsConfig _globalAccess.
+                         * @member {"globalAccess"|undefined} _globalAccess
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(IPEndpointsConfig.prototype, "_globalAccess", {
+                            get: $util.oneOfGetter($oneOfFields = ["globalAccess"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new IPEndpointsConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @static
+                         * @param {google.container.v1beta1.ControlPlaneEndpointsConfig.IIPEndpointsConfig=} [properties] Properties to set
+                         * @returns {google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig} IPEndpointsConfig instance
+                         */
+                        IPEndpointsConfig.create = function create(properties) {
+                            return new IPEndpointsConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IPEndpointsConfig message. Does not implicitly {@link google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @static
+                         * @param {google.container.v1beta1.ControlPlaneEndpointsConfig.IIPEndpointsConfig} message IPEndpointsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IPEndpointsConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                            if (message.enablePublicEndpoint != null && Object.hasOwnProperty.call(message, "enablePublicEndpoint"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enablePublicEndpoint);
+                            if (message.globalAccess != null && Object.hasOwnProperty.call(message, "globalAccess"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.globalAccess);
+                            if (message.authorizedNetworksConfig != null && Object.hasOwnProperty.call(message, "authorizedNetworksConfig"))
+                                $root.google.container.v1beta1.MasterAuthorizedNetworksConfig.encode(message.authorizedNetworksConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.publicEndpoint != null && Object.hasOwnProperty.call(message, "publicEndpoint"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.publicEndpoint);
+                            if (message.privateEndpoint != null && Object.hasOwnProperty.call(message, "privateEndpoint"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.privateEndpoint);
+                            if (message.privateEndpointSubnetwork != null && Object.hasOwnProperty.call(message, "privateEndpointSubnetwork"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.privateEndpointSubnetwork);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IPEndpointsConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @static
+                         * @param {google.container.v1beta1.ControlPlaneEndpointsConfig.IIPEndpointsConfig} message IPEndpointsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IPEndpointsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a IPEndpointsConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig} IPEndpointsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IPEndpointsConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.enabled = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enablePublicEndpoint = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.globalAccess = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.authorizedNetworksConfig = $root.google.container.v1beta1.MasterAuthorizedNetworksConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.publicEndpoint = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.privateEndpoint = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.privateEndpointSubnetwork = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a IPEndpointsConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig} IPEndpointsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IPEndpointsConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a IPEndpointsConfig message.
+                         * @function verify
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IPEndpointsConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.enabled != null && message.hasOwnProperty("enabled")) {
+                                properties._enabled = 1;
+                                if (typeof message.enabled !== "boolean")
+                                    return "enabled: boolean expected";
+                            }
+                            if (message.enablePublicEndpoint != null && message.hasOwnProperty("enablePublicEndpoint")) {
+                                properties._enablePublicEndpoint = 1;
+                                if (typeof message.enablePublicEndpoint !== "boolean")
+                                    return "enablePublicEndpoint: boolean expected";
+                            }
+                            if (message.globalAccess != null && message.hasOwnProperty("globalAccess")) {
+                                properties._globalAccess = 1;
+                                if (typeof message.globalAccess !== "boolean")
+                                    return "globalAccess: boolean expected";
+                            }
+                            if (message.authorizedNetworksConfig != null && message.hasOwnProperty("authorizedNetworksConfig")) {
+                                var error = $root.google.container.v1beta1.MasterAuthorizedNetworksConfig.verify(message.authorizedNetworksConfig);
+                                if (error)
+                                    return "authorizedNetworksConfig." + error;
+                            }
+                            if (message.publicEndpoint != null && message.hasOwnProperty("publicEndpoint"))
+                                if (!$util.isString(message.publicEndpoint))
+                                    return "publicEndpoint: string expected";
+                            if (message.privateEndpoint != null && message.hasOwnProperty("privateEndpoint"))
+                                if (!$util.isString(message.privateEndpoint))
+                                    return "privateEndpoint: string expected";
+                            if (message.privateEndpointSubnetwork != null && message.hasOwnProperty("privateEndpointSubnetwork"))
+                                if (!$util.isString(message.privateEndpointSubnetwork))
+                                    return "privateEndpointSubnetwork: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a IPEndpointsConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig} IPEndpointsConfig
+                         */
+                        IPEndpointsConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig)
+                                return object;
+                            var message = new $root.google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig();
+                            if (object.enabled != null)
+                                message.enabled = Boolean(object.enabled);
+                            if (object.enablePublicEndpoint != null)
+                                message.enablePublicEndpoint = Boolean(object.enablePublicEndpoint);
+                            if (object.globalAccess != null)
+                                message.globalAccess = Boolean(object.globalAccess);
+                            if (object.authorizedNetworksConfig != null) {
+                                if (typeof object.authorizedNetworksConfig !== "object")
+                                    throw TypeError(".google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig.authorizedNetworksConfig: object expected");
+                                message.authorizedNetworksConfig = $root.google.container.v1beta1.MasterAuthorizedNetworksConfig.fromObject(object.authorizedNetworksConfig);
+                            }
+                            if (object.publicEndpoint != null)
+                                message.publicEndpoint = String(object.publicEndpoint);
+                            if (object.privateEndpoint != null)
+                                message.privateEndpoint = String(object.privateEndpoint);
+                            if (object.privateEndpointSubnetwork != null)
+                                message.privateEndpointSubnetwork = String(object.privateEndpointSubnetwork);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a IPEndpointsConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @static
+                         * @param {google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig} message IPEndpointsConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IPEndpointsConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.authorizedNetworksConfig = null;
+                                object.publicEndpoint = "";
+                                object.privateEndpoint = "";
+                                object.privateEndpointSubnetwork = "";
+                            }
+                            if (message.enabled != null && message.hasOwnProperty("enabled")) {
+                                object.enabled = message.enabled;
+                                if (options.oneofs)
+                                    object._enabled = "enabled";
+                            }
+                            if (message.enablePublicEndpoint != null && message.hasOwnProperty("enablePublicEndpoint")) {
+                                object.enablePublicEndpoint = message.enablePublicEndpoint;
+                                if (options.oneofs)
+                                    object._enablePublicEndpoint = "enablePublicEndpoint";
+                            }
+                            if (message.globalAccess != null && message.hasOwnProperty("globalAccess")) {
+                                object.globalAccess = message.globalAccess;
+                                if (options.oneofs)
+                                    object._globalAccess = "globalAccess";
+                            }
+                            if (message.authorizedNetworksConfig != null && message.hasOwnProperty("authorizedNetworksConfig"))
+                                object.authorizedNetworksConfig = $root.google.container.v1beta1.MasterAuthorizedNetworksConfig.toObject(message.authorizedNetworksConfig, options);
+                            if (message.publicEndpoint != null && message.hasOwnProperty("publicEndpoint"))
+                                object.publicEndpoint = message.publicEndpoint;
+                            if (message.privateEndpoint != null && message.hasOwnProperty("privateEndpoint"))
+                                object.privateEndpoint = message.privateEndpoint;
+                            if (message.privateEndpointSubnetwork != null && message.hasOwnProperty("privateEndpointSubnetwork"))
+                                object.privateEndpointSubnetwork = message.privateEndpointSubnetwork;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IPEndpointsConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IPEndpointsConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IPEndpointsConfig
+                         * @function getTypeUrl
+                         * @memberof google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IPEndpointsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.container.v1beta1.ControlPlaneEndpointsConfig.IPEndpointsConfig";
+                        };
+    
+                        return IPEndpointsConfig;
+                    })();
+    
+                    return ControlPlaneEndpointsConfig;
+                })();
+    
                 v1beta1.ResourceManagerTags = (function() {
     
                     /**
@@ -131909,6 +137572,7 @@
                      * @memberof google.container.v1beta1
                      * @interface IEnterpriseConfig
                      * @property {google.container.v1beta1.EnterpriseConfig.ClusterTier|null} [clusterTier] EnterpriseConfig clusterTier
+                     * @property {google.container.v1beta1.EnterpriseConfig.ClusterTier|null} [desiredTier] EnterpriseConfig desiredTier
                      */
     
                     /**
@@ -131933,6 +137597,14 @@
                      * @instance
                      */
                     EnterpriseConfig.prototype.clusterTier = 0;
+    
+                    /**
+                     * EnterpriseConfig desiredTier.
+                     * @member {google.container.v1beta1.EnterpriseConfig.ClusterTier} desiredTier
+                     * @memberof google.container.v1beta1.EnterpriseConfig
+                     * @instance
+                     */
+                    EnterpriseConfig.prototype.desiredTier = 0;
     
                     /**
                      * Creates a new EnterpriseConfig instance using the specified properties.
@@ -131960,6 +137632,8 @@
                             writer = $Writer.create();
                         if (message.clusterTier != null && Object.hasOwnProperty.call(message, "clusterTier"))
                             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.clusterTier);
+                        if (message.desiredTier != null && Object.hasOwnProperty.call(message, "desiredTier"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.desiredTier);
                         return writer;
                     };
     
@@ -131996,6 +137670,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.clusterTier = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.desiredTier = reader.int32();
                                     break;
                                 }
                             default:
@@ -132042,6 +137720,15 @@
                             case 2:
                                 break;
                             }
+                        if (message.desiredTier != null && message.hasOwnProperty("desiredTier"))
+                            switch (message.desiredTier) {
+                            default:
+                                return "desiredTier: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -132077,6 +137764,26 @@
                             message.clusterTier = 2;
                             break;
                         }
+                        switch (object.desiredTier) {
+                        default:
+                            if (typeof object.desiredTier === "number") {
+                                message.desiredTier = object.desiredTier;
+                                break;
+                            }
+                            break;
+                        case "CLUSTER_TIER_UNSPECIFIED":
+                        case 0:
+                            message.desiredTier = 0;
+                            break;
+                        case "STANDARD":
+                        case 1:
+                            message.desiredTier = 1;
+                            break;
+                        case "ENTERPRISE":
+                        case 2:
+                            message.desiredTier = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -132093,10 +137800,14 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.clusterTier = options.enums === String ? "CLUSTER_TIER_UNSPECIFIED" : 0;
+                            object.desiredTier = options.enums === String ? "CLUSTER_TIER_UNSPECIFIED" : 0;
+                        }
                         if (message.clusterTier != null && message.hasOwnProperty("clusterTier"))
                             object.clusterTier = options.enums === String ? $root.google.container.v1beta1.EnterpriseConfig.ClusterTier[message.clusterTier] === undefined ? message.clusterTier : $root.google.container.v1beta1.EnterpriseConfig.ClusterTier[message.clusterTier] : message.clusterTier;
+                        if (message.desiredTier != null && message.hasOwnProperty("desiredTier"))
+                            object.desiredTier = options.enums === String ? $root.google.container.v1beta1.EnterpriseConfig.ClusterTier[message.desiredTier] === undefined ? message.desiredTier : $root.google.container.v1beta1.EnterpriseConfig.ClusterTier[message.desiredTier] : message.desiredTier;
                         return object;
                     };
     
@@ -132152,6 +137863,7 @@
                      * @memberof google.container.v1beta1
                      * @interface ISecretManagerConfig
                      * @property {boolean|null} [enabled] SecretManagerConfig enabled
+                     * @property {google.container.v1beta1.SecretManagerConfig.IRotationConfig|null} [rotationConfig] SecretManagerConfig rotationConfig
                      */
     
                     /**
@@ -132177,6 +137889,14 @@
                      */
                     SecretManagerConfig.prototype.enabled = null;
     
+                    /**
+                     * SecretManagerConfig rotationConfig.
+                     * @member {google.container.v1beta1.SecretManagerConfig.IRotationConfig|null|undefined} rotationConfig
+                     * @memberof google.container.v1beta1.SecretManagerConfig
+                     * @instance
+                     */
+                    SecretManagerConfig.prototype.rotationConfig = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -132188,6 +137908,17 @@
                      */
                     Object.defineProperty(SecretManagerConfig.prototype, "_enabled", {
                         get: $util.oneOfGetter($oneOfFields = ["enabled"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * SecretManagerConfig _rotationConfig.
+                     * @member {"rotationConfig"|undefined} _rotationConfig
+                     * @memberof google.container.v1beta1.SecretManagerConfig
+                     * @instance
+                     */
+                    Object.defineProperty(SecretManagerConfig.prototype, "_rotationConfig", {
+                        get: $util.oneOfGetter($oneOfFields = ["rotationConfig"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -132217,6 +137948,8 @@
                             writer = $Writer.create();
                         if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                             writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        if (message.rotationConfig != null && Object.hasOwnProperty.call(message, "rotationConfig"))
+                            $root.google.container.v1beta1.SecretManagerConfig.RotationConfig.encode(message.rotationConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         return writer;
                     };
     
@@ -132253,6 +137986,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.enabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.rotationConfig = $root.google.container.v1beta1.SecretManagerConfig.RotationConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -132296,6 +138033,14 @@
                             if (typeof message.enabled !== "boolean")
                                 return "enabled: boolean expected";
                         }
+                        if (message.rotationConfig != null && message.hasOwnProperty("rotationConfig")) {
+                            properties._rotationConfig = 1;
+                            {
+                                var error = $root.google.container.v1beta1.SecretManagerConfig.RotationConfig.verify(message.rotationConfig);
+                                if (error)
+                                    return "rotationConfig." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -132313,6 +138058,11 @@
                         var message = new $root.google.container.v1beta1.SecretManagerConfig();
                         if (object.enabled != null)
                             message.enabled = Boolean(object.enabled);
+                        if (object.rotationConfig != null) {
+                            if (typeof object.rotationConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.SecretManagerConfig.rotationConfig: object expected");
+                            message.rotationConfig = $root.google.container.v1beta1.SecretManagerConfig.RotationConfig.fromObject(object.rotationConfig);
+                        }
                         return message;
                     };
     
@@ -132333,6 +138083,11 @@
                             object.enabled = message.enabled;
                             if (options.oneofs)
                                 object._enabled = "enabled";
+                        }
+                        if (message.rotationConfig != null && message.hasOwnProperty("rotationConfig")) {
+                            object.rotationConfig = $root.google.container.v1beta1.SecretManagerConfig.RotationConfig.toObject(message.rotationConfig, options);
+                            if (options.oneofs)
+                                object._rotationConfig = "rotationConfig";
                         }
                         return object;
                     };
@@ -132362,6 +138117,271 @@
                         }
                         return typeUrlPrefix + "/google.container.v1beta1.SecretManagerConfig";
                     };
+    
+                    SecretManagerConfig.RotationConfig = (function() {
+    
+                        /**
+                         * Properties of a RotationConfig.
+                         * @memberof google.container.v1beta1.SecretManagerConfig
+                         * @interface IRotationConfig
+                         * @property {boolean|null} [enabled] RotationConfig enabled
+                         * @property {google.protobuf.IDuration|null} [rotationInterval] RotationConfig rotationInterval
+                         */
+    
+                        /**
+                         * Constructs a new RotationConfig.
+                         * @memberof google.container.v1beta1.SecretManagerConfig
+                         * @classdesc Represents a RotationConfig.
+                         * @implements IRotationConfig
+                         * @constructor
+                         * @param {google.container.v1beta1.SecretManagerConfig.IRotationConfig=} [properties] Properties to set
+                         */
+                        function RotationConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RotationConfig enabled.
+                         * @member {boolean|null|undefined} enabled
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @instance
+                         */
+                        RotationConfig.prototype.enabled = null;
+    
+                        /**
+                         * RotationConfig rotationInterval.
+                         * @member {google.protobuf.IDuration|null|undefined} rotationInterval
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @instance
+                         */
+                        RotationConfig.prototype.rotationInterval = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RotationConfig _enabled.
+                         * @member {"enabled"|undefined} _enabled
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @instance
+                         */
+                        Object.defineProperty(RotationConfig.prototype, "_enabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["enabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * RotationConfig _rotationInterval.
+                         * @member {"rotationInterval"|undefined} _rotationInterval
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @instance
+                         */
+                        Object.defineProperty(RotationConfig.prototype, "_rotationInterval", {
+                            get: $util.oneOfGetter($oneOfFields = ["rotationInterval"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RotationConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @static
+                         * @param {google.container.v1beta1.SecretManagerConfig.IRotationConfig=} [properties] Properties to set
+                         * @returns {google.container.v1beta1.SecretManagerConfig.RotationConfig} RotationConfig instance
+                         */
+                        RotationConfig.create = function create(properties) {
+                            return new RotationConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RotationConfig message. Does not implicitly {@link google.container.v1beta1.SecretManagerConfig.RotationConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @static
+                         * @param {google.container.v1beta1.SecretManagerConfig.IRotationConfig} message RotationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RotationConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                            if (message.rotationInterval != null && Object.hasOwnProperty.call(message, "rotationInterval"))
+                                $root.google.protobuf.Duration.encode(message.rotationInterval, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RotationConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.SecretManagerConfig.RotationConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @static
+                         * @param {google.container.v1beta1.SecretManagerConfig.IRotationConfig} message RotationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RotationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RotationConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.container.v1beta1.SecretManagerConfig.RotationConfig} RotationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RotationConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.SecretManagerConfig.RotationConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.enabled = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rotationInterval = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RotationConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.container.v1beta1.SecretManagerConfig.RotationConfig} RotationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RotationConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RotationConfig message.
+                         * @function verify
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RotationConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.enabled != null && message.hasOwnProperty("enabled")) {
+                                properties._enabled = 1;
+                                if (typeof message.enabled !== "boolean")
+                                    return "enabled: boolean expected";
+                            }
+                            if (message.rotationInterval != null && message.hasOwnProperty("rotationInterval")) {
+                                properties._rotationInterval = 1;
+                                {
+                                    var error = $root.google.protobuf.Duration.verify(message.rotationInterval);
+                                    if (error)
+                                        return "rotationInterval." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RotationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.container.v1beta1.SecretManagerConfig.RotationConfig} RotationConfig
+                         */
+                        RotationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.container.v1beta1.SecretManagerConfig.RotationConfig)
+                                return object;
+                            var message = new $root.google.container.v1beta1.SecretManagerConfig.RotationConfig();
+                            if (object.enabled != null)
+                                message.enabled = Boolean(object.enabled);
+                            if (object.rotationInterval != null) {
+                                if (typeof object.rotationInterval !== "object")
+                                    throw TypeError(".google.container.v1beta1.SecretManagerConfig.RotationConfig.rotationInterval: object expected");
+                                message.rotationInterval = $root.google.protobuf.Duration.fromObject(object.rotationInterval);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RotationConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @static
+                         * @param {google.container.v1beta1.SecretManagerConfig.RotationConfig} message RotationConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RotationConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.enabled != null && message.hasOwnProperty("enabled")) {
+                                object.enabled = message.enabled;
+                                if (options.oneofs)
+                                    object._enabled = "enabled";
+                            }
+                            if (message.rotationInterval != null && message.hasOwnProperty("rotationInterval")) {
+                                object.rotationInterval = $root.google.protobuf.Duration.toObject(message.rotationInterval, options);
+                                if (options.oneofs)
+                                    object._rotationInterval = "rotationInterval";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RotationConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RotationConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RotationConfig
+                         * @function getTypeUrl
+                         * @memberof google.container.v1beta1.SecretManagerConfig.RotationConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RotationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.container.v1beta1.SecretManagerConfig.RotationConfig";
+                        };
+    
+                        return RotationConfig;
+                    })();
     
                     return SecretManagerConfig;
                 })();
@@ -132815,6 +138835,2085 @@
                     };
     
                     return SecondaryBootDiskUpdateStrategy;
+                })();
+    
+                v1beta1.FetchClusterUpgradeInfoRequest = (function() {
+    
+                    /**
+                     * Properties of a FetchClusterUpgradeInfoRequest.
+                     * @memberof google.container.v1beta1
+                     * @interface IFetchClusterUpgradeInfoRequest
+                     * @property {string|null} [name] FetchClusterUpgradeInfoRequest name
+                     * @property {string|null} [version] FetchClusterUpgradeInfoRequest version
+                     */
+    
+                    /**
+                     * Constructs a new FetchClusterUpgradeInfoRequest.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a FetchClusterUpgradeInfoRequest.
+                     * @implements IFetchClusterUpgradeInfoRequest
+                     * @constructor
+                     * @param {google.container.v1beta1.IFetchClusterUpgradeInfoRequest=} [properties] Properties to set
+                     */
+                    function FetchClusterUpgradeInfoRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FetchClusterUpgradeInfoRequest name.
+                     * @member {string} name
+                     * @memberof google.container.v1beta1.FetchClusterUpgradeInfoRequest
+                     * @instance
+                     */
+                    FetchClusterUpgradeInfoRequest.prototype.name = "";
+    
+                    /**
+                     * FetchClusterUpgradeInfoRequest version.
+                     * @member {string} version
+                     * @memberof google.container.v1beta1.FetchClusterUpgradeInfoRequest
+                     * @instance
+                     */
+                    FetchClusterUpgradeInfoRequest.prototype.version = "";
+    
+                    /**
+                     * Creates a new FetchClusterUpgradeInfoRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.FetchClusterUpgradeInfoRequest
+                     * @static
+                     * @param {google.container.v1beta1.IFetchClusterUpgradeInfoRequest=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.FetchClusterUpgradeInfoRequest} FetchClusterUpgradeInfoRequest instance
+                     */
+                    FetchClusterUpgradeInfoRequest.create = function create(properties) {
+                        return new FetchClusterUpgradeInfoRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FetchClusterUpgradeInfoRequest message. Does not implicitly {@link google.container.v1beta1.FetchClusterUpgradeInfoRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.FetchClusterUpgradeInfoRequest
+                     * @static
+                     * @param {google.container.v1beta1.IFetchClusterUpgradeInfoRequest} message FetchClusterUpgradeInfoRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FetchClusterUpgradeInfoRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                            writer.uint32(/* id 100, wireType 2 =*/802).string(message.version);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FetchClusterUpgradeInfoRequest message, length delimited. Does not implicitly {@link google.container.v1beta1.FetchClusterUpgradeInfoRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.FetchClusterUpgradeInfoRequest
+                     * @static
+                     * @param {google.container.v1beta1.IFetchClusterUpgradeInfoRequest} message FetchClusterUpgradeInfoRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FetchClusterUpgradeInfoRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FetchClusterUpgradeInfoRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.FetchClusterUpgradeInfoRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.FetchClusterUpgradeInfoRequest} FetchClusterUpgradeInfoRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FetchClusterUpgradeInfoRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.FetchClusterUpgradeInfoRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 100: {
+                                    message.version = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FetchClusterUpgradeInfoRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.FetchClusterUpgradeInfoRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.FetchClusterUpgradeInfoRequest} FetchClusterUpgradeInfoRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FetchClusterUpgradeInfoRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FetchClusterUpgradeInfoRequest message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.FetchClusterUpgradeInfoRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FetchClusterUpgradeInfoRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.version != null && message.hasOwnProperty("version"))
+                            if (!$util.isString(message.version))
+                                return "version: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FetchClusterUpgradeInfoRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.FetchClusterUpgradeInfoRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.FetchClusterUpgradeInfoRequest} FetchClusterUpgradeInfoRequest
+                     */
+                    FetchClusterUpgradeInfoRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.FetchClusterUpgradeInfoRequest)
+                            return object;
+                        var message = new $root.google.container.v1beta1.FetchClusterUpgradeInfoRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.version != null)
+                            message.version = String(object.version);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FetchClusterUpgradeInfoRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.FetchClusterUpgradeInfoRequest
+                     * @static
+                     * @param {google.container.v1beta1.FetchClusterUpgradeInfoRequest} message FetchClusterUpgradeInfoRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FetchClusterUpgradeInfoRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.version = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.version != null && message.hasOwnProperty("version"))
+                            object.version = message.version;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FetchClusterUpgradeInfoRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.FetchClusterUpgradeInfoRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FetchClusterUpgradeInfoRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FetchClusterUpgradeInfoRequest
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.FetchClusterUpgradeInfoRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FetchClusterUpgradeInfoRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.FetchClusterUpgradeInfoRequest";
+                    };
+    
+                    return FetchClusterUpgradeInfoRequest;
+                })();
+    
+                v1beta1.ClusterUpgradeInfo = (function() {
+    
+                    /**
+                     * Properties of a ClusterUpgradeInfo.
+                     * @memberof google.container.v1beta1
+                     * @interface IClusterUpgradeInfo
+                     * @property {string|null} [minorTargetVersion] ClusterUpgradeInfo minorTargetVersion
+                     * @property {string|null} [patchTargetVersion] ClusterUpgradeInfo patchTargetVersion
+                     * @property {Array.<google.container.v1beta1.ClusterUpgradeInfo.AutoUpgradeStatus>|null} [autoUpgradeStatus] ClusterUpgradeInfo autoUpgradeStatus
+                     * @property {Array.<google.container.v1beta1.ClusterUpgradeInfo.AutoUpgradePausedReason>|null} [pausedReason] ClusterUpgradeInfo pausedReason
+                     * @property {Array.<google.container.v1beta1.IUpgradeDetails>|null} [upgradeDetails] ClusterUpgradeInfo upgradeDetails
+                     * @property {string|null} [endOfStandardSupportTimestamp] ClusterUpgradeInfo endOfStandardSupportTimestamp
+                     * @property {string|null} [endOfExtendedSupportTimestamp] ClusterUpgradeInfo endOfExtendedSupportTimestamp
+                     */
+    
+                    /**
+                     * Constructs a new ClusterUpgradeInfo.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a ClusterUpgradeInfo.
+                     * @implements IClusterUpgradeInfo
+                     * @constructor
+                     * @param {google.container.v1beta1.IClusterUpgradeInfo=} [properties] Properties to set
+                     */
+                    function ClusterUpgradeInfo(properties) {
+                        this.autoUpgradeStatus = [];
+                        this.pausedReason = [];
+                        this.upgradeDetails = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ClusterUpgradeInfo minorTargetVersion.
+                     * @member {string|null|undefined} minorTargetVersion
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @instance
+                     */
+                    ClusterUpgradeInfo.prototype.minorTargetVersion = null;
+    
+                    /**
+                     * ClusterUpgradeInfo patchTargetVersion.
+                     * @member {string|null|undefined} patchTargetVersion
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @instance
+                     */
+                    ClusterUpgradeInfo.prototype.patchTargetVersion = null;
+    
+                    /**
+                     * ClusterUpgradeInfo autoUpgradeStatus.
+                     * @member {Array.<google.container.v1beta1.ClusterUpgradeInfo.AutoUpgradeStatus>} autoUpgradeStatus
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @instance
+                     */
+                    ClusterUpgradeInfo.prototype.autoUpgradeStatus = $util.emptyArray;
+    
+                    /**
+                     * ClusterUpgradeInfo pausedReason.
+                     * @member {Array.<google.container.v1beta1.ClusterUpgradeInfo.AutoUpgradePausedReason>} pausedReason
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @instance
+                     */
+                    ClusterUpgradeInfo.prototype.pausedReason = $util.emptyArray;
+    
+                    /**
+                     * ClusterUpgradeInfo upgradeDetails.
+                     * @member {Array.<google.container.v1beta1.IUpgradeDetails>} upgradeDetails
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @instance
+                     */
+                    ClusterUpgradeInfo.prototype.upgradeDetails = $util.emptyArray;
+    
+                    /**
+                     * ClusterUpgradeInfo endOfStandardSupportTimestamp.
+                     * @member {string|null|undefined} endOfStandardSupportTimestamp
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @instance
+                     */
+                    ClusterUpgradeInfo.prototype.endOfStandardSupportTimestamp = null;
+    
+                    /**
+                     * ClusterUpgradeInfo endOfExtendedSupportTimestamp.
+                     * @member {string|null|undefined} endOfExtendedSupportTimestamp
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @instance
+                     */
+                    ClusterUpgradeInfo.prototype.endOfExtendedSupportTimestamp = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * ClusterUpgradeInfo _minorTargetVersion.
+                     * @member {"minorTargetVersion"|undefined} _minorTargetVersion
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @instance
+                     */
+                    Object.defineProperty(ClusterUpgradeInfo.prototype, "_minorTargetVersion", {
+                        get: $util.oneOfGetter($oneOfFields = ["minorTargetVersion"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * ClusterUpgradeInfo _patchTargetVersion.
+                     * @member {"patchTargetVersion"|undefined} _patchTargetVersion
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @instance
+                     */
+                    Object.defineProperty(ClusterUpgradeInfo.prototype, "_patchTargetVersion", {
+                        get: $util.oneOfGetter($oneOfFields = ["patchTargetVersion"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * ClusterUpgradeInfo _endOfStandardSupportTimestamp.
+                     * @member {"endOfStandardSupportTimestamp"|undefined} _endOfStandardSupportTimestamp
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @instance
+                     */
+                    Object.defineProperty(ClusterUpgradeInfo.prototype, "_endOfStandardSupportTimestamp", {
+                        get: $util.oneOfGetter($oneOfFields = ["endOfStandardSupportTimestamp"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * ClusterUpgradeInfo _endOfExtendedSupportTimestamp.
+                     * @member {"endOfExtendedSupportTimestamp"|undefined} _endOfExtendedSupportTimestamp
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @instance
+                     */
+                    Object.defineProperty(ClusterUpgradeInfo.prototype, "_endOfExtendedSupportTimestamp", {
+                        get: $util.oneOfGetter($oneOfFields = ["endOfExtendedSupportTimestamp"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new ClusterUpgradeInfo instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @static
+                     * @param {google.container.v1beta1.IClusterUpgradeInfo=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.ClusterUpgradeInfo} ClusterUpgradeInfo instance
+                     */
+                    ClusterUpgradeInfo.create = function create(properties) {
+                        return new ClusterUpgradeInfo(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ClusterUpgradeInfo message. Does not implicitly {@link google.container.v1beta1.ClusterUpgradeInfo.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @static
+                     * @param {google.container.v1beta1.IClusterUpgradeInfo} message ClusterUpgradeInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ClusterUpgradeInfo.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.autoUpgradeStatus != null && message.autoUpgradeStatus.length) {
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                            for (var i = 0; i < message.autoUpgradeStatus.length; ++i)
+                                writer.int32(message.autoUpgradeStatus[i]);
+                            writer.ldelim();
+                        }
+                        if (message.pausedReason != null && message.pausedReason.length) {
+                            writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                            for (var i = 0; i < message.pausedReason.length; ++i)
+                                writer.int32(message.pausedReason[i]);
+                            writer.ldelim();
+                        }
+                        if (message.upgradeDetails != null && message.upgradeDetails.length)
+                            for (var i = 0; i < message.upgradeDetails.length; ++i)
+                                $root.google.container.v1beta1.UpgradeDetails.encode(message.upgradeDetails[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.endOfStandardSupportTimestamp != null && Object.hasOwnProperty.call(message, "endOfStandardSupportTimestamp"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.endOfStandardSupportTimestamp);
+                        if (message.endOfExtendedSupportTimestamp != null && Object.hasOwnProperty.call(message, "endOfExtendedSupportTimestamp"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.endOfExtendedSupportTimestamp);
+                        if (message.minorTargetVersion != null && Object.hasOwnProperty.call(message, "minorTargetVersion"))
+                            writer.uint32(/* id 7, wireType 2 =*/58).string(message.minorTargetVersion);
+                        if (message.patchTargetVersion != null && Object.hasOwnProperty.call(message, "patchTargetVersion"))
+                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.patchTargetVersion);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ClusterUpgradeInfo message, length delimited. Does not implicitly {@link google.container.v1beta1.ClusterUpgradeInfo.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @static
+                     * @param {google.container.v1beta1.IClusterUpgradeInfo} message ClusterUpgradeInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ClusterUpgradeInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ClusterUpgradeInfo message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.ClusterUpgradeInfo} ClusterUpgradeInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ClusterUpgradeInfo.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.ClusterUpgradeInfo();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 7: {
+                                    message.minorTargetVersion = reader.string();
+                                    break;
+                                }
+                            case 8: {
+                                    message.patchTargetVersion = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.autoUpgradeStatus && message.autoUpgradeStatus.length))
+                                        message.autoUpgradeStatus = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.autoUpgradeStatus.push(reader.int32());
+                                    } else
+                                        message.autoUpgradeStatus.push(reader.int32());
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.pausedReason && message.pausedReason.length))
+                                        message.pausedReason = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.pausedReason.push(reader.int32());
+                                    } else
+                                        message.pausedReason.push(reader.int32());
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.upgradeDetails && message.upgradeDetails.length))
+                                        message.upgradeDetails = [];
+                                    message.upgradeDetails.push($root.google.container.v1beta1.UpgradeDetails.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 5: {
+                                    message.endOfStandardSupportTimestamp = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.endOfExtendedSupportTimestamp = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ClusterUpgradeInfo message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.ClusterUpgradeInfo} ClusterUpgradeInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ClusterUpgradeInfo.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ClusterUpgradeInfo message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ClusterUpgradeInfo.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.minorTargetVersion != null && message.hasOwnProperty("minorTargetVersion")) {
+                            properties._minorTargetVersion = 1;
+                            if (!$util.isString(message.minorTargetVersion))
+                                return "minorTargetVersion: string expected";
+                        }
+                        if (message.patchTargetVersion != null && message.hasOwnProperty("patchTargetVersion")) {
+                            properties._patchTargetVersion = 1;
+                            if (!$util.isString(message.patchTargetVersion))
+                                return "patchTargetVersion: string expected";
+                        }
+                        if (message.autoUpgradeStatus != null && message.hasOwnProperty("autoUpgradeStatus")) {
+                            if (!Array.isArray(message.autoUpgradeStatus))
+                                return "autoUpgradeStatus: array expected";
+                            for (var i = 0; i < message.autoUpgradeStatus.length; ++i)
+                                switch (message.autoUpgradeStatus[i]) {
+                                default:
+                                    return "autoUpgradeStatus: enum value[] expected";
+                                case 0:
+                                case 1:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                        }
+                        if (message.pausedReason != null && message.hasOwnProperty("pausedReason")) {
+                            if (!Array.isArray(message.pausedReason))
+                                return "pausedReason: array expected";
+                            for (var i = 0; i < message.pausedReason.length; ++i)
+                                switch (message.pausedReason[i]) {
+                                default:
+                                    return "pausedReason: enum value[] expected";
+                                case 0:
+                                case 1:
+                                case 5:
+                                case 6:
+                                case 4:
+                                case 7:
+                                case 8:
+                                    break;
+                                }
+                        }
+                        if (message.upgradeDetails != null && message.hasOwnProperty("upgradeDetails")) {
+                            if (!Array.isArray(message.upgradeDetails))
+                                return "upgradeDetails: array expected";
+                            for (var i = 0; i < message.upgradeDetails.length; ++i) {
+                                var error = $root.google.container.v1beta1.UpgradeDetails.verify(message.upgradeDetails[i]);
+                                if (error)
+                                    return "upgradeDetails." + error;
+                            }
+                        }
+                        if (message.endOfStandardSupportTimestamp != null && message.hasOwnProperty("endOfStandardSupportTimestamp")) {
+                            properties._endOfStandardSupportTimestamp = 1;
+                            if (!$util.isString(message.endOfStandardSupportTimestamp))
+                                return "endOfStandardSupportTimestamp: string expected";
+                        }
+                        if (message.endOfExtendedSupportTimestamp != null && message.hasOwnProperty("endOfExtendedSupportTimestamp")) {
+                            properties._endOfExtendedSupportTimestamp = 1;
+                            if (!$util.isString(message.endOfExtendedSupportTimestamp))
+                                return "endOfExtendedSupportTimestamp: string expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ClusterUpgradeInfo message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.ClusterUpgradeInfo} ClusterUpgradeInfo
+                     */
+                    ClusterUpgradeInfo.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.ClusterUpgradeInfo)
+                            return object;
+                        var message = new $root.google.container.v1beta1.ClusterUpgradeInfo();
+                        if (object.minorTargetVersion != null)
+                            message.minorTargetVersion = String(object.minorTargetVersion);
+                        if (object.patchTargetVersion != null)
+                            message.patchTargetVersion = String(object.patchTargetVersion);
+                        if (object.autoUpgradeStatus) {
+                            if (!Array.isArray(object.autoUpgradeStatus))
+                                throw TypeError(".google.container.v1beta1.ClusterUpgradeInfo.autoUpgradeStatus: array expected");
+                            message.autoUpgradeStatus = [];
+                            for (var i = 0; i < object.autoUpgradeStatus.length; ++i)
+                                switch (object.autoUpgradeStatus[i]) {
+                                default:
+                                    if (typeof object.autoUpgradeStatus[i] === "number") {
+                                        message.autoUpgradeStatus[i] = object.autoUpgradeStatus[i];
+                                        break;
+                                    }
+                                case "UNKNOWN":
+                                case 0:
+                                    message.autoUpgradeStatus[i] = 0;
+                                    break;
+                                case "ACTIVE":
+                                case 1:
+                                    message.autoUpgradeStatus[i] = 1;
+                                    break;
+                                case "MINOR_UPGRADE_PAUSED":
+                                case 4:
+                                    message.autoUpgradeStatus[i] = 4;
+                                    break;
+                                case "UPGRADE_PAUSED":
+                                case 5:
+                                    message.autoUpgradeStatus[i] = 5;
+                                    break;
+                                }
+                        }
+                        if (object.pausedReason) {
+                            if (!Array.isArray(object.pausedReason))
+                                throw TypeError(".google.container.v1beta1.ClusterUpgradeInfo.pausedReason: array expected");
+                            message.pausedReason = [];
+                            for (var i = 0; i < object.pausedReason.length; ++i)
+                                switch (object.pausedReason[i]) {
+                                default:
+                                    if (typeof object.pausedReason[i] === "number") {
+                                        message.pausedReason[i] = object.pausedReason[i];
+                                        break;
+                                    }
+                                case "AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED":
+                                case 0:
+                                    message.pausedReason[i] = 0;
+                                    break;
+                                case "MAINTENANCE_WINDOW":
+                                case 1:
+                                    message.pausedReason[i] = 1;
+                                    break;
+                                case "MAINTENANCE_EXCLUSION_NO_UPGRADES":
+                                case 5:
+                                    message.pausedReason[i] = 5;
+                                    break;
+                                case "MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES":
+                                case 6:
+                                    message.pausedReason[i] = 6;
+                                    break;
+                                case "CLUSTER_DISRUPTION_BUDGET":
+                                case 4:
+                                    message.pausedReason[i] = 4;
+                                    break;
+                                case "CLUSTER_DISRUPTION_BUDGET_MINOR_UPGRADE":
+                                case 7:
+                                    message.pausedReason[i] = 7;
+                                    break;
+                                case "SYSTEM_CONFIG":
+                                case 8:
+                                    message.pausedReason[i] = 8;
+                                    break;
+                                }
+                        }
+                        if (object.upgradeDetails) {
+                            if (!Array.isArray(object.upgradeDetails))
+                                throw TypeError(".google.container.v1beta1.ClusterUpgradeInfo.upgradeDetails: array expected");
+                            message.upgradeDetails = [];
+                            for (var i = 0; i < object.upgradeDetails.length; ++i) {
+                                if (typeof object.upgradeDetails[i] !== "object")
+                                    throw TypeError(".google.container.v1beta1.ClusterUpgradeInfo.upgradeDetails: object expected");
+                                message.upgradeDetails[i] = $root.google.container.v1beta1.UpgradeDetails.fromObject(object.upgradeDetails[i]);
+                            }
+                        }
+                        if (object.endOfStandardSupportTimestamp != null)
+                            message.endOfStandardSupportTimestamp = String(object.endOfStandardSupportTimestamp);
+                        if (object.endOfExtendedSupportTimestamp != null)
+                            message.endOfExtendedSupportTimestamp = String(object.endOfExtendedSupportTimestamp);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ClusterUpgradeInfo message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @static
+                     * @param {google.container.v1beta1.ClusterUpgradeInfo} message ClusterUpgradeInfo
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ClusterUpgradeInfo.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.autoUpgradeStatus = [];
+                            object.pausedReason = [];
+                            object.upgradeDetails = [];
+                        }
+                        if (message.autoUpgradeStatus && message.autoUpgradeStatus.length) {
+                            object.autoUpgradeStatus = [];
+                            for (var j = 0; j < message.autoUpgradeStatus.length; ++j)
+                                object.autoUpgradeStatus[j] = options.enums === String ? $root.google.container.v1beta1.ClusterUpgradeInfo.AutoUpgradeStatus[message.autoUpgradeStatus[j]] === undefined ? message.autoUpgradeStatus[j] : $root.google.container.v1beta1.ClusterUpgradeInfo.AutoUpgradeStatus[message.autoUpgradeStatus[j]] : message.autoUpgradeStatus[j];
+                        }
+                        if (message.pausedReason && message.pausedReason.length) {
+                            object.pausedReason = [];
+                            for (var j = 0; j < message.pausedReason.length; ++j)
+                                object.pausedReason[j] = options.enums === String ? $root.google.container.v1beta1.ClusterUpgradeInfo.AutoUpgradePausedReason[message.pausedReason[j]] === undefined ? message.pausedReason[j] : $root.google.container.v1beta1.ClusterUpgradeInfo.AutoUpgradePausedReason[message.pausedReason[j]] : message.pausedReason[j];
+                        }
+                        if (message.upgradeDetails && message.upgradeDetails.length) {
+                            object.upgradeDetails = [];
+                            for (var j = 0; j < message.upgradeDetails.length; ++j)
+                                object.upgradeDetails[j] = $root.google.container.v1beta1.UpgradeDetails.toObject(message.upgradeDetails[j], options);
+                        }
+                        if (message.endOfStandardSupportTimestamp != null && message.hasOwnProperty("endOfStandardSupportTimestamp")) {
+                            object.endOfStandardSupportTimestamp = message.endOfStandardSupportTimestamp;
+                            if (options.oneofs)
+                                object._endOfStandardSupportTimestamp = "endOfStandardSupportTimestamp";
+                        }
+                        if (message.endOfExtendedSupportTimestamp != null && message.hasOwnProperty("endOfExtendedSupportTimestamp")) {
+                            object.endOfExtendedSupportTimestamp = message.endOfExtendedSupportTimestamp;
+                            if (options.oneofs)
+                                object._endOfExtendedSupportTimestamp = "endOfExtendedSupportTimestamp";
+                        }
+                        if (message.minorTargetVersion != null && message.hasOwnProperty("minorTargetVersion")) {
+                            object.minorTargetVersion = message.minorTargetVersion;
+                            if (options.oneofs)
+                                object._minorTargetVersion = "minorTargetVersion";
+                        }
+                        if (message.patchTargetVersion != null && message.hasOwnProperty("patchTargetVersion")) {
+                            object.patchTargetVersion = message.patchTargetVersion;
+                            if (options.oneofs)
+                                object._patchTargetVersion = "patchTargetVersion";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ClusterUpgradeInfo to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ClusterUpgradeInfo.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ClusterUpgradeInfo
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.ClusterUpgradeInfo
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ClusterUpgradeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.ClusterUpgradeInfo";
+                    };
+    
+                    /**
+                     * AutoUpgradeStatus enum.
+                     * @name google.container.v1beta1.ClusterUpgradeInfo.AutoUpgradeStatus
+                     * @enum {number}
+                     * @property {number} UNKNOWN=0 UNKNOWN value
+                     * @property {number} ACTIVE=1 ACTIVE value
+                     * @property {number} MINOR_UPGRADE_PAUSED=4 MINOR_UPGRADE_PAUSED value
+                     * @property {number} UPGRADE_PAUSED=5 UPGRADE_PAUSED value
+                     */
+                    ClusterUpgradeInfo.AutoUpgradeStatus = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "UNKNOWN"] = 0;
+                        values[valuesById[1] = "ACTIVE"] = 1;
+                        values[valuesById[4] = "MINOR_UPGRADE_PAUSED"] = 4;
+                        values[valuesById[5] = "UPGRADE_PAUSED"] = 5;
+                        return values;
+                    })();
+    
+                    /**
+                     * AutoUpgradePausedReason enum.
+                     * @name google.container.v1beta1.ClusterUpgradeInfo.AutoUpgradePausedReason
+                     * @enum {number}
+                     * @property {number} AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED=0 AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED value
+                     * @property {number} MAINTENANCE_WINDOW=1 MAINTENANCE_WINDOW value
+                     * @property {number} MAINTENANCE_EXCLUSION_NO_UPGRADES=5 MAINTENANCE_EXCLUSION_NO_UPGRADES value
+                     * @property {number} MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES=6 MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES value
+                     * @property {number} CLUSTER_DISRUPTION_BUDGET=4 CLUSTER_DISRUPTION_BUDGET value
+                     * @property {number} CLUSTER_DISRUPTION_BUDGET_MINOR_UPGRADE=7 CLUSTER_DISRUPTION_BUDGET_MINOR_UPGRADE value
+                     * @property {number} SYSTEM_CONFIG=8 SYSTEM_CONFIG value
+                     */
+                    ClusterUpgradeInfo.AutoUpgradePausedReason = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MAINTENANCE_WINDOW"] = 1;
+                        values[valuesById[5] = "MAINTENANCE_EXCLUSION_NO_UPGRADES"] = 5;
+                        values[valuesById[6] = "MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES"] = 6;
+                        values[valuesById[4] = "CLUSTER_DISRUPTION_BUDGET"] = 4;
+                        values[valuesById[7] = "CLUSTER_DISRUPTION_BUDGET_MINOR_UPGRADE"] = 7;
+                        values[valuesById[8] = "SYSTEM_CONFIG"] = 8;
+                        return values;
+                    })();
+    
+                    return ClusterUpgradeInfo;
+                })();
+    
+                v1beta1.UpgradeDetails = (function() {
+    
+                    /**
+                     * Properties of an UpgradeDetails.
+                     * @memberof google.container.v1beta1
+                     * @interface IUpgradeDetails
+                     * @property {google.container.v1beta1.UpgradeDetails.State|null} [state] UpgradeDetails state
+                     * @property {google.protobuf.ITimestamp|null} [startTime] UpgradeDetails startTime
+                     * @property {google.protobuf.ITimestamp|null} [endTime] UpgradeDetails endTime
+                     * @property {string|null} [initialVersion] UpgradeDetails initialVersion
+                     * @property {string|null} [targetVersion] UpgradeDetails targetVersion
+                     * @property {google.container.v1beta1.UpgradeDetails.StartType|null} [startType] UpgradeDetails startType
+                     */
+    
+                    /**
+                     * Constructs a new UpgradeDetails.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents an UpgradeDetails.
+                     * @implements IUpgradeDetails
+                     * @constructor
+                     * @param {google.container.v1beta1.IUpgradeDetails=} [properties] Properties to set
+                     */
+                    function UpgradeDetails(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpgradeDetails state.
+                     * @member {google.container.v1beta1.UpgradeDetails.State} state
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @instance
+                     */
+                    UpgradeDetails.prototype.state = 0;
+    
+                    /**
+                     * UpgradeDetails startTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @instance
+                     */
+                    UpgradeDetails.prototype.startTime = null;
+    
+                    /**
+                     * UpgradeDetails endTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @instance
+                     */
+                    UpgradeDetails.prototype.endTime = null;
+    
+                    /**
+                     * UpgradeDetails initialVersion.
+                     * @member {string} initialVersion
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @instance
+                     */
+                    UpgradeDetails.prototype.initialVersion = "";
+    
+                    /**
+                     * UpgradeDetails targetVersion.
+                     * @member {string} targetVersion
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @instance
+                     */
+                    UpgradeDetails.prototype.targetVersion = "";
+    
+                    /**
+                     * UpgradeDetails startType.
+                     * @member {google.container.v1beta1.UpgradeDetails.StartType} startType
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @instance
+                     */
+                    UpgradeDetails.prototype.startType = 0;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * UpgradeDetails _startTime.
+                     * @member {"startTime"|undefined} _startTime
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @instance
+                     */
+                    Object.defineProperty(UpgradeDetails.prototype, "_startTime", {
+                        get: $util.oneOfGetter($oneOfFields = ["startTime"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * UpgradeDetails _endTime.
+                     * @member {"endTime"|undefined} _endTime
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @instance
+                     */
+                    Object.defineProperty(UpgradeDetails.prototype, "_endTime", {
+                        get: $util.oneOfGetter($oneOfFields = ["endTime"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new UpgradeDetails instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @static
+                     * @param {google.container.v1beta1.IUpgradeDetails=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.UpgradeDetails} UpgradeDetails instance
+                     */
+                    UpgradeDetails.create = function create(properties) {
+                        return new UpgradeDetails(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpgradeDetails message. Does not implicitly {@link google.container.v1beta1.UpgradeDetails.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @static
+                     * @param {google.container.v1beta1.IUpgradeDetails} message UpgradeDetails message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpgradeDetails.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                        if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                            $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                            $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.initialVersion != null && Object.hasOwnProperty.call(message, "initialVersion"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.initialVersion);
+                        if (message.targetVersion != null && Object.hasOwnProperty.call(message, "targetVersion"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.targetVersion);
+                        if (message.startType != null && Object.hasOwnProperty.call(message, "startType"))
+                            writer.uint32(/* id 6, wireType 0 =*/48).int32(message.startType);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpgradeDetails message, length delimited. Does not implicitly {@link google.container.v1beta1.UpgradeDetails.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @static
+                     * @param {google.container.v1beta1.IUpgradeDetails} message UpgradeDetails message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpgradeDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpgradeDetails message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.UpgradeDetails} UpgradeDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpgradeDetails.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.UpgradeDetails();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.state = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.initialVersion = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.targetVersion = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.startType = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpgradeDetails message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.UpgradeDetails} UpgradeDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpgradeDetails.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpgradeDetails message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpgradeDetails.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            switch (message.state) {
+                            default:
+                                return "state: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                                break;
+                            }
+                        if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                            properties._startTime = 1;
+                            {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                        }
+                        if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                            properties._endTime = 1;
+                            {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                        }
+                        if (message.initialVersion != null && message.hasOwnProperty("initialVersion"))
+                            if (!$util.isString(message.initialVersion))
+                                return "initialVersion: string expected";
+                        if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
+                            if (!$util.isString(message.targetVersion))
+                                return "targetVersion: string expected";
+                        if (message.startType != null && message.hasOwnProperty("startType"))
+                            switch (message.startType) {
+                            default:
+                                return "startType: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpgradeDetails message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.UpgradeDetails} UpgradeDetails
+                     */
+                    UpgradeDetails.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.UpgradeDetails)
+                            return object;
+                        var message = new $root.google.container.v1beta1.UpgradeDetails();
+                        switch (object.state) {
+                        default:
+                            if (typeof object.state === "number") {
+                                message.state = object.state;
+                                break;
+                            }
+                            break;
+                        case "UNKNOWN":
+                        case 0:
+                            message.state = 0;
+                            break;
+                        case "FAILED":
+                        case 1:
+                            message.state = 1;
+                            break;
+                        case "SUCCEEDED":
+                        case 2:
+                            message.state = 2;
+                            break;
+                        case "CANCELED":
+                        case 3:
+                            message.state = 3;
+                            break;
+                        case "RUNNING":
+                        case 4:
+                            message.state = 4;
+                            break;
+                        }
+                        if (object.startTime != null) {
+                            if (typeof object.startTime !== "object")
+                                throw TypeError(".google.container.v1beta1.UpgradeDetails.startTime: object expected");
+                            message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                        }
+                        if (object.endTime != null) {
+                            if (typeof object.endTime !== "object")
+                                throw TypeError(".google.container.v1beta1.UpgradeDetails.endTime: object expected");
+                            message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                        }
+                        if (object.initialVersion != null)
+                            message.initialVersion = String(object.initialVersion);
+                        if (object.targetVersion != null)
+                            message.targetVersion = String(object.targetVersion);
+                        switch (object.startType) {
+                        default:
+                            if (typeof object.startType === "number") {
+                                message.startType = object.startType;
+                                break;
+                            }
+                            break;
+                        case "START_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.startType = 0;
+                            break;
+                        case "AUTOMATIC":
+                        case 1:
+                            message.startType = 1;
+                            break;
+                        case "MANUAL":
+                        case 2:
+                            message.startType = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpgradeDetails message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @static
+                     * @param {google.container.v1beta1.UpgradeDetails} message UpgradeDetails
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpgradeDetails.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.state = options.enums === String ? "UNKNOWN" : 0;
+                            object.initialVersion = "";
+                            object.targetVersion = "";
+                            object.startType = options.enums === String ? "START_TYPE_UNSPECIFIED" : 0;
+                        }
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            object.state = options.enums === String ? $root.google.container.v1beta1.UpgradeDetails.State[message.state] === undefined ? message.state : $root.google.container.v1beta1.UpgradeDetails.State[message.state] : message.state;
+                        if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                            object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (options.oneofs)
+                                object._startTime = "startTime";
+                        }
+                        if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                            object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (options.oneofs)
+                                object._endTime = "endTime";
+                        }
+                        if (message.initialVersion != null && message.hasOwnProperty("initialVersion"))
+                            object.initialVersion = message.initialVersion;
+                        if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
+                            object.targetVersion = message.targetVersion;
+                        if (message.startType != null && message.hasOwnProperty("startType"))
+                            object.startType = options.enums === String ? $root.google.container.v1beta1.UpgradeDetails.StartType[message.startType] === undefined ? message.startType : $root.google.container.v1beta1.UpgradeDetails.StartType[message.startType] : message.startType;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpgradeDetails to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpgradeDetails.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for UpgradeDetails
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.UpgradeDetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UpgradeDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.UpgradeDetails";
+                    };
+    
+                    /**
+                     * State enum.
+                     * @name google.container.v1beta1.UpgradeDetails.State
+                     * @enum {number}
+                     * @property {number} UNKNOWN=0 UNKNOWN value
+                     * @property {number} FAILED=1 FAILED value
+                     * @property {number} SUCCEEDED=2 SUCCEEDED value
+                     * @property {number} CANCELED=3 CANCELED value
+                     * @property {number} RUNNING=4 RUNNING value
+                     */
+                    UpgradeDetails.State = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "UNKNOWN"] = 0;
+                        values[valuesById[1] = "FAILED"] = 1;
+                        values[valuesById[2] = "SUCCEEDED"] = 2;
+                        values[valuesById[3] = "CANCELED"] = 3;
+                        values[valuesById[4] = "RUNNING"] = 4;
+                        return values;
+                    })();
+    
+                    /**
+                     * StartType enum.
+                     * @name google.container.v1beta1.UpgradeDetails.StartType
+                     * @enum {number}
+                     * @property {number} START_TYPE_UNSPECIFIED=0 START_TYPE_UNSPECIFIED value
+                     * @property {number} AUTOMATIC=1 AUTOMATIC value
+                     * @property {number} MANUAL=2 MANUAL value
+                     */
+                    UpgradeDetails.StartType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "START_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "AUTOMATIC"] = 1;
+                        values[valuesById[2] = "MANUAL"] = 2;
+                        return values;
+                    })();
+    
+                    return UpgradeDetails;
+                })();
+    
+                v1beta1.FetchNodePoolUpgradeInfoRequest = (function() {
+    
+                    /**
+                     * Properties of a FetchNodePoolUpgradeInfoRequest.
+                     * @memberof google.container.v1beta1
+                     * @interface IFetchNodePoolUpgradeInfoRequest
+                     * @property {string|null} [name] FetchNodePoolUpgradeInfoRequest name
+                     * @property {string|null} [version] FetchNodePoolUpgradeInfoRequest version
+                     */
+    
+                    /**
+                     * Constructs a new FetchNodePoolUpgradeInfoRequest.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a FetchNodePoolUpgradeInfoRequest.
+                     * @implements IFetchNodePoolUpgradeInfoRequest
+                     * @constructor
+                     * @param {google.container.v1beta1.IFetchNodePoolUpgradeInfoRequest=} [properties] Properties to set
+                     */
+                    function FetchNodePoolUpgradeInfoRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FetchNodePoolUpgradeInfoRequest name.
+                     * @member {string} name
+                     * @memberof google.container.v1beta1.FetchNodePoolUpgradeInfoRequest
+                     * @instance
+                     */
+                    FetchNodePoolUpgradeInfoRequest.prototype.name = "";
+    
+                    /**
+                     * FetchNodePoolUpgradeInfoRequest version.
+                     * @member {string} version
+                     * @memberof google.container.v1beta1.FetchNodePoolUpgradeInfoRequest
+                     * @instance
+                     */
+                    FetchNodePoolUpgradeInfoRequest.prototype.version = "";
+    
+                    /**
+                     * Creates a new FetchNodePoolUpgradeInfoRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.FetchNodePoolUpgradeInfoRequest
+                     * @static
+                     * @param {google.container.v1beta1.IFetchNodePoolUpgradeInfoRequest=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.FetchNodePoolUpgradeInfoRequest} FetchNodePoolUpgradeInfoRequest instance
+                     */
+                    FetchNodePoolUpgradeInfoRequest.create = function create(properties) {
+                        return new FetchNodePoolUpgradeInfoRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FetchNodePoolUpgradeInfoRequest message. Does not implicitly {@link google.container.v1beta1.FetchNodePoolUpgradeInfoRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.FetchNodePoolUpgradeInfoRequest
+                     * @static
+                     * @param {google.container.v1beta1.IFetchNodePoolUpgradeInfoRequest} message FetchNodePoolUpgradeInfoRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FetchNodePoolUpgradeInfoRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                            writer.uint32(/* id 100, wireType 2 =*/802).string(message.version);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FetchNodePoolUpgradeInfoRequest message, length delimited. Does not implicitly {@link google.container.v1beta1.FetchNodePoolUpgradeInfoRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.FetchNodePoolUpgradeInfoRequest
+                     * @static
+                     * @param {google.container.v1beta1.IFetchNodePoolUpgradeInfoRequest} message FetchNodePoolUpgradeInfoRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FetchNodePoolUpgradeInfoRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FetchNodePoolUpgradeInfoRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.FetchNodePoolUpgradeInfoRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.FetchNodePoolUpgradeInfoRequest} FetchNodePoolUpgradeInfoRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FetchNodePoolUpgradeInfoRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 100: {
+                                    message.version = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FetchNodePoolUpgradeInfoRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.FetchNodePoolUpgradeInfoRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.FetchNodePoolUpgradeInfoRequest} FetchNodePoolUpgradeInfoRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FetchNodePoolUpgradeInfoRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FetchNodePoolUpgradeInfoRequest message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.FetchNodePoolUpgradeInfoRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FetchNodePoolUpgradeInfoRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.version != null && message.hasOwnProperty("version"))
+                            if (!$util.isString(message.version))
+                                return "version: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FetchNodePoolUpgradeInfoRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.FetchNodePoolUpgradeInfoRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.FetchNodePoolUpgradeInfoRequest} FetchNodePoolUpgradeInfoRequest
+                     */
+                    FetchNodePoolUpgradeInfoRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest)
+                            return object;
+                        var message = new $root.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.version != null)
+                            message.version = String(object.version);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FetchNodePoolUpgradeInfoRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.FetchNodePoolUpgradeInfoRequest
+                     * @static
+                     * @param {google.container.v1beta1.FetchNodePoolUpgradeInfoRequest} message FetchNodePoolUpgradeInfoRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FetchNodePoolUpgradeInfoRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.version = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.version != null && message.hasOwnProperty("version"))
+                            object.version = message.version;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FetchNodePoolUpgradeInfoRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.FetchNodePoolUpgradeInfoRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FetchNodePoolUpgradeInfoRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FetchNodePoolUpgradeInfoRequest
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.FetchNodePoolUpgradeInfoRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FetchNodePoolUpgradeInfoRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.FetchNodePoolUpgradeInfoRequest";
+                    };
+    
+                    return FetchNodePoolUpgradeInfoRequest;
+                })();
+    
+                v1beta1.NodePoolUpgradeInfo = (function() {
+    
+                    /**
+                     * Properties of a NodePoolUpgradeInfo.
+                     * @memberof google.container.v1beta1
+                     * @interface INodePoolUpgradeInfo
+                     * @property {string|null} [minorTargetVersion] NodePoolUpgradeInfo minorTargetVersion
+                     * @property {string|null} [patchTargetVersion] NodePoolUpgradeInfo patchTargetVersion
+                     * @property {Array.<google.container.v1beta1.NodePoolUpgradeInfo.AutoUpgradeStatus>|null} [autoUpgradeStatus] NodePoolUpgradeInfo autoUpgradeStatus
+                     * @property {Array.<google.container.v1beta1.NodePoolUpgradeInfo.AutoUpgradePausedReason>|null} [pausedReason] NodePoolUpgradeInfo pausedReason
+                     * @property {Array.<google.container.v1beta1.IUpgradeDetails>|null} [upgradeDetails] NodePoolUpgradeInfo upgradeDetails
+                     * @property {string|null} [endOfStandardSupportTimestamp] NodePoolUpgradeInfo endOfStandardSupportTimestamp
+                     * @property {string|null} [endOfExtendedSupportTimestamp] NodePoolUpgradeInfo endOfExtendedSupportTimestamp
+                     */
+    
+                    /**
+                     * Constructs a new NodePoolUpgradeInfo.
+                     * @memberof google.container.v1beta1
+                     * @classdesc Represents a NodePoolUpgradeInfo.
+                     * @implements INodePoolUpgradeInfo
+                     * @constructor
+                     * @param {google.container.v1beta1.INodePoolUpgradeInfo=} [properties] Properties to set
+                     */
+                    function NodePoolUpgradeInfo(properties) {
+                        this.autoUpgradeStatus = [];
+                        this.pausedReason = [];
+                        this.upgradeDetails = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * NodePoolUpgradeInfo minorTargetVersion.
+                     * @member {string|null|undefined} minorTargetVersion
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @instance
+                     */
+                    NodePoolUpgradeInfo.prototype.minorTargetVersion = null;
+    
+                    /**
+                     * NodePoolUpgradeInfo patchTargetVersion.
+                     * @member {string|null|undefined} patchTargetVersion
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @instance
+                     */
+                    NodePoolUpgradeInfo.prototype.patchTargetVersion = null;
+    
+                    /**
+                     * NodePoolUpgradeInfo autoUpgradeStatus.
+                     * @member {Array.<google.container.v1beta1.NodePoolUpgradeInfo.AutoUpgradeStatus>} autoUpgradeStatus
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @instance
+                     */
+                    NodePoolUpgradeInfo.prototype.autoUpgradeStatus = $util.emptyArray;
+    
+                    /**
+                     * NodePoolUpgradeInfo pausedReason.
+                     * @member {Array.<google.container.v1beta1.NodePoolUpgradeInfo.AutoUpgradePausedReason>} pausedReason
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @instance
+                     */
+                    NodePoolUpgradeInfo.prototype.pausedReason = $util.emptyArray;
+    
+                    /**
+                     * NodePoolUpgradeInfo upgradeDetails.
+                     * @member {Array.<google.container.v1beta1.IUpgradeDetails>} upgradeDetails
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @instance
+                     */
+                    NodePoolUpgradeInfo.prototype.upgradeDetails = $util.emptyArray;
+    
+                    /**
+                     * NodePoolUpgradeInfo endOfStandardSupportTimestamp.
+                     * @member {string|null|undefined} endOfStandardSupportTimestamp
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @instance
+                     */
+                    NodePoolUpgradeInfo.prototype.endOfStandardSupportTimestamp = null;
+    
+                    /**
+                     * NodePoolUpgradeInfo endOfExtendedSupportTimestamp.
+                     * @member {string|null|undefined} endOfExtendedSupportTimestamp
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @instance
+                     */
+                    NodePoolUpgradeInfo.prototype.endOfExtendedSupportTimestamp = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * NodePoolUpgradeInfo _minorTargetVersion.
+                     * @member {"minorTargetVersion"|undefined} _minorTargetVersion
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @instance
+                     */
+                    Object.defineProperty(NodePoolUpgradeInfo.prototype, "_minorTargetVersion", {
+                        get: $util.oneOfGetter($oneOfFields = ["minorTargetVersion"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * NodePoolUpgradeInfo _patchTargetVersion.
+                     * @member {"patchTargetVersion"|undefined} _patchTargetVersion
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @instance
+                     */
+                    Object.defineProperty(NodePoolUpgradeInfo.prototype, "_patchTargetVersion", {
+                        get: $util.oneOfGetter($oneOfFields = ["patchTargetVersion"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * NodePoolUpgradeInfo _endOfStandardSupportTimestamp.
+                     * @member {"endOfStandardSupportTimestamp"|undefined} _endOfStandardSupportTimestamp
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @instance
+                     */
+                    Object.defineProperty(NodePoolUpgradeInfo.prototype, "_endOfStandardSupportTimestamp", {
+                        get: $util.oneOfGetter($oneOfFields = ["endOfStandardSupportTimestamp"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * NodePoolUpgradeInfo _endOfExtendedSupportTimestamp.
+                     * @member {"endOfExtendedSupportTimestamp"|undefined} _endOfExtendedSupportTimestamp
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @instance
+                     */
+                    Object.defineProperty(NodePoolUpgradeInfo.prototype, "_endOfExtendedSupportTimestamp", {
+                        get: $util.oneOfGetter($oneOfFields = ["endOfExtendedSupportTimestamp"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new NodePoolUpgradeInfo instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @static
+                     * @param {google.container.v1beta1.INodePoolUpgradeInfo=} [properties] Properties to set
+                     * @returns {google.container.v1beta1.NodePoolUpgradeInfo} NodePoolUpgradeInfo instance
+                     */
+                    NodePoolUpgradeInfo.create = function create(properties) {
+                        return new NodePoolUpgradeInfo(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified NodePoolUpgradeInfo message. Does not implicitly {@link google.container.v1beta1.NodePoolUpgradeInfo.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @static
+                     * @param {google.container.v1beta1.INodePoolUpgradeInfo} message NodePoolUpgradeInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NodePoolUpgradeInfo.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.minorTargetVersion != null && Object.hasOwnProperty.call(message, "minorTargetVersion"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.minorTargetVersion);
+                        if (message.patchTargetVersion != null && Object.hasOwnProperty.call(message, "patchTargetVersion"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.patchTargetVersion);
+                        if (message.autoUpgradeStatus != null && message.autoUpgradeStatus.length) {
+                            writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                            for (var i = 0; i < message.autoUpgradeStatus.length; ++i)
+                                writer.int32(message.autoUpgradeStatus[i]);
+                            writer.ldelim();
+                        }
+                        if (message.pausedReason != null && message.pausedReason.length) {
+                            writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                            for (var i = 0; i < message.pausedReason.length; ++i)
+                                writer.int32(message.pausedReason[i]);
+                            writer.ldelim();
+                        }
+                        if (message.upgradeDetails != null && message.upgradeDetails.length)
+                            for (var i = 0; i < message.upgradeDetails.length; ++i)
+                                $root.google.container.v1beta1.UpgradeDetails.encode(message.upgradeDetails[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.endOfStandardSupportTimestamp != null && Object.hasOwnProperty.call(message, "endOfStandardSupportTimestamp"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.endOfStandardSupportTimestamp);
+                        if (message.endOfExtendedSupportTimestamp != null && Object.hasOwnProperty.call(message, "endOfExtendedSupportTimestamp"))
+                            writer.uint32(/* id 7, wireType 2 =*/58).string(message.endOfExtendedSupportTimestamp);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified NodePoolUpgradeInfo message, length delimited. Does not implicitly {@link google.container.v1beta1.NodePoolUpgradeInfo.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @static
+                     * @param {google.container.v1beta1.INodePoolUpgradeInfo} message NodePoolUpgradeInfo message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NodePoolUpgradeInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a NodePoolUpgradeInfo message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1beta1.NodePoolUpgradeInfo} NodePoolUpgradeInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NodePoolUpgradeInfo.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1beta1.NodePoolUpgradeInfo();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.minorTargetVersion = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.patchTargetVersion = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.autoUpgradeStatus && message.autoUpgradeStatus.length))
+                                        message.autoUpgradeStatus = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.autoUpgradeStatus.push(reader.int32());
+                                    } else
+                                        message.autoUpgradeStatus.push(reader.int32());
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.pausedReason && message.pausedReason.length))
+                                        message.pausedReason = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.pausedReason.push(reader.int32());
+                                    } else
+                                        message.pausedReason.push(reader.int32());
+                                    break;
+                                }
+                            case 5: {
+                                    if (!(message.upgradeDetails && message.upgradeDetails.length))
+                                        message.upgradeDetails = [];
+                                    message.upgradeDetails.push($root.google.container.v1beta1.UpgradeDetails.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 6: {
+                                    message.endOfStandardSupportTimestamp = reader.string();
+                                    break;
+                                }
+                            case 7: {
+                                    message.endOfExtendedSupportTimestamp = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a NodePoolUpgradeInfo message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1beta1.NodePoolUpgradeInfo} NodePoolUpgradeInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NodePoolUpgradeInfo.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a NodePoolUpgradeInfo message.
+                     * @function verify
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    NodePoolUpgradeInfo.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.minorTargetVersion != null && message.hasOwnProperty("minorTargetVersion")) {
+                            properties._minorTargetVersion = 1;
+                            if (!$util.isString(message.minorTargetVersion))
+                                return "minorTargetVersion: string expected";
+                        }
+                        if (message.patchTargetVersion != null && message.hasOwnProperty("patchTargetVersion")) {
+                            properties._patchTargetVersion = 1;
+                            if (!$util.isString(message.patchTargetVersion))
+                                return "patchTargetVersion: string expected";
+                        }
+                        if (message.autoUpgradeStatus != null && message.hasOwnProperty("autoUpgradeStatus")) {
+                            if (!Array.isArray(message.autoUpgradeStatus))
+                                return "autoUpgradeStatus: array expected";
+                            for (var i = 0; i < message.autoUpgradeStatus.length; ++i)
+                                switch (message.autoUpgradeStatus[i]) {
+                                default:
+                                    return "autoUpgradeStatus: enum value[] expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                        }
+                        if (message.pausedReason != null && message.hasOwnProperty("pausedReason")) {
+                            if (!Array.isArray(message.pausedReason))
+                                return "pausedReason: array expected";
+                            for (var i = 0; i < message.pausedReason.length; ++i)
+                                switch (message.pausedReason[i]) {
+                                default:
+                                    return "pausedReason: enum value[] expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                        }
+                        if (message.upgradeDetails != null && message.hasOwnProperty("upgradeDetails")) {
+                            if (!Array.isArray(message.upgradeDetails))
+                                return "upgradeDetails: array expected";
+                            for (var i = 0; i < message.upgradeDetails.length; ++i) {
+                                var error = $root.google.container.v1beta1.UpgradeDetails.verify(message.upgradeDetails[i]);
+                                if (error)
+                                    return "upgradeDetails." + error;
+                            }
+                        }
+                        if (message.endOfStandardSupportTimestamp != null && message.hasOwnProperty("endOfStandardSupportTimestamp")) {
+                            properties._endOfStandardSupportTimestamp = 1;
+                            if (!$util.isString(message.endOfStandardSupportTimestamp))
+                                return "endOfStandardSupportTimestamp: string expected";
+                        }
+                        if (message.endOfExtendedSupportTimestamp != null && message.hasOwnProperty("endOfExtendedSupportTimestamp")) {
+                            properties._endOfExtendedSupportTimestamp = 1;
+                            if (!$util.isString(message.endOfExtendedSupportTimestamp))
+                                return "endOfExtendedSupportTimestamp: string expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a NodePoolUpgradeInfo message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1beta1.NodePoolUpgradeInfo} NodePoolUpgradeInfo
+                     */
+                    NodePoolUpgradeInfo.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1beta1.NodePoolUpgradeInfo)
+                            return object;
+                        var message = new $root.google.container.v1beta1.NodePoolUpgradeInfo();
+                        if (object.minorTargetVersion != null)
+                            message.minorTargetVersion = String(object.minorTargetVersion);
+                        if (object.patchTargetVersion != null)
+                            message.patchTargetVersion = String(object.patchTargetVersion);
+                        if (object.autoUpgradeStatus) {
+                            if (!Array.isArray(object.autoUpgradeStatus))
+                                throw TypeError(".google.container.v1beta1.NodePoolUpgradeInfo.autoUpgradeStatus: array expected");
+                            message.autoUpgradeStatus = [];
+                            for (var i = 0; i < object.autoUpgradeStatus.length; ++i)
+                                switch (object.autoUpgradeStatus[i]) {
+                                default:
+                                    if (typeof object.autoUpgradeStatus[i] === "number") {
+                                        message.autoUpgradeStatus[i] = object.autoUpgradeStatus[i];
+                                        break;
+                                    }
+                                case "UNKNOWN":
+                                case 0:
+                                    message.autoUpgradeStatus[i] = 0;
+                                    break;
+                                case "ACTIVE":
+                                case 1:
+                                    message.autoUpgradeStatus[i] = 1;
+                                    break;
+                                case "MINOR_UPGRADE_PAUSED":
+                                case 2:
+                                    message.autoUpgradeStatus[i] = 2;
+                                    break;
+                                case "UPGRADE_PAUSED":
+                                case 3:
+                                    message.autoUpgradeStatus[i] = 3;
+                                    break;
+                                }
+                        }
+                        if (object.pausedReason) {
+                            if (!Array.isArray(object.pausedReason))
+                                throw TypeError(".google.container.v1beta1.NodePoolUpgradeInfo.pausedReason: array expected");
+                            message.pausedReason = [];
+                            for (var i = 0; i < object.pausedReason.length; ++i)
+                                switch (object.pausedReason[i]) {
+                                default:
+                                    if (typeof object.pausedReason[i] === "number") {
+                                        message.pausedReason[i] = object.pausedReason[i];
+                                        break;
+                                    }
+                                case "AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED":
+                                case 0:
+                                    message.pausedReason[i] = 0;
+                                    break;
+                                case "MAINTENANCE_WINDOW":
+                                case 1:
+                                    message.pausedReason[i] = 1;
+                                    break;
+                                case "MAINTENANCE_EXCLUSION_NO_UPGRADES":
+                                case 2:
+                                    message.pausedReason[i] = 2;
+                                    break;
+                                case "MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES":
+                                case 3:
+                                    message.pausedReason[i] = 3;
+                                    break;
+                                case "SYSTEM_CONFIG":
+                                case 4:
+                                    message.pausedReason[i] = 4;
+                                    break;
+                                }
+                        }
+                        if (object.upgradeDetails) {
+                            if (!Array.isArray(object.upgradeDetails))
+                                throw TypeError(".google.container.v1beta1.NodePoolUpgradeInfo.upgradeDetails: array expected");
+                            message.upgradeDetails = [];
+                            for (var i = 0; i < object.upgradeDetails.length; ++i) {
+                                if (typeof object.upgradeDetails[i] !== "object")
+                                    throw TypeError(".google.container.v1beta1.NodePoolUpgradeInfo.upgradeDetails: object expected");
+                                message.upgradeDetails[i] = $root.google.container.v1beta1.UpgradeDetails.fromObject(object.upgradeDetails[i]);
+                            }
+                        }
+                        if (object.endOfStandardSupportTimestamp != null)
+                            message.endOfStandardSupportTimestamp = String(object.endOfStandardSupportTimestamp);
+                        if (object.endOfExtendedSupportTimestamp != null)
+                            message.endOfExtendedSupportTimestamp = String(object.endOfExtendedSupportTimestamp);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a NodePoolUpgradeInfo message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @static
+                     * @param {google.container.v1beta1.NodePoolUpgradeInfo} message NodePoolUpgradeInfo
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    NodePoolUpgradeInfo.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.autoUpgradeStatus = [];
+                            object.pausedReason = [];
+                            object.upgradeDetails = [];
+                        }
+                        if (message.minorTargetVersion != null && message.hasOwnProperty("minorTargetVersion")) {
+                            object.minorTargetVersion = message.minorTargetVersion;
+                            if (options.oneofs)
+                                object._minorTargetVersion = "minorTargetVersion";
+                        }
+                        if (message.patchTargetVersion != null && message.hasOwnProperty("patchTargetVersion")) {
+                            object.patchTargetVersion = message.patchTargetVersion;
+                            if (options.oneofs)
+                                object._patchTargetVersion = "patchTargetVersion";
+                        }
+                        if (message.autoUpgradeStatus && message.autoUpgradeStatus.length) {
+                            object.autoUpgradeStatus = [];
+                            for (var j = 0; j < message.autoUpgradeStatus.length; ++j)
+                                object.autoUpgradeStatus[j] = options.enums === String ? $root.google.container.v1beta1.NodePoolUpgradeInfo.AutoUpgradeStatus[message.autoUpgradeStatus[j]] === undefined ? message.autoUpgradeStatus[j] : $root.google.container.v1beta1.NodePoolUpgradeInfo.AutoUpgradeStatus[message.autoUpgradeStatus[j]] : message.autoUpgradeStatus[j];
+                        }
+                        if (message.pausedReason && message.pausedReason.length) {
+                            object.pausedReason = [];
+                            for (var j = 0; j < message.pausedReason.length; ++j)
+                                object.pausedReason[j] = options.enums === String ? $root.google.container.v1beta1.NodePoolUpgradeInfo.AutoUpgradePausedReason[message.pausedReason[j]] === undefined ? message.pausedReason[j] : $root.google.container.v1beta1.NodePoolUpgradeInfo.AutoUpgradePausedReason[message.pausedReason[j]] : message.pausedReason[j];
+                        }
+                        if (message.upgradeDetails && message.upgradeDetails.length) {
+                            object.upgradeDetails = [];
+                            for (var j = 0; j < message.upgradeDetails.length; ++j)
+                                object.upgradeDetails[j] = $root.google.container.v1beta1.UpgradeDetails.toObject(message.upgradeDetails[j], options);
+                        }
+                        if (message.endOfStandardSupportTimestamp != null && message.hasOwnProperty("endOfStandardSupportTimestamp")) {
+                            object.endOfStandardSupportTimestamp = message.endOfStandardSupportTimestamp;
+                            if (options.oneofs)
+                                object._endOfStandardSupportTimestamp = "endOfStandardSupportTimestamp";
+                        }
+                        if (message.endOfExtendedSupportTimestamp != null && message.hasOwnProperty("endOfExtendedSupportTimestamp")) {
+                            object.endOfExtendedSupportTimestamp = message.endOfExtendedSupportTimestamp;
+                            if (options.oneofs)
+                                object._endOfExtendedSupportTimestamp = "endOfExtendedSupportTimestamp";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this NodePoolUpgradeInfo to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    NodePoolUpgradeInfo.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for NodePoolUpgradeInfo
+                     * @function getTypeUrl
+                     * @memberof google.container.v1beta1.NodePoolUpgradeInfo
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    NodePoolUpgradeInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1beta1.NodePoolUpgradeInfo";
+                    };
+    
+                    /**
+                     * AutoUpgradeStatus enum.
+                     * @name google.container.v1beta1.NodePoolUpgradeInfo.AutoUpgradeStatus
+                     * @enum {number}
+                     * @property {number} UNKNOWN=0 UNKNOWN value
+                     * @property {number} ACTIVE=1 ACTIVE value
+                     * @property {number} MINOR_UPGRADE_PAUSED=2 MINOR_UPGRADE_PAUSED value
+                     * @property {number} UPGRADE_PAUSED=3 UPGRADE_PAUSED value
+                     */
+                    NodePoolUpgradeInfo.AutoUpgradeStatus = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "UNKNOWN"] = 0;
+                        values[valuesById[1] = "ACTIVE"] = 1;
+                        values[valuesById[2] = "MINOR_UPGRADE_PAUSED"] = 2;
+                        values[valuesById[3] = "UPGRADE_PAUSED"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * AutoUpgradePausedReason enum.
+                     * @name google.container.v1beta1.NodePoolUpgradeInfo.AutoUpgradePausedReason
+                     * @enum {number}
+                     * @property {number} AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED=0 AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED value
+                     * @property {number} MAINTENANCE_WINDOW=1 MAINTENANCE_WINDOW value
+                     * @property {number} MAINTENANCE_EXCLUSION_NO_UPGRADES=2 MAINTENANCE_EXCLUSION_NO_UPGRADES value
+                     * @property {number} MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES=3 MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES value
+                     * @property {number} SYSTEM_CONFIG=4 SYSTEM_CONFIG value
+                     */
+                    NodePoolUpgradeInfo.AutoUpgradePausedReason = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MAINTENANCE_WINDOW"] = 1;
+                        values[valuesById[2] = "MAINTENANCE_EXCLUSION_NO_UPGRADES"] = 2;
+                        values[valuesById[3] = "MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES"] = 3;
+                        values[valuesById[4] = "SYSTEM_CONFIG"] = 4;
+                        return values;
+                    })();
+    
+                    return NodePoolUpgradeInfo;
                 })();
     
                 return v1beta1;

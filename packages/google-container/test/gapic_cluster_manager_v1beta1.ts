@@ -6709,6 +6709,284 @@ describe('v1beta1.ClusterManagerClient', () => {
     });
   });
 
+  describe('fetchClusterUpgradeInfo', () => {
+    it('invokes fetchClusterUpgradeInfo without error', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchClusterUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchClusterUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1beta1.ClusterUpgradeInfo()
+      );
+      client.innerApiCalls.fetchClusterUpgradeInfo =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchClusterUpgradeInfo(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchClusterUpgradeInfo without error using callback', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchClusterUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchClusterUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1beta1.ClusterUpgradeInfo()
+      );
+      client.innerApiCalls.fetchClusterUpgradeInfo =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchClusterUpgradeInfo(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.container.v1beta1.IClusterUpgradeInfo | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchClusterUpgradeInfo with error', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchClusterUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchClusterUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchClusterUpgradeInfo = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.fetchClusterUpgradeInfo(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchClusterUpgradeInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchClusterUpgradeInfo with closed client', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchClusterUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchClusterUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.fetchClusterUpgradeInfo(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('fetchNodePoolUpgradeInfo', () => {
+    it('invokes fetchNodePoolUpgradeInfo without error', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1beta1.NodePoolUpgradeInfo()
+      );
+      client.innerApiCalls.fetchNodePoolUpgradeInfo =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchNodePoolUpgradeInfo(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchNodePoolUpgradeInfo without error using callback', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.container.v1beta1.NodePoolUpgradeInfo()
+      );
+      client.innerApiCalls.fetchNodePoolUpgradeInfo =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchNodePoolUpgradeInfo(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.container.v1beta1.INodePoolUpgradeInfo | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchNodePoolUpgradeInfo with error', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchNodePoolUpgradeInfo = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.fetchNodePoolUpgradeInfo(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchNodePoolUpgradeInfo as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchNodePoolUpgradeInfo with closed client', async () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1beta1.FetchNodePoolUpgradeInfoRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.fetchNodePoolUpgradeInfo(request),
+        expectedError
+      );
+    });
+  });
+
   describe('listUsableSubnetworks', () => {
     it('invokes listUsableSubnetworks without error', async () => {
       const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
@@ -7058,6 +7336,164 @@ describe('v1beta1.ClusterManagerClient', () => {
             expectedHeaderRequestParams
           )
       );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('caPool', async () => {
+      const fakePath = '/rendered/path/caPool';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        ca_pool: 'caPoolValue',
+      };
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.caPoolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.caPoolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('caPoolPath', () => {
+        const result = client.caPoolPath(
+          'projectValue',
+          'locationValue',
+          'caPoolValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.caPoolPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCaPoolName', () => {
+        const result = client.matchProjectFromCaPoolName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCaPoolName', () => {
+        const result = client.matchLocationFromCaPoolName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCaPoolFromCaPoolName', () => {
+        const result = client.matchCaPoolFromCaPoolName(fakePath);
+        assert.strictEqual(result, 'caPoolValue');
+        assert(
+          (client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('cryptoKeyVersion', async () => {
+      const fakePath = '/rendered/path/cryptoKeyVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        key_ring: 'keyRingValue',
+        crypto_key: 'cryptoKeyValue',
+        crypto_key_version: 'cryptoKeyVersionValue',
+      };
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cryptoKeyVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cryptoKeyVersionPath', () => {
+        const result = client.cryptoKeyVersionPath(
+          'projectValue',
+          'locationValue',
+          'keyRingValue',
+          'cryptoKeyValue',
+          'cryptoKeyVersionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.cryptoKeyVersionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCryptoKeyVersionName', () => {
+        const result = client.matchProjectFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCryptoKeyVersionName', () => {
+        const result = client.matchLocationFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKeyRingFromCryptoKeyVersionName', () => {
+        const result = client.matchKeyRingFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'keyRingValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCryptoKeyFromCryptoKeyVersionName', () => {
+        const result = client.matchCryptoKeyFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCryptoKeyVersionFromCryptoKeyVersionName', () => {
+        const result =
+          client.matchCryptoKeyVersionFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyVersionValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
     });
   });
 });
