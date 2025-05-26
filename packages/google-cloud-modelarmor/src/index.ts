@@ -17,11 +17,12 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1beta from './v1beta';
 
 const ModelArmorClient = v1.ModelArmorClient;
 type ModelArmorClient = v1.ModelArmorClient;
 
-export {v1, ModelArmorClient};
-export default {v1, ModelArmorClient};
+export {v1, v1beta, ModelArmorClient};
+export default {v1, v1beta, ModelArmorClient};
 import * as protos from '../protos/protos';
 export {protos};
