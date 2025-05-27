@@ -32,7 +32,7 @@ function generateSampleMessage<T extends object>(instance: T) {
     instance.constructor as typeof protobuf.Message
   ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
+    filledObject,
   ) as T;
 }
 
@@ -44,7 +44,7 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(
   response?: ResponseType,
-  error?: Error
+  error?: Error,
 ) {
   return error
     ? sinon.stub().callsArgWith(2, error)
@@ -53,7 +53,7 @@ function stubSimpleCallWithCallback<ResponseType>(
 
 function stubPageStreamingCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error
+  error?: Error,
 ) {
   const pagingStub = sinon.stub();
   if (responses) {
@@ -91,7 +91,7 @@ function stubPageStreamingCall<ResponseType>(
 
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error
+  error?: Error,
 ) {
   let counter = 0;
   const asyncIterable = {
@@ -211,7 +211,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.CreateSecretRequest()
+        new protos.google.cloud.secrets.v1beta1.CreateSecretRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -223,7 +223,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.Secret()
+        new protos.google.cloud.secrets.v1beta1.Secret(),
       );
       client.innerApiCalls.createSecret = stubSimpleCall(expectedResponse);
       const [response] = await client.createSecret(request);
@@ -231,7 +231,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.createSecret as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -243,7 +243,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.CreateSecretRequest()
+        new protos.google.cloud.secrets.v1beta1.CreateSecretRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -255,7 +255,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.Secret()
+        new protos.google.cloud.secrets.v1beta1.Secret(),
       );
       client.innerApiCalls.createSecret =
         stubSimpleCallWithCallback(expectedResponse);
@@ -264,14 +264,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secrets.v1beta1.ISecret | null
+            result?: protos.google.cloud.secrets.v1beta1.ISecret | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -279,7 +279,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.createSecret as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -291,7 +291,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.CreateSecretRequest()
+        new protos.google.cloud.secrets.v1beta1.CreateSecretRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -305,13 +305,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.createSecret = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.createSecret(request), expectedError);
       assert(
         (client.innerApiCalls.createSecret as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -325,7 +325,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.AddSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.AddSecretVersionRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -337,7 +337,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.SecretVersion()
+        new protos.google.cloud.secrets.v1beta1.SecretVersion(),
       );
       client.innerApiCalls.addSecretVersion = stubSimpleCall(expectedResponse);
       const [response] = await client.addSecretVersion(request);
@@ -345,7 +345,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.addSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -357,7 +357,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.AddSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.AddSecretVersionRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -369,7 +369,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.SecretVersion()
+        new protos.google.cloud.secrets.v1beta1.SecretVersion(),
       );
       client.innerApiCalls.addSecretVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -378,14 +378,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secrets.v1beta1.ISecretVersion | null
+            result?: protos.google.cloud.secrets.v1beta1.ISecretVersion | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -393,7 +393,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.addSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -405,7 +405,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.AddSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.AddSecretVersionRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -419,13 +419,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.addSecretVersion = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.addSecretVersion(request), expectedError);
       assert(
         (client.innerApiCalls.addSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -439,7 +439,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.GetSecretRequest()
+        new protos.google.cloud.secrets.v1beta1.GetSecretRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -451,7 +451,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.Secret()
+        new protos.google.cloud.secrets.v1beta1.Secret(),
       );
       client.innerApiCalls.getSecret = stubSimpleCall(expectedResponse);
       const [response] = await client.getSecret(request);
@@ -459,7 +459,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.getSecret as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -471,7 +471,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.GetSecretRequest()
+        new protos.google.cloud.secrets.v1beta1.GetSecretRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -483,7 +483,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.Secret()
+        new protos.google.cloud.secrets.v1beta1.Secret(),
       );
       client.innerApiCalls.getSecret =
         stubSimpleCallWithCallback(expectedResponse);
@@ -492,14 +492,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secrets.v1beta1.ISecret | null
+            result?: protos.google.cloud.secrets.v1beta1.ISecret | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -507,7 +507,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.getSecret as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -519,7 +519,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.GetSecretRequest()
+        new protos.google.cloud.secrets.v1beta1.GetSecretRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -536,7 +536,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.getSecret as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -550,7 +550,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.UpdateSecretRequest()
+        new protos.google.cloud.secrets.v1beta1.UpdateSecretRequest(),
       );
       request.secret = {};
       request.secret.name = '';
@@ -563,7 +563,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.Secret()
+        new protos.google.cloud.secrets.v1beta1.Secret(),
       );
       client.innerApiCalls.updateSecret = stubSimpleCall(expectedResponse);
       const [response] = await client.updateSecret(request);
@@ -571,7 +571,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.updateSecret as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -583,7 +583,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.UpdateSecretRequest()
+        new protos.google.cloud.secrets.v1beta1.UpdateSecretRequest(),
       );
       request.secret = {};
       request.secret.name = '';
@@ -596,7 +596,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.Secret()
+        new protos.google.cloud.secrets.v1beta1.Secret(),
       );
       client.innerApiCalls.updateSecret =
         stubSimpleCallWithCallback(expectedResponse);
@@ -605,14 +605,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secrets.v1beta1.ISecret | null
+            result?: protos.google.cloud.secrets.v1beta1.ISecret | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -620,7 +620,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.updateSecret as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -632,7 +632,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.UpdateSecretRequest()
+        new protos.google.cloud.secrets.v1beta1.UpdateSecretRequest(),
       );
       request.secret = {};
       request.secret.name = '';
@@ -647,13 +647,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSecret = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.updateSecret(request), expectedError);
       assert(
         (client.innerApiCalls.updateSecret as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -667,7 +667,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.DeleteSecretRequest()
+        new protos.google.cloud.secrets.v1beta1.DeleteSecretRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -679,7 +679,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteSecret = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteSecret(request);
@@ -687,7 +687,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.deleteSecret as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -699,7 +699,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.DeleteSecretRequest()
+        new protos.google.cloud.secrets.v1beta1.DeleteSecretRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -711,7 +711,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteSecret =
         stubSimpleCallWithCallback(expectedResponse);
@@ -720,14 +720,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
+            result?: protos.google.protobuf.IEmpty | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -735,7 +735,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.deleteSecret as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -747,7 +747,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.DeleteSecretRequest()
+        new protos.google.cloud.secrets.v1beta1.DeleteSecretRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -761,13 +761,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSecret = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.deleteSecret(request), expectedError);
       assert(
         (client.innerApiCalls.deleteSecret as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -781,7 +781,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.GetSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.GetSecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -793,7 +793,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.SecretVersion()
+        new protos.google.cloud.secrets.v1beta1.SecretVersion(),
       );
       client.innerApiCalls.getSecretVersion = stubSimpleCall(expectedResponse);
       const [response] = await client.getSecretVersion(request);
@@ -801,7 +801,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.getSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -813,7 +813,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.GetSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.GetSecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -825,7 +825,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.SecretVersion()
+        new protos.google.cloud.secrets.v1beta1.SecretVersion(),
       );
       client.innerApiCalls.getSecretVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -834,14 +834,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secrets.v1beta1.ISecretVersion | null
+            result?: protos.google.cloud.secrets.v1beta1.ISecretVersion | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -849,7 +849,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.getSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -861,7 +861,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.GetSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.GetSecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -875,13 +875,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.getSecretVersion = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.getSecretVersion(request), expectedError);
       assert(
         (client.innerApiCalls.getSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -895,7 +895,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.AccessSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.AccessSecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -907,7 +907,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.AccessSecretVersionResponse()
+        new protos.google.cloud.secrets.v1beta1.AccessSecretVersionResponse(),
       );
       client.innerApiCalls.accessSecretVersion =
         stubSimpleCall(expectedResponse);
@@ -916,7 +916,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.accessSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -928,7 +928,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.AccessSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.AccessSecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -940,7 +940,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.AccessSecretVersionResponse()
+        new protos.google.cloud.secrets.v1beta1.AccessSecretVersionResponse(),
       );
       client.innerApiCalls.accessSecretVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -949,14 +949,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secrets.v1beta1.IAccessSecretVersionResponse | null
+            result?: protos.google.cloud.secrets.v1beta1.IAccessSecretVersionResponse | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -964,7 +964,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.accessSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -976,7 +976,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.AccessSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.AccessSecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -990,13 +990,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.accessSecretVersion = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.accessSecretVersion(request), expectedError);
       assert(
         (client.innerApiCalls.accessSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -1010,7 +1010,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.DisableSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.DisableSecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1022,7 +1022,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.SecretVersion()
+        new protos.google.cloud.secrets.v1beta1.SecretVersion(),
       );
       client.innerApiCalls.disableSecretVersion =
         stubSimpleCall(expectedResponse);
@@ -1031,7 +1031,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.disableSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -1043,7 +1043,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.DisableSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.DisableSecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1055,7 +1055,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.SecretVersion()
+        new protos.google.cloud.secrets.v1beta1.SecretVersion(),
       );
       client.innerApiCalls.disableSecretVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1064,14 +1064,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secrets.v1beta1.ISecretVersion | null
+            result?: protos.google.cloud.secrets.v1beta1.ISecretVersion | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1079,7 +1079,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.disableSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -1091,7 +1091,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.DisableSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.DisableSecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1105,13 +1105,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.disableSecretVersion = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.disableSecretVersion(request), expectedError);
       assert(
         (client.innerApiCalls.disableSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -1125,7 +1125,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.EnableSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.EnableSecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1137,7 +1137,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.SecretVersion()
+        new protos.google.cloud.secrets.v1beta1.SecretVersion(),
       );
       client.innerApiCalls.enableSecretVersion =
         stubSimpleCall(expectedResponse);
@@ -1146,7 +1146,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.enableSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -1158,7 +1158,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.EnableSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.EnableSecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1170,7 +1170,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.SecretVersion()
+        new protos.google.cloud.secrets.v1beta1.SecretVersion(),
       );
       client.innerApiCalls.enableSecretVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1179,14 +1179,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secrets.v1beta1.ISecretVersion | null
+            result?: protos.google.cloud.secrets.v1beta1.ISecretVersion | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1194,7 +1194,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.enableSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -1206,7 +1206,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.EnableSecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.EnableSecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1220,13 +1220,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.enableSecretVersion = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.enableSecretVersion(request), expectedError);
       assert(
         (client.innerApiCalls.enableSecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -1240,7 +1240,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.DestroySecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.DestroySecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1252,7 +1252,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.SecretVersion()
+        new protos.google.cloud.secrets.v1beta1.SecretVersion(),
       );
       client.innerApiCalls.destroySecretVersion =
         stubSimpleCall(expectedResponse);
@@ -1261,7 +1261,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.destroySecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -1273,7 +1273,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.DestroySecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.DestroySecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1285,7 +1285,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.SecretVersion()
+        new protos.google.cloud.secrets.v1beta1.SecretVersion(),
       );
       client.innerApiCalls.destroySecretVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1294,14 +1294,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secrets.v1beta1.ISecretVersion | null
+            result?: protos.google.cloud.secrets.v1beta1.ISecretVersion | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1309,7 +1309,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.destroySecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -1321,7 +1321,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.DestroySecretVersionRequest()
+        new protos.google.cloud.secrets.v1beta1.DestroySecretVersionRequest(),
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -1335,13 +1335,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.destroySecretVersion = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.destroySecretVersion(request), expectedError);
       assert(
         (client.innerApiCalls.destroySecretVersion as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -1355,7 +1355,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
+        new protos.google.iam.v1.SetIamPolicyRequest(),
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -1367,7 +1367,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
+        new protos.google.iam.v1.Policy(),
       );
       client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.setIamPolicy(request);
@@ -1375,7 +1375,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -1387,7 +1387,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
+        new protos.google.iam.v1.SetIamPolicyRequest(),
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -1399,7 +1399,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
+        new protos.google.iam.v1.Policy(),
       );
       client.innerApiCalls.setIamPolicy =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1408,14 +1408,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
+            result?: protos.google.iam.v1.IPolicy | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1423,7 +1423,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -1435,7 +1435,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.iam.v1.SetIamPolicyRequest()
+        new protos.google.iam.v1.SetIamPolicyRequest(),
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -1449,13 +1449,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.setIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -1469,7 +1469,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
+        new protos.google.iam.v1.GetIamPolicyRequest(),
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -1481,7 +1481,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
+        new protos.google.iam.v1.Policy(),
       );
       client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.getIamPolicy(request);
@@ -1489,7 +1489,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -1501,7 +1501,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
+        new protos.google.iam.v1.GetIamPolicyRequest(),
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -1513,7 +1513,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.Policy()
+        new protos.google.iam.v1.Policy(),
       );
       client.innerApiCalls.getIamPolicy =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1522,14 +1522,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.iam.v1.IPolicy | null
+            result?: protos.google.iam.v1.IPolicy | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1537,7 +1537,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -1549,7 +1549,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.iam.v1.GetIamPolicyRequest()
+        new protos.google.iam.v1.GetIamPolicyRequest(),
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -1563,13 +1563,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.getIamPolicy(request), expectedError);
       assert(
         (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -1583,7 +1583,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
+        new protos.google.iam.v1.TestIamPermissionsRequest(),
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -1595,7 +1595,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
+        new protos.google.iam.v1.TestIamPermissionsResponse(),
       );
       client.innerApiCalls.testIamPermissions =
         stubSimpleCall(expectedResponse);
@@ -1604,7 +1604,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -1616,7 +1616,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
+        new protos.google.iam.v1.TestIamPermissionsRequest(),
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -1628,7 +1628,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsResponse()
+        new protos.google.iam.v1.TestIamPermissionsResponse(),
       );
       client.innerApiCalls.testIamPermissions =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1637,14 +1637,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.iam.v1.ITestIamPermissionsResponse | null
+            result?: protos.google.iam.v1.ITestIamPermissionsResponse | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1652,7 +1652,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -1664,7 +1664,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.iam.v1.TestIamPermissionsRequest()
+        new protos.google.iam.v1.TestIamPermissionsRequest(),
       );
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
@@ -1678,13 +1678,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.testIamPermissions(request), expectedError);
       assert(
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
   });
@@ -1698,7 +1698,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1720,7 +1720,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.listSecrets as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -1732,7 +1732,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1755,14 +1755,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secrets.v1beta1.ISecret[] | null
+            result?: protos.google.cloud.secrets.v1beta1.ISecret[] | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1770,7 +1770,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.listSecrets as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -1782,7 +1782,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1796,13 +1796,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.listSecrets = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.listSecrets(request), expectedError);
       assert(
         (client.innerApiCalls.listSecrets as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -1814,7 +1814,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1832,7 +1832,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           'data',
           (response: protos.google.cloud.secrets.v1beta1.Secret) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -1846,13 +1846,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listSecrets, request)
+          .calledWith(client.innerApiCalls.listSecrets, request),
       );
       assert.strictEqual(
         (client.descriptors.page.listSecrets.createStream as SinonStub).getCall(
-          0
+          0,
         ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        expectedHeaderRequestParams,
       );
     });
 
@@ -1864,14 +1864,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
       client.descriptors.page.listSecrets.createStream = stubPageStreamingCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const stream = client.listSecretsStream(request);
       const promise = new Promise((resolve, reject) => {
@@ -1880,7 +1880,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           'data',
           (response: protos.google.cloud.secrets.v1beta1.Secret) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -1893,13 +1893,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listSecrets, request)
+          .calledWith(client.innerApiCalls.listSecrets, request),
       );
       assert.strictEqual(
         (client.descriptors.page.listSecrets.createStream as SinonStub).getCall(
-          0
+          0,
         ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        expectedHeaderRequestParams,
       );
     });
 
@@ -1911,7 +1911,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1930,15 +1930,15 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (client.descriptors.page.listSecrets.asyncIterate as SinonStub).getCall(
-          0
+          0,
         ).args[1],
-        request
+        request,
       );
       assert.strictEqual(
         (client.descriptors.page.listSecrets.asyncIterate as SinonStub).getCall(
-          0
+          0,
         ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        expectedHeaderRequestParams,
       );
     });
 
@@ -1950,14 +1950,14 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
       client.descriptors.page.listSecrets.asyncIterate = stubAsyncIterationCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const iterable = client.listSecretsAsync(request);
       await assert.rejects(async () => {
@@ -1968,15 +1968,15 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       });
       assert.deepStrictEqual(
         (client.descriptors.page.listSecrets.asyncIterate as SinonStub).getCall(
-          0
+          0,
         ).args[1],
-        request
+        request,
       );
       assert.strictEqual(
         (client.descriptors.page.listSecrets.asyncIterate as SinonStub).getCall(
-          0
+          0,
         ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        expectedHeaderRequestParams,
       );
     });
   });
@@ -1990,7 +1990,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2003,13 +2003,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       };
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.secrets.v1beta1.SecretVersion()
+          new protos.google.cloud.secrets.v1beta1.SecretVersion(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.secrets.v1beta1.SecretVersion()
+          new protos.google.cloud.secrets.v1beta1.SecretVersion(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.secrets.v1beta1.SecretVersion()
+          new protos.google.cloud.secrets.v1beta1.SecretVersion(),
         ),
       ];
       client.innerApiCalls.listSecretVersions =
@@ -2019,7 +2019,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.listSecretVersions as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -2031,7 +2031,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2044,13 +2044,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       };
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.secrets.v1beta1.SecretVersion()
+          new protos.google.cloud.secrets.v1beta1.SecretVersion(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.secrets.v1beta1.SecretVersion()
+          new protos.google.cloud.secrets.v1beta1.SecretVersion(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.secrets.v1beta1.SecretVersion()
+          new protos.google.cloud.secrets.v1beta1.SecretVersion(),
         ),
       ];
       client.innerApiCalls.listSecretVersions =
@@ -2060,14 +2060,16 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secrets.v1beta1.ISecretVersion[] | null
+            result?:
+              | protos.google.cloud.secrets.v1beta1.ISecretVersion[]
+              | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -2075,7 +2077,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.innerApiCalls.listSecretVersions as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(request, expectedOptions /*, callback defined above */),
       );
     });
 
@@ -2087,7 +2089,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2101,13 +2103,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.listSecretVersions = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.listSecretVersions(request), expectedError);
       assert(
         (client.innerApiCalls.listSecretVersions as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+          .calledWith(request, expectedOptions, undefined),
       );
     });
 
@@ -2119,19 +2121,19 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.secrets.v1beta1.SecretVersion()
+          new protos.google.cloud.secrets.v1beta1.SecretVersion(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.secrets.v1beta1.SecretVersion()
+          new protos.google.cloud.secrets.v1beta1.SecretVersion(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.secrets.v1beta1.SecretVersion()
+          new protos.google.cloud.secrets.v1beta1.SecretVersion(),
         ),
       ];
       client.descriptors.page.listSecretVersions.createStream =
@@ -2144,7 +2146,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           'data',
           (response: protos.google.cloud.secrets.v1beta1.SecretVersion) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -2158,13 +2160,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listSecretVersions, request)
+          .calledWith(client.innerApiCalls.listSecretVersions, request),
       );
       assert.strictEqual(
         (
           client.descriptors.page.listSecretVersions.createStream as SinonStub
         ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        expectedHeaderRequestParams,
       );
     });
 
@@ -2176,7 +2178,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2191,7 +2193,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
           'data',
           (response: protos.google.cloud.secrets.v1beta1.SecretVersion) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -2204,13 +2206,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listSecretVersions, request)
+          .calledWith(client.innerApiCalls.listSecretVersions, request),
       );
       assert.strictEqual(
         (
           client.descriptors.page.listSecretVersions.createStream as SinonStub
         ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        expectedHeaderRequestParams,
       );
     });
 
@@ -2222,19 +2224,19 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.secrets.v1beta1.SecretVersion()
+          new protos.google.cloud.secrets.v1beta1.SecretVersion(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.secrets.v1beta1.SecretVersion()
+          new protos.google.cloud.secrets.v1beta1.SecretVersion(),
         ),
         generateSampleMessage(
-          new protos.google.cloud.secrets.v1beta1.SecretVersion()
+          new protos.google.cloud.secrets.v1beta1.SecretVersion(),
         ),
       ];
       client.descriptors.page.listSecretVersions.asyncIterate =
@@ -2250,13 +2252,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         (
           client.descriptors.page.listSecretVersions.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
       assert.strictEqual(
         (
           client.descriptors.page.listSecretVersions.asyncIterate as SinonStub
         ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        expectedHeaderRequestParams,
       );
     });
 
@@ -2268,7 +2270,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest()
+        new protos.google.cloud.secrets.v1beta1.ListSecretVersionsRequest(),
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -2287,13 +2289,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         (
           client.descriptors.page.listSecretVersions.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
       assert.strictEqual(
         (
           client.descriptors.page.listSecretVersions.asyncIterate as SinonStub
         ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        expectedHeaderRequestParams,
       );
     });
   });
@@ -2323,7 +2325,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         assert(
           (client.pathTemplates.projectPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2333,7 +2335,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2363,7 +2365,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         assert(
           (client.pathTemplates.secretPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2373,7 +2375,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         assert(
           (client.pathTemplates.secretPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2383,7 +2385,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         assert(
           (client.pathTemplates.secretPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -2412,13 +2414,13 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         const result = client.secretVersionPath(
           'projectValue',
           'secretValue',
-          'secretVersionValue'
+          'secretVersionValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.secretVersionPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -2428,7 +2430,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         assert(
           (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2438,7 +2440,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         assert(
           (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -2448,7 +2450,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         assert(
           (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });

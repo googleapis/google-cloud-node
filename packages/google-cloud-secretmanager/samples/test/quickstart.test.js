@@ -33,7 +33,7 @@ describe('Secret Manager samples', () => {
 
   it('runs the quickstart', async () => {
     const stdout = execSync(
-      `node quickstart.js projects/${projectId} ${secretId}-quickstart bar`
+      `node quickstart.js projects/${projectId} ${secretId}-quickstart bar`,
     );
     assert(stdout !== null);
   });
