@@ -2187,6 +2187,7 @@
                          * @property {string|null} [name] AutokeyConfig name
                          * @property {string|null} [keyProject] AutokeyConfig keyProject
                          * @property {google.cloud.kms.v1.AutokeyConfig.State|null} [state] AutokeyConfig state
+                         * @property {string|null} [etag] AutokeyConfig etag
                          */
     
                         /**
@@ -2229,6 +2230,14 @@
                         AutokeyConfig.prototype.state = 0;
     
                         /**
+                         * AutokeyConfig etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.kms.v1.AutokeyConfig
+                         * @instance
+                         */
+                        AutokeyConfig.prototype.etag = "";
+    
+                        /**
                          * Creates a new AutokeyConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.AutokeyConfig
@@ -2258,6 +2267,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.keyProject);
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.etag);
                             return writer;
                         };
     
@@ -2302,6 +2313,10 @@
                                     }
                                 case 4: {
                                         message.state = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.etag = reader.string();
                                         break;
                                     }
                                 default:
@@ -2355,6 +2370,9 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -2398,6 +2416,8 @@
                                 message.state = 3;
                                 break;
                             }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -2418,6 +2438,7 @@
                                 object.name = "";
                                 object.keyProject = "";
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2425,6 +2446,8 @@
                                 object.keyProject = message.keyProject;
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.kms.v1.AutokeyConfig.State[message.state] === undefined ? message.state : $root.google.cloud.kms.v1.AutokeyConfig.State[message.state] : message.state;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     

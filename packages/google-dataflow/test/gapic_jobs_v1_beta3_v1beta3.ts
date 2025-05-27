@@ -256,9 +256,14 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         throw err;
       });
       assert(client.jobsV1Beta3Stub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -267,9 +272,14 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.jobsV1Beta3Stub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -449,7 +459,9 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       );
       request.location = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createJob(request), expectedError);
     });
   });
@@ -616,7 +628,9 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getJob(request), expectedError);
     });
   });
@@ -783,7 +797,9 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateJob(request), expectedError);
     });
   });
@@ -866,7 +882,9 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.CheckActiveJobsRequest()
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.checkActiveJobs(request), expectedError);
     });
   });
@@ -1036,7 +1054,9 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.snapshotJob(request), expectedError);
     });
   });

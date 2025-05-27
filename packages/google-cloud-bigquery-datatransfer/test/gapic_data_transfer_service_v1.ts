@@ -270,9 +270,14 @@ describe('v1.DataTransferServiceClient', () => {
         throw err;
       });
       assert(client.dataTransferServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -283,9 +288,14 @@ describe('v1.DataTransferServiceClient', () => {
         }
       );
       assert.strictEqual(client.dataTransferServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -460,7 +470,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDataSource(request), expectedError);
     });
   });
@@ -599,7 +611,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createTransferConfig(request), expectedError);
     });
   });
@@ -742,7 +756,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.transferConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateTransferConfig(request), expectedError);
     });
   });
@@ -881,7 +897,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteTransferConfig(request), expectedError);
     });
   });
@@ -1019,7 +1037,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTransferConfig(request), expectedError);
     });
   });
@@ -1165,7 +1185,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.scheduleTransferRuns(request), expectedError);
       assert(stub.calledOnce);
     });
@@ -1308,7 +1330,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.startManualTransferRuns(request),
         expectedError
@@ -1449,7 +1473,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTransferRun(request), expectedError);
     });
   });
@@ -1587,7 +1613,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteTransferRun(request), expectedError);
     });
   });
@@ -1725,7 +1753,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.checkValidCreds(request), expectedError);
     });
   });
@@ -1863,7 +1893,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.enrollDataSources(request), expectedError);
     });
   });
@@ -2002,7 +2034,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.unenrollDataSources(request), expectedError);
     });
   });

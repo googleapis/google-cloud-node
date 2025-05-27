@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -33,11 +36,17 @@
                     "serviceOptions": {
                       "rule": "repeated",
                       "type": "string",
-                      "id": 16
+                      "id": 16,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "serviceKmsKeyName": {
                       "type": "string",
-                      "id": 12
+                      "id": 12,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "workerPools": {
                       "rule": "repeated",
@@ -54,7 +63,10 @@
                     },
                     "dataset": {
                       "type": "string",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "sdkPipelineOptions": {
                       "type": "google.protobuf.Struct",
@@ -66,19 +78,31 @@
                     },
                     "serviceAccountEmail": {
                       "type": "string",
-                      "id": 10
+                      "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "flexResourceSchedulingGoal": {
                       "type": "FlexResourceSchedulingGoal",
-                      "id": 11
+                      "id": 11,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "workerRegion": {
                       "type": "string",
-                      "id": 13
+                      "id": 13,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "workerZone": {
                       "type": "string",
-                      "id": 14
+                      "id": 14,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "shuffleMode": {
                       "type": "ShuffleMode",
@@ -89,7 +113,24 @@
                     },
                     "debugOptions": {
                       "type": "DebugOptions",
-                      "id": 17
+                      "id": 17,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "useStreamingEngineResourceBasedBilling": {
+                      "type": "bool",
+                      "id": 18,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "streamingMode": {
+                      "type": "StreamingMode",
+                      "id": 19,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -410,18 +451,51 @@
                     "SERVICE_BASED": 2
                   }
                 },
+                "DataSamplingConfig": {
+                  "fields": {
+                    "behaviors": {
+                      "rule": "repeated",
+                      "type": "DataSamplingBehavior",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "DataSamplingBehavior": {
+                      "values": {
+                        "DATA_SAMPLING_BEHAVIOR_UNSPECIFIED": 0,
+                        "DISABLED": 1,
+                        "ALWAYS_ON": 2,
+                        "EXCEPTIONS": 3
+                      }
+                    }
+                  }
+                },
                 "DebugOptions": {
                   "fields": {
                     "enableHotKeyLogging": {
                       "type": "bool",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "dataSampling": {
+                      "type": "DataSamplingConfig",
+                      "id": 2
                     }
+                  }
+                },
+                "StreamingMode": {
+                  "values": {
+                    "STREAMING_MODE_UNSPECIFIED": 0,
+                    "STREAMING_MODE_EXACTLY_ONCE": 1,
+                    "STREAMING_MODE_AT_LEAST_ONCE": 2
                   }
                 },
                 "JobsV1Beta3": {
                   "options": {
                     "(google.api.default_host)": "dataflow.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/userinfo.email"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute"
                   },
                   "methods": {
                     "CreateJob": {
@@ -547,6 +621,23 @@
                   }
                 },
                 "Job": {
+                  "oneofs": {
+                    "_runtimeUpdatableParams": {
+                      "oneof": [
+                        "runtimeUpdatableParams"
+                      ]
+                    },
+                    "_satisfiesPzi": {
+                      "oneof": [
+                        "satisfiesPzi"
+                      ]
+                    },
+                    "_serviceResources": {
+                      "oneof": [
+                        "serviceResources"
+                      ]
+                    }
+                  },
                   "fields": {
                     "id": {
                       "type": "string",
@@ -558,15 +649,24 @@
                     },
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "type": {
                       "type": "JobType",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "environment": {
                       "type": "Environment",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "steps": {
                       "rule": "repeated",
@@ -604,7 +704,10 @@
                     "transformNameMapping": {
                       "keyType": "string",
                       "type": "string",
-                      "id": 13
+                      "id": 13,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "clientRequestId": {
                       "type": "string",
@@ -626,7 +729,10 @@
                     },
                     "location": {
                       "type": "string",
-                      "id": 18
+                      "id": 18,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     },
                     "pipelineDescription": {
                       "type": "PipelineDescription",
@@ -652,6 +758,83 @@
                     "satisfiesPzs": {
                       "type": "bool",
                       "id": 25
+                    },
+                    "runtimeUpdatableParams": {
+                      "type": "RuntimeUpdatableParams",
+                      "id": 26,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "satisfiesPzi": {
+                      "type": "bool",
+                      "id": 27,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "proto3_optional": true
+                      }
+                    },
+                    "serviceResources": {
+                      "type": "ServiceResources",
+                      "id": 28,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "proto3_optional": true
+                      }
+                    }
+                  }
+                },
+                "ServiceResources": {
+                  "fields": {
+                    "zones": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  }
+                },
+                "RuntimeUpdatableParams": {
+                  "oneofs": {
+                    "_maxNumWorkers": {
+                      "oneof": [
+                        "maxNumWorkers"
+                      ]
+                    },
+                    "_minNumWorkers": {
+                      "oneof": [
+                        "minNumWorkers"
+                      ]
+                    },
+                    "_workerUtilizationHint": {
+                      "oneof": [
+                        "workerUtilizationHint"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "maxNumWorkers": {
+                      "type": "int32",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "minNumWorkers": {
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "workerUtilizationHint": {
+                      "type": "double",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
@@ -752,6 +935,14 @@
                     "sdkSupportStatus": {
                       "type": "SdkSupportStatus",
                       "id": 3
+                    },
+                    "bugs": {
+                      "rule": "repeated",
+                      "type": "SdkBug",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -762,6 +953,49 @@
                         "STALE": 2,
                         "DEPRECATED": 3,
                         "UNSUPPORTED": 4
+                      }
+                    }
+                  }
+                },
+                "SdkBug": {
+                  "fields": {
+                    "type": {
+                      "type": "Type",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "severity": {
+                      "type": "Severity",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "uri": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Type": {
+                      "values": {
+                        "TYPE_UNSPECIFIED": 0,
+                        "GENERAL": 1,
+                        "PERFORMANCE": 2,
+                        "DATALOSS": 3
+                      }
+                    },
+                    "Severity": {
+                      "values": {
+                        "SEVERITY_UNSPECIFIED": 0,
+                        "NOTICE": 1,
+                        "WARNING": 2,
+                        "SEVERE": 3
                       }
                     }
                   }
@@ -801,6 +1035,11 @@
                       "rule": "repeated",
                       "type": "DatastoreIODetails",
                       "id": 7
+                    },
+                    "userDisplayProperties": {
+                      "keyType": "string",
+                      "type": "string",
+                      "id": 8
                     }
                   }
                 },
@@ -836,6 +1075,10 @@
                       "rule": "repeated",
                       "type": "DisplayData",
                       "id": 3
+                    },
+                    "stepNamesHash": {
+                      "type": "string",
+                      "id": 4
                     }
                   }
                 },
@@ -1147,6 +1390,13 @@
                   }
                 },
                 "UpdateJobRequest": {
+                  "oneofs": {
+                    "_updateMask": {
+                      "oneof": [
+                        "updateMask"
+                      ]
+                    }
+                  },
                   "fields": {
                     "projectId": {
                       "type": "string",
@@ -1163,10 +1413,24 @@
                     "location": {
                       "type": "string",
                       "id": 4
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 5,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
                 "ListJobsRequest": {
+                  "oneofs": {
+                    "_name": {
+                      "oneof": [
+                        "name"
+                      ]
+                    }
+                  },
                   "fields": {
                     "filter": {
                       "type": "Filter",
@@ -1194,6 +1458,14 @@
                     "location": {
                       "type": "string",
                       "id": 17
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 11,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {
@@ -1280,7 +1552,7 @@
                 "SnapshotsV1Beta3": {
                   "options": {
                     "(google.api.default_host)": "dataflow.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/userinfo.email"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute"
                   },
                   "methods": {
                     "GetSnapshot": {
@@ -1478,7 +1750,7 @@
                 "MessagesV1Beta3": {
                   "options": {
                     "(google.api.default_host)": "dataflow.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/userinfo.email"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute"
                   },
                   "methods": {
                     "ListJobMessages": {
@@ -1658,7 +1930,7 @@
                 "MetricsV1Beta3": {
                   "options": {
                     "(google.api.default_host)": "dataflow.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/userinfo.email"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute"
                   },
                   "methods": {
                     "GetJobMetrics": {
@@ -1755,6 +2027,10 @@
                     "set": {
                       "type": "google.protobuf.Value",
                       "id": 7
+                    },
+                    "trie": {
+                      "type": "google.protobuf.Value",
+                      "id": 13
                     },
                     "distribution": {
                       "type": "google.protobuf.Value",
@@ -1858,6 +2134,125 @@
                     }
                   }
                 },
+                "StragglerInfo": {
+                  "fields": {
+                    "startTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 1
+                    },
+                    "causes": {
+                      "keyType": "string",
+                      "type": "StragglerDebuggingInfo",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "StragglerDebuggingInfo": {
+                      "oneofs": {
+                        "stragglerDebuggingInfoValue": {
+                          "oneof": [
+                            "hotKey"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "hotKey": {
+                          "type": "HotKeyDebuggingInfo",
+                          "id": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "StreamingStragglerInfo": {
+                  "fields": {
+                    "startTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 1
+                    },
+                    "endTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    },
+                    "workerName": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "dataWatermarkLag": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4
+                    },
+                    "systemWatermarkLag": {
+                      "type": "google.protobuf.Duration",
+                      "id": 5
+                    }
+                  }
+                },
+                "Straggler": {
+                  "oneofs": {
+                    "stragglerInfo": {
+                      "oneof": [
+                        "batchStraggler",
+                        "streamingStraggler"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "batchStraggler": {
+                      "type": "StragglerInfo",
+                      "id": 1
+                    },
+                    "streamingStraggler": {
+                      "type": "StreamingStragglerInfo",
+                      "id": 2
+                    }
+                  }
+                },
+                "HotKeyDebuggingInfo": {
+                  "fields": {
+                    "detectedHotKeys": {
+                      "keyType": "uint64",
+                      "type": "HotKeyInfo",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "HotKeyInfo": {
+                      "fields": {
+                        "hotKeyAge": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        },
+                        "key": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "keyTruncated": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
+                "StragglerSummary": {
+                  "fields": {
+                    "totalStragglerCount": {
+                      "type": "int64",
+                      "id": 1
+                    },
+                    "stragglerCauseCount": {
+                      "keyType": "string",
+                      "type": "int64",
+                      "id": 2
+                    },
+                    "recentStragglers": {
+                      "rule": "repeated",
+                      "type": "Straggler",
+                      "id": 3
+                    }
+                  }
+                },
                 "ExecutionState": {
                   "values": {
                     "EXECUTION_STATE_UNKNOWN": 0,
@@ -1894,6 +2289,10 @@
                       "rule": "repeated",
                       "type": "MetricUpdate",
                       "id": 6
+                    },
+                    "stragglerSummary": {
+                      "type": "StragglerSummary",
+                      "id": 7
                     }
                   }
                 },
@@ -1976,6 +2375,10 @@
                       "rule": "repeated",
                       "type": "MetricUpdate",
                       "id": 7
+                    },
+                    "stragglerInfo": {
+                      "type": "StragglerInfo",
+                      "id": 8
                     }
                   }
                 },
@@ -2061,6 +2464,10 @@
                     "withAttributes": {
                       "type": "bool",
                       "id": 7
+                    },
+                    "dynamicDestinations": {
+                      "type": "bool",
+                      "id": 8
                     }
                   }
                 },
@@ -2258,7 +2665,7 @@
                 "TemplatesService": {
                   "options": {
                     "(google.api.default_host)": "dataflow.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/userinfo.email"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute"
                   },
                   "methods": {
                     "CreateJobFromTemplate": {
@@ -2328,7 +2735,7 @@
                 "FlexTemplatesService": {
                   "options": {
                     "(google.api.default_host)": "dataflow.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/userinfo.email"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute"
                   },
                   "methods": {
                     "LaunchFlexTemplate": {
@@ -2374,6 +2781,18 @@
                     "defaultEnvironment": {
                       "type": "FlexTemplateRuntimeEnvironment",
                       "id": 4
+                    },
+                    "imageRepositoryUsernameSecretId": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "imageRepositoryPasswordSecretId": {
+                      "type": "string",
+                      "id": 6
+                    },
+                    "imageRepositoryCertPath": {
+                      "type": "string",
+                      "id": 7
                     }
                   }
                 },
@@ -2425,6 +2844,13 @@
                   }
                 },
                 "FlexTemplateRuntimeEnvironment": {
+                  "oneofs": {
+                    "_streamingMode": {
+                      "oneof": [
+                        "streamingMode"
+                      ]
+                    }
+                  },
                   "fields": {
                     "numWorkers": {
                       "type": "int32",
@@ -2519,6 +2945,18 @@
                     "launcherMachineType": {
                       "type": "string",
                       "id": 24
+                    },
+                    "enableLauncherVmSerialPortLogging": {
+                      "type": "bool",
+                      "id": 25
+                    },
+                    "streamingMode": {
+                      "type": "StreamingMode",
+                      "id": 26,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
@@ -2543,6 +2981,13 @@
                   }
                 },
                 "RuntimeEnvironment": {
+                  "oneofs": {
+                    "_streamingMode": {
+                      "oneof": [
+                        "streamingMode"
+                      ]
+                    }
+                  },
                   "fields": {
                     "numWorkers": {
                       "type": "int32",
@@ -2609,6 +3054,43 @@
                     "enableStreamingEngine": {
                       "type": "bool",
                       "id": 17
+                    },
+                    "diskSizeGb": {
+                      "type": "int32",
+                      "id": 18
+                    },
+                    "streamingMode": {
+                      "type": "StreamingMode",
+                      "id": 19,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
+                      }
+                    }
+                  }
+                },
+                "ParameterMetadataEnumOption": {
+                  "fields": {
+                    "value": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "label": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -2643,21 +3125,33 @@
                       "keyType": "string",
                       "type": "string",
                       "id": 7
+                    },
+                    "groupName": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "parentName": {
+                      "type": "string",
+                      "id": 9
+                    },
+                    "parentTriggerValues": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 10
+                    },
+                    "enumOptions": {
+                      "rule": "repeated",
+                      "type": "ParameterMetadataEnumOption",
+                      "id": 11
+                    },
+                    "defaultValue": {
+                      "type": "string",
+                      "id": 12
+                    },
+                    "hiddenUi": {
+                      "type": "bool",
+                      "id": 13
                     }
-                  }
-                },
-                "ParameterType": {
-                  "values": {
-                    "DEFAULT": 0,
-                    "TEXT": 1,
-                    "GCS_READ_BUCKET": 2,
-                    "GCS_WRITE_BUCKET": 3,
-                    "GCS_READ_FILE": 4,
-                    "GCS_WRITE_FILE": 5,
-                    "GCS_READ_FOLDER": 6,
-                    "GCS_WRITE_FOLDER": 7,
-                    "PUBSUB_TOPIC": 8,
-                    "PUBSUB_SUBSCRIPTION": 9
                   }
                 },
                 "TemplateMetadata": {
@@ -2674,6 +3168,22 @@
                       "rule": "repeated",
                       "type": "ParameterMetadata",
                       "id": 3
+                    },
+                    "streaming": {
+                      "type": "bool",
+                      "id": 5
+                    },
+                    "supportsAtLeastOnce": {
+                      "type": "bool",
+                      "id": 6
+                    },
+                    "supportsExactlyOnce": {
+                      "type": "bool",
+                      "id": 7
+                    },
+                    "defaultStreamingMode": {
+                      "type": "string",
+                      "id": 8
                     }
                   }
                 },
@@ -2693,7 +3203,8 @@
                       "values": {
                         "UNKNOWN": 0,
                         "JAVA": 1,
-                        "PYTHON": 2
+                        "PYTHON": 2,
+                        "GO": 3
                       }
                     }
                   }
@@ -2913,6 +3424,38 @@
                       "type": "string",
                       "id": 2
                     }
+                  }
+                },
+                "ParameterType": {
+                  "valuesOptions": {
+                    "KAFKA_TOPIC": {
+                      "deprecated": true
+                    }
+                  },
+                  "values": {
+                    "DEFAULT": 0,
+                    "TEXT": 1,
+                    "GCS_READ_BUCKET": 2,
+                    "GCS_WRITE_BUCKET": 3,
+                    "GCS_READ_FILE": 4,
+                    "GCS_WRITE_FILE": 5,
+                    "GCS_READ_FOLDER": 6,
+                    "GCS_WRITE_FOLDER": 7,
+                    "PUBSUB_TOPIC": 8,
+                    "PUBSUB_SUBSCRIPTION": 9,
+                    "BIGQUERY_TABLE": 10,
+                    "JAVASCRIPT_UDF_FILE": 11,
+                    "SERVICE_ACCOUNT": 12,
+                    "MACHINE_TYPE": 13,
+                    "KMS_KEY_NAME": 14,
+                    "WORKER_REGION": 15,
+                    "WORKER_ZONE": 16,
+                    "BOOLEAN": 17,
+                    "ENUM": 18,
+                    "NUMBER": 19,
+                    "KAFKA_TOPIC": 20,
+                    "KAFKA_READ_TOPIC": 21,
+                    "KAFKA_WRITE_TOPIC": 22
                   }
                 }
               }
@@ -4703,6 +5246,15 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             }
