@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.4.1...lfp-v0.5.0) (2025-05-09)
+
+
+### Features
+
+* [merchantapi] Add GetLfpMerchantState method ([#6259](https://github.com/googleapis/google-cloud-node/issues/6259)) ([31d2647](https://github.com/googleapis/google-cloud-node/commit/31d264703dc99125aae56551999d86cdedfc1b81))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.4.0...lfp-v0.4.1) (2025-03-21)
 
 

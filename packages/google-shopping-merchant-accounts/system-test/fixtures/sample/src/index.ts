@@ -25,7 +25,10 @@ import {
   BusinessIdentityServiceClient,
   BusinessInfoServiceClient,
   EmailPreferencesServiceClient,
+  GbpAccountsServiceClient,
   HomepageServiceClient,
+  LfpProvidersServiceClient,
+  OmnichannelSettingsServiceClient,
   OnlineReturnPolicyServiceClient,
   ProgramsServiceClient,
   RegionsServiceClient,
@@ -72,7 +75,20 @@ function doStuffWithEmailPreferencesServiceClient(
 ) {
   client.close();
 }
+function doStuffWithGbpAccountsServiceClient(client: GbpAccountsServiceClient) {
+  client.close();
+}
 function doStuffWithHomepageServiceClient(client: HomepageServiceClient) {
+  client.close();
+}
+function doStuffWithLfpProvidersServiceClient(
+  client: LfpProvidersServiceClient
+) {
+  client.close();
+}
+function doStuffWithOmnichannelSettingsServiceClient(
+  client: OmnichannelSettingsServiceClient
+) {
   client.close();
 }
 function doStuffWithOnlineReturnPolicyServiceClient(
@@ -134,8 +150,18 @@ function main() {
   const emailPreferencesServiceClient = new EmailPreferencesServiceClient();
   doStuffWithEmailPreferencesServiceClient(emailPreferencesServiceClient);
   // check that the client instance can be created
+  const gbpAccountsServiceClient = new GbpAccountsServiceClient();
+  doStuffWithGbpAccountsServiceClient(gbpAccountsServiceClient);
+  // check that the client instance can be created
   const homepageServiceClient = new HomepageServiceClient();
   doStuffWithHomepageServiceClient(homepageServiceClient);
+  // check that the client instance can be created
+  const lfpProvidersServiceClient = new LfpProvidersServiceClient();
+  doStuffWithLfpProvidersServiceClient(lfpProvidersServiceClient);
+  // check that the client instance can be created
+  const omnichannelSettingsServiceClient =
+    new OmnichannelSettingsServiceClient();
+  doStuffWithOmnichannelSettingsServiceClient(omnichannelSettingsServiceClient);
   // check that the client instance can be created
   const onlineReturnPolicyServiceClient = new OnlineReturnPolicyServiceClient();
   doStuffWithOnlineReturnPolicyServiceClient(onlineReturnPolicyServiceClient);

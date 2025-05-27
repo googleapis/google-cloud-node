@@ -259,9 +259,14 @@ describe('v1alpha1.TablesServiceClient', () => {
         throw err;
       });
       assert(client.tablesServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -270,9 +275,14 @@ describe('v1alpha1.TablesServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.tablesServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -432,7 +442,9 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTable(request), expectedError);
     });
   });
@@ -562,7 +574,9 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getWorkspace(request), expectedError);
     });
   });
@@ -689,7 +703,9 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getRow(request), expectedError);
     });
   });
@@ -816,7 +832,9 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createRow(request), expectedError);
     });
   });
@@ -946,7 +964,9 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchCreateRows(request), expectedError);
     });
   });
@@ -1077,7 +1097,9 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.row.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateRow(request), expectedError);
     });
   });
@@ -1207,7 +1229,9 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchUpdateRows(request), expectedError);
     });
   });
@@ -1334,7 +1358,9 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteRow(request), expectedError);
     });
   });
@@ -1464,7 +1490,9 @@ describe('v1alpha1.TablesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchDeleteRows(request), expectedError);
     });
   });

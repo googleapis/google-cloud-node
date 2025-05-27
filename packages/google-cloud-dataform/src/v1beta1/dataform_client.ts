@@ -230,6 +230,9 @@ export class DataformClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      notebookRuntimeTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}'
+      ),
       releaseConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}/releaseConfigs/{release_config}'
       ),
@@ -788,11 +791,10 @@ export class DataformClient {
   /**
    * Updates a single Repository.
    *
-   * **Note:** This method does not fully implement
-   * [AIP-134](https://google.aip.dev/134); in particular:
-   * - The wildcard entry (**\***) is treated as a bad request
-   * - When the **field_mask** is omitted, instead of only updating the set
-   *   fields, the request is treated as a full update on all modifiable fields
+   * **Note:** *This method does not fully implement
+   * [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+   * as a bad request, and when the `field_mask` is omitted, the request is
+   * treated as a full update on all modifiable fields.*
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4069,11 +4071,10 @@ export class DataformClient {
   /**
    * Updates a single ReleaseConfig.
    *
-   * **Note:** This method does not fully implement
-   * [AIP-134](https://google.aip.dev/134); in particular:
-   * - The wildcard entry (**\***) is treated as a bad request
-   * - When the **field_mask** is omitted, instead of only updating the set
-   *   fields, the request is treated as a full update on all modifiable fields
+   * **Note:** *This method does not fully implement
+   * [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+   * as a bad request, and when the `field_mask` is omitted, the request is
+   * treated as a full update on all modifiable fields.*
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4849,11 +4850,10 @@ export class DataformClient {
   /**
    * Updates a single WorkflowConfig.
    *
-   * **Note:** This method does not fully implement
-   * [AIP-134](https://google.aip.dev/134); in particular:
-   * - The wildcard entry (**\***) is treated as a bad request
-   * - When the **field_mask** is omitted, instead of only updating the set
-   *   fields, the request is treated as a full update on all modifiable fields
+   * **Note:** *This method does not fully implement
+   * [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+   * as a bad request, and when the `field_mask` is omitted, the request is
+   * treated as a full update on all modifiable fields.*
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5735,11 +5735,10 @@ export class DataformClient {
   /**
    * Update default config for a given project and location.
    *
-   * **Note:** This method does not fully implement
-   * [AIP-134](https://google.aip.dev/134); in particular:
-   * - The wildcard entry (**\***) is treated as a bad request
-   * - When the **field_mask** is omitted, instead of only updating the set
-   *   fields, the request is treated as a full update on all modifiable fields
+   * **Note:** *This method does not fully implement
+   * [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+   * as a bad request, and when the `field_mask` is omitted, the request is
+   * treated as a full update on all modifiable fields.*
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5861,6 +5860,9 @@ export class DataformClient {
 
   /**
    * Lists Repositories in a given project and location.
+   *
+   * **Note:** *This method can return repositories not shown in the [Dataform
+   * UI](https://console.cloud.google.com/bigquery/dataform)*.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -9439,6 +9441,71 @@ export class DataformClient {
   }
 
   /**
+   * Return a fully-qualified notebookRuntimeTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} notebook_runtime_template
+   * @returns {string} Resource name string.
+   */
+  notebookRuntimeTemplatePath(
+    project: string,
+    location: string,
+    notebookRuntimeTemplate: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.render({
+      project: project,
+      location: location,
+      notebook_runtime_template: notebookRuntimeTemplate,
+    });
+  }
+
+  /**
+   * Parse the project from NotebookRuntimeTemplate resource.
+   *
+   * @param {string} notebookRuntimeTemplateName
+   *   A fully-qualified path representing NotebookRuntimeTemplate resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).project;
+  }
+
+  /**
+   * Parse the location from NotebookRuntimeTemplate resource.
+   *
+   * @param {string} notebookRuntimeTemplateName
+   *   A fully-qualified path representing NotebookRuntimeTemplate resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).location;
+  }
+
+  /**
+   * Parse the notebook_runtime_template from NotebookRuntimeTemplate resource.
+   *
+   * @param {string} notebookRuntimeTemplateName
+   *   A fully-qualified path representing NotebookRuntimeTemplate resource.
+   * @returns {string} A string representing the notebook_runtime_template.
+   */
+  matchNotebookRuntimeTemplateFromNotebookRuntimeTemplateName(
+    notebookRuntimeTemplateName: string
+  ) {
+    return this.pathTemplates.notebookRuntimeTemplatePathTemplate.match(
+      notebookRuntimeTemplateName
+    ).notebook_runtime_template;
+  }
+
+  /**
    * Return a fully-qualified releaseConfig resource name string.
    *
    * @param {string} project
@@ -9848,8 +9915,12 @@ export class DataformClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close();
-        this.locationsClient.close();
+        this.iamClient.close().catch(err => {
+          throw err;
+        });
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

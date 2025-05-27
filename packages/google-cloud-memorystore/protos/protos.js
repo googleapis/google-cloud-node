@@ -296,6 +296,270 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|rescheduleMaintenance}.
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @typedef RescheduleMaintenanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RescheduleMaintenance.
+                         * @function rescheduleMaintenance
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IRescheduleMaintenanceRequest} request RescheduleMaintenanceRequest message or plain object
+                         * @param {google.cloud.memorystore.v1.Memorystore.RescheduleMaintenanceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Memorystore.prototype.rescheduleMaintenance = function rescheduleMaintenance(request, callback) {
+                            return this.rpcCall(rescheduleMaintenance, $root.google.cloud.memorystore.v1.RescheduleMaintenanceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RescheduleMaintenance" });
+    
+                        /**
+                         * Calls RescheduleMaintenance.
+                         * @function rescheduleMaintenance
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IRescheduleMaintenanceRequest} request RescheduleMaintenanceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|listBackupCollections}.
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @typedef ListBackupCollectionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.memorystore.v1.ListBackupCollectionsResponse} [response] ListBackupCollectionsResponse
+                         */
+    
+                        /**
+                         * Calls ListBackupCollections.
+                         * @function listBackupCollections
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IListBackupCollectionsRequest} request ListBackupCollectionsRequest message or plain object
+                         * @param {google.cloud.memorystore.v1.Memorystore.ListBackupCollectionsCallback} callback Node-style callback called with the error, if any, and ListBackupCollectionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Memorystore.prototype.listBackupCollections = function listBackupCollections(request, callback) {
+                            return this.rpcCall(listBackupCollections, $root.google.cloud.memorystore.v1.ListBackupCollectionsRequest, $root.google.cloud.memorystore.v1.ListBackupCollectionsResponse, request, callback);
+                        }, "name", { value: "ListBackupCollections" });
+    
+                        /**
+                         * Calls ListBackupCollections.
+                         * @function listBackupCollections
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IListBackupCollectionsRequest} request ListBackupCollectionsRequest message or plain object
+                         * @returns {Promise<google.cloud.memorystore.v1.ListBackupCollectionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|getBackupCollection}.
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @typedef GetBackupCollectionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.memorystore.v1.BackupCollection} [response] BackupCollection
+                         */
+    
+                        /**
+                         * Calls GetBackupCollection.
+                         * @function getBackupCollection
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IGetBackupCollectionRequest} request GetBackupCollectionRequest message or plain object
+                         * @param {google.cloud.memorystore.v1.Memorystore.GetBackupCollectionCallback} callback Node-style callback called with the error, if any, and BackupCollection
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Memorystore.prototype.getBackupCollection = function getBackupCollection(request, callback) {
+                            return this.rpcCall(getBackupCollection, $root.google.cloud.memorystore.v1.GetBackupCollectionRequest, $root.google.cloud.memorystore.v1.BackupCollection, request, callback);
+                        }, "name", { value: "GetBackupCollection" });
+    
+                        /**
+                         * Calls GetBackupCollection.
+                         * @function getBackupCollection
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IGetBackupCollectionRequest} request GetBackupCollectionRequest message or plain object
+                         * @returns {Promise<google.cloud.memorystore.v1.BackupCollection>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|listBackups}.
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @typedef ListBackupsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.memorystore.v1.ListBackupsResponse} [response] ListBackupsResponse
+                         */
+    
+                        /**
+                         * Calls ListBackups.
+                         * @function listBackups
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IListBackupsRequest} request ListBackupsRequest message or plain object
+                         * @param {google.cloud.memorystore.v1.Memorystore.ListBackupsCallback} callback Node-style callback called with the error, if any, and ListBackupsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Memorystore.prototype.listBackups = function listBackups(request, callback) {
+                            return this.rpcCall(listBackups, $root.google.cloud.memorystore.v1.ListBackupsRequest, $root.google.cloud.memorystore.v1.ListBackupsResponse, request, callback);
+                        }, "name", { value: "ListBackups" });
+    
+                        /**
+                         * Calls ListBackups.
+                         * @function listBackups
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IListBackupsRequest} request ListBackupsRequest message or plain object
+                         * @returns {Promise<google.cloud.memorystore.v1.ListBackupsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|getBackup}.
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @typedef GetBackupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.memorystore.v1.Backup} [response] Backup
+                         */
+    
+                        /**
+                         * Calls GetBackup.
+                         * @function getBackup
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IGetBackupRequest} request GetBackupRequest message or plain object
+                         * @param {google.cloud.memorystore.v1.Memorystore.GetBackupCallback} callback Node-style callback called with the error, if any, and Backup
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Memorystore.prototype.getBackup = function getBackup(request, callback) {
+                            return this.rpcCall(getBackup, $root.google.cloud.memorystore.v1.GetBackupRequest, $root.google.cloud.memorystore.v1.Backup, request, callback);
+                        }, "name", { value: "GetBackup" });
+    
+                        /**
+                         * Calls GetBackup.
+                         * @function getBackup
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IGetBackupRequest} request GetBackupRequest message or plain object
+                         * @returns {Promise<google.cloud.memorystore.v1.Backup>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|deleteBackup}.
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @typedef DeleteBackupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteBackup.
+                         * @function deleteBackup
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IDeleteBackupRequest} request DeleteBackupRequest message or plain object
+                         * @param {google.cloud.memorystore.v1.Memorystore.DeleteBackupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Memorystore.prototype.deleteBackup = function deleteBackup(request, callback) {
+                            return this.rpcCall(deleteBackup, $root.google.cloud.memorystore.v1.DeleteBackupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteBackup" });
+    
+                        /**
+                         * Calls DeleteBackup.
+                         * @function deleteBackup
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IDeleteBackupRequest} request DeleteBackupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|exportBackup}.
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @typedef ExportBackupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ExportBackup.
+                         * @function exportBackup
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IExportBackupRequest} request ExportBackupRequest message or plain object
+                         * @param {google.cloud.memorystore.v1.Memorystore.ExportBackupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Memorystore.prototype.exportBackup = function exportBackup(request, callback) {
+                            return this.rpcCall(exportBackup, $root.google.cloud.memorystore.v1.ExportBackupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ExportBackup" });
+    
+                        /**
+                         * Calls ExportBackup.
+                         * @function exportBackup
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IExportBackupRequest} request ExportBackupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.memorystore.v1.Memorystore|backupInstance}.
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @typedef BackupInstanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls BackupInstance.
+                         * @function backupInstance
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IBackupInstanceRequest} request BackupInstanceRequest message or plain object
+                         * @param {google.cloud.memorystore.v1.Memorystore.BackupInstanceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Memorystore.prototype.backupInstance = function backupInstance(request, callback) {
+                            return this.rpcCall(backupInstance, $root.google.cloud.memorystore.v1.BackupInstanceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "BackupInstance" });
+    
+                        /**
+                         * Calls BackupInstance.
+                         * @function backupInstance
+                         * @memberof google.cloud.memorystore.v1.Memorystore
+                         * @instance
+                         * @param {google.cloud.memorystore.v1.IBackupInstanceRequest} request BackupInstanceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return Memorystore;
                     })();
     
@@ -339,6 +603,8 @@
                          * Properties of an Instance.
                          * @memberof google.cloud.memorystore.v1
                          * @interface IInstance
+                         * @property {google.cloud.memorystore.v1.Instance.IGcsBackupSource|null} [gcsSource] Instance gcsSource
+                         * @property {google.cloud.memorystore.v1.Instance.IManagedBackupSource|null} [managedBackupSource] Instance managedBackupSource
                          * @property {string|null} [name] Instance name
                          * @property {google.protobuf.ITimestamp|null} [createTime] Instance createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Instance updateTime
@@ -359,8 +625,16 @@
                          * @property {google.cloud.memorystore.v1.IZoneDistributionConfig|null} [zoneDistributionConfig] Instance zoneDistributionConfig
                          * @property {boolean|null} [deletionProtectionEnabled] Instance deletionProtectionEnabled
                          * @property {Array.<google.cloud.memorystore.v1.IPscAutoConnection>|null} [pscAutoConnections] Instance pscAutoConnections
+                         * @property {Array.<google.cloud.memorystore.v1.IPscAttachmentDetail>|null} [pscAttachmentDetails] Instance pscAttachmentDetails
                          * @property {Array.<google.cloud.memorystore.v1.Instance.IInstanceEndpoint>|null} [endpoints] Instance endpoints
                          * @property {google.cloud.memorystore.v1.Instance.Mode|null} [mode] Instance mode
+                         * @property {boolean|null} [ondemandMaintenance] Instance ondemandMaintenance
+                         * @property {google.cloud.memorystore.v1.IMaintenancePolicy|null} [maintenancePolicy] Instance maintenancePolicy
+                         * @property {google.cloud.memorystore.v1.IMaintenanceSchedule|null} [maintenanceSchedule] Instance maintenanceSchedule
+                         * @property {google.cloud.memorystore.v1.ICrossInstanceReplicationConfig|null} [crossInstanceReplicationConfig] Instance crossInstanceReplicationConfig
+                         * @property {boolean|null} [asyncInstanceEndpointsDeletionEnabled] Instance asyncInstanceEndpointsDeletionEnabled
+                         * @property {string|null} [backupCollection] Instance backupCollection
+                         * @property {google.cloud.memorystore.v1.IAutomatedBackupConfig|null} [automatedBackupConfig] Instance automatedBackupConfig
                          */
     
                         /**
@@ -376,12 +650,29 @@
                             this.discoveryEndpoints = [];
                             this.engineConfigs = {};
                             this.pscAutoConnections = [];
+                            this.pscAttachmentDetails = [];
                             this.endpoints = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * Instance gcsSource.
+                         * @member {google.cloud.memorystore.v1.Instance.IGcsBackupSource|null|undefined} gcsSource
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.gcsSource = null;
+    
+                        /**
+                         * Instance managedBackupSource.
+                         * @member {google.cloud.memorystore.v1.Instance.IManagedBackupSource|null|undefined} managedBackupSource
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.managedBackupSource = null;
     
                         /**
                          * Instance name.
@@ -544,6 +835,14 @@
                         Instance.prototype.pscAutoConnections = $util.emptyArray;
     
                         /**
+                         * Instance pscAttachmentDetails.
+                         * @member {Array.<google.cloud.memorystore.v1.IPscAttachmentDetail>} pscAttachmentDetails
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.pscAttachmentDetails = $util.emptyArray;
+    
+                        /**
                          * Instance endpoints.
                          * @member {Array.<google.cloud.memorystore.v1.Instance.IInstanceEndpoint>} endpoints
                          * @memberof google.cloud.memorystore.v1.Instance
@@ -559,8 +858,75 @@
                          */
                         Instance.prototype.mode = 0;
     
+                        /**
+                         * Instance ondemandMaintenance.
+                         * @member {boolean|null|undefined} ondemandMaintenance
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.ondemandMaintenance = null;
+    
+                        /**
+                         * Instance maintenancePolicy.
+                         * @member {google.cloud.memorystore.v1.IMaintenancePolicy|null|undefined} maintenancePolicy
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.maintenancePolicy = null;
+    
+                        /**
+                         * Instance maintenanceSchedule.
+                         * @member {google.cloud.memorystore.v1.IMaintenanceSchedule|null|undefined} maintenanceSchedule
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.maintenanceSchedule = null;
+    
+                        /**
+                         * Instance crossInstanceReplicationConfig.
+                         * @member {google.cloud.memorystore.v1.ICrossInstanceReplicationConfig|null|undefined} crossInstanceReplicationConfig
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.crossInstanceReplicationConfig = null;
+    
+                        /**
+                         * Instance asyncInstanceEndpointsDeletionEnabled.
+                         * @member {boolean|null|undefined} asyncInstanceEndpointsDeletionEnabled
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.asyncInstanceEndpointsDeletionEnabled = null;
+    
+                        /**
+                         * Instance backupCollection.
+                         * @member {string|null|undefined} backupCollection
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.backupCollection = null;
+    
+                        /**
+                         * Instance automatedBackupConfig.
+                         * @member {google.cloud.memorystore.v1.IAutomatedBackupConfig|null|undefined} automatedBackupConfig
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.automatedBackupConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
+    
+                        /**
+                         * Instance importSources.
+                         * @member {"gcsSource"|"managedBackupSource"|undefined} importSources
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Object.defineProperty(Instance.prototype, "importSources", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsSource", "managedBackupSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Instance _replicaCount.
@@ -581,6 +947,39 @@
                          */
                         Object.defineProperty(Instance.prototype, "_deletionProtectionEnabled", {
                             get: $util.oneOfGetter($oneOfFields = ["deletionProtectionEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Instance _ondemandMaintenance.
+                         * @member {"ondemandMaintenance"|undefined} _ondemandMaintenance
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Object.defineProperty(Instance.prototype, "_ondemandMaintenance", {
+                            get: $util.oneOfGetter($oneOfFields = ["ondemandMaintenance"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Instance _asyncInstanceEndpointsDeletionEnabled.
+                         * @member {"asyncInstanceEndpointsDeletionEnabled"|undefined} _asyncInstanceEndpointsDeletionEnabled
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Object.defineProperty(Instance.prototype, "_asyncInstanceEndpointsDeletionEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["asyncInstanceEndpointsDeletionEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Instance _backupCollection.
+                         * @member {"backupCollection"|undefined} _backupCollection
+                         * @memberof google.cloud.memorystore.v1.Instance
+                         * @instance
+                         */
+                        Object.defineProperty(Instance.prototype, "_backupCollection", {
+                            get: $util.oneOfGetter($oneOfFields = ["backupCollection"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -652,11 +1051,32 @@
                             if (message.pscAutoConnections != null && message.pscAutoConnections.length)
                                 for (var i = 0; i < message.pscAutoConnections.length; ++i)
                                     $root.google.cloud.memorystore.v1.PscAutoConnection.encode(message.pscAutoConnections[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.pscAttachmentDetails != null && message.pscAttachmentDetails.length)
+                                for (var i = 0; i < message.pscAttachmentDetails.length; ++i)
+                                    $root.google.cloud.memorystore.v1.PscAttachmentDetail.encode(message.pscAttachmentDetails[i], writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.gcsSource != null && Object.hasOwnProperty.call(message, "gcsSource"))
+                                $root.google.cloud.memorystore.v1.Instance.GcsBackupSource.encode(message.gcsSource, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.managedBackupSource != null && Object.hasOwnProperty.call(message, "managedBackupSource"))
+                                $root.google.cloud.memorystore.v1.Instance.ManagedBackupSource.encode(message.managedBackupSource, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             if (message.endpoints != null && message.endpoints.length)
                                 for (var i = 0; i < message.endpoints.length; ++i)
                                     $root.google.cloud.memorystore.v1.Instance.InstanceEndpoint.encode(message.endpoints[i], writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                             if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
                                 writer.uint32(/* id 26, wireType 0 =*/208).int32(message.mode);
+                            if (message.ondemandMaintenance != null && Object.hasOwnProperty.call(message, "ondemandMaintenance"))
+                                writer.uint32(/* id 28, wireType 0 =*/224).bool(message.ondemandMaintenance);
+                            if (message.maintenancePolicy != null && Object.hasOwnProperty.call(message, "maintenancePolicy"))
+                                $root.google.cloud.memorystore.v1.MaintenancePolicy.encode(message.maintenancePolicy, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                            if (message.maintenanceSchedule != null && Object.hasOwnProperty.call(message, "maintenanceSchedule"))
+                                $root.google.cloud.memorystore.v1.MaintenanceSchedule.encode(message.maintenanceSchedule, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
+                            if (message.crossInstanceReplicationConfig != null && Object.hasOwnProperty.call(message, "crossInstanceReplicationConfig"))
+                                $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.encode(message.crossInstanceReplicationConfig, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
+                            if (message.asyncInstanceEndpointsDeletionEnabled != null && Object.hasOwnProperty.call(message, "asyncInstanceEndpointsDeletionEnabled"))
+                                writer.uint32(/* id 44, wireType 0 =*/352).bool(message.asyncInstanceEndpointsDeletionEnabled);
+                            if (message.backupCollection != null && Object.hasOwnProperty.call(message, "backupCollection"))
+                                writer.uint32(/* id 47, wireType 2 =*/378).string(message.backupCollection);
+                            if (message.automatedBackupConfig != null && Object.hasOwnProperty.call(message, "automatedBackupConfig"))
+                                $root.google.cloud.memorystore.v1.AutomatedBackupConfig.encode(message.automatedBackupConfig, writer.uint32(/* id 48, wireType 2 =*/386).fork()).ldelim();
                             return writer;
                         };
     
@@ -691,6 +1111,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 23: {
+                                        message.gcsSource = $root.google.cloud.memorystore.v1.Instance.GcsBackupSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 24: {
+                                        message.managedBackupSource = $root.google.cloud.memorystore.v1.Instance.ManagedBackupSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 1: {
                                         message.name = reader.string();
                                         break;
@@ -813,6 +1241,12 @@
                                         message.pscAutoConnections.push($root.google.cloud.memorystore.v1.PscAutoConnection.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 21: {
+                                        if (!(message.pscAttachmentDetails && message.pscAttachmentDetails.length))
+                                            message.pscAttachmentDetails = [];
+                                        message.pscAttachmentDetails.push($root.google.cloud.memorystore.v1.PscAttachmentDetail.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 case 25: {
                                         if (!(message.endpoints && message.endpoints.length))
                                             message.endpoints = [];
@@ -821,6 +1255,34 @@
                                     }
                                 case 26: {
                                         message.mode = reader.int32();
+                                        break;
+                                    }
+                                case 28: {
+                                        message.ondemandMaintenance = reader.bool();
+                                        break;
+                                    }
+                                case 31: {
+                                        message.maintenancePolicy = $root.google.cloud.memorystore.v1.MaintenancePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 32: {
+                                        message.maintenanceSchedule = $root.google.cloud.memorystore.v1.MaintenanceSchedule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 33: {
+                                        message.crossInstanceReplicationConfig = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 44: {
+                                        message.asyncInstanceEndpointsDeletionEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 47: {
+                                        message.backupCollection = reader.string();
+                                        break;
+                                    }
+                                case 48: {
+                                        message.automatedBackupConfig = $root.google.cloud.memorystore.v1.AutomatedBackupConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -859,6 +1321,24 @@
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             var properties = {};
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                properties.importSources = 1;
+                                {
+                                    var error = $root.google.cloud.memorystore.v1.Instance.GcsBackupSource.verify(message.gcsSource);
+                                    if (error)
+                                        return "gcsSource." + error;
+                                }
+                            }
+                            if (message.managedBackupSource != null && message.hasOwnProperty("managedBackupSource")) {
+                                if (properties.importSources === 1)
+                                    return "importSources: multiple values";
+                                properties.importSources = 1;
+                                {
+                                    var error = $root.google.cloud.memorystore.v1.Instance.ManagedBackupSource.verify(message.managedBackupSource);
+                                    if (error)
+                                        return "managedBackupSource." + error;
+                                }
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -985,6 +1465,15 @@
                                         return "pscAutoConnections." + error;
                                 }
                             }
+                            if (message.pscAttachmentDetails != null && message.hasOwnProperty("pscAttachmentDetails")) {
+                                if (!Array.isArray(message.pscAttachmentDetails))
+                                    return "pscAttachmentDetails: array expected";
+                                for (var i = 0; i < message.pscAttachmentDetails.length; ++i) {
+                                    var error = $root.google.cloud.memorystore.v1.PscAttachmentDetail.verify(message.pscAttachmentDetails[i]);
+                                    if (error)
+                                        return "pscAttachmentDetails." + error;
+                                }
+                            }
                             if (message.endpoints != null && message.hasOwnProperty("endpoints")) {
                                 if (!Array.isArray(message.endpoints))
                                     return "endpoints: array expected";
@@ -1004,6 +1493,41 @@
                                 case 4:
                                     break;
                                 }
+                            if (message.ondemandMaintenance != null && message.hasOwnProperty("ondemandMaintenance")) {
+                                properties._ondemandMaintenance = 1;
+                                if (typeof message.ondemandMaintenance !== "boolean")
+                                    return "ondemandMaintenance: boolean expected";
+                            }
+                            if (message.maintenancePolicy != null && message.hasOwnProperty("maintenancePolicy")) {
+                                var error = $root.google.cloud.memorystore.v1.MaintenancePolicy.verify(message.maintenancePolicy);
+                                if (error)
+                                    return "maintenancePolicy." + error;
+                            }
+                            if (message.maintenanceSchedule != null && message.hasOwnProperty("maintenanceSchedule")) {
+                                var error = $root.google.cloud.memorystore.v1.MaintenanceSchedule.verify(message.maintenanceSchedule);
+                                if (error)
+                                    return "maintenanceSchedule." + error;
+                            }
+                            if (message.crossInstanceReplicationConfig != null && message.hasOwnProperty("crossInstanceReplicationConfig")) {
+                                var error = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.verify(message.crossInstanceReplicationConfig);
+                                if (error)
+                                    return "crossInstanceReplicationConfig." + error;
+                            }
+                            if (message.asyncInstanceEndpointsDeletionEnabled != null && message.hasOwnProperty("asyncInstanceEndpointsDeletionEnabled")) {
+                                properties._asyncInstanceEndpointsDeletionEnabled = 1;
+                                if (typeof message.asyncInstanceEndpointsDeletionEnabled !== "boolean")
+                                    return "asyncInstanceEndpointsDeletionEnabled: boolean expected";
+                            }
+                            if (message.backupCollection != null && message.hasOwnProperty("backupCollection")) {
+                                properties._backupCollection = 1;
+                                if (!$util.isString(message.backupCollection))
+                                    return "backupCollection: string expected";
+                            }
+                            if (message.automatedBackupConfig != null && message.hasOwnProperty("automatedBackupConfig")) {
+                                var error = $root.google.cloud.memorystore.v1.AutomatedBackupConfig.verify(message.automatedBackupConfig);
+                                if (error)
+                                    return "automatedBackupConfig." + error;
+                            }
                             return null;
                         };
     
@@ -1019,6 +1543,16 @@
                             if (object instanceof $root.google.cloud.memorystore.v1.Instance)
                                 return object;
                             var message = new $root.google.cloud.memorystore.v1.Instance();
+                            if (object.gcsSource != null) {
+                                if (typeof object.gcsSource !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.Instance.gcsSource: object expected");
+                                message.gcsSource = $root.google.cloud.memorystore.v1.Instance.GcsBackupSource.fromObject(object.gcsSource);
+                            }
+                            if (object.managedBackupSource != null) {
+                                if (typeof object.managedBackupSource !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.Instance.managedBackupSource: object expected");
+                                message.managedBackupSource = $root.google.cloud.memorystore.v1.Instance.ManagedBackupSource.fromObject(object.managedBackupSource);
+                            }
                             if (object.name != null)
                                 message.name = String(object.name);
                             if (object.createTime != null) {
@@ -1191,6 +1725,16 @@
                                     message.pscAutoConnections[i] = $root.google.cloud.memorystore.v1.PscAutoConnection.fromObject(object.pscAutoConnections[i]);
                                 }
                             }
+                            if (object.pscAttachmentDetails) {
+                                if (!Array.isArray(object.pscAttachmentDetails))
+                                    throw TypeError(".google.cloud.memorystore.v1.Instance.pscAttachmentDetails: array expected");
+                                message.pscAttachmentDetails = [];
+                                for (var i = 0; i < object.pscAttachmentDetails.length; ++i) {
+                                    if (typeof object.pscAttachmentDetails[i] !== "object")
+                                        throw TypeError(".google.cloud.memorystore.v1.Instance.pscAttachmentDetails: object expected");
+                                    message.pscAttachmentDetails[i] = $root.google.cloud.memorystore.v1.PscAttachmentDetail.fromObject(object.pscAttachmentDetails[i]);
+                                }
+                            }
                             if (object.endpoints) {
                                 if (!Array.isArray(object.endpoints))
                                     throw TypeError(".google.cloud.memorystore.v1.Instance.endpoints: array expected");
@@ -1225,6 +1769,32 @@
                                 message.mode = 4;
                                 break;
                             }
+                            if (object.ondemandMaintenance != null)
+                                message.ondemandMaintenance = Boolean(object.ondemandMaintenance);
+                            if (object.maintenancePolicy != null) {
+                                if (typeof object.maintenancePolicy !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.Instance.maintenancePolicy: object expected");
+                                message.maintenancePolicy = $root.google.cloud.memorystore.v1.MaintenancePolicy.fromObject(object.maintenancePolicy);
+                            }
+                            if (object.maintenanceSchedule != null) {
+                                if (typeof object.maintenanceSchedule !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.Instance.maintenanceSchedule: object expected");
+                                message.maintenanceSchedule = $root.google.cloud.memorystore.v1.MaintenanceSchedule.fromObject(object.maintenanceSchedule);
+                            }
+                            if (object.crossInstanceReplicationConfig != null) {
+                                if (typeof object.crossInstanceReplicationConfig !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.Instance.crossInstanceReplicationConfig: object expected");
+                                message.crossInstanceReplicationConfig = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.fromObject(object.crossInstanceReplicationConfig);
+                            }
+                            if (object.asyncInstanceEndpointsDeletionEnabled != null)
+                                message.asyncInstanceEndpointsDeletionEnabled = Boolean(object.asyncInstanceEndpointsDeletionEnabled);
+                            if (object.backupCollection != null)
+                                message.backupCollection = String(object.backupCollection);
+                            if (object.automatedBackupConfig != null) {
+                                if (typeof object.automatedBackupConfig !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.Instance.automatedBackupConfig: object expected");
+                                message.automatedBackupConfig = $root.google.cloud.memorystore.v1.AutomatedBackupConfig.fromObject(object.automatedBackupConfig);
+                            }
                             return message;
                         };
     
@@ -1244,6 +1814,7 @@
                             if (options.arrays || options.defaults) {
                                 object.discoveryEndpoints = [];
                                 object.pscAutoConnections = [];
+                                object.pscAttachmentDetails = [];
                                 object.endpoints = [];
                             }
                             if (options.objects || options.defaults) {
@@ -1266,6 +1837,10 @@
                                 object.nodeConfig = null;
                                 object.zoneDistributionConfig = null;
                                 object.mode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
+                                object.maintenancePolicy = null;
+                                object.maintenanceSchedule = null;
+                                object.crossInstanceReplicationConfig = null;
+                                object.automatedBackupConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1326,6 +1901,21 @@
                                 for (var j = 0; j < message.pscAutoConnections.length; ++j)
                                     object.pscAutoConnections[j] = $root.google.cloud.memorystore.v1.PscAutoConnection.toObject(message.pscAutoConnections[j], options);
                             }
+                            if (message.pscAttachmentDetails && message.pscAttachmentDetails.length) {
+                                object.pscAttachmentDetails = [];
+                                for (var j = 0; j < message.pscAttachmentDetails.length; ++j)
+                                    object.pscAttachmentDetails[j] = $root.google.cloud.memorystore.v1.PscAttachmentDetail.toObject(message.pscAttachmentDetails[j], options);
+                            }
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                object.gcsSource = $root.google.cloud.memorystore.v1.Instance.GcsBackupSource.toObject(message.gcsSource, options);
+                                if (options.oneofs)
+                                    object.importSources = "gcsSource";
+                            }
+                            if (message.managedBackupSource != null && message.hasOwnProperty("managedBackupSource")) {
+                                object.managedBackupSource = $root.google.cloud.memorystore.v1.Instance.ManagedBackupSource.toObject(message.managedBackupSource, options);
+                                if (options.oneofs)
+                                    object.importSources = "managedBackupSource";
+                            }
                             if (message.endpoints && message.endpoints.length) {
                                 object.endpoints = [];
                                 for (var j = 0; j < message.endpoints.length; ++j)
@@ -1333,6 +1923,29 @@
                             }
                             if (message.mode != null && message.hasOwnProperty("mode"))
                                 object.mode = options.enums === String ? $root.google.cloud.memorystore.v1.Instance.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.memorystore.v1.Instance.Mode[message.mode] : message.mode;
+                            if (message.ondemandMaintenance != null && message.hasOwnProperty("ondemandMaintenance")) {
+                                object.ondemandMaintenance = message.ondemandMaintenance;
+                                if (options.oneofs)
+                                    object._ondemandMaintenance = "ondemandMaintenance";
+                            }
+                            if (message.maintenancePolicy != null && message.hasOwnProperty("maintenancePolicy"))
+                                object.maintenancePolicy = $root.google.cloud.memorystore.v1.MaintenancePolicy.toObject(message.maintenancePolicy, options);
+                            if (message.maintenanceSchedule != null && message.hasOwnProperty("maintenanceSchedule"))
+                                object.maintenanceSchedule = $root.google.cloud.memorystore.v1.MaintenanceSchedule.toObject(message.maintenanceSchedule, options);
+                            if (message.crossInstanceReplicationConfig != null && message.hasOwnProperty("crossInstanceReplicationConfig"))
+                                object.crossInstanceReplicationConfig = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.toObject(message.crossInstanceReplicationConfig, options);
+                            if (message.asyncInstanceEndpointsDeletionEnabled != null && message.hasOwnProperty("asyncInstanceEndpointsDeletionEnabled")) {
+                                object.asyncInstanceEndpointsDeletionEnabled = message.asyncInstanceEndpointsDeletionEnabled;
+                                if (options.oneofs)
+                                    object._asyncInstanceEndpointsDeletionEnabled = "asyncInstanceEndpointsDeletionEnabled";
+                            }
+                            if (message.backupCollection != null && message.hasOwnProperty("backupCollection")) {
+                                object.backupCollection = message.backupCollection;
+                                if (options.oneofs)
+                                    object._backupCollection = "backupCollection";
+                            }
+                            if (message.automatedBackupConfig != null && message.hasOwnProperty("automatedBackupConfig"))
+                                object.automatedBackupConfig = $root.google.cloud.memorystore.v1.AutomatedBackupConfig.toObject(message.automatedBackupConfig, options);
                             return object;
                         };
     
@@ -1594,6 +2207,8 @@
                                  * @interface IUpdateInfo
                                  * @property {number|null} [targetShardCount] UpdateInfo targetShardCount
                                  * @property {number|null} [targetReplicaCount] UpdateInfo targetReplicaCount
+                                 * @property {string|null} [targetEngineVersion] UpdateInfo targetEngineVersion
+                                 * @property {google.cloud.memorystore.v1.Instance.NodeType|null} [targetNodeType] UpdateInfo targetNodeType
                                  */
     
                                 /**
@@ -1627,6 +2242,22 @@
                                  */
                                 UpdateInfo.prototype.targetReplicaCount = null;
     
+                                /**
+                                 * UpdateInfo targetEngineVersion.
+                                 * @member {string|null|undefined} targetEngineVersion
+                                 * @memberof google.cloud.memorystore.v1.Instance.StateInfo.UpdateInfo
+                                 * @instance
+                                 */
+                                UpdateInfo.prototype.targetEngineVersion = null;
+    
+                                /**
+                                 * UpdateInfo targetNodeType.
+                                 * @member {google.cloud.memorystore.v1.Instance.NodeType|null|undefined} targetNodeType
+                                 * @memberof google.cloud.memorystore.v1.Instance.StateInfo.UpdateInfo
+                                 * @instance
+                                 */
+                                UpdateInfo.prototype.targetNodeType = null;
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
@@ -1649,6 +2280,28 @@
                                  */
                                 Object.defineProperty(UpdateInfo.prototype, "_targetReplicaCount", {
                                     get: $util.oneOfGetter($oneOfFields = ["targetReplicaCount"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * UpdateInfo _targetEngineVersion.
+                                 * @member {"targetEngineVersion"|undefined} _targetEngineVersion
+                                 * @memberof google.cloud.memorystore.v1.Instance.StateInfo.UpdateInfo
+                                 * @instance
+                                 */
+                                Object.defineProperty(UpdateInfo.prototype, "_targetEngineVersion", {
+                                    get: $util.oneOfGetter($oneOfFields = ["targetEngineVersion"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * UpdateInfo _targetNodeType.
+                                 * @member {"targetNodeType"|undefined} _targetNodeType
+                                 * @memberof google.cloud.memorystore.v1.Instance.StateInfo.UpdateInfo
+                                 * @instance
+                                 */
+                                Object.defineProperty(UpdateInfo.prototype, "_targetNodeType", {
+                                    get: $util.oneOfGetter($oneOfFields = ["targetNodeType"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -1680,6 +2333,10 @@
                                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.targetShardCount);
                                     if (message.targetReplicaCount != null && Object.hasOwnProperty.call(message, "targetReplicaCount"))
                                         writer.uint32(/* id 2, wireType 0 =*/16).int32(message.targetReplicaCount);
+                                    if (message.targetEngineVersion != null && Object.hasOwnProperty.call(message, "targetEngineVersion"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.targetEngineVersion);
+                                    if (message.targetNodeType != null && Object.hasOwnProperty.call(message, "targetNodeType"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.targetNodeType);
                                     return writer;
                                 };
     
@@ -1720,6 +2377,14 @@
                                             }
                                         case 2: {
                                                 message.targetReplicaCount = reader.int32();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.targetEngineVersion = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.targetNodeType = reader.int32();
                                                 break;
                                             }
                                         default:
@@ -1768,6 +2433,24 @@
                                         if (!$util.isInteger(message.targetReplicaCount))
                                             return "targetReplicaCount: integer expected";
                                     }
+                                    if (message.targetEngineVersion != null && message.hasOwnProperty("targetEngineVersion")) {
+                                        properties._targetEngineVersion = 1;
+                                        if (!$util.isString(message.targetEngineVersion))
+                                            return "targetEngineVersion: string expected";
+                                    }
+                                    if (message.targetNodeType != null && message.hasOwnProperty("targetNodeType")) {
+                                        properties._targetNodeType = 1;
+                                        switch (message.targetNodeType) {
+                                        default:
+                                            return "targetNodeType: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                            break;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -1787,6 +2470,36 @@
                                         message.targetShardCount = object.targetShardCount | 0;
                                     if (object.targetReplicaCount != null)
                                         message.targetReplicaCount = object.targetReplicaCount | 0;
+                                    if (object.targetEngineVersion != null)
+                                        message.targetEngineVersion = String(object.targetEngineVersion);
+                                    switch (object.targetNodeType) {
+                                    default:
+                                        if (typeof object.targetNodeType === "number") {
+                                            message.targetNodeType = object.targetNodeType;
+                                            break;
+                                        }
+                                        break;
+                                    case "NODE_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.targetNodeType = 0;
+                                        break;
+                                    case "SHARED_CORE_NANO":
+                                    case 1:
+                                        message.targetNodeType = 1;
+                                        break;
+                                    case "HIGHMEM_MEDIUM":
+                                    case 2:
+                                        message.targetNodeType = 2;
+                                        break;
+                                    case "HIGHMEM_XLARGE":
+                                    case 3:
+                                        message.targetNodeType = 3;
+                                        break;
+                                    case "STANDARD_SMALL":
+                                    case 4:
+                                        message.targetNodeType = 4;
+                                        break;
+                                    }
                                     return message;
                                 };
     
@@ -1812,6 +2525,16 @@
                                         object.targetReplicaCount = message.targetReplicaCount;
                                         if (options.oneofs)
                                             object._targetReplicaCount = "targetReplicaCount";
+                                    }
+                                    if (message.targetEngineVersion != null && message.hasOwnProperty("targetEngineVersion")) {
+                                        object.targetEngineVersion = message.targetEngineVersion;
+                                        if (options.oneofs)
+                                            object._targetEngineVersion = "targetEngineVersion";
+                                    }
+                                    if (message.targetNodeType != null && message.hasOwnProperty("targetNodeType")) {
+                                        object.targetNodeType = options.enums === String ? $root.google.cloud.memorystore.v1.Instance.NodeType[message.targetNodeType] === undefined ? message.targetNodeType : $root.google.cloud.memorystore.v1.Instance.NodeType[message.targetNodeType] : message.targetNodeType;
+                                        if (options.oneofs)
+                                            object._targetNodeType = "targetNodeType";
                                     }
                                     return object;
                                 };
@@ -1846,6 +2569,428 @@
                             })();
     
                             return StateInfo;
+                        })();
+    
+                        Instance.GcsBackupSource = (function() {
+    
+                            /**
+                             * Properties of a GcsBackupSource.
+                             * @memberof google.cloud.memorystore.v1.Instance
+                             * @interface IGcsBackupSource
+                             * @property {Array.<string>|null} [uris] GcsBackupSource uris
+                             */
+    
+                            /**
+                             * Constructs a new GcsBackupSource.
+                             * @memberof google.cloud.memorystore.v1.Instance
+                             * @classdesc Represents a GcsBackupSource.
+                             * @implements IGcsBackupSource
+                             * @constructor
+                             * @param {google.cloud.memorystore.v1.Instance.IGcsBackupSource=} [properties] Properties to set
+                             */
+                            function GcsBackupSource(properties) {
+                                this.uris = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GcsBackupSource uris.
+                             * @member {Array.<string>} uris
+                             * @memberof google.cloud.memorystore.v1.Instance.GcsBackupSource
+                             * @instance
+                             */
+                            GcsBackupSource.prototype.uris = $util.emptyArray;
+    
+                            /**
+                             * Creates a new GcsBackupSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.memorystore.v1.Instance.GcsBackupSource
+                             * @static
+                             * @param {google.cloud.memorystore.v1.Instance.IGcsBackupSource=} [properties] Properties to set
+                             * @returns {google.cloud.memorystore.v1.Instance.GcsBackupSource} GcsBackupSource instance
+                             */
+                            GcsBackupSource.create = function create(properties) {
+                                return new GcsBackupSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GcsBackupSource message. Does not implicitly {@link google.cloud.memorystore.v1.Instance.GcsBackupSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.memorystore.v1.Instance.GcsBackupSource
+                             * @static
+                             * @param {google.cloud.memorystore.v1.Instance.IGcsBackupSource} message GcsBackupSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GcsBackupSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uris != null && message.uris.length)
+                                    for (var i = 0; i < message.uris.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.uris[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GcsBackupSource message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.Instance.GcsBackupSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.memorystore.v1.Instance.GcsBackupSource
+                             * @static
+                             * @param {google.cloud.memorystore.v1.Instance.IGcsBackupSource} message GcsBackupSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GcsBackupSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GcsBackupSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.memorystore.v1.Instance.GcsBackupSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.memorystore.v1.Instance.GcsBackupSource} GcsBackupSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GcsBackupSource.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.Instance.GcsBackupSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.uris && message.uris.length))
+                                                message.uris = [];
+                                            message.uris.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GcsBackupSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.memorystore.v1.Instance.GcsBackupSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.memorystore.v1.Instance.GcsBackupSource} GcsBackupSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GcsBackupSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GcsBackupSource message.
+                             * @function verify
+                             * @memberof google.cloud.memorystore.v1.Instance.GcsBackupSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GcsBackupSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uris != null && message.hasOwnProperty("uris")) {
+                                    if (!Array.isArray(message.uris))
+                                        return "uris: array expected";
+                                    for (var i = 0; i < message.uris.length; ++i)
+                                        if (!$util.isString(message.uris[i]))
+                                            return "uris: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GcsBackupSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.memorystore.v1.Instance.GcsBackupSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.memorystore.v1.Instance.GcsBackupSource} GcsBackupSource
+                             */
+                            GcsBackupSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.memorystore.v1.Instance.GcsBackupSource)
+                                    return object;
+                                var message = new $root.google.cloud.memorystore.v1.Instance.GcsBackupSource();
+                                if (object.uris) {
+                                    if (!Array.isArray(object.uris))
+                                        throw TypeError(".google.cloud.memorystore.v1.Instance.GcsBackupSource.uris: array expected");
+                                    message.uris = [];
+                                    for (var i = 0; i < object.uris.length; ++i)
+                                        message.uris[i] = String(object.uris[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GcsBackupSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.memorystore.v1.Instance.GcsBackupSource
+                             * @static
+                             * @param {google.cloud.memorystore.v1.Instance.GcsBackupSource} message GcsBackupSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GcsBackupSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.uris = [];
+                                if (message.uris && message.uris.length) {
+                                    object.uris = [];
+                                    for (var j = 0; j < message.uris.length; ++j)
+                                        object.uris[j] = message.uris[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GcsBackupSource to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.memorystore.v1.Instance.GcsBackupSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GcsBackupSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GcsBackupSource
+                             * @function getTypeUrl
+                             * @memberof google.cloud.memorystore.v1.Instance.GcsBackupSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GcsBackupSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.memorystore.v1.Instance.GcsBackupSource";
+                            };
+    
+                            return GcsBackupSource;
+                        })();
+    
+                        Instance.ManagedBackupSource = (function() {
+    
+                            /**
+                             * Properties of a ManagedBackupSource.
+                             * @memberof google.cloud.memorystore.v1.Instance
+                             * @interface IManagedBackupSource
+                             * @property {string|null} [backup] ManagedBackupSource backup
+                             */
+    
+                            /**
+                             * Constructs a new ManagedBackupSource.
+                             * @memberof google.cloud.memorystore.v1.Instance
+                             * @classdesc Represents a ManagedBackupSource.
+                             * @implements IManagedBackupSource
+                             * @constructor
+                             * @param {google.cloud.memorystore.v1.Instance.IManagedBackupSource=} [properties] Properties to set
+                             */
+                            function ManagedBackupSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ManagedBackupSource backup.
+                             * @member {string} backup
+                             * @memberof google.cloud.memorystore.v1.Instance.ManagedBackupSource
+                             * @instance
+                             */
+                            ManagedBackupSource.prototype.backup = "";
+    
+                            /**
+                             * Creates a new ManagedBackupSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.memorystore.v1.Instance.ManagedBackupSource
+                             * @static
+                             * @param {google.cloud.memorystore.v1.Instance.IManagedBackupSource=} [properties] Properties to set
+                             * @returns {google.cloud.memorystore.v1.Instance.ManagedBackupSource} ManagedBackupSource instance
+                             */
+                            ManagedBackupSource.create = function create(properties) {
+                                return new ManagedBackupSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ManagedBackupSource message. Does not implicitly {@link google.cloud.memorystore.v1.Instance.ManagedBackupSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.memorystore.v1.Instance.ManagedBackupSource
+                             * @static
+                             * @param {google.cloud.memorystore.v1.Instance.IManagedBackupSource} message ManagedBackupSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ManagedBackupSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.backup != null && Object.hasOwnProperty.call(message, "backup"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.backup);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ManagedBackupSource message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.Instance.ManagedBackupSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.memorystore.v1.Instance.ManagedBackupSource
+                             * @static
+                             * @param {google.cloud.memorystore.v1.Instance.IManagedBackupSource} message ManagedBackupSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ManagedBackupSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ManagedBackupSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.memorystore.v1.Instance.ManagedBackupSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.memorystore.v1.Instance.ManagedBackupSource} ManagedBackupSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ManagedBackupSource.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.Instance.ManagedBackupSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.backup = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ManagedBackupSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.memorystore.v1.Instance.ManagedBackupSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.memorystore.v1.Instance.ManagedBackupSource} ManagedBackupSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ManagedBackupSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ManagedBackupSource message.
+                             * @function verify
+                             * @memberof google.cloud.memorystore.v1.Instance.ManagedBackupSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ManagedBackupSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.backup != null && message.hasOwnProperty("backup"))
+                                    if (!$util.isString(message.backup))
+                                        return "backup: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ManagedBackupSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.memorystore.v1.Instance.ManagedBackupSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.memorystore.v1.Instance.ManagedBackupSource} ManagedBackupSource
+                             */
+                            ManagedBackupSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.memorystore.v1.Instance.ManagedBackupSource)
+                                    return object;
+                                var message = new $root.google.cloud.memorystore.v1.Instance.ManagedBackupSource();
+                                if (object.backup != null)
+                                    message.backup = String(object.backup);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ManagedBackupSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.memorystore.v1.Instance.ManagedBackupSource
+                             * @static
+                             * @param {google.cloud.memorystore.v1.Instance.ManagedBackupSource} message ManagedBackupSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ManagedBackupSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.backup = "";
+                                if (message.backup != null && message.hasOwnProperty("backup"))
+                                    object.backup = message.backup;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ManagedBackupSource to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.memorystore.v1.Instance.ManagedBackupSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ManagedBackupSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ManagedBackupSource
+                             * @function getTypeUrl
+                             * @memberof google.cloud.memorystore.v1.Instance.ManagedBackupSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ManagedBackupSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.memorystore.v1.Instance.ManagedBackupSource";
+                            };
+    
+                            return ManagedBackupSource;
                         })();
     
                         Instance.InstanceEndpoint = (function() {
@@ -2427,6 +3572,3720 @@
                         return Instance;
                     })();
     
+                    v1.AutomatedBackupConfig = (function() {
+    
+                        /**
+                         * Properties of an AutomatedBackupConfig.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IAutomatedBackupConfig
+                         * @property {google.cloud.memorystore.v1.AutomatedBackupConfig.IFixedFrequencySchedule|null} [fixedFrequencySchedule] AutomatedBackupConfig fixedFrequencySchedule
+                         * @property {google.cloud.memorystore.v1.AutomatedBackupConfig.AutomatedBackupMode|null} [automatedBackupMode] AutomatedBackupConfig automatedBackupMode
+                         * @property {google.protobuf.IDuration|null} [retention] AutomatedBackupConfig retention
+                         */
+    
+                        /**
+                         * Constructs a new AutomatedBackupConfig.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents an AutomatedBackupConfig.
+                         * @implements IAutomatedBackupConfig
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IAutomatedBackupConfig=} [properties] Properties to set
+                         */
+                        function AutomatedBackupConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AutomatedBackupConfig fixedFrequencySchedule.
+                         * @member {google.cloud.memorystore.v1.AutomatedBackupConfig.IFixedFrequencySchedule|null|undefined} fixedFrequencySchedule
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @instance
+                         */
+                        AutomatedBackupConfig.prototype.fixedFrequencySchedule = null;
+    
+                        /**
+                         * AutomatedBackupConfig automatedBackupMode.
+                         * @member {google.cloud.memorystore.v1.AutomatedBackupConfig.AutomatedBackupMode} automatedBackupMode
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @instance
+                         */
+                        AutomatedBackupConfig.prototype.automatedBackupMode = 0;
+    
+                        /**
+                         * AutomatedBackupConfig retention.
+                         * @member {google.protobuf.IDuration|null|undefined} retention
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @instance
+                         */
+                        AutomatedBackupConfig.prototype.retention = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AutomatedBackupConfig schedule.
+                         * @member {"fixedFrequencySchedule"|undefined} schedule
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @instance
+                         */
+                        Object.defineProperty(AutomatedBackupConfig.prototype, "schedule", {
+                            get: $util.oneOfGetter($oneOfFields = ["fixedFrequencySchedule"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AutomatedBackupConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IAutomatedBackupConfig=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.AutomatedBackupConfig} AutomatedBackupConfig instance
+                         */
+                        AutomatedBackupConfig.create = function create(properties) {
+                            return new AutomatedBackupConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutomatedBackupConfig message. Does not implicitly {@link google.cloud.memorystore.v1.AutomatedBackupConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IAutomatedBackupConfig} message AutomatedBackupConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomatedBackupConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.automatedBackupMode != null && Object.hasOwnProperty.call(message, "automatedBackupMode"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.automatedBackupMode);
+                            if (message.fixedFrequencySchedule != null && Object.hasOwnProperty.call(message, "fixedFrequencySchedule"))
+                                $root.google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule.encode(message.fixedFrequencySchedule, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.retention != null && Object.hasOwnProperty.call(message, "retention"))
+                                $root.google.protobuf.Duration.encode(message.retention, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutomatedBackupConfig message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.AutomatedBackupConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IAutomatedBackupConfig} message AutomatedBackupConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomatedBackupConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutomatedBackupConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.AutomatedBackupConfig} AutomatedBackupConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomatedBackupConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.AutomatedBackupConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.fixedFrequencySchedule = $root.google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.automatedBackupMode = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.retention = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutomatedBackupConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.AutomatedBackupConfig} AutomatedBackupConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomatedBackupConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutomatedBackupConfig message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutomatedBackupConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.fixedFrequencySchedule != null && message.hasOwnProperty("fixedFrequencySchedule")) {
+                                properties.schedule = 1;
+                                {
+                                    var error = $root.google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule.verify(message.fixedFrequencySchedule);
+                                    if (error)
+                                        return "fixedFrequencySchedule." + error;
+                                }
+                            }
+                            if (message.automatedBackupMode != null && message.hasOwnProperty("automatedBackupMode"))
+                                switch (message.automatedBackupMode) {
+                                default:
+                                    return "automatedBackupMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.retention != null && message.hasOwnProperty("retention")) {
+                                var error = $root.google.protobuf.Duration.verify(message.retention);
+                                if (error)
+                                    return "retention." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutomatedBackupConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.AutomatedBackupConfig} AutomatedBackupConfig
+                         */
+                        AutomatedBackupConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.AutomatedBackupConfig)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.AutomatedBackupConfig();
+                            if (object.fixedFrequencySchedule != null) {
+                                if (typeof object.fixedFrequencySchedule !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.AutomatedBackupConfig.fixedFrequencySchedule: object expected");
+                                message.fixedFrequencySchedule = $root.google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule.fromObject(object.fixedFrequencySchedule);
+                            }
+                            switch (object.automatedBackupMode) {
+                            default:
+                                if (typeof object.automatedBackupMode === "number") {
+                                    message.automatedBackupMode = object.automatedBackupMode;
+                                    break;
+                                }
+                                break;
+                            case "AUTOMATED_BACKUP_MODE_UNSPECIFIED":
+                            case 0:
+                                message.automatedBackupMode = 0;
+                                break;
+                            case "DISABLED":
+                            case 1:
+                                message.automatedBackupMode = 1;
+                                break;
+                            case "ENABLED":
+                            case 2:
+                                message.automatedBackupMode = 2;
+                                break;
+                            }
+                            if (object.retention != null) {
+                                if (typeof object.retention !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.AutomatedBackupConfig.retention: object expected");
+                                message.retention = $root.google.protobuf.Duration.fromObject(object.retention);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutomatedBackupConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @static
+                         * @param {google.cloud.memorystore.v1.AutomatedBackupConfig} message AutomatedBackupConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutomatedBackupConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.automatedBackupMode = options.enums === String ? "AUTOMATED_BACKUP_MODE_UNSPECIFIED" : 0;
+                                object.retention = null;
+                            }
+                            if (message.automatedBackupMode != null && message.hasOwnProperty("automatedBackupMode"))
+                                object.automatedBackupMode = options.enums === String ? $root.google.cloud.memorystore.v1.AutomatedBackupConfig.AutomatedBackupMode[message.automatedBackupMode] === undefined ? message.automatedBackupMode : $root.google.cloud.memorystore.v1.AutomatedBackupConfig.AutomatedBackupMode[message.automatedBackupMode] : message.automatedBackupMode;
+                            if (message.fixedFrequencySchedule != null && message.hasOwnProperty("fixedFrequencySchedule")) {
+                                object.fixedFrequencySchedule = $root.google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule.toObject(message.fixedFrequencySchedule, options);
+                                if (options.oneofs)
+                                    object.schedule = "fixedFrequencySchedule";
+                            }
+                            if (message.retention != null && message.hasOwnProperty("retention"))
+                                object.retention = $root.google.protobuf.Duration.toObject(message.retention, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AutomatedBackupConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutomatedBackupConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutomatedBackupConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutomatedBackupConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.AutomatedBackupConfig";
+                        };
+    
+                        AutomatedBackupConfig.FixedFrequencySchedule = (function() {
+    
+                            /**
+                             * Properties of a FixedFrequencySchedule.
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                             * @interface IFixedFrequencySchedule
+                             * @property {google.type.ITimeOfDay|null} [startTime] FixedFrequencySchedule startTime
+                             */
+    
+                            /**
+                             * Constructs a new FixedFrequencySchedule.
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig
+                             * @classdesc Represents a FixedFrequencySchedule.
+                             * @implements IFixedFrequencySchedule
+                             * @constructor
+                             * @param {google.cloud.memorystore.v1.AutomatedBackupConfig.IFixedFrequencySchedule=} [properties] Properties to set
+                             */
+                            function FixedFrequencySchedule(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FixedFrequencySchedule startTime.
+                             * @member {google.type.ITimeOfDay|null|undefined} startTime
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule
+                             * @instance
+                             */
+                            FixedFrequencySchedule.prototype.startTime = null;
+    
+                            /**
+                             * Creates a new FixedFrequencySchedule instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule
+                             * @static
+                             * @param {google.cloud.memorystore.v1.AutomatedBackupConfig.IFixedFrequencySchedule=} [properties] Properties to set
+                             * @returns {google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule} FixedFrequencySchedule instance
+                             */
+                            FixedFrequencySchedule.create = function create(properties) {
+                                return new FixedFrequencySchedule(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FixedFrequencySchedule message. Does not implicitly {@link google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule
+                             * @static
+                             * @param {google.cloud.memorystore.v1.AutomatedBackupConfig.IFixedFrequencySchedule} message FixedFrequencySchedule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FixedFrequencySchedule.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                    $root.google.type.TimeOfDay.encode(message.startTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FixedFrequencySchedule message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule
+                             * @static
+                             * @param {google.cloud.memorystore.v1.AutomatedBackupConfig.IFixedFrequencySchedule} message FixedFrequencySchedule message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FixedFrequencySchedule.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FixedFrequencySchedule message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule} FixedFrequencySchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FixedFrequencySchedule.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.startTime = $root.google.type.TimeOfDay.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FixedFrequencySchedule message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule} FixedFrequencySchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FixedFrequencySchedule.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FixedFrequencySchedule message.
+                             * @function verify
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FixedFrequencySchedule.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                    var error = $root.google.type.TimeOfDay.verify(message.startTime);
+                                    if (error)
+                                        return "startTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FixedFrequencySchedule message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule} FixedFrequencySchedule
+                             */
+                            FixedFrequencySchedule.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule)
+                                    return object;
+                                var message = new $root.google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule();
+                                if (object.startTime != null) {
+                                    if (typeof object.startTime !== "object")
+                                        throw TypeError(".google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule.startTime: object expected");
+                                    message.startTime = $root.google.type.TimeOfDay.fromObject(object.startTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FixedFrequencySchedule message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule
+                             * @static
+                             * @param {google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule} message FixedFrequencySchedule
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FixedFrequencySchedule.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.startTime = null;
+                                if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                    object.startTime = $root.google.type.TimeOfDay.toObject(message.startTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FixedFrequencySchedule to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FixedFrequencySchedule.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FixedFrequencySchedule
+                             * @function getTypeUrl
+                             * @memberof google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FixedFrequencySchedule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.memorystore.v1.AutomatedBackupConfig.FixedFrequencySchedule";
+                            };
+    
+                            return FixedFrequencySchedule;
+                        })();
+    
+                        /**
+                         * AutomatedBackupMode enum.
+                         * @name google.cloud.memorystore.v1.AutomatedBackupConfig.AutomatedBackupMode
+                         * @enum {number}
+                         * @property {number} AUTOMATED_BACKUP_MODE_UNSPECIFIED=0 AUTOMATED_BACKUP_MODE_UNSPECIFIED value
+                         * @property {number} DISABLED=1 DISABLED value
+                         * @property {number} ENABLED=2 ENABLED value
+                         */
+                        AutomatedBackupConfig.AutomatedBackupMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "AUTOMATED_BACKUP_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DISABLED"] = 1;
+                            values[valuesById[2] = "ENABLED"] = 2;
+                            return values;
+                        })();
+    
+                        return AutomatedBackupConfig;
+                    })();
+    
+                    v1.BackupCollection = (function() {
+    
+                        /**
+                         * Properties of a BackupCollection.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IBackupCollection
+                         * @property {string|null} [name] BackupCollection name
+                         * @property {string|null} [instanceUid] BackupCollection instanceUid
+                         * @property {string|null} [instance] BackupCollection instance
+                         * @property {string|null} [kmsKey] BackupCollection kmsKey
+                         * @property {string|null} [uid] BackupCollection uid
+                         * @property {google.protobuf.ITimestamp|null} [createTime] BackupCollection createTime
+                         */
+    
+                        /**
+                         * Constructs a new BackupCollection.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a BackupCollection.
+                         * @implements IBackupCollection
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IBackupCollection=} [properties] Properties to set
+                         */
+                        function BackupCollection(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BackupCollection name.
+                         * @member {string} name
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @instance
+                         */
+                        BackupCollection.prototype.name = "";
+    
+                        /**
+                         * BackupCollection instanceUid.
+                         * @member {string} instanceUid
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @instance
+                         */
+                        BackupCollection.prototype.instanceUid = "";
+    
+                        /**
+                         * BackupCollection instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @instance
+                         */
+                        BackupCollection.prototype.instance = "";
+    
+                        /**
+                         * BackupCollection kmsKey.
+                         * @member {string} kmsKey
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @instance
+                         */
+                        BackupCollection.prototype.kmsKey = "";
+    
+                        /**
+                         * BackupCollection uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @instance
+                         */
+                        BackupCollection.prototype.uid = "";
+    
+                        /**
+                         * BackupCollection createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @instance
+                         */
+                        BackupCollection.prototype.createTime = null;
+    
+                        /**
+                         * Creates a new BackupCollection instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IBackupCollection=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.BackupCollection} BackupCollection instance
+                         */
+                        BackupCollection.create = function create(properties) {
+                            return new BackupCollection(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BackupCollection message. Does not implicitly {@link google.cloud.memorystore.v1.BackupCollection.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IBackupCollection} message BackupCollection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupCollection.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.instanceUid != null && Object.hasOwnProperty.call(message, "instanceUid"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.instanceUid);
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.instance);
+                            if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.kmsKey);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.uid);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BackupCollection message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.BackupCollection.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IBackupCollection} message BackupCollection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupCollection.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BackupCollection message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.BackupCollection} BackupCollection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupCollection.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.BackupCollection();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.instanceUid = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.kmsKey = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BackupCollection message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.BackupCollection} BackupCollection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupCollection.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BackupCollection message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BackupCollection.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.instanceUid != null && message.hasOwnProperty("instanceUid"))
+                                if (!$util.isString(message.instanceUid))
+                                    return "instanceUid: string expected";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                                if (!$util.isString(message.kmsKey))
+                                    return "kmsKey: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BackupCollection message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.BackupCollection} BackupCollection
+                         */
+                        BackupCollection.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.BackupCollection)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.BackupCollection();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.instanceUid != null)
+                                message.instanceUid = String(object.instanceUid);
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            if (object.kmsKey != null)
+                                message.kmsKey = String(object.kmsKey);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.BackupCollection.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BackupCollection message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @static
+                         * @param {google.cloud.memorystore.v1.BackupCollection} message BackupCollection
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BackupCollection.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.instanceUid = "";
+                                object.instance = "";
+                                object.kmsKey = "";
+                                object.uid = "";
+                                object.createTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.instanceUid != null && message.hasOwnProperty("instanceUid"))
+                                object.instanceUid = message.instanceUid;
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                                object.kmsKey = message.kmsKey;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BackupCollection to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BackupCollection.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BackupCollection
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.BackupCollection
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BackupCollection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.BackupCollection";
+                        };
+    
+                        return BackupCollection;
+                    })();
+    
+                    v1.Backup = (function() {
+    
+                        /**
+                         * Properties of a Backup.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IBackup
+                         * @property {string|null} [name] Backup name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Backup createTime
+                         * @property {string|null} [instance] Backup instance
+                         * @property {string|null} [instanceUid] Backup instanceUid
+                         * @property {number|Long|null} [totalSizeBytes] Backup totalSizeBytes
+                         * @property {google.protobuf.ITimestamp|null} [expireTime] Backup expireTime
+                         * @property {string|null} [engineVersion] Backup engineVersion
+                         * @property {Array.<google.cloud.memorystore.v1.IBackupFile>|null} [backupFiles] Backup backupFiles
+                         * @property {google.cloud.memorystore.v1.Instance.NodeType|null} [nodeType] Backup nodeType
+                         * @property {number|null} [replicaCount] Backup replicaCount
+                         * @property {number|null} [shardCount] Backup shardCount
+                         * @property {google.cloud.memorystore.v1.Backup.BackupType|null} [backupType] Backup backupType
+                         * @property {google.cloud.memorystore.v1.Backup.State|null} [state] Backup state
+                         * @property {string|null} [uid] Backup uid
+                         */
+    
+                        /**
+                         * Constructs a new Backup.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a Backup.
+                         * @implements IBackup
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IBackup=} [properties] Properties to set
+                         */
+                        function Backup(properties) {
+                            this.backupFiles = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Backup name.
+                         * @member {string} name
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.name = "";
+    
+                        /**
+                         * Backup createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.createTime = null;
+    
+                        /**
+                         * Backup instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.instance = "";
+    
+                        /**
+                         * Backup instanceUid.
+                         * @member {string} instanceUid
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.instanceUid = "";
+    
+                        /**
+                         * Backup totalSizeBytes.
+                         * @member {number|Long} totalSizeBytes
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.totalSizeBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Backup expireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.expireTime = null;
+    
+                        /**
+                         * Backup engineVersion.
+                         * @member {string} engineVersion
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.engineVersion = "";
+    
+                        /**
+                         * Backup backupFiles.
+                         * @member {Array.<google.cloud.memorystore.v1.IBackupFile>} backupFiles
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.backupFiles = $util.emptyArray;
+    
+                        /**
+                         * Backup nodeType.
+                         * @member {google.cloud.memorystore.v1.Instance.NodeType} nodeType
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.nodeType = 0;
+    
+                        /**
+                         * Backup replicaCount.
+                         * @member {number} replicaCount
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.replicaCount = 0;
+    
+                        /**
+                         * Backup shardCount.
+                         * @member {number} shardCount
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.shardCount = 0;
+    
+                        /**
+                         * Backup backupType.
+                         * @member {google.cloud.memorystore.v1.Backup.BackupType} backupType
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.backupType = 0;
+    
+                        /**
+                         * Backup state.
+                         * @member {google.cloud.memorystore.v1.Backup.State} state
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.state = 0;
+    
+                        /**
+                         * Backup uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.uid = "";
+    
+                        /**
+                         * Creates a new Backup instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IBackup=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.Backup} Backup instance
+                         */
+                        Backup.create = function create(properties) {
+                            return new Backup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Backup message. Does not implicitly {@link google.cloud.memorystore.v1.Backup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IBackup} message Backup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Backup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.instance);
+                            if (message.instanceUid != null && Object.hasOwnProperty.call(message, "instanceUid"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.instanceUid);
+                            if (message.totalSizeBytes != null && Object.hasOwnProperty.call(message, "totalSizeBytes"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.totalSizeBytes);
+                            if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.engineVersion != null && Object.hasOwnProperty.call(message, "engineVersion"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.engineVersion);
+                            if (message.backupFiles != null && message.backupFiles.length)
+                                for (var i = 0; i < message.backupFiles.length; ++i)
+                                    $root.google.cloud.memorystore.v1.BackupFile.encode(message.backupFiles[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.nodeType != null && Object.hasOwnProperty.call(message, "nodeType"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.nodeType);
+                            if (message.replicaCount != null && Object.hasOwnProperty.call(message, "replicaCount"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.replicaCount);
+                            if (message.shardCount != null && Object.hasOwnProperty.call(message, "shardCount"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.shardCount);
+                            if (message.backupType != null && Object.hasOwnProperty.call(message, "backupType"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.backupType);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.state);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.uid);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Backup message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.Backup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IBackup} message Backup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Backup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Backup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.Backup} Backup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Backup.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.Backup();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.instanceUid = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.totalSizeBytes = reader.int64();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.engineVersion = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.backupFiles && message.backupFiles.length))
+                                            message.backupFiles = [];
+                                        message.backupFiles.push($root.google.cloud.memorystore.v1.BackupFile.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        message.nodeType = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.replicaCount = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.shardCount = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.backupType = reader.int32();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Backup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.Backup} Backup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Backup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Backup message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Backup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            if (message.instanceUid != null && message.hasOwnProperty("instanceUid"))
+                                if (!$util.isString(message.instanceUid))
+                                    return "instanceUid: string expected";
+                            if (message.totalSizeBytes != null && message.hasOwnProperty("totalSizeBytes"))
+                                if (!$util.isInteger(message.totalSizeBytes) && !(message.totalSizeBytes && $util.isInteger(message.totalSizeBytes.low) && $util.isInteger(message.totalSizeBytes.high)))
+                                    return "totalSizeBytes: integer|Long expected";
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                if (error)
+                                    return "expireTime." + error;
+                            }
+                            if (message.engineVersion != null && message.hasOwnProperty("engineVersion"))
+                                if (!$util.isString(message.engineVersion))
+                                    return "engineVersion: string expected";
+                            if (message.backupFiles != null && message.hasOwnProperty("backupFiles")) {
+                                if (!Array.isArray(message.backupFiles))
+                                    return "backupFiles: array expected";
+                                for (var i = 0; i < message.backupFiles.length; ++i) {
+                                    var error = $root.google.cloud.memorystore.v1.BackupFile.verify(message.backupFiles[i]);
+                                    if (error)
+                                        return "backupFiles." + error;
+                                }
+                            }
+                            if (message.nodeType != null && message.hasOwnProperty("nodeType"))
+                                switch (message.nodeType) {
+                                default:
+                                    return "nodeType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.replicaCount != null && message.hasOwnProperty("replicaCount"))
+                                if (!$util.isInteger(message.replicaCount))
+                                    return "replicaCount: integer expected";
+                            if (message.shardCount != null && message.hasOwnProperty("shardCount"))
+                                if (!$util.isInteger(message.shardCount))
+                                    return "shardCount: integer expected";
+                            if (message.backupType != null && message.hasOwnProperty("backupType"))
+                                switch (message.backupType) {
+                                default:
+                                    return "backupType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Backup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.Backup} Backup
+                         */
+                        Backup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.Backup)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.Backup();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.Backup.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            if (object.instanceUid != null)
+                                message.instanceUid = String(object.instanceUid);
+                            if (object.totalSizeBytes != null)
+                                if ($util.Long)
+                                    (message.totalSizeBytes = $util.Long.fromValue(object.totalSizeBytes)).unsigned = false;
+                                else if (typeof object.totalSizeBytes === "string")
+                                    message.totalSizeBytes = parseInt(object.totalSizeBytes, 10);
+                                else if (typeof object.totalSizeBytes === "number")
+                                    message.totalSizeBytes = object.totalSizeBytes;
+                                else if (typeof object.totalSizeBytes === "object")
+                                    message.totalSizeBytes = new $util.LongBits(object.totalSizeBytes.low >>> 0, object.totalSizeBytes.high >>> 0).toNumber();
+                            if (object.expireTime != null) {
+                                if (typeof object.expireTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.Backup.expireTime: object expected");
+                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            }
+                            if (object.engineVersion != null)
+                                message.engineVersion = String(object.engineVersion);
+                            if (object.backupFiles) {
+                                if (!Array.isArray(object.backupFiles))
+                                    throw TypeError(".google.cloud.memorystore.v1.Backup.backupFiles: array expected");
+                                message.backupFiles = [];
+                                for (var i = 0; i < object.backupFiles.length; ++i) {
+                                    if (typeof object.backupFiles[i] !== "object")
+                                        throw TypeError(".google.cloud.memorystore.v1.Backup.backupFiles: object expected");
+                                    message.backupFiles[i] = $root.google.cloud.memorystore.v1.BackupFile.fromObject(object.backupFiles[i]);
+                                }
+                            }
+                            switch (object.nodeType) {
+                            default:
+                                if (typeof object.nodeType === "number") {
+                                    message.nodeType = object.nodeType;
+                                    break;
+                                }
+                                break;
+                            case "NODE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.nodeType = 0;
+                                break;
+                            case "SHARED_CORE_NANO":
+                            case 1:
+                                message.nodeType = 1;
+                                break;
+                            case "HIGHMEM_MEDIUM":
+                            case 2:
+                                message.nodeType = 2;
+                                break;
+                            case "HIGHMEM_XLARGE":
+                            case 3:
+                                message.nodeType = 3;
+                                break;
+                            case "STANDARD_SMALL":
+                            case 4:
+                                message.nodeType = 4;
+                                break;
+                            }
+                            if (object.replicaCount != null)
+                                message.replicaCount = object.replicaCount | 0;
+                            if (object.shardCount != null)
+                                message.shardCount = object.shardCount | 0;
+                            switch (object.backupType) {
+                            default:
+                                if (typeof object.backupType === "number") {
+                                    message.backupType = object.backupType;
+                                    break;
+                                }
+                                break;
+                            case "BACKUP_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.backupType = 0;
+                                break;
+                            case "ON_DEMAND":
+                            case 1:
+                                message.backupType = 1;
+                                break;
+                            case "AUTOMATED":
+                            case 2:
+                                message.backupType = 2;
+                                break;
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "SUSPENDED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Backup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @static
+                         * @param {google.cloud.memorystore.v1.Backup} message Backup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Backup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.backupFiles = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.instance = "";
+                                object.instanceUid = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalSizeBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalSizeBytes = options.longs === String ? "0" : 0;
+                                object.expireTime = null;
+                                object.engineVersion = "";
+                                object.nodeType = options.enums === String ? "NODE_TYPE_UNSPECIFIED" : 0;
+                                object.replicaCount = 0;
+                                object.shardCount = 0;
+                                object.backupType = options.enums === String ? "BACKUP_TYPE_UNSPECIFIED" : 0;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.uid = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            if (message.instanceUid != null && message.hasOwnProperty("instanceUid"))
+                                object.instanceUid = message.instanceUid;
+                            if (message.totalSizeBytes != null && message.hasOwnProperty("totalSizeBytes"))
+                                if (typeof message.totalSizeBytes === "number")
+                                    object.totalSizeBytes = options.longs === String ? String(message.totalSizeBytes) : message.totalSizeBytes;
+                                else
+                                    object.totalSizeBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalSizeBytes) : options.longs === Number ? new $util.LongBits(message.totalSizeBytes.low >>> 0, message.totalSizeBytes.high >>> 0).toNumber() : message.totalSizeBytes;
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                            if (message.engineVersion != null && message.hasOwnProperty("engineVersion"))
+                                object.engineVersion = message.engineVersion;
+                            if (message.backupFiles && message.backupFiles.length) {
+                                object.backupFiles = [];
+                                for (var j = 0; j < message.backupFiles.length; ++j)
+                                    object.backupFiles[j] = $root.google.cloud.memorystore.v1.BackupFile.toObject(message.backupFiles[j], options);
+                            }
+                            if (message.nodeType != null && message.hasOwnProperty("nodeType"))
+                                object.nodeType = options.enums === String ? $root.google.cloud.memorystore.v1.Instance.NodeType[message.nodeType] === undefined ? message.nodeType : $root.google.cloud.memorystore.v1.Instance.NodeType[message.nodeType] : message.nodeType;
+                            if (message.replicaCount != null && message.hasOwnProperty("replicaCount"))
+                                object.replicaCount = message.replicaCount;
+                            if (message.shardCount != null && message.hasOwnProperty("shardCount"))
+                                object.shardCount = message.shardCount;
+                            if (message.backupType != null && message.hasOwnProperty("backupType"))
+                                object.backupType = options.enums === String ? $root.google.cloud.memorystore.v1.Backup.BackupType[message.backupType] === undefined ? message.backupType : $root.google.cloud.memorystore.v1.Backup.BackupType[message.backupType] : message.backupType;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.memorystore.v1.Backup.State[message.state] === undefined ? message.state : $root.google.cloud.memorystore.v1.Backup.State[message.state] : message.state;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Backup to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Backup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Backup
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.Backup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Backup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.Backup";
+                        };
+    
+                        /**
+                         * BackupType enum.
+                         * @name google.cloud.memorystore.v1.Backup.BackupType
+                         * @enum {number}
+                         * @property {number} BACKUP_TYPE_UNSPECIFIED=0 BACKUP_TYPE_UNSPECIFIED value
+                         * @property {number} ON_DEMAND=1 ON_DEMAND value
+                         * @property {number} AUTOMATED=2 AUTOMATED value
+                         */
+                        Backup.BackupType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "BACKUP_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ON_DEMAND"] = 1;
+                            values[valuesById[2] = "AUTOMATED"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.memorystore.v1.Backup.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} ACTIVE=2 ACTIVE value
+                         * @property {number} DELETING=3 DELETING value
+                         * @property {number} SUSPENDED=4 SUSPENDED value
+                         */
+                        Backup.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "ACTIVE"] = 2;
+                            values[valuesById[3] = "DELETING"] = 3;
+                            values[valuesById[4] = "SUSPENDED"] = 4;
+                            return values;
+                        })();
+    
+                        return Backup;
+                    })();
+    
+                    v1.BackupFile = (function() {
+    
+                        /**
+                         * Properties of a BackupFile.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IBackupFile
+                         * @property {string|null} [fileName] BackupFile fileName
+                         * @property {number|Long|null} [sizeBytes] BackupFile sizeBytes
+                         * @property {google.protobuf.ITimestamp|null} [createTime] BackupFile createTime
+                         */
+    
+                        /**
+                         * Constructs a new BackupFile.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a BackupFile.
+                         * @implements IBackupFile
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IBackupFile=} [properties] Properties to set
+                         */
+                        function BackupFile(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BackupFile fileName.
+                         * @member {string} fileName
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @instance
+                         */
+                        BackupFile.prototype.fileName = "";
+    
+                        /**
+                         * BackupFile sizeBytes.
+                         * @member {number|Long} sizeBytes
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @instance
+                         */
+                        BackupFile.prototype.sizeBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BackupFile createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @instance
+                         */
+                        BackupFile.prototype.createTime = null;
+    
+                        /**
+                         * Creates a new BackupFile instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IBackupFile=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.BackupFile} BackupFile instance
+                         */
+                        BackupFile.create = function create(properties) {
+                            return new BackupFile(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BackupFile message. Does not implicitly {@link google.cloud.memorystore.v1.BackupFile.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IBackupFile} message BackupFile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupFile.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.fileName != null && Object.hasOwnProperty.call(message, "fileName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.fileName);
+                            if (message.sizeBytes != null && Object.hasOwnProperty.call(message, "sizeBytes"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.sizeBytes);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BackupFile message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.BackupFile.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IBackupFile} message BackupFile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupFile.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BackupFile message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.BackupFile} BackupFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupFile.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.BackupFile();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.fileName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sizeBytes = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BackupFile message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.BackupFile} BackupFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupFile.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BackupFile message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BackupFile.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.fileName != null && message.hasOwnProperty("fileName"))
+                                if (!$util.isString(message.fileName))
+                                    return "fileName: string expected";
+                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
+                                if (!$util.isInteger(message.sizeBytes) && !(message.sizeBytes && $util.isInteger(message.sizeBytes.low) && $util.isInteger(message.sizeBytes.high)))
+                                    return "sizeBytes: integer|Long expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BackupFile message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.BackupFile} BackupFile
+                         */
+                        BackupFile.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.BackupFile)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.BackupFile();
+                            if (object.fileName != null)
+                                message.fileName = String(object.fileName);
+                            if (object.sizeBytes != null)
+                                if ($util.Long)
+                                    (message.sizeBytes = $util.Long.fromValue(object.sizeBytes)).unsigned = false;
+                                else if (typeof object.sizeBytes === "string")
+                                    message.sizeBytes = parseInt(object.sizeBytes, 10);
+                                else if (typeof object.sizeBytes === "number")
+                                    message.sizeBytes = object.sizeBytes;
+                                else if (typeof object.sizeBytes === "object")
+                                    message.sizeBytes = new $util.LongBits(object.sizeBytes.low >>> 0, object.sizeBytes.high >>> 0).toNumber();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.BackupFile.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BackupFile message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @static
+                         * @param {google.cloud.memorystore.v1.BackupFile} message BackupFile
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BackupFile.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.fileName = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.sizeBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.sizeBytes = options.longs === String ? "0" : 0;
+                                object.createTime = null;
+                            }
+                            if (message.fileName != null && message.hasOwnProperty("fileName"))
+                                object.fileName = message.fileName;
+                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
+                                if (typeof message.sizeBytes === "number")
+                                    object.sizeBytes = options.longs === String ? String(message.sizeBytes) : message.sizeBytes;
+                                else
+                                    object.sizeBytes = options.longs === String ? $util.Long.prototype.toString.call(message.sizeBytes) : options.longs === Number ? new $util.LongBits(message.sizeBytes.low >>> 0, message.sizeBytes.high >>> 0).toNumber() : message.sizeBytes;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BackupFile to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BackupFile.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BackupFile
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.BackupFile
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BackupFile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.BackupFile";
+                        };
+    
+                        return BackupFile;
+                    })();
+    
+                    v1.CrossInstanceReplicationConfig = (function() {
+    
+                        /**
+                         * Properties of a CrossInstanceReplicationConfig.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface ICrossInstanceReplicationConfig
+                         * @property {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.InstanceRole|null} [instanceRole] CrossInstanceReplicationConfig instanceRole
+                         * @property {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance|null} [primaryInstance] CrossInstanceReplicationConfig primaryInstance
+                         * @property {Array.<google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance>|null} [secondaryInstances] CrossInstanceReplicationConfig secondaryInstances
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] CrossInstanceReplicationConfig updateTime
+                         * @property {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IMembership|null} [membership] CrossInstanceReplicationConfig membership
+                         */
+    
+                        /**
+                         * Constructs a new CrossInstanceReplicationConfig.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a CrossInstanceReplicationConfig.
+                         * @implements ICrossInstanceReplicationConfig
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.ICrossInstanceReplicationConfig=} [properties] Properties to set
+                         */
+                        function CrossInstanceReplicationConfig(properties) {
+                            this.secondaryInstances = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CrossInstanceReplicationConfig instanceRole.
+                         * @member {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.InstanceRole} instanceRole
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @instance
+                         */
+                        CrossInstanceReplicationConfig.prototype.instanceRole = 0;
+    
+                        /**
+                         * CrossInstanceReplicationConfig primaryInstance.
+                         * @member {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance|null|undefined} primaryInstance
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @instance
+                         */
+                        CrossInstanceReplicationConfig.prototype.primaryInstance = null;
+    
+                        /**
+                         * CrossInstanceReplicationConfig secondaryInstances.
+                         * @member {Array.<google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance>} secondaryInstances
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @instance
+                         */
+                        CrossInstanceReplicationConfig.prototype.secondaryInstances = $util.emptyArray;
+    
+                        /**
+                         * CrossInstanceReplicationConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @instance
+                         */
+                        CrossInstanceReplicationConfig.prototype.updateTime = null;
+    
+                        /**
+                         * CrossInstanceReplicationConfig membership.
+                         * @member {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IMembership|null|undefined} membership
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @instance
+                         */
+                        CrossInstanceReplicationConfig.prototype.membership = null;
+    
+                        /**
+                         * Creates a new CrossInstanceReplicationConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @static
+                         * @param {google.cloud.memorystore.v1.ICrossInstanceReplicationConfig=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.CrossInstanceReplicationConfig} CrossInstanceReplicationConfig instance
+                         */
+                        CrossInstanceReplicationConfig.create = function create(properties) {
+                            return new CrossInstanceReplicationConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CrossInstanceReplicationConfig message. Does not implicitly {@link google.cloud.memorystore.v1.CrossInstanceReplicationConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @static
+                         * @param {google.cloud.memorystore.v1.ICrossInstanceReplicationConfig} message CrossInstanceReplicationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CrossInstanceReplicationConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instanceRole != null && Object.hasOwnProperty.call(message, "instanceRole"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.instanceRole);
+                            if (message.primaryInstance != null && Object.hasOwnProperty.call(message, "primaryInstance"))
+                                $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.encode(message.primaryInstance, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.secondaryInstances != null && message.secondaryInstances.length)
+                                for (var i = 0; i < message.secondaryInstances.length; ++i)
+                                    $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.encode(message.secondaryInstances[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.membership != null && Object.hasOwnProperty.call(message, "membership"))
+                                $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership.encode(message.membership, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CrossInstanceReplicationConfig message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.CrossInstanceReplicationConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @static
+                         * @param {google.cloud.memorystore.v1.ICrossInstanceReplicationConfig} message CrossInstanceReplicationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CrossInstanceReplicationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CrossInstanceReplicationConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.CrossInstanceReplicationConfig} CrossInstanceReplicationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CrossInstanceReplicationConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instanceRole = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.primaryInstance = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.secondaryInstances && message.secondaryInstances.length))
+                                            message.secondaryInstances = [];
+                                        message.secondaryInstances.push($root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.membership = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CrossInstanceReplicationConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.CrossInstanceReplicationConfig} CrossInstanceReplicationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CrossInstanceReplicationConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CrossInstanceReplicationConfig message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CrossInstanceReplicationConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.instanceRole != null && message.hasOwnProperty("instanceRole"))
+                                switch (message.instanceRole) {
+                                default:
+                                    return "instanceRole: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.primaryInstance != null && message.hasOwnProperty("primaryInstance")) {
+                                var error = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.verify(message.primaryInstance);
+                                if (error)
+                                    return "primaryInstance." + error;
+                            }
+                            if (message.secondaryInstances != null && message.hasOwnProperty("secondaryInstances")) {
+                                if (!Array.isArray(message.secondaryInstances))
+                                    return "secondaryInstances: array expected";
+                                for (var i = 0; i < message.secondaryInstances.length; ++i) {
+                                    var error = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.verify(message.secondaryInstances[i]);
+                                    if (error)
+                                        return "secondaryInstances." + error;
+                                }
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.membership != null && message.hasOwnProperty("membership")) {
+                                var error = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership.verify(message.membership);
+                                if (error)
+                                    return "membership." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CrossInstanceReplicationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.CrossInstanceReplicationConfig} CrossInstanceReplicationConfig
+                         */
+                        CrossInstanceReplicationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig();
+                            switch (object.instanceRole) {
+                            default:
+                                if (typeof object.instanceRole === "number") {
+                                    message.instanceRole = object.instanceRole;
+                                    break;
+                                }
+                                break;
+                            case "INSTANCE_ROLE_UNSPECIFIED":
+                            case 0:
+                                message.instanceRole = 0;
+                                break;
+                            case "NONE":
+                            case 1:
+                                message.instanceRole = 1;
+                                break;
+                            case "PRIMARY":
+                            case 2:
+                                message.instanceRole = 2;
+                                break;
+                            case "SECONDARY":
+                            case 3:
+                                message.instanceRole = 3;
+                                break;
+                            }
+                            if (object.primaryInstance != null) {
+                                if (typeof object.primaryInstance !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.CrossInstanceReplicationConfig.primaryInstance: object expected");
+                                message.primaryInstance = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.fromObject(object.primaryInstance);
+                            }
+                            if (object.secondaryInstances) {
+                                if (!Array.isArray(object.secondaryInstances))
+                                    throw TypeError(".google.cloud.memorystore.v1.CrossInstanceReplicationConfig.secondaryInstances: array expected");
+                                message.secondaryInstances = [];
+                                for (var i = 0; i < object.secondaryInstances.length; ++i) {
+                                    if (typeof object.secondaryInstances[i] !== "object")
+                                        throw TypeError(".google.cloud.memorystore.v1.CrossInstanceReplicationConfig.secondaryInstances: object expected");
+                                    message.secondaryInstances[i] = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.fromObject(object.secondaryInstances[i]);
+                                }
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.CrossInstanceReplicationConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.membership != null) {
+                                if (typeof object.membership !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.CrossInstanceReplicationConfig.membership: object expected");
+                                message.membership = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership.fromObject(object.membership);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CrossInstanceReplicationConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @static
+                         * @param {google.cloud.memorystore.v1.CrossInstanceReplicationConfig} message CrossInstanceReplicationConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CrossInstanceReplicationConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.secondaryInstances = [];
+                            if (options.defaults) {
+                                object.instanceRole = options.enums === String ? "INSTANCE_ROLE_UNSPECIFIED" : 0;
+                                object.primaryInstance = null;
+                                object.updateTime = null;
+                                object.membership = null;
+                            }
+                            if (message.instanceRole != null && message.hasOwnProperty("instanceRole"))
+                                object.instanceRole = options.enums === String ? $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.InstanceRole[message.instanceRole] === undefined ? message.instanceRole : $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.InstanceRole[message.instanceRole] : message.instanceRole;
+                            if (message.primaryInstance != null && message.hasOwnProperty("primaryInstance"))
+                                object.primaryInstance = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.toObject(message.primaryInstance, options);
+                            if (message.secondaryInstances && message.secondaryInstances.length) {
+                                object.secondaryInstances = [];
+                                for (var j = 0; j < message.secondaryInstances.length; ++j)
+                                    object.secondaryInstances[j] = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.toObject(message.secondaryInstances[j], options);
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.membership != null && message.hasOwnProperty("membership"))
+                                object.membership = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership.toObject(message.membership, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CrossInstanceReplicationConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CrossInstanceReplicationConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CrossInstanceReplicationConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CrossInstanceReplicationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.CrossInstanceReplicationConfig";
+                        };
+    
+                        CrossInstanceReplicationConfig.RemoteInstance = (function() {
+    
+                            /**
+                             * Properties of a RemoteInstance.
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                             * @interface IRemoteInstance
+                             * @property {string|null} [instance] RemoteInstance instance
+                             * @property {string|null} [uid] RemoteInstance uid
+                             */
+    
+                            /**
+                             * Constructs a new RemoteInstance.
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                             * @classdesc Represents a RemoteInstance.
+                             * @implements IRemoteInstance
+                             * @constructor
+                             * @param {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance=} [properties] Properties to set
+                             */
+                            function RemoteInstance(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RemoteInstance instance.
+                             * @member {string} instance
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance
+                             * @instance
+                             */
+                            RemoteInstance.prototype.instance = "";
+    
+                            /**
+                             * RemoteInstance uid.
+                             * @member {string} uid
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance
+                             * @instance
+                             */
+                            RemoteInstance.prototype.uid = "";
+    
+                            /**
+                             * Creates a new RemoteInstance instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance
+                             * @static
+                             * @param {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance=} [properties] Properties to set
+                             * @returns {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance} RemoteInstance instance
+                             */
+                            RemoteInstance.create = function create(properties) {
+                                return new RemoteInstance(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RemoteInstance message. Does not implicitly {@link google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance
+                             * @static
+                             * @param {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance} message RemoteInstance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RemoteInstance.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
+                                if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.uid);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RemoteInstance message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance
+                             * @static
+                             * @param {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance} message RemoteInstance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RemoteInstance.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RemoteInstance message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance} RemoteInstance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RemoteInstance.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.instance = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.uid = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RemoteInstance message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance} RemoteInstance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RemoteInstance.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RemoteInstance message.
+                             * @function verify
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RemoteInstance.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.instance != null && message.hasOwnProperty("instance"))
+                                    if (!$util.isString(message.instance))
+                                        return "instance: string expected";
+                                if (message.uid != null && message.hasOwnProperty("uid"))
+                                    if (!$util.isString(message.uid))
+                                        return "uid: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RemoteInstance message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance} RemoteInstance
+                             */
+                            RemoteInstance.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance)
+                                    return object;
+                                var message = new $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance();
+                                if (object.instance != null)
+                                    message.instance = String(object.instance);
+                                if (object.uid != null)
+                                    message.uid = String(object.uid);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RemoteInstance message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance
+                             * @static
+                             * @param {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance} message RemoteInstance
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RemoteInstance.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.instance = "";
+                                    object.uid = "";
+                                }
+                                if (message.instance != null && message.hasOwnProperty("instance"))
+                                    object.instance = message.instance;
+                                if (message.uid != null && message.hasOwnProperty("uid"))
+                                    object.uid = message.uid;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RemoteInstance to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RemoteInstance.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RemoteInstance
+                             * @function getTypeUrl
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RemoteInstance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance";
+                            };
+    
+                            return RemoteInstance;
+                        })();
+    
+                        CrossInstanceReplicationConfig.Membership = (function() {
+    
+                            /**
+                             * Properties of a Membership.
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                             * @interface IMembership
+                             * @property {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance|null} [primaryInstance] Membership primaryInstance
+                             * @property {Array.<google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance>|null} [secondaryInstances] Membership secondaryInstances
+                             */
+    
+                            /**
+                             * Constructs a new Membership.
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig
+                             * @classdesc Represents a Membership.
+                             * @implements IMembership
+                             * @constructor
+                             * @param {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IMembership=} [properties] Properties to set
+                             */
+                            function Membership(properties) {
+                                this.secondaryInstances = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Membership primaryInstance.
+                             * @member {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance|null|undefined} primaryInstance
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership
+                             * @instance
+                             */
+                            Membership.prototype.primaryInstance = null;
+    
+                            /**
+                             * Membership secondaryInstances.
+                             * @member {Array.<google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IRemoteInstance>} secondaryInstances
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership
+                             * @instance
+                             */
+                            Membership.prototype.secondaryInstances = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Membership instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership
+                             * @static
+                             * @param {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IMembership=} [properties] Properties to set
+                             * @returns {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership} Membership instance
+                             */
+                            Membership.create = function create(properties) {
+                                return new Membership(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Membership message. Does not implicitly {@link google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership
+                             * @static
+                             * @param {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IMembership} message Membership message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Membership.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.primaryInstance != null && Object.hasOwnProperty.call(message, "primaryInstance"))
+                                    $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.encode(message.primaryInstance, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.secondaryInstances != null && message.secondaryInstances.length)
+                                    for (var i = 0; i < message.secondaryInstances.length; ++i)
+                                        $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.encode(message.secondaryInstances[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Membership message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership
+                             * @static
+                             * @param {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.IMembership} message Membership message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Membership.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Membership message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership} Membership
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Membership.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.primaryInstance = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.secondaryInstances && message.secondaryInstances.length))
+                                                message.secondaryInstances = [];
+                                            message.secondaryInstances.push($root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Membership message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership} Membership
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Membership.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Membership message.
+                             * @function verify
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Membership.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.primaryInstance != null && message.hasOwnProperty("primaryInstance")) {
+                                    var error = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.verify(message.primaryInstance);
+                                    if (error)
+                                        return "primaryInstance." + error;
+                                }
+                                if (message.secondaryInstances != null && message.hasOwnProperty("secondaryInstances")) {
+                                    if (!Array.isArray(message.secondaryInstances))
+                                        return "secondaryInstances: array expected";
+                                    for (var i = 0; i < message.secondaryInstances.length; ++i) {
+                                        var error = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.verify(message.secondaryInstances[i]);
+                                        if (error)
+                                            return "secondaryInstances." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Membership message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership} Membership
+                             */
+                            Membership.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership)
+                                    return object;
+                                var message = new $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership();
+                                if (object.primaryInstance != null) {
+                                    if (typeof object.primaryInstance !== "object")
+                                        throw TypeError(".google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership.primaryInstance: object expected");
+                                    message.primaryInstance = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.fromObject(object.primaryInstance);
+                                }
+                                if (object.secondaryInstances) {
+                                    if (!Array.isArray(object.secondaryInstances))
+                                        throw TypeError(".google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership.secondaryInstances: array expected");
+                                    message.secondaryInstances = [];
+                                    for (var i = 0; i < object.secondaryInstances.length; ++i) {
+                                        if (typeof object.secondaryInstances[i] !== "object")
+                                            throw TypeError(".google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership.secondaryInstances: object expected");
+                                        message.secondaryInstances[i] = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.fromObject(object.secondaryInstances[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Membership message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership
+                             * @static
+                             * @param {google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership} message Membership
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Membership.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.secondaryInstances = [];
+                                if (options.defaults)
+                                    object.primaryInstance = null;
+                                if (message.primaryInstance != null && message.hasOwnProperty("primaryInstance"))
+                                    object.primaryInstance = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.toObject(message.primaryInstance, options);
+                                if (message.secondaryInstances && message.secondaryInstances.length) {
+                                    object.secondaryInstances = [];
+                                    for (var j = 0; j < message.secondaryInstances.length; ++j)
+                                        object.secondaryInstances[j] = $root.google.cloud.memorystore.v1.CrossInstanceReplicationConfig.RemoteInstance.toObject(message.secondaryInstances[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Membership to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Membership.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Membership
+                             * @function getTypeUrl
+                             * @memberof google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Membership.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.memorystore.v1.CrossInstanceReplicationConfig.Membership";
+                            };
+    
+                            return Membership;
+                        })();
+    
+                        /**
+                         * InstanceRole enum.
+                         * @name google.cloud.memorystore.v1.CrossInstanceReplicationConfig.InstanceRole
+                         * @enum {number}
+                         * @property {number} INSTANCE_ROLE_UNSPECIFIED=0 INSTANCE_ROLE_UNSPECIFIED value
+                         * @property {number} NONE=1 NONE value
+                         * @property {number} PRIMARY=2 PRIMARY value
+                         * @property {number} SECONDARY=3 SECONDARY value
+                         */
+                        CrossInstanceReplicationConfig.InstanceRole = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INSTANCE_ROLE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NONE"] = 1;
+                            values[valuesById[2] = "PRIMARY"] = 2;
+                            values[valuesById[3] = "SECONDARY"] = 3;
+                            return values;
+                        })();
+    
+                        return CrossInstanceReplicationConfig;
+                    })();
+    
+                    v1.MaintenancePolicy = (function() {
+    
+                        /**
+                         * Properties of a MaintenancePolicy.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IMaintenancePolicy
+                         * @property {google.protobuf.ITimestamp|null} [createTime] MaintenancePolicy createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] MaintenancePolicy updateTime
+                         * @property {Array.<google.cloud.memorystore.v1.IWeeklyMaintenanceWindow>|null} [weeklyMaintenanceWindow] MaintenancePolicy weeklyMaintenanceWindow
+                         */
+    
+                        /**
+                         * Constructs a new MaintenancePolicy.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a MaintenancePolicy.
+                         * @implements IMaintenancePolicy
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IMaintenancePolicy=} [properties] Properties to set
+                         */
+                        function MaintenancePolicy(properties) {
+                            this.weeklyMaintenanceWindow = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaintenancePolicy createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.createTime = null;
+    
+                        /**
+                         * MaintenancePolicy updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.updateTime = null;
+    
+                        /**
+                         * MaintenancePolicy weeklyMaintenanceWindow.
+                         * @member {Array.<google.cloud.memorystore.v1.IWeeklyMaintenanceWindow>} weeklyMaintenanceWindow
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @instance
+                         */
+                        MaintenancePolicy.prototype.weeklyMaintenanceWindow = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MaintenancePolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IMaintenancePolicy=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.MaintenancePolicy} MaintenancePolicy instance
+                         */
+                        MaintenancePolicy.create = function create(properties) {
+                            return new MaintenancePolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenancePolicy message. Does not implicitly {@link google.cloud.memorystore.v1.MaintenancePolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IMaintenancePolicy} message MaintenancePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenancePolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.weeklyMaintenanceWindow != null && message.weeklyMaintenanceWindow.length)
+                                for (var i = 0; i < message.weeklyMaintenanceWindow.length; ++i)
+                                    $root.google.cloud.memorystore.v1.WeeklyMaintenanceWindow.encode(message.weeklyMaintenanceWindow[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenancePolicy message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.MaintenancePolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IMaintenancePolicy} message MaintenancePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenancePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaintenancePolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.MaintenancePolicy} MaintenancePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenancePolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.MaintenancePolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.weeklyMaintenanceWindow && message.weeklyMaintenanceWindow.length))
+                                            message.weeklyMaintenanceWindow = [];
+                                        message.weeklyMaintenanceWindow.push($root.google.cloud.memorystore.v1.WeeklyMaintenanceWindow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaintenancePolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.MaintenancePolicy} MaintenancePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenancePolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaintenancePolicy message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaintenancePolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.weeklyMaintenanceWindow != null && message.hasOwnProperty("weeklyMaintenanceWindow")) {
+                                if (!Array.isArray(message.weeklyMaintenanceWindow))
+                                    return "weeklyMaintenanceWindow: array expected";
+                                for (var i = 0; i < message.weeklyMaintenanceWindow.length; ++i) {
+                                    var error = $root.google.cloud.memorystore.v1.WeeklyMaintenanceWindow.verify(message.weeklyMaintenanceWindow[i]);
+                                    if (error)
+                                        return "weeklyMaintenanceWindow." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaintenancePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.MaintenancePolicy} MaintenancePolicy
+                         */
+                        MaintenancePolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.MaintenancePolicy)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.MaintenancePolicy();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.MaintenancePolicy.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.MaintenancePolicy.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.weeklyMaintenanceWindow) {
+                                if (!Array.isArray(object.weeklyMaintenanceWindow))
+                                    throw TypeError(".google.cloud.memorystore.v1.MaintenancePolicy.weeklyMaintenanceWindow: array expected");
+                                message.weeklyMaintenanceWindow = [];
+                                for (var i = 0; i < object.weeklyMaintenanceWindow.length; ++i) {
+                                    if (typeof object.weeklyMaintenanceWindow[i] !== "object")
+                                        throw TypeError(".google.cloud.memorystore.v1.MaintenancePolicy.weeklyMaintenanceWindow: object expected");
+                                    message.weeklyMaintenanceWindow[i] = $root.google.cloud.memorystore.v1.WeeklyMaintenanceWindow.fromObject(object.weeklyMaintenanceWindow[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaintenancePolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @static
+                         * @param {google.cloud.memorystore.v1.MaintenancePolicy} message MaintenancePolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaintenancePolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.weeklyMaintenanceWindow = [];
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.weeklyMaintenanceWindow && message.weeklyMaintenanceWindow.length) {
+                                object.weeklyMaintenanceWindow = [];
+                                for (var j = 0; j < message.weeklyMaintenanceWindow.length; ++j)
+                                    object.weeklyMaintenanceWindow[j] = $root.google.cloud.memorystore.v1.WeeklyMaintenanceWindow.toObject(message.weeklyMaintenanceWindow[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaintenancePolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaintenancePolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaintenancePolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.MaintenancePolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaintenancePolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.MaintenancePolicy";
+                        };
+    
+                        return MaintenancePolicy;
+                    })();
+    
+                    v1.WeeklyMaintenanceWindow = (function() {
+    
+                        /**
+                         * Properties of a WeeklyMaintenanceWindow.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IWeeklyMaintenanceWindow
+                         * @property {google.type.DayOfWeek|null} [day] WeeklyMaintenanceWindow day
+                         * @property {google.type.ITimeOfDay|null} [startTime] WeeklyMaintenanceWindow startTime
+                         */
+    
+                        /**
+                         * Constructs a new WeeklyMaintenanceWindow.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a WeeklyMaintenanceWindow.
+                         * @implements IWeeklyMaintenanceWindow
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IWeeklyMaintenanceWindow=} [properties] Properties to set
+                         */
+                        function WeeklyMaintenanceWindow(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WeeklyMaintenanceWindow day.
+                         * @member {google.type.DayOfWeek} day
+                         * @memberof google.cloud.memorystore.v1.WeeklyMaintenanceWindow
+                         * @instance
+                         */
+                        WeeklyMaintenanceWindow.prototype.day = 0;
+    
+                        /**
+                         * WeeklyMaintenanceWindow startTime.
+                         * @member {google.type.ITimeOfDay|null|undefined} startTime
+                         * @memberof google.cloud.memorystore.v1.WeeklyMaintenanceWindow
+                         * @instance
+                         */
+                        WeeklyMaintenanceWindow.prototype.startTime = null;
+    
+                        /**
+                         * Creates a new WeeklyMaintenanceWindow instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IWeeklyMaintenanceWindow=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow instance
+                         */
+                        WeeklyMaintenanceWindow.create = function create(properties) {
+                            return new WeeklyMaintenanceWindow(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WeeklyMaintenanceWindow message. Does not implicitly {@link google.cloud.memorystore.v1.WeeklyMaintenanceWindow.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IWeeklyMaintenanceWindow} message WeeklyMaintenanceWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WeeklyMaintenanceWindow.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.day);
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.type.TimeOfDay.encode(message.startTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WeeklyMaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.WeeklyMaintenanceWindow.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IWeeklyMaintenanceWindow} message WeeklyMaintenanceWindow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WeeklyMaintenanceWindow.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WeeklyMaintenanceWindow.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.WeeklyMaintenanceWindow();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.day = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.startTime = $root.google.type.TimeOfDay.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WeeklyMaintenanceWindow.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WeeklyMaintenanceWindow message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WeeklyMaintenanceWindow.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.day != null && message.hasOwnProperty("day"))
+                                switch (message.day) {
+                                default:
+                                    return "day: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.type.TimeOfDay.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WeeklyMaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.WeeklyMaintenanceWindow} WeeklyMaintenanceWindow
+                         */
+                        WeeklyMaintenanceWindow.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.WeeklyMaintenanceWindow)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.WeeklyMaintenanceWindow();
+                            switch (object.day) {
+                            default:
+                                if (typeof object.day === "number") {
+                                    message.day = object.day;
+                                    break;
+                                }
+                                break;
+                            case "DAY_OF_WEEK_UNSPECIFIED":
+                            case 0:
+                                message.day = 0;
+                                break;
+                            case "MONDAY":
+                            case 1:
+                                message.day = 1;
+                                break;
+                            case "TUESDAY":
+                            case 2:
+                                message.day = 2;
+                                break;
+                            case "WEDNESDAY":
+                            case 3:
+                                message.day = 3;
+                                break;
+                            case "THURSDAY":
+                            case 4:
+                                message.day = 4;
+                                break;
+                            case "FRIDAY":
+                            case 5:
+                                message.day = 5;
+                                break;
+                            case "SATURDAY":
+                            case 6:
+                                message.day = 6;
+                                break;
+                            case "SUNDAY":
+                            case 7:
+                                message.day = 7;
+                                break;
+                            }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.WeeklyMaintenanceWindow.startTime: object expected");
+                                message.startTime = $root.google.type.TimeOfDay.fromObject(object.startTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WeeklyMaintenanceWindow message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {google.cloud.memorystore.v1.WeeklyMaintenanceWindow} message WeeklyMaintenanceWindow
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WeeklyMaintenanceWindow.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.day = options.enums === String ? "DAY_OF_WEEK_UNSPECIFIED" : 0;
+                                object.startTime = null;
+                            }
+                            if (message.day != null && message.hasOwnProperty("day"))
+                                object.day = options.enums === String ? $root.google.type.DayOfWeek[message.day] === undefined ? message.day : $root.google.type.DayOfWeek[message.day] : message.day;
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.type.TimeOfDay.toObject(message.startTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WeeklyMaintenanceWindow to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.WeeklyMaintenanceWindow
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WeeklyMaintenanceWindow.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WeeklyMaintenanceWindow
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.WeeklyMaintenanceWindow
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WeeklyMaintenanceWindow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.WeeklyMaintenanceWindow";
+                        };
+    
+                        return WeeklyMaintenanceWindow;
+                    })();
+    
+                    v1.MaintenanceSchedule = (function() {
+    
+                        /**
+                         * Properties of a MaintenanceSchedule.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IMaintenanceSchedule
+                         * @property {google.protobuf.ITimestamp|null} [startTime] MaintenanceSchedule startTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] MaintenanceSchedule endTime
+                         */
+    
+                        /**
+                         * Constructs a new MaintenanceSchedule.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a MaintenanceSchedule.
+                         * @implements IMaintenanceSchedule
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IMaintenanceSchedule=} [properties] Properties to set
+                         */
+                        function MaintenanceSchedule(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaintenanceSchedule startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.memorystore.v1.MaintenanceSchedule
+                         * @instance
+                         */
+                        MaintenanceSchedule.prototype.startTime = null;
+    
+                        /**
+                         * MaintenanceSchedule endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.memorystore.v1.MaintenanceSchedule
+                         * @instance
+                         */
+                        MaintenanceSchedule.prototype.endTime = null;
+    
+                        /**
+                         * Creates a new MaintenanceSchedule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IMaintenanceSchedule=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.MaintenanceSchedule} MaintenanceSchedule instance
+                         */
+                        MaintenanceSchedule.create = function create(properties) {
+                            return new MaintenanceSchedule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenanceSchedule message. Does not implicitly {@link google.cloud.memorystore.v1.MaintenanceSchedule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IMaintenanceSchedule} message MaintenanceSchedule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenanceSchedule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaintenanceSchedule message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.MaintenanceSchedule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IMaintenanceSchedule} message MaintenanceSchedule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaintenanceSchedule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaintenanceSchedule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.MaintenanceSchedule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.MaintenanceSchedule} MaintenanceSchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenanceSchedule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.MaintenanceSchedule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaintenanceSchedule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.MaintenanceSchedule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.MaintenanceSchedule} MaintenanceSchedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaintenanceSchedule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaintenanceSchedule message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.MaintenanceSchedule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaintenanceSchedule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaintenanceSchedule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.MaintenanceSchedule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.MaintenanceSchedule} MaintenanceSchedule
+                         */
+                        MaintenanceSchedule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.MaintenanceSchedule)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.MaintenanceSchedule();
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.MaintenanceSchedule.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.MaintenanceSchedule.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaintenanceSchedule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.MaintenanceSchedule
+                         * @static
+                         * @param {google.cloud.memorystore.v1.MaintenanceSchedule} message MaintenanceSchedule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaintenanceSchedule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.endTime = null;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaintenanceSchedule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.MaintenanceSchedule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaintenanceSchedule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaintenanceSchedule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.MaintenanceSchedule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaintenanceSchedule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.MaintenanceSchedule";
+                        };
+    
+                        return MaintenanceSchedule;
+                    })();
+    
+                    v1.PscAttachmentDetail = (function() {
+    
+                        /**
+                         * Properties of a PscAttachmentDetail.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IPscAttachmentDetail
+                         * @property {string|null} [serviceAttachment] PscAttachmentDetail serviceAttachment
+                         * @property {google.cloud.memorystore.v1.ConnectionType|null} [connectionType] PscAttachmentDetail connectionType
+                         */
+    
+                        /**
+                         * Constructs a new PscAttachmentDetail.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a PscAttachmentDetail.
+                         * @implements IPscAttachmentDetail
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IPscAttachmentDetail=} [properties] Properties to set
+                         */
+                        function PscAttachmentDetail(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PscAttachmentDetail serviceAttachment.
+                         * @member {string} serviceAttachment
+                         * @memberof google.cloud.memorystore.v1.PscAttachmentDetail
+                         * @instance
+                         */
+                        PscAttachmentDetail.prototype.serviceAttachment = "";
+    
+                        /**
+                         * PscAttachmentDetail connectionType.
+                         * @member {google.cloud.memorystore.v1.ConnectionType} connectionType
+                         * @memberof google.cloud.memorystore.v1.PscAttachmentDetail
+                         * @instance
+                         */
+                        PscAttachmentDetail.prototype.connectionType = 0;
+    
+                        /**
+                         * Creates a new PscAttachmentDetail instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.PscAttachmentDetail
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IPscAttachmentDetail=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.PscAttachmentDetail} PscAttachmentDetail instance
+                         */
+                        PscAttachmentDetail.create = function create(properties) {
+                            return new PscAttachmentDetail(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PscAttachmentDetail message. Does not implicitly {@link google.cloud.memorystore.v1.PscAttachmentDetail.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.PscAttachmentDetail
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IPscAttachmentDetail} message PscAttachmentDetail message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PscAttachmentDetail.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceAttachment != null && Object.hasOwnProperty.call(message, "serviceAttachment"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceAttachment);
+                            if (message.connectionType != null && Object.hasOwnProperty.call(message, "connectionType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.connectionType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PscAttachmentDetail message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.PscAttachmentDetail.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.PscAttachmentDetail
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IPscAttachmentDetail} message PscAttachmentDetail message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PscAttachmentDetail.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PscAttachmentDetail message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.PscAttachmentDetail
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.PscAttachmentDetail} PscAttachmentDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PscAttachmentDetail.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.PscAttachmentDetail();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.serviceAttachment = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.connectionType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PscAttachmentDetail message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.PscAttachmentDetail
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.PscAttachmentDetail} PscAttachmentDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PscAttachmentDetail.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PscAttachmentDetail message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.PscAttachmentDetail
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PscAttachmentDetail.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serviceAttachment != null && message.hasOwnProperty("serviceAttachment"))
+                                if (!$util.isString(message.serviceAttachment))
+                                    return "serviceAttachment: string expected";
+                            if (message.connectionType != null && message.hasOwnProperty("connectionType"))
+                                switch (message.connectionType) {
+                                default:
+                                    return "connectionType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PscAttachmentDetail message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.PscAttachmentDetail
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.PscAttachmentDetail} PscAttachmentDetail
+                         */
+                        PscAttachmentDetail.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.PscAttachmentDetail)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.PscAttachmentDetail();
+                            if (object.serviceAttachment != null)
+                                message.serviceAttachment = String(object.serviceAttachment);
+                            switch (object.connectionType) {
+                            default:
+                                if (typeof object.connectionType === "number") {
+                                    message.connectionType = object.connectionType;
+                                    break;
+                                }
+                                break;
+                            case "CONNECTION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.connectionType = 0;
+                                break;
+                            case "CONNECTION_TYPE_DISCOVERY":
+                            case 1:
+                                message.connectionType = 1;
+                                break;
+                            case "CONNECTION_TYPE_PRIMARY":
+                            case 2:
+                                message.connectionType = 2;
+                                break;
+                            case "CONNECTION_TYPE_READER":
+                            case 3:
+                                message.connectionType = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PscAttachmentDetail message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.PscAttachmentDetail
+                         * @static
+                         * @param {google.cloud.memorystore.v1.PscAttachmentDetail} message PscAttachmentDetail
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PscAttachmentDetail.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.serviceAttachment = "";
+                                object.connectionType = options.enums === String ? "CONNECTION_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.serviceAttachment != null && message.hasOwnProperty("serviceAttachment"))
+                                object.serviceAttachment = message.serviceAttachment;
+                            if (message.connectionType != null && message.hasOwnProperty("connectionType"))
+                                object.connectionType = options.enums === String ? $root.google.cloud.memorystore.v1.ConnectionType[message.connectionType] === undefined ? message.connectionType : $root.google.cloud.memorystore.v1.ConnectionType[message.connectionType] : message.connectionType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PscAttachmentDetail to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.PscAttachmentDetail
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PscAttachmentDetail.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PscAttachmentDetail
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.PscAttachmentDetail
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PscAttachmentDetail.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.PscAttachmentDetail";
+                        };
+    
+                        return PscAttachmentDetail;
+                    })();
+    
                     v1.PscAutoConnection = (function() {
     
                         /**
@@ -2893,6 +7752,7 @@
                          * Properties of a PscConnection.
                          * @memberof google.cloud.memorystore.v1
                          * @interface IPscConnection
+                         * @property {number|null} [port] PscConnection port
                          * @property {string|null} [pscConnectionId] PscConnection pscConnectionId
                          * @property {string|null} [ipAddress] PscConnection ipAddress
                          * @property {string|null} [forwardingRule] PscConnection forwardingRule
@@ -2917,6 +7777,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * PscConnection port.
+                         * @member {number|null|undefined} port
+                         * @memberof google.cloud.memorystore.v1.PscConnection
+                         * @instance
+                         */
+                        PscConnection.prototype.port = null;
     
                         /**
                          * PscConnection pscConnectionId.
@@ -2982,6 +7850,20 @@
                          */
                         PscConnection.prototype.connectionType = 0;
     
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * PscConnection ports.
+                         * @member {"port"|undefined} ports
+                         * @memberof google.cloud.memorystore.v1.PscConnection
+                         * @instance
+                         */
+                        Object.defineProperty(PscConnection.prototype, "ports", {
+                            get: $util.oneOfGetter($oneOfFields = ["port"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new PscConnection instance using the specified properties.
                          * @function create
@@ -3022,6 +7904,8 @@
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.pscConnectionStatus);
                             if (message.connectionType != null && Object.hasOwnProperty.call(message, "connectionType"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.connectionType);
+                            if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.port);
                             return writer;
                         };
     
@@ -3056,6 +7940,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 9: {
+                                        message.port = reader.int32();
+                                        break;
+                                    }
                                 case 1: {
                                         message.pscConnectionId = reader.string();
                                         break;
@@ -3123,6 +8011,12 @@
                         PscConnection.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.port != null && message.hasOwnProperty("port")) {
+                                properties.ports = 1;
+                                if (!$util.isInteger(message.port))
+                                    return "port: integer expected";
+                            }
                             if (message.pscConnectionId != null && message.hasOwnProperty("pscConnectionId"))
                                 if (!$util.isString(message.pscConnectionId))
                                     return "pscConnectionId: string expected";
@@ -3175,6 +8069,8 @@
                             if (object instanceof $root.google.cloud.memorystore.v1.PscConnection)
                                 return object;
                             var message = new $root.google.cloud.memorystore.v1.PscConnection();
+                            if (object.port != null)
+                                message.port = object.port | 0;
                             if (object.pscConnectionId != null)
                                 message.pscConnectionId = String(object.pscConnectionId);
                             if (object.ipAddress != null)
@@ -3273,6 +8169,11 @@
                                 object.pscConnectionStatus = options.enums === String ? $root.google.cloud.memorystore.v1.PscConnectionStatus[message.pscConnectionStatus] === undefined ? message.pscConnectionStatus : $root.google.cloud.memorystore.v1.PscConnectionStatus[message.pscConnectionStatus] : message.pscConnectionStatus;
                             if (message.connectionType != null && message.hasOwnProperty("connectionType"))
                                 object.connectionType = options.enums === String ? $root.google.cloud.memorystore.v1.ConnectionType[message.connectionType] === undefined ? message.connectionType : $root.google.cloud.memorystore.v1.ConnectionType[message.connectionType] : message.connectionType;
+                            if (message.port != null && message.hasOwnProperty("port")) {
+                                object.port = message.port;
+                                if (options.oneofs)
+                                    object.ports = "port";
+                            }
                             return object;
                         };
     
@@ -4868,6 +9769,301 @@
                         return ZoneDistributionConfig;
                     })();
     
+                    v1.RescheduleMaintenanceRequest = (function() {
+    
+                        /**
+                         * Properties of a RescheduleMaintenanceRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IRescheduleMaintenanceRequest
+                         * @property {string|null} [name] RescheduleMaintenanceRequest name
+                         * @property {google.cloud.memorystore.v1.RescheduleMaintenanceRequest.RescheduleType|null} [rescheduleType] RescheduleMaintenanceRequest rescheduleType
+                         * @property {google.protobuf.ITimestamp|null} [scheduleTime] RescheduleMaintenanceRequest scheduleTime
+                         */
+    
+                        /**
+                         * Constructs a new RescheduleMaintenanceRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a RescheduleMaintenanceRequest.
+                         * @implements IRescheduleMaintenanceRequest
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IRescheduleMaintenanceRequest=} [properties] Properties to set
+                         */
+                        function RescheduleMaintenanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RescheduleMaintenanceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @instance
+                         */
+                        RescheduleMaintenanceRequest.prototype.name = "";
+    
+                        /**
+                         * RescheduleMaintenanceRequest rescheduleType.
+                         * @member {google.cloud.memorystore.v1.RescheduleMaintenanceRequest.RescheduleType} rescheduleType
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @instance
+                         */
+                        RescheduleMaintenanceRequest.prototype.rescheduleType = 0;
+    
+                        /**
+                         * RescheduleMaintenanceRequest scheduleTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} scheduleTime
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @instance
+                         */
+                        RescheduleMaintenanceRequest.prototype.scheduleTime = null;
+    
+                        /**
+                         * Creates a new RescheduleMaintenanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IRescheduleMaintenanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest instance
+                         */
+                        RescheduleMaintenanceRequest.create = function create(properties) {
+                            return new RescheduleMaintenanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RescheduleMaintenanceRequest message. Does not implicitly {@link google.cloud.memorystore.v1.RescheduleMaintenanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IRescheduleMaintenanceRequest} message RescheduleMaintenanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RescheduleMaintenanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.rescheduleType != null && Object.hasOwnProperty.call(message, "rescheduleType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.rescheduleType);
+                            if (message.scheduleTime != null && Object.hasOwnProperty.call(message, "scheduleTime"))
+                                $root.google.protobuf.Timestamp.encode(message.scheduleTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RescheduleMaintenanceRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.RescheduleMaintenanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IRescheduleMaintenanceRequest} message RescheduleMaintenanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RescheduleMaintenanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RescheduleMaintenanceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.RescheduleMaintenanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.rescheduleType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.scheduleTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RescheduleMaintenanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RescheduleMaintenanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RescheduleMaintenanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.rescheduleType != null && message.hasOwnProperty("rescheduleType"))
+                                switch (message.rescheduleType) {
+                                default:
+                                    return "rescheduleType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                    break;
+                                }
+                            if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.scheduleTime);
+                                if (error)
+                                    return "scheduleTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RescheduleMaintenanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.RescheduleMaintenanceRequest} RescheduleMaintenanceRequest
+                         */
+                        RescheduleMaintenanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.RescheduleMaintenanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.RescheduleMaintenanceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.rescheduleType) {
+                            default:
+                                if (typeof object.rescheduleType === "number") {
+                                    message.rescheduleType = object.rescheduleType;
+                                    break;
+                                }
+                                break;
+                            case "RESCHEDULE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.rescheduleType = 0;
+                                break;
+                            case "IMMEDIATE":
+                            case 1:
+                                message.rescheduleType = 1;
+                                break;
+                            case "SPECIFIC_TIME":
+                            case 3:
+                                message.rescheduleType = 3;
+                                break;
+                            }
+                            if (object.scheduleTime != null) {
+                                if (typeof object.scheduleTime !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.RescheduleMaintenanceRequest.scheduleTime: object expected");
+                                message.scheduleTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RescheduleMaintenanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.RescheduleMaintenanceRequest} message RescheduleMaintenanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RescheduleMaintenanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.rescheduleType = options.enums === String ? "RESCHEDULE_TYPE_UNSPECIFIED" : 0;
+                                object.scheduleTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.rescheduleType != null && message.hasOwnProperty("rescheduleType"))
+                                object.rescheduleType = options.enums === String ? $root.google.cloud.memorystore.v1.RescheduleMaintenanceRequest.RescheduleType[message.rescheduleType] === undefined ? message.rescheduleType : $root.google.cloud.memorystore.v1.RescheduleMaintenanceRequest.RescheduleType[message.rescheduleType] : message.rescheduleType;
+                            if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime"))
+                                object.scheduleTime = $root.google.protobuf.Timestamp.toObject(message.scheduleTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RescheduleMaintenanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RescheduleMaintenanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RescheduleMaintenanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.RescheduleMaintenanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RescheduleMaintenanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.RescheduleMaintenanceRequest";
+                        };
+    
+                        /**
+                         * RescheduleType enum.
+                         * @name google.cloud.memorystore.v1.RescheduleMaintenanceRequest.RescheduleType
+                         * @enum {number}
+                         * @property {number} RESCHEDULE_TYPE_UNSPECIFIED=0 RESCHEDULE_TYPE_UNSPECIFIED value
+                         * @property {number} IMMEDIATE=1 IMMEDIATE value
+                         * @property {number} SPECIFIC_TIME=3 SPECIFIC_TIME value
+                         */
+                        RescheduleMaintenanceRequest.RescheduleType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RESCHEDULE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IMMEDIATE"] = 1;
+                            values[valuesById[3] = "SPECIFIC_TIME"] = 3;
+                            return values;
+                        })();
+    
+                        return RescheduleMaintenanceRequest;
+                    })();
+    
                     v1.ListInstancesRequest = (function() {
     
                         /**
@@ -6418,6 +11614,2234 @@
                         };
     
                         return DeleteInstanceRequest;
+                    })();
+    
+                    v1.ListBackupCollectionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListBackupCollectionsRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IListBackupCollectionsRequest
+                         * @property {string|null} [parent] ListBackupCollectionsRequest parent
+                         * @property {number|null} [pageSize] ListBackupCollectionsRequest pageSize
+                         * @property {string|null} [pageToken] ListBackupCollectionsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupCollectionsRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a ListBackupCollectionsRequest.
+                         * @implements IListBackupCollectionsRequest
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IListBackupCollectionsRequest=} [properties] Properties to set
+                         */
+                        function ListBackupCollectionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupCollectionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @instance
+                         */
+                        ListBackupCollectionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListBackupCollectionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @instance
+                         */
+                        ListBackupCollectionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListBackupCollectionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @instance
+                         */
+                        ListBackupCollectionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListBackupCollectionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IListBackupCollectionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.ListBackupCollectionsRequest} ListBackupCollectionsRequest instance
+                         */
+                        ListBackupCollectionsRequest.create = function create(properties) {
+                            return new ListBackupCollectionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupCollectionsRequest message. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupCollectionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IListBackupCollectionsRequest} message ListBackupCollectionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupCollectionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupCollectionsRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupCollectionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IListBackupCollectionsRequest} message ListBackupCollectionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupCollectionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupCollectionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.ListBackupCollectionsRequest} ListBackupCollectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupCollectionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.ListBackupCollectionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupCollectionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.ListBackupCollectionsRequest} ListBackupCollectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupCollectionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupCollectionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupCollectionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupCollectionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.ListBackupCollectionsRequest} ListBackupCollectionsRequest
+                         */
+                        ListBackupCollectionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.ListBackupCollectionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.ListBackupCollectionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupCollectionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.ListBackupCollectionsRequest} message ListBackupCollectionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupCollectionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupCollectionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupCollectionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupCollectionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupCollectionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.ListBackupCollectionsRequest";
+                        };
+    
+                        return ListBackupCollectionsRequest;
+                    })();
+    
+                    v1.ListBackupCollectionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListBackupCollectionsResponse.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IListBackupCollectionsResponse
+                         * @property {Array.<google.cloud.memorystore.v1.IBackupCollection>|null} [backupCollections] ListBackupCollectionsResponse backupCollections
+                         * @property {string|null} [nextPageToken] ListBackupCollectionsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListBackupCollectionsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupCollectionsResponse.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a ListBackupCollectionsResponse.
+                         * @implements IListBackupCollectionsResponse
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IListBackupCollectionsResponse=} [properties] Properties to set
+                         */
+                        function ListBackupCollectionsResponse(properties) {
+                            this.backupCollections = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupCollectionsResponse backupCollections.
+                         * @member {Array.<google.cloud.memorystore.v1.IBackupCollection>} backupCollections
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @instance
+                         */
+                        ListBackupCollectionsResponse.prototype.backupCollections = $util.emptyArray;
+    
+                        /**
+                         * ListBackupCollectionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @instance
+                         */
+                        ListBackupCollectionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListBackupCollectionsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @instance
+                         */
+                        ListBackupCollectionsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListBackupCollectionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IListBackupCollectionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.ListBackupCollectionsResponse} ListBackupCollectionsResponse instance
+                         */
+                        ListBackupCollectionsResponse.create = function create(properties) {
+                            return new ListBackupCollectionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupCollectionsResponse message. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupCollectionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IListBackupCollectionsResponse} message ListBackupCollectionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupCollectionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backupCollections != null && message.backupCollections.length)
+                                for (var i = 0; i < message.backupCollections.length; ++i)
+                                    $root.google.cloud.memorystore.v1.BackupCollection.encode(message.backupCollections[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupCollectionsResponse message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupCollectionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IListBackupCollectionsResponse} message ListBackupCollectionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupCollectionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupCollectionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.ListBackupCollectionsResponse} ListBackupCollectionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupCollectionsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.ListBackupCollectionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.backupCollections && message.backupCollections.length))
+                                            message.backupCollections = [];
+                                        message.backupCollections.push($root.google.cloud.memorystore.v1.BackupCollection.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupCollectionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.ListBackupCollectionsResponse} ListBackupCollectionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupCollectionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupCollectionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupCollectionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.backupCollections != null && message.hasOwnProperty("backupCollections")) {
+                                if (!Array.isArray(message.backupCollections))
+                                    return "backupCollections: array expected";
+                                for (var i = 0; i < message.backupCollections.length; ++i) {
+                                    var error = $root.google.cloud.memorystore.v1.BackupCollection.verify(message.backupCollections[i]);
+                                    if (error)
+                                        return "backupCollections." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupCollectionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.ListBackupCollectionsResponse} ListBackupCollectionsResponse
+                         */
+                        ListBackupCollectionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.ListBackupCollectionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.ListBackupCollectionsResponse();
+                            if (object.backupCollections) {
+                                if (!Array.isArray(object.backupCollections))
+                                    throw TypeError(".google.cloud.memorystore.v1.ListBackupCollectionsResponse.backupCollections: array expected");
+                                message.backupCollections = [];
+                                for (var i = 0; i < object.backupCollections.length; ++i) {
+                                    if (typeof object.backupCollections[i] !== "object")
+                                        throw TypeError(".google.cloud.memorystore.v1.ListBackupCollectionsResponse.backupCollections: object expected");
+                                    message.backupCollections[i] = $root.google.cloud.memorystore.v1.BackupCollection.fromObject(object.backupCollections[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.memorystore.v1.ListBackupCollectionsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupCollectionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @static
+                         * @param {google.cloud.memorystore.v1.ListBackupCollectionsResponse} message ListBackupCollectionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupCollectionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.backupCollections = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.backupCollections && message.backupCollections.length) {
+                                object.backupCollections = [];
+                                for (var j = 0; j < message.backupCollections.length; ++j)
+                                    object.backupCollections[j] = $root.google.cloud.memorystore.v1.BackupCollection.toObject(message.backupCollections[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupCollectionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupCollectionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupCollectionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.ListBackupCollectionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupCollectionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.ListBackupCollectionsResponse";
+                        };
+    
+                        return ListBackupCollectionsResponse;
+                    })();
+    
+                    v1.GetBackupCollectionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetBackupCollectionRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IGetBackupCollectionRequest
+                         * @property {string|null} [name] GetBackupCollectionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetBackupCollectionRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a GetBackupCollectionRequest.
+                         * @implements IGetBackupCollectionRequest
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IGetBackupCollectionRequest=} [properties] Properties to set
+                         */
+                        function GetBackupCollectionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetBackupCollectionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.memorystore.v1.GetBackupCollectionRequest
+                         * @instance
+                         */
+                        GetBackupCollectionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetBackupCollectionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.GetBackupCollectionRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IGetBackupCollectionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.GetBackupCollectionRequest} GetBackupCollectionRequest instance
+                         */
+                        GetBackupCollectionRequest.create = function create(properties) {
+                            return new GetBackupCollectionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupCollectionRequest message. Does not implicitly {@link google.cloud.memorystore.v1.GetBackupCollectionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.GetBackupCollectionRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IGetBackupCollectionRequest} message GetBackupCollectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupCollectionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupCollectionRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.GetBackupCollectionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.GetBackupCollectionRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IGetBackupCollectionRequest} message GetBackupCollectionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupCollectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetBackupCollectionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.GetBackupCollectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.GetBackupCollectionRequest} GetBackupCollectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupCollectionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.GetBackupCollectionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetBackupCollectionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.GetBackupCollectionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.GetBackupCollectionRequest} GetBackupCollectionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupCollectionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetBackupCollectionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.GetBackupCollectionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetBackupCollectionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetBackupCollectionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.GetBackupCollectionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.GetBackupCollectionRequest} GetBackupCollectionRequest
+                         */
+                        GetBackupCollectionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.GetBackupCollectionRequest)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.GetBackupCollectionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetBackupCollectionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.GetBackupCollectionRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.GetBackupCollectionRequest} message GetBackupCollectionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetBackupCollectionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetBackupCollectionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.GetBackupCollectionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetBackupCollectionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetBackupCollectionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.GetBackupCollectionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetBackupCollectionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.GetBackupCollectionRequest";
+                        };
+    
+                        return GetBackupCollectionRequest;
+                    })();
+    
+                    v1.ListBackupsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListBackupsRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IListBackupsRequest
+                         * @property {string|null} [parent] ListBackupsRequest parent
+                         * @property {number|null} [pageSize] ListBackupsRequest pageSize
+                         * @property {string|null} [pageToken] ListBackupsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupsRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a ListBackupsRequest.
+                         * @implements IListBackupsRequest
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IListBackupsRequest=} [properties] Properties to set
+                         */
+                        function ListBackupsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListBackupsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListBackupsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListBackupsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IListBackupsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.ListBackupsRequest} ListBackupsRequest instance
+                         */
+                        ListBackupsRequest.create = function create(properties) {
+                            return new ListBackupsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupsRequest message. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IListBackupsRequest} message ListBackupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupsRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IListBackupsRequest} message ListBackupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.ListBackupsRequest} ListBackupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.ListBackupsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.ListBackupsRequest} ListBackupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.ListBackupsRequest} ListBackupsRequest
+                         */
+                        ListBackupsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.ListBackupsRequest)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.ListBackupsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.ListBackupsRequest} message ListBackupsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.ListBackupsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.ListBackupsRequest";
+                        };
+    
+                        return ListBackupsRequest;
+                    })();
+    
+                    v1.ListBackupsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListBackupsResponse.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IListBackupsResponse
+                         * @property {Array.<google.cloud.memorystore.v1.IBackup>|null} [backups] ListBackupsResponse backups
+                         * @property {string|null} [nextPageToken] ListBackupsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListBackupsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupsResponse.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a ListBackupsResponse.
+                         * @implements IListBackupsResponse
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IListBackupsResponse=} [properties] Properties to set
+                         */
+                        function ListBackupsResponse(properties) {
+                            this.backups = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupsResponse backups.
+                         * @member {Array.<google.cloud.memorystore.v1.IBackup>} backups
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @instance
+                         */
+                        ListBackupsResponse.prototype.backups = $util.emptyArray;
+    
+                        /**
+                         * ListBackupsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @instance
+                         */
+                        ListBackupsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListBackupsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @instance
+                         */
+                        ListBackupsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListBackupsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IListBackupsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.ListBackupsResponse} ListBackupsResponse instance
+                         */
+                        ListBackupsResponse.create = function create(properties) {
+                            return new ListBackupsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupsResponse message. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IListBackupsResponse} message ListBackupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backups != null && message.backups.length)
+                                for (var i = 0; i < message.backups.length; ++i)
+                                    $root.google.cloud.memorystore.v1.Backup.encode(message.backups[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupsResponse message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.ListBackupsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IListBackupsResponse} message ListBackupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.ListBackupsResponse} ListBackupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.ListBackupsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.backups && message.backups.length))
+                                            message.backups = [];
+                                        message.backups.push($root.google.cloud.memorystore.v1.Backup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.ListBackupsResponse} ListBackupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.backups != null && message.hasOwnProperty("backups")) {
+                                if (!Array.isArray(message.backups))
+                                    return "backups: array expected";
+                                for (var i = 0; i < message.backups.length; ++i) {
+                                    var error = $root.google.cloud.memorystore.v1.Backup.verify(message.backups[i]);
+                                    if (error)
+                                        return "backups." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.ListBackupsResponse} ListBackupsResponse
+                         */
+                        ListBackupsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.ListBackupsResponse)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.ListBackupsResponse();
+                            if (object.backups) {
+                                if (!Array.isArray(object.backups))
+                                    throw TypeError(".google.cloud.memorystore.v1.ListBackupsResponse.backups: array expected");
+                                message.backups = [];
+                                for (var i = 0; i < object.backups.length; ++i) {
+                                    if (typeof object.backups[i] !== "object")
+                                        throw TypeError(".google.cloud.memorystore.v1.ListBackupsResponse.backups: object expected");
+                                    message.backups[i] = $root.google.cloud.memorystore.v1.Backup.fromObject(object.backups[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.memorystore.v1.ListBackupsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @static
+                         * @param {google.cloud.memorystore.v1.ListBackupsResponse} message ListBackupsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.backups = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.backups && message.backups.length) {
+                                object.backups = [];
+                                for (var j = 0; j < message.backups.length; ++j)
+                                    object.backups[j] = $root.google.cloud.memorystore.v1.Backup.toObject(message.backups[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.ListBackupsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.ListBackupsResponse";
+                        };
+    
+                        return ListBackupsResponse;
+                    })();
+    
+                    v1.GetBackupRequest = (function() {
+    
+                        /**
+                         * Properties of a GetBackupRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IGetBackupRequest
+                         * @property {string|null} [name] GetBackupRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetBackupRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a GetBackupRequest.
+                         * @implements IGetBackupRequest
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IGetBackupRequest=} [properties] Properties to set
+                         */
+                        function GetBackupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetBackupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.memorystore.v1.GetBackupRequest
+                         * @instance
+                         */
+                        GetBackupRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetBackupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.GetBackupRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IGetBackupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.GetBackupRequest} GetBackupRequest instance
+                         */
+                        GetBackupRequest.create = function create(properties) {
+                            return new GetBackupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupRequest message. Does not implicitly {@link google.cloud.memorystore.v1.GetBackupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.GetBackupRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IGetBackupRequest} message GetBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.GetBackupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.GetBackupRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IGetBackupRequest} message GetBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetBackupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.GetBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.GetBackupRequest} GetBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.GetBackupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetBackupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.GetBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.GetBackupRequest} GetBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetBackupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.GetBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetBackupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.GetBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.GetBackupRequest} GetBackupRequest
+                         */
+                        GetBackupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.GetBackupRequest)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.GetBackupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetBackupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.GetBackupRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.GetBackupRequest} message GetBackupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetBackupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetBackupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.GetBackupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetBackupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.GetBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.GetBackupRequest";
+                        };
+    
+                        return GetBackupRequest;
+                    })();
+    
+                    v1.DeleteBackupRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteBackupRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IDeleteBackupRequest
+                         * @property {string|null} [name] DeleteBackupRequest name
+                         * @property {string|null} [requestId] DeleteBackupRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteBackupRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a DeleteBackupRequest.
+                         * @implements IDeleteBackupRequest
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IDeleteBackupRequest=} [properties] Properties to set
+                         */
+                        function DeleteBackupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteBackupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.memorystore.v1.DeleteBackupRequest
+                         * @instance
+                         */
+                        DeleteBackupRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteBackupRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.memorystore.v1.DeleteBackupRequest
+                         * @instance
+                         */
+                        DeleteBackupRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteBackupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.DeleteBackupRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IDeleteBackupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.DeleteBackupRequest} DeleteBackupRequest instance
+                         */
+                        DeleteBackupRequest.create = function create(properties) {
+                            return new DeleteBackupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBackupRequest message. Does not implicitly {@link google.cloud.memorystore.v1.DeleteBackupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.DeleteBackupRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IDeleteBackupRequest} message DeleteBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBackupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBackupRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.DeleteBackupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.DeleteBackupRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IDeleteBackupRequest} message DeleteBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBackupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteBackupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.DeleteBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.DeleteBackupRequest} DeleteBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBackupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.DeleteBackupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteBackupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.DeleteBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.DeleteBackupRequest} DeleteBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBackupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteBackupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.DeleteBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteBackupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.DeleteBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.DeleteBackupRequest} DeleteBackupRequest
+                         */
+                        DeleteBackupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.DeleteBackupRequest)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.DeleteBackupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteBackupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.DeleteBackupRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.DeleteBackupRequest} message DeleteBackupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteBackupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteBackupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.DeleteBackupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteBackupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.DeleteBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.DeleteBackupRequest";
+                        };
+    
+                        return DeleteBackupRequest;
+                    })();
+    
+                    v1.ExportBackupRequest = (function() {
+    
+                        /**
+                         * Properties of an ExportBackupRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IExportBackupRequest
+                         * @property {string|null} [gcsBucket] ExportBackupRequest gcsBucket
+                         * @property {string|null} [name] ExportBackupRequest name
+                         */
+    
+                        /**
+                         * Constructs a new ExportBackupRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents an ExportBackupRequest.
+                         * @implements IExportBackupRequest
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IExportBackupRequest=} [properties] Properties to set
+                         */
+                        function ExportBackupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportBackupRequest gcsBucket.
+                         * @member {string|null|undefined} gcsBucket
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @instance
+                         */
+                        ExportBackupRequest.prototype.gcsBucket = null;
+    
+                        /**
+                         * ExportBackupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @instance
+                         */
+                        ExportBackupRequest.prototype.name = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ExportBackupRequest destination.
+                         * @member {"gcsBucket"|undefined} destination
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ExportBackupRequest.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsBucket"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ExportBackupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IExportBackupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.ExportBackupRequest} ExportBackupRequest instance
+                         */
+                        ExportBackupRequest.create = function create(properties) {
+                            return new ExportBackupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportBackupRequest message. Does not implicitly {@link google.cloud.memorystore.v1.ExportBackupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IExportBackupRequest} message ExportBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportBackupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.gcsBucket != null && Object.hasOwnProperty.call(message, "gcsBucket"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.gcsBucket);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportBackupRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.ExportBackupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IExportBackupRequest} message ExportBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportBackupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportBackupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.ExportBackupRequest} ExportBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportBackupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.ExportBackupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.gcsBucket = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportBackupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.ExportBackupRequest} ExportBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportBackupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportBackupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportBackupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsBucket != null && message.hasOwnProperty("gcsBucket")) {
+                                properties.destination = 1;
+                                if (!$util.isString(message.gcsBucket))
+                                    return "gcsBucket: string expected";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.ExportBackupRequest} ExportBackupRequest
+                         */
+                        ExportBackupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.ExportBackupRequest)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.ExportBackupRequest();
+                            if (object.gcsBucket != null)
+                                message.gcsBucket = String(object.gcsBucket);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportBackupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.ExportBackupRequest} message ExportBackupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportBackupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.gcsBucket != null && message.hasOwnProperty("gcsBucket")) {
+                                object.gcsBucket = message.gcsBucket;
+                                if (options.oneofs)
+                                    object.destination = "gcsBucket";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportBackupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportBackupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.ExportBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.ExportBackupRequest";
+                        };
+    
+                        return ExportBackupRequest;
+                    })();
+    
+                    v1.BackupInstanceRequest = (function() {
+    
+                        /**
+                         * Properties of a BackupInstanceRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @interface IBackupInstanceRequest
+                         * @property {string|null} [name] BackupInstanceRequest name
+                         * @property {google.protobuf.IDuration|null} [ttl] BackupInstanceRequest ttl
+                         * @property {string|null} [backupId] BackupInstanceRequest backupId
+                         */
+    
+                        /**
+                         * Constructs a new BackupInstanceRequest.
+                         * @memberof google.cloud.memorystore.v1
+                         * @classdesc Represents a BackupInstanceRequest.
+                         * @implements IBackupInstanceRequest
+                         * @constructor
+                         * @param {google.cloud.memorystore.v1.IBackupInstanceRequest=} [properties] Properties to set
+                         */
+                        function BackupInstanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BackupInstanceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @instance
+                         */
+                        BackupInstanceRequest.prototype.name = "";
+    
+                        /**
+                         * BackupInstanceRequest ttl.
+                         * @member {google.protobuf.IDuration|null|undefined} ttl
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @instance
+                         */
+                        BackupInstanceRequest.prototype.ttl = null;
+    
+                        /**
+                         * BackupInstanceRequest backupId.
+                         * @member {string|null|undefined} backupId
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @instance
+                         */
+                        BackupInstanceRequest.prototype.backupId = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BackupInstanceRequest _backupId.
+                         * @member {"backupId"|undefined} _backupId
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @instance
+                         */
+                        Object.defineProperty(BackupInstanceRequest.prototype, "_backupId", {
+                            get: $util.oneOfGetter($oneOfFields = ["backupId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BackupInstanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IBackupInstanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.memorystore.v1.BackupInstanceRequest} BackupInstanceRequest instance
+                         */
+                        BackupInstanceRequest.create = function create(properties) {
+                            return new BackupInstanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BackupInstanceRequest message. Does not implicitly {@link google.cloud.memorystore.v1.BackupInstanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IBackupInstanceRequest} message BackupInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupInstanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
+                                $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.backupId != null && Object.hasOwnProperty.call(message, "backupId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.backupId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BackupInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1.BackupInstanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.IBackupInstanceRequest} message BackupInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupInstanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BackupInstanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.memorystore.v1.BackupInstanceRequest} BackupInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupInstanceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.memorystore.v1.BackupInstanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.backupId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BackupInstanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.memorystore.v1.BackupInstanceRequest} BackupInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupInstanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BackupInstanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BackupInstanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                var error = $root.google.protobuf.Duration.verify(message.ttl);
+                                if (error)
+                                    return "ttl." + error;
+                            }
+                            if (message.backupId != null && message.hasOwnProperty("backupId")) {
+                                properties._backupId = 1;
+                                if (!$util.isString(message.backupId))
+                                    return "backupId: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BackupInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.memorystore.v1.BackupInstanceRequest} BackupInstanceRequest
+                         */
+                        BackupInstanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.memorystore.v1.BackupInstanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.memorystore.v1.BackupInstanceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.ttl != null) {
+                                if (typeof object.ttl !== "object")
+                                    throw TypeError(".google.cloud.memorystore.v1.BackupInstanceRequest.ttl: object expected");
+                                message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
+                            }
+                            if (object.backupId != null)
+                                message.backupId = String(object.backupId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BackupInstanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @static
+                         * @param {google.cloud.memorystore.v1.BackupInstanceRequest} message BackupInstanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BackupInstanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.ttl = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.ttl != null && message.hasOwnProperty("ttl"))
+                                object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options);
+                            if (message.backupId != null && message.hasOwnProperty("backupId")) {
+                                object.backupId = message.backupId;
+                                if (options.oneofs)
+                                    object._backupId = "backupId";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BackupInstanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BackupInstanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BackupInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.memorystore.v1.BackupInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BackupInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.memorystore.v1.BackupInstanceRequest";
+                        };
+    
+                        return BackupInstanceRequest;
                     })();
     
                     v1.GetCertificateAuthorityRequest = (function() {
@@ -36755,6 +44179,317 @@
             })();
     
             return rpc;
+        })();
+    
+        google.type = (function() {
+    
+            /**
+             * Namespace type.
+             * @memberof google
+             * @namespace
+             */
+            var type = {};
+    
+            /**
+             * DayOfWeek enum.
+             * @name google.type.DayOfWeek
+             * @enum {number}
+             * @property {number} DAY_OF_WEEK_UNSPECIFIED=0 DAY_OF_WEEK_UNSPECIFIED value
+             * @property {number} MONDAY=1 MONDAY value
+             * @property {number} TUESDAY=2 TUESDAY value
+             * @property {number} WEDNESDAY=3 WEDNESDAY value
+             * @property {number} THURSDAY=4 THURSDAY value
+             * @property {number} FRIDAY=5 FRIDAY value
+             * @property {number} SATURDAY=6 SATURDAY value
+             * @property {number} SUNDAY=7 SUNDAY value
+             */
+            type.DayOfWeek = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "DAY_OF_WEEK_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "MONDAY"] = 1;
+                values[valuesById[2] = "TUESDAY"] = 2;
+                values[valuesById[3] = "WEDNESDAY"] = 3;
+                values[valuesById[4] = "THURSDAY"] = 4;
+                values[valuesById[5] = "FRIDAY"] = 5;
+                values[valuesById[6] = "SATURDAY"] = 6;
+                values[valuesById[7] = "SUNDAY"] = 7;
+                return values;
+            })();
+    
+            type.TimeOfDay = (function() {
+    
+                /**
+                 * Properties of a TimeOfDay.
+                 * @memberof google.type
+                 * @interface ITimeOfDay
+                 * @property {number|null} [hours] TimeOfDay hours
+                 * @property {number|null} [minutes] TimeOfDay minutes
+                 * @property {number|null} [seconds] TimeOfDay seconds
+                 * @property {number|null} [nanos] TimeOfDay nanos
+                 */
+    
+                /**
+                 * Constructs a new TimeOfDay.
+                 * @memberof google.type
+                 * @classdesc Represents a TimeOfDay.
+                 * @implements ITimeOfDay
+                 * @constructor
+                 * @param {google.type.ITimeOfDay=} [properties] Properties to set
+                 */
+                function TimeOfDay(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TimeOfDay hours.
+                 * @member {number} hours
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.hours = 0;
+    
+                /**
+                 * TimeOfDay minutes.
+                 * @member {number} minutes
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.minutes = 0;
+    
+                /**
+                 * TimeOfDay seconds.
+                 * @member {number} seconds
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.seconds = 0;
+    
+                /**
+                 * TimeOfDay nanos.
+                 * @member {number} nanos
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new TimeOfDay instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay=} [properties] Properties to set
+                 * @returns {google.type.TimeOfDay} TimeOfDay instance
+                 */
+                TimeOfDay.create = function create(properties) {
+                    return new TimeOfDay(properties);
+                };
+    
+                /**
+                 * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay} message TimeOfDay message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeOfDay.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.hours);
+                    if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minutes);
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay} message TimeOfDay message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeOfDay.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TimeOfDay message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeOfDay.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeOfDay();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.hours = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.minutes = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.seconds = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeOfDay.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TimeOfDay message.
+                 * @function verify
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TimeOfDay.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        if (!$util.isInteger(message.hours))
+                            return "hours: integer expected";
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        if (!$util.isInteger(message.minutes))
+                            return "minutes: integer expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds))
+                            return "seconds: integer expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 */
+                TimeOfDay.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.TimeOfDay)
+                        return object;
+                    var message = new $root.google.type.TimeOfDay();
+                    if (object.hours != null)
+                        message.hours = object.hours | 0;
+                    if (object.minutes != null)
+                        message.minutes = object.minutes | 0;
+                    if (object.seconds != null)
+                        message.seconds = object.seconds | 0;
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.TimeOfDay} message TimeOfDay
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TimeOfDay.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.hours = 0;
+                        object.minutes = 0;
+                        object.seconds = 0;
+                        object.nanos = 0;
+                    }
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        object.hours = message.hours;
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        object.minutes = message.minutes;
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        object.seconds = message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TimeOfDay to JSON.
+                 * @function toJSON
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TimeOfDay.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TimeOfDay
+                 * @function getTypeUrl
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TimeOfDay.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.TimeOfDay";
+                };
+    
+                return TimeOfDay;
+            })();
+    
+            return type;
         })();
     
         return google;
