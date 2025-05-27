@@ -5036,6 +5036,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "storeContext": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -5797,6 +5804,54 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "corpusTypeConfig": {
+                          "type": "CorpusTypeConfig",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CorpusTypeConfig": {
+                          "oneofs": {
+                            "corpusTypeConfig": {
+                              "oneof": [
+                                "documentCorpus",
+                                "memoryCorpus"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "documentCorpus": {
+                              "type": "DocumentCorpus",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "memoryCorpus": {
+                              "type": "MemoryCorpus",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DocumentCorpus": {
+                              "fields": {}
+                            },
+                            "MemoryCorpus": {
+                              "fields": {
+                                "llmParser": {
+                                  "type": "RagFileParsingConfig.LlmParser",
+                                  "id": 1
+                                }
+                              }
+                            }
                           }
                         }
                       }

@@ -18584,6 +18584,9 @@ export namespace google {
 
                     /** VertexRagStore ragRetrievalConfig */
                     ragRetrievalConfig?: (google.cloud.aiplatform.v1beta1.IRagRetrievalConfig|null);
+
+                    /** VertexRagStore storeContext */
+                    storeContext?: (boolean|null);
                 }
 
                 /** Represents a VertexRagStore. */
@@ -18609,6 +18612,9 @@ export namespace google {
 
                     /** VertexRagStore ragRetrievalConfig. */
                     public ragRetrievalConfig?: (google.cloud.aiplatform.v1beta1.IRagRetrievalConfig|null);
+
+                    /** VertexRagStore storeContext. */
+                    public storeContext: boolean;
 
                     /** VertexRagStore _similarityTopK. */
                     public _similarityTopK?: "similarityTopK";
@@ -22038,6 +22044,9 @@ export namespace google {
 
                     /** RagCorpus encryptionSpec */
                     encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
+
+                    /** RagCorpus corpusTypeConfig */
+                    corpusTypeConfig?: (google.cloud.aiplatform.v1beta1.RagCorpus.ICorpusTypeConfig|null);
                 }
 
                 /** Represents a RagCorpus. */
@@ -22084,6 +22093,9 @@ export namespace google {
 
                     /** RagCorpus encryptionSpec. */
                     public encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
+
+                    /** RagCorpus corpusTypeConfig. */
+                    public corpusTypeConfig?: (google.cloud.aiplatform.v1beta1.RagCorpus.ICorpusTypeConfig|null);
 
                     /** RagCorpus backendConfig. */
                     public backendConfig?: ("vectorDbConfig"|"vertexAiSearchConfig");
@@ -22164,6 +22176,306 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RagCorpus {
+
+                    /** Properties of a CorpusTypeConfig. */
+                    interface ICorpusTypeConfig {
+
+                        /** CorpusTypeConfig documentCorpus */
+                        documentCorpus?: (google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.IDocumentCorpus|null);
+
+                        /** CorpusTypeConfig memoryCorpus */
+                        memoryCorpus?: (google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.IMemoryCorpus|null);
+                    }
+
+                    /** Represents a CorpusTypeConfig. */
+                    class CorpusTypeConfig implements ICorpusTypeConfig {
+
+                        /**
+                         * Constructs a new CorpusTypeConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.RagCorpus.ICorpusTypeConfig);
+
+                        /** CorpusTypeConfig documentCorpus. */
+                        public documentCorpus?: (google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.IDocumentCorpus|null);
+
+                        /** CorpusTypeConfig memoryCorpus. */
+                        public memoryCorpus?: (google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.IMemoryCorpus|null);
+
+                        /** CorpusTypeConfig corpusTypeConfig. */
+                        public corpusTypeConfig?: ("documentCorpus"|"memoryCorpus");
+
+                        /**
+                         * Creates a new CorpusTypeConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CorpusTypeConfig instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.RagCorpus.ICorpusTypeConfig): google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig;
+
+                        /**
+                         * Encodes the specified CorpusTypeConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.verify|verify} messages.
+                         * @param message CorpusTypeConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.RagCorpus.ICorpusTypeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CorpusTypeConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.verify|verify} messages.
+                         * @param message CorpusTypeConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.RagCorpus.ICorpusTypeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CorpusTypeConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CorpusTypeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig;
+
+                        /**
+                         * Decodes a CorpusTypeConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CorpusTypeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig;
+
+                        /**
+                         * Verifies a CorpusTypeConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CorpusTypeConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CorpusTypeConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig;
+
+                        /**
+                         * Creates a plain object from a CorpusTypeConfig message. Also converts values to other types if specified.
+                         * @param message CorpusTypeConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CorpusTypeConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CorpusTypeConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CorpusTypeConfig {
+
+                        /** Properties of a DocumentCorpus. */
+                        interface IDocumentCorpus {
+                        }
+
+                        /** Represents a DocumentCorpus. */
+                        class DocumentCorpus implements IDocumentCorpus {
+
+                            /**
+                             * Constructs a new DocumentCorpus.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.IDocumentCorpus);
+
+                            /**
+                             * Creates a new DocumentCorpus instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DocumentCorpus instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.IDocumentCorpus): google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.DocumentCorpus;
+
+                            /**
+                             * Encodes the specified DocumentCorpus message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.DocumentCorpus.verify|verify} messages.
+                             * @param message DocumentCorpus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.IDocumentCorpus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DocumentCorpus message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.DocumentCorpus.verify|verify} messages.
+                             * @param message DocumentCorpus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.IDocumentCorpus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DocumentCorpus message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DocumentCorpus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.DocumentCorpus;
+
+                            /**
+                             * Decodes a DocumentCorpus message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DocumentCorpus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.DocumentCorpus;
+
+                            /**
+                             * Verifies a DocumentCorpus message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DocumentCorpus message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DocumentCorpus
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.DocumentCorpus;
+
+                            /**
+                             * Creates a plain object from a DocumentCorpus message. Also converts values to other types if specified.
+                             * @param message DocumentCorpus
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.DocumentCorpus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DocumentCorpus to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DocumentCorpus
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a MemoryCorpus. */
+                        interface IMemoryCorpus {
+
+                            /** MemoryCorpus llmParser */
+                            llmParser?: (google.cloud.aiplatform.v1beta1.RagFileParsingConfig.ILlmParser|null);
+                        }
+
+                        /** Represents a MemoryCorpus. */
+                        class MemoryCorpus implements IMemoryCorpus {
+
+                            /**
+                             * Constructs a new MemoryCorpus.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.IMemoryCorpus);
+
+                            /** MemoryCorpus llmParser. */
+                            public llmParser?: (google.cloud.aiplatform.v1beta1.RagFileParsingConfig.ILlmParser|null);
+
+                            /**
+                             * Creates a new MemoryCorpus instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns MemoryCorpus instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.IMemoryCorpus): google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.MemoryCorpus;
+
+                            /**
+                             * Encodes the specified MemoryCorpus message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.MemoryCorpus.verify|verify} messages.
+                             * @param message MemoryCorpus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.IMemoryCorpus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified MemoryCorpus message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.MemoryCorpus.verify|verify} messages.
+                             * @param message MemoryCorpus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.IMemoryCorpus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a MemoryCorpus message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns MemoryCorpus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.MemoryCorpus;
+
+                            /**
+                             * Decodes a MemoryCorpus message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns MemoryCorpus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.MemoryCorpus;
+
+                            /**
+                             * Verifies a MemoryCorpus message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a MemoryCorpus message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns MemoryCorpus
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.MemoryCorpus;
+
+                            /**
+                             * Creates a plain object from a MemoryCorpus message. Also converts values to other types if specified.
+                             * @param message MemoryCorpus
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.RagCorpus.CorpusTypeConfig.MemoryCorpus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this MemoryCorpus to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for MemoryCorpus
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
                 }
 
                 /** Properties of a RagFile. */
