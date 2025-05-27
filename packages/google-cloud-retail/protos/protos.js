@@ -69834,6 +69834,452 @@
                         return PinControlMetadata;
                     })();
     
+                    v2alpha.StringList = (function() {
+    
+                        /**
+                         * Properties of a StringList.
+                         * @memberof google.cloud.retail.v2alpha
+                         * @interface IStringList
+                         * @property {Array.<string>|null} [values] StringList values
+                         */
+    
+                        /**
+                         * Constructs a new StringList.
+                         * @memberof google.cloud.retail.v2alpha
+                         * @classdesc Represents a StringList.
+                         * @implements IStringList
+                         * @constructor
+                         * @param {google.cloud.retail.v2alpha.IStringList=} [properties] Properties to set
+                         */
+                        function StringList(properties) {
+                            this.values = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StringList values.
+                         * @member {Array.<string>} values
+                         * @memberof google.cloud.retail.v2alpha.StringList
+                         * @instance
+                         */
+                        StringList.prototype.values = $util.emptyArray;
+    
+                        /**
+                         * Creates a new StringList instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.retail.v2alpha.StringList
+                         * @static
+                         * @param {google.cloud.retail.v2alpha.IStringList=} [properties] Properties to set
+                         * @returns {google.cloud.retail.v2alpha.StringList} StringList instance
+                         */
+                        StringList.create = function create(properties) {
+                            return new StringList(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StringList message. Does not implicitly {@link google.cloud.retail.v2alpha.StringList.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.retail.v2alpha.StringList
+                         * @static
+                         * @param {google.cloud.retail.v2alpha.IStringList} message StringList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StringList.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.values != null && message.values.length)
+                                for (var i = 0; i < message.values.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.values[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StringList message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.StringList.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.retail.v2alpha.StringList
+                         * @static
+                         * @param {google.cloud.retail.v2alpha.IStringList} message StringList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StringList.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StringList message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.retail.v2alpha.StringList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.retail.v2alpha.StringList} StringList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StringList.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2alpha.StringList();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.values && message.values.length))
+                                            message.values = [];
+                                        message.values.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StringList message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.retail.v2alpha.StringList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.retail.v2alpha.StringList} StringList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StringList.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StringList message.
+                         * @function verify
+                         * @memberof google.cloud.retail.v2alpha.StringList
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StringList.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.values != null && message.hasOwnProperty("values")) {
+                                if (!Array.isArray(message.values))
+                                    return "values: array expected";
+                                for (var i = 0; i < message.values.length; ++i)
+                                    if (!$util.isString(message.values[i]))
+                                        return "values: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StringList message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.retail.v2alpha.StringList
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.retail.v2alpha.StringList} StringList
+                         */
+                        StringList.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.retail.v2alpha.StringList)
+                                return object;
+                            var message = new $root.google.cloud.retail.v2alpha.StringList();
+                            if (object.values) {
+                                if (!Array.isArray(object.values))
+                                    throw TypeError(".google.cloud.retail.v2alpha.StringList.values: array expected");
+                                message.values = [];
+                                for (var i = 0; i < object.values.length; ++i)
+                                    message.values[i] = String(object.values[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StringList message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.retail.v2alpha.StringList
+                         * @static
+                         * @param {google.cloud.retail.v2alpha.StringList} message StringList
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StringList.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.values = [];
+                            if (message.values && message.values.length) {
+                                object.values = [];
+                                for (var j = 0; j < message.values.length; ++j)
+                                    object.values[j] = message.values[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StringList to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.retail.v2alpha.StringList
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StringList.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StringList
+                         * @function getTypeUrl
+                         * @memberof google.cloud.retail.v2alpha.StringList
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StringList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.retail.v2alpha.StringList";
+                        };
+    
+                        return StringList;
+                    })();
+    
+                    v2alpha.DoubleList = (function() {
+    
+                        /**
+                         * Properties of a DoubleList.
+                         * @memberof google.cloud.retail.v2alpha
+                         * @interface IDoubleList
+                         * @property {Array.<number>|null} [values] DoubleList values
+                         */
+    
+                        /**
+                         * Constructs a new DoubleList.
+                         * @memberof google.cloud.retail.v2alpha
+                         * @classdesc Represents a DoubleList.
+                         * @implements IDoubleList
+                         * @constructor
+                         * @param {google.cloud.retail.v2alpha.IDoubleList=} [properties] Properties to set
+                         */
+                        function DoubleList(properties) {
+                            this.values = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DoubleList values.
+                         * @member {Array.<number>} values
+                         * @memberof google.cloud.retail.v2alpha.DoubleList
+                         * @instance
+                         */
+                        DoubleList.prototype.values = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DoubleList instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.retail.v2alpha.DoubleList
+                         * @static
+                         * @param {google.cloud.retail.v2alpha.IDoubleList=} [properties] Properties to set
+                         * @returns {google.cloud.retail.v2alpha.DoubleList} DoubleList instance
+                         */
+                        DoubleList.create = function create(properties) {
+                            return new DoubleList(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DoubleList message. Does not implicitly {@link google.cloud.retail.v2alpha.DoubleList.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.retail.v2alpha.DoubleList
+                         * @static
+                         * @param {google.cloud.retail.v2alpha.IDoubleList} message DoubleList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DoubleList.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.values != null && message.values.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.values.length; ++i)
+                                    writer.double(message.values[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DoubleList message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.DoubleList.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.retail.v2alpha.DoubleList
+                         * @static
+                         * @param {google.cloud.retail.v2alpha.IDoubleList} message DoubleList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DoubleList.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DoubleList message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.retail.v2alpha.DoubleList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.retail.v2alpha.DoubleList} DoubleList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DoubleList.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2alpha.DoubleList();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.values && message.values.length))
+                                            message.values = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.values.push(reader.double());
+                                        } else
+                                            message.values.push(reader.double());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DoubleList message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.retail.v2alpha.DoubleList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.retail.v2alpha.DoubleList} DoubleList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DoubleList.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DoubleList message.
+                         * @function verify
+                         * @memberof google.cloud.retail.v2alpha.DoubleList
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DoubleList.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.values != null && message.hasOwnProperty("values")) {
+                                if (!Array.isArray(message.values))
+                                    return "values: array expected";
+                                for (var i = 0; i < message.values.length; ++i)
+                                    if (typeof message.values[i] !== "number")
+                                        return "values: number[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DoubleList message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.retail.v2alpha.DoubleList
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.retail.v2alpha.DoubleList} DoubleList
+                         */
+                        DoubleList.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.retail.v2alpha.DoubleList)
+                                return object;
+                            var message = new $root.google.cloud.retail.v2alpha.DoubleList();
+                            if (object.values) {
+                                if (!Array.isArray(object.values))
+                                    throw TypeError(".google.cloud.retail.v2alpha.DoubleList.values: array expected");
+                                message.values = [];
+                                for (var i = 0; i < object.values.length; ++i)
+                                    message.values[i] = Number(object.values[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DoubleList message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.retail.v2alpha.DoubleList
+                         * @static
+                         * @param {google.cloud.retail.v2alpha.DoubleList} message DoubleList
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DoubleList.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.values = [];
+                            if (message.values && message.values.length) {
+                                object.values = [];
+                                for (var j = 0; j < message.values.length; ++j)
+                                    object.values[j] = options.json && !isFinite(message.values[j]) ? String(message.values[j]) : message.values[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DoubleList to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.retail.v2alpha.DoubleList
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DoubleList.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DoubleList
+                         * @function getTypeUrl
+                         * @memberof google.cloud.retail.v2alpha.DoubleList
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DoubleList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.retail.v2alpha.DoubleList";
+                        };
+    
+                        return DoubleList;
+                    })();
+    
                     v2alpha.Promotion = (function() {
     
                         /**
@@ -74253,6 +74699,7 @@
                          * @memberof google.cloud.retail.v2alpha
                          * @interface IMerchantCenterFeedFilter
                          * @property {number|Long|null} [primaryFeedId] MerchantCenterFeedFilter primaryFeedId
+                         * @property {number|Long|null} [dataSourceId] MerchantCenterFeedFilter dataSourceId
                          * @property {string|null} [primaryFeedName] MerchantCenterFeedFilter primaryFeedName
                          */
     
@@ -74278,6 +74725,14 @@
                          * @instance
                          */
                         MerchantCenterFeedFilter.prototype.primaryFeedId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * MerchantCenterFeedFilter dataSourceId.
+                         * @member {number|Long} dataSourceId
+                         * @memberof google.cloud.retail.v2alpha.MerchantCenterFeedFilter
+                         * @instance
+                         */
+                        MerchantCenterFeedFilter.prototype.dataSourceId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
                          * MerchantCenterFeedFilter primaryFeedName.
@@ -74315,6 +74770,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int64(message.primaryFeedId);
                             if (message.primaryFeedName != null && Object.hasOwnProperty.call(message, "primaryFeedName"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.primaryFeedName);
+                            if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.dataSourceId);
                             return writer;
                         };
     
@@ -74351,6 +74808,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.primaryFeedId = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.dataSourceId = reader.int64();
                                         break;
                                     }
                                 case 2: {
@@ -74395,6 +74856,9 @@
                             if (message.primaryFeedId != null && message.hasOwnProperty("primaryFeedId"))
                                 if (!$util.isInteger(message.primaryFeedId) && !(message.primaryFeedId && $util.isInteger(message.primaryFeedId.low) && $util.isInteger(message.primaryFeedId.high)))
                                     return "primaryFeedId: integer|Long expected";
+                            if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
+                                if (!$util.isInteger(message.dataSourceId) && !(message.dataSourceId && $util.isInteger(message.dataSourceId.low) && $util.isInteger(message.dataSourceId.high)))
+                                    return "dataSourceId: integer|Long expected";
                             if (message.primaryFeedName != null && message.hasOwnProperty("primaryFeedName"))
                                 if (!$util.isString(message.primaryFeedName))
                                     return "primaryFeedName: string expected";
@@ -74422,6 +74886,15 @@
                                     message.primaryFeedId = object.primaryFeedId;
                                 else if (typeof object.primaryFeedId === "object")
                                     message.primaryFeedId = new $util.LongBits(object.primaryFeedId.low >>> 0, object.primaryFeedId.high >>> 0).toNumber();
+                            if (object.dataSourceId != null)
+                                if ($util.Long)
+                                    (message.dataSourceId = $util.Long.fromValue(object.dataSourceId)).unsigned = false;
+                                else if (typeof object.dataSourceId === "string")
+                                    message.dataSourceId = parseInt(object.dataSourceId, 10);
+                                else if (typeof object.dataSourceId === "number")
+                                    message.dataSourceId = object.dataSourceId;
+                                else if (typeof object.dataSourceId === "object")
+                                    message.dataSourceId = new $util.LongBits(object.dataSourceId.low >>> 0, object.dataSourceId.high >>> 0).toNumber();
                             if (object.primaryFeedName != null)
                                 message.primaryFeedName = String(object.primaryFeedName);
                             return message;
@@ -74447,6 +74920,11 @@
                                 } else
                                     object.primaryFeedId = options.longs === String ? "0" : 0;
                                 object.primaryFeedName = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.dataSourceId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.dataSourceId = options.longs === String ? "0" : 0;
                             }
                             if (message.primaryFeedId != null && message.hasOwnProperty("primaryFeedId"))
                                 if (typeof message.primaryFeedId === "number")
@@ -74455,6 +74933,11 @@
                                     object.primaryFeedId = options.longs === String ? $util.Long.prototype.toString.call(message.primaryFeedId) : options.longs === Number ? new $util.LongBits(message.primaryFeedId.low >>> 0, message.primaryFeedId.high >>> 0).toNumber() : message.primaryFeedId;
                             if (message.primaryFeedName != null && message.hasOwnProperty("primaryFeedName"))
                                 object.primaryFeedName = message.primaryFeedName;
+                            if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
+                                if (typeof message.dataSourceId === "number")
+                                    object.dataSourceId = options.longs === String ? String(message.dataSourceId) : message.dataSourceId;
+                                else
+                                    object.dataSourceId = options.longs === String ? $util.Long.prototype.toString.call(message.dataSourceId) : options.longs === Number ? new $util.LongBits(message.dataSourceId.low >>> 0, message.dataSourceId.high >>> 0).toNumber() : message.dataSourceId;
                             return object;
                         };
     
@@ -87695,6 +88178,7 @@
                          * @property {string|null} [languageCode] SearchRequest languageCode
                          * @property {string|null} [regionCode] SearchRequest regionCode
                          * @property {string|null} [placeId] SearchRequest placeId
+                         * @property {Object.<string,google.cloud.retail.v2alpha.IStringList>|null} [userAttributes] SearchRequest userAttributes
                          */
     
                         /**
@@ -87710,6 +88194,7 @@
                             this.variantRollupKeys = [];
                             this.pageCategories = [];
                             this.labels = {};
+                            this.userAttributes = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -87940,6 +88425,14 @@
                          */
                         SearchRequest.prototype.placeId = "";
     
+                        /**
+                         * SearchRequest userAttributes.
+                         * @member {Object.<string,google.cloud.retail.v2alpha.IStringList>} userAttributes
+                         * @memberof google.cloud.retail.v2alpha.SearchRequest
+                         * @instance
+                         */
+                        SearchRequest.prototype.userAttributes = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -88038,6 +88531,11 @@
                                 writer.uint32(/* id 44, wireType 2 =*/354).string(message.regionCode);
                             if (message.placeId != null && Object.hasOwnProperty.call(message, "placeId"))
                                 writer.uint32(/* id 46, wireType 2 =*/370).string(message.placeId);
+                            if (message.userAttributes != null && Object.hasOwnProperty.call(message, "userAttributes"))
+                                for (var keys = Object.keys(message.userAttributes), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 47, wireType 2 =*/378).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.retail.v2alpha.StringList.encode(message.userAttributes[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
                             return writer;
                         };
     
@@ -88207,6 +88705,29 @@
                                     }
                                 case 46: {
                                         message.placeId = reader.string();
+                                        break;
+                                    }
+                                case 47: {
+                                        if (message.userAttributes === $util.emptyObject)
+                                            message.userAttributes = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.retail.v2alpha.StringList.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.userAttributes[key] = value;
                                         break;
                                     }
                                 default:
@@ -88381,6 +88902,16 @@
                             if (message.placeId != null && message.hasOwnProperty("placeId"))
                                 if (!$util.isString(message.placeId))
                                     return "placeId: string expected";
+                            if (message.userAttributes != null && message.hasOwnProperty("userAttributes")) {
+                                if (!$util.isObject(message.userAttributes))
+                                    return "userAttributes: object expected";
+                                var key = Object.keys(message.userAttributes);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.retail.v2alpha.StringList.verify(message.userAttributes[key[i]]);
+                                    if (error)
+                                        return "userAttributes." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -88543,6 +89074,16 @@
                                 message.regionCode = String(object.regionCode);
                             if (object.placeId != null)
                                 message.placeId = String(object.placeId);
+                            if (object.userAttributes) {
+                                if (typeof object.userAttributes !== "object")
+                                    throw TypeError(".google.cloud.retail.v2alpha.SearchRequest.userAttributes: object expected");
+                                message.userAttributes = {};
+                                for (var keys = Object.keys(object.userAttributes), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.userAttributes[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.retail.v2alpha.SearchRequest.userAttributes: object expected");
+                                    message.userAttributes[keys[i]] = $root.google.cloud.retail.v2alpha.StringList.fromObject(object.userAttributes[keys[i]]);
+                                }
+                            }
                             return message;
                         };
     
@@ -88564,8 +89105,10 @@
                                 object.variantRollupKeys = [];
                                 object.pageCategories = [];
                             }
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.labels = {};
+                                object.userAttributes = {};
+                            }
                             if (options.defaults) {
                                 object.placement = "";
                                 object.branch = "";
@@ -88663,6 +89206,11 @@
                                 object.regionCode = message.regionCode;
                             if (message.placeId != null && message.hasOwnProperty("placeId"))
                                 object.placeId = message.placeId;
+                            if (message.userAttributes && (keys2 = Object.keys(message.userAttributes)).length) {
+                                object.userAttributes = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.userAttributes[keys2[j]] = $root.google.cloud.retail.v2alpha.StringList.toObject(message.userAttributes[keys2[j]], options);
+                            }
                             return object;
                         };
     
@@ -92620,6 +93168,7 @@
                              * @property {Object.<string,google.protobuf.IFieldMask>|null} [matchingVariantFields] SearchResult matchingVariantFields
                              * @property {Object.<string,google.protobuf.IValue>|null} [variantRollupValues] SearchResult variantRollupValues
                              * @property {Array.<string>|null} [personalLabels] SearchResult personalLabels
+                             * @property {Object.<string,google.cloud.retail.v2alpha.IDoubleList>|null} [modelScores] SearchResult modelScores
                              */
     
                             /**
@@ -92634,6 +93183,7 @@
                                 this.matchingVariantFields = {};
                                 this.variantRollupValues = {};
                                 this.personalLabels = [];
+                                this.modelScores = {};
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -92689,6 +93239,14 @@
                             SearchResult.prototype.personalLabels = $util.emptyArray;
     
                             /**
+                             * SearchResult modelScores.
+                             * @member {Object.<string,google.cloud.retail.v2alpha.IDoubleList>} modelScores
+                             * @memberof google.cloud.retail.v2alpha.SearchResponse.SearchResult
+                             * @instance
+                             */
+                            SearchResult.prototype.modelScores = $util.emptyObject;
+    
+                            /**
                              * Creates a new SearchResult instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.retail.v2alpha.SearchResponse.SearchResult
@@ -92731,6 +93289,11 @@
                                 if (message.personalLabels != null && message.personalLabels.length)
                                     for (var i = 0; i < message.personalLabels.length; ++i)
                                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.personalLabels[i]);
+                                if (message.modelScores != null && Object.hasOwnProperty.call(message, "modelScores"))
+                                    for (var keys = Object.keys(message.modelScores), i = 0; i < keys.length; ++i) {
+                                        writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                        $root.google.cloud.retail.v2alpha.DoubleList.encode(message.modelScores[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                    }
                                 return writer;
                             };
     
@@ -92829,6 +93392,29 @@
                                             message.personalLabels.push(reader.string());
                                             break;
                                         }
+                                    case 8: {
+                                            if (message.modelScores === $util.emptyObject)
+                                                message.modelScores = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = null;
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = $root.google.cloud.retail.v2alpha.DoubleList.decode(reader, reader.uint32());
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.modelScores[key] = value;
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -92902,6 +93488,16 @@
                                         if (!$util.isString(message.personalLabels[i]))
                                             return "personalLabels: string[] expected";
                                 }
+                                if (message.modelScores != null && message.hasOwnProperty("modelScores")) {
+                                    if (!$util.isObject(message.modelScores))
+                                        return "modelScores: object expected";
+                                    var key = Object.keys(message.modelScores);
+                                    for (var i = 0; i < key.length; ++i) {
+                                        var error = $root.google.cloud.retail.v2alpha.DoubleList.verify(message.modelScores[key[i]]);
+                                        if (error)
+                                            return "modelScores." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -92953,6 +93549,16 @@
                                     for (var i = 0; i < object.personalLabels.length; ++i)
                                         message.personalLabels[i] = String(object.personalLabels[i]);
                                 }
+                                if (object.modelScores) {
+                                    if (typeof object.modelScores !== "object")
+                                        throw TypeError(".google.cloud.retail.v2alpha.SearchResponse.SearchResult.modelScores: object expected");
+                                    message.modelScores = {};
+                                    for (var keys = Object.keys(object.modelScores), i = 0; i < keys.length; ++i) {
+                                        if (typeof object.modelScores[keys[i]] !== "object")
+                                            throw TypeError(".google.cloud.retail.v2alpha.SearchResponse.SearchResult.modelScores: object expected");
+                                        message.modelScores[keys[i]] = $root.google.cloud.retail.v2alpha.DoubleList.fromObject(object.modelScores[keys[i]]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -92974,6 +93580,7 @@
                                 if (options.objects || options.defaults) {
                                     object.matchingVariantFields = {};
                                     object.variantRollupValues = {};
+                                    object.modelScores = {};
                                 }
                                 if (options.defaults) {
                                     object.id = "";
@@ -93001,6 +93608,11 @@
                                     object.personalLabels = [];
                                     for (var j = 0; j < message.personalLabels.length; ++j)
                                         object.personalLabels[j] = message.personalLabels[j];
+                                }
+                                if (message.modelScores && (keys2 = Object.keys(message.modelScores)).length) {
+                                    object.modelScores = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.modelScores[keys2[j]] = $root.google.cloud.retail.v2alpha.DoubleList.toObject(message.modelScores[keys2[j]], options);
                                 }
                                 return object;
                             };
@@ -103253,6 +103865,7 @@
                              * @memberof google.cloud.retail.v2alpha.MerchantCenterAccountLink
                              * @interface IMerchantCenterFeedFilter
                              * @property {number|Long|null} [primaryFeedId] MerchantCenterFeedFilter primaryFeedId
+                             * @property {number|Long|null} [dataSourceId] MerchantCenterFeedFilter dataSourceId
                              * @property {string|null} [primaryFeedName] MerchantCenterFeedFilter primaryFeedName
                              */
     
@@ -103278,6 +103891,14 @@
                              * @instance
                              */
                             MerchantCenterFeedFilter.prototype.primaryFeedId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * MerchantCenterFeedFilter dataSourceId.
+                             * @member {number|Long} dataSourceId
+                             * @memberof google.cloud.retail.v2alpha.MerchantCenterAccountLink.MerchantCenterFeedFilter
+                             * @instance
+                             */
+                            MerchantCenterFeedFilter.prototype.dataSourceId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                             /**
                              * MerchantCenterFeedFilter primaryFeedName.
@@ -103315,6 +103936,8 @@
                                     writer.uint32(/* id 1, wireType 0 =*/8).int64(message.primaryFeedId);
                                 if (message.primaryFeedName != null && Object.hasOwnProperty.call(message, "primaryFeedName"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.primaryFeedName);
+                                if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.dataSourceId);
                                 return writer;
                             };
     
@@ -103351,6 +103974,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.primaryFeedId = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.dataSourceId = reader.int64();
                                             break;
                                         }
                                     case 2: {
@@ -103395,6 +104022,9 @@
                                 if (message.primaryFeedId != null && message.hasOwnProperty("primaryFeedId"))
                                     if (!$util.isInteger(message.primaryFeedId) && !(message.primaryFeedId && $util.isInteger(message.primaryFeedId.low) && $util.isInteger(message.primaryFeedId.high)))
                                         return "primaryFeedId: integer|Long expected";
+                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
+                                    if (!$util.isInteger(message.dataSourceId) && !(message.dataSourceId && $util.isInteger(message.dataSourceId.low) && $util.isInteger(message.dataSourceId.high)))
+                                        return "dataSourceId: integer|Long expected";
                                 if (message.primaryFeedName != null && message.hasOwnProperty("primaryFeedName"))
                                     if (!$util.isString(message.primaryFeedName))
                                         return "primaryFeedName: string expected";
@@ -103422,6 +104052,15 @@
                                         message.primaryFeedId = object.primaryFeedId;
                                     else if (typeof object.primaryFeedId === "object")
                                         message.primaryFeedId = new $util.LongBits(object.primaryFeedId.low >>> 0, object.primaryFeedId.high >>> 0).toNumber();
+                                if (object.dataSourceId != null)
+                                    if ($util.Long)
+                                        (message.dataSourceId = $util.Long.fromValue(object.dataSourceId)).unsigned = false;
+                                    else if (typeof object.dataSourceId === "string")
+                                        message.dataSourceId = parseInt(object.dataSourceId, 10);
+                                    else if (typeof object.dataSourceId === "number")
+                                        message.dataSourceId = object.dataSourceId;
+                                    else if (typeof object.dataSourceId === "object")
+                                        message.dataSourceId = new $util.LongBits(object.dataSourceId.low >>> 0, object.dataSourceId.high >>> 0).toNumber();
                                 if (object.primaryFeedName != null)
                                     message.primaryFeedName = String(object.primaryFeedName);
                                 return message;
@@ -103447,6 +104086,11 @@
                                     } else
                                         object.primaryFeedId = options.longs === String ? "0" : 0;
                                     object.primaryFeedName = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.dataSourceId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.dataSourceId = options.longs === String ? "0" : 0;
                                 }
                                 if (message.primaryFeedId != null && message.hasOwnProperty("primaryFeedId"))
                                     if (typeof message.primaryFeedId === "number")
@@ -103455,6 +104099,11 @@
                                         object.primaryFeedId = options.longs === String ? $util.Long.prototype.toString.call(message.primaryFeedId) : options.longs === Number ? new $util.LongBits(message.primaryFeedId.low >>> 0, message.primaryFeedId.high >>> 0).toNumber() : message.primaryFeedId;
                                 if (message.primaryFeedName != null && message.hasOwnProperty("primaryFeedName"))
                                     object.primaryFeedName = message.primaryFeedName;
+                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
+                                    if (typeof message.dataSourceId === "number")
+                                        object.dataSourceId = options.longs === String ? String(message.dataSourceId) : message.dataSourceId;
+                                    else
+                                        object.dataSourceId = options.longs === String ? $util.Long.prototype.toString.call(message.dataSourceId) : options.longs === Number ? new $util.LongBits(message.dataSourceId.low >>> 0, message.dataSourceId.high >>> 0).toNumber() : message.dataSourceId;
                                 return object;
                             };
     

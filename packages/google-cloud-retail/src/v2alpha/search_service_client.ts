@@ -758,6 +758,27 @@ export class SearchServiceClient {
    *   product's
    *   {@link protos.google.cloud.retail.v2alpha.LocalInventory.place_id|LocalInventory.place_id}
    *   for revenue optimization.
+   * @param {number[]} [request.userAttributes]
+   *   Optional. The user attributes that could be used for personalization of
+   *   search results.
+   *   * Populate at most 100 key-value pairs per query.
+   *   * Only supports string keys and repeated string values.
+   *   * Duplcate keys are not allowed within a single query.
+   *
+   *   Example:
+   *      user_attributes: [
+   *       { key: "pets"
+   *         value {
+   *           values: "dog"
+   *           values: "cat"
+   *         }
+   *       },
+   *       { key: "state"
+   *         value {
+   *           values: "CA"
+   *         }
+   *       }
+   *      ]
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1146,6 +1167,27 @@ export class SearchServiceClient {
    *   product's
    *   {@link protos.google.cloud.retail.v2alpha.LocalInventory.place_id|LocalInventory.place_id}
    *   for revenue optimization.
+   * @param {number[]} [request.userAttributes]
+   *   Optional. The user attributes that could be used for personalization of
+   *   search results.
+   *   * Populate at most 100 key-value pairs per query.
+   *   * Only supports string keys and repeated string values.
+   *   * Duplcate keys are not allowed within a single query.
+   *
+   *   Example:
+   *      user_attributes: [
+   *       { key: "pets"
+   *         value {
+   *           values: "dog"
+   *           values: "cat"
+   *         }
+   *       },
+   *       { key: "state"
+   *         value {
+   *           values: "CA"
+   *         }
+   *       }
+   *      ]
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1467,6 +1509,27 @@ export class SearchServiceClient {
    *   product's
    *   {@link protos.google.cloud.retail.v2alpha.LocalInventory.place_id|LocalInventory.place_id}
    *   for revenue optimization.
+   * @param {number[]} [request.userAttributes]
+   *   Optional. The user attributes that could be used for personalization of
+   *   search results.
+   *   * Populate at most 100 key-value pairs per query.
+   *   * Only supports string keys and repeated string values.
+   *   * Duplcate keys are not allowed within a single query.
+   *
+   *   Example:
+   *      user_attributes: [
+   *       { key: "pets"
+   *         value {
+   *           values: "dog"
+   *           values: "cat"
+   *         }
+   *       },
+   *       { key: "state"
+   *         value {
+   *           values: "CA"
+   *         }
+   *       }
+   *      ]
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
