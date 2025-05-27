@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/apphub-v0.4.1...apphub-v0.5.0) (2025-05-09)
+
+
+### Features
+
+* [apphub] add enum `Type.GLOBAL` ([#6215](https://github.com/googleapis/google-cloud-node/issues/6215)) ([5b4b0d3](https://github.com/googleapis/google-cloud-node/commit/5b4b0d3fc31b656fcbbb0661cb810b9278207ba2))
+
 ## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/apphub-v0.4.0...apphub-v0.4.1) (2025-03-19)
 
 

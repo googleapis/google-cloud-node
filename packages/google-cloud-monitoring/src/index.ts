@@ -33,25 +33,7 @@ type ServiceMonitoringServiceClient = v3.ServiceMonitoringServiceClient;
 const UptimeCheckServiceClient = v3.UptimeCheckServiceClient;
 type UptimeCheckServiceClient = v3.UptimeCheckServiceClient;
 
-export {
-  v3,
-  AlertPolicyServiceClient,
-  GroupServiceClient,
-  MetricServiceClient,
-  NotificationChannelServiceClient,
-  QueryServiceClient,
-  ServiceMonitoringServiceClient,
-  UptimeCheckServiceClient,
-};
-export default {
-  v3,
-  AlertPolicyServiceClient,
-  GroupServiceClient,
-  MetricServiceClient,
-  NotificationChannelServiceClient,
-  QueryServiceClient,
-  ServiceMonitoringServiceClient,
-  UptimeCheckServiceClient,
-};
+export {v3, AlertPolicyServiceClient, GroupServiceClient, MetricServiceClient, NotificationChannelServiceClient, QueryServiceClient, ServiceMonitoringServiceClient, UptimeCheckServiceClient};
+export default {v3, AlertPolicyServiceClient, GroupServiceClient, MetricServiceClient, NotificationChannelServiceClient, QueryServiceClient, ServiceMonitoringServiceClient, UptimeCheckServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
+import "google/cloud/aiplatform/v1beta1/io.proto";
 import "google/cloud/aiplatform/v1beta1/machine_resources.proto";
 import "google/cloud/aiplatform/v1beta1/model.proto";
 import "google/cloud/aiplatform/v1beta1/operation.proto";
@@ -72,14 +73,49 @@ service ModelGardenService {
   // Deploys publisher models.
   rpc DeployPublisherModel(DeployPublisherModelRequest)
       returns (google.longrunning.Operation) {
+    option deprecated = true;
     option (google.api.http) = {
-      post: "/v1beta1/{destination=projects/*/locations/*}:deploy"
+      post: "/v1beta1/{destination=projects/*/locations/*}:deployPublisherModel"
       body: "*"
     };
     option (google.longrunning.operation_info) = {
       response_type: "DeployPublisherModelResponse"
       metadata_type: "DeployPublisherModelOperationMetadata"
     };
+  }
+
+  // Exports a publisher model to a user provided Google Cloud Storage bucket.
+  rpc ExportPublisherModel(ExportPublisherModelRequest)
+      returns (google.longrunning.Operation) {
+    option (google.api.http) = {
+      post: "/v1beta1/{parent=projects/*/locations/*}/{name=publishers/*/models/*}:export"
+      body: "*"
+    };
+    option (google.longrunning.operation_info) = {
+      response_type: "ExportPublisherModelResponse"
+      metadata_type: "ExportPublisherModelOperationMetadata"
+    };
+  }
+
+  // Checks the EULA acceptance status of a publisher model.
+  rpc CheckPublisherModelEulaAcceptance(
+      CheckPublisherModelEulaAcceptanceRequest)
+      returns (PublisherModelEulaAcceptance) {
+    option (google.api.http) = {
+      post: "/v1beta1/{parent=projects/*}/modelGardenEula:check"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,publisher_model";
+  }
+
+  // Accepts the EULA acceptance status of a publisher model.
+  rpc AcceptPublisherModelEula(AcceptPublisherModelEulaRequest)
+      returns (PublisherModelEulaAcceptance) {
+    option (google.api.http) = {
+      post: "/v1beta1/{parent=projects/*}/modelGardenEula:accept"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,publisher_model";
   }
 }
 
@@ -125,6 +161,11 @@ message GetPublisherModelRequest {
 
   // Optional. Token used to access Hugging Face gated models.
   string hugging_face_token = 6 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Whether to cnclude the deployment configs from the equivalent
+  // Model Garden model if the requested model is a Hugging Face model.
+  bool include_equivalent_model_garden_model_deployment_configs = 7
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Request message for
@@ -273,11 +314,15 @@ message DeployRequest {
 // Request message for
 // [ModelGardenService.DeployPublisherModel][google.cloud.aiplatform.v1beta1.ModelGardenService.DeployPublisherModel].
 message DeployPublisherModelRequest {
-  // Required. The name of the PublisherModel resource.
+  option deprecated = true;
+
+  // Required. The model to deploy.
   // Format:
-  // `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
-  // `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`
-  // or Hugging Face model ID like `google/gemma-2-2b-it`.
+  // 1. `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
+  // `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`.
+  // 2. Hugging Face model ID like `google/gemma-2-2b-it`.
+  // 3. Custom model Google Cloud Storage URI like `gs://bucket`.
+  // 4. Custom model zip file like `https://example.com/a.zip`.
   string model = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Required. The resource name of the Location to deploy the model in.
@@ -347,6 +392,8 @@ message DeployResponse {
 // Response message for
 // [ModelGardenService.DeployPublisherModel][google.cloud.aiplatform.v1beta1.ModelGardenService.DeployPublisherModel].
 message DeployPublisherModelResponse {
+  option deprecated = true;
+
   // Output only. The name of the PublisherModel resource.
   // Format:
   // `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
@@ -402,11 +449,16 @@ message DeployOperationMetadata {
 
   // Output only. The project number where the deploy model request is sent.
   int64 project_number = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The model id to be used at query time.
+  string model_id = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Runtime operation information for
 // [ModelGardenService.DeployPublisherModel][google.cloud.aiplatform.v1beta1.ModelGardenService.DeployPublisherModel].
 message DeployPublisherModelOperationMetadata {
+  option deprecated = true;
+
   // The operation generic information.
   GenericOperationMetadata generic_metadata = 1;
 
@@ -432,4 +484,106 @@ message DeployPublisherModelOperationMetadata {
 
   // Output only. The project number where the deploy model request is sent.
   int64 project_number = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Response message for
+// [ModelGardenService.ExportPublisherModel][google.cloud.aiplatform.v1beta1.ModelGardenService.ExportPublisherModel].
+message ExportPublisherModelResponse {
+  // The name of the PublisherModel resource.
+  // Format:
+  // `publishers/{publisher}/models/{publisher_model}@{version_id}`
+  string publisher_model = 1;
+
+  // The destination uri of the model weights.
+  string destination_uri = 2;
+}
+
+// Runtime operation information for
+// [ModelGardenService.ExportPublisherModel][google.cloud.aiplatform.v1beta1.ModelGardenService.ExportPublisherModel].
+message ExportPublisherModelOperationMetadata {
+  // The operation generic information.
+  GenericOperationMetadata generic_metadata = 1;
+}
+
+// Request message for
+// [ModelGardenService.ExportPublisherModel][google.cloud.aiplatform.v1beta1.ModelGardenService.ExportPublisherModel].
+message ExportPublisherModelRequest {
+  // Required. The name of the PublisherModel resource.
+  // Format:
+  // `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
+  // `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The target where we are exporting the model weights to
+  GcsDestination destination = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The Location to export the model weights from
+  // Format: `projects/{project}/locations/{location}`
+  string parent = 3 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "locations.googleapis.com/Location"
+    }
+  ];
+}
+
+// Request message for
+// [ModelGardenService.CheckPublisherModelEula][].
+message CheckPublisherModelEulaAcceptanceRequest {
+  // Required. The project requesting access for named model. The format is
+  // `projects/{project}`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "cloudresourcemanager.googleapis.com/Project"
+    }
+  ];
+
+  // Required. The name of the PublisherModel resource.
+  // Format:
+  // `publishers/{publisher}/models/{publisher_model}`, or
+  // `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}`
+  string publisher_model = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "aiplatform.googleapis.com/PublisherModel"
+    }
+  ];
+}
+
+// Request message for
+// [ModelGardenService.AcceptPublisherModelEula][google.cloud.aiplatform.v1beta1.ModelGardenService.AcceptPublisherModelEula].
+message AcceptPublisherModelEulaRequest {
+  // Required. The project requesting access for named model. The format is
+  // `projects/{project}`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "cloudresourcemanager.googleapis.com/Project"
+    }
+  ];
+
+  // Required. The name of the PublisherModel resource.
+  // Format:
+  // `publishers/{publisher}/models/{publisher_model}`, or
+  // `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}`
+  string publisher_model = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "aiplatform.googleapis.com/PublisherModel"
+    }
+  ];
+}
+
+// Response message for
+// [ModelGardenService.UpdatePublisherModelEula][].
+message PublisherModelEulaAcceptance {
+  // The project number requesting access for named model.
+  int64 project_number = 1;
+
+  // The publisher model resource name.
+  string publisher_model = 2;
+
+  // The EULA content acceptance status.
+  bool publisher_model_eula_acked = 3;
 }

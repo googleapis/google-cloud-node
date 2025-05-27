@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package google.cloud.aiplatform.v1;
 import "google/api/field_behavior.proto";
 import "google/cloud/aiplatform/v1/openapi.proto";
 import "google/cloud/aiplatform/v1/tool.proto";
+import "google/cloud/aiplatform/v1/vertex_rag_data.proto";
 import "google/protobuf/duration.proto";
 import "google/type/date.proto";
 
@@ -47,8 +48,9 @@ enum HarmCategory {
   // The harm category is sexually explicit content.
   HARM_CATEGORY_SEXUALLY_EXPLICIT = 4;
 
+  // Deprecated: Election filter is not longer supported.
   // The harm category is civic integrity.
-  HARM_CATEGORY_CIVIC_INTEGRITY = 5;
+  HARM_CATEGORY_CIVIC_INTEGRITY = 5 [deprecated = true];
 }
 
 // Content Part modality
@@ -210,6 +212,13 @@ message GenerationConfig {
     }
   }
 
+  // Config for thinking features.
+  message ThinkingConfig {
+    // Optional. Indicates the thinking budget in tokens.
+    // This is only applied when enable_thinking is true.
+    optional int32 thinking_budget = 3 [(google.api.field_behavior) = OPTIONAL];
+  }
+
   // Optional. Controls the randomness of predictions.
   optional float temperature = 1 [(google.api.field_behavior) = OPTIONAL];
 
@@ -264,6 +273,11 @@ message GenerationConfig {
   // Optional. Routing configuration.
   optional RoutingConfig routing_config = 17
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Config for thinking features.
+  // An error will be returned if this field is set for models that don't
+  // support thinking.
+  ThinkingConfig thinking_config = 25 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Safety settings.
@@ -538,6 +552,13 @@ message GroundingChunk {
 
   // Chunk from context retrieved by the retrieval tools.
   message RetrievedContext {
+    // Tool-specific details about the retrieved context.
+    oneof context_details {
+      // Additional context for the RAG retrieval result. This is only populated
+      // when using the RAG retrieval tool.
+      RagChunk rag_chunk = 4;
+    }
+
     // URI reference of the attribution.
     optional string uri = 1;
 

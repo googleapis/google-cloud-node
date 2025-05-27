@@ -3305,7 +3305,9 @@
                              * @property {google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig|null} [restrictedExportConfig] Listing restrictedExportConfig
                              * @property {google.cloud.bigquery.analyticshub.v1.DiscoveryType|null} [discoveryType] Listing discoveryType
                              * @property {google.cloud.bigquery.analyticshub.v1.SharedResourceType|null} [resourceType] Listing resourceType
+                             * @property {google.cloud.bigquery.analyticshub.v1.Listing.ICommercialInfo|null} [commercialInfo] Listing commercialInfo
                              * @property {boolean|null} [logLinkedDatasetQueryUserEmail] Listing logLinkedDatasetQueryUserEmail
+                             * @property {boolean|null} [allowOnlyMetadataSharing] Listing allowOnlyMetadataSharing
                              */
     
                             /**
@@ -3453,12 +3455,28 @@
                             Listing.prototype.resourceType = 0;
     
                             /**
+                             * Listing commercialInfo.
+                             * @member {google.cloud.bigquery.analyticshub.v1.Listing.ICommercialInfo|null|undefined} commercialInfo
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                             * @instance
+                             */
+                            Listing.prototype.commercialInfo = null;
+    
+                            /**
                              * Listing logLinkedDatasetQueryUserEmail.
                              * @member {boolean|null|undefined} logLinkedDatasetQueryUserEmail
                              * @memberof google.cloud.bigquery.analyticshub.v1.Listing
                              * @instance
                              */
                             Listing.prototype.logLinkedDatasetQueryUserEmail = null;
+    
+                            /**
+                             * Listing allowOnlyMetadataSharing.
+                             * @member {boolean|null|undefined} allowOnlyMetadataSharing
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                             * @instance
+                             */
+                            Listing.prototype.allowOnlyMetadataSharing = null;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -3486,6 +3504,17 @@
                             });
     
                             /**
+                             * Listing _commercialInfo.
+                             * @member {"commercialInfo"|undefined} _commercialInfo
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                             * @instance
+                             */
+                            Object.defineProperty(Listing.prototype, "_commercialInfo", {
+                                get: $util.oneOfGetter($oneOfFields = ["commercialInfo"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Listing _logLinkedDatasetQueryUserEmail.
                              * @member {"logLinkedDatasetQueryUserEmail"|undefined} _logLinkedDatasetQueryUserEmail
                              * @memberof google.cloud.bigquery.analyticshub.v1.Listing
@@ -3493,6 +3522,17 @@
                              */
                             Object.defineProperty(Listing.prototype, "_logLinkedDatasetQueryUserEmail", {
                                 get: $util.oneOfGetter($oneOfFields = ["logLinkedDatasetQueryUserEmail"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Listing _allowOnlyMetadataSharing.
+                             * @member {"allowOnlyMetadataSharing"|undefined} _allowOnlyMetadataSharing
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                             * @instance
+                             */
+                            Object.defineProperty(Listing.prototype, "_allowOnlyMetadataSharing", {
+                                get: $util.oneOfGetter($oneOfFields = ["allowOnlyMetadataSharing"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -3556,8 +3596,12 @@
                                     writer.uint32(/* id 15, wireType 0 =*/120).int32(message.resourceType);
                                 if (message.pubsubTopic != null && Object.hasOwnProperty.call(message, "pubsubTopic"))
                                     $root.google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource.encode(message.pubsubTopic, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                                if (message.commercialInfo != null && Object.hasOwnProperty.call(message, "commercialInfo"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.encode(message.commercialInfo, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                                 if (message.logLinkedDatasetQueryUserEmail != null && Object.hasOwnProperty.call(message, "logLinkedDatasetQueryUserEmail"))
                                     writer.uint32(/* id 18, wireType 0 =*/144).bool(message.logLinkedDatasetQueryUserEmail);
+                                if (message.allowOnlyMetadataSharing != null && Object.hasOwnProperty.call(message, "allowOnlyMetadataSharing"))
+                                    writer.uint32(/* id 19, wireType 0 =*/152).bool(message.allowOnlyMetadataSharing);
                                 return writer;
                             };
     
@@ -3663,8 +3707,16 @@
                                             message.resourceType = reader.int32();
                                             break;
                                         }
+                                    case 17: {
+                                            message.commercialInfo = $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     case 18: {
                                             message.logLinkedDatasetQueryUserEmail = reader.bool();
+                                            break;
+                                        }
+                                    case 19: {
+                                            message.allowOnlyMetadataSharing = reader.bool();
                                             break;
                                         }
                                     default:
@@ -3815,10 +3867,23 @@
                                     case 2:
                                         break;
                                     }
+                                if (message.commercialInfo != null && message.hasOwnProperty("commercialInfo")) {
+                                    properties._commercialInfo = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.verify(message.commercialInfo);
+                                        if (error)
+                                            return "commercialInfo." + error;
+                                    }
+                                }
                                 if (message.logLinkedDatasetQueryUserEmail != null && message.hasOwnProperty("logLinkedDatasetQueryUserEmail")) {
                                     properties._logLinkedDatasetQueryUserEmail = 1;
                                     if (typeof message.logLinkedDatasetQueryUserEmail !== "boolean")
                                         return "logLinkedDatasetQueryUserEmail: boolean expected";
+                                }
+                                if (message.allowOnlyMetadataSharing != null && message.hasOwnProperty("allowOnlyMetadataSharing")) {
+                                    properties._allowOnlyMetadataSharing = 1;
+                                    if (typeof message.allowOnlyMetadataSharing !== "boolean")
+                                        return "allowOnlyMetadataSharing: boolean expected";
                                 }
                                 return null;
                             };
@@ -4026,8 +4091,15 @@
                                     message.resourceType = 2;
                                     break;
                                 }
+                                if (object.commercialInfo != null) {
+                                    if (typeof object.commercialInfo !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.commercialInfo: object expected");
+                                    message.commercialInfo = $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.fromObject(object.commercialInfo);
+                                }
                                 if (object.logLinkedDatasetQueryUserEmail != null)
                                     message.logLinkedDatasetQueryUserEmail = Boolean(object.logLinkedDatasetQueryUserEmail);
+                                if (object.allowOnlyMetadataSharing != null)
+                                    message.allowOnlyMetadataSharing = Boolean(object.allowOnlyMetadataSharing);
                                 return message;
                             };
     
@@ -4110,10 +4182,20 @@
                                     if (options.oneofs)
                                         object.source = "pubsubTopic";
                                 }
+                                if (message.commercialInfo != null && message.hasOwnProperty("commercialInfo")) {
+                                    object.commercialInfo = $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.toObject(message.commercialInfo, options);
+                                    if (options.oneofs)
+                                        object._commercialInfo = "commercialInfo";
+                                }
                                 if (message.logLinkedDatasetQueryUserEmail != null && message.hasOwnProperty("logLinkedDatasetQueryUserEmail")) {
                                     object.logLinkedDatasetQueryUserEmail = message.logLinkedDatasetQueryUserEmail;
                                     if (options.oneofs)
                                         object._logLinkedDatasetQueryUserEmail = "logLinkedDatasetQueryUserEmail";
+                                }
+                                if (message.allowOnlyMetadataSharing != null && message.hasOwnProperty("allowOnlyMetadataSharing")) {
+                                    object.allowOnlyMetadataSharing = message.allowOnlyMetadataSharing;
+                                    if (options.oneofs)
+                                        object._allowOnlyMetadataSharing = "allowOnlyMetadataSharing";
                                 }
                                 return object;
                             };
@@ -4425,6 +4507,7 @@
                                      * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
                                      * @interface ISelectedResource
                                      * @property {string|null} [table] SelectedResource table
+                                     * @property {string|null} [routine] SelectedResource routine
                                      */
     
                                     /**
@@ -4450,17 +4533,25 @@
                                      */
                                     SelectedResource.prototype.table = null;
     
+                                    /**
+                                     * SelectedResource routine.
+                                     * @member {string|null|undefined} routine
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.SelectedResource
+                                     * @instance
+                                     */
+                                    SelectedResource.prototype.routine = null;
+    
                                     // OneOf field names bound to virtual getters and setters
                                     var $oneOfFields;
     
                                     /**
                                      * SelectedResource resource.
-                                     * @member {"table"|undefined} resource
+                                     * @member {"table"|"routine"|undefined} resource
                                      * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.SelectedResource
                                      * @instance
                                      */
                                     Object.defineProperty(SelectedResource.prototype, "resource", {
-                                        get: $util.oneOfGetter($oneOfFields = ["table"]),
+                                        get: $util.oneOfGetter($oneOfFields = ["table", "routine"]),
                                         set: $util.oneOfSetter($oneOfFields)
                                     });
     
@@ -4490,6 +4581,8 @@
                                             writer = $Writer.create();
                                         if (message.table != null && Object.hasOwnProperty.call(message, "table"))
                                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.table);
+                                        if (message.routine != null && Object.hasOwnProperty.call(message, "routine"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.routine);
                                         return writer;
                                     };
     
@@ -4526,6 +4619,10 @@
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.table = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.routine = reader.string();
                                                     break;
                                                 }
                                             default:
@@ -4569,6 +4666,13 @@
                                             if (!$util.isString(message.table))
                                                 return "table: string expected";
                                         }
+                                        if (message.routine != null && message.hasOwnProperty("routine")) {
+                                            if (properties.resource === 1)
+                                                return "resource: multiple values";
+                                            properties.resource = 1;
+                                            if (!$util.isString(message.routine))
+                                                return "routine: string expected";
+                                        }
                                         return null;
                                     };
     
@@ -4586,6 +4690,8 @@
                                         var message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.SelectedResource();
                                         if (object.table != null)
                                             message.table = String(object.table);
+                                        if (object.routine != null)
+                                            message.routine = String(object.routine);
                                         return message;
                                     };
     
@@ -4606,6 +4712,11 @@
                                             object.table = message.table;
                                             if (options.oneofs)
                                                 object.resource = "table";
+                                        }
+                                        if (message.routine != null && message.hasOwnProperty("routine")) {
+                                            object.routine = message.routine;
+                                            if (options.oneofs)
+                                                object.resource = "routine";
                                         }
                                         return object;
                                     };
@@ -5400,6 +5511,532 @@
                                 return RestrictedExportConfig;
                             })();
     
+                            Listing.CommercialInfo = (function() {
+    
+                                /**
+                                 * Properties of a CommercialInfo.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                                 * @interface ICommercialInfo
+                                 * @property {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.IGoogleCloudMarketplaceInfo|null} [cloudMarketplace] CommercialInfo cloudMarketplace
+                                 */
+    
+                                /**
+                                 * Constructs a new CommercialInfo.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                                 * @classdesc Represents a CommercialInfo.
+                                 * @implements ICommercialInfo
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Listing.ICommercialInfo=} [properties] Properties to set
+                                 */
+                                function CommercialInfo(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * CommercialInfo cloudMarketplace.
+                                 * @member {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.IGoogleCloudMarketplaceInfo|null|undefined} cloudMarketplace
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                 * @instance
+                                 */
+                                CommercialInfo.prototype.cloudMarketplace = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * CommercialInfo _cloudMarketplace.
+                                 * @member {"cloudMarketplace"|undefined} _cloudMarketplace
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                 * @instance
+                                 */
+                                Object.defineProperty(CommercialInfo.prototype, "_cloudMarketplace", {
+                                    get: $util.oneOfGetter($oneOfFields = ["cloudMarketplace"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new CommercialInfo instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Listing.ICommercialInfo=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo} CommercialInfo instance
+                                 */
+                                CommercialInfo.create = function create(properties) {
+                                    return new CommercialInfo(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified CommercialInfo message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Listing.ICommercialInfo} message CommercialInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CommercialInfo.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.cloudMarketplace != null && Object.hasOwnProperty.call(message, "cloudMarketplace"))
+                                        $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo.encode(message.cloudMarketplace, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified CommercialInfo message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Listing.ICommercialInfo} message CommercialInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CommercialInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a CommercialInfo message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo} CommercialInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CommercialInfo.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.cloudMarketplace = $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a CommercialInfo message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo} CommercialInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CommercialInfo.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a CommercialInfo message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                CommercialInfo.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.cloudMarketplace != null && message.hasOwnProperty("cloudMarketplace")) {
+                                        properties._cloudMarketplace = 1;
+                                        {
+                                            var error = $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo.verify(message.cloudMarketplace);
+                                            if (error)
+                                                return "cloudMarketplace." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a CommercialInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo} CommercialInfo
+                                 */
+                                CommercialInfo.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo)
+                                        return object;
+                                    var message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo();
+                                    if (object.cloudMarketplace != null) {
+                                        if (typeof object.cloudMarketplace !== "object")
+                                            throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.cloudMarketplace: object expected");
+                                        message.cloudMarketplace = $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo.fromObject(object.cloudMarketplace);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a CommercialInfo message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo} message CommercialInfo
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                CommercialInfo.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.cloudMarketplace != null && message.hasOwnProperty("cloudMarketplace")) {
+                                        object.cloudMarketplace = $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo.toObject(message.cloudMarketplace, options);
+                                        if (options.oneofs)
+                                            object._cloudMarketplace = "cloudMarketplace";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this CommercialInfo to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                CommercialInfo.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for CommercialInfo
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                CommercialInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo";
+                                };
+    
+                                CommercialInfo.GoogleCloudMarketplaceInfo = (function() {
+    
+                                    /**
+                                     * Properties of a GoogleCloudMarketplaceInfo.
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                     * @interface IGoogleCloudMarketplaceInfo
+                                     * @property {string|null} [service] GoogleCloudMarketplaceInfo service
+                                     * @property {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo.CommercialState|null} [commercialState] GoogleCloudMarketplaceInfo commercialState
+                                     */
+    
+                                    /**
+                                     * Constructs a new GoogleCloudMarketplaceInfo.
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo
+                                     * @classdesc Represents a GoogleCloudMarketplaceInfo.
+                                     * @implements IGoogleCloudMarketplaceInfo
+                                     * @constructor
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.IGoogleCloudMarketplaceInfo=} [properties] Properties to set
+                                     */
+                                    function GoogleCloudMarketplaceInfo(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * GoogleCloudMarketplaceInfo service.
+                                     * @member {string|null|undefined} service
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @instance
+                                     */
+                                    GoogleCloudMarketplaceInfo.prototype.service = null;
+    
+                                    /**
+                                     * GoogleCloudMarketplaceInfo commercialState.
+                                     * @member {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo.CommercialState|null|undefined} commercialState
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @instance
+                                     */
+                                    GoogleCloudMarketplaceInfo.prototype.commercialState = null;
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    /**
+                                     * GoogleCloudMarketplaceInfo _service.
+                                     * @member {"service"|undefined} _service
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @instance
+                                     */
+                                    Object.defineProperty(GoogleCloudMarketplaceInfo.prototype, "_service", {
+                                        get: $util.oneOfGetter($oneOfFields = ["service"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * GoogleCloudMarketplaceInfo _commercialState.
+                                     * @member {"commercialState"|undefined} _commercialState
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @instance
+                                     */
+                                    Object.defineProperty(GoogleCloudMarketplaceInfo.prototype, "_commercialState", {
+                                        get: $util.oneOfGetter($oneOfFields = ["commercialState"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new GoogleCloudMarketplaceInfo instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.IGoogleCloudMarketplaceInfo=} [properties] Properties to set
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo} GoogleCloudMarketplaceInfo instance
+                                     */
+                                    GoogleCloudMarketplaceInfo.create = function create(properties) {
+                                        return new GoogleCloudMarketplaceInfo(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified GoogleCloudMarketplaceInfo message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.IGoogleCloudMarketplaceInfo} message GoogleCloudMarketplaceInfo message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    GoogleCloudMarketplaceInfo.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
+                                        if (message.commercialState != null && Object.hasOwnProperty.call(message, "commercialState"))
+                                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.commercialState);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified GoogleCloudMarketplaceInfo message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.IGoogleCloudMarketplaceInfo} message GoogleCloudMarketplaceInfo message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    GoogleCloudMarketplaceInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a GoogleCloudMarketplaceInfo message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo} GoogleCloudMarketplaceInfo
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    GoogleCloudMarketplaceInfo.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.service = reader.string();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.commercialState = reader.int32();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a GoogleCloudMarketplaceInfo message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo} GoogleCloudMarketplaceInfo
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    GoogleCloudMarketplaceInfo.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a GoogleCloudMarketplaceInfo message.
+                                     * @function verify
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    GoogleCloudMarketplaceInfo.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.service != null && message.hasOwnProperty("service")) {
+                                            properties._service = 1;
+                                            if (!$util.isString(message.service))
+                                                return "service: string expected";
+                                        }
+                                        if (message.commercialState != null && message.hasOwnProperty("commercialState")) {
+                                            properties._commercialState = 1;
+                                            switch (message.commercialState) {
+                                            default:
+                                                return "commercialState: enum value expected";
+                                            case 0:
+                                            case 1:
+                                            case 2:
+                                                break;
+                                            }
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a GoogleCloudMarketplaceInfo message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo} GoogleCloudMarketplaceInfo
+                                     */
+                                    GoogleCloudMarketplaceInfo.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo)
+                                            return object;
+                                        var message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo();
+                                        if (object.service != null)
+                                            message.service = String(object.service);
+                                        switch (object.commercialState) {
+                                        default:
+                                            if (typeof object.commercialState === "number") {
+                                                message.commercialState = object.commercialState;
+                                                break;
+                                            }
+                                            break;
+                                        case "COMMERCIAL_STATE_UNSPECIFIED":
+                                        case 0:
+                                            message.commercialState = 0;
+                                            break;
+                                        case "ONBOARDING":
+                                        case 1:
+                                            message.commercialState = 1;
+                                            break;
+                                        case "ACTIVE":
+                                        case 2:
+                                            message.commercialState = 2;
+                                            break;
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a GoogleCloudMarketplaceInfo message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo} message GoogleCloudMarketplaceInfo
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    GoogleCloudMarketplaceInfo.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (message.service != null && message.hasOwnProperty("service")) {
+                                            object.service = message.service;
+                                            if (options.oneofs)
+                                                object._service = "service";
+                                        }
+                                        if (message.commercialState != null && message.hasOwnProperty("commercialState")) {
+                                            object.commercialState = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo.CommercialState[message.commercialState] === undefined ? message.commercialState : $root.google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo.CommercialState[message.commercialState] : message.commercialState;
+                                            if (options.oneofs)
+                                                object._commercialState = "commercialState";
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this GoogleCloudMarketplaceInfo to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    GoogleCloudMarketplaceInfo.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for GoogleCloudMarketplaceInfo
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    GoogleCloudMarketplaceInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo";
+                                    };
+    
+                                    /**
+                                     * CommercialState enum.
+                                     * @name google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo.CommercialState
+                                     * @enum {number}
+                                     * @property {number} COMMERCIAL_STATE_UNSPECIFIED=0 COMMERCIAL_STATE_UNSPECIFIED value
+                                     * @property {number} ONBOARDING=1 ONBOARDING value
+                                     * @property {number} ACTIVE=2 ACTIVE value
+                                     */
+                                    GoogleCloudMarketplaceInfo.CommercialState = (function() {
+                                        var valuesById = {}, values = Object.create(valuesById);
+                                        values[valuesById[0] = "COMMERCIAL_STATE_UNSPECIFIED"] = 0;
+                                        values[valuesById[1] = "ONBOARDING"] = 1;
+                                        values[valuesById[2] = "ACTIVE"] = 2;
+                                        return values;
+                                    })();
+    
+                                    return GoogleCloudMarketplaceInfo;
+                                })();
+    
+                                return CommercialInfo;
+                            })();
+    
                             /**
                              * State enum.
                              * @name google.cloud.bigquery.analyticshub.v1.Listing.State
@@ -5485,7 +6122,9 @@
                              * @property {string|null} [subscriberContact] Subscription subscriberContact
                              * @property {Array.<google.cloud.bigquery.analyticshub.v1.Subscription.ILinkedResource>|null} [linkedResources] Subscription linkedResources
                              * @property {google.cloud.bigquery.analyticshub.v1.SharedResourceType|null} [resourceType] Subscription resourceType
+                             * @property {google.cloud.bigquery.analyticshub.v1.Subscription.ICommercialInfo|null} [commercialInfo] Subscription commercialInfo
                              * @property {boolean|null} [logLinkedDatasetQueryUserEmail] Subscription logLinkedDatasetQueryUserEmail
+                             * @property {google.cloud.bigquery.analyticshub.v1.IDestinationDataset|null} [destinationDataset] Subscription destinationDataset
                              */
     
                             /**
@@ -5602,12 +6241,28 @@
                             Subscription.prototype.resourceType = 0;
     
                             /**
+                             * Subscription commercialInfo.
+                             * @member {google.cloud.bigquery.analyticshub.v1.Subscription.ICommercialInfo|null|undefined} commercialInfo
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Subscription
+                             * @instance
+                             */
+                            Subscription.prototype.commercialInfo = null;
+    
+                            /**
                              * Subscription logLinkedDatasetQueryUserEmail.
                              * @member {boolean|null|undefined} logLinkedDatasetQueryUserEmail
                              * @memberof google.cloud.bigquery.analyticshub.v1.Subscription
                              * @instance
                              */
                             Subscription.prototype.logLinkedDatasetQueryUserEmail = null;
+    
+                            /**
+                             * Subscription destinationDataset.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IDestinationDataset|null|undefined} destinationDataset
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Subscription
+                             * @instance
+                             */
+                            Subscription.prototype.destinationDataset = null;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -5686,8 +6341,12 @@
                                         $root.google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource.encode(message.linkedResources[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                 if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
                                     writer.uint32(/* id 12, wireType 0 =*/96).int32(message.resourceType);
+                                if (message.commercialInfo != null && Object.hasOwnProperty.call(message, "commercialInfo"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.encode(message.commercialInfo, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                                 if (message.logLinkedDatasetQueryUserEmail != null && Object.hasOwnProperty.call(message, "logLinkedDatasetQueryUserEmail"))
                                     writer.uint32(/* id 14, wireType 0 =*/112).bool(message.logLinkedDatasetQueryUserEmail);
+                                if (message.destinationDataset != null && Object.hasOwnProperty.call(message, "destinationDataset"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.encode(message.destinationDataset, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                                 return writer;
                             };
     
@@ -5791,8 +6450,16 @@
                                             message.resourceType = reader.int32();
                                             break;
                                         }
+                                    case 13: {
+                                            message.commercialInfo = $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     case 14: {
                                             message.logLinkedDatasetQueryUserEmail = reader.bool();
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.destinationDataset = $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -5903,10 +6570,20 @@
                                     case 2:
                                         break;
                                     }
+                                if (message.commercialInfo != null && message.hasOwnProperty("commercialInfo")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.verify(message.commercialInfo);
+                                    if (error)
+                                        return "commercialInfo." + error;
+                                }
                                 if (message.logLinkedDatasetQueryUserEmail != null && message.hasOwnProperty("logLinkedDatasetQueryUserEmail")) {
                                     properties._logLinkedDatasetQueryUserEmail = 1;
                                     if (typeof message.logLinkedDatasetQueryUserEmail !== "boolean")
                                         return "logLinkedDatasetQueryUserEmail: boolean expected";
+                                }
+                                if (message.destinationDataset != null && message.hasOwnProperty("destinationDataset")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.verify(message.destinationDataset);
+                                    if (error)
+                                        return "destinationDataset." + error;
                                 }
                                 return null;
                             };
@@ -6009,8 +6686,18 @@
                                     message.resourceType = 2;
                                     break;
                                 }
+                                if (object.commercialInfo != null) {
+                                    if (typeof object.commercialInfo !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.Subscription.commercialInfo: object expected");
+                                    message.commercialInfo = $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.fromObject(object.commercialInfo);
+                                }
                                 if (object.logLinkedDatasetQueryUserEmail != null)
                                     message.logLinkedDatasetQueryUserEmail = Boolean(object.logLinkedDatasetQueryUserEmail);
+                                if (object.destinationDataset != null) {
+                                    if (typeof object.destinationDataset !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.Subscription.destinationDataset: object expected");
+                                    message.destinationDataset = $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.fromObject(object.destinationDataset);
+                                }
                                 return message;
                             };
     
@@ -6040,6 +6727,8 @@
                                     object.subscriberContact = "";
                                     object.organizationDisplayName = "";
                                     object.resourceType = options.enums === String ? "SHARED_RESOURCE_TYPE_UNSPECIFIED" : 0;
+                                    object.commercialInfo = null;
+                                    object.destinationDataset = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -6078,11 +6767,15 @@
                                 }
                                 if (message.resourceType != null && message.hasOwnProperty("resourceType"))
                                     object.resourceType = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.SharedResourceType[message.resourceType] === undefined ? message.resourceType : $root.google.cloud.bigquery.analyticshub.v1.SharedResourceType[message.resourceType] : message.resourceType;
+                                if (message.commercialInfo != null && message.hasOwnProperty("commercialInfo"))
+                                    object.commercialInfo = $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.toObject(message.commercialInfo, options);
                                 if (message.logLinkedDatasetQueryUserEmail != null && message.hasOwnProperty("logLinkedDatasetQueryUserEmail")) {
                                     object.logLinkedDatasetQueryUserEmail = message.logLinkedDatasetQueryUserEmail;
                                     if (options.oneofs)
                                         object._logLinkedDatasetQueryUserEmail = "logLinkedDatasetQueryUserEmail";
                                 }
+                                if (message.destinationDataset != null && message.hasOwnProperty("destinationDataset"))
+                                    object.destinationDataset = $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.toObject(message.destinationDataset, options);
                                 return object;
                             };
     
@@ -6384,6 +7077,417 @@
                                 };
     
                                 return LinkedResource;
+                            })();
+    
+                            Subscription.CommercialInfo = (function() {
+    
+                                /**
+                                 * Properties of a CommercialInfo.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription
+                                 * @interface ICommercialInfo
+                                 * @property {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.IGoogleCloudMarketplaceInfo|null} [cloudMarketplace] CommercialInfo cloudMarketplace
+                                 */
+    
+                                /**
+                                 * Constructs a new CommercialInfo.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription
+                                 * @classdesc Represents a CommercialInfo.
+                                 * @implements ICommercialInfo
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Subscription.ICommercialInfo=} [properties] Properties to set
+                                 */
+                                function CommercialInfo(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * CommercialInfo cloudMarketplace.
+                                 * @member {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.IGoogleCloudMarketplaceInfo|null|undefined} cloudMarketplace
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                 * @instance
+                                 */
+                                CommercialInfo.prototype.cloudMarketplace = null;
+    
+                                /**
+                                 * Creates a new CommercialInfo instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Subscription.ICommercialInfo=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo} CommercialInfo instance
+                                 */
+                                CommercialInfo.create = function create(properties) {
+                                    return new CommercialInfo(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified CommercialInfo message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Subscription.ICommercialInfo} message CommercialInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CommercialInfo.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.cloudMarketplace != null && Object.hasOwnProperty.call(message, "cloudMarketplace"))
+                                        $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo.encode(message.cloudMarketplace, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified CommercialInfo message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Subscription.ICommercialInfo} message CommercialInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CommercialInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a CommercialInfo message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo} CommercialInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CommercialInfo.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.cloudMarketplace = $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a CommercialInfo message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo} CommercialInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CommercialInfo.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a CommercialInfo message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                CommercialInfo.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.cloudMarketplace != null && message.hasOwnProperty("cloudMarketplace")) {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo.verify(message.cloudMarketplace);
+                                        if (error)
+                                            return "cloudMarketplace." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a CommercialInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo} CommercialInfo
+                                 */
+                                CommercialInfo.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo)
+                                        return object;
+                                    var message = new $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo();
+                                    if (object.cloudMarketplace != null) {
+                                        if (typeof object.cloudMarketplace !== "object")
+                                            throw TypeError(".google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.cloudMarketplace: object expected");
+                                        message.cloudMarketplace = $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo.fromObject(object.cloudMarketplace);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a CommercialInfo message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo} message CommercialInfo
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                CommercialInfo.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.cloudMarketplace = null;
+                                    if (message.cloudMarketplace != null && message.hasOwnProperty("cloudMarketplace"))
+                                        object.cloudMarketplace = $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo.toObject(message.cloudMarketplace, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this CommercialInfo to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                CommercialInfo.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for CommercialInfo
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                CommercialInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo";
+                                };
+    
+                                CommercialInfo.GoogleCloudMarketplaceInfo = (function() {
+    
+                                    /**
+                                     * Properties of a GoogleCloudMarketplaceInfo.
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                     * @interface IGoogleCloudMarketplaceInfo
+                                     * @property {string|null} [order] GoogleCloudMarketplaceInfo order
+                                     */
+    
+                                    /**
+                                     * Constructs a new GoogleCloudMarketplaceInfo.
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo
+                                     * @classdesc Represents a GoogleCloudMarketplaceInfo.
+                                     * @implements IGoogleCloudMarketplaceInfo
+                                     * @constructor
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.IGoogleCloudMarketplaceInfo=} [properties] Properties to set
+                                     */
+                                    function GoogleCloudMarketplaceInfo(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * GoogleCloudMarketplaceInfo order.
+                                     * @member {string} order
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @instance
+                                     */
+                                    GoogleCloudMarketplaceInfo.prototype.order = "";
+    
+                                    /**
+                                     * Creates a new GoogleCloudMarketplaceInfo instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.IGoogleCloudMarketplaceInfo=} [properties] Properties to set
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo} GoogleCloudMarketplaceInfo instance
+                                     */
+                                    GoogleCloudMarketplaceInfo.create = function create(properties) {
+                                        return new GoogleCloudMarketplaceInfo(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified GoogleCloudMarketplaceInfo message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.IGoogleCloudMarketplaceInfo} message GoogleCloudMarketplaceInfo message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    GoogleCloudMarketplaceInfo.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.order != null && Object.hasOwnProperty.call(message, "order"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.order);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified GoogleCloudMarketplaceInfo message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.IGoogleCloudMarketplaceInfo} message GoogleCloudMarketplaceInfo message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    GoogleCloudMarketplaceInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a GoogleCloudMarketplaceInfo message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo} GoogleCloudMarketplaceInfo
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    GoogleCloudMarketplaceInfo.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.order = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a GoogleCloudMarketplaceInfo message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo} GoogleCloudMarketplaceInfo
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    GoogleCloudMarketplaceInfo.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a GoogleCloudMarketplaceInfo message.
+                                     * @function verify
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    GoogleCloudMarketplaceInfo.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.order != null && message.hasOwnProperty("order"))
+                                            if (!$util.isString(message.order))
+                                                return "order: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a GoogleCloudMarketplaceInfo message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo} GoogleCloudMarketplaceInfo
+                                     */
+                                    GoogleCloudMarketplaceInfo.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo)
+                                            return object;
+                                        var message = new $root.google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo();
+                                        if (object.order != null)
+                                            message.order = String(object.order);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a GoogleCloudMarketplaceInfo message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo} message GoogleCloudMarketplaceInfo
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    GoogleCloudMarketplaceInfo.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.order = "";
+                                        if (message.order != null && message.hasOwnProperty("order"))
+                                            object.order = message.order;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this GoogleCloudMarketplaceInfo to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    GoogleCloudMarketplaceInfo.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for GoogleCloudMarketplaceInfo
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    GoogleCloudMarketplaceInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo";
+                                    };
+    
+                                    return GoogleCloudMarketplaceInfo;
+                                })();
+    
+                                return CommercialInfo;
                             })();
     
                             /**
@@ -9501,6 +10605,7 @@
                              * @memberof google.cloud.bigquery.analyticshub.v1
                              * @interface IDeleteListingRequest
                              * @property {string|null} [name] DeleteListingRequest name
+                             * @property {boolean|null} [deleteCommercial] DeleteListingRequest deleteCommercial
                              */
     
                             /**
@@ -9525,6 +10630,14 @@
                              * @instance
                              */
                             DeleteListingRequest.prototype.name = "";
+    
+                            /**
+                             * DeleteListingRequest deleteCommercial.
+                             * @member {boolean} deleteCommercial
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteListingRequest
+                             * @instance
+                             */
+                            DeleteListingRequest.prototype.deleteCommercial = false;
     
                             /**
                              * Creates a new DeleteListingRequest instance using the specified properties.
@@ -9552,6 +10665,8 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.deleteCommercial != null && Object.hasOwnProperty.call(message, "deleteCommercial"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.deleteCommercial);
                                 return writer;
                             };
     
@@ -9588,6 +10703,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.deleteCommercial = reader.bool();
                                             break;
                                         }
                                     default:
@@ -9628,6 +10747,9 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.deleteCommercial != null && message.hasOwnProperty("deleteCommercial"))
+                                    if (typeof message.deleteCommercial !== "boolean")
+                                        return "deleteCommercial: boolean expected";
                                 return null;
                             };
     
@@ -9645,6 +10767,8 @@
                                 var message = new $root.google.cloud.bigquery.analyticshub.v1.DeleteListingRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                if (object.deleteCommercial != null)
+                                    message.deleteCommercial = Boolean(object.deleteCommercial);
                                 return message;
                             };
     
@@ -9661,10 +10785,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.name = "";
+                                    object.deleteCommercial = false;
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
+                                if (message.deleteCommercial != null && message.hasOwnProperty("deleteCommercial"))
+                                    object.deleteCommercial = message.deleteCommercial;
                                 return object;
                             };
     
@@ -12363,6 +13491,7 @@
                              * @memberof google.cloud.bigquery.analyticshub.v1
                              * @interface IRevokeSubscriptionRequest
                              * @property {string|null} [name] RevokeSubscriptionRequest name
+                             * @property {boolean|null} [revokeCommercial] RevokeSubscriptionRequest revokeCommercial
                              */
     
                             /**
@@ -12387,6 +13516,14 @@
                              * @instance
                              */
                             RevokeSubscriptionRequest.prototype.name = "";
+    
+                            /**
+                             * RevokeSubscriptionRequest revokeCommercial.
+                             * @member {boolean} revokeCommercial
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionRequest
+                             * @instance
+                             */
+                            RevokeSubscriptionRequest.prototype.revokeCommercial = false;
     
                             /**
                              * Creates a new RevokeSubscriptionRequest instance using the specified properties.
@@ -12414,6 +13551,8 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.revokeCommercial != null && Object.hasOwnProperty.call(message, "revokeCommercial"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.revokeCommercial);
                                 return writer;
                             };
     
@@ -12450,6 +13589,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.revokeCommercial = reader.bool();
                                             break;
                                         }
                                     default:
@@ -12490,6 +13633,9 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.revokeCommercial != null && message.hasOwnProperty("revokeCommercial"))
+                                    if (typeof message.revokeCommercial !== "boolean")
+                                        return "revokeCommercial: boolean expected";
                                 return null;
                             };
     
@@ -12507,6 +13653,8 @@
                                 var message = new $root.google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                if (object.revokeCommercial != null)
+                                    message.revokeCommercial = Boolean(object.revokeCommercial);
                                 return message;
                             };
     
@@ -12523,10 +13671,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.name = "";
+                                    object.revokeCommercial = false;
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
+                                if (message.revokeCommercial != null && message.hasOwnProperty("revokeCommercial"))
+                                    object.revokeCommercial = message.revokeCommercial;
                                 return object;
                             };
     

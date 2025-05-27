@@ -257,9 +257,14 @@ describe('v1beta.ProgramsServiceClient', () => {
         throw err;
       });
       assert(client.programsServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -268,9 +273,14 @@ describe('v1beta.ProgramsServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.programsServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -433,7 +443,9 @@ describe('v1beta.ProgramsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getProgram(request), expectedError);
     });
   });
@@ -563,7 +575,9 @@ describe('v1beta.ProgramsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.enableProgram(request), expectedError);
     });
   });
@@ -693,7 +707,9 @@ describe('v1beta.ProgramsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.disableProgram(request), expectedError);
     });
   });
@@ -1392,6 +1408,55 @@ describe('v1beta.ProgramsServiceClient', () => {
       });
     });
 
+    describe('gbpAccount', async () => {
+      const fakePath = '/rendered/path/gbpAccount';
+      const expectedParameters = {
+        account: 'accountValue',
+        gbp_account: 'gbpAccountValue',
+      };
+      const client = new programsserviceModule.v1beta.ProgramsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.gbpAccountPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.gbpAccountPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('gbpAccountPath', () => {
+        const result = client.gbpAccountPath('accountValue', 'gbpAccountValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.gbpAccountPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromGbpAccountName', () => {
+        const result = client.matchAccountFromGbpAccountName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.gbpAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchGbpAccountFromGbpAccountName', () => {
+        const result = client.matchGbpAccountFromGbpAccountName(fakePath);
+        assert.strictEqual(result, 'gbpAccountValue');
+        assert(
+          (client.pathTemplates.gbpAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('homepage', async () => {
       const fakePath = '/rendered/path/homepage';
       const expectedParameters = {
@@ -1424,6 +1489,133 @@ describe('v1beta.ProgramsServiceClient', () => {
         assert.strictEqual(result, 'accountValue');
         assert(
           (client.pathTemplates.homepagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('lfpProvider', async () => {
+      const fakePath = '/rendered/path/lfpProvider';
+      const expectedParameters = {
+        account: 'accountValue',
+        omnichannel_setting: 'omnichannelSettingValue',
+        lfp_provider: 'lfpProviderValue',
+      };
+      const client = new programsserviceModule.v1beta.ProgramsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.lfpProviderPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.lfpProviderPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lfpProviderPath', () => {
+        const result = client.lfpProviderPath(
+          'accountValue',
+          'omnichannelSettingValue',
+          'lfpProviderValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.lfpProviderPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromLfpProviderName', () => {
+        const result = client.matchAccountFromLfpProviderName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.lfpProviderPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchOmnichannelSettingFromLfpProviderName', () => {
+        const result =
+          client.matchOmnichannelSettingFromLfpProviderName(fakePath);
+        assert.strictEqual(result, 'omnichannelSettingValue');
+        assert(
+          (client.pathTemplates.lfpProviderPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLfpProviderFromLfpProviderName', () => {
+        const result = client.matchLfpProviderFromLfpProviderName(fakePath);
+        assert.strictEqual(result, 'lfpProviderValue');
+        assert(
+          (client.pathTemplates.lfpProviderPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('omnichannelSetting', async () => {
+      const fakePath = '/rendered/path/omnichannelSetting';
+      const expectedParameters = {
+        account: 'accountValue',
+        omnichannel_setting: 'omnichannelSettingValue',
+      };
+      const client = new programsserviceModule.v1beta.ProgramsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.omnichannelSettingPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.omnichannelSettingPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('omnichannelSettingPath', () => {
+        const result = client.omnichannelSettingPath(
+          'accountValue',
+          'omnichannelSettingValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.omnichannelSettingPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromOmnichannelSettingName', () => {
+        const result = client.matchAccountFromOmnichannelSettingName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (
+            client.pathTemplates.omnichannelSettingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchOmnichannelSettingFromOmnichannelSettingName', () => {
+        const result =
+          client.matchOmnichannelSettingFromOmnichannelSettingName(fakePath);
+        assert.strictEqual(result, 'omnichannelSettingValue');
+        assert(
+          (
+            client.pathTemplates.omnichannelSettingPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

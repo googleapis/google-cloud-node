@@ -15218,6 +15218,1390 @@
                             return UpdateEmailPreferencesRequest;
                         })();
     
+                        v1beta.GbpAccountsService = (function() {
+    
+                            /**
+                             * Constructs a new GbpAccountsService service.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a GbpAccountsService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function GbpAccountsService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (GbpAccountsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = GbpAccountsService;
+    
+                            /**
+                             * Creates new GbpAccountsService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccountsService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {GbpAccountsService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            GbpAccountsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.GbpAccountsService|listGbpAccounts}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccountsService
+                             * @typedef ListGbpAccountsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse} [response] ListGbpAccountsResponse
+                             */
+    
+                            /**
+                             * Calls ListGbpAccounts.
+                             * @function listGbpAccounts
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccountsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest} request ListGbpAccountsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.GbpAccountsService.ListGbpAccountsCallback} callback Node-style callback called with the error, if any, and ListGbpAccountsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(GbpAccountsService.prototype.listGbpAccounts = function listGbpAccounts(request, callback) {
+                                return this.rpcCall(listGbpAccounts, $root.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest, $root.google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse, request, callback);
+                            }, "name", { value: "ListGbpAccounts" });
+    
+                            /**
+                             * Calls ListGbpAccounts.
+                             * @function listGbpAccounts
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccountsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest} request ListGbpAccountsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.GbpAccountsService|linkGbpAccount}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccountsService
+                             * @typedef LinkGbpAccountCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse} [response] LinkGbpAccountResponse
+                             */
+    
+                            /**
+                             * Calls LinkGbpAccount.
+                             * @function linkGbpAccount
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccountsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest} request LinkGbpAccountRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.GbpAccountsService.LinkGbpAccountCallback} callback Node-style callback called with the error, if any, and LinkGbpAccountResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(GbpAccountsService.prototype.linkGbpAccount = function linkGbpAccount(request, callback) {
+                                return this.rpcCall(linkGbpAccount, $root.google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest, $root.google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse, request, callback);
+                            }, "name", { value: "LinkGbpAccount" });
+    
+                            /**
+                             * Calls LinkGbpAccount.
+                             * @function linkGbpAccount
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccountsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest} request LinkGbpAccountRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return GbpAccountsService;
+                        })();
+    
+                        v1beta.GbpAccount = (function() {
+    
+                            /**
+                             * Properties of a GbpAccount.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IGbpAccount
+                             * @property {string|null} [name] GbpAccount name
+                             * @property {string|null} [gbpAccountId] GbpAccount gbpAccountId
+                             * @property {google.shopping.merchant.accounts.v1beta.GbpAccount.Type|null} [type] GbpAccount type
+                             * @property {string|null} [gbpAccountName] GbpAccount gbpAccountName
+                             * @property {number|Long|null} [listingCount] GbpAccount listingCount
+                             */
+    
+                            /**
+                             * Constructs a new GbpAccount.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a GbpAccount.
+                             * @implements IGbpAccount
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IGbpAccount=} [properties] Properties to set
+                             */
+                            function GbpAccount(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GbpAccount name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @instance
+                             */
+                            GbpAccount.prototype.name = "";
+    
+                            /**
+                             * GbpAccount gbpAccountId.
+                             * @member {string} gbpAccountId
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @instance
+                             */
+                            GbpAccount.prototype.gbpAccountId = "";
+    
+                            /**
+                             * GbpAccount type.
+                             * @member {google.shopping.merchant.accounts.v1beta.GbpAccount.Type} type
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @instance
+                             */
+                            GbpAccount.prototype.type = 0;
+    
+                            /**
+                             * GbpAccount gbpAccountName.
+                             * @member {string} gbpAccountName
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @instance
+                             */
+                            GbpAccount.prototype.gbpAccountName = "";
+    
+                            /**
+                             * GbpAccount listingCount.
+                             * @member {number|Long} listingCount
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @instance
+                             */
+                            GbpAccount.prototype.listingCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new GbpAccount instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGbpAccount=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.GbpAccount} GbpAccount instance
+                             */
+                            GbpAccount.create = function create(properties) {
+                                return new GbpAccount(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GbpAccount message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GbpAccount.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGbpAccount} message GbpAccount message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GbpAccount.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.gbpAccountId != null && Object.hasOwnProperty.call(message, "gbpAccountId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.gbpAccountId);
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                                if (message.gbpAccountName != null && Object.hasOwnProperty.call(message, "gbpAccountName"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.gbpAccountName);
+                                if (message.listingCount != null && Object.hasOwnProperty.call(message, "listingCount"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int64(message.listingCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GbpAccount message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GbpAccount.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGbpAccount} message GbpAccount message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GbpAccount.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GbpAccount message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.GbpAccount} GbpAccount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GbpAccount.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.GbpAccount();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.gbpAccountId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.gbpAccountName = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.listingCount = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GbpAccount message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.GbpAccount} GbpAccount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GbpAccount.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GbpAccount message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GbpAccount.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.gbpAccountId != null && message.hasOwnProperty("gbpAccountId"))
+                                    if (!$util.isString(message.gbpAccountId))
+                                        return "gbpAccountId: string expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.gbpAccountName != null && message.hasOwnProperty("gbpAccountName"))
+                                    if (!$util.isString(message.gbpAccountName))
+                                        return "gbpAccountName: string expected";
+                                if (message.listingCount != null && message.hasOwnProperty("listingCount"))
+                                    if (!$util.isInteger(message.listingCount) && !(message.listingCount && $util.isInteger(message.listingCount.low) && $util.isInteger(message.listingCount.high)))
+                                        return "listingCount: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GbpAccount message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.GbpAccount} GbpAccount
+                             */
+                            GbpAccount.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.GbpAccount)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.GbpAccount();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.gbpAccountId != null)
+                                    message.gbpAccountId = String(object.gbpAccountId);
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "USER":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "BUSINESS_ACCOUNT":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                }
+                                if (object.gbpAccountName != null)
+                                    message.gbpAccountName = String(object.gbpAccountName);
+                                if (object.listingCount != null)
+                                    if ($util.Long)
+                                        (message.listingCount = $util.Long.fromValue(object.listingCount)).unsigned = false;
+                                    else if (typeof object.listingCount === "string")
+                                        message.listingCount = parseInt(object.listingCount, 10);
+                                    else if (typeof object.listingCount === "number")
+                                        message.listingCount = object.listingCount;
+                                    else if (typeof object.listingCount === "object")
+                                        message.listingCount = new $util.LongBits(object.listingCount.low >>> 0, object.listingCount.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GbpAccount message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.GbpAccount} message GbpAccount
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GbpAccount.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.gbpAccountId = "";
+                                    object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                    object.gbpAccountName = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.listingCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.listingCount = options.longs === String ? "0" : 0;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.gbpAccountId != null && message.hasOwnProperty("gbpAccountId"))
+                                    object.gbpAccountId = message.gbpAccountId;
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.GbpAccount.Type[message.type] === undefined ? message.type : $root.google.shopping.merchant.accounts.v1beta.GbpAccount.Type[message.type] : message.type;
+                                if (message.gbpAccountName != null && message.hasOwnProperty("gbpAccountName"))
+                                    object.gbpAccountName = message.gbpAccountName;
+                                if (message.listingCount != null && message.hasOwnProperty("listingCount"))
+                                    if (typeof message.listingCount === "number")
+                                        object.listingCount = options.longs === String ? String(message.listingCount) : message.listingCount;
+                                    else
+                                        object.listingCount = options.longs === String ? $util.Long.prototype.toString.call(message.listingCount) : options.longs === Number ? new $util.LongBits(message.listingCount.low >>> 0, message.listingCount.high >>> 0).toNumber() : message.listingCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GbpAccount to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GbpAccount.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GbpAccount
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.GbpAccount
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GbpAccount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.GbpAccount";
+                            };
+    
+                            /**
+                             * Type enum.
+                             * @name google.shopping.merchant.accounts.v1beta.GbpAccount.Type
+                             * @enum {number}
+                             * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                             * @property {number} USER=1 USER value
+                             * @property {number} BUSINESS_ACCOUNT=2 BUSINESS_ACCOUNT value
+                             */
+                            GbpAccount.Type = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "USER"] = 1;
+                                values[valuesById[2] = "BUSINESS_ACCOUNT"] = 2;
+                                return values;
+                            })();
+    
+                            return GbpAccount;
+                        })();
+    
+                        v1beta.ListGbpAccountsRequest = (function() {
+    
+                            /**
+                             * Properties of a ListGbpAccountsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IListGbpAccountsRequest
+                             * @property {string|null} [parent] ListGbpAccountsRequest parent
+                             * @property {number|null} [pageSize] ListGbpAccountsRequest pageSize
+                             * @property {string|null} [pageToken] ListGbpAccountsRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListGbpAccountsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a ListGbpAccountsRequest.
+                             * @implements IListGbpAccountsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest=} [properties] Properties to set
+                             */
+                            function ListGbpAccountsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListGbpAccountsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @instance
+                             */
+                            ListGbpAccountsRequest.prototype.parent = "";
+    
+                            /**
+                             * ListGbpAccountsRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @instance
+                             */
+                            ListGbpAccountsRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListGbpAccountsRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @instance
+                             */
+                            ListGbpAccountsRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListGbpAccountsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest} ListGbpAccountsRequest instance
+                             */
+                            ListGbpAccountsRequest.create = function create(properties) {
+                                return new ListGbpAccountsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListGbpAccountsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest} message ListGbpAccountsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListGbpAccountsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListGbpAccountsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest} message ListGbpAccountsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListGbpAccountsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListGbpAccountsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest} ListGbpAccountsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListGbpAccountsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListGbpAccountsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest} ListGbpAccountsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListGbpAccountsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListGbpAccountsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListGbpAccountsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListGbpAccountsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest} ListGbpAccountsRequest
+                             */
+                            ListGbpAccountsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListGbpAccountsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest} message ListGbpAccountsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListGbpAccountsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListGbpAccountsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListGbpAccountsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListGbpAccountsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListGbpAccountsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest";
+                            };
+    
+                            return ListGbpAccountsRequest;
+                        })();
+    
+                        v1beta.ListGbpAccountsResponse = (function() {
+    
+                            /**
+                             * Properties of a ListGbpAccountsResponse.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IListGbpAccountsResponse
+                             * @property {Array.<google.shopping.merchant.accounts.v1beta.IGbpAccount>|null} [gbpAccounts] ListGbpAccountsResponse gbpAccounts
+                             * @property {string|null} [nextPageToken] ListGbpAccountsResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListGbpAccountsResponse.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a ListGbpAccountsResponse.
+                             * @implements IListGbpAccountsResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse=} [properties] Properties to set
+                             */
+                            function ListGbpAccountsResponse(properties) {
+                                this.gbpAccounts = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListGbpAccountsResponse gbpAccounts.
+                             * @member {Array.<google.shopping.merchant.accounts.v1beta.IGbpAccount>} gbpAccounts
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse
+                             * @instance
+                             */
+                            ListGbpAccountsResponse.prototype.gbpAccounts = $util.emptyArray;
+    
+                            /**
+                             * ListGbpAccountsResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse
+                             * @instance
+                             */
+                            ListGbpAccountsResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListGbpAccountsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse} ListGbpAccountsResponse instance
+                             */
+                            ListGbpAccountsResponse.create = function create(properties) {
+                                return new ListGbpAccountsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListGbpAccountsResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse} message ListGbpAccountsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListGbpAccountsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.gbpAccounts != null && message.gbpAccounts.length)
+                                    for (var i = 0; i < message.gbpAccounts.length; ++i)
+                                        $root.google.shopping.merchant.accounts.v1beta.GbpAccount.encode(message.gbpAccounts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListGbpAccountsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse} message ListGbpAccountsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListGbpAccountsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListGbpAccountsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse} ListGbpAccountsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListGbpAccountsResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.gbpAccounts && message.gbpAccounts.length))
+                                                message.gbpAccounts = [];
+                                            message.gbpAccounts.push($root.google.shopping.merchant.accounts.v1beta.GbpAccount.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListGbpAccountsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse} ListGbpAccountsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListGbpAccountsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListGbpAccountsResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListGbpAccountsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.gbpAccounts != null && message.hasOwnProperty("gbpAccounts")) {
+                                    if (!Array.isArray(message.gbpAccounts))
+                                        return "gbpAccounts: array expected";
+                                    for (var i = 0; i < message.gbpAccounts.length; ++i) {
+                                        var error = $root.google.shopping.merchant.accounts.v1beta.GbpAccount.verify(message.gbpAccounts[i]);
+                                        if (error)
+                                            return "gbpAccounts." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListGbpAccountsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse} ListGbpAccountsResponse
+                             */
+                            ListGbpAccountsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse();
+                                if (object.gbpAccounts) {
+                                    if (!Array.isArray(object.gbpAccounts))
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse.gbpAccounts: array expected");
+                                    message.gbpAccounts = [];
+                                    for (var i = 0; i < object.gbpAccounts.length; ++i) {
+                                        if (typeof object.gbpAccounts[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse.gbpAccounts: object expected");
+                                        message.gbpAccounts[i] = $root.google.shopping.merchant.accounts.v1beta.GbpAccount.fromObject(object.gbpAccounts[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListGbpAccountsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse} message ListGbpAccountsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListGbpAccountsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.gbpAccounts = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.gbpAccounts && message.gbpAccounts.length) {
+                                    object.gbpAccounts = [];
+                                    for (var j = 0; j < message.gbpAccounts.length; ++j)
+                                        object.gbpAccounts[j] = $root.google.shopping.merchant.accounts.v1beta.GbpAccount.toObject(message.gbpAccounts[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListGbpAccountsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListGbpAccountsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListGbpAccountsResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListGbpAccountsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse";
+                            };
+    
+                            return ListGbpAccountsResponse;
+                        })();
+    
+                        v1beta.LinkGbpAccountRequest = (function() {
+    
+                            /**
+                             * Properties of a LinkGbpAccountRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface ILinkGbpAccountRequest
+                             * @property {string|null} [parent] LinkGbpAccountRequest parent
+                             * @property {string|null} [gbpEmail] LinkGbpAccountRequest gbpEmail
+                             */
+    
+                            /**
+                             * Constructs a new LinkGbpAccountRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a LinkGbpAccountRequest.
+                             * @implements ILinkGbpAccountRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest=} [properties] Properties to set
+                             */
+                            function LinkGbpAccountRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LinkGbpAccountRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest
+                             * @instance
+                             */
+                            LinkGbpAccountRequest.prototype.parent = "";
+    
+                            /**
+                             * LinkGbpAccountRequest gbpEmail.
+                             * @member {string} gbpEmail
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest
+                             * @instance
+                             */
+                            LinkGbpAccountRequest.prototype.gbpEmail = "";
+    
+                            /**
+                             * Creates a new LinkGbpAccountRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest} LinkGbpAccountRequest instance
+                             */
+                            LinkGbpAccountRequest.create = function create(properties) {
+                                return new LinkGbpAccountRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LinkGbpAccountRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest} message LinkGbpAccountRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LinkGbpAccountRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.gbpEmail != null && Object.hasOwnProperty.call(message, "gbpEmail"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.gbpEmail);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LinkGbpAccountRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest} message LinkGbpAccountRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LinkGbpAccountRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LinkGbpAccountRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest} LinkGbpAccountRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LinkGbpAccountRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.gbpEmail = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LinkGbpAccountRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest} LinkGbpAccountRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LinkGbpAccountRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LinkGbpAccountRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LinkGbpAccountRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.gbpEmail != null && message.hasOwnProperty("gbpEmail"))
+                                    if (!$util.isString(message.gbpEmail))
+                                        return "gbpEmail: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LinkGbpAccountRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest} LinkGbpAccountRequest
+                             */
+                            LinkGbpAccountRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.gbpEmail != null)
+                                    message.gbpEmail = String(object.gbpEmail);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LinkGbpAccountRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest} message LinkGbpAccountRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LinkGbpAccountRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.gbpEmail = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.gbpEmail != null && message.hasOwnProperty("gbpEmail"))
+                                    object.gbpEmail = message.gbpEmail;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LinkGbpAccountRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LinkGbpAccountRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LinkGbpAccountRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LinkGbpAccountRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest";
+                            };
+    
+                            return LinkGbpAccountRequest;
+                        })();
+    
+                        v1beta.LinkGbpAccountResponse = (function() {
+    
+                            /**
+                             * Properties of a LinkGbpAccountResponse.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface ILinkGbpAccountResponse
+                             * @property {google.protobuf.IEmpty|null} [response] LinkGbpAccountResponse response
+                             */
+    
+                            /**
+                             * Constructs a new LinkGbpAccountResponse.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a LinkGbpAccountResponse.
+                             * @implements ILinkGbpAccountResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse=} [properties] Properties to set
+                             */
+                            function LinkGbpAccountResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LinkGbpAccountResponse response.
+                             * @member {google.protobuf.IEmpty|null|undefined} response
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse
+                             * @instance
+                             */
+                            LinkGbpAccountResponse.prototype.response = null;
+    
+                            /**
+                             * Creates a new LinkGbpAccountResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse} LinkGbpAccountResponse instance
+                             */
+                            LinkGbpAccountResponse.create = function create(properties) {
+                                return new LinkGbpAccountResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LinkGbpAccountResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse} message LinkGbpAccountResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LinkGbpAccountResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.response != null && Object.hasOwnProperty.call(message, "response"))
+                                    $root.google.protobuf.Empty.encode(message.response, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LinkGbpAccountResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse} message LinkGbpAccountResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LinkGbpAccountResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LinkGbpAccountResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse} LinkGbpAccountResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LinkGbpAccountResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.response = $root.google.protobuf.Empty.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LinkGbpAccountResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse} LinkGbpAccountResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LinkGbpAccountResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LinkGbpAccountResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LinkGbpAccountResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.response != null && message.hasOwnProperty("response")) {
+                                    var error = $root.google.protobuf.Empty.verify(message.response);
+                                    if (error)
+                                        return "response." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LinkGbpAccountResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse} LinkGbpAccountResponse
+                             */
+                            LinkGbpAccountResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse();
+                                if (object.response != null) {
+                                    if (typeof object.response !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse.response: object expected");
+                                    message.response = $root.google.protobuf.Empty.fromObject(object.response);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LinkGbpAccountResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse} message LinkGbpAccountResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LinkGbpAccountResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.response = null;
+                                if (message.response != null && message.hasOwnProperty("response"))
+                                    object.response = $root.google.protobuf.Empty.toObject(message.response, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LinkGbpAccountResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LinkGbpAccountResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LinkGbpAccountResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LinkGbpAccountResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse";
+                            };
+    
+                            return LinkGbpAccountResponse;
+                        })();
+    
                         v1beta.HomepageService = (function() {
     
                             /**
@@ -16500,6 +17884,5427 @@
                             return UnclaimHomepageRequest;
                         })();
     
+                        v1beta.LfpProvidersService = (function() {
+    
+                            /**
+                             * Constructs a new LfpProvidersService service.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a LfpProvidersService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function LfpProvidersService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (LfpProvidersService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = LfpProvidersService;
+    
+                            /**
+                             * Creates new LfpProvidersService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvidersService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {LfpProvidersService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            LfpProvidersService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.LfpProvidersService|findLfpProviders}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvidersService
+                             * @typedef FindLfpProvidersCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse} [response] FindLfpProvidersResponse
+                             */
+    
+                            /**
+                             * Calls FindLfpProviders.
+                             * @function findLfpProviders
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvidersService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest} request FindLfpProvidersRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.LfpProvidersService.FindLfpProvidersCallback} callback Node-style callback called with the error, if any, and FindLfpProvidersResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LfpProvidersService.prototype.findLfpProviders = function findLfpProviders(request, callback) {
+                                return this.rpcCall(findLfpProviders, $root.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest, $root.google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse, request, callback);
+                            }, "name", { value: "FindLfpProviders" });
+    
+                            /**
+                             * Calls FindLfpProviders.
+                             * @function findLfpProviders
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvidersService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest} request FindLfpProvidersRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.LfpProvidersService|linkLfpProvider}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvidersService
+                             * @typedef LinkLfpProviderCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse} [response] LinkLfpProviderResponse
+                             */
+    
+                            /**
+                             * Calls LinkLfpProvider.
+                             * @function linkLfpProvider
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvidersService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkLfpProviderRequest} request LinkLfpProviderRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.LfpProvidersService.LinkLfpProviderCallback} callback Node-style callback called with the error, if any, and LinkLfpProviderResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LfpProvidersService.prototype.linkLfpProvider = function linkLfpProvider(request, callback) {
+                                return this.rpcCall(linkLfpProvider, $root.google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest, $root.google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse, request, callback);
+                            }, "name", { value: "LinkLfpProvider" });
+    
+                            /**
+                             * Calls LinkLfpProvider.
+                             * @function linkLfpProvider
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvidersService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkLfpProviderRequest} request LinkLfpProviderRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return LfpProvidersService;
+                        })();
+    
+                        v1beta.LfpProvider = (function() {
+    
+                            /**
+                             * Properties of a LfpProvider.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface ILfpProvider
+                             * @property {string|null} [name] LfpProvider name
+                             * @property {string|null} [regionCode] LfpProvider regionCode
+                             * @property {string|null} [displayName] LfpProvider displayName
+                             */
+    
+                            /**
+                             * Constructs a new LfpProvider.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a LfpProvider.
+                             * @implements ILfpProvider
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.ILfpProvider=} [properties] Properties to set
+                             */
+                            function LfpProvider(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LfpProvider name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @instance
+                             */
+                            LfpProvider.prototype.name = "";
+    
+                            /**
+                             * LfpProvider regionCode.
+                             * @member {string} regionCode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @instance
+                             */
+                            LfpProvider.prototype.regionCode = "";
+    
+                            /**
+                             * LfpProvider displayName.
+                             * @member {string} displayName
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @instance
+                             */
+                            LfpProvider.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new LfpProvider instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILfpProvider=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.LfpProvider} LfpProvider instance
+                             */
+                            LfpProvider.create = function create(properties) {
+                                return new LfpProvider(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LfpProvider message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LfpProvider.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILfpProvider} message LfpProvider message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LfpProvider.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.regionCode);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LfpProvider message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LfpProvider.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILfpProvider} message LfpProvider message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LfpProvider.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LfpProvider message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.LfpProvider} LfpProvider
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LfpProvider.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.LfpProvider();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.regionCode = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LfpProvider message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.LfpProvider} LfpProvider
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LfpProvider.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LfpProvider message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LfpProvider.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                    if (!$util.isString(message.regionCode))
+                                        return "regionCode: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LfpProvider message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.LfpProvider} LfpProvider
+                             */
+                            LfpProvider.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.LfpProvider)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.LfpProvider();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.regionCode != null)
+                                    message.regionCode = String(object.regionCode);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LfpProvider message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.LfpProvider} message LfpProvider
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LfpProvider.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.regionCode = "";
+                                    object.displayName = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                    object.regionCode = message.regionCode;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LfpProvider to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LfpProvider.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LfpProvider
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpProvider
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LfpProvider.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.LfpProvider";
+                            };
+    
+                            return LfpProvider;
+                        })();
+    
+                        v1beta.FindLfpProvidersRequest = (function() {
+    
+                            /**
+                             * Properties of a FindLfpProvidersRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IFindLfpProvidersRequest
+                             * @property {string|null} [parent] FindLfpProvidersRequest parent
+                             * @property {number|null} [pageSize] FindLfpProvidersRequest pageSize
+                             * @property {string|null} [pageToken] FindLfpProvidersRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new FindLfpProvidersRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a FindLfpProvidersRequest.
+                             * @implements IFindLfpProvidersRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest=} [properties] Properties to set
+                             */
+                            function FindLfpProvidersRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FindLfpProvidersRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @instance
+                             */
+                            FindLfpProvidersRequest.prototype.parent = "";
+    
+                            /**
+                             * FindLfpProvidersRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @instance
+                             */
+                            FindLfpProvidersRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * FindLfpProvidersRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @instance
+                             */
+                            FindLfpProvidersRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new FindLfpProvidersRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest} FindLfpProvidersRequest instance
+                             */
+                            FindLfpProvidersRequest.create = function create(properties) {
+                                return new FindLfpProvidersRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FindLfpProvidersRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest} message FindLfpProvidersRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FindLfpProvidersRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FindLfpProvidersRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest} message FindLfpProvidersRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FindLfpProvidersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FindLfpProvidersRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest} FindLfpProvidersRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FindLfpProvidersRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FindLfpProvidersRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest} FindLfpProvidersRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FindLfpProvidersRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FindLfpProvidersRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FindLfpProvidersRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FindLfpProvidersRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest} FindLfpProvidersRequest
+                             */
+                            FindLfpProvidersRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FindLfpProvidersRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest} message FindLfpProvidersRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FindLfpProvidersRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FindLfpProvidersRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FindLfpProvidersRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FindLfpProvidersRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FindLfpProvidersRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest";
+                            };
+    
+                            return FindLfpProvidersRequest;
+                        })();
+    
+                        v1beta.FindLfpProvidersResponse = (function() {
+    
+                            /**
+                             * Properties of a FindLfpProvidersResponse.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IFindLfpProvidersResponse
+                             * @property {Array.<google.shopping.merchant.accounts.v1beta.ILfpProvider>|null} [lfpProviders] FindLfpProvidersResponse lfpProviders
+                             * @property {string|null} [nextPageToken] FindLfpProvidersResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new FindLfpProvidersResponse.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a FindLfpProvidersResponse.
+                             * @implements IFindLfpProvidersResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IFindLfpProvidersResponse=} [properties] Properties to set
+                             */
+                            function FindLfpProvidersResponse(properties) {
+                                this.lfpProviders = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FindLfpProvidersResponse lfpProviders.
+                             * @member {Array.<google.shopping.merchant.accounts.v1beta.ILfpProvider>} lfpProviders
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse
+                             * @instance
+                             */
+                            FindLfpProvidersResponse.prototype.lfpProviders = $util.emptyArray;
+    
+                            /**
+                             * FindLfpProvidersResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse
+                             * @instance
+                             */
+                            FindLfpProvidersResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new FindLfpProvidersResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IFindLfpProvidersResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse} FindLfpProvidersResponse instance
+                             */
+                            FindLfpProvidersResponse.create = function create(properties) {
+                                return new FindLfpProvidersResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FindLfpProvidersResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IFindLfpProvidersResponse} message FindLfpProvidersResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FindLfpProvidersResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.lfpProviders != null && message.lfpProviders.length)
+                                    for (var i = 0; i < message.lfpProviders.length; ++i)
+                                        $root.google.shopping.merchant.accounts.v1beta.LfpProvider.encode(message.lfpProviders[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FindLfpProvidersResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IFindLfpProvidersResponse} message FindLfpProvidersResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FindLfpProvidersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FindLfpProvidersResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse} FindLfpProvidersResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FindLfpProvidersResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.lfpProviders && message.lfpProviders.length))
+                                                message.lfpProviders = [];
+                                            message.lfpProviders.push($root.google.shopping.merchant.accounts.v1beta.LfpProvider.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FindLfpProvidersResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse} FindLfpProvidersResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FindLfpProvidersResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FindLfpProvidersResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FindLfpProvidersResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.lfpProviders != null && message.hasOwnProperty("lfpProviders")) {
+                                    if (!Array.isArray(message.lfpProviders))
+                                        return "lfpProviders: array expected";
+                                    for (var i = 0; i < message.lfpProviders.length; ++i) {
+                                        var error = $root.google.shopping.merchant.accounts.v1beta.LfpProvider.verify(message.lfpProviders[i]);
+                                        if (error)
+                                            return "lfpProviders." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FindLfpProvidersResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse} FindLfpProvidersResponse
+                             */
+                            FindLfpProvidersResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse();
+                                if (object.lfpProviders) {
+                                    if (!Array.isArray(object.lfpProviders))
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse.lfpProviders: array expected");
+                                    message.lfpProviders = [];
+                                    for (var i = 0; i < object.lfpProviders.length; ++i) {
+                                        if (typeof object.lfpProviders[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse.lfpProviders: object expected");
+                                        message.lfpProviders[i] = $root.google.shopping.merchant.accounts.v1beta.LfpProvider.fromObject(object.lfpProviders[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FindLfpProvidersResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse} message FindLfpProvidersResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FindLfpProvidersResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.lfpProviders = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.lfpProviders && message.lfpProviders.length) {
+                                    object.lfpProviders = [];
+                                    for (var j = 0; j < message.lfpProviders.length; ++j)
+                                        object.lfpProviders[j] = $root.google.shopping.merchant.accounts.v1beta.LfpProvider.toObject(message.lfpProviders[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FindLfpProvidersResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FindLfpProvidersResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FindLfpProvidersResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FindLfpProvidersResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse";
+                            };
+    
+                            return FindLfpProvidersResponse;
+                        })();
+    
+                        v1beta.LinkLfpProviderRequest = (function() {
+    
+                            /**
+                             * Properties of a LinkLfpProviderRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface ILinkLfpProviderRequest
+                             * @property {string|null} [name] LinkLfpProviderRequest name
+                             * @property {string|null} [externalAccountId] LinkLfpProviderRequest externalAccountId
+                             */
+    
+                            /**
+                             * Constructs a new LinkLfpProviderRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a LinkLfpProviderRequest.
+                             * @implements ILinkLfpProviderRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkLfpProviderRequest=} [properties] Properties to set
+                             */
+                            function LinkLfpProviderRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LinkLfpProviderRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest
+                             * @instance
+                             */
+                            LinkLfpProviderRequest.prototype.name = "";
+    
+                            /**
+                             * LinkLfpProviderRequest externalAccountId.
+                             * @member {string} externalAccountId
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest
+                             * @instance
+                             */
+                            LinkLfpProviderRequest.prototype.externalAccountId = "";
+    
+                            /**
+                             * Creates a new LinkLfpProviderRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkLfpProviderRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest} LinkLfpProviderRequest instance
+                             */
+                            LinkLfpProviderRequest.create = function create(properties) {
+                                return new LinkLfpProviderRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LinkLfpProviderRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkLfpProviderRequest} message LinkLfpProviderRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LinkLfpProviderRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.externalAccountId != null && Object.hasOwnProperty.call(message, "externalAccountId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.externalAccountId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LinkLfpProviderRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkLfpProviderRequest} message LinkLfpProviderRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LinkLfpProviderRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LinkLfpProviderRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest} LinkLfpProviderRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LinkLfpProviderRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.externalAccountId = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LinkLfpProviderRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest} LinkLfpProviderRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LinkLfpProviderRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LinkLfpProviderRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LinkLfpProviderRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.externalAccountId != null && message.hasOwnProperty("externalAccountId"))
+                                    if (!$util.isString(message.externalAccountId))
+                                        return "externalAccountId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LinkLfpProviderRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest} LinkLfpProviderRequest
+                             */
+                            LinkLfpProviderRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.externalAccountId != null)
+                                    message.externalAccountId = String(object.externalAccountId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LinkLfpProviderRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest} message LinkLfpProviderRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LinkLfpProviderRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.externalAccountId = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.externalAccountId != null && message.hasOwnProperty("externalAccountId"))
+                                    object.externalAccountId = message.externalAccountId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LinkLfpProviderRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LinkLfpProviderRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LinkLfpProviderRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LinkLfpProviderRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest";
+                            };
+    
+                            return LinkLfpProviderRequest;
+                        })();
+    
+                        v1beta.LinkLfpProviderResponse = (function() {
+    
+                            /**
+                             * Properties of a LinkLfpProviderResponse.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface ILinkLfpProviderResponse
+                             * @property {google.protobuf.IEmpty|null} [response] LinkLfpProviderResponse response
+                             */
+    
+                            /**
+                             * Constructs a new LinkLfpProviderResponse.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a LinkLfpProviderResponse.
+                             * @implements ILinkLfpProviderResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkLfpProviderResponse=} [properties] Properties to set
+                             */
+                            function LinkLfpProviderResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LinkLfpProviderResponse response.
+                             * @member {google.protobuf.IEmpty|null|undefined} response
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse
+                             * @instance
+                             */
+                            LinkLfpProviderResponse.prototype.response = null;
+    
+                            /**
+                             * Creates a new LinkLfpProviderResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkLfpProviderResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse} LinkLfpProviderResponse instance
+                             */
+                            LinkLfpProviderResponse.create = function create(properties) {
+                                return new LinkLfpProviderResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LinkLfpProviderResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkLfpProviderResponse} message LinkLfpProviderResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LinkLfpProviderResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.response != null && Object.hasOwnProperty.call(message, "response"))
+                                    $root.google.protobuf.Empty.encode(message.response, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LinkLfpProviderResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILinkLfpProviderResponse} message LinkLfpProviderResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LinkLfpProviderResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LinkLfpProviderResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse} LinkLfpProviderResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LinkLfpProviderResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.response = $root.google.protobuf.Empty.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LinkLfpProviderResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse} LinkLfpProviderResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LinkLfpProviderResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LinkLfpProviderResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LinkLfpProviderResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.response != null && message.hasOwnProperty("response")) {
+                                    var error = $root.google.protobuf.Empty.verify(message.response);
+                                    if (error)
+                                        return "response." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LinkLfpProviderResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse} LinkLfpProviderResponse
+                             */
+                            LinkLfpProviderResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse();
+                                if (object.response != null) {
+                                    if (typeof object.response !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse.response: object expected");
+                                    message.response = $root.google.protobuf.Empty.fromObject(object.response);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LinkLfpProviderResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse} message LinkLfpProviderResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LinkLfpProviderResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.response = null;
+                                if (message.response != null && message.hasOwnProperty("response"))
+                                    object.response = $root.google.protobuf.Empty.toObject(message.response, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LinkLfpProviderResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LinkLfpProviderResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LinkLfpProviderResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LinkLfpProviderResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse";
+                            };
+    
+                            return LinkLfpProviderResponse;
+                        })();
+    
+                        v1beta.OmnichannelSettingsService = (function() {
+    
+                            /**
+                             * Constructs a new OmnichannelSettingsService service.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an OmnichannelSettingsService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function OmnichannelSettingsService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (OmnichannelSettingsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = OmnichannelSettingsService;
+    
+                            /**
+                             * Creates new OmnichannelSettingsService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {OmnichannelSettingsService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            OmnichannelSettingsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService|getOmnichannelSetting}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @typedef GetOmnichannelSettingCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.OmnichannelSetting} [response] OmnichannelSetting
+                             */
+    
+                            /**
+                             * Calls GetOmnichannelSetting.
+                             * @function getOmnichannelSetting
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest} request GetOmnichannelSettingRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService.GetOmnichannelSettingCallback} callback Node-style callback called with the error, if any, and OmnichannelSetting
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(OmnichannelSettingsService.prototype.getOmnichannelSetting = function getOmnichannelSetting(request, callback) {
+                                return this.rpcCall(getOmnichannelSetting, $root.google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest, $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting, request, callback);
+                            }, "name", { value: "GetOmnichannelSetting" });
+    
+                            /**
+                             * Calls GetOmnichannelSetting.
+                             * @function getOmnichannelSetting
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest} request GetOmnichannelSettingRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.OmnichannelSetting>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService|listOmnichannelSettings}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @typedef ListOmnichannelSettingsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse} [response] ListOmnichannelSettingsResponse
+                             */
+    
+                            /**
+                             * Calls ListOmnichannelSettings.
+                             * @function listOmnichannelSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest} request ListOmnichannelSettingsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService.ListOmnichannelSettingsCallback} callback Node-style callback called with the error, if any, and ListOmnichannelSettingsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(OmnichannelSettingsService.prototype.listOmnichannelSettings = function listOmnichannelSettings(request, callback) {
+                                return this.rpcCall(listOmnichannelSettings, $root.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest, $root.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse, request, callback);
+                            }, "name", { value: "ListOmnichannelSettings" });
+    
+                            /**
+                             * Calls ListOmnichannelSettings.
+                             * @function listOmnichannelSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest} request ListOmnichannelSettingsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService|createOmnichannelSetting}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @typedef CreateOmnichannelSettingCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.OmnichannelSetting} [response] OmnichannelSetting
+                             */
+    
+                            /**
+                             * Calls CreateOmnichannelSetting.
+                             * @function createOmnichannelSetting
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest} request CreateOmnichannelSettingRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService.CreateOmnichannelSettingCallback} callback Node-style callback called with the error, if any, and OmnichannelSetting
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(OmnichannelSettingsService.prototype.createOmnichannelSetting = function createOmnichannelSetting(request, callback) {
+                                return this.rpcCall(createOmnichannelSetting, $root.google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest, $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting, request, callback);
+                            }, "name", { value: "CreateOmnichannelSetting" });
+    
+                            /**
+                             * Calls CreateOmnichannelSetting.
+                             * @function createOmnichannelSetting
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest} request CreateOmnichannelSettingRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.OmnichannelSetting>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService|updateOmnichannelSetting}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @typedef UpdateOmnichannelSettingCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.OmnichannelSetting} [response] OmnichannelSetting
+                             */
+    
+                            /**
+                             * Calls UpdateOmnichannelSetting.
+                             * @function updateOmnichannelSetting
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest} request UpdateOmnichannelSettingRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService.UpdateOmnichannelSettingCallback} callback Node-style callback called with the error, if any, and OmnichannelSetting
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(OmnichannelSettingsService.prototype.updateOmnichannelSetting = function updateOmnichannelSetting(request, callback) {
+                                return this.rpcCall(updateOmnichannelSetting, $root.google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest, $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting, request, callback);
+                            }, "name", { value: "UpdateOmnichannelSetting" });
+    
+                            /**
+                             * Calls UpdateOmnichannelSetting.
+                             * @function updateOmnichannelSetting
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest} request UpdateOmnichannelSettingRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.OmnichannelSetting>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService|requestInventoryVerification}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @typedef RequestInventoryVerificationCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse} [response] RequestInventoryVerificationResponse
+                             */
+    
+                            /**
+                             * Calls RequestInventoryVerification.
+                             * @function requestInventoryVerification
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest} request RequestInventoryVerificationRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService.RequestInventoryVerificationCallback} callback Node-style callback called with the error, if any, and RequestInventoryVerificationResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(OmnichannelSettingsService.prototype.requestInventoryVerification = function requestInventoryVerification(request, callback) {
+                                return this.rpcCall(requestInventoryVerification, $root.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest, $root.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse, request, callback);
+                            }, "name", { value: "RequestInventoryVerification" });
+    
+                            /**
+                             * Calls RequestInventoryVerification.
+                             * @function requestInventoryVerification
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest} request RequestInventoryVerificationRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return OmnichannelSettingsService;
+                        })();
+    
+                        v1beta.OmnichannelSetting = (function() {
+    
+                            /**
+                             * Properties of an OmnichannelSetting.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IOmnichannelSetting
+                             * @property {string|null} [name] OmnichannelSetting name
+                             * @property {string|null} [regionCode] OmnichannelSetting regionCode
+                             * @property {google.shopping.merchant.accounts.v1beta.OmnichannelSetting.LsfType|null} [lsfType] OmnichannelSetting lsfType
+                             * @property {google.shopping.merchant.accounts.v1beta.IInStock|null} [inStock] OmnichannelSetting inStock
+                             * @property {google.shopping.merchant.accounts.v1beta.IPickup|null} [pickup] OmnichannelSetting pickup
+                             * @property {google.shopping.merchant.accounts.v1beta.ILfpLink|null} [lfpLink] OmnichannelSetting lfpLink
+                             * @property {google.shopping.merchant.accounts.v1beta.IOnDisplayToOrder|null} [odo] OmnichannelSetting odo
+                             * @property {google.shopping.merchant.accounts.v1beta.IAbout|null} [about] OmnichannelSetting about
+                             * @property {google.shopping.merchant.accounts.v1beta.IInventoryVerification|null} [inventoryVerification] OmnichannelSetting inventoryVerification
+                             */
+    
+                            /**
+                             * Constructs a new OmnichannelSetting.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an OmnichannelSetting.
+                             * @implements IOmnichannelSetting
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IOmnichannelSetting=} [properties] Properties to set
+                             */
+                            function OmnichannelSetting(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * OmnichannelSetting name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @instance
+                             */
+                            OmnichannelSetting.prototype.name = "";
+    
+                            /**
+                             * OmnichannelSetting regionCode.
+                             * @member {string} regionCode
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @instance
+                             */
+                            OmnichannelSetting.prototype.regionCode = "";
+    
+                            /**
+                             * OmnichannelSetting lsfType.
+                             * @member {google.shopping.merchant.accounts.v1beta.OmnichannelSetting.LsfType} lsfType
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @instance
+                             */
+                            OmnichannelSetting.prototype.lsfType = 0;
+    
+                            /**
+                             * OmnichannelSetting inStock.
+                             * @member {google.shopping.merchant.accounts.v1beta.IInStock|null|undefined} inStock
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @instance
+                             */
+                            OmnichannelSetting.prototype.inStock = null;
+    
+                            /**
+                             * OmnichannelSetting pickup.
+                             * @member {google.shopping.merchant.accounts.v1beta.IPickup|null|undefined} pickup
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @instance
+                             */
+                            OmnichannelSetting.prototype.pickup = null;
+    
+                            /**
+                             * OmnichannelSetting lfpLink.
+                             * @member {google.shopping.merchant.accounts.v1beta.ILfpLink|null|undefined} lfpLink
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @instance
+                             */
+                            OmnichannelSetting.prototype.lfpLink = null;
+    
+                            /**
+                             * OmnichannelSetting odo.
+                             * @member {google.shopping.merchant.accounts.v1beta.IOnDisplayToOrder|null|undefined} odo
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @instance
+                             */
+                            OmnichannelSetting.prototype.odo = null;
+    
+                            /**
+                             * OmnichannelSetting about.
+                             * @member {google.shopping.merchant.accounts.v1beta.IAbout|null|undefined} about
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @instance
+                             */
+                            OmnichannelSetting.prototype.about = null;
+    
+                            /**
+                             * OmnichannelSetting inventoryVerification.
+                             * @member {google.shopping.merchant.accounts.v1beta.IInventoryVerification|null|undefined} inventoryVerification
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @instance
+                             */
+                            OmnichannelSetting.prototype.inventoryVerification = null;
+    
+                            /**
+                             * Creates a new OmnichannelSetting instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IOmnichannelSetting=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.OmnichannelSetting} OmnichannelSetting instance
+                             */
+                            OmnichannelSetting.create = function create(properties) {
+                                return new OmnichannelSetting(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified OmnichannelSetting message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.OmnichannelSetting.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IOmnichannelSetting} message OmnichannelSetting message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OmnichannelSetting.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.regionCode);
+                                if (message.lfpLink != null && Object.hasOwnProperty.call(message, "lfpLink"))
+                                    $root.google.shopping.merchant.accounts.v1beta.LfpLink.encode(message.lfpLink, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.odo != null && Object.hasOwnProperty.call(message, "odo"))
+                                    $root.google.shopping.merchant.accounts.v1beta.OnDisplayToOrder.encode(message.odo, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.about != null && Object.hasOwnProperty.call(message, "about"))
+                                    $root.google.shopping.merchant.accounts.v1beta.About.encode(message.about, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.inventoryVerification != null && Object.hasOwnProperty.call(message, "inventoryVerification"))
+                                    $root.google.shopping.merchant.accounts.v1beta.InventoryVerification.encode(message.inventoryVerification, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.lsfType != null && Object.hasOwnProperty.call(message, "lsfType"))
+                                    writer.uint32(/* id 12, wireType 0 =*/96).int32(message.lsfType);
+                                if (message.inStock != null && Object.hasOwnProperty.call(message, "inStock"))
+                                    $root.google.shopping.merchant.accounts.v1beta.InStock.encode(message.inStock, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                if (message.pickup != null && Object.hasOwnProperty.call(message, "pickup"))
+                                    $root.google.shopping.merchant.accounts.v1beta.Pickup.encode(message.pickup, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified OmnichannelSetting message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.OmnichannelSetting.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IOmnichannelSetting} message OmnichannelSetting message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OmnichannelSetting.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an OmnichannelSetting message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.OmnichannelSetting} OmnichannelSetting
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OmnichannelSetting.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.regionCode = reader.string();
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.lsfType = reader.int32();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.inStock = $root.google.shopping.merchant.accounts.v1beta.InStock.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.pickup = $root.google.shopping.merchant.accounts.v1beta.Pickup.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.lfpLink = $root.google.shopping.merchant.accounts.v1beta.LfpLink.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.odo = $root.google.shopping.merchant.accounts.v1beta.OnDisplayToOrder.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.about = $root.google.shopping.merchant.accounts.v1beta.About.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.inventoryVerification = $root.google.shopping.merchant.accounts.v1beta.InventoryVerification.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an OmnichannelSetting message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.OmnichannelSetting} OmnichannelSetting
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OmnichannelSetting.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an OmnichannelSetting message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            OmnichannelSetting.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                    if (!$util.isString(message.regionCode))
+                                        return "regionCode: string expected";
+                                if (message.lsfType != null && message.hasOwnProperty("lsfType"))
+                                    switch (message.lsfType) {
+                                    default:
+                                        return "lsfType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.inStock != null && message.hasOwnProperty("inStock")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.InStock.verify(message.inStock);
+                                    if (error)
+                                        return "inStock." + error;
+                                }
+                                if (message.pickup != null && message.hasOwnProperty("pickup")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.Pickup.verify(message.pickup);
+                                    if (error)
+                                        return "pickup." + error;
+                                }
+                                if (message.lfpLink != null && message.hasOwnProperty("lfpLink")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.LfpLink.verify(message.lfpLink);
+                                    if (error)
+                                        return "lfpLink." + error;
+                                }
+                                if (message.odo != null && message.hasOwnProperty("odo")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.OnDisplayToOrder.verify(message.odo);
+                                    if (error)
+                                        return "odo." + error;
+                                }
+                                if (message.about != null && message.hasOwnProperty("about")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.About.verify(message.about);
+                                    if (error)
+                                        return "about." + error;
+                                }
+                                if (message.inventoryVerification != null && message.hasOwnProperty("inventoryVerification")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.InventoryVerification.verify(message.inventoryVerification);
+                                    if (error)
+                                        return "inventoryVerification." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an OmnichannelSetting message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.OmnichannelSetting} OmnichannelSetting
+                             */
+                            OmnichannelSetting.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.regionCode != null)
+                                    message.regionCode = String(object.regionCode);
+                                switch (object.lsfType) {
+                                default:
+                                    if (typeof object.lsfType === "number") {
+                                        message.lsfType = object.lsfType;
+                                        break;
+                                    }
+                                    break;
+                                case "LSF_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.lsfType = 0;
+                                    break;
+                                case "GHLSF":
+                                case 1:
+                                    message.lsfType = 1;
+                                    break;
+                                case "MHLSF_BASIC":
+                                case 2:
+                                    message.lsfType = 2;
+                                    break;
+                                case "MHLSF_FULL":
+                                case 3:
+                                    message.lsfType = 3;
+                                    break;
+                                }
+                                if (object.inStock != null) {
+                                    if (typeof object.inStock !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.OmnichannelSetting.inStock: object expected");
+                                    message.inStock = $root.google.shopping.merchant.accounts.v1beta.InStock.fromObject(object.inStock);
+                                }
+                                if (object.pickup != null) {
+                                    if (typeof object.pickup !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.OmnichannelSetting.pickup: object expected");
+                                    message.pickup = $root.google.shopping.merchant.accounts.v1beta.Pickup.fromObject(object.pickup);
+                                }
+                                if (object.lfpLink != null) {
+                                    if (typeof object.lfpLink !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.OmnichannelSetting.lfpLink: object expected");
+                                    message.lfpLink = $root.google.shopping.merchant.accounts.v1beta.LfpLink.fromObject(object.lfpLink);
+                                }
+                                if (object.odo != null) {
+                                    if (typeof object.odo !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.OmnichannelSetting.odo: object expected");
+                                    message.odo = $root.google.shopping.merchant.accounts.v1beta.OnDisplayToOrder.fromObject(object.odo);
+                                }
+                                if (object.about != null) {
+                                    if (typeof object.about !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.OmnichannelSetting.about: object expected");
+                                    message.about = $root.google.shopping.merchant.accounts.v1beta.About.fromObject(object.about);
+                                }
+                                if (object.inventoryVerification != null) {
+                                    if (typeof object.inventoryVerification !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.OmnichannelSetting.inventoryVerification: object expected");
+                                    message.inventoryVerification = $root.google.shopping.merchant.accounts.v1beta.InventoryVerification.fromObject(object.inventoryVerification);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an OmnichannelSetting message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.OmnichannelSetting} message OmnichannelSetting
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            OmnichannelSetting.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.regionCode = "";
+                                    object.lfpLink = null;
+                                    object.odo = null;
+                                    object.about = null;
+                                    object.inventoryVerification = null;
+                                    object.lsfType = options.enums === String ? "LSF_TYPE_UNSPECIFIED" : 0;
+                                    object.inStock = null;
+                                    object.pickup = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                    object.regionCode = message.regionCode;
+                                if (message.lfpLink != null && message.hasOwnProperty("lfpLink"))
+                                    object.lfpLink = $root.google.shopping.merchant.accounts.v1beta.LfpLink.toObject(message.lfpLink, options);
+                                if (message.odo != null && message.hasOwnProperty("odo"))
+                                    object.odo = $root.google.shopping.merchant.accounts.v1beta.OnDisplayToOrder.toObject(message.odo, options);
+                                if (message.about != null && message.hasOwnProperty("about"))
+                                    object.about = $root.google.shopping.merchant.accounts.v1beta.About.toObject(message.about, options);
+                                if (message.inventoryVerification != null && message.hasOwnProperty("inventoryVerification"))
+                                    object.inventoryVerification = $root.google.shopping.merchant.accounts.v1beta.InventoryVerification.toObject(message.inventoryVerification, options);
+                                if (message.lsfType != null && message.hasOwnProperty("lsfType"))
+                                    object.lsfType = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.LsfType[message.lsfType] === undefined ? message.lsfType : $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.LsfType[message.lsfType] : message.lsfType;
+                                if (message.inStock != null && message.hasOwnProperty("inStock"))
+                                    object.inStock = $root.google.shopping.merchant.accounts.v1beta.InStock.toObject(message.inStock, options);
+                                if (message.pickup != null && message.hasOwnProperty("pickup"))
+                                    object.pickup = $root.google.shopping.merchant.accounts.v1beta.Pickup.toObject(message.pickup, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this OmnichannelSetting to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            OmnichannelSetting.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for OmnichannelSetting
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.OmnichannelSetting
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            OmnichannelSetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.OmnichannelSetting";
+                            };
+    
+                            /**
+                             * LsfType enum.
+                             * @name google.shopping.merchant.accounts.v1beta.OmnichannelSetting.LsfType
+                             * @enum {number}
+                             * @property {number} LSF_TYPE_UNSPECIFIED=0 LSF_TYPE_UNSPECIFIED value
+                             * @property {number} GHLSF=1 GHLSF value
+                             * @property {number} MHLSF_BASIC=2 MHLSF_BASIC value
+                             * @property {number} MHLSF_FULL=3 MHLSF_FULL value
+                             */
+                            OmnichannelSetting.LsfType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "LSF_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "GHLSF"] = 1;
+                                values[valuesById[2] = "MHLSF_BASIC"] = 2;
+                                values[valuesById[3] = "MHLSF_FULL"] = 3;
+                                return values;
+                            })();
+    
+                            return OmnichannelSetting;
+                        })();
+    
+                        v1beta.ReviewState = (function() {
+    
+                            /**
+                             * Properties of a ReviewState.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IReviewState
+                             */
+    
+                            /**
+                             * Constructs a new ReviewState.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a ReviewState.
+                             * @implements IReviewState
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IReviewState=} [properties] Properties to set
+                             */
+                            function ReviewState(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new ReviewState instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.ReviewState
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IReviewState=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.ReviewState} ReviewState instance
+                             */
+                            ReviewState.create = function create(properties) {
+                                return new ReviewState(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReviewState message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ReviewState.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.ReviewState
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IReviewState} message ReviewState message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReviewState.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReviewState message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ReviewState.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.ReviewState
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IReviewState} message ReviewState message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReviewState.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReviewState message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.ReviewState
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.ReviewState} ReviewState
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReviewState.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.ReviewState();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReviewState message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.ReviewState
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.ReviewState} ReviewState
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReviewState.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReviewState message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.ReviewState
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReviewState.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReviewState message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.ReviewState
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.ReviewState} ReviewState
+                             */
+                            ReviewState.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.ReviewState)
+                                    return object;
+                                return new $root.google.shopping.merchant.accounts.v1beta.ReviewState();
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReviewState message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.ReviewState
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ReviewState} message ReviewState
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReviewState.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this ReviewState to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.ReviewState
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReviewState.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ReviewState
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.ReviewState
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReviewState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.ReviewState";
+                            };
+    
+                            /**
+                             * State enum.
+                             * @name google.shopping.merchant.accounts.v1beta.ReviewState.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} ACTIVE=1 ACTIVE value
+                             * @property {number} FAILED=2 FAILED value
+                             * @property {number} RUNNING=3 RUNNING value
+                             * @property {number} ACTION_REQUIRED=4 ACTION_REQUIRED value
+                             */
+                            ReviewState.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ACTIVE"] = 1;
+                                values[valuesById[2] = "FAILED"] = 2;
+                                values[valuesById[3] = "RUNNING"] = 3;
+                                values[valuesById[4] = "ACTION_REQUIRED"] = 4;
+                                return values;
+                            })();
+    
+                            return ReviewState;
+                        })();
+    
+                        v1beta.InStock = (function() {
+    
+                            /**
+                             * Properties of an InStock.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IInStock
+                             * @property {string|null} [uri] InStock uri
+                             * @property {google.shopping.merchant.accounts.v1beta.ReviewState.State|null} [state] InStock state
+                             */
+    
+                            /**
+                             * Constructs a new InStock.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an InStock.
+                             * @implements IInStock
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IInStock=} [properties] Properties to set
+                             */
+                            function InStock(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InStock uri.
+                             * @member {string} uri
+                             * @memberof google.shopping.merchant.accounts.v1beta.InStock
+                             * @instance
+                             */
+                            InStock.prototype.uri = "";
+    
+                            /**
+                             * InStock state.
+                             * @member {google.shopping.merchant.accounts.v1beta.ReviewState.State} state
+                             * @memberof google.shopping.merchant.accounts.v1beta.InStock
+                             * @instance
+                             */
+                            InStock.prototype.state = 0;
+    
+                            /**
+                             * Creates a new InStock instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.InStock
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IInStock=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.InStock} InStock instance
+                             */
+                            InStock.create = function create(properties) {
+                                return new InStock(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InStock message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.InStock.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.InStock
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IInStock} message InStock message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InStock.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InStock message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.InStock.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.InStock
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IInStock} message InStock message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InStock.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InStock message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.InStock
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.InStock} InStock
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InStock.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.InStock();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InStock message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.InStock
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.InStock} InStock
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InStock.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InStock message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.InStock
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InStock.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InStock message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.InStock
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.InStock} InStock
+                             */
+                            InStock.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.InStock)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.InStock();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "ACTIVE":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "FAILED":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "RUNNING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "ACTION_REQUIRED":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InStock message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.InStock
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.InStock} message InStock
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InStock.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.uri = "";
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                }
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    object.uri = message.uri;
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.ReviewState.State[message.state] === undefined ? message.state : $root.google.shopping.merchant.accounts.v1beta.ReviewState.State[message.state] : message.state;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InStock to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.InStock
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InStock.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InStock
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.InStock
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InStock.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.InStock";
+                            };
+    
+                            return InStock;
+                        })();
+    
+                        v1beta.Pickup = (function() {
+    
+                            /**
+                             * Properties of a Pickup.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IPickup
+                             * @property {string|null} [uri] Pickup uri
+                             * @property {google.shopping.merchant.accounts.v1beta.ReviewState.State|null} [state] Pickup state
+                             */
+    
+                            /**
+                             * Constructs a new Pickup.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a Pickup.
+                             * @implements IPickup
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IPickup=} [properties] Properties to set
+                             */
+                            function Pickup(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Pickup uri.
+                             * @member {string} uri
+                             * @memberof google.shopping.merchant.accounts.v1beta.Pickup
+                             * @instance
+                             */
+                            Pickup.prototype.uri = "";
+    
+                            /**
+                             * Pickup state.
+                             * @member {google.shopping.merchant.accounts.v1beta.ReviewState.State} state
+                             * @memberof google.shopping.merchant.accounts.v1beta.Pickup
+                             * @instance
+                             */
+                            Pickup.prototype.state = 0;
+    
+                            /**
+                             * Creates a new Pickup instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.Pickup
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IPickup=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.Pickup} Pickup instance
+                             */
+                            Pickup.create = function create(properties) {
+                                return new Pickup(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Pickup message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.Pickup.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.Pickup
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IPickup} message Pickup message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Pickup.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Pickup message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.Pickup.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.Pickup
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IPickup} message Pickup message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Pickup.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Pickup message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.Pickup
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.Pickup} Pickup
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Pickup.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.Pickup();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Pickup message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.Pickup
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.Pickup} Pickup
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Pickup.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Pickup message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.Pickup
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Pickup.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Pickup message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.Pickup
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.Pickup} Pickup
+                             */
+                            Pickup.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.Pickup)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.Pickup();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "ACTIVE":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "FAILED":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "RUNNING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "ACTION_REQUIRED":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Pickup message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.Pickup
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.Pickup} message Pickup
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Pickup.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.uri = "";
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                }
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    object.uri = message.uri;
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.ReviewState.State[message.state] === undefined ? message.state : $root.google.shopping.merchant.accounts.v1beta.ReviewState.State[message.state] : message.state;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Pickup to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.Pickup
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Pickup.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Pickup
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.Pickup
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Pickup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.Pickup";
+                            };
+    
+                            return Pickup;
+                        })();
+    
+                        v1beta.LfpLink = (function() {
+    
+                            /**
+                             * Properties of a LfpLink.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface ILfpLink
+                             * @property {string|null} [lfpProvider] LfpLink lfpProvider
+                             * @property {string|null} [externalAccountId] LfpLink externalAccountId
+                             * @property {google.shopping.merchant.accounts.v1beta.ReviewState.State|null} [state] LfpLink state
+                             */
+    
+                            /**
+                             * Constructs a new LfpLink.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a LfpLink.
+                             * @implements ILfpLink
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.ILfpLink=} [properties] Properties to set
+                             */
+                            function LfpLink(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LfpLink lfpProvider.
+                             * @member {string} lfpProvider
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @instance
+                             */
+                            LfpLink.prototype.lfpProvider = "";
+    
+                            /**
+                             * LfpLink externalAccountId.
+                             * @member {string} externalAccountId
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @instance
+                             */
+                            LfpLink.prototype.externalAccountId = "";
+    
+                            /**
+                             * LfpLink state.
+                             * @member {google.shopping.merchant.accounts.v1beta.ReviewState.State} state
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @instance
+                             */
+                            LfpLink.prototype.state = 0;
+    
+                            /**
+                             * Creates a new LfpLink instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILfpLink=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.LfpLink} LfpLink instance
+                             */
+                            LfpLink.create = function create(properties) {
+                                return new LfpLink(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LfpLink message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LfpLink.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILfpLink} message LfpLink message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LfpLink.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.lfpProvider != null && Object.hasOwnProperty.call(message, "lfpProvider"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.lfpProvider);
+                                if (message.externalAccountId != null && Object.hasOwnProperty.call(message, "externalAccountId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.externalAccountId);
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LfpLink message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LfpLink.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ILfpLink} message LfpLink message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LfpLink.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LfpLink message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.LfpLink} LfpLink
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LfpLink.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.LfpLink();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.lfpProvider = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.externalAccountId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LfpLink message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.LfpLink} LfpLink
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LfpLink.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LfpLink message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LfpLink.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.lfpProvider != null && message.hasOwnProperty("lfpProvider"))
+                                    if (!$util.isString(message.lfpProvider))
+                                        return "lfpProvider: string expected";
+                                if (message.externalAccountId != null && message.hasOwnProperty("externalAccountId"))
+                                    if (!$util.isString(message.externalAccountId))
+                                        return "externalAccountId: string expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LfpLink message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.LfpLink} LfpLink
+                             */
+                            LfpLink.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.LfpLink)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.LfpLink();
+                                if (object.lfpProvider != null)
+                                    message.lfpProvider = String(object.lfpProvider);
+                                if (object.externalAccountId != null)
+                                    message.externalAccountId = String(object.externalAccountId);
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "ACTIVE":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "FAILED":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "RUNNING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "ACTION_REQUIRED":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LfpLink message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.LfpLink} message LfpLink
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LfpLink.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.lfpProvider = "";
+                                    object.externalAccountId = "";
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                }
+                                if (message.lfpProvider != null && message.hasOwnProperty("lfpProvider"))
+                                    object.lfpProvider = message.lfpProvider;
+                                if (message.externalAccountId != null && message.hasOwnProperty("externalAccountId"))
+                                    object.externalAccountId = message.externalAccountId;
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.ReviewState.State[message.state] === undefined ? message.state : $root.google.shopping.merchant.accounts.v1beta.ReviewState.State[message.state] : message.state;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LfpLink to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LfpLink.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LfpLink
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.LfpLink
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LfpLink.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.LfpLink";
+                            };
+    
+                            return LfpLink;
+                        })();
+    
+                        v1beta.OnDisplayToOrder = (function() {
+    
+                            /**
+                             * Properties of an OnDisplayToOrder.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IOnDisplayToOrder
+                             * @property {string|null} [uri] OnDisplayToOrder uri
+                             * @property {google.shopping.merchant.accounts.v1beta.ReviewState.State|null} [state] OnDisplayToOrder state
+                             */
+    
+                            /**
+                             * Constructs a new OnDisplayToOrder.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an OnDisplayToOrder.
+                             * @implements IOnDisplayToOrder
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IOnDisplayToOrder=} [properties] Properties to set
+                             */
+                            function OnDisplayToOrder(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * OnDisplayToOrder uri.
+                             * @member {string} uri
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnDisplayToOrder
+                             * @instance
+                             */
+                            OnDisplayToOrder.prototype.uri = "";
+    
+                            /**
+                             * OnDisplayToOrder state.
+                             * @member {google.shopping.merchant.accounts.v1beta.ReviewState.State} state
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnDisplayToOrder
+                             * @instance
+                             */
+                            OnDisplayToOrder.prototype.state = 0;
+    
+                            /**
+                             * Creates a new OnDisplayToOrder instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnDisplayToOrder
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IOnDisplayToOrder=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.OnDisplayToOrder} OnDisplayToOrder instance
+                             */
+                            OnDisplayToOrder.create = function create(properties) {
+                                return new OnDisplayToOrder(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified OnDisplayToOrder message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.OnDisplayToOrder.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnDisplayToOrder
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IOnDisplayToOrder} message OnDisplayToOrder message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OnDisplayToOrder.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified OnDisplayToOrder message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.OnDisplayToOrder.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnDisplayToOrder
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IOnDisplayToOrder} message OnDisplayToOrder message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OnDisplayToOrder.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an OnDisplayToOrder message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnDisplayToOrder
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.OnDisplayToOrder} OnDisplayToOrder
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OnDisplayToOrder.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.OnDisplayToOrder();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an OnDisplayToOrder message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnDisplayToOrder
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.OnDisplayToOrder} OnDisplayToOrder
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OnDisplayToOrder.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an OnDisplayToOrder message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnDisplayToOrder
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            OnDisplayToOrder.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an OnDisplayToOrder message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnDisplayToOrder
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.OnDisplayToOrder} OnDisplayToOrder
+                             */
+                            OnDisplayToOrder.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.OnDisplayToOrder)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.OnDisplayToOrder();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "ACTIVE":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "FAILED":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "RUNNING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "ACTION_REQUIRED":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an OnDisplayToOrder message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnDisplayToOrder
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.OnDisplayToOrder} message OnDisplayToOrder
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            OnDisplayToOrder.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.uri = "";
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                }
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    object.uri = message.uri;
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.ReviewState.State[message.state] === undefined ? message.state : $root.google.shopping.merchant.accounts.v1beta.ReviewState.State[message.state] : message.state;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this OnDisplayToOrder to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnDisplayToOrder
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            OnDisplayToOrder.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for OnDisplayToOrder
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnDisplayToOrder
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            OnDisplayToOrder.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.OnDisplayToOrder";
+                            };
+    
+                            return OnDisplayToOrder;
+                        })();
+    
+                        v1beta.About = (function() {
+    
+                            /**
+                             * Properties of an About.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IAbout
+                             * @property {string|null} [uri] About uri
+                             * @property {google.shopping.merchant.accounts.v1beta.ReviewState.State|null} [state] About state
+                             */
+    
+                            /**
+                             * Constructs a new About.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an About.
+                             * @implements IAbout
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IAbout=} [properties] Properties to set
+                             */
+                            function About(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * About uri.
+                             * @member {string} uri
+                             * @memberof google.shopping.merchant.accounts.v1beta.About
+                             * @instance
+                             */
+                            About.prototype.uri = "";
+    
+                            /**
+                             * About state.
+                             * @member {google.shopping.merchant.accounts.v1beta.ReviewState.State} state
+                             * @memberof google.shopping.merchant.accounts.v1beta.About
+                             * @instance
+                             */
+                            About.prototype.state = 0;
+    
+                            /**
+                             * Creates a new About instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.About
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAbout=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.About} About instance
+                             */
+                            About.create = function create(properties) {
+                                return new About(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified About message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.About.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.About
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAbout} message About message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            About.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified About message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.About.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.About
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAbout} message About message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            About.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an About message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.About
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.About} About
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            About.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.About();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an About message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.About
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.About} About
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            About.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an About message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.About
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            About.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an About message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.About
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.About} About
+                             */
+                            About.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.About)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.About();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "ACTIVE":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "FAILED":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "RUNNING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "ACTION_REQUIRED":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an About message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.About
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.About} message About
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            About.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.uri = "";
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                }
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    object.uri = message.uri;
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.ReviewState.State[message.state] === undefined ? message.state : $root.google.shopping.merchant.accounts.v1beta.ReviewState.State[message.state] : message.state;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this About to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.About
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            About.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for About
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.About
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            About.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.About";
+                            };
+    
+                            return About;
+                        })();
+    
+                        v1beta.InventoryVerification = (function() {
+    
+                            /**
+                             * Properties of an InventoryVerification.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IInventoryVerification
+                             * @property {google.shopping.merchant.accounts.v1beta.InventoryVerification.State|null} [state] InventoryVerification state
+                             * @property {string|null} [contact] InventoryVerification contact
+                             * @property {string|null} [contactEmail] InventoryVerification contactEmail
+                             * @property {google.shopping.merchant.accounts.v1beta.ReviewState.State|null} [contactState] InventoryVerification contactState
+                             */
+    
+                            /**
+                             * Constructs a new InventoryVerification.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an InventoryVerification.
+                             * @implements IInventoryVerification
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IInventoryVerification=} [properties] Properties to set
+                             */
+                            function InventoryVerification(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InventoryVerification state.
+                             * @member {google.shopping.merchant.accounts.v1beta.InventoryVerification.State} state
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @instance
+                             */
+                            InventoryVerification.prototype.state = 0;
+    
+                            /**
+                             * InventoryVerification contact.
+                             * @member {string} contact
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @instance
+                             */
+                            InventoryVerification.prototype.contact = "";
+    
+                            /**
+                             * InventoryVerification contactEmail.
+                             * @member {string} contactEmail
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @instance
+                             */
+                            InventoryVerification.prototype.contactEmail = "";
+    
+                            /**
+                             * InventoryVerification contactState.
+                             * @member {google.shopping.merchant.accounts.v1beta.ReviewState.State} contactState
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @instance
+                             */
+                            InventoryVerification.prototype.contactState = 0;
+    
+                            /**
+                             * Creates a new InventoryVerification instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IInventoryVerification=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.InventoryVerification} InventoryVerification instance
+                             */
+                            InventoryVerification.create = function create(properties) {
+                                return new InventoryVerification(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InventoryVerification message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.InventoryVerification.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IInventoryVerification} message InventoryVerification message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InventoryVerification.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                                if (message.contact != null && Object.hasOwnProperty.call(message, "contact"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.contact);
+                                if (message.contactEmail != null && Object.hasOwnProperty.call(message, "contactEmail"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.contactEmail);
+                                if (message.contactState != null && Object.hasOwnProperty.call(message, "contactState"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.contactState);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InventoryVerification message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.InventoryVerification.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IInventoryVerification} message InventoryVerification message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InventoryVerification.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InventoryVerification message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.InventoryVerification} InventoryVerification
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InventoryVerification.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.InventoryVerification();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.contact = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.contactEmail = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.contactState = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InventoryVerification message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.InventoryVerification} InventoryVerification
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InventoryVerification.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InventoryVerification message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InventoryVerification.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 5:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.contact != null && message.hasOwnProperty("contact"))
+                                    if (!$util.isString(message.contact))
+                                        return "contact: string expected";
+                                if (message.contactEmail != null && message.hasOwnProperty("contactEmail"))
+                                    if (!$util.isString(message.contactEmail))
+                                        return "contactEmail: string expected";
+                                if (message.contactState != null && message.hasOwnProperty("contactState"))
+                                    switch (message.contactState) {
+                                    default:
+                                        return "contactState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InventoryVerification message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.InventoryVerification} InventoryVerification
+                             */
+                            InventoryVerification.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.InventoryVerification)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.InventoryVerification();
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "ACTION_REQUIRED":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "INACTIVE":
+                                case 5:
+                                    message.state = 5;
+                                    break;
+                                case "RUNNING":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "SUCCEEDED":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "SUSPENDED":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                }
+                                if (object.contact != null)
+                                    message.contact = String(object.contact);
+                                if (object.contactEmail != null)
+                                    message.contactEmail = String(object.contactEmail);
+                                switch (object.contactState) {
+                                default:
+                                    if (typeof object.contactState === "number") {
+                                        message.contactState = object.contactState;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.contactState = 0;
+                                    break;
+                                case "ACTIVE":
+                                case 1:
+                                    message.contactState = 1;
+                                    break;
+                                case "FAILED":
+                                case 2:
+                                    message.contactState = 2;
+                                    break;
+                                case "RUNNING":
+                                case 3:
+                                    message.contactState = 3;
+                                    break;
+                                case "ACTION_REQUIRED":
+                                case 4:
+                                    message.contactState = 4;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InventoryVerification message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.InventoryVerification} message InventoryVerification
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InventoryVerification.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.contact = "";
+                                    object.contactEmail = "";
+                                    object.contactState = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                }
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.InventoryVerification.State[message.state] === undefined ? message.state : $root.google.shopping.merchant.accounts.v1beta.InventoryVerification.State[message.state] : message.state;
+                                if (message.contact != null && message.hasOwnProperty("contact"))
+                                    object.contact = message.contact;
+                                if (message.contactEmail != null && message.hasOwnProperty("contactEmail"))
+                                    object.contactEmail = message.contactEmail;
+                                if (message.contactState != null && message.hasOwnProperty("contactState"))
+                                    object.contactState = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.ReviewState.State[message.contactState] === undefined ? message.contactState : $root.google.shopping.merchant.accounts.v1beta.ReviewState.State[message.contactState] : message.contactState;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InventoryVerification to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InventoryVerification.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InventoryVerification
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.InventoryVerification
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InventoryVerification.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.InventoryVerification";
+                            };
+    
+                            /**
+                             * State enum.
+                             * @name google.shopping.merchant.accounts.v1beta.InventoryVerification.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} ACTION_REQUIRED=1 ACTION_REQUIRED value
+                             * @property {number} INACTIVE=5 INACTIVE value
+                             * @property {number} RUNNING=2 RUNNING value
+                             * @property {number} SUCCEEDED=3 SUCCEEDED value
+                             * @property {number} SUSPENDED=4 SUSPENDED value
+                             */
+                            InventoryVerification.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ACTION_REQUIRED"] = 1;
+                                values[valuesById[5] = "INACTIVE"] = 5;
+                                values[valuesById[2] = "RUNNING"] = 2;
+                                values[valuesById[3] = "SUCCEEDED"] = 3;
+                                values[valuesById[4] = "SUSPENDED"] = 4;
+                                return values;
+                            })();
+    
+                            return InventoryVerification;
+                        })();
+    
+                        v1beta.GetOmnichannelSettingRequest = (function() {
+    
+                            /**
+                             * Properties of a GetOmnichannelSettingRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IGetOmnichannelSettingRequest
+                             * @property {string|null} [name] GetOmnichannelSettingRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetOmnichannelSettingRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a GetOmnichannelSettingRequest.
+                             * @implements IGetOmnichannelSettingRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest=} [properties] Properties to set
+                             */
+                            function GetOmnichannelSettingRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetOmnichannelSettingRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest
+                             * @instance
+                             */
+                            GetOmnichannelSettingRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetOmnichannelSettingRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest} GetOmnichannelSettingRequest instance
+                             */
+                            GetOmnichannelSettingRequest.create = function create(properties) {
+                                return new GetOmnichannelSettingRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetOmnichannelSettingRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest} message GetOmnichannelSettingRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetOmnichannelSettingRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetOmnichannelSettingRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest} message GetOmnichannelSettingRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetOmnichannelSettingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetOmnichannelSettingRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest} GetOmnichannelSettingRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetOmnichannelSettingRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetOmnichannelSettingRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest} GetOmnichannelSettingRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetOmnichannelSettingRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetOmnichannelSettingRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetOmnichannelSettingRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetOmnichannelSettingRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest} GetOmnichannelSettingRequest
+                             */
+                            GetOmnichannelSettingRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetOmnichannelSettingRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest} message GetOmnichannelSettingRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetOmnichannelSettingRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetOmnichannelSettingRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetOmnichannelSettingRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetOmnichannelSettingRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetOmnichannelSettingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest";
+                            };
+    
+                            return GetOmnichannelSettingRequest;
+                        })();
+    
+                        v1beta.ListOmnichannelSettingsRequest = (function() {
+    
+                            /**
+                             * Properties of a ListOmnichannelSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IListOmnichannelSettingsRequest
+                             * @property {string|null} [parent] ListOmnichannelSettingsRequest parent
+                             * @property {number|null} [pageSize] ListOmnichannelSettingsRequest pageSize
+                             * @property {string|null} [pageToken] ListOmnichannelSettingsRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListOmnichannelSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a ListOmnichannelSettingsRequest.
+                             * @implements IListOmnichannelSettingsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest=} [properties] Properties to set
+                             */
+                            function ListOmnichannelSettingsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListOmnichannelSettingsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @instance
+                             */
+                            ListOmnichannelSettingsRequest.prototype.parent = "";
+    
+                            /**
+                             * ListOmnichannelSettingsRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @instance
+                             */
+                            ListOmnichannelSettingsRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListOmnichannelSettingsRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @instance
+                             */
+                            ListOmnichannelSettingsRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListOmnichannelSettingsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest} ListOmnichannelSettingsRequest instance
+                             */
+                            ListOmnichannelSettingsRequest.create = function create(properties) {
+                                return new ListOmnichannelSettingsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListOmnichannelSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest} message ListOmnichannelSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListOmnichannelSettingsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListOmnichannelSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest} message ListOmnichannelSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListOmnichannelSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListOmnichannelSettingsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest} ListOmnichannelSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListOmnichannelSettingsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListOmnichannelSettingsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest} ListOmnichannelSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListOmnichannelSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListOmnichannelSettingsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListOmnichannelSettingsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListOmnichannelSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest} ListOmnichannelSettingsRequest
+                             */
+                            ListOmnichannelSettingsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListOmnichannelSettingsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest} message ListOmnichannelSettingsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListOmnichannelSettingsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListOmnichannelSettingsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListOmnichannelSettingsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListOmnichannelSettingsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListOmnichannelSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest";
+                            };
+    
+                            return ListOmnichannelSettingsRequest;
+                        })();
+    
+                        v1beta.ListOmnichannelSettingsResponse = (function() {
+    
+                            /**
+                             * Properties of a ListOmnichannelSettingsResponse.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IListOmnichannelSettingsResponse
+                             * @property {Array.<google.shopping.merchant.accounts.v1beta.IOmnichannelSetting>|null} [omnichannelSettings] ListOmnichannelSettingsResponse omnichannelSettings
+                             * @property {string|null} [nextPageToken] ListOmnichannelSettingsResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListOmnichannelSettingsResponse.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a ListOmnichannelSettingsResponse.
+                             * @implements IListOmnichannelSettingsResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse=} [properties] Properties to set
+                             */
+                            function ListOmnichannelSettingsResponse(properties) {
+                                this.omnichannelSettings = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListOmnichannelSettingsResponse omnichannelSettings.
+                             * @member {Array.<google.shopping.merchant.accounts.v1beta.IOmnichannelSetting>} omnichannelSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse
+                             * @instance
+                             */
+                            ListOmnichannelSettingsResponse.prototype.omnichannelSettings = $util.emptyArray;
+    
+                            /**
+                             * ListOmnichannelSettingsResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse
+                             * @instance
+                             */
+                            ListOmnichannelSettingsResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListOmnichannelSettingsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse} ListOmnichannelSettingsResponse instance
+                             */
+                            ListOmnichannelSettingsResponse.create = function create(properties) {
+                                return new ListOmnichannelSettingsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListOmnichannelSettingsResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse} message ListOmnichannelSettingsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListOmnichannelSettingsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.omnichannelSettings != null && message.omnichannelSettings.length)
+                                    for (var i = 0; i < message.omnichannelSettings.length; ++i)
+                                        $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.encode(message.omnichannelSettings[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListOmnichannelSettingsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse} message ListOmnichannelSettingsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListOmnichannelSettingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListOmnichannelSettingsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse} ListOmnichannelSettingsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListOmnichannelSettingsResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.omnichannelSettings && message.omnichannelSettings.length))
+                                                message.omnichannelSettings = [];
+                                            message.omnichannelSettings.push($root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListOmnichannelSettingsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse} ListOmnichannelSettingsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListOmnichannelSettingsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListOmnichannelSettingsResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListOmnichannelSettingsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.omnichannelSettings != null && message.hasOwnProperty("omnichannelSettings")) {
+                                    if (!Array.isArray(message.omnichannelSettings))
+                                        return "omnichannelSettings: array expected";
+                                    for (var i = 0; i < message.omnichannelSettings.length; ++i) {
+                                        var error = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.verify(message.omnichannelSettings[i]);
+                                        if (error)
+                                            return "omnichannelSettings." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListOmnichannelSettingsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse} ListOmnichannelSettingsResponse
+                             */
+                            ListOmnichannelSettingsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse();
+                                if (object.omnichannelSettings) {
+                                    if (!Array.isArray(object.omnichannelSettings))
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse.omnichannelSettings: array expected");
+                                    message.omnichannelSettings = [];
+                                    for (var i = 0; i < object.omnichannelSettings.length; ++i) {
+                                        if (typeof object.omnichannelSettings[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse.omnichannelSettings: object expected");
+                                        message.omnichannelSettings[i] = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.fromObject(object.omnichannelSettings[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListOmnichannelSettingsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse} message ListOmnichannelSettingsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListOmnichannelSettingsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.omnichannelSettings = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.omnichannelSettings && message.omnichannelSettings.length) {
+                                    object.omnichannelSettings = [];
+                                    for (var j = 0; j < message.omnichannelSettings.length; ++j)
+                                        object.omnichannelSettings[j] = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.toObject(message.omnichannelSettings[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListOmnichannelSettingsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListOmnichannelSettingsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListOmnichannelSettingsResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListOmnichannelSettingsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse";
+                            };
+    
+                            return ListOmnichannelSettingsResponse;
+                        })();
+    
+                        v1beta.CreateOmnichannelSettingRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateOmnichannelSettingRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface ICreateOmnichannelSettingRequest
+                             * @property {string|null} [parent] CreateOmnichannelSettingRequest parent
+                             * @property {google.shopping.merchant.accounts.v1beta.IOmnichannelSetting|null} [omnichannelSetting] CreateOmnichannelSettingRequest omnichannelSetting
+                             */
+    
+                            /**
+                             * Constructs a new CreateOmnichannelSettingRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a CreateOmnichannelSettingRequest.
+                             * @implements ICreateOmnichannelSettingRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest=} [properties] Properties to set
+                             */
+                            function CreateOmnichannelSettingRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateOmnichannelSettingRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest
+                             * @instance
+                             */
+                            CreateOmnichannelSettingRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateOmnichannelSettingRequest omnichannelSetting.
+                             * @member {google.shopping.merchant.accounts.v1beta.IOmnichannelSetting|null|undefined} omnichannelSetting
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest
+                             * @instance
+                             */
+                            CreateOmnichannelSettingRequest.prototype.omnichannelSetting = null;
+    
+                            /**
+                             * Creates a new CreateOmnichannelSettingRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest} CreateOmnichannelSettingRequest instance
+                             */
+                            CreateOmnichannelSettingRequest.create = function create(properties) {
+                                return new CreateOmnichannelSettingRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateOmnichannelSettingRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest} message CreateOmnichannelSettingRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateOmnichannelSettingRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.omnichannelSetting != null && Object.hasOwnProperty.call(message, "omnichannelSetting"))
+                                    $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.encode(message.omnichannelSetting, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateOmnichannelSettingRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest} message CreateOmnichannelSettingRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateOmnichannelSettingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateOmnichannelSettingRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest} CreateOmnichannelSettingRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateOmnichannelSettingRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.omnichannelSetting = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateOmnichannelSettingRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest} CreateOmnichannelSettingRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateOmnichannelSettingRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateOmnichannelSettingRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateOmnichannelSettingRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.omnichannelSetting != null && message.hasOwnProperty("omnichannelSetting")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.verify(message.omnichannelSetting);
+                                    if (error)
+                                        return "omnichannelSetting." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateOmnichannelSettingRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest} CreateOmnichannelSettingRequest
+                             */
+                            CreateOmnichannelSettingRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.omnichannelSetting != null) {
+                                    if (typeof object.omnichannelSetting !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest.omnichannelSetting: object expected");
+                                    message.omnichannelSetting = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.fromObject(object.omnichannelSetting);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateOmnichannelSettingRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest} message CreateOmnichannelSettingRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateOmnichannelSettingRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.omnichannelSetting = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.omnichannelSetting != null && message.hasOwnProperty("omnichannelSetting"))
+                                    object.omnichannelSetting = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.toObject(message.omnichannelSetting, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateOmnichannelSettingRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateOmnichannelSettingRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateOmnichannelSettingRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateOmnichannelSettingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest";
+                            };
+    
+                            return CreateOmnichannelSettingRequest;
+                        })();
+    
+                        v1beta.UpdateOmnichannelSettingRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateOmnichannelSettingRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IUpdateOmnichannelSettingRequest
+                             * @property {google.shopping.merchant.accounts.v1beta.IOmnichannelSetting|null} [omnichannelSetting] UpdateOmnichannelSettingRequest omnichannelSetting
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateOmnichannelSettingRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateOmnichannelSettingRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an UpdateOmnichannelSettingRequest.
+                             * @implements IUpdateOmnichannelSettingRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest=} [properties] Properties to set
+                             */
+                            function UpdateOmnichannelSettingRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateOmnichannelSettingRequest omnichannelSetting.
+                             * @member {google.shopping.merchant.accounts.v1beta.IOmnichannelSetting|null|undefined} omnichannelSetting
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest
+                             * @instance
+                             */
+                            UpdateOmnichannelSettingRequest.prototype.omnichannelSetting = null;
+    
+                            /**
+                             * UpdateOmnichannelSettingRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest
+                             * @instance
+                             */
+                            UpdateOmnichannelSettingRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateOmnichannelSettingRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest} UpdateOmnichannelSettingRequest instance
+                             */
+                            UpdateOmnichannelSettingRequest.create = function create(properties) {
+                                return new UpdateOmnichannelSettingRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateOmnichannelSettingRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest} message UpdateOmnichannelSettingRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateOmnichannelSettingRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.omnichannelSetting != null && Object.hasOwnProperty.call(message, "omnichannelSetting"))
+                                    $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.encode(message.omnichannelSetting, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateOmnichannelSettingRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest} message UpdateOmnichannelSettingRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateOmnichannelSettingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateOmnichannelSettingRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest} UpdateOmnichannelSettingRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateOmnichannelSettingRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.omnichannelSetting = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateOmnichannelSettingRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest} UpdateOmnichannelSettingRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateOmnichannelSettingRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateOmnichannelSettingRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateOmnichannelSettingRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.omnichannelSetting != null && message.hasOwnProperty("omnichannelSetting")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.verify(message.omnichannelSetting);
+                                    if (error)
+                                        return "omnichannelSetting." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateOmnichannelSettingRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest} UpdateOmnichannelSettingRequest
+                             */
+                            UpdateOmnichannelSettingRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest();
+                                if (object.omnichannelSetting != null) {
+                                    if (typeof object.omnichannelSetting !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest.omnichannelSetting: object expected");
+                                    message.omnichannelSetting = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.fromObject(object.omnichannelSetting);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateOmnichannelSettingRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest} message UpdateOmnichannelSettingRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateOmnichannelSettingRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.omnichannelSetting = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.omnichannelSetting != null && message.hasOwnProperty("omnichannelSetting"))
+                                    object.omnichannelSetting = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.toObject(message.omnichannelSetting, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateOmnichannelSettingRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateOmnichannelSettingRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateOmnichannelSettingRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateOmnichannelSettingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest";
+                            };
+    
+                            return UpdateOmnichannelSettingRequest;
+                        })();
+    
+                        v1beta.RequestInventoryVerificationRequest = (function() {
+    
+                            /**
+                             * Properties of a RequestInventoryVerificationRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IRequestInventoryVerificationRequest
+                             * @property {string|null} [name] RequestInventoryVerificationRequest name
+                             */
+    
+                            /**
+                             * Constructs a new RequestInventoryVerificationRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a RequestInventoryVerificationRequest.
+                             * @implements IRequestInventoryVerificationRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest=} [properties] Properties to set
+                             */
+                            function RequestInventoryVerificationRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RequestInventoryVerificationRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest
+                             * @instance
+                             */
+                            RequestInventoryVerificationRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new RequestInventoryVerificationRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest} RequestInventoryVerificationRequest instance
+                             */
+                            RequestInventoryVerificationRequest.create = function create(properties) {
+                                return new RequestInventoryVerificationRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RequestInventoryVerificationRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest} message RequestInventoryVerificationRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RequestInventoryVerificationRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RequestInventoryVerificationRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest} message RequestInventoryVerificationRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RequestInventoryVerificationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RequestInventoryVerificationRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest} RequestInventoryVerificationRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RequestInventoryVerificationRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RequestInventoryVerificationRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest} RequestInventoryVerificationRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RequestInventoryVerificationRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RequestInventoryVerificationRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RequestInventoryVerificationRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RequestInventoryVerificationRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest} RequestInventoryVerificationRequest
+                             */
+                            RequestInventoryVerificationRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RequestInventoryVerificationRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest} message RequestInventoryVerificationRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RequestInventoryVerificationRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RequestInventoryVerificationRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RequestInventoryVerificationRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RequestInventoryVerificationRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RequestInventoryVerificationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest";
+                            };
+    
+                            return RequestInventoryVerificationRequest;
+                        })();
+    
+                        v1beta.RequestInventoryVerificationResponse = (function() {
+    
+                            /**
+                             * Properties of a RequestInventoryVerificationResponse.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IRequestInventoryVerificationResponse
+                             * @property {google.shopping.merchant.accounts.v1beta.IOmnichannelSetting|null} [omnichannelSetting] RequestInventoryVerificationResponse omnichannelSetting
+                             */
+    
+                            /**
+                             * Constructs a new RequestInventoryVerificationResponse.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a RequestInventoryVerificationResponse.
+                             * @implements IRequestInventoryVerificationResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse=} [properties] Properties to set
+                             */
+                            function RequestInventoryVerificationResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RequestInventoryVerificationResponse omnichannelSetting.
+                             * @member {google.shopping.merchant.accounts.v1beta.IOmnichannelSetting|null|undefined} omnichannelSetting
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse
+                             * @instance
+                             */
+                            RequestInventoryVerificationResponse.prototype.omnichannelSetting = null;
+    
+                            /**
+                             * Creates a new RequestInventoryVerificationResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse} RequestInventoryVerificationResponse instance
+                             */
+                            RequestInventoryVerificationResponse.create = function create(properties) {
+                                return new RequestInventoryVerificationResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RequestInventoryVerificationResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse} message RequestInventoryVerificationResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RequestInventoryVerificationResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.omnichannelSetting != null && Object.hasOwnProperty.call(message, "omnichannelSetting"))
+                                    $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.encode(message.omnichannelSetting, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RequestInventoryVerificationResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse} message RequestInventoryVerificationResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RequestInventoryVerificationResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RequestInventoryVerificationResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse} RequestInventoryVerificationResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RequestInventoryVerificationResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.omnichannelSetting = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RequestInventoryVerificationResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse} RequestInventoryVerificationResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RequestInventoryVerificationResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RequestInventoryVerificationResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RequestInventoryVerificationResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.omnichannelSetting != null && message.hasOwnProperty("omnichannelSetting")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.verify(message.omnichannelSetting);
+                                    if (error)
+                                        return "omnichannelSetting." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RequestInventoryVerificationResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse} RequestInventoryVerificationResponse
+                             */
+                            RequestInventoryVerificationResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse();
+                                if (object.omnichannelSetting != null) {
+                                    if (typeof object.omnichannelSetting !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse.omnichannelSetting: object expected");
+                                    message.omnichannelSetting = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.fromObject(object.omnichannelSetting);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RequestInventoryVerificationResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse} message RequestInventoryVerificationResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RequestInventoryVerificationResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.omnichannelSetting = null;
+                                if (message.omnichannelSetting != null && message.hasOwnProperty("omnichannelSetting"))
+                                    object.omnichannelSetting = $root.google.shopping.merchant.accounts.v1beta.OmnichannelSetting.toObject(message.omnichannelSetting, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RequestInventoryVerificationResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RequestInventoryVerificationResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RequestInventoryVerificationResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RequestInventoryVerificationResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse";
+                            };
+    
+                            return RequestInventoryVerificationResponse;
+                        })();
+    
                         v1beta.OnlineReturnPolicyService = (function() {
     
                             /**
@@ -16595,6 +23400,105 @@
                              * @instance
                              * @param {google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest} request ListOnlineReturnPoliciesRequest message or plain object
                              * @returns {Promise<google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService|createOnlineReturnPolicy}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService
+                             * @typedef CreateOnlineReturnPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy} [response] OnlineReturnPolicy
+                             */
+    
+                            /**
+                             * Calls CreateOnlineReturnPolicy.
+                             * @function createOnlineReturnPolicy
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest} request CreateOnlineReturnPolicyRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.CreateOnlineReturnPolicyCallback} callback Node-style callback called with the error, if any, and OnlineReturnPolicy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(OnlineReturnPolicyService.prototype.createOnlineReturnPolicy = function createOnlineReturnPolicy(request, callback) {
+                                return this.rpcCall(createOnlineReturnPolicy, $root.google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest, $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy, request, callback);
+                            }, "name", { value: "CreateOnlineReturnPolicy" });
+    
+                            /**
+                             * Calls CreateOnlineReturnPolicy.
+                             * @function createOnlineReturnPolicy
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest} request CreateOnlineReturnPolicyRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService|updateOnlineReturnPolicy}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService
+                             * @typedef UpdateOnlineReturnPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy} [response] OnlineReturnPolicy
+                             */
+    
+                            /**
+                             * Calls UpdateOnlineReturnPolicy.
+                             * @function updateOnlineReturnPolicy
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest} request UpdateOnlineReturnPolicyRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.UpdateOnlineReturnPolicyCallback} callback Node-style callback called with the error, if any, and OnlineReturnPolicy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(OnlineReturnPolicyService.prototype.updateOnlineReturnPolicy = function updateOnlineReturnPolicy(request, callback) {
+                                return this.rpcCall(updateOnlineReturnPolicy, $root.google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest, $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy, request, callback);
+                            }, "name", { value: "UpdateOnlineReturnPolicy" });
+    
+                            /**
+                             * Calls UpdateOnlineReturnPolicy.
+                             * @function updateOnlineReturnPolicy
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest} request UpdateOnlineReturnPolicyRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService|deleteOnlineReturnPolicy}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService
+                             * @typedef DeleteOnlineReturnPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteOnlineReturnPolicy.
+                             * @function deleteOnlineReturnPolicy
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest} request DeleteOnlineReturnPolicyRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.DeleteOnlineReturnPolicyCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(OnlineReturnPolicyService.prototype.deleteOnlineReturnPolicy = function deleteOnlineReturnPolicy(request, callback) {
+                                return this.rpcCall(deleteOnlineReturnPolicy, $root.google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteOnlineReturnPolicy" });
+    
+                            /**
+                             * Calls DeleteOnlineReturnPolicy.
+                             * @function deleteOnlineReturnPolicy
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest} request DeleteOnlineReturnPolicyRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
                              * @variation 2
                              */
     
@@ -16802,6 +23706,678 @@
                             };
     
                             return GetOnlineReturnPolicyRequest;
+                        })();
+    
+                        v1beta.CreateOnlineReturnPolicyRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateOnlineReturnPolicyRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface ICreateOnlineReturnPolicyRequest
+                             * @property {string|null} [parent] CreateOnlineReturnPolicyRequest parent
+                             * @property {google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy|null} [onlineReturnPolicy] CreateOnlineReturnPolicyRequest onlineReturnPolicy
+                             */
+    
+                            /**
+                             * Constructs a new CreateOnlineReturnPolicyRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a CreateOnlineReturnPolicyRequest.
+                             * @implements ICreateOnlineReturnPolicyRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest=} [properties] Properties to set
+                             */
+                            function CreateOnlineReturnPolicyRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateOnlineReturnPolicyRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest
+                             * @instance
+                             */
+                            CreateOnlineReturnPolicyRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateOnlineReturnPolicyRequest onlineReturnPolicy.
+                             * @member {google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy|null|undefined} onlineReturnPolicy
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest
+                             * @instance
+                             */
+                            CreateOnlineReturnPolicyRequest.prototype.onlineReturnPolicy = null;
+    
+                            /**
+                             * Creates a new CreateOnlineReturnPolicyRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest} CreateOnlineReturnPolicyRequest instance
+                             */
+                            CreateOnlineReturnPolicyRequest.create = function create(properties) {
+                                return new CreateOnlineReturnPolicyRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateOnlineReturnPolicyRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest} message CreateOnlineReturnPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateOnlineReturnPolicyRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.onlineReturnPolicy != null && Object.hasOwnProperty.call(message, "onlineReturnPolicy"))
+                                    $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.encode(message.onlineReturnPolicy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateOnlineReturnPolicyRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest} message CreateOnlineReturnPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateOnlineReturnPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateOnlineReturnPolicyRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest} CreateOnlineReturnPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateOnlineReturnPolicyRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.onlineReturnPolicy = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateOnlineReturnPolicyRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest} CreateOnlineReturnPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateOnlineReturnPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateOnlineReturnPolicyRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateOnlineReturnPolicyRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.onlineReturnPolicy != null && message.hasOwnProperty("onlineReturnPolicy")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.verify(message.onlineReturnPolicy);
+                                    if (error)
+                                        return "onlineReturnPolicy." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateOnlineReturnPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest} CreateOnlineReturnPolicyRequest
+                             */
+                            CreateOnlineReturnPolicyRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.onlineReturnPolicy != null) {
+                                    if (typeof object.onlineReturnPolicy !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest.onlineReturnPolicy: object expected");
+                                    message.onlineReturnPolicy = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.fromObject(object.onlineReturnPolicy);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateOnlineReturnPolicyRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest} message CreateOnlineReturnPolicyRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateOnlineReturnPolicyRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.onlineReturnPolicy = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.onlineReturnPolicy != null && message.hasOwnProperty("onlineReturnPolicy"))
+                                    object.onlineReturnPolicy = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.toObject(message.onlineReturnPolicy, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateOnlineReturnPolicyRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateOnlineReturnPolicyRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateOnlineReturnPolicyRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateOnlineReturnPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest";
+                            };
+    
+                            return CreateOnlineReturnPolicyRequest;
+                        })();
+    
+                        v1beta.UpdateOnlineReturnPolicyRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateOnlineReturnPolicyRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IUpdateOnlineReturnPolicyRequest
+                             * @property {google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy|null} [onlineReturnPolicy] UpdateOnlineReturnPolicyRequest onlineReturnPolicy
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateOnlineReturnPolicyRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateOnlineReturnPolicyRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an UpdateOnlineReturnPolicyRequest.
+                             * @implements IUpdateOnlineReturnPolicyRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest=} [properties] Properties to set
+                             */
+                            function UpdateOnlineReturnPolicyRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateOnlineReturnPolicyRequest onlineReturnPolicy.
+                             * @member {google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy|null|undefined} onlineReturnPolicy
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest
+                             * @instance
+                             */
+                            UpdateOnlineReturnPolicyRequest.prototype.onlineReturnPolicy = null;
+    
+                            /**
+                             * UpdateOnlineReturnPolicyRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest
+                             * @instance
+                             */
+                            UpdateOnlineReturnPolicyRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateOnlineReturnPolicyRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest} UpdateOnlineReturnPolicyRequest instance
+                             */
+                            UpdateOnlineReturnPolicyRequest.create = function create(properties) {
+                                return new UpdateOnlineReturnPolicyRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateOnlineReturnPolicyRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest} message UpdateOnlineReturnPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateOnlineReturnPolicyRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.onlineReturnPolicy != null && Object.hasOwnProperty.call(message, "onlineReturnPolicy"))
+                                    $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.encode(message.onlineReturnPolicy, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateOnlineReturnPolicyRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest} message UpdateOnlineReturnPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateOnlineReturnPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateOnlineReturnPolicyRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest} UpdateOnlineReturnPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateOnlineReturnPolicyRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.onlineReturnPolicy = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateOnlineReturnPolicyRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest} UpdateOnlineReturnPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateOnlineReturnPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateOnlineReturnPolicyRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateOnlineReturnPolicyRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.onlineReturnPolicy != null && message.hasOwnProperty("onlineReturnPolicy")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.verify(message.onlineReturnPolicy);
+                                    if (error)
+                                        return "onlineReturnPolicy." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateOnlineReturnPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest} UpdateOnlineReturnPolicyRequest
+                             */
+                            UpdateOnlineReturnPolicyRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest();
+                                if (object.onlineReturnPolicy != null) {
+                                    if (typeof object.onlineReturnPolicy !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest.onlineReturnPolicy: object expected");
+                                    message.onlineReturnPolicy = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.fromObject(object.onlineReturnPolicy);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateOnlineReturnPolicyRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest} message UpdateOnlineReturnPolicyRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateOnlineReturnPolicyRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.onlineReturnPolicy = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.onlineReturnPolicy != null && message.hasOwnProperty("onlineReturnPolicy"))
+                                    object.onlineReturnPolicy = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.toObject(message.onlineReturnPolicy, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateOnlineReturnPolicyRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateOnlineReturnPolicyRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateOnlineReturnPolicyRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateOnlineReturnPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest";
+                            };
+    
+                            return UpdateOnlineReturnPolicyRequest;
+                        })();
+    
+                        v1beta.DeleteOnlineReturnPolicyRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteOnlineReturnPolicyRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IDeleteOnlineReturnPolicyRequest
+                             * @property {string|null} [name] DeleteOnlineReturnPolicyRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteOnlineReturnPolicyRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a DeleteOnlineReturnPolicyRequest.
+                             * @implements IDeleteOnlineReturnPolicyRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest=} [properties] Properties to set
+                             */
+                            function DeleteOnlineReturnPolicyRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteOnlineReturnPolicyRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest
+                             * @instance
+                             */
+                            DeleteOnlineReturnPolicyRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteOnlineReturnPolicyRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest} DeleteOnlineReturnPolicyRequest instance
+                             */
+                            DeleteOnlineReturnPolicyRequest.create = function create(properties) {
+                                return new DeleteOnlineReturnPolicyRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteOnlineReturnPolicyRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest} message DeleteOnlineReturnPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteOnlineReturnPolicyRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteOnlineReturnPolicyRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest} message DeleteOnlineReturnPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteOnlineReturnPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteOnlineReturnPolicyRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest} DeleteOnlineReturnPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteOnlineReturnPolicyRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteOnlineReturnPolicyRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest} DeleteOnlineReturnPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteOnlineReturnPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteOnlineReturnPolicyRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteOnlineReturnPolicyRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteOnlineReturnPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest} DeleteOnlineReturnPolicyRequest
+                             */
+                            DeleteOnlineReturnPolicyRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteOnlineReturnPolicyRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest} message DeleteOnlineReturnPolicyRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteOnlineReturnPolicyRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteOnlineReturnPolicyRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteOnlineReturnPolicyRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteOnlineReturnPolicyRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteOnlineReturnPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest";
+                            };
+    
+                            return DeleteOnlineReturnPolicyRequest;
                         })();
     
                         v1beta.ListOnlineReturnPoliciesRequest = (function() {
@@ -17322,6 +24898,7 @@
                              * @property {boolean|null} [acceptDefectiveOnly] OnlineReturnPolicy acceptDefectiveOnly
                              * @property {number|null} [processRefundDays] OnlineReturnPolicy processRefundDays
                              * @property {boolean|null} [acceptExchange] OnlineReturnPolicy acceptExchange
+                             * @property {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|null} [returnLabelSource] OnlineReturnPolicy returnLabelSource
                              */
     
                             /**
@@ -17455,6 +25032,14 @@
                              */
                             OnlineReturnPolicy.prototype.acceptExchange = null;
     
+                            /**
+                             * OnlineReturnPolicy returnLabelSource.
+                             * @member {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|null|undefined} returnLabelSource
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy
+                             * @instance
+                             */
+                            OnlineReturnPolicy.prototype.returnLabelSource = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -17488,6 +25073,17 @@
                              */
                             Object.defineProperty(OnlineReturnPolicy.prototype, "_acceptExchange", {
                                 get: $util.oneOfGetter($oneOfFields = ["acceptExchange"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * OnlineReturnPolicy _returnLabelSource.
+                             * @member {"returnLabelSource"|undefined} _returnLabelSource
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy
+                             * @instance
+                             */
+                            Object.defineProperty(OnlineReturnPolicy.prototype, "_returnLabelSource", {
+                                get: $util.oneOfGetter($oneOfFields = ["returnLabelSource"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -17553,6 +25149,8 @@
                                 if (message.seasonalOverrides != null && message.seasonalOverrides.length)
                                     for (var i = 0; i < message.seasonalOverrides.length; ++i)
                                         $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.encode(message.seasonalOverrides[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                                if (message.returnLabelSource != null && Object.hasOwnProperty.call(message, "returnLabelSource"))
+                                    writer.uint32(/* id 15, wireType 0 =*/120).int32(message.returnLabelSource);
                                 return writer;
                             };
     
@@ -17659,6 +25257,10 @@
                                         }
                                     case 13: {
                                             message.acceptExchange = reader.bool();
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.returnLabelSource = reader.int32();
                                             break;
                                         }
                                     default:
@@ -17782,6 +25384,18 @@
                                     if (typeof message.acceptExchange !== "boolean")
                                         return "acceptExchange: boolean expected";
                                 }
+                                if (message.returnLabelSource != null && message.hasOwnProperty("returnLabelSource")) {
+                                    properties._returnLabelSource = 1;
+                                    switch (message.returnLabelSource) {
+                                    default:
+                                        return "returnLabelSource: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -17897,6 +25511,30 @@
                                     message.processRefundDays = object.processRefundDays | 0;
                                 if (object.acceptExchange != null)
                                     message.acceptExchange = Boolean(object.acceptExchange);
+                                switch (object.returnLabelSource) {
+                                default:
+                                    if (typeof object.returnLabelSource === "number") {
+                                        message.returnLabelSource = object.returnLabelSource;
+                                        break;
+                                    }
+                                    break;
+                                case "RETURN_LABEL_SOURCE_UNSPECIFIED":
+                                case 0:
+                                    message.returnLabelSource = 0;
+                                    break;
+                                case "DOWNLOAD_AND_PRINT":
+                                case 1:
+                                    message.returnLabelSource = 1;
+                                    break;
+                                case "IN_THE_PACKAGE":
+                                case 2:
+                                    message.returnLabelSource = 2;
+                                    break;
+                                case "CUSTOMER_RESPONSIBILITY":
+                                case 3:
+                                    message.returnLabelSource = 3;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -17976,6 +25614,11 @@
                                     object.seasonalOverrides = [];
                                     for (var j = 0; j < message.seasonalOverrides.length; ++j)
                                         object.seasonalOverrides[j] = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.toObject(message.seasonalOverrides[j], options);
+                                }
+                                if (message.returnLabelSource != null && message.hasOwnProperty("returnLabelSource")) {
+                                    object.returnLabelSource = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource[message.returnLabelSource] === undefined ? message.returnLabelSource : $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource[message.returnLabelSource] : message.returnLabelSource;
+                                    if (options.oneofs)
+                                        object._returnLabelSource = "returnLabelSource";
                                 }
                                 return object;
                             };
@@ -19190,6 +26833,24 @@
                                 values[valuesById[0] = "ITEM_CONDITION_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "NEW"] = 1;
                                 values[valuesById[2] = "USED"] = 2;
+                                return values;
+                            })();
+    
+                            /**
+                             * ReturnLabelSource enum.
+                             * @name google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource
+                             * @enum {number}
+                             * @property {number} RETURN_LABEL_SOURCE_UNSPECIFIED=0 RETURN_LABEL_SOURCE_UNSPECIFIED value
+                             * @property {number} DOWNLOAD_AND_PRINT=1 DOWNLOAD_AND_PRINT value
+                             * @property {number} IN_THE_PACKAGE=2 IN_THE_PACKAGE value
+                             * @property {number} CUSTOMER_RESPONSIBILITY=3 CUSTOMER_RESPONSIBILITY value
+                             */
+                            OnlineReturnPolicy.ReturnLabelSource = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "RETURN_LABEL_SOURCE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DOWNLOAD_AND_PRINT"] = 1;
+                                values[valuesById[2] = "IN_THE_PACKAGE"] = 2;
+                                values[valuesById[3] = "CUSTOMER_RESPONSIBILITY"] = 3;
                                 return values;
                             })();
     

@@ -4615,6 +4615,9 @@ export namespace google {
 
                         /** Clip clipManifests */
                         clipManifests?: (google.cloud.video.livestream.v1.Clip.IClipManifest[]|null);
+
+                        /** Clip outputType */
+                        outputType?: (google.cloud.video.livestream.v1.Clip.OutputType|keyof typeof google.cloud.video.livestream.v1.Clip.OutputType|null);
                     }
 
                     /** Represents a Clip. */
@@ -4655,6 +4658,9 @@ export namespace google {
 
                         /** Clip clipManifests. */
                         public clipManifests: google.cloud.video.livestream.v1.Clip.IClipManifest[];
+
+                        /** Clip outputType. */
+                        public outputType: (google.cloud.video.livestream.v1.Clip.OutputType|keyof typeof google.cloud.video.livestream.v1.Clip.OutputType);
 
                         /**
                          * Creates a new Clip instance using the specified properties.
@@ -5045,6 +5051,476 @@ export namespace google {
 
                             /**
                              * Gets the default type url for ClipManifest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** OutputType enum. */
+                        enum OutputType {
+                            OUTPUT_TYPE_UNSPECIFIED = 0,
+                            MANIFEST = 1,
+                            MP4 = 2
+                        }
+                    }
+
+                    /** Properties of a TimeInterval. */
+                    interface ITimeInterval {
+
+                        /** TimeInterval startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** TimeInterval endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a TimeInterval. */
+                    class TimeInterval implements ITimeInterval {
+
+                        /**
+                         * Constructs a new TimeInterval.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.ITimeInterval);
+
+                        /** TimeInterval startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** TimeInterval endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new TimeInterval instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TimeInterval instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.ITimeInterval): google.cloud.video.livestream.v1.TimeInterval;
+
+                        /**
+                         * Encodes the specified TimeInterval message. Does not implicitly {@link google.cloud.video.livestream.v1.TimeInterval.verify|verify} messages.
+                         * @param message TimeInterval message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.ITimeInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TimeInterval message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.TimeInterval.verify|verify} messages.
+                         * @param message TimeInterval message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.ITimeInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TimeInterval message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TimeInterval
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.TimeInterval;
+
+                        /**
+                         * Decodes a TimeInterval message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TimeInterval
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.TimeInterval;
+
+                        /**
+                         * Verifies a TimeInterval message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TimeInterval message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TimeInterval
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.TimeInterval;
+
+                        /**
+                         * Creates a plain object from a TimeInterval message. Also converts values to other types if specified.
+                         * @param message TimeInterval
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.TimeInterval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TimeInterval to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TimeInterval
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DvrSession. */
+                    interface IDvrSession {
+
+                        /** DvrSession name */
+                        name?: (string|null);
+
+                        /** DvrSession createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** DvrSession updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** DvrSession labels */
+                        labels?: ({ [k: string]: string }|null);
+
+                        /** DvrSession state */
+                        state?: (google.cloud.video.livestream.v1.DvrSession.State|keyof typeof google.cloud.video.livestream.v1.DvrSession.State|null);
+
+                        /** DvrSession error */
+                        error?: (google.rpc.IStatus|null);
+
+                        /** DvrSession dvrManifests */
+                        dvrManifests?: (google.cloud.video.livestream.v1.DvrSession.IDvrManifest[]|null);
+
+                        /** DvrSession dvrWindows */
+                        dvrWindows?: (google.cloud.video.livestream.v1.DvrSession.IDvrWindow[]|null);
+                    }
+
+                    /** Represents a DvrSession. */
+                    class DvrSession implements IDvrSession {
+
+                        /**
+                         * Constructs a new DvrSession.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IDvrSession);
+
+                        /** DvrSession name. */
+                        public name: string;
+
+                        /** DvrSession createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** DvrSession updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** DvrSession labels. */
+                        public labels: { [k: string]: string };
+
+                        /** DvrSession state. */
+                        public state: (google.cloud.video.livestream.v1.DvrSession.State|keyof typeof google.cloud.video.livestream.v1.DvrSession.State);
+
+                        /** DvrSession error. */
+                        public error?: (google.rpc.IStatus|null);
+
+                        /** DvrSession dvrManifests. */
+                        public dvrManifests: google.cloud.video.livestream.v1.DvrSession.IDvrManifest[];
+
+                        /** DvrSession dvrWindows. */
+                        public dvrWindows: google.cloud.video.livestream.v1.DvrSession.IDvrWindow[];
+
+                        /**
+                         * Creates a new DvrSession instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DvrSession instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IDvrSession): google.cloud.video.livestream.v1.DvrSession;
+
+                        /**
+                         * Encodes the specified DvrSession message. Does not implicitly {@link google.cloud.video.livestream.v1.DvrSession.verify|verify} messages.
+                         * @param message DvrSession message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IDvrSession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DvrSession message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.DvrSession.verify|verify} messages.
+                         * @param message DvrSession message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IDvrSession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DvrSession message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DvrSession
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.DvrSession;
+
+                        /**
+                         * Decodes a DvrSession message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DvrSession
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.DvrSession;
+
+                        /**
+                         * Verifies a DvrSession message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DvrSession message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DvrSession
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.DvrSession;
+
+                        /**
+                         * Creates a plain object from a DvrSession message. Also converts values to other types if specified.
+                         * @param message DvrSession
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.DvrSession, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DvrSession to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DvrSession
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DvrSession {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            PENDING = 1,
+                            UPDATING = 2,
+                            SCHEDULED = 3,
+                            LIVE = 4,
+                            FINISHED = 5,
+                            FAILED = 6,
+                            DELETING = 7,
+                            POST_PROCESSING = 8,
+                            COOLDOWN = 9,
+                            STOPPING = 10
+                        }
+
+                        /** Properties of a DvrManifest. */
+                        interface IDvrManifest {
+
+                            /** DvrManifest manifestKey */
+                            manifestKey?: (string|null);
+
+                            /** DvrManifest outputUri */
+                            outputUri?: (string|null);
+                        }
+
+                        /** Represents a DvrManifest. */
+                        class DvrManifest implements IDvrManifest {
+
+                            /**
+                             * Constructs a new DvrManifest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.livestream.v1.DvrSession.IDvrManifest);
+
+                            /** DvrManifest manifestKey. */
+                            public manifestKey: string;
+
+                            /** DvrManifest outputUri. */
+                            public outputUri: string;
+
+                            /**
+                             * Creates a new DvrManifest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DvrManifest instance
+                             */
+                            public static create(properties?: google.cloud.video.livestream.v1.DvrSession.IDvrManifest): google.cloud.video.livestream.v1.DvrSession.DvrManifest;
+
+                            /**
+                             * Encodes the specified DvrManifest message. Does not implicitly {@link google.cloud.video.livestream.v1.DvrSession.DvrManifest.verify|verify} messages.
+                             * @param message DvrManifest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.livestream.v1.DvrSession.IDvrManifest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DvrManifest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.DvrSession.DvrManifest.verify|verify} messages.
+                             * @param message DvrManifest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.livestream.v1.DvrSession.IDvrManifest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DvrManifest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DvrManifest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.DvrSession.DvrManifest;
+
+                            /**
+                             * Decodes a DvrManifest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DvrManifest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.DvrSession.DvrManifest;
+
+                            /**
+                             * Verifies a DvrManifest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DvrManifest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DvrManifest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.DvrSession.DvrManifest;
+
+                            /**
+                             * Creates a plain object from a DvrManifest message. Also converts values to other types if specified.
+                             * @param message DvrManifest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.livestream.v1.DvrSession.DvrManifest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DvrManifest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DvrManifest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DvrWindow. */
+                        interface IDvrWindow {
+
+                            /** DvrWindow timeInterval */
+                            timeInterval?: (google.cloud.video.livestream.v1.ITimeInterval|null);
+                        }
+
+                        /** Represents a DvrWindow. */
+                        class DvrWindow implements IDvrWindow {
+
+                            /**
+                             * Constructs a new DvrWindow.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.livestream.v1.DvrSession.IDvrWindow);
+
+                            /** DvrWindow timeInterval. */
+                            public timeInterval?: (google.cloud.video.livestream.v1.ITimeInterval|null);
+
+                            /** DvrWindow kind. */
+                            public kind?: "timeInterval";
+
+                            /**
+                             * Creates a new DvrWindow instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DvrWindow instance
+                             */
+                            public static create(properties?: google.cloud.video.livestream.v1.DvrSession.IDvrWindow): google.cloud.video.livestream.v1.DvrSession.DvrWindow;
+
+                            /**
+                             * Encodes the specified DvrWindow message. Does not implicitly {@link google.cloud.video.livestream.v1.DvrSession.DvrWindow.verify|verify} messages.
+                             * @param message DvrWindow message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.livestream.v1.DvrSession.IDvrWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DvrWindow message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.DvrSession.DvrWindow.verify|verify} messages.
+                             * @param message DvrWindow message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.livestream.v1.DvrSession.IDvrWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DvrWindow message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DvrWindow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.DvrSession.DvrWindow;
+
+                            /**
+                             * Decodes a DvrWindow message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DvrWindow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.DvrSession.DvrWindow;
+
+                            /**
+                             * Verifies a DvrWindow message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DvrWindow message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DvrWindow
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.DvrSession.DvrWindow;
+
+                            /**
+                             * Creates a plain object from a DvrWindow message. Also converts values to other types if specified.
+                             * @param message DvrWindow
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.livestream.v1.DvrSession.DvrWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DvrWindow to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DvrWindow
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -6919,6 +7395,76 @@ export namespace google {
                         public deleteClip(request: google.cloud.video.livestream.v1.IDeleteClipRequest): Promise<google.longrunning.Operation>;
 
                         /**
+                         * Calls CreateDvrSession.
+                         * @param request CreateDvrSessionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public createDvrSession(request: google.cloud.video.livestream.v1.ICreateDvrSessionRequest, callback: google.cloud.video.livestream.v1.LivestreamService.CreateDvrSessionCallback): void;
+
+                        /**
+                         * Calls CreateDvrSession.
+                         * @param request CreateDvrSessionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createDvrSession(request: google.cloud.video.livestream.v1.ICreateDvrSessionRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ListDvrSessions.
+                         * @param request ListDvrSessionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListDvrSessionsResponse
+                         */
+                        public listDvrSessions(request: google.cloud.video.livestream.v1.IListDvrSessionsRequest, callback: google.cloud.video.livestream.v1.LivestreamService.ListDvrSessionsCallback): void;
+
+                        /**
+                         * Calls ListDvrSessions.
+                         * @param request ListDvrSessionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listDvrSessions(request: google.cloud.video.livestream.v1.IListDvrSessionsRequest): Promise<google.cloud.video.livestream.v1.ListDvrSessionsResponse>;
+
+                        /**
+                         * Calls GetDvrSession.
+                         * @param request GetDvrSessionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DvrSession
+                         */
+                        public getDvrSession(request: google.cloud.video.livestream.v1.IGetDvrSessionRequest, callback: google.cloud.video.livestream.v1.LivestreamService.GetDvrSessionCallback): void;
+
+                        /**
+                         * Calls GetDvrSession.
+                         * @param request GetDvrSessionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getDvrSession(request: google.cloud.video.livestream.v1.IGetDvrSessionRequest): Promise<google.cloud.video.livestream.v1.DvrSession>;
+
+                        /**
+                         * Calls DeleteDvrSession.
+                         * @param request DeleteDvrSessionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteDvrSession(request: google.cloud.video.livestream.v1.IDeleteDvrSessionRequest, callback: google.cloud.video.livestream.v1.LivestreamService.DeleteDvrSessionCallback): void;
+
+                        /**
+                         * Calls DeleteDvrSession.
+                         * @param request DeleteDvrSessionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteDvrSession(request: google.cloud.video.livestream.v1.IDeleteDvrSessionRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls UpdateDvrSession.
+                         * @param request UpdateDvrSessionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public updateDvrSession(request: google.cloud.video.livestream.v1.IUpdateDvrSessionRequest, callback: google.cloud.video.livestream.v1.LivestreamService.UpdateDvrSessionCallback): void;
+
+                        /**
+                         * Calls UpdateDvrSession.
+                         * @param request UpdateDvrSessionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateDvrSession(request: google.cloud.video.livestream.v1.IUpdateDvrSessionRequest): Promise<google.longrunning.Operation>;
+
+                        /**
                          * Calls CreateAsset.
                          * @param request CreateAssetRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Operation
@@ -7144,6 +7690,41 @@ export namespace google {
                          * @param [response] Operation
                          */
                         type DeleteClipCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|createDvrSession}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type CreateDvrSessionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|listDvrSessions}.
+                         * @param error Error, if any
+                         * @param [response] ListDvrSessionsResponse
+                         */
+                        type ListDvrSessionsCallback = (error: (Error|null), response?: google.cloud.video.livestream.v1.ListDvrSessionsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|getDvrSession}.
+                         * @param error Error, if any
+                         * @param [response] DvrSession
+                         */
+                        type GetDvrSessionCallback = (error: (Error|null), response?: google.cloud.video.livestream.v1.DvrSession) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|deleteDvrSession}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteDvrSessionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|updateDvrSession}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type UpdateDvrSessionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.video.livestream.v1.LivestreamService|createAsset}.
@@ -10428,6 +11009,660 @@ export namespace google {
 
                         /**
                          * Gets the default type url for DeleteClipRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListDvrSessionsRequest. */
+                    interface IListDvrSessionsRequest {
+
+                        /** ListDvrSessionsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListDvrSessionsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListDvrSessionsRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListDvrSessionsRequest filter */
+                        filter?: (string|null);
+
+                        /** ListDvrSessionsRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListDvrSessionsRequest. */
+                    class ListDvrSessionsRequest implements IListDvrSessionsRequest {
+
+                        /**
+                         * Constructs a new ListDvrSessionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IListDvrSessionsRequest);
+
+                        /** ListDvrSessionsRequest parent. */
+                        public parent: string;
+
+                        /** ListDvrSessionsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListDvrSessionsRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListDvrSessionsRequest filter. */
+                        public filter: string;
+
+                        /** ListDvrSessionsRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListDvrSessionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListDvrSessionsRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IListDvrSessionsRequest): google.cloud.video.livestream.v1.ListDvrSessionsRequest;
+
+                        /**
+                         * Encodes the specified ListDvrSessionsRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.ListDvrSessionsRequest.verify|verify} messages.
+                         * @param message ListDvrSessionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IListDvrSessionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListDvrSessionsRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.ListDvrSessionsRequest.verify|verify} messages.
+                         * @param message ListDvrSessionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IListDvrSessionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListDvrSessionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListDvrSessionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.ListDvrSessionsRequest;
+
+                        /**
+                         * Decodes a ListDvrSessionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListDvrSessionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.ListDvrSessionsRequest;
+
+                        /**
+                         * Verifies a ListDvrSessionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListDvrSessionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListDvrSessionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.ListDvrSessionsRequest;
+
+                        /**
+                         * Creates a plain object from a ListDvrSessionsRequest message. Also converts values to other types if specified.
+                         * @param message ListDvrSessionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.ListDvrSessionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListDvrSessionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListDvrSessionsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListDvrSessionsResponse. */
+                    interface IListDvrSessionsResponse {
+
+                        /** ListDvrSessionsResponse dvrSessions */
+                        dvrSessions?: (google.cloud.video.livestream.v1.IDvrSession[]|null);
+
+                        /** ListDvrSessionsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListDvrSessionsResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListDvrSessionsResponse. */
+                    class ListDvrSessionsResponse implements IListDvrSessionsResponse {
+
+                        /**
+                         * Constructs a new ListDvrSessionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IListDvrSessionsResponse);
+
+                        /** ListDvrSessionsResponse dvrSessions. */
+                        public dvrSessions: google.cloud.video.livestream.v1.IDvrSession[];
+
+                        /** ListDvrSessionsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListDvrSessionsResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListDvrSessionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListDvrSessionsResponse instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IListDvrSessionsResponse): google.cloud.video.livestream.v1.ListDvrSessionsResponse;
+
+                        /**
+                         * Encodes the specified ListDvrSessionsResponse message. Does not implicitly {@link google.cloud.video.livestream.v1.ListDvrSessionsResponse.verify|verify} messages.
+                         * @param message ListDvrSessionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IListDvrSessionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListDvrSessionsResponse message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.ListDvrSessionsResponse.verify|verify} messages.
+                         * @param message ListDvrSessionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IListDvrSessionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListDvrSessionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListDvrSessionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.ListDvrSessionsResponse;
+
+                        /**
+                         * Decodes a ListDvrSessionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListDvrSessionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.ListDvrSessionsResponse;
+
+                        /**
+                         * Verifies a ListDvrSessionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListDvrSessionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListDvrSessionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.ListDvrSessionsResponse;
+
+                        /**
+                         * Creates a plain object from a ListDvrSessionsResponse message. Also converts values to other types if specified.
+                         * @param message ListDvrSessionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.ListDvrSessionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListDvrSessionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListDvrSessionsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetDvrSessionRequest. */
+                    interface IGetDvrSessionRequest {
+
+                        /** GetDvrSessionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetDvrSessionRequest. */
+                    class GetDvrSessionRequest implements IGetDvrSessionRequest {
+
+                        /**
+                         * Constructs a new GetDvrSessionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IGetDvrSessionRequest);
+
+                        /** GetDvrSessionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetDvrSessionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetDvrSessionRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IGetDvrSessionRequest): google.cloud.video.livestream.v1.GetDvrSessionRequest;
+
+                        /**
+                         * Encodes the specified GetDvrSessionRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.GetDvrSessionRequest.verify|verify} messages.
+                         * @param message GetDvrSessionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IGetDvrSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetDvrSessionRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.GetDvrSessionRequest.verify|verify} messages.
+                         * @param message GetDvrSessionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IGetDvrSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetDvrSessionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetDvrSessionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.GetDvrSessionRequest;
+
+                        /**
+                         * Decodes a GetDvrSessionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetDvrSessionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.GetDvrSessionRequest;
+
+                        /**
+                         * Verifies a GetDvrSessionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetDvrSessionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetDvrSessionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.GetDvrSessionRequest;
+
+                        /**
+                         * Creates a plain object from a GetDvrSessionRequest message. Also converts values to other types if specified.
+                         * @param message GetDvrSessionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.GetDvrSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetDvrSessionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetDvrSessionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CreateDvrSessionRequest. */
+                    interface ICreateDvrSessionRequest {
+
+                        /** CreateDvrSessionRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateDvrSessionRequest dvrSessionId */
+                        dvrSessionId?: (string|null);
+
+                        /** CreateDvrSessionRequest dvrSession */
+                        dvrSession?: (google.cloud.video.livestream.v1.IDvrSession|null);
+
+                        /** CreateDvrSessionRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a CreateDvrSessionRequest. */
+                    class CreateDvrSessionRequest implements ICreateDvrSessionRequest {
+
+                        /**
+                         * Constructs a new CreateDvrSessionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.ICreateDvrSessionRequest);
+
+                        /** CreateDvrSessionRequest parent. */
+                        public parent: string;
+
+                        /** CreateDvrSessionRequest dvrSessionId. */
+                        public dvrSessionId: string;
+
+                        /** CreateDvrSessionRequest dvrSession. */
+                        public dvrSession?: (google.cloud.video.livestream.v1.IDvrSession|null);
+
+                        /** CreateDvrSessionRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new CreateDvrSessionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateDvrSessionRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.ICreateDvrSessionRequest): google.cloud.video.livestream.v1.CreateDvrSessionRequest;
+
+                        /**
+                         * Encodes the specified CreateDvrSessionRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.CreateDvrSessionRequest.verify|verify} messages.
+                         * @param message CreateDvrSessionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.ICreateDvrSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateDvrSessionRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.CreateDvrSessionRequest.verify|verify} messages.
+                         * @param message CreateDvrSessionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.ICreateDvrSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateDvrSessionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateDvrSessionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.CreateDvrSessionRequest;
+
+                        /**
+                         * Decodes a CreateDvrSessionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateDvrSessionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.CreateDvrSessionRequest;
+
+                        /**
+                         * Verifies a CreateDvrSessionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateDvrSessionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateDvrSessionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.CreateDvrSessionRequest;
+
+                        /**
+                         * Creates a plain object from a CreateDvrSessionRequest message. Also converts values to other types if specified.
+                         * @param message CreateDvrSessionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.CreateDvrSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateDvrSessionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateDvrSessionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteDvrSessionRequest. */
+                    interface IDeleteDvrSessionRequest {
+
+                        /** DeleteDvrSessionRequest name */
+                        name?: (string|null);
+
+                        /** DeleteDvrSessionRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a DeleteDvrSessionRequest. */
+                    class DeleteDvrSessionRequest implements IDeleteDvrSessionRequest {
+
+                        /**
+                         * Constructs a new DeleteDvrSessionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IDeleteDvrSessionRequest);
+
+                        /** DeleteDvrSessionRequest name. */
+                        public name: string;
+
+                        /** DeleteDvrSessionRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new DeleteDvrSessionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteDvrSessionRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IDeleteDvrSessionRequest): google.cloud.video.livestream.v1.DeleteDvrSessionRequest;
+
+                        /**
+                         * Encodes the specified DeleteDvrSessionRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.DeleteDvrSessionRequest.verify|verify} messages.
+                         * @param message DeleteDvrSessionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IDeleteDvrSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteDvrSessionRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.DeleteDvrSessionRequest.verify|verify} messages.
+                         * @param message DeleteDvrSessionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IDeleteDvrSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteDvrSessionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteDvrSessionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.DeleteDvrSessionRequest;
+
+                        /**
+                         * Decodes a DeleteDvrSessionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteDvrSessionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.DeleteDvrSessionRequest;
+
+                        /**
+                         * Verifies a DeleteDvrSessionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteDvrSessionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteDvrSessionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.DeleteDvrSessionRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteDvrSessionRequest message. Also converts values to other types if specified.
+                         * @param message DeleteDvrSessionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.DeleteDvrSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteDvrSessionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteDvrSessionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateDvrSessionRequest. */
+                    interface IUpdateDvrSessionRequest {
+
+                        /** UpdateDvrSessionRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateDvrSessionRequest dvrSession */
+                        dvrSession?: (google.cloud.video.livestream.v1.IDvrSession|null);
+
+                        /** UpdateDvrSessionRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents an UpdateDvrSessionRequest. */
+                    class UpdateDvrSessionRequest implements IUpdateDvrSessionRequest {
+
+                        /**
+                         * Constructs a new UpdateDvrSessionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.livestream.v1.IUpdateDvrSessionRequest);
+
+                        /** UpdateDvrSessionRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateDvrSessionRequest dvrSession. */
+                        public dvrSession?: (google.cloud.video.livestream.v1.IDvrSession|null);
+
+                        /** UpdateDvrSessionRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new UpdateDvrSessionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateDvrSessionRequest instance
+                         */
+                        public static create(properties?: google.cloud.video.livestream.v1.IUpdateDvrSessionRequest): google.cloud.video.livestream.v1.UpdateDvrSessionRequest;
+
+                        /**
+                         * Encodes the specified UpdateDvrSessionRequest message. Does not implicitly {@link google.cloud.video.livestream.v1.UpdateDvrSessionRequest.verify|verify} messages.
+                         * @param message UpdateDvrSessionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.livestream.v1.IUpdateDvrSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateDvrSessionRequest message, length delimited. Does not implicitly {@link google.cloud.video.livestream.v1.UpdateDvrSessionRequest.verify|verify} messages.
+                         * @param message UpdateDvrSessionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.livestream.v1.IUpdateDvrSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateDvrSessionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateDvrSessionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.livestream.v1.UpdateDvrSessionRequest;
+
+                        /**
+                         * Decodes an UpdateDvrSessionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateDvrSessionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.livestream.v1.UpdateDvrSessionRequest;
+
+                        /**
+                         * Verifies an UpdateDvrSessionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateDvrSessionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateDvrSessionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.livestream.v1.UpdateDvrSessionRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateDvrSessionRequest message. Also converts values to other types if specified.
+                         * @param message UpdateDvrSessionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.livestream.v1.UpdateDvrSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateDvrSessionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateDvrSessionRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

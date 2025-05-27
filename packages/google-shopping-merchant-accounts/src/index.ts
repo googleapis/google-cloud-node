@@ -36,8 +36,15 @@ const BusinessInfoServiceClient = v1beta.BusinessInfoServiceClient;
 type BusinessInfoServiceClient = v1beta.BusinessInfoServiceClient;
 const EmailPreferencesServiceClient = v1beta.EmailPreferencesServiceClient;
 type EmailPreferencesServiceClient = v1beta.EmailPreferencesServiceClient;
+const GbpAccountsServiceClient = v1beta.GbpAccountsServiceClient;
+type GbpAccountsServiceClient = v1beta.GbpAccountsServiceClient;
 const HomepageServiceClient = v1beta.HomepageServiceClient;
 type HomepageServiceClient = v1beta.HomepageServiceClient;
+const LfpProvidersServiceClient = v1beta.LfpProvidersServiceClient;
+type LfpProvidersServiceClient = v1beta.LfpProvidersServiceClient;
+const OmnichannelSettingsServiceClient =
+  v1beta.OmnichannelSettingsServiceClient;
+type OmnichannelSettingsServiceClient = v1beta.OmnichannelSettingsServiceClient;
 const OnlineReturnPolicyServiceClient = v1beta.OnlineReturnPolicyServiceClient;
 type OnlineReturnPolicyServiceClient = v1beta.OnlineReturnPolicyServiceClient;
 const ProgramsServiceClient = v1beta.ProgramsServiceClient;
@@ -65,7 +72,10 @@ export {
   BusinessIdentityServiceClient,
   BusinessInfoServiceClient,
   EmailPreferencesServiceClient,
+  GbpAccountsServiceClient,
   HomepageServiceClient,
+  LfpProvidersServiceClient,
+  OmnichannelSettingsServiceClient,
   OnlineReturnPolicyServiceClient,
   ProgramsServiceClient,
   RegionsServiceClient,
@@ -84,7 +94,10 @@ export default {
   BusinessIdentityServiceClient,
   BusinessInfoServiceClient,
   EmailPreferencesServiceClient,
+  GbpAccountsServiceClient,
   HomepageServiceClient,
+  LfpProvidersServiceClient,
+  OmnichannelSettingsServiceClient,
   OnlineReturnPolicyServiceClient,
   ProgramsServiceClient,
   RegionsServiceClient,

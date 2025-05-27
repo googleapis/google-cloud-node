@@ -270,9 +270,14 @@ describe('v1beta.PermissionServiceClient', () => {
         throw err;
       });
       assert(client.permissionServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -283,9 +288,14 @@ describe('v1beta.PermissionServiceClient', () => {
         }
       );
       assert.strictEqual(client.permissionServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -460,7 +470,9 @@ describe('v1beta.PermissionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createPermission(request), expectedError);
     });
   });
@@ -598,7 +610,9 @@ describe('v1beta.PermissionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getPermission(request), expectedError);
     });
   });
@@ -740,7 +754,9 @@ describe('v1beta.PermissionServiceClient', () => {
       );
       request.permission.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updatePermission(request), expectedError);
     });
   });
@@ -878,7 +894,9 @@ describe('v1beta.PermissionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deletePermission(request), expectedError);
     });
   });
@@ -1016,7 +1034,9 @@ describe('v1beta.PermissionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.transferOwnership(request), expectedError);
     });
   });

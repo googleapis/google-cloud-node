@@ -185,6 +185,188 @@ export namespace google {
                      * @returns Promise
                      */
                     public listManagedFolders(request: google.storage.control.v2.IListManagedFoldersRequest): Promise<google.storage.control.v2.ListManagedFoldersResponse>;
+
+                    /**
+                     * Calls CreateAnywhereCache.
+                     * @param request CreateAnywhereCacheRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createAnywhereCache(request: google.storage.control.v2.ICreateAnywhereCacheRequest, callback: google.storage.control.v2.StorageControl.CreateAnywhereCacheCallback): void;
+
+                    /**
+                     * Calls CreateAnywhereCache.
+                     * @param request CreateAnywhereCacheRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAnywhereCache(request: google.storage.control.v2.ICreateAnywhereCacheRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateAnywhereCache.
+                     * @param request UpdateAnywhereCacheRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateAnywhereCache(request: google.storage.control.v2.IUpdateAnywhereCacheRequest, callback: google.storage.control.v2.StorageControl.UpdateAnywhereCacheCallback): void;
+
+                    /**
+                     * Calls UpdateAnywhereCache.
+                     * @param request UpdateAnywhereCacheRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAnywhereCache(request: google.storage.control.v2.IUpdateAnywhereCacheRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DisableAnywhereCache.
+                     * @param request DisableAnywhereCacheRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AnywhereCache
+                     */
+                    public disableAnywhereCache(request: google.storage.control.v2.IDisableAnywhereCacheRequest, callback: google.storage.control.v2.StorageControl.DisableAnywhereCacheCallback): void;
+
+                    /**
+                     * Calls DisableAnywhereCache.
+                     * @param request DisableAnywhereCacheRequest message or plain object
+                     * @returns Promise
+                     */
+                    public disableAnywhereCache(request: google.storage.control.v2.IDisableAnywhereCacheRequest): Promise<google.storage.control.v2.AnywhereCache>;
+
+                    /**
+                     * Calls PauseAnywhereCache.
+                     * @param request PauseAnywhereCacheRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AnywhereCache
+                     */
+                    public pauseAnywhereCache(request: google.storage.control.v2.IPauseAnywhereCacheRequest, callback: google.storage.control.v2.StorageControl.PauseAnywhereCacheCallback): void;
+
+                    /**
+                     * Calls PauseAnywhereCache.
+                     * @param request PauseAnywhereCacheRequest message or plain object
+                     * @returns Promise
+                     */
+                    public pauseAnywhereCache(request: google.storage.control.v2.IPauseAnywhereCacheRequest): Promise<google.storage.control.v2.AnywhereCache>;
+
+                    /**
+                     * Calls ResumeAnywhereCache.
+                     * @param request ResumeAnywhereCacheRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AnywhereCache
+                     */
+                    public resumeAnywhereCache(request: google.storage.control.v2.IResumeAnywhereCacheRequest, callback: google.storage.control.v2.StorageControl.ResumeAnywhereCacheCallback): void;
+
+                    /**
+                     * Calls ResumeAnywhereCache.
+                     * @param request ResumeAnywhereCacheRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resumeAnywhereCache(request: google.storage.control.v2.IResumeAnywhereCacheRequest): Promise<google.storage.control.v2.AnywhereCache>;
+
+                    /**
+                     * Calls GetAnywhereCache.
+                     * @param request GetAnywhereCacheRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AnywhereCache
+                     */
+                    public getAnywhereCache(request: google.storage.control.v2.IGetAnywhereCacheRequest, callback: google.storage.control.v2.StorageControl.GetAnywhereCacheCallback): void;
+
+                    /**
+                     * Calls GetAnywhereCache.
+                     * @param request GetAnywhereCacheRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAnywhereCache(request: google.storage.control.v2.IGetAnywhereCacheRequest): Promise<google.storage.control.v2.AnywhereCache>;
+
+                    /**
+                     * Calls ListAnywhereCaches.
+                     * @param request ListAnywhereCachesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAnywhereCachesResponse
+                     */
+                    public listAnywhereCaches(request: google.storage.control.v2.IListAnywhereCachesRequest, callback: google.storage.control.v2.StorageControl.ListAnywhereCachesCallback): void;
+
+                    /**
+                     * Calls ListAnywhereCaches.
+                     * @param request ListAnywhereCachesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAnywhereCaches(request: google.storage.control.v2.IListAnywhereCachesRequest): Promise<google.storage.control.v2.ListAnywhereCachesResponse>;
+
+                    /**
+                     * Calls GetProjectIntelligenceConfig.
+                     * @param request GetProjectIntelligenceConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IntelligenceConfig
+                     */
+                    public getProjectIntelligenceConfig(request: google.storage.control.v2.IGetProjectIntelligenceConfigRequest, callback: google.storage.control.v2.StorageControl.GetProjectIntelligenceConfigCallback): void;
+
+                    /**
+                     * Calls GetProjectIntelligenceConfig.
+                     * @param request GetProjectIntelligenceConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getProjectIntelligenceConfig(request: google.storage.control.v2.IGetProjectIntelligenceConfigRequest): Promise<google.storage.control.v2.IntelligenceConfig>;
+
+                    /**
+                     * Calls UpdateProjectIntelligenceConfig.
+                     * @param request UpdateProjectIntelligenceConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IntelligenceConfig
+                     */
+                    public updateProjectIntelligenceConfig(request: google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest, callback: google.storage.control.v2.StorageControl.UpdateProjectIntelligenceConfigCallback): void;
+
+                    /**
+                     * Calls UpdateProjectIntelligenceConfig.
+                     * @param request UpdateProjectIntelligenceConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateProjectIntelligenceConfig(request: google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest): Promise<google.storage.control.v2.IntelligenceConfig>;
+
+                    /**
+                     * Calls GetFolderIntelligenceConfig.
+                     * @param request GetFolderIntelligenceConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IntelligenceConfig
+                     */
+                    public getFolderIntelligenceConfig(request: google.storage.control.v2.IGetFolderIntelligenceConfigRequest, callback: google.storage.control.v2.StorageControl.GetFolderIntelligenceConfigCallback): void;
+
+                    /**
+                     * Calls GetFolderIntelligenceConfig.
+                     * @param request GetFolderIntelligenceConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFolderIntelligenceConfig(request: google.storage.control.v2.IGetFolderIntelligenceConfigRequest): Promise<google.storage.control.v2.IntelligenceConfig>;
+
+                    /**
+                     * Calls UpdateFolderIntelligenceConfig.
+                     * @param request UpdateFolderIntelligenceConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IntelligenceConfig
+                     */
+                    public updateFolderIntelligenceConfig(request: google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest, callback: google.storage.control.v2.StorageControl.UpdateFolderIntelligenceConfigCallback): void;
+
+                    /**
+                     * Calls UpdateFolderIntelligenceConfig.
+                     * @param request UpdateFolderIntelligenceConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateFolderIntelligenceConfig(request: google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest): Promise<google.storage.control.v2.IntelligenceConfig>;
+
+                    /**
+                     * Calls GetOrganizationIntelligenceConfig.
+                     * @param request GetOrganizationIntelligenceConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IntelligenceConfig
+                     */
+                    public getOrganizationIntelligenceConfig(request: google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest, callback: google.storage.control.v2.StorageControl.GetOrganizationIntelligenceConfigCallback): void;
+
+                    /**
+                     * Calls GetOrganizationIntelligenceConfig.
+                     * @param request GetOrganizationIntelligenceConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getOrganizationIntelligenceConfig(request: google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest): Promise<google.storage.control.v2.IntelligenceConfig>;
+
+                    /**
+                     * Calls UpdateOrganizationIntelligenceConfig.
+                     * @param request UpdateOrganizationIntelligenceConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IntelligenceConfig
+                     */
+                    public updateOrganizationIntelligenceConfig(request: google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest, callback: google.storage.control.v2.StorageControl.UpdateOrganizationIntelligenceConfigCallback): void;
+
+                    /**
+                     * Calls UpdateOrganizationIntelligenceConfig.
+                     * @param request UpdateOrganizationIntelligenceConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateOrganizationIntelligenceConfig(request: google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest): Promise<google.storage.control.v2.IntelligenceConfig>;
                 }
 
                 namespace StorageControl {
@@ -258,6 +440,97 @@ export namespace google {
                      * @param [response] ListManagedFoldersResponse
                      */
                     type ListManagedFoldersCallback = (error: (Error|null), response?: google.storage.control.v2.ListManagedFoldersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|createAnywhereCache}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateAnywhereCacheCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|updateAnywhereCache}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateAnywhereCacheCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|disableAnywhereCache}.
+                     * @param error Error, if any
+                     * @param [response] AnywhereCache
+                     */
+                    type DisableAnywhereCacheCallback = (error: (Error|null), response?: google.storage.control.v2.AnywhereCache) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|pauseAnywhereCache}.
+                     * @param error Error, if any
+                     * @param [response] AnywhereCache
+                     */
+                    type PauseAnywhereCacheCallback = (error: (Error|null), response?: google.storage.control.v2.AnywhereCache) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|resumeAnywhereCache}.
+                     * @param error Error, if any
+                     * @param [response] AnywhereCache
+                     */
+                    type ResumeAnywhereCacheCallback = (error: (Error|null), response?: google.storage.control.v2.AnywhereCache) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|getAnywhereCache}.
+                     * @param error Error, if any
+                     * @param [response] AnywhereCache
+                     */
+                    type GetAnywhereCacheCallback = (error: (Error|null), response?: google.storage.control.v2.AnywhereCache) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|listAnywhereCaches}.
+                     * @param error Error, if any
+                     * @param [response] ListAnywhereCachesResponse
+                     */
+                    type ListAnywhereCachesCallback = (error: (Error|null), response?: google.storage.control.v2.ListAnywhereCachesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|getProjectIntelligenceConfig}.
+                     * @param error Error, if any
+                     * @param [response] IntelligenceConfig
+                     */
+                    type GetProjectIntelligenceConfigCallback = (error: (Error|null), response?: google.storage.control.v2.IntelligenceConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|updateProjectIntelligenceConfig}.
+                     * @param error Error, if any
+                     * @param [response] IntelligenceConfig
+                     */
+                    type UpdateProjectIntelligenceConfigCallback = (error: (Error|null), response?: google.storage.control.v2.IntelligenceConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|getFolderIntelligenceConfig}.
+                     * @param error Error, if any
+                     * @param [response] IntelligenceConfig
+                     */
+                    type GetFolderIntelligenceConfigCallback = (error: (Error|null), response?: google.storage.control.v2.IntelligenceConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|updateFolderIntelligenceConfig}.
+                     * @param error Error, if any
+                     * @param [response] IntelligenceConfig
+                     */
+                    type UpdateFolderIntelligenceConfigCallback = (error: (Error|null), response?: google.storage.control.v2.IntelligenceConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|getOrganizationIntelligenceConfig}.
+                     * @param error Error, if any
+                     * @param [response] IntelligenceConfig
+                     */
+                    type GetOrganizationIntelligenceConfigCallback = (error: (Error|null), response?: google.storage.control.v2.IntelligenceConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|updateOrganizationIntelligenceConfig}.
+                     * @param error Error, if any
+                     * @param [response] IntelligenceConfig
+                     */
+                    type UpdateOrganizationIntelligenceConfigCallback = (error: (Error|null), response?: google.storage.control.v2.IntelligenceConfig) => void;
                 }
 
                 /** Properties of a PendingRenameInfo. */
@@ -2574,12 +2847,2910 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Properties of a CreateAnywhereCacheMetadata. */
+                interface ICreateAnywhereCacheMetadata {
+
+                    /** CreateAnywhereCacheMetadata commonMetadata */
+                    commonMetadata?: (google.storage.control.v2.ICommonLongRunningOperationMetadata|null);
+
+                    /** CreateAnywhereCacheMetadata anywhereCacheId */
+                    anywhereCacheId?: (string|null);
+
+                    /** CreateAnywhereCacheMetadata zone */
+                    zone?: (string|null);
+
+                    /** CreateAnywhereCacheMetadata ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
+                    /** CreateAnywhereCacheMetadata admissionPolicy */
+                    admissionPolicy?: (string|null);
+                }
+
+                /** Represents a CreateAnywhereCacheMetadata. */
+                class CreateAnywhereCacheMetadata implements ICreateAnywhereCacheMetadata {
+
+                    /**
+                     * Constructs a new CreateAnywhereCacheMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.ICreateAnywhereCacheMetadata);
+
+                    /** CreateAnywhereCacheMetadata commonMetadata. */
+                    public commonMetadata?: (google.storage.control.v2.ICommonLongRunningOperationMetadata|null);
+
+                    /** CreateAnywhereCacheMetadata anywhereCacheId. */
+                    public anywhereCacheId?: (string|null);
+
+                    /** CreateAnywhereCacheMetadata zone. */
+                    public zone?: (string|null);
+
+                    /** CreateAnywhereCacheMetadata ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
+                    /** CreateAnywhereCacheMetadata admissionPolicy. */
+                    public admissionPolicy?: (string|null);
+
+                    /** CreateAnywhereCacheMetadata _anywhereCacheId. */
+                    public _anywhereCacheId?: "anywhereCacheId";
+
+                    /** CreateAnywhereCacheMetadata _zone. */
+                    public _zone?: "zone";
+
+                    /** CreateAnywhereCacheMetadata _ttl. */
+                    public _ttl?: "ttl";
+
+                    /** CreateAnywhereCacheMetadata _admissionPolicy. */
+                    public _admissionPolicy?: "admissionPolicy";
+
+                    /**
+                     * Creates a new CreateAnywhereCacheMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAnywhereCacheMetadata instance
+                     */
+                    public static create(properties?: google.storage.control.v2.ICreateAnywhereCacheMetadata): google.storage.control.v2.CreateAnywhereCacheMetadata;
+
+                    /**
+                     * Encodes the specified CreateAnywhereCacheMetadata message. Does not implicitly {@link google.storage.control.v2.CreateAnywhereCacheMetadata.verify|verify} messages.
+                     * @param message CreateAnywhereCacheMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.ICreateAnywhereCacheMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAnywhereCacheMetadata message, length delimited. Does not implicitly {@link google.storage.control.v2.CreateAnywhereCacheMetadata.verify|verify} messages.
+                     * @param message CreateAnywhereCacheMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.ICreateAnywhereCacheMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAnywhereCacheMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAnywhereCacheMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.CreateAnywhereCacheMetadata;
+
+                    /**
+                     * Decodes a CreateAnywhereCacheMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAnywhereCacheMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.CreateAnywhereCacheMetadata;
+
+                    /**
+                     * Verifies a CreateAnywhereCacheMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAnywhereCacheMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAnywhereCacheMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.CreateAnywhereCacheMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateAnywhereCacheMetadata message. Also converts values to other types if specified.
+                     * @param message CreateAnywhereCacheMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.CreateAnywhereCacheMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAnywhereCacheMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAnywhereCacheMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAnywhereCacheMetadata. */
+                interface IUpdateAnywhereCacheMetadata {
+
+                    /** UpdateAnywhereCacheMetadata commonMetadata */
+                    commonMetadata?: (google.storage.control.v2.ICommonLongRunningOperationMetadata|null);
+
+                    /** UpdateAnywhereCacheMetadata anywhereCacheId */
+                    anywhereCacheId?: (string|null);
+
+                    /** UpdateAnywhereCacheMetadata zone */
+                    zone?: (string|null);
+
+                    /** UpdateAnywhereCacheMetadata ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
+                    /** UpdateAnywhereCacheMetadata admissionPolicy */
+                    admissionPolicy?: (string|null);
+                }
+
+                /** Represents an UpdateAnywhereCacheMetadata. */
+                class UpdateAnywhereCacheMetadata implements IUpdateAnywhereCacheMetadata {
+
+                    /**
+                     * Constructs a new UpdateAnywhereCacheMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IUpdateAnywhereCacheMetadata);
+
+                    /** UpdateAnywhereCacheMetadata commonMetadata. */
+                    public commonMetadata?: (google.storage.control.v2.ICommonLongRunningOperationMetadata|null);
+
+                    /** UpdateAnywhereCacheMetadata anywhereCacheId. */
+                    public anywhereCacheId?: (string|null);
+
+                    /** UpdateAnywhereCacheMetadata zone. */
+                    public zone?: (string|null);
+
+                    /** UpdateAnywhereCacheMetadata ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
+                    /** UpdateAnywhereCacheMetadata admissionPolicy. */
+                    public admissionPolicy?: (string|null);
+
+                    /** UpdateAnywhereCacheMetadata _anywhereCacheId. */
+                    public _anywhereCacheId?: "anywhereCacheId";
+
+                    /** UpdateAnywhereCacheMetadata _zone. */
+                    public _zone?: "zone";
+
+                    /** UpdateAnywhereCacheMetadata _ttl. */
+                    public _ttl?: "ttl";
+
+                    /** UpdateAnywhereCacheMetadata _admissionPolicy. */
+                    public _admissionPolicy?: "admissionPolicy";
+
+                    /**
+                     * Creates a new UpdateAnywhereCacheMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAnywhereCacheMetadata instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IUpdateAnywhereCacheMetadata): google.storage.control.v2.UpdateAnywhereCacheMetadata;
+
+                    /**
+                     * Encodes the specified UpdateAnywhereCacheMetadata message. Does not implicitly {@link google.storage.control.v2.UpdateAnywhereCacheMetadata.verify|verify} messages.
+                     * @param message UpdateAnywhereCacheMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IUpdateAnywhereCacheMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAnywhereCacheMetadata message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateAnywhereCacheMetadata.verify|verify} messages.
+                     * @param message UpdateAnywhereCacheMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IUpdateAnywhereCacheMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAnywhereCacheMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAnywhereCacheMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.UpdateAnywhereCacheMetadata;
+
+                    /**
+                     * Decodes an UpdateAnywhereCacheMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAnywhereCacheMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.UpdateAnywhereCacheMetadata;
+
+                    /**
+                     * Verifies an UpdateAnywhereCacheMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAnywhereCacheMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAnywhereCacheMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.UpdateAnywhereCacheMetadata;
+
+                    /**
+                     * Creates a plain object from an UpdateAnywhereCacheMetadata message. Also converts values to other types if specified.
+                     * @param message UpdateAnywhereCacheMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.UpdateAnywhereCacheMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAnywhereCacheMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAnywhereCacheMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AnywhereCache. */
+                interface IAnywhereCache {
+
+                    /** AnywhereCache name */
+                    name?: (string|null);
+
+                    /** AnywhereCache zone */
+                    zone?: (string|null);
+
+                    /** AnywhereCache ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
+                    /** AnywhereCache admissionPolicy */
+                    admissionPolicy?: (string|null);
+
+                    /** AnywhereCache state */
+                    state?: (string|null);
+
+                    /** AnywhereCache createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AnywhereCache updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AnywhereCache pendingUpdate */
+                    pendingUpdate?: (boolean|null);
+                }
+
+                /** Represents an AnywhereCache. */
+                class AnywhereCache implements IAnywhereCache {
+
+                    /**
+                     * Constructs a new AnywhereCache.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IAnywhereCache);
+
+                    /** AnywhereCache name. */
+                    public name: string;
+
+                    /** AnywhereCache zone. */
+                    public zone: string;
+
+                    /** AnywhereCache ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
+                    /** AnywhereCache admissionPolicy. */
+                    public admissionPolicy: string;
+
+                    /** AnywhereCache state. */
+                    public state: string;
+
+                    /** AnywhereCache createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AnywhereCache updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AnywhereCache pendingUpdate. */
+                    public pendingUpdate: boolean;
+
+                    /**
+                     * Creates a new AnywhereCache instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnywhereCache instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IAnywhereCache): google.storage.control.v2.AnywhereCache;
+
+                    /**
+                     * Encodes the specified AnywhereCache message. Does not implicitly {@link google.storage.control.v2.AnywhereCache.verify|verify} messages.
+                     * @param message AnywhereCache message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IAnywhereCache, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnywhereCache message, length delimited. Does not implicitly {@link google.storage.control.v2.AnywhereCache.verify|verify} messages.
+                     * @param message AnywhereCache message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IAnywhereCache, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnywhereCache message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnywhereCache
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.AnywhereCache;
+
+                    /**
+                     * Decodes an AnywhereCache message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnywhereCache
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.AnywhereCache;
+
+                    /**
+                     * Verifies an AnywhereCache message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnywhereCache message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnywhereCache
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.AnywhereCache;
+
+                    /**
+                     * Creates a plain object from an AnywhereCache message. Also converts values to other types if specified.
+                     * @param message AnywhereCache
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.AnywhereCache, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnywhereCache to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnywhereCache
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAnywhereCacheRequest. */
+                interface ICreateAnywhereCacheRequest {
+
+                    /** CreateAnywhereCacheRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAnywhereCacheRequest anywhereCache */
+                    anywhereCache?: (google.storage.control.v2.IAnywhereCache|null);
+
+                    /** CreateAnywhereCacheRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateAnywhereCacheRequest. */
+                class CreateAnywhereCacheRequest implements ICreateAnywhereCacheRequest {
+
+                    /**
+                     * Constructs a new CreateAnywhereCacheRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.ICreateAnywhereCacheRequest);
+
+                    /** CreateAnywhereCacheRequest parent. */
+                    public parent: string;
+
+                    /** CreateAnywhereCacheRequest anywhereCache. */
+                    public anywhereCache?: (google.storage.control.v2.IAnywhereCache|null);
+
+                    /** CreateAnywhereCacheRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateAnywhereCacheRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAnywhereCacheRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.ICreateAnywhereCacheRequest): google.storage.control.v2.CreateAnywhereCacheRequest;
+
+                    /**
+                     * Encodes the specified CreateAnywhereCacheRequest message. Does not implicitly {@link google.storage.control.v2.CreateAnywhereCacheRequest.verify|verify} messages.
+                     * @param message CreateAnywhereCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.ICreateAnywhereCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAnywhereCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.CreateAnywhereCacheRequest.verify|verify} messages.
+                     * @param message CreateAnywhereCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.ICreateAnywhereCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAnywhereCacheRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAnywhereCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.CreateAnywhereCacheRequest;
+
+                    /**
+                     * Decodes a CreateAnywhereCacheRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAnywhereCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.CreateAnywhereCacheRequest;
+
+                    /**
+                     * Verifies a CreateAnywhereCacheRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAnywhereCacheRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAnywhereCacheRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.CreateAnywhereCacheRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAnywhereCacheRequest message. Also converts values to other types if specified.
+                     * @param message CreateAnywhereCacheRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.CreateAnywhereCacheRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAnywhereCacheRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAnywhereCacheRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAnywhereCacheRequest. */
+                interface IUpdateAnywhereCacheRequest {
+
+                    /** UpdateAnywhereCacheRequest anywhereCache */
+                    anywhereCache?: (google.storage.control.v2.IAnywhereCache|null);
+
+                    /** UpdateAnywhereCacheRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAnywhereCacheRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateAnywhereCacheRequest. */
+                class UpdateAnywhereCacheRequest implements IUpdateAnywhereCacheRequest {
+
+                    /**
+                     * Constructs a new UpdateAnywhereCacheRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IUpdateAnywhereCacheRequest);
+
+                    /** UpdateAnywhereCacheRequest anywhereCache. */
+                    public anywhereCache?: (google.storage.control.v2.IAnywhereCache|null);
+
+                    /** UpdateAnywhereCacheRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAnywhereCacheRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateAnywhereCacheRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAnywhereCacheRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IUpdateAnywhereCacheRequest): google.storage.control.v2.UpdateAnywhereCacheRequest;
+
+                    /**
+                     * Encodes the specified UpdateAnywhereCacheRequest message. Does not implicitly {@link google.storage.control.v2.UpdateAnywhereCacheRequest.verify|verify} messages.
+                     * @param message UpdateAnywhereCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IUpdateAnywhereCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAnywhereCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateAnywhereCacheRequest.verify|verify} messages.
+                     * @param message UpdateAnywhereCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IUpdateAnywhereCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAnywhereCacheRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAnywhereCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.UpdateAnywhereCacheRequest;
+
+                    /**
+                     * Decodes an UpdateAnywhereCacheRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAnywhereCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.UpdateAnywhereCacheRequest;
+
+                    /**
+                     * Verifies an UpdateAnywhereCacheRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAnywhereCacheRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAnywhereCacheRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.UpdateAnywhereCacheRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAnywhereCacheRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAnywhereCacheRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.UpdateAnywhereCacheRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAnywhereCacheRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAnywhereCacheRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisableAnywhereCacheRequest. */
+                interface IDisableAnywhereCacheRequest {
+
+                    /** DisableAnywhereCacheRequest name */
+                    name?: (string|null);
+
+                    /** DisableAnywhereCacheRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DisableAnywhereCacheRequest. */
+                class DisableAnywhereCacheRequest implements IDisableAnywhereCacheRequest {
+
+                    /**
+                     * Constructs a new DisableAnywhereCacheRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IDisableAnywhereCacheRequest);
+
+                    /** DisableAnywhereCacheRequest name. */
+                    public name: string;
+
+                    /** DisableAnywhereCacheRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DisableAnywhereCacheRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisableAnywhereCacheRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IDisableAnywhereCacheRequest): google.storage.control.v2.DisableAnywhereCacheRequest;
+
+                    /**
+                     * Encodes the specified DisableAnywhereCacheRequest message. Does not implicitly {@link google.storage.control.v2.DisableAnywhereCacheRequest.verify|verify} messages.
+                     * @param message DisableAnywhereCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IDisableAnywhereCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisableAnywhereCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.DisableAnywhereCacheRequest.verify|verify} messages.
+                     * @param message DisableAnywhereCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IDisableAnywhereCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisableAnywhereCacheRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisableAnywhereCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.DisableAnywhereCacheRequest;
+
+                    /**
+                     * Decodes a DisableAnywhereCacheRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisableAnywhereCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.DisableAnywhereCacheRequest;
+
+                    /**
+                     * Verifies a DisableAnywhereCacheRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisableAnywhereCacheRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisableAnywhereCacheRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.DisableAnywhereCacheRequest;
+
+                    /**
+                     * Creates a plain object from a DisableAnywhereCacheRequest message. Also converts values to other types if specified.
+                     * @param message DisableAnywhereCacheRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.DisableAnywhereCacheRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisableAnywhereCacheRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisableAnywhereCacheRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PauseAnywhereCacheRequest. */
+                interface IPauseAnywhereCacheRequest {
+
+                    /** PauseAnywhereCacheRequest name */
+                    name?: (string|null);
+
+                    /** PauseAnywhereCacheRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a PauseAnywhereCacheRequest. */
+                class PauseAnywhereCacheRequest implements IPauseAnywhereCacheRequest {
+
+                    /**
+                     * Constructs a new PauseAnywhereCacheRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IPauseAnywhereCacheRequest);
+
+                    /** PauseAnywhereCacheRequest name. */
+                    public name: string;
+
+                    /** PauseAnywhereCacheRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new PauseAnywhereCacheRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PauseAnywhereCacheRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IPauseAnywhereCacheRequest): google.storage.control.v2.PauseAnywhereCacheRequest;
+
+                    /**
+                     * Encodes the specified PauseAnywhereCacheRequest message. Does not implicitly {@link google.storage.control.v2.PauseAnywhereCacheRequest.verify|verify} messages.
+                     * @param message PauseAnywhereCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IPauseAnywhereCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PauseAnywhereCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.PauseAnywhereCacheRequest.verify|verify} messages.
+                     * @param message PauseAnywhereCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IPauseAnywhereCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PauseAnywhereCacheRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PauseAnywhereCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.PauseAnywhereCacheRequest;
+
+                    /**
+                     * Decodes a PauseAnywhereCacheRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PauseAnywhereCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.PauseAnywhereCacheRequest;
+
+                    /**
+                     * Verifies a PauseAnywhereCacheRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PauseAnywhereCacheRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PauseAnywhereCacheRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.PauseAnywhereCacheRequest;
+
+                    /**
+                     * Creates a plain object from a PauseAnywhereCacheRequest message. Also converts values to other types if specified.
+                     * @param message PauseAnywhereCacheRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.PauseAnywhereCacheRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PauseAnywhereCacheRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PauseAnywhereCacheRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResumeAnywhereCacheRequest. */
+                interface IResumeAnywhereCacheRequest {
+
+                    /** ResumeAnywhereCacheRequest name */
+                    name?: (string|null);
+
+                    /** ResumeAnywhereCacheRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a ResumeAnywhereCacheRequest. */
+                class ResumeAnywhereCacheRequest implements IResumeAnywhereCacheRequest {
+
+                    /**
+                     * Constructs a new ResumeAnywhereCacheRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IResumeAnywhereCacheRequest);
+
+                    /** ResumeAnywhereCacheRequest name. */
+                    public name: string;
+
+                    /** ResumeAnywhereCacheRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new ResumeAnywhereCacheRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResumeAnywhereCacheRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IResumeAnywhereCacheRequest): google.storage.control.v2.ResumeAnywhereCacheRequest;
+
+                    /**
+                     * Encodes the specified ResumeAnywhereCacheRequest message. Does not implicitly {@link google.storage.control.v2.ResumeAnywhereCacheRequest.verify|verify} messages.
+                     * @param message ResumeAnywhereCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IResumeAnywhereCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResumeAnywhereCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ResumeAnywhereCacheRequest.verify|verify} messages.
+                     * @param message ResumeAnywhereCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IResumeAnywhereCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResumeAnywhereCacheRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResumeAnywhereCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ResumeAnywhereCacheRequest;
+
+                    /**
+                     * Decodes a ResumeAnywhereCacheRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResumeAnywhereCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ResumeAnywhereCacheRequest;
+
+                    /**
+                     * Verifies a ResumeAnywhereCacheRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResumeAnywhereCacheRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResumeAnywhereCacheRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ResumeAnywhereCacheRequest;
+
+                    /**
+                     * Creates a plain object from a ResumeAnywhereCacheRequest message. Also converts values to other types if specified.
+                     * @param message ResumeAnywhereCacheRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ResumeAnywhereCacheRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResumeAnywhereCacheRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResumeAnywhereCacheRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAnywhereCacheRequest. */
+                interface IGetAnywhereCacheRequest {
+
+                    /** GetAnywhereCacheRequest name */
+                    name?: (string|null);
+
+                    /** GetAnywhereCacheRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a GetAnywhereCacheRequest. */
+                class GetAnywhereCacheRequest implements IGetAnywhereCacheRequest {
+
+                    /**
+                     * Constructs a new GetAnywhereCacheRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IGetAnywhereCacheRequest);
+
+                    /** GetAnywhereCacheRequest name. */
+                    public name: string;
+
+                    /** GetAnywhereCacheRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new GetAnywhereCacheRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAnywhereCacheRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IGetAnywhereCacheRequest): google.storage.control.v2.GetAnywhereCacheRequest;
+
+                    /**
+                     * Encodes the specified GetAnywhereCacheRequest message. Does not implicitly {@link google.storage.control.v2.GetAnywhereCacheRequest.verify|verify} messages.
+                     * @param message GetAnywhereCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IGetAnywhereCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAnywhereCacheRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetAnywhereCacheRequest.verify|verify} messages.
+                     * @param message GetAnywhereCacheRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IGetAnywhereCacheRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAnywhereCacheRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAnywhereCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.GetAnywhereCacheRequest;
+
+                    /**
+                     * Decodes a GetAnywhereCacheRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAnywhereCacheRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.GetAnywhereCacheRequest;
+
+                    /**
+                     * Verifies a GetAnywhereCacheRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAnywhereCacheRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAnywhereCacheRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.GetAnywhereCacheRequest;
+
+                    /**
+                     * Creates a plain object from a GetAnywhereCacheRequest message. Also converts values to other types if specified.
+                     * @param message GetAnywhereCacheRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.GetAnywhereCacheRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAnywhereCacheRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAnywhereCacheRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAnywhereCachesRequest. */
+                interface IListAnywhereCachesRequest {
+
+                    /** ListAnywhereCachesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAnywhereCachesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAnywhereCachesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAnywhereCachesRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a ListAnywhereCachesRequest. */
+                class ListAnywhereCachesRequest implements IListAnywhereCachesRequest {
+
+                    /**
+                     * Constructs a new ListAnywhereCachesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IListAnywhereCachesRequest);
+
+                    /** ListAnywhereCachesRequest parent. */
+                    public parent: string;
+
+                    /** ListAnywhereCachesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAnywhereCachesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAnywhereCachesRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new ListAnywhereCachesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAnywhereCachesRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IListAnywhereCachesRequest): google.storage.control.v2.ListAnywhereCachesRequest;
+
+                    /**
+                     * Encodes the specified ListAnywhereCachesRequest message. Does not implicitly {@link google.storage.control.v2.ListAnywhereCachesRequest.verify|verify} messages.
+                     * @param message ListAnywhereCachesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IListAnywhereCachesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAnywhereCachesRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.ListAnywhereCachesRequest.verify|verify} messages.
+                     * @param message ListAnywhereCachesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IListAnywhereCachesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAnywhereCachesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAnywhereCachesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ListAnywhereCachesRequest;
+
+                    /**
+                     * Decodes a ListAnywhereCachesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAnywhereCachesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ListAnywhereCachesRequest;
+
+                    /**
+                     * Verifies a ListAnywhereCachesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAnywhereCachesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAnywhereCachesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ListAnywhereCachesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAnywhereCachesRequest message. Also converts values to other types if specified.
+                     * @param message ListAnywhereCachesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ListAnywhereCachesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAnywhereCachesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAnywhereCachesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAnywhereCachesResponse. */
+                interface IListAnywhereCachesResponse {
+
+                    /** ListAnywhereCachesResponse anywhereCaches */
+                    anywhereCaches?: (google.storage.control.v2.IAnywhereCache[]|null);
+
+                    /** ListAnywhereCachesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAnywhereCachesResponse. */
+                class ListAnywhereCachesResponse implements IListAnywhereCachesResponse {
+
+                    /**
+                     * Constructs a new ListAnywhereCachesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IListAnywhereCachesResponse);
+
+                    /** ListAnywhereCachesResponse anywhereCaches. */
+                    public anywhereCaches: google.storage.control.v2.IAnywhereCache[];
+
+                    /** ListAnywhereCachesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAnywhereCachesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAnywhereCachesResponse instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IListAnywhereCachesResponse): google.storage.control.v2.ListAnywhereCachesResponse;
+
+                    /**
+                     * Encodes the specified ListAnywhereCachesResponse message. Does not implicitly {@link google.storage.control.v2.ListAnywhereCachesResponse.verify|verify} messages.
+                     * @param message ListAnywhereCachesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IListAnywhereCachesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAnywhereCachesResponse message, length delimited. Does not implicitly {@link google.storage.control.v2.ListAnywhereCachesResponse.verify|verify} messages.
+                     * @param message ListAnywhereCachesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IListAnywhereCachesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAnywhereCachesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAnywhereCachesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.ListAnywhereCachesResponse;
+
+                    /**
+                     * Decodes a ListAnywhereCachesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAnywhereCachesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.ListAnywhereCachesResponse;
+
+                    /**
+                     * Verifies a ListAnywhereCachesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAnywhereCachesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAnywhereCachesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.ListAnywhereCachesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAnywhereCachesResponse message. Also converts values to other types if specified.
+                     * @param message ListAnywhereCachesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.ListAnywhereCachesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAnywhereCachesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAnywhereCachesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IntelligenceConfig. */
+                interface IIntelligenceConfig {
+
+                    /** IntelligenceConfig name */
+                    name?: (string|null);
+
+                    /** IntelligenceConfig editionConfig */
+                    editionConfig?: (google.storage.control.v2.IntelligenceConfig.EditionConfig|keyof typeof google.storage.control.v2.IntelligenceConfig.EditionConfig|null);
+
+                    /** IntelligenceConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IntelligenceConfig filter */
+                    filter?: (google.storage.control.v2.IntelligenceConfig.IFilter|null);
+
+                    /** IntelligenceConfig effectiveIntelligenceConfig */
+                    effectiveIntelligenceConfig?: (google.storage.control.v2.IntelligenceConfig.IEffectiveIntelligenceConfig|null);
+
+                    /** IntelligenceConfig trialConfig */
+                    trialConfig?: (google.storage.control.v2.IntelligenceConfig.ITrialConfig|null);
+                }
+
+                /** Represents an IntelligenceConfig. */
+                class IntelligenceConfig implements IIntelligenceConfig {
+
+                    /**
+                     * Constructs a new IntelligenceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IIntelligenceConfig);
+
+                    /** IntelligenceConfig name. */
+                    public name: string;
+
+                    /** IntelligenceConfig editionConfig. */
+                    public editionConfig: (google.storage.control.v2.IntelligenceConfig.EditionConfig|keyof typeof google.storage.control.v2.IntelligenceConfig.EditionConfig);
+
+                    /** IntelligenceConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IntelligenceConfig filter. */
+                    public filter?: (google.storage.control.v2.IntelligenceConfig.IFilter|null);
+
+                    /** IntelligenceConfig effectiveIntelligenceConfig. */
+                    public effectiveIntelligenceConfig?: (google.storage.control.v2.IntelligenceConfig.IEffectiveIntelligenceConfig|null);
+
+                    /** IntelligenceConfig trialConfig. */
+                    public trialConfig?: (google.storage.control.v2.IntelligenceConfig.ITrialConfig|null);
+
+                    /**
+                     * Creates a new IntelligenceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IntelligenceConfig instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IIntelligenceConfig): google.storage.control.v2.IntelligenceConfig;
+
+                    /**
+                     * Encodes the specified IntelligenceConfig message. Does not implicitly {@link google.storage.control.v2.IntelligenceConfig.verify|verify} messages.
+                     * @param message IntelligenceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IIntelligenceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IntelligenceConfig message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceConfig.verify|verify} messages.
+                     * @param message IntelligenceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IIntelligenceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IntelligenceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IntelligenceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceConfig;
+
+                    /**
+                     * Decodes an IntelligenceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IntelligenceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceConfig;
+
+                    /**
+                     * Verifies an IntelligenceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IntelligenceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IntelligenceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceConfig;
+
+                    /**
+                     * Creates a plain object from an IntelligenceConfig message. Also converts values to other types if specified.
+                     * @param message IntelligenceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.IntelligenceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IntelligenceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IntelligenceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IntelligenceConfig {
+
+                    /** EditionConfig enum. */
+                    enum EditionConfig {
+                        EDITION_CONFIG_UNSPECIFIED = 0,
+                        INHERIT = 1,
+                        DISABLED = 2,
+                        STANDARD = 3,
+                        TRIAL = 5
+                    }
+
+                    /** Properties of a Filter. */
+                    interface IFilter {
+
+                        /** Filter includedCloudStorageLocations */
+                        includedCloudStorageLocations?: (google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageLocations|null);
+
+                        /** Filter excludedCloudStorageLocations */
+                        excludedCloudStorageLocations?: (google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageLocations|null);
+
+                        /** Filter includedCloudStorageBuckets */
+                        includedCloudStorageBuckets?: (google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageBuckets|null);
+
+                        /** Filter excludedCloudStorageBuckets */
+                        excludedCloudStorageBuckets?: (google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageBuckets|null);
+                    }
+
+                    /** Represents a Filter. */
+                    class Filter implements IFilter {
+
+                        /**
+                         * Constructs a new Filter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.control.v2.IntelligenceConfig.IFilter);
+
+                        /** Filter includedCloudStorageLocations. */
+                        public includedCloudStorageLocations?: (google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageLocations|null);
+
+                        /** Filter excludedCloudStorageLocations. */
+                        public excludedCloudStorageLocations?: (google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageLocations|null);
+
+                        /** Filter includedCloudStorageBuckets. */
+                        public includedCloudStorageBuckets?: (google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageBuckets|null);
+
+                        /** Filter excludedCloudStorageBuckets. */
+                        public excludedCloudStorageBuckets?: (google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageBuckets|null);
+
+                        /** Filter cloudStorageLocations. */
+                        public cloudStorageLocations?: ("includedCloudStorageLocations"|"excludedCloudStorageLocations");
+
+                        /** Filter cloudStorageBuckets. */
+                        public cloudStorageBuckets?: ("includedCloudStorageBuckets"|"excludedCloudStorageBuckets");
+
+                        /**
+                         * Creates a new Filter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Filter instance
+                         */
+                        public static create(properties?: google.storage.control.v2.IntelligenceConfig.IFilter): google.storage.control.v2.IntelligenceConfig.Filter;
+
+                        /**
+                         * Encodes the specified Filter message. Does not implicitly {@link google.storage.control.v2.IntelligenceConfig.Filter.verify|verify} messages.
+                         * @param message Filter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.control.v2.IntelligenceConfig.IFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Filter message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceConfig.Filter.verify|verify} messages.
+                         * @param message Filter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.control.v2.IntelligenceConfig.IFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Filter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Filter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceConfig.Filter;
+
+                        /**
+                         * Decodes a Filter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Filter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceConfig.Filter;
+
+                        /**
+                         * Verifies a Filter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Filter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Filter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceConfig.Filter;
+
+                        /**
+                         * Creates a plain object from a Filter message. Also converts values to other types if specified.
+                         * @param message Filter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.control.v2.IntelligenceConfig.Filter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Filter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Filter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Filter {
+
+                        /** Properties of a CloudStorageLocations. */
+                        interface ICloudStorageLocations {
+
+                            /** CloudStorageLocations locations */
+                            locations?: (string[]|null);
+                        }
+
+                        /** Represents a CloudStorageLocations. */
+                        class CloudStorageLocations implements ICloudStorageLocations {
+
+                            /**
+                             * Constructs a new CloudStorageLocations.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageLocations);
+
+                            /** CloudStorageLocations locations. */
+                            public locations: string[];
+
+                            /**
+                             * Creates a new CloudStorageLocations instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CloudStorageLocations instance
+                             */
+                            public static create(properties?: google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageLocations): google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations;
+
+                            /**
+                             * Encodes the specified CloudStorageLocations message. Does not implicitly {@link google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations.verify|verify} messages.
+                             * @param message CloudStorageLocations message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageLocations, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CloudStorageLocations message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations.verify|verify} messages.
+                             * @param message CloudStorageLocations message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageLocations, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CloudStorageLocations message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CloudStorageLocations
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations;
+
+                            /**
+                             * Decodes a CloudStorageLocations message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CloudStorageLocations
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations;
+
+                            /**
+                             * Verifies a CloudStorageLocations message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CloudStorageLocations message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CloudStorageLocations
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations;
+
+                            /**
+                             * Creates a plain object from a CloudStorageLocations message. Also converts values to other types if specified.
+                             * @param message CloudStorageLocations
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CloudStorageLocations to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CloudStorageLocations
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a CloudStorageBuckets. */
+                        interface ICloudStorageBuckets {
+
+                            /** CloudStorageBuckets bucketIdRegexes */
+                            bucketIdRegexes?: (string[]|null);
+                        }
+
+                        /** Represents a CloudStorageBuckets. */
+                        class CloudStorageBuckets implements ICloudStorageBuckets {
+
+                            /**
+                             * Constructs a new CloudStorageBuckets.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageBuckets);
+
+                            /** CloudStorageBuckets bucketIdRegexes. */
+                            public bucketIdRegexes: string[];
+
+                            /**
+                             * Creates a new CloudStorageBuckets instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CloudStorageBuckets instance
+                             */
+                            public static create(properties?: google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageBuckets): google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets;
+
+                            /**
+                             * Encodes the specified CloudStorageBuckets message. Does not implicitly {@link google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets.verify|verify} messages.
+                             * @param message CloudStorageBuckets message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageBuckets, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CloudStorageBuckets message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets.verify|verify} messages.
+                             * @param message CloudStorageBuckets message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.storage.control.v2.IntelligenceConfig.Filter.ICloudStorageBuckets, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CloudStorageBuckets message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CloudStorageBuckets
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets;
+
+                            /**
+                             * Decodes a CloudStorageBuckets message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CloudStorageBuckets
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets;
+
+                            /**
+                             * Verifies a CloudStorageBuckets message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CloudStorageBuckets message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CloudStorageBuckets
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets;
+
+                            /**
+                             * Creates a plain object from a CloudStorageBuckets message. Also converts values to other types if specified.
+                             * @param message CloudStorageBuckets
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CloudStorageBuckets to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CloudStorageBuckets
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of an EffectiveIntelligenceConfig. */
+                    interface IEffectiveIntelligenceConfig {
+
+                        /** EffectiveIntelligenceConfig effectiveEdition */
+                        effectiveEdition?: (google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig.EffectiveEdition|keyof typeof google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig.EffectiveEdition|null);
+
+                        /** EffectiveIntelligenceConfig intelligenceConfig */
+                        intelligenceConfig?: (string|null);
+                    }
+
+                    /** Represents an EffectiveIntelligenceConfig. */
+                    class EffectiveIntelligenceConfig implements IEffectiveIntelligenceConfig {
+
+                        /**
+                         * Constructs a new EffectiveIntelligenceConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.control.v2.IntelligenceConfig.IEffectiveIntelligenceConfig);
+
+                        /** EffectiveIntelligenceConfig effectiveEdition. */
+                        public effectiveEdition: (google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig.EffectiveEdition|keyof typeof google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig.EffectiveEdition);
+
+                        /** EffectiveIntelligenceConfig intelligenceConfig. */
+                        public intelligenceConfig: string;
+
+                        /**
+                         * Creates a new EffectiveIntelligenceConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EffectiveIntelligenceConfig instance
+                         */
+                        public static create(properties?: google.storage.control.v2.IntelligenceConfig.IEffectiveIntelligenceConfig): google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig;
+
+                        /**
+                         * Encodes the specified EffectiveIntelligenceConfig message. Does not implicitly {@link google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig.verify|verify} messages.
+                         * @param message EffectiveIntelligenceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.control.v2.IntelligenceConfig.IEffectiveIntelligenceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EffectiveIntelligenceConfig message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig.verify|verify} messages.
+                         * @param message EffectiveIntelligenceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.control.v2.IntelligenceConfig.IEffectiveIntelligenceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EffectiveIntelligenceConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EffectiveIntelligenceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig;
+
+                        /**
+                         * Decodes an EffectiveIntelligenceConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EffectiveIntelligenceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig;
+
+                        /**
+                         * Verifies an EffectiveIntelligenceConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EffectiveIntelligenceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EffectiveIntelligenceConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig;
+
+                        /**
+                         * Creates a plain object from an EffectiveIntelligenceConfig message. Also converts values to other types if specified.
+                         * @param message EffectiveIntelligenceConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EffectiveIntelligenceConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EffectiveIntelligenceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace EffectiveIntelligenceConfig {
+
+                        /** EffectiveEdition enum. */
+                        enum EffectiveEdition {
+                            EFFECTIVE_EDITION_UNSPECIFIED = 0,
+                            NONE = 1,
+                            STANDARD = 2
+                        }
+                    }
+
+                    /** Properties of a TrialConfig. */
+                    interface ITrialConfig {
+
+                        /** TrialConfig expireTime */
+                        expireTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a TrialConfig. */
+                    class TrialConfig implements ITrialConfig {
+
+                        /**
+                         * Constructs a new TrialConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.storage.control.v2.IntelligenceConfig.ITrialConfig);
+
+                        /** TrialConfig expireTime. */
+                        public expireTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new TrialConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TrialConfig instance
+                         */
+                        public static create(properties?: google.storage.control.v2.IntelligenceConfig.ITrialConfig): google.storage.control.v2.IntelligenceConfig.TrialConfig;
+
+                        /**
+                         * Encodes the specified TrialConfig message. Does not implicitly {@link google.storage.control.v2.IntelligenceConfig.TrialConfig.verify|verify} messages.
+                         * @param message TrialConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.storage.control.v2.IntelligenceConfig.ITrialConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TrialConfig message, length delimited. Does not implicitly {@link google.storage.control.v2.IntelligenceConfig.TrialConfig.verify|verify} messages.
+                         * @param message TrialConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.storage.control.v2.IntelligenceConfig.ITrialConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TrialConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TrialConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.IntelligenceConfig.TrialConfig;
+
+                        /**
+                         * Decodes a TrialConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TrialConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.IntelligenceConfig.TrialConfig;
+
+                        /**
+                         * Verifies a TrialConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TrialConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TrialConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.storage.control.v2.IntelligenceConfig.TrialConfig;
+
+                        /**
+                         * Creates a plain object from a TrialConfig message. Also converts values to other types if specified.
+                         * @param message TrialConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.storage.control.v2.IntelligenceConfig.TrialConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TrialConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TrialConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an UpdateOrganizationIntelligenceConfigRequest. */
+                interface IUpdateOrganizationIntelligenceConfigRequest {
+
+                    /** UpdateOrganizationIntelligenceConfigRequest intelligenceConfig */
+                    intelligenceConfig?: (google.storage.control.v2.IIntelligenceConfig|null);
+
+                    /** UpdateOrganizationIntelligenceConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateOrganizationIntelligenceConfigRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateOrganizationIntelligenceConfigRequest. */
+                class UpdateOrganizationIntelligenceConfigRequest implements IUpdateOrganizationIntelligenceConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateOrganizationIntelligenceConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest);
+
+                    /** UpdateOrganizationIntelligenceConfigRequest intelligenceConfig. */
+                    public intelligenceConfig?: (google.storage.control.v2.IIntelligenceConfig|null);
+
+                    /** UpdateOrganizationIntelligenceConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateOrganizationIntelligenceConfigRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateOrganizationIntelligenceConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateOrganizationIntelligenceConfigRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest): google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateOrganizationIntelligenceConfigRequest message. Does not implicitly {@link google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest.verify|verify} messages.
+                     * @param message UpdateOrganizationIntelligenceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateOrganizationIntelligenceConfigRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest.verify|verify} messages.
+                     * @param message UpdateOrganizationIntelligenceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateOrganizationIntelligenceConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateOrganizationIntelligenceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest;
+
+                    /**
+                     * Decodes an UpdateOrganizationIntelligenceConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateOrganizationIntelligenceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest;
+
+                    /**
+                     * Verifies an UpdateOrganizationIntelligenceConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateOrganizationIntelligenceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateOrganizationIntelligenceConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateOrganizationIntelligenceConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateOrganizationIntelligenceConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateOrganizationIntelligenceConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateOrganizationIntelligenceConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateFolderIntelligenceConfigRequest. */
+                interface IUpdateFolderIntelligenceConfigRequest {
+
+                    /** UpdateFolderIntelligenceConfigRequest intelligenceConfig */
+                    intelligenceConfig?: (google.storage.control.v2.IIntelligenceConfig|null);
+
+                    /** UpdateFolderIntelligenceConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateFolderIntelligenceConfigRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateFolderIntelligenceConfigRequest. */
+                class UpdateFolderIntelligenceConfigRequest implements IUpdateFolderIntelligenceConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateFolderIntelligenceConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest);
+
+                    /** UpdateFolderIntelligenceConfigRequest intelligenceConfig. */
+                    public intelligenceConfig?: (google.storage.control.v2.IIntelligenceConfig|null);
+
+                    /** UpdateFolderIntelligenceConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateFolderIntelligenceConfigRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateFolderIntelligenceConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateFolderIntelligenceConfigRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest): google.storage.control.v2.UpdateFolderIntelligenceConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateFolderIntelligenceConfigRequest message. Does not implicitly {@link google.storage.control.v2.UpdateFolderIntelligenceConfigRequest.verify|verify} messages.
+                     * @param message UpdateFolderIntelligenceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateFolderIntelligenceConfigRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateFolderIntelligenceConfigRequest.verify|verify} messages.
+                     * @param message UpdateFolderIntelligenceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateFolderIntelligenceConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateFolderIntelligenceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.UpdateFolderIntelligenceConfigRequest;
+
+                    /**
+                     * Decodes an UpdateFolderIntelligenceConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateFolderIntelligenceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.UpdateFolderIntelligenceConfigRequest;
+
+                    /**
+                     * Verifies an UpdateFolderIntelligenceConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateFolderIntelligenceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateFolderIntelligenceConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.UpdateFolderIntelligenceConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateFolderIntelligenceConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateFolderIntelligenceConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.UpdateFolderIntelligenceConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateFolderIntelligenceConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateFolderIntelligenceConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateProjectIntelligenceConfigRequest. */
+                interface IUpdateProjectIntelligenceConfigRequest {
+
+                    /** UpdateProjectIntelligenceConfigRequest intelligenceConfig */
+                    intelligenceConfig?: (google.storage.control.v2.IIntelligenceConfig|null);
+
+                    /** UpdateProjectIntelligenceConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateProjectIntelligenceConfigRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateProjectIntelligenceConfigRequest. */
+                class UpdateProjectIntelligenceConfigRequest implements IUpdateProjectIntelligenceConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateProjectIntelligenceConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest);
+
+                    /** UpdateProjectIntelligenceConfigRequest intelligenceConfig. */
+                    public intelligenceConfig?: (google.storage.control.v2.IIntelligenceConfig|null);
+
+                    /** UpdateProjectIntelligenceConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateProjectIntelligenceConfigRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateProjectIntelligenceConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateProjectIntelligenceConfigRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest): google.storage.control.v2.UpdateProjectIntelligenceConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateProjectIntelligenceConfigRequest message. Does not implicitly {@link google.storage.control.v2.UpdateProjectIntelligenceConfigRequest.verify|verify} messages.
+                     * @param message UpdateProjectIntelligenceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateProjectIntelligenceConfigRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.UpdateProjectIntelligenceConfigRequest.verify|verify} messages.
+                     * @param message UpdateProjectIntelligenceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateProjectIntelligenceConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateProjectIntelligenceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.UpdateProjectIntelligenceConfigRequest;
+
+                    /**
+                     * Decodes an UpdateProjectIntelligenceConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateProjectIntelligenceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.UpdateProjectIntelligenceConfigRequest;
+
+                    /**
+                     * Verifies an UpdateProjectIntelligenceConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateProjectIntelligenceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateProjectIntelligenceConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.UpdateProjectIntelligenceConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateProjectIntelligenceConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateProjectIntelligenceConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.UpdateProjectIntelligenceConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateProjectIntelligenceConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateProjectIntelligenceConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetOrganizationIntelligenceConfigRequest. */
+                interface IGetOrganizationIntelligenceConfigRequest {
+
+                    /** GetOrganizationIntelligenceConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetOrganizationIntelligenceConfigRequest. */
+                class GetOrganizationIntelligenceConfigRequest implements IGetOrganizationIntelligenceConfigRequest {
+
+                    /**
+                     * Constructs a new GetOrganizationIntelligenceConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest);
+
+                    /** GetOrganizationIntelligenceConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetOrganizationIntelligenceConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetOrganizationIntelligenceConfigRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest): google.storage.control.v2.GetOrganizationIntelligenceConfigRequest;
+
+                    /**
+                     * Encodes the specified GetOrganizationIntelligenceConfigRequest message. Does not implicitly {@link google.storage.control.v2.GetOrganizationIntelligenceConfigRequest.verify|verify} messages.
+                     * @param message GetOrganizationIntelligenceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetOrganizationIntelligenceConfigRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetOrganizationIntelligenceConfigRequest.verify|verify} messages.
+                     * @param message GetOrganizationIntelligenceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetOrganizationIntelligenceConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetOrganizationIntelligenceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.GetOrganizationIntelligenceConfigRequest;
+
+                    /**
+                     * Decodes a GetOrganizationIntelligenceConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetOrganizationIntelligenceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.GetOrganizationIntelligenceConfigRequest;
+
+                    /**
+                     * Verifies a GetOrganizationIntelligenceConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetOrganizationIntelligenceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetOrganizationIntelligenceConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.GetOrganizationIntelligenceConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetOrganizationIntelligenceConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetOrganizationIntelligenceConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.GetOrganizationIntelligenceConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetOrganizationIntelligenceConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetOrganizationIntelligenceConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetFolderIntelligenceConfigRequest. */
+                interface IGetFolderIntelligenceConfigRequest {
+
+                    /** GetFolderIntelligenceConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFolderIntelligenceConfigRequest. */
+                class GetFolderIntelligenceConfigRequest implements IGetFolderIntelligenceConfigRequest {
+
+                    /**
+                     * Constructs a new GetFolderIntelligenceConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IGetFolderIntelligenceConfigRequest);
+
+                    /** GetFolderIntelligenceConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFolderIntelligenceConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFolderIntelligenceConfigRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IGetFolderIntelligenceConfigRequest): google.storage.control.v2.GetFolderIntelligenceConfigRequest;
+
+                    /**
+                     * Encodes the specified GetFolderIntelligenceConfigRequest message. Does not implicitly {@link google.storage.control.v2.GetFolderIntelligenceConfigRequest.verify|verify} messages.
+                     * @param message GetFolderIntelligenceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IGetFolderIntelligenceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFolderIntelligenceConfigRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetFolderIntelligenceConfigRequest.verify|verify} messages.
+                     * @param message GetFolderIntelligenceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IGetFolderIntelligenceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFolderIntelligenceConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFolderIntelligenceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.GetFolderIntelligenceConfigRequest;
+
+                    /**
+                     * Decodes a GetFolderIntelligenceConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFolderIntelligenceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.GetFolderIntelligenceConfigRequest;
+
+                    /**
+                     * Verifies a GetFolderIntelligenceConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFolderIntelligenceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFolderIntelligenceConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.GetFolderIntelligenceConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetFolderIntelligenceConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetFolderIntelligenceConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.GetFolderIntelligenceConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFolderIntelligenceConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFolderIntelligenceConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetProjectIntelligenceConfigRequest. */
+                interface IGetProjectIntelligenceConfigRequest {
+
+                    /** GetProjectIntelligenceConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetProjectIntelligenceConfigRequest. */
+                class GetProjectIntelligenceConfigRequest implements IGetProjectIntelligenceConfigRequest {
+
+                    /**
+                     * Constructs a new GetProjectIntelligenceConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IGetProjectIntelligenceConfigRequest);
+
+                    /** GetProjectIntelligenceConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetProjectIntelligenceConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetProjectIntelligenceConfigRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IGetProjectIntelligenceConfigRequest): google.storage.control.v2.GetProjectIntelligenceConfigRequest;
+
+                    /**
+                     * Encodes the specified GetProjectIntelligenceConfigRequest message. Does not implicitly {@link google.storage.control.v2.GetProjectIntelligenceConfigRequest.verify|verify} messages.
+                     * @param message GetProjectIntelligenceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IGetProjectIntelligenceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetProjectIntelligenceConfigRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.GetProjectIntelligenceConfigRequest.verify|verify} messages.
+                     * @param message GetProjectIntelligenceConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IGetProjectIntelligenceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetProjectIntelligenceConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetProjectIntelligenceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.GetProjectIntelligenceConfigRequest;
+
+                    /**
+                     * Decodes a GetProjectIntelligenceConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetProjectIntelligenceConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.GetProjectIntelligenceConfigRequest;
+
+                    /**
+                     * Verifies a GetProjectIntelligenceConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetProjectIntelligenceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetProjectIntelligenceConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.GetProjectIntelligenceConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetProjectIntelligenceConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetProjectIntelligenceConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.GetProjectIntelligenceConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetProjectIntelligenceConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetProjectIntelligenceConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
         }
     }
 
     /** Namespace api. */
     namespace api {
+
+        /** Properties of a Http. */
+        interface IHttp {
+
+            /** Http rules */
+            rules?: (google.api.IHttpRule[]|null);
+
+            /** Http fullyDecodeReservedExpansion */
+            fullyDecodeReservedExpansion?: (boolean|null);
+        }
+
+        /** Represents a Http. */
+        class Http implements IHttp {
+
+            /**
+             * Constructs a new Http.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IHttp);
+
+            /** Http rules. */
+            public rules: google.api.IHttpRule[];
+
+            /** Http fullyDecodeReservedExpansion. */
+            public fullyDecodeReservedExpansion: boolean;
+
+            /**
+             * Creates a new Http instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Http instance
+             */
+            public static create(properties?: google.api.IHttp): google.api.Http;
+
+            /**
+             * Encodes the specified Http message. Does not implicitly {@link google.api.Http.verify|verify} messages.
+             * @param message Http message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IHttp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Http message, length delimited. Does not implicitly {@link google.api.Http.verify|verify} messages.
+             * @param message Http message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IHttp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Http message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Http
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Http;
+
+            /**
+             * Decodes a Http message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Http
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Http;
+
+            /**
+             * Verifies a Http message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Http message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Http
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Http;
+
+            /**
+             * Creates a plain object from a Http message. Also converts values to other types if specified.
+             * @param message Http
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Http, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Http to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Http
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a HttpRule. */
+        interface IHttpRule {
+
+            /** HttpRule selector */
+            selector?: (string|null);
+
+            /** HttpRule get */
+            get?: (string|null);
+
+            /** HttpRule put */
+            put?: (string|null);
+
+            /** HttpRule post */
+            post?: (string|null);
+
+            /** HttpRule delete */
+            "delete"?: (string|null);
+
+            /** HttpRule patch */
+            patch?: (string|null);
+
+            /** HttpRule custom */
+            custom?: (google.api.ICustomHttpPattern|null);
+
+            /** HttpRule body */
+            body?: (string|null);
+
+            /** HttpRule responseBody */
+            responseBody?: (string|null);
+
+            /** HttpRule additionalBindings */
+            additionalBindings?: (google.api.IHttpRule[]|null);
+        }
+
+        /** Represents a HttpRule. */
+        class HttpRule implements IHttpRule {
+
+            /**
+             * Constructs a new HttpRule.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IHttpRule);
+
+            /** HttpRule selector. */
+            public selector: string;
+
+            /** HttpRule get. */
+            public get?: (string|null);
+
+            /** HttpRule put. */
+            public put?: (string|null);
+
+            /** HttpRule post. */
+            public post?: (string|null);
+
+            /** HttpRule delete. */
+            public delete?: (string|null);
+
+            /** HttpRule patch. */
+            public patch?: (string|null);
+
+            /** HttpRule custom. */
+            public custom?: (google.api.ICustomHttpPattern|null);
+
+            /** HttpRule body. */
+            public body: string;
+
+            /** HttpRule responseBody. */
+            public responseBody: string;
+
+            /** HttpRule additionalBindings. */
+            public additionalBindings: google.api.IHttpRule[];
+
+            /** HttpRule pattern. */
+            public pattern?: ("get"|"put"|"post"|"delete"|"patch"|"custom");
+
+            /**
+             * Creates a new HttpRule instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns HttpRule instance
+             */
+            public static create(properties?: google.api.IHttpRule): google.api.HttpRule;
+
+            /**
+             * Encodes the specified HttpRule message. Does not implicitly {@link google.api.HttpRule.verify|verify} messages.
+             * @param message HttpRule message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IHttpRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified HttpRule message, length delimited. Does not implicitly {@link google.api.HttpRule.verify|verify} messages.
+             * @param message HttpRule message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IHttpRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a HttpRule message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns HttpRule
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.HttpRule;
+
+            /**
+             * Decodes a HttpRule message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns HttpRule
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.HttpRule;
+
+            /**
+             * Verifies a HttpRule message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a HttpRule message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns HttpRule
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.HttpRule;
+
+            /**
+             * Creates a plain object from a HttpRule message. Also converts values to other types if specified.
+             * @param message HttpRule
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.HttpRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this HttpRule to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for HttpRule
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a CustomHttpPattern. */
+        interface ICustomHttpPattern {
+
+            /** CustomHttpPattern kind */
+            kind?: (string|null);
+
+            /** CustomHttpPattern path */
+            path?: (string|null);
+        }
+
+        /** Represents a CustomHttpPattern. */
+        class CustomHttpPattern implements ICustomHttpPattern {
+
+            /**
+             * Constructs a new CustomHttpPattern.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ICustomHttpPattern);
+
+            /** CustomHttpPattern kind. */
+            public kind: string;
+
+            /** CustomHttpPattern path. */
+            public path: string;
+
+            /**
+             * Creates a new CustomHttpPattern instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CustomHttpPattern instance
+             */
+            public static create(properties?: google.api.ICustomHttpPattern): google.api.CustomHttpPattern;
+
+            /**
+             * Encodes the specified CustomHttpPattern message. Does not implicitly {@link google.api.CustomHttpPattern.verify|verify} messages.
+             * @param message CustomHttpPattern message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ICustomHttpPattern, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CustomHttpPattern message, length delimited. Does not implicitly {@link google.api.CustomHttpPattern.verify|verify} messages.
+             * @param message CustomHttpPattern message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ICustomHttpPattern, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CustomHttpPattern message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CustomHttpPattern
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.CustomHttpPattern;
+
+            /**
+             * Decodes a CustomHttpPattern message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CustomHttpPattern
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.CustomHttpPattern;
+
+            /**
+             * Verifies a CustomHttpPattern message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CustomHttpPattern message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CustomHttpPattern
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.CustomHttpPattern;
+
+            /**
+             * Creates a plain object from a CustomHttpPattern message. Also converts values to other types if specified.
+             * @param message CustomHttpPattern
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.CustomHttpPattern, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CustomHttpPattern to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CustomHttpPattern
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
 
         /** Properties of a CommonLanguageSettings. */
         interface ICommonLanguageSettings {
@@ -4636,366 +7807,6 @@ export namespace google {
 
             /**
              * Gets the default type url for RoutingParameter
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a Http. */
-        interface IHttp {
-
-            /** Http rules */
-            rules?: (google.api.IHttpRule[]|null);
-
-            /** Http fullyDecodeReservedExpansion */
-            fullyDecodeReservedExpansion?: (boolean|null);
-        }
-
-        /** Represents a Http. */
-        class Http implements IHttp {
-
-            /**
-             * Constructs a new Http.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IHttp);
-
-            /** Http rules. */
-            public rules: google.api.IHttpRule[];
-
-            /** Http fullyDecodeReservedExpansion. */
-            public fullyDecodeReservedExpansion: boolean;
-
-            /**
-             * Creates a new Http instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Http instance
-             */
-            public static create(properties?: google.api.IHttp): google.api.Http;
-
-            /**
-             * Encodes the specified Http message. Does not implicitly {@link google.api.Http.verify|verify} messages.
-             * @param message Http message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IHttp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Http message, length delimited. Does not implicitly {@link google.api.Http.verify|verify} messages.
-             * @param message Http message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IHttp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Http message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Http
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Http;
-
-            /**
-             * Decodes a Http message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Http
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Http;
-
-            /**
-             * Verifies a Http message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Http message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Http
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Http;
-
-            /**
-             * Creates a plain object from a Http message. Also converts values to other types if specified.
-             * @param message Http
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Http, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Http to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Http
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a HttpRule. */
-        interface IHttpRule {
-
-            /** HttpRule selector */
-            selector?: (string|null);
-
-            /** HttpRule get */
-            get?: (string|null);
-
-            /** HttpRule put */
-            put?: (string|null);
-
-            /** HttpRule post */
-            post?: (string|null);
-
-            /** HttpRule delete */
-            "delete"?: (string|null);
-
-            /** HttpRule patch */
-            patch?: (string|null);
-
-            /** HttpRule custom */
-            custom?: (google.api.ICustomHttpPattern|null);
-
-            /** HttpRule body */
-            body?: (string|null);
-
-            /** HttpRule responseBody */
-            responseBody?: (string|null);
-
-            /** HttpRule additionalBindings */
-            additionalBindings?: (google.api.IHttpRule[]|null);
-        }
-
-        /** Represents a HttpRule. */
-        class HttpRule implements IHttpRule {
-
-            /**
-             * Constructs a new HttpRule.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IHttpRule);
-
-            /** HttpRule selector. */
-            public selector: string;
-
-            /** HttpRule get. */
-            public get?: (string|null);
-
-            /** HttpRule put. */
-            public put?: (string|null);
-
-            /** HttpRule post. */
-            public post?: (string|null);
-
-            /** HttpRule delete. */
-            public delete?: (string|null);
-
-            /** HttpRule patch. */
-            public patch?: (string|null);
-
-            /** HttpRule custom. */
-            public custom?: (google.api.ICustomHttpPattern|null);
-
-            /** HttpRule body. */
-            public body: string;
-
-            /** HttpRule responseBody. */
-            public responseBody: string;
-
-            /** HttpRule additionalBindings. */
-            public additionalBindings: google.api.IHttpRule[];
-
-            /** HttpRule pattern. */
-            public pattern?: ("get"|"put"|"post"|"delete"|"patch"|"custom");
-
-            /**
-             * Creates a new HttpRule instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns HttpRule instance
-             */
-            public static create(properties?: google.api.IHttpRule): google.api.HttpRule;
-
-            /**
-             * Encodes the specified HttpRule message. Does not implicitly {@link google.api.HttpRule.verify|verify} messages.
-             * @param message HttpRule message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IHttpRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified HttpRule message, length delimited. Does not implicitly {@link google.api.HttpRule.verify|verify} messages.
-             * @param message HttpRule message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IHttpRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a HttpRule message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns HttpRule
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.HttpRule;
-
-            /**
-             * Decodes a HttpRule message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns HttpRule
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.HttpRule;
-
-            /**
-             * Verifies a HttpRule message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a HttpRule message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns HttpRule
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.HttpRule;
-
-            /**
-             * Creates a plain object from a HttpRule message. Also converts values to other types if specified.
-             * @param message HttpRule
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.HttpRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this HttpRule to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for HttpRule
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a CustomHttpPattern. */
-        interface ICustomHttpPattern {
-
-            /** CustomHttpPattern kind */
-            kind?: (string|null);
-
-            /** CustomHttpPattern path */
-            path?: (string|null);
-        }
-
-        /** Represents a CustomHttpPattern. */
-        class CustomHttpPattern implements ICustomHttpPattern {
-
-            /**
-             * Constructs a new CustomHttpPattern.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ICustomHttpPattern);
-
-            /** CustomHttpPattern kind. */
-            public kind: string;
-
-            /** CustomHttpPattern path. */
-            public path: string;
-
-            /**
-             * Creates a new CustomHttpPattern instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns CustomHttpPattern instance
-             */
-            public static create(properties?: google.api.ICustomHttpPattern): google.api.CustomHttpPattern;
-
-            /**
-             * Encodes the specified CustomHttpPattern message. Does not implicitly {@link google.api.CustomHttpPattern.verify|verify} messages.
-             * @param message CustomHttpPattern message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ICustomHttpPattern, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified CustomHttpPattern message, length delimited. Does not implicitly {@link google.api.CustomHttpPattern.verify|verify} messages.
-             * @param message CustomHttpPattern message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ICustomHttpPattern, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a CustomHttpPattern message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns CustomHttpPattern
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.CustomHttpPattern;
-
-            /**
-             * Decodes a CustomHttpPattern message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns CustomHttpPattern
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.CustomHttpPattern;
-
-            /**
-             * Verifies a CustomHttpPattern message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a CustomHttpPattern message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns CustomHttpPattern
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.CustomHttpPattern;
-
-            /**
-             * Creates a plain object from a CustomHttpPattern message. Also converts values to other types if specified.
-             * @param message CustomHttpPattern
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.CustomHttpPattern, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this CustomHttpPattern to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for CustomHttpPattern
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -7916,14 +10727,14 @@ export namespace google {
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
+            /** MethodOptions .google.api.http */
+            ".google.api.http"?: (google.api.IHttpRule|null);
+
             /** MethodOptions .google.api.methodSignature */
             ".google.api.methodSignature"?: (string[]|null);
 
             /** MethodOptions .google.api.routing */
             ".google.api.routing"?: (google.api.IRoutingRule|null);
-
-            /** MethodOptions .google.api.http */
-            ".google.api.http"?: (google.api.IHttpRule|null);
 
             /** MethodOptions .google.longrunning.operationInfo */
             ".google.longrunning.operationInfo"?: (google.longrunning.IOperationInfo|null);
@@ -9408,6 +12219,103 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
