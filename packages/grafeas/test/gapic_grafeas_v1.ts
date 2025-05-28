@@ -257,9 +257,14 @@ describe('v1.GrafeasClient', () => {
         throw err;
       });
       assert(client.grafeasStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -268,9 +273,14 @@ describe('v1.GrafeasClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.grafeasStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -433,7 +443,9 @@ describe('v1.GrafeasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getOccurrence(request), expectedError);
     });
   });
@@ -563,7 +575,9 @@ describe('v1.GrafeasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteOccurrence(request), expectedError);
     });
   });
@@ -693,7 +707,9 @@ describe('v1.GrafeasClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createOccurrence(request), expectedError);
     });
   });
@@ -827,7 +843,9 @@ describe('v1.GrafeasClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.batchCreateOccurrences(request),
         expectedError
@@ -960,7 +978,9 @@ describe('v1.GrafeasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateOccurrence(request), expectedError);
     });
   });
@@ -1087,7 +1107,9 @@ describe('v1.GrafeasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getOccurrenceNote(request), expectedError);
     });
   });
@@ -1207,7 +1229,9 @@ describe('v1.GrafeasClient', () => {
       ]);
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getNote(request), expectedError);
     });
   });
@@ -1337,7 +1361,9 @@ describe('v1.GrafeasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteNote(request), expectedError);
     });
   });
@@ -1464,7 +1490,9 @@ describe('v1.GrafeasClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createNote(request), expectedError);
     });
   });
@@ -1594,7 +1622,9 @@ describe('v1.GrafeasClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.batchCreateNotes(request), expectedError);
     });
   });
@@ -1721,7 +1751,9 @@ describe('v1.GrafeasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateNote(request), expectedError);
     });
   });

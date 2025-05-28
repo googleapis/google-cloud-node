@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -8,10 +11,12 @@
               "nested": {
                 "v1": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.ModelArmor.V1",
                     "go_package": "cloud.google.com/go/modelarmor/apiv1/modelarmorpb;modelarmorpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "V1mainProto",
-                    "java_package": "com.google.cloud.modelarmor.v1"
+                    "java_package": "com.google.cloud.modelarmor.v1",
+                    "php_namespace": "Google\\Cloud\\ModelArmor\\V1"
                   },
                   "nested": {
                     "ModelArmor": {
@@ -881,6 +886,10 @@
                             "errorMessage": {
                               "type": "string",
                               "id": 2
+                            },
+                            "ignorePartialInvocationFailures": {
+                              "type": "bool",
+                              "id": 3
                             }
                           }
                         }
@@ -1069,7 +1078,10 @@
                           "values": {
                             "BYTE_ITEM_TYPE_UNSPECIFIED": 0,
                             "PLAINTEXT_UTF8": 1,
-                            "PDF": 2
+                            "PDF": 2,
+                            "WORD_DOCUMENT": 3,
+                            "EXCEL_DOCUMENT": 4,
+                            "POWERPOINT_DOCUMENT": 5
                           }
                         }
                       }

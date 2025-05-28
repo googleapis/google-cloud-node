@@ -783,7 +783,9 @@ export namespace google {
                     enum PhoneticEncoding {
                         PHONETIC_ENCODING_UNSPECIFIED = 0,
                         PHONETIC_ENCODING_IPA = 1,
-                        PHONETIC_ENCODING_X_SAMPA = 2
+                        PHONETIC_ENCODING_X_SAMPA = 2,
+                        PHONETIC_ENCODING_JAPANESE_YOMIGANA = 3,
+                        PHONETIC_ENCODING_PINYIN = 4
                     }
                 }
 
@@ -1093,6 +1095,9 @@ export namespace google {
                     /** SynthesisInput text */
                     text?: (string|null);
 
+                    /** SynthesisInput markup */
+                    markup?: (string|null);
+
                     /** SynthesisInput ssml */
                     ssml?: (string|null);
 
@@ -1115,6 +1120,9 @@ export namespace google {
                     /** SynthesisInput text. */
                     public text?: (string|null);
 
+                    /** SynthesisInput markup. */
+                    public markup?: (string|null);
+
                     /** SynthesisInput ssml. */
                     public ssml?: (string|null);
 
@@ -1125,7 +1133,7 @@ export namespace google {
                     public customPronunciations?: (google.cloud.texttospeech.v1.ICustomPronunciations|null);
 
                     /** SynthesisInput inputSource. */
-                    public inputSource?: ("text"|"ssml"|"multiSpeakerMarkup");
+                    public inputSource?: ("text"|"markup"|"ssml"|"multiSpeakerMarkup");
 
                     /**
                      * Creates a new SynthesisInput instance using the specified properties.
@@ -1983,6 +1991,9 @@ export namespace google {
 
                     /** StreamingSynthesisInput text */
                     text?: (string|null);
+
+                    /** StreamingSynthesisInput markup */
+                    markup?: (string|null);
                 }
 
                 /** Represents a StreamingSynthesisInput. */
@@ -1997,8 +2008,11 @@ export namespace google {
                     /** StreamingSynthesisInput text. */
                     public text?: (string|null);
 
+                    /** StreamingSynthesisInput markup. */
+                    public markup?: (string|null);
+
                     /** StreamingSynthesisInput inputSource. */
-                    public inputSource?: "text";
+                    public inputSource?: ("text"|"markup");
 
                     /**
                      * Creates a new StreamingSynthesisInput instance using the specified properties.

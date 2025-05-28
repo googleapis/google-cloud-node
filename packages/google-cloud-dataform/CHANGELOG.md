@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.0.1...dataform-v2.1.0) (2025-05-20)
+
+
+### Features
+
+* Add initial files for google.cloud.dataform.v1beta1 ([#6364](https://github.com/googleapis/google-cloud-node/issues/6364)) ([efa3877](https://github.com/googleapis/google-cloud-node/commit/efa38775edbbb8a078b79e61b924a0041b2a6f6a))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.0.0...dataform-v2.0.1) (2025-03-19)
 
 

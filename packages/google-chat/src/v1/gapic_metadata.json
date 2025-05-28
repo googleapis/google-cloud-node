@@ -105,6 +105,21 @@
                 "deleteReaction"
               ]
             },
+            "CreateCustomEmoji": {
+              "methods": [
+                "createCustomEmoji"
+              ]
+            },
+            "GetCustomEmoji": {
+              "methods": [
+                "getCustomEmoji"
+              ]
+            },
+            "DeleteCustomEmoji": {
+              "methods": [
+                "deleteCustomEmoji"
+              ]
+            },
             "GetSpaceReadState": {
               "methods": [
                 "getSpaceReadState"
@@ -168,6 +183,13 @@
                 "listReactions",
                 "listReactionsStream",
                 "listReactionsAsync"
+              ]
+            },
+            "ListCustomEmojis": {
+              "methods": [
+                "listCustomEmojis",
+                "listCustomEmojisStream",
+                "listCustomEmojisAsync"
               ]
             },
             "ListSpaceEvents": {
@@ -277,6 +299,21 @@
                 "deleteReaction"
               ]
             },
+            "CreateCustomEmoji": {
+              "methods": [
+                "createCustomEmoji"
+              ]
+            },
+            "GetCustomEmoji": {
+              "methods": [
+                "getCustomEmoji"
+              ]
+            },
+            "DeleteCustomEmoji": {
+              "methods": [
+                "deleteCustomEmoji"
+              ]
+            },
             "GetSpaceReadState": {
               "methods": [
                 "getSpaceReadState"
@@ -340,6 +377,13 @@
                 "listReactions",
                 "listReactionsStream",
                 "listReactionsAsync"
+              ]
+            },
+            "ListCustomEmojis": {
+              "methods": [
+                "listCustomEmojis",
+                "listCustomEmojisStream",
+                "listCustomEmojisAsync"
               ]
             },
             "ListSpaceEvents": {

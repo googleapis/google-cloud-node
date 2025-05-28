@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Resource name of the Subscription to refresh.
-   *  e.g. `projects/subscriberproject/locations/US/subscriptions/123`
+   *  e.g. `projects/subscriberproject/locations/us/subscriptions/123`
    */
   // const name = 'abc123'
 
