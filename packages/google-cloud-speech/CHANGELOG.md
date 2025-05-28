@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.0.1...speech-v7.1.0) (2025-05-09)
+
+
+### Features
+
+* Expand types for streamingRecognize ([#6254](https://github.com/googleapis/google-cloud-node/issues/6254)) ([2c5c68c](https://github.com/googleapis/google-cloud-node/commit/2c5c68c6049fdb8801ee9b1bcd320a4c7e09ba12))
+* Expose google.cloud.location.Locations API ([#6243](https://github.com/googleapis/google-cloud-node/issues/6243)) ([fb10089](https://github.com/googleapis/google-cloud-node/commit/fb100893835275f1cc1374385ff22764f3e622dd))
+* Multiple ai-platform updates ([0b8b1a7](https://github.com/googleapis/google-cloud-node/commit/0b8b1a75f33bdf94000321d239834b9b10757862))
+
 ## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/speech-v7.0.0...speech-v7.0.1) (2025-03-19)
 
 

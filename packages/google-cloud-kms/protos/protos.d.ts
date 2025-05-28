@@ -1035,6 +1035,9 @@ export namespace google {
 
                     /** AutokeyConfig state */
                     state?: (google.cloud.kms.v1.AutokeyConfig.State|keyof typeof google.cloud.kms.v1.AutokeyConfig.State|null);
+
+                    /** AutokeyConfig etag */
+                    etag?: (string|null);
                 }
 
                 /** Represents an AutokeyConfig. */
@@ -1054,6 +1057,9 @@ export namespace google {
 
                     /** AutokeyConfig state. */
                     public state: (google.cloud.kms.v1.AutokeyConfig.State|keyof typeof google.cloud.kms.v1.AutokeyConfig.State);
+
+                    /** AutokeyConfig etag. */
+                    public etag: string;
 
                     /**
                      * Creates a new AutokeyConfig instance using the specified properties.
