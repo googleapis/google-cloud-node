@@ -213,6 +213,9 @@ export class ManagedKafkaClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aclPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl}'
+      ),
       clusterPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}'
       ),
@@ -254,6 +257,11 @@ export class ManagedKafkaClient {
         'pageToken',
         'nextPageToken',
         'consumerGroups'
+      ),
+      listAcls: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'acls'
       ),
     };
 
@@ -399,6 +407,13 @@ export class ManagedKafkaClient {
       'getConsumerGroup',
       'updateConsumerGroup',
       'deleteConsumerGroup',
+      'listAcls',
+      'getAcl',
+      'createAcl',
+      'updateAcl',
+      'deleteAcl',
+      'addAclEntry',
+      'removeAclEntry',
     ];
     for (const methodName of managedKafkaStubMethods) {
       const callPromise = this.managedKafkaStub.then(
@@ -1492,6 +1507,753 @@ export class ManagedKafkaClient {
           {} | undefined,
         ]) => {
           this._log.info('deleteConsumerGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Returns the properties of a single acl.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the acl to return.
+   *   Structured like:
+   *   `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl_id}`.
+   *
+   *   The structure of `acl_id` defines the Resource Pattern (resource_type,
+   *   resource_name, pattern_type) of the acl. See `Acl.name` for
+   *   details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.Acl|Acl}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka.get_acl.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafka_GetAcl_async
+   */
+  getAcl(
+    request?: protos.google.cloud.managedkafka.v1.IGetAclRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.IGetAclRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getAcl(
+    request: protos.google.cloud.managedkafka.v1.IGetAclRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.IGetAclRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAcl(
+    request: protos.google.cloud.managedkafka.v1.IGetAclRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.IGetAclRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getAcl(
+    request?: protos.google.cloud.managedkafka.v1.IGetAclRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IAcl,
+          protos.google.cloud.managedkafka.v1.IGetAclRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.IGetAclRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.IGetAclRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAcl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IAcl,
+          protos.google.cloud.managedkafka.v1.IGetAclRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAcl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAcl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IAcl,
+          protos.google.cloud.managedkafka.v1.IGetAclRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAcl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Creates a new acl in the given project, location, and cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent cluster in which to create the acl.
+   *   Structured like
+   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   * @param {string} request.aclId
+   *   Required. The ID to use for the acl, which will become the final component
+   *   of the acl's name. The structure of `acl_id` defines the Resource Pattern
+   *   (resource_type, resource_name, pattern_type) of the acl. `acl_id` is
+   *   structured like one of the following:
+   *
+   *   For acls on the cluster:
+   *     `cluster`
+   *
+   *   For acls on a single resource within the cluster:
+   *     `topic/{resource_name}`
+   *     `consumerGroup/{resource_name}`
+   *     `transactionalId/{resource_name}`
+   *
+   *   For acls on all resources that match a prefix:
+   *     `topicPrefixed/{resource_name}`
+   *     `consumerGroupPrefixed/{resource_name}`
+   *     `transactionalIdPrefixed/{resource_name}`
+   *
+   *   For acls on all resources of a given type (i.e. the wildcard literal "*"):
+   *     `allTopics` (represents `topic/*`)
+   *     `allConsumerGroups` (represents `consumerGroup/*`)
+   *     `allTransactionalIds` (represents `transactionalId/*`)
+   * @param {google.cloud.managedkafka.v1.Acl} request.acl
+   *   Required. Configuration of the acl to create. Its `name` field is ignored.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.Acl|Acl}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka.create_acl.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafka_CreateAcl_async
+   */
+  createAcl(
+    request?: protos.google.cloud.managedkafka.v1.ICreateAclRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.ICreateAclRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createAcl(
+    request: protos.google.cloud.managedkafka.v1.ICreateAclRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.ICreateAclRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAcl(
+    request: protos.google.cloud.managedkafka.v1.ICreateAclRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.ICreateAclRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createAcl(
+    request?: protos.google.cloud.managedkafka.v1.ICreateAclRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IAcl,
+          | protos.google.cloud.managedkafka.v1.ICreateAclRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.ICreateAclRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.ICreateAclRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAcl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IAcl,
+          | protos.google.cloud.managedkafka.v1.ICreateAclRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAcl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAcl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IAcl,
+          protos.google.cloud.managedkafka.v1.ICreateAclRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAcl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Updates the properties of a single acl.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.managedkafka.v1.Acl} request.acl
+   *   Required. The updated acl. Its `name` and `etag` fields must be populated.
+   *   `acl_entries` must not be empty in the updated acl; to remove all acl
+   *   entries for an acl, use DeleteAcl.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   Acl resource by the update. The fields specified in the update_mask are
+   *   relative to the resource, not the full request. A field will be overwritten
+   *   if it is in the mask.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.Acl|Acl}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka.update_acl.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafka_UpdateAcl_async
+   */
+  updateAcl(
+    request?: protos.google.cloud.managedkafka.v1.IUpdateAclRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.IUpdateAclRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateAcl(
+    request: protos.google.cloud.managedkafka.v1.IUpdateAclRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.IUpdateAclRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAcl(
+    request: protos.google.cloud.managedkafka.v1.IUpdateAclRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.IUpdateAclRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAcl(
+    request?: protos.google.cloud.managedkafka.v1.IUpdateAclRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IAcl,
+          | protos.google.cloud.managedkafka.v1.IUpdateAclRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.IUpdateAclRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IAcl,
+      protos.google.cloud.managedkafka.v1.IUpdateAclRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'acl.name': request.acl!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAcl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IAcl,
+          | protos.google.cloud.managedkafka.v1.IUpdateAclRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAcl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAcl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IAcl,
+          protos.google.cloud.managedkafka.v1.IUpdateAclRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAcl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Deletes an acl.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the acl to delete.
+   *   Structured like:
+   *   `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl_id}`.
+   *
+   *   The structure of `acl_id` defines the Resource Pattern (resource_type,
+   *   resource_name, pattern_type) of the acl. See `Acl.name` for details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka.delete_acl.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafka_DeleteAcl_async
+   */
+  deleteAcl(
+    request?: protos.google.cloud.managedkafka.v1.IDeleteAclRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.managedkafka.v1.IDeleteAclRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteAcl(
+    request: protos.google.cloud.managedkafka.v1.IDeleteAclRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.managedkafka.v1.IDeleteAclRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAcl(
+    request: protos.google.cloud.managedkafka.v1.IDeleteAclRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.managedkafka.v1.IDeleteAclRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteAcl(
+    request?: protos.google.cloud.managedkafka.v1.IDeleteAclRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.managedkafka.v1.IDeleteAclRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.managedkafka.v1.IDeleteAclRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.managedkafka.v1.IDeleteAclRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteAcl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.managedkafka.v1.IDeleteAclRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAcl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAcl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.managedkafka.v1.IDeleteAclRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAcl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Incremental update: Adds an acl entry to an acl. Creates the acl if it does
+   * not exist yet.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.acl
+   *   Required. The name of the acl to add the acl entry to.
+   *   Structured like:
+   *   `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl_id}`.
+   *
+   *   The structure of `acl_id` defines the Resource Pattern (resource_type,
+   *   resource_name, pattern_type) of the acl. See `Acl.name` for
+   *   details.
+   * @param {google.cloud.managedkafka.v1.AclEntry} request.aclEntry
+   *   Required. The acl entry to add.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.AddAclEntryResponse|AddAclEntryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka.add_acl_entry.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafka_AddAclEntry_async
+   */
+  addAclEntry(
+    request?: protos.google.cloud.managedkafka.v1.IAddAclEntryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IAddAclEntryResponse,
+      protos.google.cloud.managedkafka.v1.IAddAclEntryRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  addAclEntry(
+    request: protos.google.cloud.managedkafka.v1.IAddAclEntryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IAddAclEntryResponse,
+      | protos.google.cloud.managedkafka.v1.IAddAclEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  addAclEntry(
+    request: protos.google.cloud.managedkafka.v1.IAddAclEntryRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IAddAclEntryResponse,
+      | protos.google.cloud.managedkafka.v1.IAddAclEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  addAclEntry(
+    request?: protos.google.cloud.managedkafka.v1.IAddAclEntryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IAddAclEntryResponse,
+          | protos.google.cloud.managedkafka.v1.IAddAclEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.v1.IAddAclEntryResponse,
+      | protos.google.cloud.managedkafka.v1.IAddAclEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IAddAclEntryResponse,
+      protos.google.cloud.managedkafka.v1.IAddAclEntryRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        acl: request.acl ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('addAclEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IAddAclEntryResponse,
+          | protos.google.cloud.managedkafka.v1.IAddAclEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('addAclEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .addAclEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IAddAclEntryResponse,
+          protos.google.cloud.managedkafka.v1.IAddAclEntryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('addAclEntry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Incremental update: Removes an acl entry from an acl. Deletes the acl if
+   * its acl entries become empty (i.e. if the removed entry was the last one in
+   * the acl).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.acl
+   *   Required. The name of the acl to remove the acl entry from.
+   *   Structured like:
+   *   `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl_id}`.
+   *
+   *   The structure of `acl_id` defines the Resource Pattern (resource_type,
+   *   resource_name, pattern_type) of the acl. See `Acl.name` for
+   *   details.
+   * @param {google.cloud.managedkafka.v1.AclEntry} request.aclEntry
+   *   Required. The acl entry to remove.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.RemoveAclEntryResponse|RemoveAclEntryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka.remove_acl_entry.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafka_RemoveAclEntry_async
+   */
+  removeAclEntry(
+    request?: protos.google.cloud.managedkafka.v1.IRemoveAclEntryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IRemoveAclEntryResponse,
+      protos.google.cloud.managedkafka.v1.IRemoveAclEntryRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  removeAclEntry(
+    request: protos.google.cloud.managedkafka.v1.IRemoveAclEntryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IRemoveAclEntryResponse,
+      | protos.google.cloud.managedkafka.v1.IRemoveAclEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeAclEntry(
+    request: protos.google.cloud.managedkafka.v1.IRemoveAclEntryRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IRemoveAclEntryResponse,
+      | protos.google.cloud.managedkafka.v1.IRemoveAclEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeAclEntry(
+    request?: protos.google.cloud.managedkafka.v1.IRemoveAclEntryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IRemoveAclEntryResponse,
+          | protos.google.cloud.managedkafka.v1.IRemoveAclEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.v1.IRemoveAclEntryResponse,
+      | protos.google.cloud.managedkafka.v1.IRemoveAclEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IRemoveAclEntryResponse,
+      protos.google.cloud.managedkafka.v1.IRemoveAclEntryRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        acl: request.acl ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('removeAclEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IRemoveAclEntryResponse,
+          | protos.google.cloud.managedkafka.v1.IRemoveAclEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('removeAclEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .removeAclEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IRemoveAclEntryResponse,
+          (
+            | protos.google.cloud.managedkafka.v1.IRemoveAclEntryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('removeAclEntry response %j', response);
           return [response, options, rawResponse];
         }
       );
@@ -2805,6 +3567,244 @@ export class ManagedKafkaClient {
     ) as AsyncIterable<protos.google.cloud.managedkafka.v1.IConsumerGroup>;
   }
   /**
+   * Lists the acls in a given cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent cluster whose acls are to be listed.
+   *   Structured like
+   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of acls to return. The service may return
+   *   fewer than this value. If unset or zero, all acls for the parent is
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListAcls` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListAcls` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.managedkafka.v1.Acl|Acl}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAclsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAcls(
+    request?: protos.google.cloud.managedkafka.v1.IListAclsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IAcl[],
+      protos.google.cloud.managedkafka.v1.IListAclsRequest | null,
+      protos.google.cloud.managedkafka.v1.IListAclsResponse,
+    ]
+  >;
+  listAcls(
+    request: protos.google.cloud.managedkafka.v1.IListAclsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.managedkafka.v1.IListAclsRequest,
+      protos.google.cloud.managedkafka.v1.IListAclsResponse | null | undefined,
+      protos.google.cloud.managedkafka.v1.IAcl
+    >
+  ): void;
+  listAcls(
+    request: protos.google.cloud.managedkafka.v1.IListAclsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.managedkafka.v1.IListAclsRequest,
+      protos.google.cloud.managedkafka.v1.IListAclsResponse | null | undefined,
+      protos.google.cloud.managedkafka.v1.IAcl
+    >
+  ): void;
+  listAcls(
+    request?: protos.google.cloud.managedkafka.v1.IListAclsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.managedkafka.v1.IListAclsRequest,
+          | protos.google.cloud.managedkafka.v1.IListAclsResponse
+          | null
+          | undefined,
+          protos.google.cloud.managedkafka.v1.IAcl
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.managedkafka.v1.IListAclsRequest,
+      protos.google.cloud.managedkafka.v1.IListAclsResponse | null | undefined,
+      protos.google.cloud.managedkafka.v1.IAcl
+    >
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IAcl[],
+      protos.google.cloud.managedkafka.v1.IListAclsRequest | null,
+      protos.google.cloud.managedkafka.v1.IListAclsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.managedkafka.v1.IListAclsRequest,
+          | protos.google.cloud.managedkafka.v1.IListAclsResponse
+          | null
+          | undefined,
+          protos.google.cloud.managedkafka.v1.IAcl
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAcls values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAcls request %j', request);
+    return this.innerApiCalls
+      .listAcls(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.managedkafka.v1.IAcl[],
+          protos.google.cloud.managedkafka.v1.IListAclsRequest | null,
+          protos.google.cloud.managedkafka.v1.IListAclsResponse,
+        ]) => {
+          this._log.info('listAcls values %j', response);
+          return [response, input, output];
+        }
+      );
+  }
+
+  /**
+   * Equivalent to `listAcls`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent cluster whose acls are to be listed.
+   *   Structured like
+   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of acls to return. The service may return
+   *   fewer than this value. If unset or zero, all acls for the parent is
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListAcls` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListAcls` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.managedkafka.v1.Acl|Acl} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAclsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAclsStream(
+    request?: protos.google.cloud.managedkafka.v1.IListAclsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAcls'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAcls stream %j', request);
+    return this.descriptors.page.listAcls.createStream(
+      this.innerApiCalls.listAcls as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAcls`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent cluster whose acls are to be listed.
+   *   Structured like
+   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of acls to return. The service may return
+   *   fewer than this value. If unset or zero, all acls for the parent is
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListAcls` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListAcls` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.managedkafka.v1.Acl|Acl}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka.list_acls.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafka_ListAcls_async
+   */
+  listAclsAsync(
+    request?: protos.google.cloud.managedkafka.v1.IListAclsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.managedkafka.v1.IAcl> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAcls'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAcls iterate %j', request);
+    return this.descriptors.page.listAcls.asyncIterate(
+      this.innerApiCalls['listAcls'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.managedkafka.v1.IAcl>;
+  }
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3109,6 +4109,68 @@ export class ManagedKafkaClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified acl resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cluster
+   * @param {string} acl
+   * @returns {string} Resource name string.
+   */
+  aclPath(project: string, location: string, cluster: string, acl: string) {
+    return this.pathTemplates.aclPathTemplate.render({
+      project: project,
+      location: location,
+      cluster: cluster,
+      acl: acl,
+    });
+  }
+
+  /**
+   * Parse the project from Acl resource.
+   *
+   * @param {string} aclName
+   *   A fully-qualified path representing Acl resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAclName(aclName: string) {
+    return this.pathTemplates.aclPathTemplate.match(aclName).project;
+  }
+
+  /**
+   * Parse the location from Acl resource.
+   *
+   * @param {string} aclName
+   *   A fully-qualified path representing Acl resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAclName(aclName: string) {
+    return this.pathTemplates.aclPathTemplate.match(aclName).location;
+  }
+
+  /**
+   * Parse the cluster from Acl resource.
+   *
+   * @param {string} aclName
+   *   A fully-qualified path representing Acl resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromAclName(aclName: string) {
+    return this.pathTemplates.aclPathTemplate.match(aclName).cluster;
+  }
+
+  /**
+   * Parse the acl from Acl resource.
+   *
+   * @param {string} aclName
+   *   A fully-qualified path representing Acl resource.
+   * @returns {string} A string representing the acl.
+   */
+  matchAclFromAclName(aclName: string) {
+    return this.pathTemplates.aclPathTemplate.match(aclName).acl;
+  }
 
   /**
    * Return a fully-qualified cluster resource name string.

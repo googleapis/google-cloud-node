@@ -272,9 +272,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         throw err;
       });
       assert(client.analyticsHubServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -284,9 +289,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.analyticsHubServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -455,7 +465,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDataExchange(request), expectedError);
     });
   });
@@ -590,7 +602,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDataExchange(request), expectedError);
     });
   });
@@ -729,7 +743,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.dataExchange.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateDataExchange(request), expectedError);
     });
   });
@@ -864,7 +880,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteDataExchange(request), expectedError);
     });
   });
@@ -998,7 +1016,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getListing(request), expectedError);
     });
   });
@@ -1132,7 +1152,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createListing(request), expectedError);
     });
   });
@@ -1270,7 +1292,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.listing.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateListing(request), expectedError);
     });
   });
@@ -1404,7 +1428,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteListing(request), expectedError);
     });
   });
@@ -1538,7 +1564,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.subscribeListing(request), expectedError);
     });
   });
@@ -1672,7 +1700,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getIamPolicy(request), expectedError);
     });
   });
@@ -1806,7 +1836,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.setIamPolicy(request), expectedError);
     });
   });
@@ -1941,7 +1973,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });

@@ -29,12 +29,12 @@ function main(parent, onlineReturnPolicy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The merchant account for which to create a return policy.
+   *  Required. The merchant account for which the return policy will be created.
    *  Format: `accounts/{account}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. The return policy to create.
+   *  Required. The return policy object to create.
    */
   // const onlineReturnPolicy = {}
 

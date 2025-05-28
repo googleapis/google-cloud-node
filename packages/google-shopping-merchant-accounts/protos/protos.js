@@ -23708,256 +23708,6 @@
                             return GetOnlineReturnPolicyRequest;
                         })();
     
-                        v1beta.ListOnlineReturnPoliciesRequest = (function() {
-    
-                            /**
-                             * Properties of a ListOnlineReturnPoliciesRequest.
-                             * @memberof google.shopping.merchant.accounts.v1beta
-                             * @interface IListOnlineReturnPoliciesRequest
-                             * @property {string|null} [parent] ListOnlineReturnPoliciesRequest parent
-                             * @property {number|null} [pageSize] ListOnlineReturnPoliciesRequest pageSize
-                             * @property {string|null} [pageToken] ListOnlineReturnPoliciesRequest pageToken
-                             */
-    
-                            /**
-                             * Constructs a new ListOnlineReturnPoliciesRequest.
-                             * @memberof google.shopping.merchant.accounts.v1beta
-                             * @classdesc Represents a ListOnlineReturnPoliciesRequest.
-                             * @implements IListOnlineReturnPoliciesRequest
-                             * @constructor
-                             * @param {google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest=} [properties] Properties to set
-                             */
-                            function ListOnlineReturnPoliciesRequest(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ListOnlineReturnPoliciesRequest parent.
-                             * @member {string} parent
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @instance
-                             */
-                            ListOnlineReturnPoliciesRequest.prototype.parent = "";
-    
-                            /**
-                             * ListOnlineReturnPoliciesRequest pageSize.
-                             * @member {number} pageSize
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @instance
-                             */
-                            ListOnlineReturnPoliciesRequest.prototype.pageSize = 0;
-    
-                            /**
-                             * ListOnlineReturnPoliciesRequest pageToken.
-                             * @member {string} pageToken
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @instance
-                             */
-                            ListOnlineReturnPoliciesRequest.prototype.pageToken = "";
-    
-                            /**
-                             * Creates a new ListOnlineReturnPoliciesRequest instance using the specified properties.
-                             * @function create
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @static
-                             * @param {google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest=} [properties] Properties to set
-                             * @returns {google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest} ListOnlineReturnPoliciesRequest instance
-                             */
-                            ListOnlineReturnPoliciesRequest.create = function create(properties) {
-                                return new ListOnlineReturnPoliciesRequest(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ListOnlineReturnPoliciesRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @static
-                             * @param {google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest} message ListOnlineReturnPoliciesRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListOnlineReturnPoliciesRequest.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
-                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
-                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ListOnlineReturnPoliciesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @static
-                             * @param {google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest} message ListOnlineReturnPoliciesRequest message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ListOnlineReturnPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ListOnlineReturnPoliciesRequest message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest} ListOnlineReturnPoliciesRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListOnlineReturnPoliciesRequest.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.parent = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.pageSize = reader.int32();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.pageToken = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ListOnlineReturnPoliciesRequest message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest} ListOnlineReturnPoliciesRequest
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ListOnlineReturnPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ListOnlineReturnPoliciesRequest message.
-                             * @function verify
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ListOnlineReturnPoliciesRequest.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.parent != null && message.hasOwnProperty("parent"))
-                                    if (!$util.isString(message.parent))
-                                        return "parent: string expected";
-                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                    if (!$util.isInteger(message.pageSize))
-                                        return "pageSize: integer expected";
-                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                    if (!$util.isString(message.pageToken))
-                                        return "pageToken: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ListOnlineReturnPoliciesRequest message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest} ListOnlineReturnPoliciesRequest
-                             */
-                            ListOnlineReturnPoliciesRequest.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest)
-                                    return object;
-                                var message = new $root.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest();
-                                if (object.parent != null)
-                                    message.parent = String(object.parent);
-                                if (object.pageSize != null)
-                                    message.pageSize = object.pageSize | 0;
-                                if (object.pageToken != null)
-                                    message.pageToken = String(object.pageToken);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ListOnlineReturnPoliciesRequest message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @static
-                             * @param {google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest} message ListOnlineReturnPoliciesRequest
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ListOnlineReturnPoliciesRequest.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.parent = "";
-                                    object.pageSize = 0;
-                                    object.pageToken = "";
-                                }
-                                if (message.parent != null && message.hasOwnProperty("parent"))
-                                    object.parent = message.parent;
-                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                    object.pageSize = message.pageSize;
-                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                    object.pageToken = message.pageToken;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ListOnlineReturnPoliciesRequest to JSON.
-                             * @function toJSON
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ListOnlineReturnPoliciesRequest.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ListOnlineReturnPoliciesRequest
-                             * @function getTypeUrl
-                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ListOnlineReturnPoliciesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest";
-                            };
-    
-                            return ListOnlineReturnPoliciesRequest;
-                        })();
-    
                         v1beta.CreateOnlineReturnPolicyRequest = (function() {
     
                             /**
@@ -24628,6 +24378,256 @@
                             };
     
                             return DeleteOnlineReturnPolicyRequest;
+                        })();
+    
+                        v1beta.ListOnlineReturnPoliciesRequest = (function() {
+    
+                            /**
+                             * Properties of a ListOnlineReturnPoliciesRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IListOnlineReturnPoliciesRequest
+                             * @property {string|null} [parent] ListOnlineReturnPoliciesRequest parent
+                             * @property {number|null} [pageSize] ListOnlineReturnPoliciesRequest pageSize
+                             * @property {string|null} [pageToken] ListOnlineReturnPoliciesRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListOnlineReturnPoliciesRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a ListOnlineReturnPoliciesRequest.
+                             * @implements IListOnlineReturnPoliciesRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest=} [properties] Properties to set
+                             */
+                            function ListOnlineReturnPoliciesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListOnlineReturnPoliciesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @instance
+                             */
+                            ListOnlineReturnPoliciesRequest.prototype.parent = "";
+    
+                            /**
+                             * ListOnlineReturnPoliciesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @instance
+                             */
+                            ListOnlineReturnPoliciesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListOnlineReturnPoliciesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @instance
+                             */
+                            ListOnlineReturnPoliciesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListOnlineReturnPoliciesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest} ListOnlineReturnPoliciesRequest instance
+                             */
+                            ListOnlineReturnPoliciesRequest.create = function create(properties) {
+                                return new ListOnlineReturnPoliciesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListOnlineReturnPoliciesRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest} message ListOnlineReturnPoliciesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListOnlineReturnPoliciesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListOnlineReturnPoliciesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest} message ListOnlineReturnPoliciesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListOnlineReturnPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListOnlineReturnPoliciesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest} ListOnlineReturnPoliciesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListOnlineReturnPoliciesRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListOnlineReturnPoliciesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest} ListOnlineReturnPoliciesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListOnlineReturnPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListOnlineReturnPoliciesRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListOnlineReturnPoliciesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListOnlineReturnPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest} ListOnlineReturnPoliciesRequest
+                             */
+                            ListOnlineReturnPoliciesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListOnlineReturnPoliciesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest} message ListOnlineReturnPoliciesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListOnlineReturnPoliciesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListOnlineReturnPoliciesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListOnlineReturnPoliciesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListOnlineReturnPoliciesRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListOnlineReturnPoliciesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest";
+                            };
+    
+                            return ListOnlineReturnPoliciesRequest;
                         })();
     
                         v1beta.ListOnlineReturnPoliciesResponse = (function() {

@@ -13358,6 +13358,9 @@ export namespace google {
                     /** Document content */
                     content?: (Uint8Array|string|null);
 
+                    /** Document docid */
+                    docid?: (string|null);
+
                     /** Document mimeType */
                     mimeType?: (string|null);
 
@@ -13409,6 +13412,9 @@ export namespace google {
 
                     /** Document content. */
                     public content?: (Uint8Array|string|null);
+
+                    /** Document docid. */
+                    public docid: string;
 
                     /** Document mimeType. */
                     public mimeType: string;
@@ -17949,6 +17955,9 @@ export namespace google {
 
                             /** DocumentLayoutBlock pageSpan */
                             pageSpan?: (google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutPageSpan|null);
+
+                            /** DocumentLayoutBlock boundingBox */
+                            boundingBox?: (google.cloud.documentai.v1.IBoundingPoly|null);
                         }
 
                         /** Represents a DocumentLayoutBlock. */
@@ -17974,6 +17983,9 @@ export namespace google {
 
                             /** DocumentLayoutBlock pageSpan. */
                             public pageSpan?: (google.cloud.documentai.v1.Document.DocumentLayout.DocumentLayoutBlock.ILayoutPageSpan|null);
+
+                            /** DocumentLayoutBlock boundingBox. */
+                            public boundingBox?: (google.cloud.documentai.v1.IBoundingPoly|null);
 
                             /** DocumentLayoutBlock block. */
                             public block?: ("textBlock"|"tableBlock"|"listBlock");
