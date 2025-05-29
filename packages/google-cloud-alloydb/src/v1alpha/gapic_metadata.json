@@ -70,6 +70,16 @@
                 "updateCluster"
               ]
             },
+            "ExportCluster": {
+              "methods": [
+                "exportCluster"
+              ]
+            },
+            "ImportCluster": {
+              "methods": [
+                "importCluster"
+              ]
+            },
             "UpgradeCluster": {
               "methods": [
                 "upgradeCluster"
@@ -262,6 +272,16 @@
                 "updateCluster"
               ]
             },
+            "ExportCluster": {
+              "methods": [
+                "exportCluster"
+              ]
+            },
+            "ImportCluster": {
+              "methods": [
+                "importCluster"
+              ]
+            },
             "UpgradeCluster": {
               "methods": [
                 "upgradeCluster"
@@ -387,6 +407,30 @@
                 "listDatabases",
                 "listDatabasesStream",
                 "listDatabasesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AlloyDBCSQLAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AlloyDBCSQLAdminClient",
+          "rpcs": {
+            "RestoreFromCloudSQL": {
+              "methods": [
+                "restoreFromCloudSQL"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AlloyDBCSQLAdminClient",
+          "rpcs": {
+            "RestoreFromCloudSQL": {
+              "methods": [
+                "restoreFromCloudSQL"
               ]
             }
           }

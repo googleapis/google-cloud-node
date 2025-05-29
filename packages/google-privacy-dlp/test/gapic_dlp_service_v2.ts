@@ -254,9 +254,14 @@ describe('v2.DlpServiceClient', () => {
         throw err;
       });
       assert(client.dlpServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -265,9 +270,14 @@ describe('v2.DlpServiceClient', () => {
         projectId: 'bogus',
       });
       assert.strictEqual(client.dlpServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -430,7 +440,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.inspectContent(request), expectedError);
     });
   });
@@ -560,7 +572,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.redactImage(request), expectedError);
     });
   });
@@ -690,7 +704,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deidentifyContent(request), expectedError);
     });
   });
@@ -820,7 +836,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.reidentifyContent(request), expectedError);
     });
   });
@@ -950,7 +968,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.listInfoTypes(request), expectedError);
     });
   });
@@ -1084,7 +1104,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createInspectTemplate(request),
         expectedError
@@ -1221,7 +1243,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateInspectTemplate(request),
         expectedError
@@ -1355,7 +1379,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getInspectTemplate(request), expectedError);
     });
   });
@@ -1489,7 +1515,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteInspectTemplate(request),
         expectedError
@@ -1626,7 +1654,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createDeidentifyTemplate(request),
         expectedError
@@ -1763,7 +1793,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateDeidentifyTemplate(request),
         expectedError
@@ -1900,7 +1932,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getDeidentifyTemplate(request),
         expectedError
@@ -2037,7 +2071,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteDeidentifyTemplate(request),
         expectedError
@@ -2170,7 +2206,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createJobTrigger(request), expectedError);
     });
   });
@@ -2300,7 +2338,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateJobTrigger(request), expectedError);
     });
   });
@@ -2434,7 +2474,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.hybridInspectJobTrigger(request),
         expectedError
@@ -2567,7 +2609,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getJobTrigger(request), expectedError);
     });
   });
@@ -2697,7 +2741,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteJobTrigger(request), expectedError);
     });
   });
@@ -2828,7 +2874,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.activateJobTrigger(request), expectedError);
     });
   });
@@ -2962,7 +3010,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.createDiscoveryConfig(request),
         expectedError
@@ -3099,7 +3149,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.updateDiscoveryConfig(request),
         expectedError
@@ -3233,7 +3285,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDiscoveryConfig(request), expectedError);
     });
   });
@@ -3367,7 +3421,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteDiscoveryConfig(request),
         expectedError
@@ -3500,7 +3556,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createDlpJob(request), expectedError);
     });
   });
@@ -3627,7 +3685,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getDlpJob(request), expectedError);
     });
   });
@@ -3757,7 +3817,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteDlpJob(request), expectedError);
     });
   });
@@ -3887,7 +3949,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.cancelDlpJob(request), expectedError);
     });
   });
@@ -4018,7 +4082,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createStoredInfoType(request), expectedError);
     });
   });
@@ -4149,7 +4215,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateStoredInfoType(request), expectedError);
     });
   });
@@ -4279,7 +4347,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getStoredInfoType(request), expectedError);
     });
   });
@@ -4410,7 +4480,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteStoredInfoType(request), expectedError);
     });
   });
@@ -4544,7 +4616,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getProjectDataProfile(request),
         expectedError
@@ -4681,7 +4755,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.getFileStoreDataProfile(request),
         expectedError
@@ -4818,7 +4894,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteFileStoreDataProfile(request),
         expectedError
@@ -4952,7 +5030,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getTableDataProfile(request), expectedError);
     });
   });
@@ -5083,7 +5163,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getColumnDataProfile(request), expectedError);
     });
   });
@@ -5217,7 +5299,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(
         client.deleteTableDataProfile(request),
         expectedError
@@ -5351,7 +5435,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.hybridInspectDlpJob(request), expectedError);
     });
   });
@@ -5481,7 +5567,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.finishDlpJob(request), expectedError);
     });
   });
@@ -5611,7 +5699,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.createConnection(request), expectedError);
     });
   });
@@ -5741,7 +5831,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.getConnection(request), expectedError);
     });
   });
@@ -5871,7 +5963,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteConnection(request), expectedError);
     });
   });
@@ -6001,7 +6095,9 @@ describe('v2.DlpServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateConnection(request), expectedError);
     });
   });

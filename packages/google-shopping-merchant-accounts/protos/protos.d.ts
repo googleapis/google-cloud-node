@@ -6563,6 +6563,615 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Represents a GbpAccountsService */
+                    class GbpAccountsService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new GbpAccountsService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new GbpAccountsService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): GbpAccountsService;
+
+                        /**
+                         * Calls ListGbpAccounts.
+                         * @param request ListGbpAccountsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListGbpAccountsResponse
+                         */
+                        public listGbpAccounts(request: google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest, callback: google.shopping.merchant.accounts.v1beta.GbpAccountsService.ListGbpAccountsCallback): void;
+
+                        /**
+                         * Calls ListGbpAccounts.
+                         * @param request ListGbpAccountsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listGbpAccounts(request: google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest): Promise<google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse>;
+
+                        /**
+                         * Calls LinkGbpAccount.
+                         * @param request LinkGbpAccountRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and LinkGbpAccountResponse
+                         */
+                        public linkGbpAccount(request: google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest, callback: google.shopping.merchant.accounts.v1beta.GbpAccountsService.LinkGbpAccountCallback): void;
+
+                        /**
+                         * Calls LinkGbpAccount.
+                         * @param request LinkGbpAccountRequest message or plain object
+                         * @returns Promise
+                         */
+                        public linkGbpAccount(request: google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest): Promise<google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse>;
+                    }
+
+                    namespace GbpAccountsService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.GbpAccountsService|listGbpAccounts}.
+                         * @param error Error, if any
+                         * @param [response] ListGbpAccountsResponse
+                         */
+                        type ListGbpAccountsCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.GbpAccountsService|linkGbpAccount}.
+                         * @param error Error, if any
+                         * @param [response] LinkGbpAccountResponse
+                         */
+                        type LinkGbpAccountCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse) => void;
+                    }
+
+                    /** Properties of a GbpAccount. */
+                    interface IGbpAccount {
+
+                        /** GbpAccount name */
+                        name?: (string|null);
+
+                        /** GbpAccount gbpAccountId */
+                        gbpAccountId?: (string|null);
+
+                        /** GbpAccount type */
+                        type?: (google.shopping.merchant.accounts.v1beta.GbpAccount.Type|keyof typeof google.shopping.merchant.accounts.v1beta.GbpAccount.Type|null);
+
+                        /** GbpAccount gbpAccountName */
+                        gbpAccountName?: (string|null);
+
+                        /** GbpAccount listingCount */
+                        listingCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents a GbpAccount. */
+                    class GbpAccount implements IGbpAccount {
+
+                        /**
+                         * Constructs a new GbpAccount.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IGbpAccount);
+
+                        /** GbpAccount name. */
+                        public name: string;
+
+                        /** GbpAccount gbpAccountId. */
+                        public gbpAccountId: string;
+
+                        /** GbpAccount type. */
+                        public type: (google.shopping.merchant.accounts.v1beta.GbpAccount.Type|keyof typeof google.shopping.merchant.accounts.v1beta.GbpAccount.Type);
+
+                        /** GbpAccount gbpAccountName. */
+                        public gbpAccountName: string;
+
+                        /** GbpAccount listingCount. */
+                        public listingCount: (number|Long|string);
+
+                        /**
+                         * Creates a new GbpAccount instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GbpAccount instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IGbpAccount): google.shopping.merchant.accounts.v1beta.GbpAccount;
+
+                        /**
+                         * Encodes the specified GbpAccount message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GbpAccount.verify|verify} messages.
+                         * @param message GbpAccount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IGbpAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GbpAccount message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GbpAccount.verify|verify} messages.
+                         * @param message GbpAccount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IGbpAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GbpAccount message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GbpAccount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.GbpAccount;
+
+                        /**
+                         * Decodes a GbpAccount message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GbpAccount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.GbpAccount;
+
+                        /**
+                         * Verifies a GbpAccount message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GbpAccount message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GbpAccount
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.GbpAccount;
+
+                        /**
+                         * Creates a plain object from a GbpAccount message. Also converts values to other types if specified.
+                         * @param message GbpAccount
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.GbpAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GbpAccount to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GbpAccount
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GbpAccount {
+
+                        /** Type enum. */
+                        enum Type {
+                            TYPE_UNSPECIFIED = 0,
+                            USER = 1,
+                            BUSINESS_ACCOUNT = 2
+                        }
+                    }
+
+                    /** Properties of a ListGbpAccountsRequest. */
+                    interface IListGbpAccountsRequest {
+
+                        /** ListGbpAccountsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListGbpAccountsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListGbpAccountsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListGbpAccountsRequest. */
+                    class ListGbpAccountsRequest implements IListGbpAccountsRequest {
+
+                        /**
+                         * Constructs a new ListGbpAccountsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest);
+
+                        /** ListGbpAccountsRequest parent. */
+                        public parent: string;
+
+                        /** ListGbpAccountsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListGbpAccountsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListGbpAccountsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListGbpAccountsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest): google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest;
+
+                        /**
+                         * Encodes the specified ListGbpAccountsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest.verify|verify} messages.
+                         * @param message ListGbpAccountsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListGbpAccountsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest.verify|verify} messages.
+                         * @param message ListGbpAccountsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IListGbpAccountsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListGbpAccountsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListGbpAccountsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest;
+
+                        /**
+                         * Decodes a ListGbpAccountsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListGbpAccountsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest;
+
+                        /**
+                         * Verifies a ListGbpAccountsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListGbpAccountsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListGbpAccountsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest;
+
+                        /**
+                         * Creates a plain object from a ListGbpAccountsRequest message. Also converts values to other types if specified.
+                         * @param message ListGbpAccountsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.ListGbpAccountsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListGbpAccountsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListGbpAccountsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListGbpAccountsResponse. */
+                    interface IListGbpAccountsResponse {
+
+                        /** ListGbpAccountsResponse gbpAccounts */
+                        gbpAccounts?: (google.shopping.merchant.accounts.v1beta.IGbpAccount[]|null);
+
+                        /** ListGbpAccountsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListGbpAccountsResponse. */
+                    class ListGbpAccountsResponse implements IListGbpAccountsResponse {
+
+                        /**
+                         * Constructs a new ListGbpAccountsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse);
+
+                        /** ListGbpAccountsResponse gbpAccounts. */
+                        public gbpAccounts: google.shopping.merchant.accounts.v1beta.IGbpAccount[];
+
+                        /** ListGbpAccountsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListGbpAccountsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListGbpAccountsResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse): google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse;
+
+                        /**
+                         * Encodes the specified ListGbpAccountsResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse.verify|verify} messages.
+                         * @param message ListGbpAccountsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListGbpAccountsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse.verify|verify} messages.
+                         * @param message ListGbpAccountsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IListGbpAccountsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListGbpAccountsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListGbpAccountsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse;
+
+                        /**
+                         * Decodes a ListGbpAccountsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListGbpAccountsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse;
+
+                        /**
+                         * Verifies a ListGbpAccountsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListGbpAccountsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListGbpAccountsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse;
+
+                        /**
+                         * Creates a plain object from a ListGbpAccountsResponse message. Also converts values to other types if specified.
+                         * @param message ListGbpAccountsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.ListGbpAccountsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListGbpAccountsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListGbpAccountsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a LinkGbpAccountRequest. */
+                    interface ILinkGbpAccountRequest {
+
+                        /** LinkGbpAccountRequest parent */
+                        parent?: (string|null);
+
+                        /** LinkGbpAccountRequest gbpEmail */
+                        gbpEmail?: (string|null);
+                    }
+
+                    /** Represents a LinkGbpAccountRequest. */
+                    class LinkGbpAccountRequest implements ILinkGbpAccountRequest {
+
+                        /**
+                         * Constructs a new LinkGbpAccountRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest);
+
+                        /** LinkGbpAccountRequest parent. */
+                        public parent: string;
+
+                        /** LinkGbpAccountRequest gbpEmail. */
+                        public gbpEmail: string;
+
+                        /**
+                         * Creates a new LinkGbpAccountRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LinkGbpAccountRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest): google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest;
+
+                        /**
+                         * Encodes the specified LinkGbpAccountRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest.verify|verify} messages.
+                         * @param message LinkGbpAccountRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LinkGbpAccountRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest.verify|verify} messages.
+                         * @param message LinkGbpAccountRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.ILinkGbpAccountRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LinkGbpAccountRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LinkGbpAccountRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest;
+
+                        /**
+                         * Decodes a LinkGbpAccountRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LinkGbpAccountRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest;
+
+                        /**
+                         * Verifies a LinkGbpAccountRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LinkGbpAccountRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LinkGbpAccountRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest;
+
+                        /**
+                         * Creates a plain object from a LinkGbpAccountRequest message. Also converts values to other types if specified.
+                         * @param message LinkGbpAccountRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.LinkGbpAccountRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LinkGbpAccountRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LinkGbpAccountRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a LinkGbpAccountResponse. */
+                    interface ILinkGbpAccountResponse {
+
+                        /** LinkGbpAccountResponse response */
+                        response?: (google.protobuf.IEmpty|null);
+                    }
+
+                    /** Represents a LinkGbpAccountResponse. */
+                    class LinkGbpAccountResponse implements ILinkGbpAccountResponse {
+
+                        /**
+                         * Constructs a new LinkGbpAccountResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse);
+
+                        /** LinkGbpAccountResponse response. */
+                        public response?: (google.protobuf.IEmpty|null);
+
+                        /**
+                         * Creates a new LinkGbpAccountResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LinkGbpAccountResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse): google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse;
+
+                        /**
+                         * Encodes the specified LinkGbpAccountResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse.verify|verify} messages.
+                         * @param message LinkGbpAccountResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LinkGbpAccountResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse.verify|verify} messages.
+                         * @param message LinkGbpAccountResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.ILinkGbpAccountResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LinkGbpAccountResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LinkGbpAccountResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse;
+
+                        /**
+                         * Decodes a LinkGbpAccountResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LinkGbpAccountResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse;
+
+                        /**
+                         * Verifies a LinkGbpAccountResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LinkGbpAccountResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LinkGbpAccountResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse;
+
+                        /**
+                         * Creates a plain object from a LinkGbpAccountResponse message. Also converts values to other types if specified.
+                         * @param message LinkGbpAccountResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.LinkGbpAccountResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LinkGbpAccountResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LinkGbpAccountResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Represents a HomepageService */
                     class HomepageService extends $protobuf.rpc.Service {
 
@@ -7177,6 +7786,2339 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Represents a LfpProvidersService */
+                    class LfpProvidersService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new LfpProvidersService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new LfpProvidersService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): LfpProvidersService;
+
+                        /**
+                         * Calls FindLfpProviders.
+                         * @param request FindLfpProvidersRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and FindLfpProvidersResponse
+                         */
+                        public findLfpProviders(request: google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest, callback: google.shopping.merchant.accounts.v1beta.LfpProvidersService.FindLfpProvidersCallback): void;
+
+                        /**
+                         * Calls FindLfpProviders.
+                         * @param request FindLfpProvidersRequest message or plain object
+                         * @returns Promise
+                         */
+                        public findLfpProviders(request: google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest): Promise<google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse>;
+
+                        /**
+                         * Calls LinkLfpProvider.
+                         * @param request LinkLfpProviderRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and LinkLfpProviderResponse
+                         */
+                        public linkLfpProvider(request: google.shopping.merchant.accounts.v1beta.ILinkLfpProviderRequest, callback: google.shopping.merchant.accounts.v1beta.LfpProvidersService.LinkLfpProviderCallback): void;
+
+                        /**
+                         * Calls LinkLfpProvider.
+                         * @param request LinkLfpProviderRequest message or plain object
+                         * @returns Promise
+                         */
+                        public linkLfpProvider(request: google.shopping.merchant.accounts.v1beta.ILinkLfpProviderRequest): Promise<google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse>;
+                    }
+
+                    namespace LfpProvidersService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.LfpProvidersService|findLfpProviders}.
+                         * @param error Error, if any
+                         * @param [response] FindLfpProvidersResponse
+                         */
+                        type FindLfpProvidersCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.LfpProvidersService|linkLfpProvider}.
+                         * @param error Error, if any
+                         * @param [response] LinkLfpProviderResponse
+                         */
+                        type LinkLfpProviderCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse) => void;
+                    }
+
+                    /** Properties of a LfpProvider. */
+                    interface ILfpProvider {
+
+                        /** LfpProvider name */
+                        name?: (string|null);
+
+                        /** LfpProvider regionCode */
+                        regionCode?: (string|null);
+
+                        /** LfpProvider displayName */
+                        displayName?: (string|null);
+                    }
+
+                    /** Represents a LfpProvider. */
+                    class LfpProvider implements ILfpProvider {
+
+                        /**
+                         * Constructs a new LfpProvider.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.ILfpProvider);
+
+                        /** LfpProvider name. */
+                        public name: string;
+
+                        /** LfpProvider regionCode. */
+                        public regionCode: string;
+
+                        /** LfpProvider displayName. */
+                        public displayName: string;
+
+                        /**
+                         * Creates a new LfpProvider instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LfpProvider instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.ILfpProvider): google.shopping.merchant.accounts.v1beta.LfpProvider;
+
+                        /**
+                         * Encodes the specified LfpProvider message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LfpProvider.verify|verify} messages.
+                         * @param message LfpProvider message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.ILfpProvider, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LfpProvider message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LfpProvider.verify|verify} messages.
+                         * @param message LfpProvider message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.ILfpProvider, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LfpProvider message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LfpProvider
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.LfpProvider;
+
+                        /**
+                         * Decodes a LfpProvider message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LfpProvider
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.LfpProvider;
+
+                        /**
+                         * Verifies a LfpProvider message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LfpProvider message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LfpProvider
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.LfpProvider;
+
+                        /**
+                         * Creates a plain object from a LfpProvider message. Also converts values to other types if specified.
+                         * @param message LfpProvider
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.LfpProvider, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LfpProvider to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LfpProvider
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FindLfpProvidersRequest. */
+                    interface IFindLfpProvidersRequest {
+
+                        /** FindLfpProvidersRequest parent */
+                        parent?: (string|null);
+
+                        /** FindLfpProvidersRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** FindLfpProvidersRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a FindLfpProvidersRequest. */
+                    class FindLfpProvidersRequest implements IFindLfpProvidersRequest {
+
+                        /**
+                         * Constructs a new FindLfpProvidersRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest);
+
+                        /** FindLfpProvidersRequest parent. */
+                        public parent: string;
+
+                        /** FindLfpProvidersRequest pageSize. */
+                        public pageSize: number;
+
+                        /** FindLfpProvidersRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new FindLfpProvidersRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FindLfpProvidersRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest): google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest;
+
+                        /**
+                         * Encodes the specified FindLfpProvidersRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest.verify|verify} messages.
+                         * @param message FindLfpProvidersRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FindLfpProvidersRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest.verify|verify} messages.
+                         * @param message FindLfpProvidersRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IFindLfpProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FindLfpProvidersRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FindLfpProvidersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest;
+
+                        /**
+                         * Decodes a FindLfpProvidersRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FindLfpProvidersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest;
+
+                        /**
+                         * Verifies a FindLfpProvidersRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FindLfpProvidersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FindLfpProvidersRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest;
+
+                        /**
+                         * Creates a plain object from a FindLfpProvidersRequest message. Also converts values to other types if specified.
+                         * @param message FindLfpProvidersRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.FindLfpProvidersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FindLfpProvidersRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FindLfpProvidersRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FindLfpProvidersResponse. */
+                    interface IFindLfpProvidersResponse {
+
+                        /** FindLfpProvidersResponse lfpProviders */
+                        lfpProviders?: (google.shopping.merchant.accounts.v1beta.ILfpProvider[]|null);
+
+                        /** FindLfpProvidersResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a FindLfpProvidersResponse. */
+                    class FindLfpProvidersResponse implements IFindLfpProvidersResponse {
+
+                        /**
+                         * Constructs a new FindLfpProvidersResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IFindLfpProvidersResponse);
+
+                        /** FindLfpProvidersResponse lfpProviders. */
+                        public lfpProviders: google.shopping.merchant.accounts.v1beta.ILfpProvider[];
+
+                        /** FindLfpProvidersResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new FindLfpProvidersResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FindLfpProvidersResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IFindLfpProvidersResponse): google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse;
+
+                        /**
+                         * Encodes the specified FindLfpProvidersResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse.verify|verify} messages.
+                         * @param message FindLfpProvidersResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IFindLfpProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FindLfpProvidersResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse.verify|verify} messages.
+                         * @param message FindLfpProvidersResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IFindLfpProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FindLfpProvidersResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FindLfpProvidersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse;
+
+                        /**
+                         * Decodes a FindLfpProvidersResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FindLfpProvidersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse;
+
+                        /**
+                         * Verifies a FindLfpProvidersResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FindLfpProvidersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FindLfpProvidersResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse;
+
+                        /**
+                         * Creates a plain object from a FindLfpProvidersResponse message. Also converts values to other types if specified.
+                         * @param message FindLfpProvidersResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.FindLfpProvidersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FindLfpProvidersResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FindLfpProvidersResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a LinkLfpProviderRequest. */
+                    interface ILinkLfpProviderRequest {
+
+                        /** LinkLfpProviderRequest name */
+                        name?: (string|null);
+
+                        /** LinkLfpProviderRequest externalAccountId */
+                        externalAccountId?: (string|null);
+                    }
+
+                    /** Represents a LinkLfpProviderRequest. */
+                    class LinkLfpProviderRequest implements ILinkLfpProviderRequest {
+
+                        /**
+                         * Constructs a new LinkLfpProviderRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.ILinkLfpProviderRequest);
+
+                        /** LinkLfpProviderRequest name. */
+                        public name: string;
+
+                        /** LinkLfpProviderRequest externalAccountId. */
+                        public externalAccountId: string;
+
+                        /**
+                         * Creates a new LinkLfpProviderRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LinkLfpProviderRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.ILinkLfpProviderRequest): google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest;
+
+                        /**
+                         * Encodes the specified LinkLfpProviderRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest.verify|verify} messages.
+                         * @param message LinkLfpProviderRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.ILinkLfpProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LinkLfpProviderRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest.verify|verify} messages.
+                         * @param message LinkLfpProviderRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.ILinkLfpProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LinkLfpProviderRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LinkLfpProviderRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest;
+
+                        /**
+                         * Decodes a LinkLfpProviderRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LinkLfpProviderRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest;
+
+                        /**
+                         * Verifies a LinkLfpProviderRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LinkLfpProviderRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LinkLfpProviderRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest;
+
+                        /**
+                         * Creates a plain object from a LinkLfpProviderRequest message. Also converts values to other types if specified.
+                         * @param message LinkLfpProviderRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.LinkLfpProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LinkLfpProviderRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LinkLfpProviderRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a LinkLfpProviderResponse. */
+                    interface ILinkLfpProviderResponse {
+
+                        /** LinkLfpProviderResponse response */
+                        response?: (google.protobuf.IEmpty|null);
+                    }
+
+                    /** Represents a LinkLfpProviderResponse. */
+                    class LinkLfpProviderResponse implements ILinkLfpProviderResponse {
+
+                        /**
+                         * Constructs a new LinkLfpProviderResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.ILinkLfpProviderResponse);
+
+                        /** LinkLfpProviderResponse response. */
+                        public response?: (google.protobuf.IEmpty|null);
+
+                        /**
+                         * Creates a new LinkLfpProviderResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LinkLfpProviderResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.ILinkLfpProviderResponse): google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse;
+
+                        /**
+                         * Encodes the specified LinkLfpProviderResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse.verify|verify} messages.
+                         * @param message LinkLfpProviderResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.ILinkLfpProviderResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LinkLfpProviderResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse.verify|verify} messages.
+                         * @param message LinkLfpProviderResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.ILinkLfpProviderResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LinkLfpProviderResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LinkLfpProviderResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse;
+
+                        /**
+                         * Decodes a LinkLfpProviderResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LinkLfpProviderResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse;
+
+                        /**
+                         * Verifies a LinkLfpProviderResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LinkLfpProviderResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LinkLfpProviderResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse;
+
+                        /**
+                         * Creates a plain object from a LinkLfpProviderResponse message. Also converts values to other types if specified.
+                         * @param message LinkLfpProviderResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.LinkLfpProviderResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LinkLfpProviderResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LinkLfpProviderResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Represents an OmnichannelSettingsService */
+                    class OmnichannelSettingsService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new OmnichannelSettingsService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new OmnichannelSettingsService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): OmnichannelSettingsService;
+
+                        /**
+                         * Calls GetOmnichannelSetting.
+                         * @param request GetOmnichannelSettingRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and OmnichannelSetting
+                         */
+                        public getOmnichannelSetting(request: google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest, callback: google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService.GetOmnichannelSettingCallback): void;
+
+                        /**
+                         * Calls GetOmnichannelSetting.
+                         * @param request GetOmnichannelSettingRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getOmnichannelSetting(request: google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest): Promise<google.shopping.merchant.accounts.v1beta.OmnichannelSetting>;
+
+                        /**
+                         * Calls ListOmnichannelSettings.
+                         * @param request ListOmnichannelSettingsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListOmnichannelSettingsResponse
+                         */
+                        public listOmnichannelSettings(request: google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest, callback: google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService.ListOmnichannelSettingsCallback): void;
+
+                        /**
+                         * Calls ListOmnichannelSettings.
+                         * @param request ListOmnichannelSettingsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listOmnichannelSettings(request: google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest): Promise<google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse>;
+
+                        /**
+                         * Calls CreateOmnichannelSetting.
+                         * @param request CreateOmnichannelSettingRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and OmnichannelSetting
+                         */
+                        public createOmnichannelSetting(request: google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest, callback: google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService.CreateOmnichannelSettingCallback): void;
+
+                        /**
+                         * Calls CreateOmnichannelSetting.
+                         * @param request CreateOmnichannelSettingRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createOmnichannelSetting(request: google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest): Promise<google.shopping.merchant.accounts.v1beta.OmnichannelSetting>;
+
+                        /**
+                         * Calls UpdateOmnichannelSetting.
+                         * @param request UpdateOmnichannelSettingRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and OmnichannelSetting
+                         */
+                        public updateOmnichannelSetting(request: google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest, callback: google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService.UpdateOmnichannelSettingCallback): void;
+
+                        /**
+                         * Calls UpdateOmnichannelSetting.
+                         * @param request UpdateOmnichannelSettingRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateOmnichannelSetting(request: google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest): Promise<google.shopping.merchant.accounts.v1beta.OmnichannelSetting>;
+
+                        /**
+                         * Calls RequestInventoryVerification.
+                         * @param request RequestInventoryVerificationRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and RequestInventoryVerificationResponse
+                         */
+                        public requestInventoryVerification(request: google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest, callback: google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService.RequestInventoryVerificationCallback): void;
+
+                        /**
+                         * Calls RequestInventoryVerification.
+                         * @param request RequestInventoryVerificationRequest message or plain object
+                         * @returns Promise
+                         */
+                        public requestInventoryVerification(request: google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest): Promise<google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse>;
+                    }
+
+                    namespace OmnichannelSettingsService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService|getOmnichannelSetting}.
+                         * @param error Error, if any
+                         * @param [response] OmnichannelSetting
+                         */
+                        type GetOmnichannelSettingCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.OmnichannelSetting) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService|listOmnichannelSettings}.
+                         * @param error Error, if any
+                         * @param [response] ListOmnichannelSettingsResponse
+                         */
+                        type ListOmnichannelSettingsCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService|createOmnichannelSetting}.
+                         * @param error Error, if any
+                         * @param [response] OmnichannelSetting
+                         */
+                        type CreateOmnichannelSettingCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.OmnichannelSetting) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService|updateOmnichannelSetting}.
+                         * @param error Error, if any
+                         * @param [response] OmnichannelSetting
+                         */
+                        type UpdateOmnichannelSettingCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.OmnichannelSetting) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OmnichannelSettingsService|requestInventoryVerification}.
+                         * @param error Error, if any
+                         * @param [response] RequestInventoryVerificationResponse
+                         */
+                        type RequestInventoryVerificationCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse) => void;
+                    }
+
+                    /** Properties of an OmnichannelSetting. */
+                    interface IOmnichannelSetting {
+
+                        /** OmnichannelSetting name */
+                        name?: (string|null);
+
+                        /** OmnichannelSetting regionCode */
+                        regionCode?: (string|null);
+
+                        /** OmnichannelSetting lsfType */
+                        lsfType?: (google.shopping.merchant.accounts.v1beta.OmnichannelSetting.LsfType|keyof typeof google.shopping.merchant.accounts.v1beta.OmnichannelSetting.LsfType|null);
+
+                        /** OmnichannelSetting inStock */
+                        inStock?: (google.shopping.merchant.accounts.v1beta.IInStock|null);
+
+                        /** OmnichannelSetting pickup */
+                        pickup?: (google.shopping.merchant.accounts.v1beta.IPickup|null);
+
+                        /** OmnichannelSetting lfpLink */
+                        lfpLink?: (google.shopping.merchant.accounts.v1beta.ILfpLink|null);
+
+                        /** OmnichannelSetting odo */
+                        odo?: (google.shopping.merchant.accounts.v1beta.IOnDisplayToOrder|null);
+
+                        /** OmnichannelSetting about */
+                        about?: (google.shopping.merchant.accounts.v1beta.IAbout|null);
+
+                        /** OmnichannelSetting inventoryVerification */
+                        inventoryVerification?: (google.shopping.merchant.accounts.v1beta.IInventoryVerification|null);
+                    }
+
+                    /** Represents an OmnichannelSetting. */
+                    class OmnichannelSetting implements IOmnichannelSetting {
+
+                        /**
+                         * Constructs a new OmnichannelSetting.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IOmnichannelSetting);
+
+                        /** OmnichannelSetting name. */
+                        public name: string;
+
+                        /** OmnichannelSetting regionCode. */
+                        public regionCode: string;
+
+                        /** OmnichannelSetting lsfType. */
+                        public lsfType: (google.shopping.merchant.accounts.v1beta.OmnichannelSetting.LsfType|keyof typeof google.shopping.merchant.accounts.v1beta.OmnichannelSetting.LsfType);
+
+                        /** OmnichannelSetting inStock. */
+                        public inStock?: (google.shopping.merchant.accounts.v1beta.IInStock|null);
+
+                        /** OmnichannelSetting pickup. */
+                        public pickup?: (google.shopping.merchant.accounts.v1beta.IPickup|null);
+
+                        /** OmnichannelSetting lfpLink. */
+                        public lfpLink?: (google.shopping.merchant.accounts.v1beta.ILfpLink|null);
+
+                        /** OmnichannelSetting odo. */
+                        public odo?: (google.shopping.merchant.accounts.v1beta.IOnDisplayToOrder|null);
+
+                        /** OmnichannelSetting about. */
+                        public about?: (google.shopping.merchant.accounts.v1beta.IAbout|null);
+
+                        /** OmnichannelSetting inventoryVerification. */
+                        public inventoryVerification?: (google.shopping.merchant.accounts.v1beta.IInventoryVerification|null);
+
+                        /**
+                         * Creates a new OmnichannelSetting instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OmnichannelSetting instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IOmnichannelSetting): google.shopping.merchant.accounts.v1beta.OmnichannelSetting;
+
+                        /**
+                         * Encodes the specified OmnichannelSetting message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.OmnichannelSetting.verify|verify} messages.
+                         * @param message OmnichannelSetting message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IOmnichannelSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OmnichannelSetting message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.OmnichannelSetting.verify|verify} messages.
+                         * @param message OmnichannelSetting message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IOmnichannelSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OmnichannelSetting message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OmnichannelSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.OmnichannelSetting;
+
+                        /**
+                         * Decodes an OmnichannelSetting message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OmnichannelSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.OmnichannelSetting;
+
+                        /**
+                         * Verifies an OmnichannelSetting message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OmnichannelSetting message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OmnichannelSetting
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.OmnichannelSetting;
+
+                        /**
+                         * Creates a plain object from an OmnichannelSetting message. Also converts values to other types if specified.
+                         * @param message OmnichannelSetting
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.OmnichannelSetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OmnichannelSetting to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OmnichannelSetting
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace OmnichannelSetting {
+
+                        /** LsfType enum. */
+                        enum LsfType {
+                            LSF_TYPE_UNSPECIFIED = 0,
+                            GHLSF = 1,
+                            MHLSF_BASIC = 2,
+                            MHLSF_FULL = 3
+                        }
+                    }
+
+                    /** Properties of a ReviewState. */
+                    interface IReviewState {
+                    }
+
+                    /** Represents a ReviewState. */
+                    class ReviewState implements IReviewState {
+
+                        /**
+                         * Constructs a new ReviewState.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IReviewState);
+
+                        /**
+                         * Creates a new ReviewState instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ReviewState instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IReviewState): google.shopping.merchant.accounts.v1beta.ReviewState;
+
+                        /**
+                         * Encodes the specified ReviewState message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ReviewState.verify|verify} messages.
+                         * @param message ReviewState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IReviewState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ReviewState message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ReviewState.verify|verify} messages.
+                         * @param message ReviewState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IReviewState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ReviewState message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ReviewState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.ReviewState;
+
+                        /**
+                         * Decodes a ReviewState message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ReviewState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.ReviewState;
+
+                        /**
+                         * Verifies a ReviewState message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ReviewState message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ReviewState
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.ReviewState;
+
+                        /**
+                         * Creates a plain object from a ReviewState message. Also converts values to other types if specified.
+                         * @param message ReviewState
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.ReviewState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ReviewState to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ReviewState
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ReviewState {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ACTIVE = 1,
+                            FAILED = 2,
+                            RUNNING = 3,
+                            ACTION_REQUIRED = 4
+                        }
+                    }
+
+                    /** Properties of an InStock. */
+                    interface IInStock {
+
+                        /** InStock uri */
+                        uri?: (string|null);
+
+                        /** InStock state */
+                        state?: (google.shopping.merchant.accounts.v1beta.ReviewState.State|keyof typeof google.shopping.merchant.accounts.v1beta.ReviewState.State|null);
+                    }
+
+                    /** Represents an InStock. */
+                    class InStock implements IInStock {
+
+                        /**
+                         * Constructs a new InStock.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IInStock);
+
+                        /** InStock uri. */
+                        public uri: string;
+
+                        /** InStock state. */
+                        public state: (google.shopping.merchant.accounts.v1beta.ReviewState.State|keyof typeof google.shopping.merchant.accounts.v1beta.ReviewState.State);
+
+                        /**
+                         * Creates a new InStock instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InStock instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IInStock): google.shopping.merchant.accounts.v1beta.InStock;
+
+                        /**
+                         * Encodes the specified InStock message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.InStock.verify|verify} messages.
+                         * @param message InStock message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IInStock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InStock message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.InStock.verify|verify} messages.
+                         * @param message InStock message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IInStock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InStock message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InStock
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.InStock;
+
+                        /**
+                         * Decodes an InStock message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InStock
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.InStock;
+
+                        /**
+                         * Verifies an InStock message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InStock message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InStock
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.InStock;
+
+                        /**
+                         * Creates a plain object from an InStock message. Also converts values to other types if specified.
+                         * @param message InStock
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.InStock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InStock to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InStock
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Pickup. */
+                    interface IPickup {
+
+                        /** Pickup uri */
+                        uri?: (string|null);
+
+                        /** Pickup state */
+                        state?: (google.shopping.merchant.accounts.v1beta.ReviewState.State|keyof typeof google.shopping.merchant.accounts.v1beta.ReviewState.State|null);
+                    }
+
+                    /** Represents a Pickup. */
+                    class Pickup implements IPickup {
+
+                        /**
+                         * Constructs a new Pickup.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IPickup);
+
+                        /** Pickup uri. */
+                        public uri: string;
+
+                        /** Pickup state. */
+                        public state: (google.shopping.merchant.accounts.v1beta.ReviewState.State|keyof typeof google.shopping.merchant.accounts.v1beta.ReviewState.State);
+
+                        /**
+                         * Creates a new Pickup instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Pickup instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IPickup): google.shopping.merchant.accounts.v1beta.Pickup;
+
+                        /**
+                         * Encodes the specified Pickup message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.Pickup.verify|verify} messages.
+                         * @param message Pickup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IPickup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Pickup message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.Pickup.verify|verify} messages.
+                         * @param message Pickup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IPickup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Pickup message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Pickup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.Pickup;
+
+                        /**
+                         * Decodes a Pickup message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Pickup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.Pickup;
+
+                        /**
+                         * Verifies a Pickup message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Pickup message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Pickup
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.Pickup;
+
+                        /**
+                         * Creates a plain object from a Pickup message. Also converts values to other types if specified.
+                         * @param message Pickup
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.Pickup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Pickup to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Pickup
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a LfpLink. */
+                    interface ILfpLink {
+
+                        /** LfpLink lfpProvider */
+                        lfpProvider?: (string|null);
+
+                        /** LfpLink externalAccountId */
+                        externalAccountId?: (string|null);
+
+                        /** LfpLink state */
+                        state?: (google.shopping.merchant.accounts.v1beta.ReviewState.State|keyof typeof google.shopping.merchant.accounts.v1beta.ReviewState.State|null);
+                    }
+
+                    /** Represents a LfpLink. */
+                    class LfpLink implements ILfpLink {
+
+                        /**
+                         * Constructs a new LfpLink.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.ILfpLink);
+
+                        /** LfpLink lfpProvider. */
+                        public lfpProvider: string;
+
+                        /** LfpLink externalAccountId. */
+                        public externalAccountId: string;
+
+                        /** LfpLink state. */
+                        public state: (google.shopping.merchant.accounts.v1beta.ReviewState.State|keyof typeof google.shopping.merchant.accounts.v1beta.ReviewState.State);
+
+                        /**
+                         * Creates a new LfpLink instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LfpLink instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.ILfpLink): google.shopping.merchant.accounts.v1beta.LfpLink;
+
+                        /**
+                         * Encodes the specified LfpLink message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LfpLink.verify|verify} messages.
+                         * @param message LfpLink message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.ILfpLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LfpLink message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.LfpLink.verify|verify} messages.
+                         * @param message LfpLink message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.ILfpLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LfpLink message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LfpLink
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.LfpLink;
+
+                        /**
+                         * Decodes a LfpLink message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LfpLink
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.LfpLink;
+
+                        /**
+                         * Verifies a LfpLink message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LfpLink message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LfpLink
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.LfpLink;
+
+                        /**
+                         * Creates a plain object from a LfpLink message. Also converts values to other types if specified.
+                         * @param message LfpLink
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.LfpLink, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LfpLink to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LfpLink
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an OnDisplayToOrder. */
+                    interface IOnDisplayToOrder {
+
+                        /** OnDisplayToOrder uri */
+                        uri?: (string|null);
+
+                        /** OnDisplayToOrder state */
+                        state?: (google.shopping.merchant.accounts.v1beta.ReviewState.State|keyof typeof google.shopping.merchant.accounts.v1beta.ReviewState.State|null);
+                    }
+
+                    /** Represents an OnDisplayToOrder. */
+                    class OnDisplayToOrder implements IOnDisplayToOrder {
+
+                        /**
+                         * Constructs a new OnDisplayToOrder.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IOnDisplayToOrder);
+
+                        /** OnDisplayToOrder uri. */
+                        public uri: string;
+
+                        /** OnDisplayToOrder state. */
+                        public state: (google.shopping.merchant.accounts.v1beta.ReviewState.State|keyof typeof google.shopping.merchant.accounts.v1beta.ReviewState.State);
+
+                        /**
+                         * Creates a new OnDisplayToOrder instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OnDisplayToOrder instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IOnDisplayToOrder): google.shopping.merchant.accounts.v1beta.OnDisplayToOrder;
+
+                        /**
+                         * Encodes the specified OnDisplayToOrder message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.OnDisplayToOrder.verify|verify} messages.
+                         * @param message OnDisplayToOrder message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IOnDisplayToOrder, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OnDisplayToOrder message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.OnDisplayToOrder.verify|verify} messages.
+                         * @param message OnDisplayToOrder message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IOnDisplayToOrder, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OnDisplayToOrder message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OnDisplayToOrder
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.OnDisplayToOrder;
+
+                        /**
+                         * Decodes an OnDisplayToOrder message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OnDisplayToOrder
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.OnDisplayToOrder;
+
+                        /**
+                         * Verifies an OnDisplayToOrder message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OnDisplayToOrder message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OnDisplayToOrder
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.OnDisplayToOrder;
+
+                        /**
+                         * Creates a plain object from an OnDisplayToOrder message. Also converts values to other types if specified.
+                         * @param message OnDisplayToOrder
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.OnDisplayToOrder, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OnDisplayToOrder to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OnDisplayToOrder
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an About. */
+                    interface IAbout {
+
+                        /** About uri */
+                        uri?: (string|null);
+
+                        /** About state */
+                        state?: (google.shopping.merchant.accounts.v1beta.ReviewState.State|keyof typeof google.shopping.merchant.accounts.v1beta.ReviewState.State|null);
+                    }
+
+                    /** Represents an About. */
+                    class About implements IAbout {
+
+                        /**
+                         * Constructs a new About.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IAbout);
+
+                        /** About uri. */
+                        public uri: string;
+
+                        /** About state. */
+                        public state: (google.shopping.merchant.accounts.v1beta.ReviewState.State|keyof typeof google.shopping.merchant.accounts.v1beta.ReviewState.State);
+
+                        /**
+                         * Creates a new About instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns About instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IAbout): google.shopping.merchant.accounts.v1beta.About;
+
+                        /**
+                         * Encodes the specified About message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.About.verify|verify} messages.
+                         * @param message About message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IAbout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified About message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.About.verify|verify} messages.
+                         * @param message About message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IAbout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an About message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns About
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.About;
+
+                        /**
+                         * Decodes an About message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns About
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.About;
+
+                        /**
+                         * Verifies an About message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an About message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns About
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.About;
+
+                        /**
+                         * Creates a plain object from an About message. Also converts values to other types if specified.
+                         * @param message About
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.About, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this About to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for About
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InventoryVerification. */
+                    interface IInventoryVerification {
+
+                        /** InventoryVerification state */
+                        state?: (google.shopping.merchant.accounts.v1beta.InventoryVerification.State|keyof typeof google.shopping.merchant.accounts.v1beta.InventoryVerification.State|null);
+
+                        /** InventoryVerification contact */
+                        contact?: (string|null);
+
+                        /** InventoryVerification contactEmail */
+                        contactEmail?: (string|null);
+
+                        /** InventoryVerification contactState */
+                        contactState?: (google.shopping.merchant.accounts.v1beta.ReviewState.State|keyof typeof google.shopping.merchant.accounts.v1beta.ReviewState.State|null);
+                    }
+
+                    /** Represents an InventoryVerification. */
+                    class InventoryVerification implements IInventoryVerification {
+
+                        /**
+                         * Constructs a new InventoryVerification.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IInventoryVerification);
+
+                        /** InventoryVerification state. */
+                        public state: (google.shopping.merchant.accounts.v1beta.InventoryVerification.State|keyof typeof google.shopping.merchant.accounts.v1beta.InventoryVerification.State);
+
+                        /** InventoryVerification contact. */
+                        public contact: string;
+
+                        /** InventoryVerification contactEmail. */
+                        public contactEmail: string;
+
+                        /** InventoryVerification contactState. */
+                        public contactState: (google.shopping.merchant.accounts.v1beta.ReviewState.State|keyof typeof google.shopping.merchant.accounts.v1beta.ReviewState.State);
+
+                        /**
+                         * Creates a new InventoryVerification instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InventoryVerification instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IInventoryVerification): google.shopping.merchant.accounts.v1beta.InventoryVerification;
+
+                        /**
+                         * Encodes the specified InventoryVerification message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.InventoryVerification.verify|verify} messages.
+                         * @param message InventoryVerification message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IInventoryVerification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InventoryVerification message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.InventoryVerification.verify|verify} messages.
+                         * @param message InventoryVerification message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IInventoryVerification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InventoryVerification message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InventoryVerification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.InventoryVerification;
+
+                        /**
+                         * Decodes an InventoryVerification message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InventoryVerification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.InventoryVerification;
+
+                        /**
+                         * Verifies an InventoryVerification message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InventoryVerification message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InventoryVerification
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.InventoryVerification;
+
+                        /**
+                         * Creates a plain object from an InventoryVerification message. Also converts values to other types if specified.
+                         * @param message InventoryVerification
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.InventoryVerification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InventoryVerification to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InventoryVerification
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace InventoryVerification {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ACTION_REQUIRED = 1,
+                            INACTIVE = 5,
+                            RUNNING = 2,
+                            SUCCEEDED = 3,
+                            SUSPENDED = 4
+                        }
+                    }
+
+                    /** Properties of a GetOmnichannelSettingRequest. */
+                    interface IGetOmnichannelSettingRequest {
+
+                        /** GetOmnichannelSettingRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetOmnichannelSettingRequest. */
+                    class GetOmnichannelSettingRequest implements IGetOmnichannelSettingRequest {
+
+                        /**
+                         * Constructs a new GetOmnichannelSettingRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest);
+
+                        /** GetOmnichannelSettingRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetOmnichannelSettingRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetOmnichannelSettingRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest): google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest;
+
+                        /**
+                         * Encodes the specified GetOmnichannelSettingRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest.verify|verify} messages.
+                         * @param message GetOmnichannelSettingRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetOmnichannelSettingRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest.verify|verify} messages.
+                         * @param message GetOmnichannelSettingRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IGetOmnichannelSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetOmnichannelSettingRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetOmnichannelSettingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest;
+
+                        /**
+                         * Decodes a GetOmnichannelSettingRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetOmnichannelSettingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest;
+
+                        /**
+                         * Verifies a GetOmnichannelSettingRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetOmnichannelSettingRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetOmnichannelSettingRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest;
+
+                        /**
+                         * Creates a plain object from a GetOmnichannelSettingRequest message. Also converts values to other types if specified.
+                         * @param message GetOmnichannelSettingRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.GetOmnichannelSettingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetOmnichannelSettingRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetOmnichannelSettingRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListOmnichannelSettingsRequest. */
+                    interface IListOmnichannelSettingsRequest {
+
+                        /** ListOmnichannelSettingsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListOmnichannelSettingsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListOmnichannelSettingsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListOmnichannelSettingsRequest. */
+                    class ListOmnichannelSettingsRequest implements IListOmnichannelSettingsRequest {
+
+                        /**
+                         * Constructs a new ListOmnichannelSettingsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest);
+
+                        /** ListOmnichannelSettingsRequest parent. */
+                        public parent: string;
+
+                        /** ListOmnichannelSettingsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListOmnichannelSettingsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListOmnichannelSettingsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListOmnichannelSettingsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest): google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest;
+
+                        /**
+                         * Encodes the specified ListOmnichannelSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest.verify|verify} messages.
+                         * @param message ListOmnichannelSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListOmnichannelSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest.verify|verify} messages.
+                         * @param message ListOmnichannelSettingsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListOmnichannelSettingsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListOmnichannelSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest;
+
+                        /**
+                         * Decodes a ListOmnichannelSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListOmnichannelSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest;
+
+                        /**
+                         * Verifies a ListOmnichannelSettingsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListOmnichannelSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListOmnichannelSettingsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest;
+
+                        /**
+                         * Creates a plain object from a ListOmnichannelSettingsRequest message. Also converts values to other types if specified.
+                         * @param message ListOmnichannelSettingsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListOmnichannelSettingsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListOmnichannelSettingsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListOmnichannelSettingsResponse. */
+                    interface IListOmnichannelSettingsResponse {
+
+                        /** ListOmnichannelSettingsResponse omnichannelSettings */
+                        omnichannelSettings?: (google.shopping.merchant.accounts.v1beta.IOmnichannelSetting[]|null);
+
+                        /** ListOmnichannelSettingsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListOmnichannelSettingsResponse. */
+                    class ListOmnichannelSettingsResponse implements IListOmnichannelSettingsResponse {
+
+                        /**
+                         * Constructs a new ListOmnichannelSettingsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse);
+
+                        /** ListOmnichannelSettingsResponse omnichannelSettings. */
+                        public omnichannelSettings: google.shopping.merchant.accounts.v1beta.IOmnichannelSetting[];
+
+                        /** ListOmnichannelSettingsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListOmnichannelSettingsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListOmnichannelSettingsResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse): google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse;
+
+                        /**
+                         * Encodes the specified ListOmnichannelSettingsResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse.verify|verify} messages.
+                         * @param message ListOmnichannelSettingsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListOmnichannelSettingsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse.verify|verify} messages.
+                         * @param message ListOmnichannelSettingsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IListOmnichannelSettingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListOmnichannelSettingsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListOmnichannelSettingsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse;
+
+                        /**
+                         * Decodes a ListOmnichannelSettingsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListOmnichannelSettingsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse;
+
+                        /**
+                         * Verifies a ListOmnichannelSettingsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListOmnichannelSettingsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListOmnichannelSettingsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse;
+
+                        /**
+                         * Creates a plain object from a ListOmnichannelSettingsResponse message. Also converts values to other types if specified.
+                         * @param message ListOmnichannelSettingsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.ListOmnichannelSettingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListOmnichannelSettingsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListOmnichannelSettingsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CreateOmnichannelSettingRequest. */
+                    interface ICreateOmnichannelSettingRequest {
+
+                        /** CreateOmnichannelSettingRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateOmnichannelSettingRequest omnichannelSetting */
+                        omnichannelSetting?: (google.shopping.merchant.accounts.v1beta.IOmnichannelSetting|null);
+                    }
+
+                    /** Represents a CreateOmnichannelSettingRequest. */
+                    class CreateOmnichannelSettingRequest implements ICreateOmnichannelSettingRequest {
+
+                        /**
+                         * Constructs a new CreateOmnichannelSettingRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest);
+
+                        /** CreateOmnichannelSettingRequest parent. */
+                        public parent: string;
+
+                        /** CreateOmnichannelSettingRequest omnichannelSetting. */
+                        public omnichannelSetting?: (google.shopping.merchant.accounts.v1beta.IOmnichannelSetting|null);
+
+                        /**
+                         * Creates a new CreateOmnichannelSettingRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateOmnichannelSettingRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest): google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest;
+
+                        /**
+                         * Encodes the specified CreateOmnichannelSettingRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest.verify|verify} messages.
+                         * @param message CreateOmnichannelSettingRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateOmnichannelSettingRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest.verify|verify} messages.
+                         * @param message CreateOmnichannelSettingRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.ICreateOmnichannelSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateOmnichannelSettingRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateOmnichannelSettingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest;
+
+                        /**
+                         * Decodes a CreateOmnichannelSettingRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateOmnichannelSettingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest;
+
+                        /**
+                         * Verifies a CreateOmnichannelSettingRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateOmnichannelSettingRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateOmnichannelSettingRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest;
+
+                        /**
+                         * Creates a plain object from a CreateOmnichannelSettingRequest message. Also converts values to other types if specified.
+                         * @param message CreateOmnichannelSettingRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.CreateOmnichannelSettingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateOmnichannelSettingRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateOmnichannelSettingRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateOmnichannelSettingRequest. */
+                    interface IUpdateOmnichannelSettingRequest {
+
+                        /** UpdateOmnichannelSettingRequest omnichannelSetting */
+                        omnichannelSetting?: (google.shopping.merchant.accounts.v1beta.IOmnichannelSetting|null);
+
+                        /** UpdateOmnichannelSettingRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateOmnichannelSettingRequest. */
+                    class UpdateOmnichannelSettingRequest implements IUpdateOmnichannelSettingRequest {
+
+                        /**
+                         * Constructs a new UpdateOmnichannelSettingRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest);
+
+                        /** UpdateOmnichannelSettingRequest omnichannelSetting. */
+                        public omnichannelSetting?: (google.shopping.merchant.accounts.v1beta.IOmnichannelSetting|null);
+
+                        /** UpdateOmnichannelSettingRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateOmnichannelSettingRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateOmnichannelSettingRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest): google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest;
+
+                        /**
+                         * Encodes the specified UpdateOmnichannelSettingRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest.verify|verify} messages.
+                         * @param message UpdateOmnichannelSettingRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateOmnichannelSettingRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest.verify|verify} messages.
+                         * @param message UpdateOmnichannelSettingRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IUpdateOmnichannelSettingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateOmnichannelSettingRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateOmnichannelSettingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest;
+
+                        /**
+                         * Decodes an UpdateOmnichannelSettingRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateOmnichannelSettingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest;
+
+                        /**
+                         * Verifies an UpdateOmnichannelSettingRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateOmnichannelSettingRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateOmnichannelSettingRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateOmnichannelSettingRequest message. Also converts values to other types if specified.
+                         * @param message UpdateOmnichannelSettingRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.UpdateOmnichannelSettingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateOmnichannelSettingRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateOmnichannelSettingRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RequestInventoryVerificationRequest. */
+                    interface IRequestInventoryVerificationRequest {
+
+                        /** RequestInventoryVerificationRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a RequestInventoryVerificationRequest. */
+                    class RequestInventoryVerificationRequest implements IRequestInventoryVerificationRequest {
+
+                        /**
+                         * Constructs a new RequestInventoryVerificationRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest);
+
+                        /** RequestInventoryVerificationRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new RequestInventoryVerificationRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RequestInventoryVerificationRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest): google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest;
+
+                        /**
+                         * Encodes the specified RequestInventoryVerificationRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest.verify|verify} messages.
+                         * @param message RequestInventoryVerificationRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RequestInventoryVerificationRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest.verify|verify} messages.
+                         * @param message RequestInventoryVerificationRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RequestInventoryVerificationRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RequestInventoryVerificationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest;
+
+                        /**
+                         * Decodes a RequestInventoryVerificationRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RequestInventoryVerificationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest;
+
+                        /**
+                         * Verifies a RequestInventoryVerificationRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RequestInventoryVerificationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RequestInventoryVerificationRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest;
+
+                        /**
+                         * Creates a plain object from a RequestInventoryVerificationRequest message. Also converts values to other types if specified.
+                         * @param message RequestInventoryVerificationRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RequestInventoryVerificationRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RequestInventoryVerificationRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RequestInventoryVerificationResponse. */
+                    interface IRequestInventoryVerificationResponse {
+
+                        /** RequestInventoryVerificationResponse omnichannelSetting */
+                        omnichannelSetting?: (google.shopping.merchant.accounts.v1beta.IOmnichannelSetting|null);
+                    }
+
+                    /** Represents a RequestInventoryVerificationResponse. */
+                    class RequestInventoryVerificationResponse implements IRequestInventoryVerificationResponse {
+
+                        /**
+                         * Constructs a new RequestInventoryVerificationResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse);
+
+                        /** RequestInventoryVerificationResponse omnichannelSetting. */
+                        public omnichannelSetting?: (google.shopping.merchant.accounts.v1beta.IOmnichannelSetting|null);
+
+                        /**
+                         * Creates a new RequestInventoryVerificationResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RequestInventoryVerificationResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse): google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse;
+
+                        /**
+                         * Encodes the specified RequestInventoryVerificationResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse.verify|verify} messages.
+                         * @param message RequestInventoryVerificationResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RequestInventoryVerificationResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse.verify|verify} messages.
+                         * @param message RequestInventoryVerificationResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IRequestInventoryVerificationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RequestInventoryVerificationResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RequestInventoryVerificationResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse;
+
+                        /**
+                         * Decodes a RequestInventoryVerificationResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RequestInventoryVerificationResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse;
+
+                        /**
+                         * Verifies a RequestInventoryVerificationResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RequestInventoryVerificationResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RequestInventoryVerificationResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse;
+
+                        /**
+                         * Creates a plain object from a RequestInventoryVerificationResponse message. Also converts values to other types if specified.
+                         * @param message RequestInventoryVerificationResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.RequestInventoryVerificationResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RequestInventoryVerificationResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RequestInventoryVerificationResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Represents an OnlineReturnPolicyService */
                     class OnlineReturnPolicyService extends $protobuf.rpc.Service {
 
@@ -7224,6 +10166,48 @@ export namespace google {
                          * @returns Promise
                          */
                         public listOnlineReturnPolicies(request: google.shopping.merchant.accounts.v1beta.IListOnlineReturnPoliciesRequest): Promise<google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesResponse>;
+
+                        /**
+                         * Calls CreateOnlineReturnPolicy.
+                         * @param request CreateOnlineReturnPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and OnlineReturnPolicy
+                         */
+                        public createOnlineReturnPolicy(request: google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest, callback: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.CreateOnlineReturnPolicyCallback): void;
+
+                        /**
+                         * Calls CreateOnlineReturnPolicy.
+                         * @param request CreateOnlineReturnPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createOnlineReturnPolicy(request: google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest): Promise<google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy>;
+
+                        /**
+                         * Calls UpdateOnlineReturnPolicy.
+                         * @param request UpdateOnlineReturnPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and OnlineReturnPolicy
+                         */
+                        public updateOnlineReturnPolicy(request: google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest, callback: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.UpdateOnlineReturnPolicyCallback): void;
+
+                        /**
+                         * Calls UpdateOnlineReturnPolicy.
+                         * @param request UpdateOnlineReturnPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateOnlineReturnPolicy(request: google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest): Promise<google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy>;
+
+                        /**
+                         * Calls DeleteOnlineReturnPolicy.
+                         * @param request DeleteOnlineReturnPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteOnlineReturnPolicy(request: google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest, callback: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService.DeleteOnlineReturnPolicyCallback): void;
+
+                        /**
+                         * Calls DeleteOnlineReturnPolicy.
+                         * @param request DeleteOnlineReturnPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteOnlineReturnPolicy(request: google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest): Promise<google.protobuf.Empty>;
                     }
 
                     namespace OnlineReturnPolicyService {
@@ -7241,6 +10225,27 @@ export namespace google {
                          * @param [response] ListOnlineReturnPoliciesResponse
                          */
                         type ListOnlineReturnPoliciesCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService|createOnlineReturnPolicy}.
+                         * @param error Error, if any
+                         * @param [response] OnlineReturnPolicy
+                         */
+                        type CreateOnlineReturnPolicyCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService|updateOnlineReturnPolicy}.
+                         * @param error Error, if any
+                         * @param [response] OnlineReturnPolicy
+                         */
+                        type UpdateOnlineReturnPolicyCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService|deleteOnlineReturnPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteOnlineReturnPolicyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                     }
 
                     /** Properties of a GetOnlineReturnPolicyRequest. */
@@ -7334,6 +10339,309 @@ export namespace google {
 
                         /**
                          * Gets the default type url for GetOnlineReturnPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CreateOnlineReturnPolicyRequest. */
+                    interface ICreateOnlineReturnPolicyRequest {
+
+                        /** CreateOnlineReturnPolicyRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateOnlineReturnPolicyRequest onlineReturnPolicy */
+                        onlineReturnPolicy?: (google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy|null);
+                    }
+
+                    /** Represents a CreateOnlineReturnPolicyRequest. */
+                    class CreateOnlineReturnPolicyRequest implements ICreateOnlineReturnPolicyRequest {
+
+                        /**
+                         * Constructs a new CreateOnlineReturnPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest);
+
+                        /** CreateOnlineReturnPolicyRequest parent. */
+                        public parent: string;
+
+                        /** CreateOnlineReturnPolicyRequest onlineReturnPolicy. */
+                        public onlineReturnPolicy?: (google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy|null);
+
+                        /**
+                         * Creates a new CreateOnlineReturnPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateOnlineReturnPolicyRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest): google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Encodes the specified CreateOnlineReturnPolicyRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest.verify|verify} messages.
+                         * @param message CreateOnlineReturnPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateOnlineReturnPolicyRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest.verify|verify} messages.
+                         * @param message CreateOnlineReturnPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.ICreateOnlineReturnPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateOnlineReturnPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateOnlineReturnPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Decodes a CreateOnlineReturnPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateOnlineReturnPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Verifies a CreateOnlineReturnPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateOnlineReturnPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateOnlineReturnPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a CreateOnlineReturnPolicyRequest message. Also converts values to other types if specified.
+                         * @param message CreateOnlineReturnPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.CreateOnlineReturnPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateOnlineReturnPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateOnlineReturnPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateOnlineReturnPolicyRequest. */
+                    interface IUpdateOnlineReturnPolicyRequest {
+
+                        /** UpdateOnlineReturnPolicyRequest onlineReturnPolicy */
+                        onlineReturnPolicy?: (google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy|null);
+
+                        /** UpdateOnlineReturnPolicyRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateOnlineReturnPolicyRequest. */
+                    class UpdateOnlineReturnPolicyRequest implements IUpdateOnlineReturnPolicyRequest {
+
+                        /**
+                         * Constructs a new UpdateOnlineReturnPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest);
+
+                        /** UpdateOnlineReturnPolicyRequest onlineReturnPolicy. */
+                        public onlineReturnPolicy?: (google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy|null);
+
+                        /** UpdateOnlineReturnPolicyRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateOnlineReturnPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateOnlineReturnPolicyRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest): google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Encodes the specified UpdateOnlineReturnPolicyRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest.verify|verify} messages.
+                         * @param message UpdateOnlineReturnPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateOnlineReturnPolicyRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest.verify|verify} messages.
+                         * @param message UpdateOnlineReturnPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IUpdateOnlineReturnPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateOnlineReturnPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateOnlineReturnPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Decodes an UpdateOnlineReturnPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateOnlineReturnPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Verifies an UpdateOnlineReturnPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateOnlineReturnPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateOnlineReturnPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateOnlineReturnPolicyRequest message. Also converts values to other types if specified.
+                         * @param message UpdateOnlineReturnPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.UpdateOnlineReturnPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateOnlineReturnPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateOnlineReturnPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteOnlineReturnPolicyRequest. */
+                    interface IDeleteOnlineReturnPolicyRequest {
+
+                        /** DeleteOnlineReturnPolicyRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteOnlineReturnPolicyRequest. */
+                    class DeleteOnlineReturnPolicyRequest implements IDeleteOnlineReturnPolicyRequest {
+
+                        /**
+                         * Constructs a new DeleteOnlineReturnPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest);
+
+                        /** DeleteOnlineReturnPolicyRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteOnlineReturnPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteOnlineReturnPolicyRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest): google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest;
+
+                        /**
+                         * Encodes the specified DeleteOnlineReturnPolicyRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest.verify|verify} messages.
+                         * @param message DeleteOnlineReturnPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteOnlineReturnPolicyRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest.verify|verify} messages.
+                         * @param message DeleteOnlineReturnPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IDeleteOnlineReturnPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteOnlineReturnPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteOnlineReturnPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest;
+
+                        /**
+                         * Decodes a DeleteOnlineReturnPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteOnlineReturnPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest;
+
+                        /**
+                         * Verifies a DeleteOnlineReturnPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteOnlineReturnPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteOnlineReturnPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteOnlineReturnPolicyRequest message. Also converts values to other types if specified.
+                         * @param message DeleteOnlineReturnPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.DeleteOnlineReturnPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteOnlineReturnPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteOnlineReturnPolicyRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -7596,6 +10904,9 @@ export namespace google {
 
                         /** OnlineReturnPolicy acceptExchange */
                         acceptExchange?: (boolean|null);
+
+                        /** OnlineReturnPolicy returnLabelSource */
+                        returnLabelSource?: (google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|keyof typeof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|null);
                     }
 
                     /** Represents an OnlineReturnPolicy. */
@@ -7649,6 +10960,9 @@ export namespace google {
                         /** OnlineReturnPolicy acceptExchange. */
                         public acceptExchange?: (boolean|null);
 
+                        /** OnlineReturnPolicy returnLabelSource. */
+                        public returnLabelSource?: (google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|keyof typeof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnLabelSource|null);
+
                         /** OnlineReturnPolicy _acceptDefectiveOnly. */
                         public _acceptDefectiveOnly?: "acceptDefectiveOnly";
 
@@ -7657,6 +10971,9 @@ export namespace google {
 
                         /** OnlineReturnPolicy _acceptExchange. */
                         public _acceptExchange?: "acceptExchange";
+
+                        /** OnlineReturnPolicy _returnLabelSource. */
+                        public _returnLabelSource?: "returnLabelSource";
 
                         /**
                          * Creates a new OnlineReturnPolicy instance using the specified properties.
@@ -8208,6 +11525,14 @@ export namespace google {
                             ITEM_CONDITION_UNSPECIFIED = 0,
                             NEW = 1,
                             USED = 2
+                        }
+
+                        /** ReturnLabelSource enum. */
+                        enum ReturnLabelSource {
+                            RETURN_LABEL_SOURCE_UNSPECIFIED = 0,
+                            DOWNLOAD_AND_PRINT = 1,
+                            IN_THE_PACKAGE = 2,
+                            CUSTOMER_RESPONSIBILITY = 3
                         }
                     }
 

@@ -329,6 +329,237 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|listDatasetConfigs}.
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @typedef ListDatasetConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.storageinsights.v1.ListDatasetConfigsResponse} [response] ListDatasetConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListDatasetConfigs.
+                         * @function listDatasetConfigs
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.IListDatasetConfigsRequest} request ListDatasetConfigsRequest message or plain object
+                         * @param {google.cloud.storageinsights.v1.StorageInsights.ListDatasetConfigsCallback} callback Node-style callback called with the error, if any, and ListDatasetConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageInsights.prototype.listDatasetConfigs = function listDatasetConfigs(request, callback) {
+                            return this.rpcCall(listDatasetConfigs, $root.google.cloud.storageinsights.v1.ListDatasetConfigsRequest, $root.google.cloud.storageinsights.v1.ListDatasetConfigsResponse, request, callback);
+                        }, "name", { value: "ListDatasetConfigs" });
+    
+                        /**
+                         * Calls ListDatasetConfigs.
+                         * @function listDatasetConfigs
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.IListDatasetConfigsRequest} request ListDatasetConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.storageinsights.v1.ListDatasetConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|getDatasetConfig}.
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @typedef GetDatasetConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.storageinsights.v1.DatasetConfig} [response] DatasetConfig
+                         */
+    
+                        /**
+                         * Calls GetDatasetConfig.
+                         * @function getDatasetConfig
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.IGetDatasetConfigRequest} request GetDatasetConfigRequest message or plain object
+                         * @param {google.cloud.storageinsights.v1.StorageInsights.GetDatasetConfigCallback} callback Node-style callback called with the error, if any, and DatasetConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageInsights.prototype.getDatasetConfig = function getDatasetConfig(request, callback) {
+                            return this.rpcCall(getDatasetConfig, $root.google.cloud.storageinsights.v1.GetDatasetConfigRequest, $root.google.cloud.storageinsights.v1.DatasetConfig, request, callback);
+                        }, "name", { value: "GetDatasetConfig" });
+    
+                        /**
+                         * Calls GetDatasetConfig.
+                         * @function getDatasetConfig
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.IGetDatasetConfigRequest} request GetDatasetConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.storageinsights.v1.DatasetConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|createDatasetConfig}.
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @typedef CreateDatasetConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateDatasetConfig.
+                         * @function createDatasetConfig
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.ICreateDatasetConfigRequest} request CreateDatasetConfigRequest message or plain object
+                         * @param {google.cloud.storageinsights.v1.StorageInsights.CreateDatasetConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageInsights.prototype.createDatasetConfig = function createDatasetConfig(request, callback) {
+                            return this.rpcCall(createDatasetConfig, $root.google.cloud.storageinsights.v1.CreateDatasetConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateDatasetConfig" });
+    
+                        /**
+                         * Calls CreateDatasetConfig.
+                         * @function createDatasetConfig
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.ICreateDatasetConfigRequest} request CreateDatasetConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|updateDatasetConfig}.
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @typedef UpdateDatasetConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateDatasetConfig.
+                         * @function updateDatasetConfig
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest} request UpdateDatasetConfigRequest message or plain object
+                         * @param {google.cloud.storageinsights.v1.StorageInsights.UpdateDatasetConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageInsights.prototype.updateDatasetConfig = function updateDatasetConfig(request, callback) {
+                            return this.rpcCall(updateDatasetConfig, $root.google.cloud.storageinsights.v1.UpdateDatasetConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateDatasetConfig" });
+    
+                        /**
+                         * Calls UpdateDatasetConfig.
+                         * @function updateDatasetConfig
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest} request UpdateDatasetConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|deleteDatasetConfig}.
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @typedef DeleteDatasetConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteDatasetConfig.
+                         * @function deleteDatasetConfig
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest} request DeleteDatasetConfigRequest message or plain object
+                         * @param {google.cloud.storageinsights.v1.StorageInsights.DeleteDatasetConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageInsights.prototype.deleteDatasetConfig = function deleteDatasetConfig(request, callback) {
+                            return this.rpcCall(deleteDatasetConfig, $root.google.cloud.storageinsights.v1.DeleteDatasetConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteDatasetConfig" });
+    
+                        /**
+                         * Calls DeleteDatasetConfig.
+                         * @function deleteDatasetConfig
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest} request DeleteDatasetConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|linkDataset}.
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @typedef LinkDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls LinkDataset.
+                         * @function linkDataset
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.ILinkDatasetRequest} request LinkDatasetRequest message or plain object
+                         * @param {google.cloud.storageinsights.v1.StorageInsights.LinkDatasetCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageInsights.prototype.linkDataset = function linkDataset(request, callback) {
+                            return this.rpcCall(linkDataset, $root.google.cloud.storageinsights.v1.LinkDatasetRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "LinkDataset" });
+    
+                        /**
+                         * Calls LinkDataset.
+                         * @function linkDataset
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.ILinkDatasetRequest} request LinkDatasetRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.storageinsights.v1.StorageInsights|unlinkDataset}.
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @typedef UnlinkDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UnlinkDataset.
+                         * @function unlinkDataset
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.IUnlinkDatasetRequest} request UnlinkDatasetRequest message or plain object
+                         * @param {google.cloud.storageinsights.v1.StorageInsights.UnlinkDatasetCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageInsights.prototype.unlinkDataset = function unlinkDataset(request, callback) {
+                            return this.rpcCall(unlinkDataset, $root.google.cloud.storageinsights.v1.UnlinkDatasetRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UnlinkDataset" });
+    
+                        /**
+                         * Calls UnlinkDataset.
+                         * @function unlinkDataset
+                         * @memberof google.cloud.storageinsights.v1.StorageInsights
+                         * @instance
+                         * @param {google.cloud.storageinsights.v1.IUnlinkDatasetRequest} request UnlinkDatasetRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return StorageInsights;
                     })();
     
@@ -5636,6 +5867,6304 @@
                         };
     
                         return ReportConfig;
+                    })();
+    
+                    v1.Identity = (function() {
+    
+                        /**
+                         * Properties of an Identity.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @interface IIdentity
+                         * @property {string|null} [name] Identity name
+                         * @property {google.cloud.storageinsights.v1.Identity.IdentityType|null} [type] Identity type
+                         */
+    
+                        /**
+                         * Constructs a new Identity.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @classdesc Represents an Identity.
+                         * @implements IIdentity
+                         * @constructor
+                         * @param {google.cloud.storageinsights.v1.IIdentity=} [properties] Properties to set
+                         */
+                        function Identity(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Identity name.
+                         * @member {string} name
+                         * @memberof google.cloud.storageinsights.v1.Identity
+                         * @instance
+                         */
+                        Identity.prototype.name = "";
+    
+                        /**
+                         * Identity type.
+                         * @member {google.cloud.storageinsights.v1.Identity.IdentityType} type
+                         * @memberof google.cloud.storageinsights.v1.Identity
+                         * @instance
+                         */
+                        Identity.prototype.type = 0;
+    
+                        /**
+                         * Creates a new Identity instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storageinsights.v1.Identity
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IIdentity=} [properties] Properties to set
+                         * @returns {google.cloud.storageinsights.v1.Identity} Identity instance
+                         */
+                        Identity.create = function create(properties) {
+                            return new Identity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Identity message. Does not implicitly {@link google.cloud.storageinsights.v1.Identity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storageinsights.v1.Identity
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IIdentity} message Identity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Identity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Identity message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.Identity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.Identity
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IIdentity} message Identity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Identity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Identity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storageinsights.v1.Identity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storageinsights.v1.Identity} Identity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Identity.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.Identity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Identity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.Identity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storageinsights.v1.Identity} Identity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Identity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Identity message.
+                         * @function verify
+                         * @memberof google.cloud.storageinsights.v1.Identity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Identity.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Identity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storageinsights.v1.Identity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storageinsights.v1.Identity} Identity
+                         */
+                        Identity.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storageinsights.v1.Identity)
+                                return object;
+                            var message = new $root.google.cloud.storageinsights.v1.Identity();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "IDENTITY_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "IDENTITY_TYPE_PER_CONFIG":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "IDENTITY_TYPE_PER_PROJECT":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Identity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storageinsights.v1.Identity
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.Identity} message Identity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Identity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.type = options.enums === String ? "IDENTITY_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.storageinsights.v1.Identity.IdentityType[message.type] === undefined ? message.type : $root.google.cloud.storageinsights.v1.Identity.IdentityType[message.type] : message.type;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Identity to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storageinsights.v1.Identity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Identity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Identity
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storageinsights.v1.Identity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Identity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storageinsights.v1.Identity";
+                        };
+    
+                        /**
+                         * IdentityType enum.
+                         * @name google.cloud.storageinsights.v1.Identity.IdentityType
+                         * @enum {number}
+                         * @property {number} IDENTITY_TYPE_UNSPECIFIED=0 IDENTITY_TYPE_UNSPECIFIED value
+                         * @property {number} IDENTITY_TYPE_PER_CONFIG=1 IDENTITY_TYPE_PER_CONFIG value
+                         * @property {number} IDENTITY_TYPE_PER_PROJECT=2 IDENTITY_TYPE_PER_PROJECT value
+                         */
+                        Identity.IdentityType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "IDENTITY_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IDENTITY_TYPE_PER_CONFIG"] = 1;
+                            values[valuesById[2] = "IDENTITY_TYPE_PER_PROJECT"] = 2;
+                            return values;
+                        })();
+    
+                        return Identity;
+                    })();
+    
+                    v1.DatasetConfig = (function() {
+    
+                        /**
+                         * Properties of a DatasetConfig.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @interface IDatasetConfig
+                         * @property {string|null} [name] DatasetConfig name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DatasetConfig createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] DatasetConfig updateTime
+                         * @property {Object.<string,string>|null} [labels] DatasetConfig labels
+                         * @property {string|null} [uid] DatasetConfig uid
+                         * @property {number|Long|null} [organizationNumber] DatasetConfig organizationNumber
+                         * @property {google.cloud.storageinsights.v1.DatasetConfig.ISourceProjects|null} [sourceProjects] DatasetConfig sourceProjects
+                         * @property {google.cloud.storageinsights.v1.DatasetConfig.ISourceFolders|null} [sourceFolders] DatasetConfig sourceFolders
+                         * @property {boolean|null} [organizationScope] DatasetConfig organizationScope
+                         * @property {string|null} [cloudStorageObjectPath] DatasetConfig cloudStorageObjectPath
+                         * @property {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations|null} [includeCloudStorageLocations] DatasetConfig includeCloudStorageLocations
+                         * @property {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations|null} [excludeCloudStorageLocations] DatasetConfig excludeCloudStorageLocations
+                         * @property {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets|null} [includeCloudStorageBuckets] DatasetConfig includeCloudStorageBuckets
+                         * @property {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets|null} [excludeCloudStorageBuckets] DatasetConfig excludeCloudStorageBuckets
+                         * @property {boolean|null} [includeNewlyCreatedBuckets] DatasetConfig includeNewlyCreatedBuckets
+                         * @property {boolean|null} [skipVerificationAndIngest] DatasetConfig skipVerificationAndIngest
+                         * @property {number|null} [retentionPeriodDays] DatasetConfig retentionPeriodDays
+                         * @property {google.cloud.storageinsights.v1.DatasetConfig.ILink|null} [link] DatasetConfig link
+                         * @property {google.cloud.storageinsights.v1.IIdentity|null} [identity] DatasetConfig identity
+                         * @property {google.rpc.IStatus|null} [status] DatasetConfig status
+                         * @property {google.cloud.storageinsights.v1.DatasetConfig.ConfigState|null} [datasetConfigState] DatasetConfig datasetConfigState
+                         * @property {string|null} [description] DatasetConfig description
+                         */
+    
+                        /**
+                         * Constructs a new DatasetConfig.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @classdesc Represents a DatasetConfig.
+                         * @implements IDatasetConfig
+                         * @constructor
+                         * @param {google.cloud.storageinsights.v1.IDatasetConfig=} [properties] Properties to set
+                         */
+                        function DatasetConfig(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DatasetConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.name = "";
+    
+                        /**
+                         * DatasetConfig createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.createTime = null;
+    
+                        /**
+                         * DatasetConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.updateTime = null;
+    
+                        /**
+                         * DatasetConfig labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * DatasetConfig uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.uid = "";
+    
+                        /**
+                         * DatasetConfig organizationNumber.
+                         * @member {number|Long} organizationNumber
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.organizationNumber = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * DatasetConfig sourceProjects.
+                         * @member {google.cloud.storageinsights.v1.DatasetConfig.ISourceProjects|null|undefined} sourceProjects
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.sourceProjects = null;
+    
+                        /**
+                         * DatasetConfig sourceFolders.
+                         * @member {google.cloud.storageinsights.v1.DatasetConfig.ISourceFolders|null|undefined} sourceFolders
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.sourceFolders = null;
+    
+                        /**
+                         * DatasetConfig organizationScope.
+                         * @member {boolean|null|undefined} organizationScope
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.organizationScope = null;
+    
+                        /**
+                         * DatasetConfig cloudStorageObjectPath.
+                         * @member {string|null|undefined} cloudStorageObjectPath
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.cloudStorageObjectPath = null;
+    
+                        /**
+                         * DatasetConfig includeCloudStorageLocations.
+                         * @member {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations|null|undefined} includeCloudStorageLocations
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.includeCloudStorageLocations = null;
+    
+                        /**
+                         * DatasetConfig excludeCloudStorageLocations.
+                         * @member {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations|null|undefined} excludeCloudStorageLocations
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.excludeCloudStorageLocations = null;
+    
+                        /**
+                         * DatasetConfig includeCloudStorageBuckets.
+                         * @member {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets|null|undefined} includeCloudStorageBuckets
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.includeCloudStorageBuckets = null;
+    
+                        /**
+                         * DatasetConfig excludeCloudStorageBuckets.
+                         * @member {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets|null|undefined} excludeCloudStorageBuckets
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.excludeCloudStorageBuckets = null;
+    
+                        /**
+                         * DatasetConfig includeNewlyCreatedBuckets.
+                         * @member {boolean} includeNewlyCreatedBuckets
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.includeNewlyCreatedBuckets = false;
+    
+                        /**
+                         * DatasetConfig skipVerificationAndIngest.
+                         * @member {boolean} skipVerificationAndIngest
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.skipVerificationAndIngest = false;
+    
+                        /**
+                         * DatasetConfig retentionPeriodDays.
+                         * @member {number} retentionPeriodDays
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.retentionPeriodDays = 0;
+    
+                        /**
+                         * DatasetConfig link.
+                         * @member {google.cloud.storageinsights.v1.DatasetConfig.ILink|null|undefined} link
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.link = null;
+    
+                        /**
+                         * DatasetConfig identity.
+                         * @member {google.cloud.storageinsights.v1.IIdentity|null|undefined} identity
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.identity = null;
+    
+                        /**
+                         * DatasetConfig status.
+                         * @member {google.rpc.IStatus|null|undefined} status
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.status = null;
+    
+                        /**
+                         * DatasetConfig datasetConfigState.
+                         * @member {google.cloud.storageinsights.v1.DatasetConfig.ConfigState} datasetConfigState
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.datasetConfigState = 0;
+    
+                        /**
+                         * DatasetConfig description.
+                         * @member {string} description
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        DatasetConfig.prototype.description = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DatasetConfig sourceOptions.
+                         * @member {"sourceProjects"|"sourceFolders"|"organizationScope"|"cloudStorageObjectPath"|undefined} sourceOptions
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        Object.defineProperty(DatasetConfig.prototype, "sourceOptions", {
+                            get: $util.oneOfGetter($oneOfFields = ["sourceProjects", "sourceFolders", "organizationScope", "cloudStorageObjectPath"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * DatasetConfig cloudStorageLocations.
+                         * @member {"includeCloudStorageLocations"|"excludeCloudStorageLocations"|undefined} cloudStorageLocations
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        Object.defineProperty(DatasetConfig.prototype, "cloudStorageLocations", {
+                            get: $util.oneOfGetter($oneOfFields = ["includeCloudStorageLocations", "excludeCloudStorageLocations"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * DatasetConfig cloudStorageBuckets.
+                         * @member {"includeCloudStorageBuckets"|"excludeCloudStorageBuckets"|undefined} cloudStorageBuckets
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         */
+                        Object.defineProperty(DatasetConfig.prototype, "cloudStorageBuckets", {
+                            get: $util.oneOfGetter($oneOfFields = ["includeCloudStorageBuckets", "excludeCloudStorageBuckets"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DatasetConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IDatasetConfig=} [properties] Properties to set
+                         * @returns {google.cloud.storageinsights.v1.DatasetConfig} DatasetConfig instance
+                         */
+                        DatasetConfig.create = function create(properties) {
+                            return new DatasetConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DatasetConfig message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IDatasetConfig} message DatasetConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatasetConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.uid);
+                            if (message.sourceProjects != null && Object.hasOwnProperty.call(message, "sourceProjects"))
+                                $root.google.cloud.storageinsights.v1.DatasetConfig.SourceProjects.encode(message.sourceProjects, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.includeCloudStorageLocations != null && Object.hasOwnProperty.call(message, "includeCloudStorageLocations"))
+                                $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.encode(message.includeCloudStorageLocations, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.excludeCloudStorageLocations != null && Object.hasOwnProperty.call(message, "excludeCloudStorageLocations"))
+                                $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.encode(message.excludeCloudStorageLocations, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.includeCloudStorageBuckets != null && Object.hasOwnProperty.call(message, "includeCloudStorageBuckets"))
+                                $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.encode(message.includeCloudStorageBuckets, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.excludeCloudStorageBuckets != null && Object.hasOwnProperty.call(message, "excludeCloudStorageBuckets"))
+                                $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.encode(message.excludeCloudStorageBuckets, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.includeNewlyCreatedBuckets != null && Object.hasOwnProperty.call(message, "includeNewlyCreatedBuckets"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.includeNewlyCreatedBuckets);
+                            if (message.retentionPeriodDays != null && Object.hasOwnProperty.call(message, "retentionPeriodDays"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.retentionPeriodDays);
+                            if (message.link != null && Object.hasOwnProperty.call(message, "link"))
+                                $root.google.cloud.storageinsights.v1.DatasetConfig.Link.encode(message.link, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.identity != null && Object.hasOwnProperty.call(message, "identity"))
+                                $root.google.cloud.storageinsights.v1.Identity.encode(message.identity, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                                $root.google.rpc.Status.encode(message.status, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.datasetConfigState != null && Object.hasOwnProperty.call(message, "datasetConfigState"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).int32(message.datasetConfigState);
+                            if (message.skipVerificationAndIngest != null && Object.hasOwnProperty.call(message, "skipVerificationAndIngest"))
+                                writer.uint32(/* id 19, wireType 0 =*/152).bool(message.skipVerificationAndIngest);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 20, wireType 2 =*/162).string(message.description);
+                            if (message.cloudStorageObjectPath != null && Object.hasOwnProperty.call(message, "cloudStorageObjectPath"))
+                                writer.uint32(/* id 21, wireType 2 =*/170).string(message.cloudStorageObjectPath);
+                            if (message.organizationNumber != null && Object.hasOwnProperty.call(message, "organizationNumber"))
+                                writer.uint32(/* id 22, wireType 0 =*/176).int64(message.organizationNumber);
+                            if (message.sourceFolders != null && Object.hasOwnProperty.call(message, "sourceFolders"))
+                                $root.google.cloud.storageinsights.v1.DatasetConfig.SourceFolders.encode(message.sourceFolders, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.organizationScope != null && Object.hasOwnProperty.call(message, "organizationScope"))
+                                writer.uint32(/* id 25, wireType 0 =*/200).bool(message.organizationScope);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DatasetConfig message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IDatasetConfig} message DatasetConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatasetConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DatasetConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storageinsights.v1.DatasetConfig} DatasetConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatasetConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.DatasetConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 22: {
+                                        message.organizationNumber = reader.int64();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.sourceProjects = $root.google.cloud.storageinsights.v1.DatasetConfig.SourceProjects.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 24: {
+                                        message.sourceFolders = $root.google.cloud.storageinsights.v1.DatasetConfig.SourceFolders.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 25: {
+                                        message.organizationScope = reader.bool();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.cloudStorageObjectPath = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.includeCloudStorageLocations = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.excludeCloudStorageLocations = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.includeCloudStorageBuckets = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.excludeCloudStorageBuckets = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.includeNewlyCreatedBuckets = reader.bool();
+                                        break;
+                                    }
+                                case 19: {
+                                        message.skipVerificationAndIngest = reader.bool();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.retentionPeriodDays = reader.int32();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.link = $root.google.cloud.storageinsights.v1.DatasetConfig.Link.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.identity = $root.google.cloud.storageinsights.v1.Identity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 17: {
+                                        message.status = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 18: {
+                                        message.datasetConfigState = reader.int32();
+                                        break;
+                                    }
+                                case 20: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DatasetConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storageinsights.v1.DatasetConfig} DatasetConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatasetConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DatasetConfig message.
+                         * @function verify
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DatasetConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.organizationNumber != null && message.hasOwnProperty("organizationNumber"))
+                                if (!$util.isInteger(message.organizationNumber) && !(message.organizationNumber && $util.isInteger(message.organizationNumber.low) && $util.isInteger(message.organizationNumber.high)))
+                                    return "organizationNumber: integer|Long expected";
+                            if (message.sourceProjects != null && message.hasOwnProperty("sourceProjects")) {
+                                properties.sourceOptions = 1;
+                                {
+                                    var error = $root.google.cloud.storageinsights.v1.DatasetConfig.SourceProjects.verify(message.sourceProjects);
+                                    if (error)
+                                        return "sourceProjects." + error;
+                                }
+                            }
+                            if (message.sourceFolders != null && message.hasOwnProperty("sourceFolders")) {
+                                if (properties.sourceOptions === 1)
+                                    return "sourceOptions: multiple values";
+                                properties.sourceOptions = 1;
+                                {
+                                    var error = $root.google.cloud.storageinsights.v1.DatasetConfig.SourceFolders.verify(message.sourceFolders);
+                                    if (error)
+                                        return "sourceFolders." + error;
+                                }
+                            }
+                            if (message.organizationScope != null && message.hasOwnProperty("organizationScope")) {
+                                if (properties.sourceOptions === 1)
+                                    return "sourceOptions: multiple values";
+                                properties.sourceOptions = 1;
+                                if (typeof message.organizationScope !== "boolean")
+                                    return "organizationScope: boolean expected";
+                            }
+                            if (message.cloudStorageObjectPath != null && message.hasOwnProperty("cloudStorageObjectPath")) {
+                                if (properties.sourceOptions === 1)
+                                    return "sourceOptions: multiple values";
+                                properties.sourceOptions = 1;
+                                if (!$util.isString(message.cloudStorageObjectPath))
+                                    return "cloudStorageObjectPath: string expected";
+                            }
+                            if (message.includeCloudStorageLocations != null && message.hasOwnProperty("includeCloudStorageLocations")) {
+                                properties.cloudStorageLocations = 1;
+                                {
+                                    var error = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.verify(message.includeCloudStorageLocations);
+                                    if (error)
+                                        return "includeCloudStorageLocations." + error;
+                                }
+                            }
+                            if (message.excludeCloudStorageLocations != null && message.hasOwnProperty("excludeCloudStorageLocations")) {
+                                if (properties.cloudStorageLocations === 1)
+                                    return "cloudStorageLocations: multiple values";
+                                properties.cloudStorageLocations = 1;
+                                {
+                                    var error = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.verify(message.excludeCloudStorageLocations);
+                                    if (error)
+                                        return "excludeCloudStorageLocations." + error;
+                                }
+                            }
+                            if (message.includeCloudStorageBuckets != null && message.hasOwnProperty("includeCloudStorageBuckets")) {
+                                properties.cloudStorageBuckets = 1;
+                                {
+                                    var error = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.verify(message.includeCloudStorageBuckets);
+                                    if (error)
+                                        return "includeCloudStorageBuckets." + error;
+                                }
+                            }
+                            if (message.excludeCloudStorageBuckets != null && message.hasOwnProperty("excludeCloudStorageBuckets")) {
+                                if (properties.cloudStorageBuckets === 1)
+                                    return "cloudStorageBuckets: multiple values";
+                                properties.cloudStorageBuckets = 1;
+                                {
+                                    var error = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.verify(message.excludeCloudStorageBuckets);
+                                    if (error)
+                                        return "excludeCloudStorageBuckets." + error;
+                                }
+                            }
+                            if (message.includeNewlyCreatedBuckets != null && message.hasOwnProperty("includeNewlyCreatedBuckets"))
+                                if (typeof message.includeNewlyCreatedBuckets !== "boolean")
+                                    return "includeNewlyCreatedBuckets: boolean expected";
+                            if (message.skipVerificationAndIngest != null && message.hasOwnProperty("skipVerificationAndIngest"))
+                                if (typeof message.skipVerificationAndIngest !== "boolean")
+                                    return "skipVerificationAndIngest: boolean expected";
+                            if (message.retentionPeriodDays != null && message.hasOwnProperty("retentionPeriodDays"))
+                                if (!$util.isInteger(message.retentionPeriodDays))
+                                    return "retentionPeriodDays: integer expected";
+                            if (message.link != null && message.hasOwnProperty("link")) {
+                                var error = $root.google.cloud.storageinsights.v1.DatasetConfig.Link.verify(message.link);
+                                if (error)
+                                    return "link." + error;
+                            }
+                            if (message.identity != null && message.hasOwnProperty("identity")) {
+                                var error = $root.google.cloud.storageinsights.v1.Identity.verify(message.identity);
+                                if (error)
+                                    return "identity." + error;
+                            }
+                            if (message.status != null && message.hasOwnProperty("status")) {
+                                var error = $root.google.rpc.Status.verify(message.status);
+                                if (error)
+                                    return "status." + error;
+                            }
+                            if (message.datasetConfigState != null && message.hasOwnProperty("datasetConfigState"))
+                                switch (message.datasetConfigState) {
+                                default:
+                                    return "datasetConfigState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DatasetConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storageinsights.v1.DatasetConfig} DatasetConfig
+                         */
+                        DatasetConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storageinsights.v1.DatasetConfig)
+                                return object;
+                            var message = new $root.google.cloud.storageinsights.v1.DatasetConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            if (object.organizationNumber != null)
+                                if ($util.Long)
+                                    (message.organizationNumber = $util.Long.fromValue(object.organizationNumber)).unsigned = false;
+                                else if (typeof object.organizationNumber === "string")
+                                    message.organizationNumber = parseInt(object.organizationNumber, 10);
+                                else if (typeof object.organizationNumber === "number")
+                                    message.organizationNumber = object.organizationNumber;
+                                else if (typeof object.organizationNumber === "object")
+                                    message.organizationNumber = new $util.LongBits(object.organizationNumber.low >>> 0, object.organizationNumber.high >>> 0).toNumber();
+                            if (object.sourceProjects != null) {
+                                if (typeof object.sourceProjects !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.sourceProjects: object expected");
+                                message.sourceProjects = $root.google.cloud.storageinsights.v1.DatasetConfig.SourceProjects.fromObject(object.sourceProjects);
+                            }
+                            if (object.sourceFolders != null) {
+                                if (typeof object.sourceFolders !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.sourceFolders: object expected");
+                                message.sourceFolders = $root.google.cloud.storageinsights.v1.DatasetConfig.SourceFolders.fromObject(object.sourceFolders);
+                            }
+                            if (object.organizationScope != null)
+                                message.organizationScope = Boolean(object.organizationScope);
+                            if (object.cloudStorageObjectPath != null)
+                                message.cloudStorageObjectPath = String(object.cloudStorageObjectPath);
+                            if (object.includeCloudStorageLocations != null) {
+                                if (typeof object.includeCloudStorageLocations !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.includeCloudStorageLocations: object expected");
+                                message.includeCloudStorageLocations = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.fromObject(object.includeCloudStorageLocations);
+                            }
+                            if (object.excludeCloudStorageLocations != null) {
+                                if (typeof object.excludeCloudStorageLocations !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.excludeCloudStorageLocations: object expected");
+                                message.excludeCloudStorageLocations = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.fromObject(object.excludeCloudStorageLocations);
+                            }
+                            if (object.includeCloudStorageBuckets != null) {
+                                if (typeof object.includeCloudStorageBuckets !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.includeCloudStorageBuckets: object expected");
+                                message.includeCloudStorageBuckets = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.fromObject(object.includeCloudStorageBuckets);
+                            }
+                            if (object.excludeCloudStorageBuckets != null) {
+                                if (typeof object.excludeCloudStorageBuckets !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.excludeCloudStorageBuckets: object expected");
+                                message.excludeCloudStorageBuckets = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.fromObject(object.excludeCloudStorageBuckets);
+                            }
+                            if (object.includeNewlyCreatedBuckets != null)
+                                message.includeNewlyCreatedBuckets = Boolean(object.includeNewlyCreatedBuckets);
+                            if (object.skipVerificationAndIngest != null)
+                                message.skipVerificationAndIngest = Boolean(object.skipVerificationAndIngest);
+                            if (object.retentionPeriodDays != null)
+                                message.retentionPeriodDays = object.retentionPeriodDays | 0;
+                            if (object.link != null) {
+                                if (typeof object.link !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.link: object expected");
+                                message.link = $root.google.cloud.storageinsights.v1.DatasetConfig.Link.fromObject(object.link);
+                            }
+                            if (object.identity != null) {
+                                if (typeof object.identity !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.identity: object expected");
+                                message.identity = $root.google.cloud.storageinsights.v1.Identity.fromObject(object.identity);
+                            }
+                            if (object.status != null) {
+                                if (typeof object.status !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.status: object expected");
+                                message.status = $root.google.rpc.Status.fromObject(object.status);
+                            }
+                            switch (object.datasetConfigState) {
+                            default:
+                                if (typeof object.datasetConfigState === "number") {
+                                    message.datasetConfigState = object.datasetConfigState;
+                                    break;
+                                }
+                                break;
+                            case "CONFIG_STATE_UNSPECIFIED":
+                            case 0:
+                                message.datasetConfigState = 0;
+                                break;
+                            case "CONFIG_STATE_ACTIVE":
+                            case 1:
+                                message.datasetConfigState = 1;
+                                break;
+                            case "CONFIG_STATE_VERIFICATION_IN_PROGRESS":
+                            case 2:
+                                message.datasetConfigState = 2;
+                                break;
+                            case "CONFIG_STATE_CREATED":
+                            case 3:
+                                message.datasetConfigState = 3;
+                                break;
+                            case "CONFIG_STATE_PROCESSING":
+                            case 4:
+                                message.datasetConfigState = 4;
+                                break;
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DatasetConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.DatasetConfig} message DatasetConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DatasetConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.uid = "";
+                                object.includeNewlyCreatedBuckets = false;
+                                object.retentionPeriodDays = 0;
+                                object.link = null;
+                                object.identity = null;
+                                object.status = null;
+                                object.datasetConfigState = options.enums === String ? "CONFIG_STATE_UNSPECIFIED" : 0;
+                                object.skipVerificationAndIngest = false;
+                                object.description = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.organizationNumber = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.organizationNumber = options.longs === String ? "0" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.sourceProjects != null && message.hasOwnProperty("sourceProjects")) {
+                                object.sourceProjects = $root.google.cloud.storageinsights.v1.DatasetConfig.SourceProjects.toObject(message.sourceProjects, options);
+                                if (options.oneofs)
+                                    object.sourceOptions = "sourceProjects";
+                            }
+                            if (message.includeCloudStorageLocations != null && message.hasOwnProperty("includeCloudStorageLocations")) {
+                                object.includeCloudStorageLocations = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.toObject(message.includeCloudStorageLocations, options);
+                                if (options.oneofs)
+                                    object.cloudStorageLocations = "includeCloudStorageLocations";
+                            }
+                            if (message.excludeCloudStorageLocations != null && message.hasOwnProperty("excludeCloudStorageLocations")) {
+                                object.excludeCloudStorageLocations = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.toObject(message.excludeCloudStorageLocations, options);
+                                if (options.oneofs)
+                                    object.cloudStorageLocations = "excludeCloudStorageLocations";
+                            }
+                            if (message.includeCloudStorageBuckets != null && message.hasOwnProperty("includeCloudStorageBuckets")) {
+                                object.includeCloudStorageBuckets = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.toObject(message.includeCloudStorageBuckets, options);
+                                if (options.oneofs)
+                                    object.cloudStorageBuckets = "includeCloudStorageBuckets";
+                            }
+                            if (message.excludeCloudStorageBuckets != null && message.hasOwnProperty("excludeCloudStorageBuckets")) {
+                                object.excludeCloudStorageBuckets = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.toObject(message.excludeCloudStorageBuckets, options);
+                                if (options.oneofs)
+                                    object.cloudStorageBuckets = "excludeCloudStorageBuckets";
+                            }
+                            if (message.includeNewlyCreatedBuckets != null && message.hasOwnProperty("includeNewlyCreatedBuckets"))
+                                object.includeNewlyCreatedBuckets = message.includeNewlyCreatedBuckets;
+                            if (message.retentionPeriodDays != null && message.hasOwnProperty("retentionPeriodDays"))
+                                object.retentionPeriodDays = message.retentionPeriodDays;
+                            if (message.link != null && message.hasOwnProperty("link"))
+                                object.link = $root.google.cloud.storageinsights.v1.DatasetConfig.Link.toObject(message.link, options);
+                            if (message.identity != null && message.hasOwnProperty("identity"))
+                                object.identity = $root.google.cloud.storageinsights.v1.Identity.toObject(message.identity, options);
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = $root.google.rpc.Status.toObject(message.status, options);
+                            if (message.datasetConfigState != null && message.hasOwnProperty("datasetConfigState"))
+                                object.datasetConfigState = options.enums === String ? $root.google.cloud.storageinsights.v1.DatasetConfig.ConfigState[message.datasetConfigState] === undefined ? message.datasetConfigState : $root.google.cloud.storageinsights.v1.DatasetConfig.ConfigState[message.datasetConfigState] : message.datasetConfigState;
+                            if (message.skipVerificationAndIngest != null && message.hasOwnProperty("skipVerificationAndIngest"))
+                                object.skipVerificationAndIngest = message.skipVerificationAndIngest;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.cloudStorageObjectPath != null && message.hasOwnProperty("cloudStorageObjectPath")) {
+                                object.cloudStorageObjectPath = message.cloudStorageObjectPath;
+                                if (options.oneofs)
+                                    object.sourceOptions = "cloudStorageObjectPath";
+                            }
+                            if (message.organizationNumber != null && message.hasOwnProperty("organizationNumber"))
+                                if (typeof message.organizationNumber === "number")
+                                    object.organizationNumber = options.longs === String ? String(message.organizationNumber) : message.organizationNumber;
+                                else
+                                    object.organizationNumber = options.longs === String ? $util.Long.prototype.toString.call(message.organizationNumber) : options.longs === Number ? new $util.LongBits(message.organizationNumber.low >>> 0, message.organizationNumber.high >>> 0).toNumber() : message.organizationNumber;
+                            if (message.sourceFolders != null && message.hasOwnProperty("sourceFolders")) {
+                                object.sourceFolders = $root.google.cloud.storageinsights.v1.DatasetConfig.SourceFolders.toObject(message.sourceFolders, options);
+                                if (options.oneofs)
+                                    object.sourceOptions = "sourceFolders";
+                            }
+                            if (message.organizationScope != null && message.hasOwnProperty("organizationScope")) {
+                                object.organizationScope = message.organizationScope;
+                                if (options.oneofs)
+                                    object.sourceOptions = "organizationScope";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DatasetConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DatasetConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DatasetConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DatasetConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storageinsights.v1.DatasetConfig";
+                        };
+    
+                        DatasetConfig.SourceProjects = (function() {
+    
+                            /**
+                             * Properties of a SourceProjects.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @interface ISourceProjects
+                             * @property {Array.<number|Long>|null} [projectNumbers] SourceProjects projectNumbers
+                             */
+    
+                            /**
+                             * Constructs a new SourceProjects.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @classdesc Represents a SourceProjects.
+                             * @implements ISourceProjects
+                             * @constructor
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ISourceProjects=} [properties] Properties to set
+                             */
+                            function SourceProjects(properties) {
+                                this.projectNumbers = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SourceProjects projectNumbers.
+                             * @member {Array.<number|Long>} projectNumbers
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceProjects
+                             * @instance
+                             */
+                            SourceProjects.prototype.projectNumbers = $util.emptyArray;
+    
+                            /**
+                             * Creates a new SourceProjects instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceProjects
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ISourceProjects=} [properties] Properties to set
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.SourceProjects} SourceProjects instance
+                             */
+                            SourceProjects.create = function create(properties) {
+                                return new SourceProjects(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SourceProjects message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.SourceProjects.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceProjects
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ISourceProjects} message SourceProjects message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SourceProjects.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.projectNumbers != null && message.projectNumbers.length) {
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                    for (var i = 0; i < message.projectNumbers.length; ++i)
+                                        writer.int64(message.projectNumbers[i]);
+                                    writer.ldelim();
+                                }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SourceProjects message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.SourceProjects.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceProjects
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ISourceProjects} message SourceProjects message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SourceProjects.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SourceProjects message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceProjects
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.SourceProjects} SourceProjects
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SourceProjects.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.DatasetConfig.SourceProjects();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.projectNumbers && message.projectNumbers.length))
+                                                message.projectNumbers = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.projectNumbers.push(reader.int64());
+                                            } else
+                                                message.projectNumbers.push(reader.int64());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SourceProjects message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceProjects
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.SourceProjects} SourceProjects
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SourceProjects.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SourceProjects message.
+                             * @function verify
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceProjects
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SourceProjects.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.projectNumbers != null && message.hasOwnProperty("projectNumbers")) {
+                                    if (!Array.isArray(message.projectNumbers))
+                                        return "projectNumbers: array expected";
+                                    for (var i = 0; i < message.projectNumbers.length; ++i)
+                                        if (!$util.isInteger(message.projectNumbers[i]) && !(message.projectNumbers[i] && $util.isInteger(message.projectNumbers[i].low) && $util.isInteger(message.projectNumbers[i].high)))
+                                            return "projectNumbers: integer|Long[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SourceProjects message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceProjects
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.SourceProjects} SourceProjects
+                             */
+                            SourceProjects.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.storageinsights.v1.DatasetConfig.SourceProjects)
+                                    return object;
+                                var message = new $root.google.cloud.storageinsights.v1.DatasetConfig.SourceProjects();
+                                if (object.projectNumbers) {
+                                    if (!Array.isArray(object.projectNumbers))
+                                        throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.SourceProjects.projectNumbers: array expected");
+                                    message.projectNumbers = [];
+                                    for (var i = 0; i < object.projectNumbers.length; ++i)
+                                        if ($util.Long)
+                                            (message.projectNumbers[i] = $util.Long.fromValue(object.projectNumbers[i])).unsigned = false;
+                                        else if (typeof object.projectNumbers[i] === "string")
+                                            message.projectNumbers[i] = parseInt(object.projectNumbers[i], 10);
+                                        else if (typeof object.projectNumbers[i] === "number")
+                                            message.projectNumbers[i] = object.projectNumbers[i];
+                                        else if (typeof object.projectNumbers[i] === "object")
+                                            message.projectNumbers[i] = new $util.LongBits(object.projectNumbers[i].low >>> 0, object.projectNumbers[i].high >>> 0).toNumber();
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SourceProjects message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceProjects
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.SourceProjects} message SourceProjects
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SourceProjects.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.projectNumbers = [];
+                                if (message.projectNumbers && message.projectNumbers.length) {
+                                    object.projectNumbers = [];
+                                    for (var j = 0; j < message.projectNumbers.length; ++j)
+                                        if (typeof message.projectNumbers[j] === "number")
+                                            object.projectNumbers[j] = options.longs === String ? String(message.projectNumbers[j]) : message.projectNumbers[j];
+                                        else
+                                            object.projectNumbers[j] = options.longs === String ? $util.Long.prototype.toString.call(message.projectNumbers[j]) : options.longs === Number ? new $util.LongBits(message.projectNumbers[j].low >>> 0, message.projectNumbers[j].high >>> 0).toNumber() : message.projectNumbers[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SourceProjects to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceProjects
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SourceProjects.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SourceProjects
+                             * @function getTypeUrl
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceProjects
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SourceProjects.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.storageinsights.v1.DatasetConfig.SourceProjects";
+                            };
+    
+                            return SourceProjects;
+                        })();
+    
+                        DatasetConfig.SourceFolders = (function() {
+    
+                            /**
+                             * Properties of a SourceFolders.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @interface ISourceFolders
+                             * @property {Array.<number|Long>|null} [folderNumbers] SourceFolders folderNumbers
+                             */
+    
+                            /**
+                             * Constructs a new SourceFolders.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @classdesc Represents a SourceFolders.
+                             * @implements ISourceFolders
+                             * @constructor
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ISourceFolders=} [properties] Properties to set
+                             */
+                            function SourceFolders(properties) {
+                                this.folderNumbers = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SourceFolders folderNumbers.
+                             * @member {Array.<number|Long>} folderNumbers
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceFolders
+                             * @instance
+                             */
+                            SourceFolders.prototype.folderNumbers = $util.emptyArray;
+    
+                            /**
+                             * Creates a new SourceFolders instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceFolders
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ISourceFolders=} [properties] Properties to set
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.SourceFolders} SourceFolders instance
+                             */
+                            SourceFolders.create = function create(properties) {
+                                return new SourceFolders(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SourceFolders message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.SourceFolders.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceFolders
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ISourceFolders} message SourceFolders message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SourceFolders.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.folderNumbers != null && message.folderNumbers.length) {
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                    for (var i = 0; i < message.folderNumbers.length; ++i)
+                                        writer.int64(message.folderNumbers[i]);
+                                    writer.ldelim();
+                                }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SourceFolders message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.SourceFolders.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceFolders
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ISourceFolders} message SourceFolders message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SourceFolders.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SourceFolders message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceFolders
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.SourceFolders} SourceFolders
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SourceFolders.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.DatasetConfig.SourceFolders();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.folderNumbers && message.folderNumbers.length))
+                                                message.folderNumbers = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.folderNumbers.push(reader.int64());
+                                            } else
+                                                message.folderNumbers.push(reader.int64());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SourceFolders message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceFolders
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.SourceFolders} SourceFolders
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SourceFolders.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SourceFolders message.
+                             * @function verify
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceFolders
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SourceFolders.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.folderNumbers != null && message.hasOwnProperty("folderNumbers")) {
+                                    if (!Array.isArray(message.folderNumbers))
+                                        return "folderNumbers: array expected";
+                                    for (var i = 0; i < message.folderNumbers.length; ++i)
+                                        if (!$util.isInteger(message.folderNumbers[i]) && !(message.folderNumbers[i] && $util.isInteger(message.folderNumbers[i].low) && $util.isInteger(message.folderNumbers[i].high)))
+                                            return "folderNumbers: integer|Long[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SourceFolders message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceFolders
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.SourceFolders} SourceFolders
+                             */
+                            SourceFolders.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.storageinsights.v1.DatasetConfig.SourceFolders)
+                                    return object;
+                                var message = new $root.google.cloud.storageinsights.v1.DatasetConfig.SourceFolders();
+                                if (object.folderNumbers) {
+                                    if (!Array.isArray(object.folderNumbers))
+                                        throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.SourceFolders.folderNumbers: array expected");
+                                    message.folderNumbers = [];
+                                    for (var i = 0; i < object.folderNumbers.length; ++i)
+                                        if ($util.Long)
+                                            (message.folderNumbers[i] = $util.Long.fromValue(object.folderNumbers[i])).unsigned = false;
+                                        else if (typeof object.folderNumbers[i] === "string")
+                                            message.folderNumbers[i] = parseInt(object.folderNumbers[i], 10);
+                                        else if (typeof object.folderNumbers[i] === "number")
+                                            message.folderNumbers[i] = object.folderNumbers[i];
+                                        else if (typeof object.folderNumbers[i] === "object")
+                                            message.folderNumbers[i] = new $util.LongBits(object.folderNumbers[i].low >>> 0, object.folderNumbers[i].high >>> 0).toNumber();
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SourceFolders message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceFolders
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.SourceFolders} message SourceFolders
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SourceFolders.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.folderNumbers = [];
+                                if (message.folderNumbers && message.folderNumbers.length) {
+                                    object.folderNumbers = [];
+                                    for (var j = 0; j < message.folderNumbers.length; ++j)
+                                        if (typeof message.folderNumbers[j] === "number")
+                                            object.folderNumbers[j] = options.longs === String ? String(message.folderNumbers[j]) : message.folderNumbers[j];
+                                        else
+                                            object.folderNumbers[j] = options.longs === String ? $util.Long.prototype.toString.call(message.folderNumbers[j]) : options.longs === Number ? new $util.LongBits(message.folderNumbers[j].low >>> 0, message.folderNumbers[j].high >>> 0).toNumber() : message.folderNumbers[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SourceFolders to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceFolders
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SourceFolders.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SourceFolders
+                             * @function getTypeUrl
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.SourceFolders
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SourceFolders.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.storageinsights.v1.DatasetConfig.SourceFolders";
+                            };
+    
+                            return SourceFolders;
+                        })();
+    
+                        DatasetConfig.CloudStorageLocations = (function() {
+    
+                            /**
+                             * Properties of a CloudStorageLocations.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @interface ICloudStorageLocations
+                             * @property {Array.<string>|null} [locations] CloudStorageLocations locations
+                             */
+    
+                            /**
+                             * Constructs a new CloudStorageLocations.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @classdesc Represents a CloudStorageLocations.
+                             * @implements ICloudStorageLocations
+                             * @constructor
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations=} [properties] Properties to set
+                             */
+                            function CloudStorageLocations(properties) {
+                                this.locations = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CloudStorageLocations locations.
+                             * @member {Array.<string>} locations
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations
+                             * @instance
+                             */
+                            CloudStorageLocations.prototype.locations = $util.emptyArray;
+    
+                            /**
+                             * Creates a new CloudStorageLocations instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations=} [properties] Properties to set
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations} CloudStorageLocations instance
+                             */
+                            CloudStorageLocations.create = function create(properties) {
+                                return new CloudStorageLocations(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CloudStorageLocations message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations} message CloudStorageLocations message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudStorageLocations.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.locations != null && message.locations.length)
+                                    for (var i = 0; i < message.locations.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.locations[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CloudStorageLocations message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageLocations} message CloudStorageLocations message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudStorageLocations.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CloudStorageLocations message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations} CloudStorageLocations
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudStorageLocations.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.locations && message.locations.length))
+                                                message.locations = [];
+                                            message.locations.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CloudStorageLocations message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations} CloudStorageLocations
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudStorageLocations.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CloudStorageLocations message.
+                             * @function verify
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CloudStorageLocations.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.locations != null && message.hasOwnProperty("locations")) {
+                                    if (!Array.isArray(message.locations))
+                                        return "locations: array expected";
+                                    for (var i = 0; i < message.locations.length; ++i)
+                                        if (!$util.isString(message.locations[i]))
+                                            return "locations: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CloudStorageLocations message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations} CloudStorageLocations
+                             */
+                            CloudStorageLocations.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations)
+                                    return object;
+                                var message = new $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations();
+                                if (object.locations) {
+                                    if (!Array.isArray(object.locations))
+                                        throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations.locations: array expected");
+                                    message.locations = [];
+                                    for (var i = 0; i < object.locations.length; ++i)
+                                        message.locations[i] = String(object.locations[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CloudStorageLocations message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations} message CloudStorageLocations
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CloudStorageLocations.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.locations = [];
+                                if (message.locations && message.locations.length) {
+                                    object.locations = [];
+                                    for (var j = 0; j < message.locations.length; ++j)
+                                        object.locations[j] = message.locations[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CloudStorageLocations to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CloudStorageLocations.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CloudStorageLocations
+                             * @function getTypeUrl
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CloudStorageLocations.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations";
+                            };
+    
+                            return CloudStorageLocations;
+                        })();
+    
+                        DatasetConfig.CloudStorageBuckets = (function() {
+    
+                            /**
+                             * Properties of a CloudStorageBuckets.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @interface ICloudStorageBuckets
+                             * @property {Array.<google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.ICloudStorageBucket>|null} [cloudStorageBuckets] CloudStorageBuckets cloudStorageBuckets
+                             */
+    
+                            /**
+                             * Constructs a new CloudStorageBuckets.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @classdesc Represents a CloudStorageBuckets.
+                             * @implements ICloudStorageBuckets
+                             * @constructor
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets=} [properties] Properties to set
+                             */
+                            function CloudStorageBuckets(properties) {
+                                this.cloudStorageBuckets = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CloudStorageBuckets cloudStorageBuckets.
+                             * @member {Array.<google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.ICloudStorageBucket>} cloudStorageBuckets
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                             * @instance
+                             */
+                            CloudStorageBuckets.prototype.cloudStorageBuckets = $util.emptyArray;
+    
+                            /**
+                             * Creates a new CloudStorageBuckets instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets=} [properties] Properties to set
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets} CloudStorageBuckets instance
+                             */
+                            CloudStorageBuckets.create = function create(properties) {
+                                return new CloudStorageBuckets(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CloudStorageBuckets message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets} message CloudStorageBuckets message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudStorageBuckets.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.cloudStorageBuckets != null && message.cloudStorageBuckets.length)
+                                    for (var i = 0; i < message.cloudStorageBuckets.length; ++i)
+                                        $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket.encode(message.cloudStorageBuckets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CloudStorageBuckets message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ICloudStorageBuckets} message CloudStorageBuckets message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudStorageBuckets.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CloudStorageBuckets message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets} CloudStorageBuckets
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudStorageBuckets.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.cloudStorageBuckets && message.cloudStorageBuckets.length))
+                                                message.cloudStorageBuckets = [];
+                                            message.cloudStorageBuckets.push($root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CloudStorageBuckets message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets} CloudStorageBuckets
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudStorageBuckets.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CloudStorageBuckets message.
+                             * @function verify
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CloudStorageBuckets.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.cloudStorageBuckets != null && message.hasOwnProperty("cloudStorageBuckets")) {
+                                    if (!Array.isArray(message.cloudStorageBuckets))
+                                        return "cloudStorageBuckets: array expected";
+                                    for (var i = 0; i < message.cloudStorageBuckets.length; ++i) {
+                                        var error = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket.verify(message.cloudStorageBuckets[i]);
+                                        if (error)
+                                            return "cloudStorageBuckets." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CloudStorageBuckets message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets} CloudStorageBuckets
+                             */
+                            CloudStorageBuckets.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets)
+                                    return object;
+                                var message = new $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets();
+                                if (object.cloudStorageBuckets) {
+                                    if (!Array.isArray(object.cloudStorageBuckets))
+                                        throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.cloudStorageBuckets: array expected");
+                                    message.cloudStorageBuckets = [];
+                                    for (var i = 0; i < object.cloudStorageBuckets.length; ++i) {
+                                        if (typeof object.cloudStorageBuckets[i] !== "object")
+                                            throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.cloudStorageBuckets: object expected");
+                                        message.cloudStorageBuckets[i] = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket.fromObject(object.cloudStorageBuckets[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CloudStorageBuckets message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets} message CloudStorageBuckets
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CloudStorageBuckets.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.cloudStorageBuckets = [];
+                                if (message.cloudStorageBuckets && message.cloudStorageBuckets.length) {
+                                    object.cloudStorageBuckets = [];
+                                    for (var j = 0; j < message.cloudStorageBuckets.length; ++j)
+                                        object.cloudStorageBuckets[j] = $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket.toObject(message.cloudStorageBuckets[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CloudStorageBuckets to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CloudStorageBuckets.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CloudStorageBuckets
+                             * @function getTypeUrl
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CloudStorageBuckets.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets";
+                            };
+    
+                            CloudStorageBuckets.CloudStorageBucket = (function() {
+    
+                                /**
+                                 * Properties of a CloudStorageBucket.
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                                 * @interface ICloudStorageBucket
+                                 * @property {string|null} [bucketName] CloudStorageBucket bucketName
+                                 * @property {string|null} [bucketPrefixRegex] CloudStorageBucket bucketPrefixRegex
+                                 */
+    
+                                /**
+                                 * Constructs a new CloudStorageBucket.
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets
+                                 * @classdesc Represents a CloudStorageBucket.
+                                 * @implements ICloudStorageBucket
+                                 * @constructor
+                                 * @param {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.ICloudStorageBucket=} [properties] Properties to set
+                                 */
+                                function CloudStorageBucket(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * CloudStorageBucket bucketName.
+                                 * @member {string|null|undefined} bucketName
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @instance
+                                 */
+                                CloudStorageBucket.prototype.bucketName = null;
+    
+                                /**
+                                 * CloudStorageBucket bucketPrefixRegex.
+                                 * @member {string|null|undefined} bucketPrefixRegex
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @instance
+                                 */
+                                CloudStorageBucket.prototype.bucketPrefixRegex = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * CloudStorageBucket cloudStorageBucket.
+                                 * @member {"bucketName"|"bucketPrefixRegex"|undefined} cloudStorageBucket
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @instance
+                                 */
+                                Object.defineProperty(CloudStorageBucket.prototype, "cloudStorageBucket", {
+                                    get: $util.oneOfGetter($oneOfFields = ["bucketName", "bucketPrefixRegex"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new CloudStorageBucket instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @static
+                                 * @param {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.ICloudStorageBucket=} [properties] Properties to set
+                                 * @returns {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket} CloudStorageBucket instance
+                                 */
+                                CloudStorageBucket.create = function create(properties) {
+                                    return new CloudStorageBucket(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified CloudStorageBucket message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @static
+                                 * @param {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.ICloudStorageBucket} message CloudStorageBucket message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CloudStorageBucket.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.bucketName != null && Object.hasOwnProperty.call(message, "bucketName"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucketName);
+                                    if (message.bucketPrefixRegex != null && Object.hasOwnProperty.call(message, "bucketPrefixRegex"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.bucketPrefixRegex);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified CloudStorageBucket message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @static
+                                 * @param {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.ICloudStorageBucket} message CloudStorageBucket message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CloudStorageBucket.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a CloudStorageBucket message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket} CloudStorageBucket
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CloudStorageBucket.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.bucketName = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.bucketPrefixRegex = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a CloudStorageBucket message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket} CloudStorageBucket
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CloudStorageBucket.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a CloudStorageBucket message.
+                                 * @function verify
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                CloudStorageBucket.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.bucketName != null && message.hasOwnProperty("bucketName")) {
+                                        properties.cloudStorageBucket = 1;
+                                        if (!$util.isString(message.bucketName))
+                                            return "bucketName: string expected";
+                                    }
+                                    if (message.bucketPrefixRegex != null && message.hasOwnProperty("bucketPrefixRegex")) {
+                                        if (properties.cloudStorageBucket === 1)
+                                            return "cloudStorageBucket: multiple values";
+                                        properties.cloudStorageBucket = 1;
+                                        if (!$util.isString(message.bucketPrefixRegex))
+                                            return "bucketPrefixRegex: string expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a CloudStorageBucket message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket} CloudStorageBucket
+                                 */
+                                CloudStorageBucket.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket)
+                                        return object;
+                                    var message = new $root.google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket();
+                                    if (object.bucketName != null)
+                                        message.bucketName = String(object.bucketName);
+                                    if (object.bucketPrefixRegex != null)
+                                        message.bucketPrefixRegex = String(object.bucketPrefixRegex);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a CloudStorageBucket message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @static
+                                 * @param {google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket} message CloudStorageBucket
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                CloudStorageBucket.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.bucketName != null && message.hasOwnProperty("bucketName")) {
+                                        object.bucketName = message.bucketName;
+                                        if (options.oneofs)
+                                            object.cloudStorageBucket = "bucketName";
+                                    }
+                                    if (message.bucketPrefixRegex != null && message.hasOwnProperty("bucketPrefixRegex")) {
+                                        object.bucketPrefixRegex = message.bucketPrefixRegex;
+                                        if (options.oneofs)
+                                            object.cloudStorageBucket = "bucketPrefixRegex";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this CloudStorageBucket to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                CloudStorageBucket.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for CloudStorageBucket
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                CloudStorageBucket.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket";
+                                };
+    
+                                return CloudStorageBucket;
+                            })();
+    
+                            return CloudStorageBuckets;
+                        })();
+    
+                        DatasetConfig.Link = (function() {
+    
+                            /**
+                             * Properties of a Link.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @interface ILink
+                             * @property {string|null} [dataset] Link dataset
+                             * @property {boolean|null} [linked] Link linked
+                             */
+    
+                            /**
+                             * Constructs a new Link.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @classdesc Represents a Link.
+                             * @implements ILink
+                             * @constructor
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ILink=} [properties] Properties to set
+                             */
+                            function Link(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Link dataset.
+                             * @member {string} dataset
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.Link
+                             * @instance
+                             */
+                            Link.prototype.dataset = "";
+    
+                            /**
+                             * Link linked.
+                             * @member {boolean} linked
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.Link
+                             * @instance
+                             */
+                            Link.prototype.linked = false;
+    
+                            /**
+                             * Creates a new Link instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.Link
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ILink=} [properties] Properties to set
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.Link} Link instance
+                             */
+                            Link.create = function create(properties) {
+                                return new Link(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Link message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.Link.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.Link
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ILink} message Link message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Link.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataset != null && Object.hasOwnProperty.call(message, "dataset"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataset);
+                                if (message.linked != null && Object.hasOwnProperty.call(message, "linked"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.linked);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Link message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.Link.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.Link
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ILink} message Link message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Link.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Link message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.Link
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.Link} Link
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Link.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.DatasetConfig.Link();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.dataset = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.linked = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Link message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.Link
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.Link} Link
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Link.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Link message.
+                             * @function verify
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.Link
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Link.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                    if (!$util.isString(message.dataset))
+                                        return "dataset: string expected";
+                                if (message.linked != null && message.hasOwnProperty("linked"))
+                                    if (typeof message.linked !== "boolean")
+                                        return "linked: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Link message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.Link
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.Link} Link
+                             */
+                            Link.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.storageinsights.v1.DatasetConfig.Link)
+                                    return object;
+                                var message = new $root.google.cloud.storageinsights.v1.DatasetConfig.Link();
+                                if (object.dataset != null)
+                                    message.dataset = String(object.dataset);
+                                if (object.linked != null)
+                                    message.linked = Boolean(object.linked);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Link message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.Link
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.Link} message Link
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Link.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.dataset = "";
+                                    object.linked = false;
+                                }
+                                if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                    object.dataset = message.dataset;
+                                if (message.linked != null && message.hasOwnProperty("linked"))
+                                    object.linked = message.linked;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Link to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.Link
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Link.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Link
+                             * @function getTypeUrl
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.Link
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Link.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.storageinsights.v1.DatasetConfig.Link";
+                            };
+    
+                            return Link;
+                        })();
+    
+                        /**
+                         * ConfigState enum.
+                         * @name google.cloud.storageinsights.v1.DatasetConfig.ConfigState
+                         * @enum {number}
+                         * @property {number} CONFIG_STATE_UNSPECIFIED=0 CONFIG_STATE_UNSPECIFIED value
+                         * @property {number} CONFIG_STATE_ACTIVE=1 CONFIG_STATE_ACTIVE value
+                         * @property {number} CONFIG_STATE_VERIFICATION_IN_PROGRESS=2 CONFIG_STATE_VERIFICATION_IN_PROGRESS value
+                         * @property {number} CONFIG_STATE_CREATED=3 CONFIG_STATE_CREATED value
+                         * @property {number} CONFIG_STATE_PROCESSING=4 CONFIG_STATE_PROCESSING value
+                         */
+                        DatasetConfig.ConfigState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONFIG_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CONFIG_STATE_ACTIVE"] = 1;
+                            values[valuesById[2] = "CONFIG_STATE_VERIFICATION_IN_PROGRESS"] = 2;
+                            values[valuesById[3] = "CONFIG_STATE_CREATED"] = 3;
+                            values[valuesById[4] = "CONFIG_STATE_PROCESSING"] = 4;
+                            return values;
+                        })();
+    
+                        DatasetConfig.BucketErrors = (function() {
+    
+                            /**
+                             * Properties of a BucketErrors.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @interface IBucketErrors
+                             * @property {number|Long|null} [validatedCount] BucketErrors validatedCount
+                             * @property {number|Long|null} [permissionDeniedCount] BucketErrors permissionDeniedCount
+                             * @property {Array.<string>|null} [permissionDeniedBucketIds] BucketErrors permissionDeniedBucketIds
+                             * @property {number|Long|null} [nonManagementHubEntitledCount] BucketErrors nonManagementHubEntitledCount
+                             * @property {number|Long|null} [internalErrorCount] BucketErrors internalErrorCount
+                             * @property {number|Long|null} [nonStorageIntelligenceEntitledCount] BucketErrors nonStorageIntelligenceEntitledCount
+                             * @property {Array.<string>|null} [nonStorageIntelligenceEntitledBucketIds] BucketErrors nonStorageIntelligenceEntitledBucketIds
+                             */
+    
+                            /**
+                             * Constructs a new BucketErrors.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @classdesc Represents a BucketErrors.
+                             * @implements IBucketErrors
+                             * @constructor
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.IBucketErrors=} [properties] Properties to set
+                             */
+                            function BucketErrors(properties) {
+                                this.permissionDeniedBucketIds = [];
+                                this.nonStorageIntelligenceEntitledBucketIds = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BucketErrors validatedCount.
+                             * @member {number|Long} validatedCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @instance
+                             */
+                            BucketErrors.prototype.validatedCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * BucketErrors permissionDeniedCount.
+                             * @member {number|Long} permissionDeniedCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @instance
+                             */
+                            BucketErrors.prototype.permissionDeniedCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * BucketErrors permissionDeniedBucketIds.
+                             * @member {Array.<string>} permissionDeniedBucketIds
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @instance
+                             */
+                            BucketErrors.prototype.permissionDeniedBucketIds = $util.emptyArray;
+    
+                            /**
+                             * BucketErrors nonManagementHubEntitledCount.
+                             * @member {number|Long} nonManagementHubEntitledCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @instance
+                             */
+                            BucketErrors.prototype.nonManagementHubEntitledCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * BucketErrors internalErrorCount.
+                             * @member {number|Long} internalErrorCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @instance
+                             */
+                            BucketErrors.prototype.internalErrorCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * BucketErrors nonStorageIntelligenceEntitledCount.
+                             * @member {number|Long} nonStorageIntelligenceEntitledCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @instance
+                             */
+                            BucketErrors.prototype.nonStorageIntelligenceEntitledCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * BucketErrors nonStorageIntelligenceEntitledBucketIds.
+                             * @member {Array.<string>} nonStorageIntelligenceEntitledBucketIds
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @instance
+                             */
+                            BucketErrors.prototype.nonStorageIntelligenceEntitledBucketIds = $util.emptyArray;
+    
+                            /**
+                             * Creates a new BucketErrors instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.IBucketErrors=} [properties] Properties to set
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.BucketErrors} BucketErrors instance
+                             */
+                            BucketErrors.create = function create(properties) {
+                                return new BucketErrors(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BucketErrors message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.BucketErrors.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.IBucketErrors} message BucketErrors message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BucketErrors.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.validatedCount != null && Object.hasOwnProperty.call(message, "validatedCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.validatedCount);
+                                if (message.permissionDeniedCount != null && Object.hasOwnProperty.call(message, "permissionDeniedCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.permissionDeniedCount);
+                                if (message.permissionDeniedBucketIds != null && message.permissionDeniedBucketIds.length)
+                                    for (var i = 0; i < message.permissionDeniedBucketIds.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.permissionDeniedBucketIds[i]);
+                                if (message.internalErrorCount != null && Object.hasOwnProperty.call(message, "internalErrorCount"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.internalErrorCount);
+                                if (message.nonManagementHubEntitledCount != null && Object.hasOwnProperty.call(message, "nonManagementHubEntitledCount"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int64(message.nonManagementHubEntitledCount);
+                                if (message.nonStorageIntelligenceEntitledCount != null && Object.hasOwnProperty.call(message, "nonStorageIntelligenceEntitledCount"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int64(message.nonStorageIntelligenceEntitledCount);
+                                if (message.nonStorageIntelligenceEntitledBucketIds != null && message.nonStorageIntelligenceEntitledBucketIds.length)
+                                    for (var i = 0; i < message.nonStorageIntelligenceEntitledBucketIds.length; ++i)
+                                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.nonStorageIntelligenceEntitledBucketIds[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BucketErrors message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.BucketErrors.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.IBucketErrors} message BucketErrors message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BucketErrors.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BucketErrors message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.BucketErrors} BucketErrors
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BucketErrors.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.DatasetConfig.BucketErrors();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.validatedCount = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.permissionDeniedCount = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.permissionDeniedBucketIds && message.permissionDeniedBucketIds.length))
+                                                message.permissionDeniedBucketIds = [];
+                                            message.permissionDeniedBucketIds.push(reader.string());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.nonManagementHubEntitledCount = reader.int64();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.internalErrorCount = reader.int64();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.nonStorageIntelligenceEntitledCount = reader.int64();
+                                            break;
+                                        }
+                                    case 8: {
+                                            if (!(message.nonStorageIntelligenceEntitledBucketIds && message.nonStorageIntelligenceEntitledBucketIds.length))
+                                                message.nonStorageIntelligenceEntitledBucketIds = [];
+                                            message.nonStorageIntelligenceEntitledBucketIds.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BucketErrors message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.BucketErrors} BucketErrors
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BucketErrors.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BucketErrors message.
+                             * @function verify
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BucketErrors.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.validatedCount != null && message.hasOwnProperty("validatedCount"))
+                                    if (!$util.isInteger(message.validatedCount) && !(message.validatedCount && $util.isInteger(message.validatedCount.low) && $util.isInteger(message.validatedCount.high)))
+                                        return "validatedCount: integer|Long expected";
+                                if (message.permissionDeniedCount != null && message.hasOwnProperty("permissionDeniedCount"))
+                                    if (!$util.isInteger(message.permissionDeniedCount) && !(message.permissionDeniedCount && $util.isInteger(message.permissionDeniedCount.low) && $util.isInteger(message.permissionDeniedCount.high)))
+                                        return "permissionDeniedCount: integer|Long expected";
+                                if (message.permissionDeniedBucketIds != null && message.hasOwnProperty("permissionDeniedBucketIds")) {
+                                    if (!Array.isArray(message.permissionDeniedBucketIds))
+                                        return "permissionDeniedBucketIds: array expected";
+                                    for (var i = 0; i < message.permissionDeniedBucketIds.length; ++i)
+                                        if (!$util.isString(message.permissionDeniedBucketIds[i]))
+                                            return "permissionDeniedBucketIds: string[] expected";
+                                }
+                                if (message.nonManagementHubEntitledCount != null && message.hasOwnProperty("nonManagementHubEntitledCount"))
+                                    if (!$util.isInteger(message.nonManagementHubEntitledCount) && !(message.nonManagementHubEntitledCount && $util.isInteger(message.nonManagementHubEntitledCount.low) && $util.isInteger(message.nonManagementHubEntitledCount.high)))
+                                        return "nonManagementHubEntitledCount: integer|Long expected";
+                                if (message.internalErrorCount != null && message.hasOwnProperty("internalErrorCount"))
+                                    if (!$util.isInteger(message.internalErrorCount) && !(message.internalErrorCount && $util.isInteger(message.internalErrorCount.low) && $util.isInteger(message.internalErrorCount.high)))
+                                        return "internalErrorCount: integer|Long expected";
+                                if (message.nonStorageIntelligenceEntitledCount != null && message.hasOwnProperty("nonStorageIntelligenceEntitledCount"))
+                                    if (!$util.isInteger(message.nonStorageIntelligenceEntitledCount) && !(message.nonStorageIntelligenceEntitledCount && $util.isInteger(message.nonStorageIntelligenceEntitledCount.low) && $util.isInteger(message.nonStorageIntelligenceEntitledCount.high)))
+                                        return "nonStorageIntelligenceEntitledCount: integer|Long expected";
+                                if (message.nonStorageIntelligenceEntitledBucketIds != null && message.hasOwnProperty("nonStorageIntelligenceEntitledBucketIds")) {
+                                    if (!Array.isArray(message.nonStorageIntelligenceEntitledBucketIds))
+                                        return "nonStorageIntelligenceEntitledBucketIds: array expected";
+                                    for (var i = 0; i < message.nonStorageIntelligenceEntitledBucketIds.length; ++i)
+                                        if (!$util.isString(message.nonStorageIntelligenceEntitledBucketIds[i]))
+                                            return "nonStorageIntelligenceEntitledBucketIds: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BucketErrors message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.BucketErrors} BucketErrors
+                             */
+                            BucketErrors.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.storageinsights.v1.DatasetConfig.BucketErrors)
+                                    return object;
+                                var message = new $root.google.cloud.storageinsights.v1.DatasetConfig.BucketErrors();
+                                if (object.validatedCount != null)
+                                    if ($util.Long)
+                                        (message.validatedCount = $util.Long.fromValue(object.validatedCount)).unsigned = false;
+                                    else if (typeof object.validatedCount === "string")
+                                        message.validatedCount = parseInt(object.validatedCount, 10);
+                                    else if (typeof object.validatedCount === "number")
+                                        message.validatedCount = object.validatedCount;
+                                    else if (typeof object.validatedCount === "object")
+                                        message.validatedCount = new $util.LongBits(object.validatedCount.low >>> 0, object.validatedCount.high >>> 0).toNumber();
+                                if (object.permissionDeniedCount != null)
+                                    if ($util.Long)
+                                        (message.permissionDeniedCount = $util.Long.fromValue(object.permissionDeniedCount)).unsigned = false;
+                                    else if (typeof object.permissionDeniedCount === "string")
+                                        message.permissionDeniedCount = parseInt(object.permissionDeniedCount, 10);
+                                    else if (typeof object.permissionDeniedCount === "number")
+                                        message.permissionDeniedCount = object.permissionDeniedCount;
+                                    else if (typeof object.permissionDeniedCount === "object")
+                                        message.permissionDeniedCount = new $util.LongBits(object.permissionDeniedCount.low >>> 0, object.permissionDeniedCount.high >>> 0).toNumber();
+                                if (object.permissionDeniedBucketIds) {
+                                    if (!Array.isArray(object.permissionDeniedBucketIds))
+                                        throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.BucketErrors.permissionDeniedBucketIds: array expected");
+                                    message.permissionDeniedBucketIds = [];
+                                    for (var i = 0; i < object.permissionDeniedBucketIds.length; ++i)
+                                        message.permissionDeniedBucketIds[i] = String(object.permissionDeniedBucketIds[i]);
+                                }
+                                if (object.nonManagementHubEntitledCount != null)
+                                    if ($util.Long)
+                                        (message.nonManagementHubEntitledCount = $util.Long.fromValue(object.nonManagementHubEntitledCount)).unsigned = false;
+                                    else if (typeof object.nonManagementHubEntitledCount === "string")
+                                        message.nonManagementHubEntitledCount = parseInt(object.nonManagementHubEntitledCount, 10);
+                                    else if (typeof object.nonManagementHubEntitledCount === "number")
+                                        message.nonManagementHubEntitledCount = object.nonManagementHubEntitledCount;
+                                    else if (typeof object.nonManagementHubEntitledCount === "object")
+                                        message.nonManagementHubEntitledCount = new $util.LongBits(object.nonManagementHubEntitledCount.low >>> 0, object.nonManagementHubEntitledCount.high >>> 0).toNumber();
+                                if (object.internalErrorCount != null)
+                                    if ($util.Long)
+                                        (message.internalErrorCount = $util.Long.fromValue(object.internalErrorCount)).unsigned = false;
+                                    else if (typeof object.internalErrorCount === "string")
+                                        message.internalErrorCount = parseInt(object.internalErrorCount, 10);
+                                    else if (typeof object.internalErrorCount === "number")
+                                        message.internalErrorCount = object.internalErrorCount;
+                                    else if (typeof object.internalErrorCount === "object")
+                                        message.internalErrorCount = new $util.LongBits(object.internalErrorCount.low >>> 0, object.internalErrorCount.high >>> 0).toNumber();
+                                if (object.nonStorageIntelligenceEntitledCount != null)
+                                    if ($util.Long)
+                                        (message.nonStorageIntelligenceEntitledCount = $util.Long.fromValue(object.nonStorageIntelligenceEntitledCount)).unsigned = false;
+                                    else if (typeof object.nonStorageIntelligenceEntitledCount === "string")
+                                        message.nonStorageIntelligenceEntitledCount = parseInt(object.nonStorageIntelligenceEntitledCount, 10);
+                                    else if (typeof object.nonStorageIntelligenceEntitledCount === "number")
+                                        message.nonStorageIntelligenceEntitledCount = object.nonStorageIntelligenceEntitledCount;
+                                    else if (typeof object.nonStorageIntelligenceEntitledCount === "object")
+                                        message.nonStorageIntelligenceEntitledCount = new $util.LongBits(object.nonStorageIntelligenceEntitledCount.low >>> 0, object.nonStorageIntelligenceEntitledCount.high >>> 0).toNumber();
+                                if (object.nonStorageIntelligenceEntitledBucketIds) {
+                                    if (!Array.isArray(object.nonStorageIntelligenceEntitledBucketIds))
+                                        throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.BucketErrors.nonStorageIntelligenceEntitledBucketIds: array expected");
+                                    message.nonStorageIntelligenceEntitledBucketIds = [];
+                                    for (var i = 0; i < object.nonStorageIntelligenceEntitledBucketIds.length; ++i)
+                                        message.nonStorageIntelligenceEntitledBucketIds[i] = String(object.nonStorageIntelligenceEntitledBucketIds[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BucketErrors message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.BucketErrors} message BucketErrors
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BucketErrors.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.permissionDeniedBucketIds = [];
+                                    object.nonStorageIntelligenceEntitledBucketIds = [];
+                                }
+                                if (options.defaults) {
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.validatedCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.validatedCount = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.permissionDeniedCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.permissionDeniedCount = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.internalErrorCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.internalErrorCount = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.nonManagementHubEntitledCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.nonManagementHubEntitledCount = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.nonStorageIntelligenceEntitledCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.nonStorageIntelligenceEntitledCount = options.longs === String ? "0" : 0;
+                                }
+                                if (message.validatedCount != null && message.hasOwnProperty("validatedCount"))
+                                    if (typeof message.validatedCount === "number")
+                                        object.validatedCount = options.longs === String ? String(message.validatedCount) : message.validatedCount;
+                                    else
+                                        object.validatedCount = options.longs === String ? $util.Long.prototype.toString.call(message.validatedCount) : options.longs === Number ? new $util.LongBits(message.validatedCount.low >>> 0, message.validatedCount.high >>> 0).toNumber() : message.validatedCount;
+                                if (message.permissionDeniedCount != null && message.hasOwnProperty("permissionDeniedCount"))
+                                    if (typeof message.permissionDeniedCount === "number")
+                                        object.permissionDeniedCount = options.longs === String ? String(message.permissionDeniedCount) : message.permissionDeniedCount;
+                                    else
+                                        object.permissionDeniedCount = options.longs === String ? $util.Long.prototype.toString.call(message.permissionDeniedCount) : options.longs === Number ? new $util.LongBits(message.permissionDeniedCount.low >>> 0, message.permissionDeniedCount.high >>> 0).toNumber() : message.permissionDeniedCount;
+                                if (message.permissionDeniedBucketIds && message.permissionDeniedBucketIds.length) {
+                                    object.permissionDeniedBucketIds = [];
+                                    for (var j = 0; j < message.permissionDeniedBucketIds.length; ++j)
+                                        object.permissionDeniedBucketIds[j] = message.permissionDeniedBucketIds[j];
+                                }
+                                if (message.internalErrorCount != null && message.hasOwnProperty("internalErrorCount"))
+                                    if (typeof message.internalErrorCount === "number")
+                                        object.internalErrorCount = options.longs === String ? String(message.internalErrorCount) : message.internalErrorCount;
+                                    else
+                                        object.internalErrorCount = options.longs === String ? $util.Long.prototype.toString.call(message.internalErrorCount) : options.longs === Number ? new $util.LongBits(message.internalErrorCount.low >>> 0, message.internalErrorCount.high >>> 0).toNumber() : message.internalErrorCount;
+                                if (message.nonManagementHubEntitledCount != null && message.hasOwnProperty("nonManagementHubEntitledCount"))
+                                    if (typeof message.nonManagementHubEntitledCount === "number")
+                                        object.nonManagementHubEntitledCount = options.longs === String ? String(message.nonManagementHubEntitledCount) : message.nonManagementHubEntitledCount;
+                                    else
+                                        object.nonManagementHubEntitledCount = options.longs === String ? $util.Long.prototype.toString.call(message.nonManagementHubEntitledCount) : options.longs === Number ? new $util.LongBits(message.nonManagementHubEntitledCount.low >>> 0, message.nonManagementHubEntitledCount.high >>> 0).toNumber() : message.nonManagementHubEntitledCount;
+                                if (message.nonStorageIntelligenceEntitledCount != null && message.hasOwnProperty("nonStorageIntelligenceEntitledCount"))
+                                    if (typeof message.nonStorageIntelligenceEntitledCount === "number")
+                                        object.nonStorageIntelligenceEntitledCount = options.longs === String ? String(message.nonStorageIntelligenceEntitledCount) : message.nonStorageIntelligenceEntitledCount;
+                                    else
+                                        object.nonStorageIntelligenceEntitledCount = options.longs === String ? $util.Long.prototype.toString.call(message.nonStorageIntelligenceEntitledCount) : options.longs === Number ? new $util.LongBits(message.nonStorageIntelligenceEntitledCount.low >>> 0, message.nonStorageIntelligenceEntitledCount.high >>> 0).toNumber() : message.nonStorageIntelligenceEntitledCount;
+                                if (message.nonStorageIntelligenceEntitledBucketIds && message.nonStorageIntelligenceEntitledBucketIds.length) {
+                                    object.nonStorageIntelligenceEntitledBucketIds = [];
+                                    for (var j = 0; j < message.nonStorageIntelligenceEntitledBucketIds.length; ++j)
+                                        object.nonStorageIntelligenceEntitledBucketIds[j] = message.nonStorageIntelligenceEntitledBucketIds[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BucketErrors to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BucketErrors.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BucketErrors
+                             * @function getTypeUrl
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.BucketErrors
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BucketErrors.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.storageinsights.v1.DatasetConfig.BucketErrors";
+                            };
+    
+                            return BucketErrors;
+                        })();
+    
+                        DatasetConfig.ProjectErrors = (function() {
+    
+                            /**
+                             * Properties of a ProjectErrors.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @interface IProjectErrors
+                             * @property {number|Long|null} [validatedCount] ProjectErrors validatedCount
+                             * @property {number|Long|null} [outsideOrgErrorCount] ProjectErrors outsideOrgErrorCount
+                             * @property {Array.<number|Long>|null} [outsideOrgProjectNumbers] ProjectErrors outsideOrgProjectNumbers
+                             * @property {number|Long|null} [nonManagementHubEntitledErrorCount] ProjectErrors nonManagementHubEntitledErrorCount
+                             * @property {Array.<number|Long>|null} [nonManagementHubEntitledProjectNumbers] ProjectErrors nonManagementHubEntitledProjectNumbers
+                             * @property {number|Long|null} [nonStorageIntelligenceEntitledErrorCount] ProjectErrors nonStorageIntelligenceEntitledErrorCount
+                             * @property {Array.<number|Long>|null} [nonStorageIntelligenceEntitledProjectNumbers] ProjectErrors nonStorageIntelligenceEntitledProjectNumbers
+                             * @property {number|Long|null} [internalErrorCount] ProjectErrors internalErrorCount
+                             * @property {boolean|null} [destinationProjectOrgError] ProjectErrors destinationProjectOrgError
+                             * @property {boolean|null} [destinationProjectCheckHasInternalError] ProjectErrors destinationProjectCheckHasInternalError
+                             */
+    
+                            /**
+                             * Constructs a new ProjectErrors.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @classdesc Represents a ProjectErrors.
+                             * @implements IProjectErrors
+                             * @constructor
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.IProjectErrors=} [properties] Properties to set
+                             */
+                            function ProjectErrors(properties) {
+                                this.outsideOrgProjectNumbers = [];
+                                this.nonManagementHubEntitledProjectNumbers = [];
+                                this.nonStorageIntelligenceEntitledProjectNumbers = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ProjectErrors validatedCount.
+                             * @member {number|Long|null|undefined} validatedCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            ProjectErrors.prototype.validatedCount = null;
+    
+                            /**
+                             * ProjectErrors outsideOrgErrorCount.
+                             * @member {number|Long|null|undefined} outsideOrgErrorCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            ProjectErrors.prototype.outsideOrgErrorCount = null;
+    
+                            /**
+                             * ProjectErrors outsideOrgProjectNumbers.
+                             * @member {Array.<number|Long>} outsideOrgProjectNumbers
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            ProjectErrors.prototype.outsideOrgProjectNumbers = $util.emptyArray;
+    
+                            /**
+                             * ProjectErrors nonManagementHubEntitledErrorCount.
+                             * @member {number|Long|null|undefined} nonManagementHubEntitledErrorCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            ProjectErrors.prototype.nonManagementHubEntitledErrorCount = null;
+    
+                            /**
+                             * ProjectErrors nonManagementHubEntitledProjectNumbers.
+                             * @member {Array.<number|Long>} nonManagementHubEntitledProjectNumbers
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            ProjectErrors.prototype.nonManagementHubEntitledProjectNumbers = $util.emptyArray;
+    
+                            /**
+                             * ProjectErrors nonStorageIntelligenceEntitledErrorCount.
+                             * @member {number|Long|null|undefined} nonStorageIntelligenceEntitledErrorCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            ProjectErrors.prototype.nonStorageIntelligenceEntitledErrorCount = null;
+    
+                            /**
+                             * ProjectErrors nonStorageIntelligenceEntitledProjectNumbers.
+                             * @member {Array.<number|Long>} nonStorageIntelligenceEntitledProjectNumbers
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            ProjectErrors.prototype.nonStorageIntelligenceEntitledProjectNumbers = $util.emptyArray;
+    
+                            /**
+                             * ProjectErrors internalErrorCount.
+                             * @member {number|Long|null|undefined} internalErrorCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            ProjectErrors.prototype.internalErrorCount = null;
+    
+                            /**
+                             * ProjectErrors destinationProjectOrgError.
+                             * @member {boolean|null|undefined} destinationProjectOrgError
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            ProjectErrors.prototype.destinationProjectOrgError = null;
+    
+                            /**
+                             * ProjectErrors destinationProjectCheckHasInternalError.
+                             * @member {boolean|null|undefined} destinationProjectCheckHasInternalError
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            ProjectErrors.prototype.destinationProjectCheckHasInternalError = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ProjectErrors _validatedCount.
+                             * @member {"validatedCount"|undefined} _validatedCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            Object.defineProperty(ProjectErrors.prototype, "_validatedCount", {
+                                get: $util.oneOfGetter($oneOfFields = ["validatedCount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ProjectErrors _outsideOrgErrorCount.
+                             * @member {"outsideOrgErrorCount"|undefined} _outsideOrgErrorCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            Object.defineProperty(ProjectErrors.prototype, "_outsideOrgErrorCount", {
+                                get: $util.oneOfGetter($oneOfFields = ["outsideOrgErrorCount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ProjectErrors _nonManagementHubEntitledErrorCount.
+                             * @member {"nonManagementHubEntitledErrorCount"|undefined} _nonManagementHubEntitledErrorCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            Object.defineProperty(ProjectErrors.prototype, "_nonManagementHubEntitledErrorCount", {
+                                get: $util.oneOfGetter($oneOfFields = ["nonManagementHubEntitledErrorCount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ProjectErrors _nonStorageIntelligenceEntitledErrorCount.
+                             * @member {"nonStorageIntelligenceEntitledErrorCount"|undefined} _nonStorageIntelligenceEntitledErrorCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            Object.defineProperty(ProjectErrors.prototype, "_nonStorageIntelligenceEntitledErrorCount", {
+                                get: $util.oneOfGetter($oneOfFields = ["nonStorageIntelligenceEntitledErrorCount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ProjectErrors _internalErrorCount.
+                             * @member {"internalErrorCount"|undefined} _internalErrorCount
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            Object.defineProperty(ProjectErrors.prototype, "_internalErrorCount", {
+                                get: $util.oneOfGetter($oneOfFields = ["internalErrorCount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ProjectErrors destinationProjectCheckResult.
+                             * @member {"destinationProjectOrgError"|"destinationProjectCheckHasInternalError"|undefined} destinationProjectCheckResult
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             */
+                            Object.defineProperty(ProjectErrors.prototype, "destinationProjectCheckResult", {
+                                get: $util.oneOfGetter($oneOfFields = ["destinationProjectOrgError", "destinationProjectCheckHasInternalError"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ProjectErrors instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.IProjectErrors=} [properties] Properties to set
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors} ProjectErrors instance
+                             */
+                            ProjectErrors.create = function create(properties) {
+                                return new ProjectErrors(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ProjectErrors message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.IProjectErrors} message ProjectErrors message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProjectErrors.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.validatedCount != null && Object.hasOwnProperty.call(message, "validatedCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.validatedCount);
+                                if (message.outsideOrgErrorCount != null && Object.hasOwnProperty.call(message, "outsideOrgErrorCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.outsideOrgErrorCount);
+                                if (message.outsideOrgProjectNumbers != null && message.outsideOrgProjectNumbers.length) {
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                                    for (var i = 0; i < message.outsideOrgProjectNumbers.length; ++i)
+                                        writer.int64(message.outsideOrgProjectNumbers[i]);
+                                    writer.ldelim();
+                                }
+                                if (message.internalErrorCount != null && Object.hasOwnProperty.call(message, "internalErrorCount"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.internalErrorCount);
+                                if (message.destinationProjectOrgError != null && Object.hasOwnProperty.call(message, "destinationProjectOrgError"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.destinationProjectOrgError);
+                                if (message.destinationProjectCheckHasInternalError != null && Object.hasOwnProperty.call(message, "destinationProjectCheckHasInternalError"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.destinationProjectCheckHasInternalError);
+                                if (message.nonManagementHubEntitledErrorCount != null && Object.hasOwnProperty.call(message, "nonManagementHubEntitledErrorCount"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int64(message.nonManagementHubEntitledErrorCount);
+                                if (message.nonManagementHubEntitledProjectNumbers != null && message.nonManagementHubEntitledProjectNumbers.length) {
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork();
+                                    for (var i = 0; i < message.nonManagementHubEntitledProjectNumbers.length; ++i)
+                                        writer.int64(message.nonManagementHubEntitledProjectNumbers[i]);
+                                    writer.ldelim();
+                                }
+                                if (message.nonStorageIntelligenceEntitledErrorCount != null && Object.hasOwnProperty.call(message, "nonStorageIntelligenceEntitledErrorCount"))
+                                    writer.uint32(/* id 9, wireType 0 =*/72).int64(message.nonStorageIntelligenceEntitledErrorCount);
+                                if (message.nonStorageIntelligenceEntitledProjectNumbers != null && message.nonStorageIntelligenceEntitledProjectNumbers.length) {
+                                    writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                                    for (var i = 0; i < message.nonStorageIntelligenceEntitledProjectNumbers.length; ++i)
+                                        writer.int64(message.nonStorageIntelligenceEntitledProjectNumbers[i]);
+                                    writer.ldelim();
+                                }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ProjectErrors message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.IProjectErrors} message ProjectErrors message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProjectErrors.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ProjectErrors message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors} ProjectErrors
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProjectErrors.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.validatedCount = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.outsideOrgErrorCount = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.outsideOrgProjectNumbers && message.outsideOrgProjectNumbers.length))
+                                                message.outsideOrgProjectNumbers = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.outsideOrgProjectNumbers.push(reader.int64());
+                                            } else
+                                                message.outsideOrgProjectNumbers.push(reader.int64());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.nonManagementHubEntitledErrorCount = reader.int64();
+                                            break;
+                                        }
+                                    case 8: {
+                                            if (!(message.nonManagementHubEntitledProjectNumbers && message.nonManagementHubEntitledProjectNumbers.length))
+                                                message.nonManagementHubEntitledProjectNumbers = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.nonManagementHubEntitledProjectNumbers.push(reader.int64());
+                                            } else
+                                                message.nonManagementHubEntitledProjectNumbers.push(reader.int64());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.nonStorageIntelligenceEntitledErrorCount = reader.int64();
+                                            break;
+                                        }
+                                    case 10: {
+                                            if (!(message.nonStorageIntelligenceEntitledProjectNumbers && message.nonStorageIntelligenceEntitledProjectNumbers.length))
+                                                message.nonStorageIntelligenceEntitledProjectNumbers = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.nonStorageIntelligenceEntitledProjectNumbers.push(reader.int64());
+                                            } else
+                                                message.nonStorageIntelligenceEntitledProjectNumbers.push(reader.int64());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.internalErrorCount = reader.int64();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.destinationProjectOrgError = reader.bool();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.destinationProjectCheckHasInternalError = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ProjectErrors message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors} ProjectErrors
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProjectErrors.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ProjectErrors message.
+                             * @function verify
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ProjectErrors.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.validatedCount != null && message.hasOwnProperty("validatedCount")) {
+                                    properties._validatedCount = 1;
+                                    if (!$util.isInteger(message.validatedCount) && !(message.validatedCount && $util.isInteger(message.validatedCount.low) && $util.isInteger(message.validatedCount.high)))
+                                        return "validatedCount: integer|Long expected";
+                                }
+                                if (message.outsideOrgErrorCount != null && message.hasOwnProperty("outsideOrgErrorCount")) {
+                                    properties._outsideOrgErrorCount = 1;
+                                    if (!$util.isInteger(message.outsideOrgErrorCount) && !(message.outsideOrgErrorCount && $util.isInteger(message.outsideOrgErrorCount.low) && $util.isInteger(message.outsideOrgErrorCount.high)))
+                                        return "outsideOrgErrorCount: integer|Long expected";
+                                }
+                                if (message.outsideOrgProjectNumbers != null && message.hasOwnProperty("outsideOrgProjectNumbers")) {
+                                    if (!Array.isArray(message.outsideOrgProjectNumbers))
+                                        return "outsideOrgProjectNumbers: array expected";
+                                    for (var i = 0; i < message.outsideOrgProjectNumbers.length; ++i)
+                                        if (!$util.isInteger(message.outsideOrgProjectNumbers[i]) && !(message.outsideOrgProjectNumbers[i] && $util.isInteger(message.outsideOrgProjectNumbers[i].low) && $util.isInteger(message.outsideOrgProjectNumbers[i].high)))
+                                            return "outsideOrgProjectNumbers: integer|Long[] expected";
+                                }
+                                if (message.nonManagementHubEntitledErrorCount != null && message.hasOwnProperty("nonManagementHubEntitledErrorCount")) {
+                                    properties._nonManagementHubEntitledErrorCount = 1;
+                                    if (!$util.isInteger(message.nonManagementHubEntitledErrorCount) && !(message.nonManagementHubEntitledErrorCount && $util.isInteger(message.nonManagementHubEntitledErrorCount.low) && $util.isInteger(message.nonManagementHubEntitledErrorCount.high)))
+                                        return "nonManagementHubEntitledErrorCount: integer|Long expected";
+                                }
+                                if (message.nonManagementHubEntitledProjectNumbers != null && message.hasOwnProperty("nonManagementHubEntitledProjectNumbers")) {
+                                    if (!Array.isArray(message.nonManagementHubEntitledProjectNumbers))
+                                        return "nonManagementHubEntitledProjectNumbers: array expected";
+                                    for (var i = 0; i < message.nonManagementHubEntitledProjectNumbers.length; ++i)
+                                        if (!$util.isInteger(message.nonManagementHubEntitledProjectNumbers[i]) && !(message.nonManagementHubEntitledProjectNumbers[i] && $util.isInteger(message.nonManagementHubEntitledProjectNumbers[i].low) && $util.isInteger(message.nonManagementHubEntitledProjectNumbers[i].high)))
+                                            return "nonManagementHubEntitledProjectNumbers: integer|Long[] expected";
+                                }
+                                if (message.nonStorageIntelligenceEntitledErrorCount != null && message.hasOwnProperty("nonStorageIntelligenceEntitledErrorCount")) {
+                                    properties._nonStorageIntelligenceEntitledErrorCount = 1;
+                                    if (!$util.isInteger(message.nonStorageIntelligenceEntitledErrorCount) && !(message.nonStorageIntelligenceEntitledErrorCount && $util.isInteger(message.nonStorageIntelligenceEntitledErrorCount.low) && $util.isInteger(message.nonStorageIntelligenceEntitledErrorCount.high)))
+                                        return "nonStorageIntelligenceEntitledErrorCount: integer|Long expected";
+                                }
+                                if (message.nonStorageIntelligenceEntitledProjectNumbers != null && message.hasOwnProperty("nonStorageIntelligenceEntitledProjectNumbers")) {
+                                    if (!Array.isArray(message.nonStorageIntelligenceEntitledProjectNumbers))
+                                        return "nonStorageIntelligenceEntitledProjectNumbers: array expected";
+                                    for (var i = 0; i < message.nonStorageIntelligenceEntitledProjectNumbers.length; ++i)
+                                        if (!$util.isInteger(message.nonStorageIntelligenceEntitledProjectNumbers[i]) && !(message.nonStorageIntelligenceEntitledProjectNumbers[i] && $util.isInteger(message.nonStorageIntelligenceEntitledProjectNumbers[i].low) && $util.isInteger(message.nonStorageIntelligenceEntitledProjectNumbers[i].high)))
+                                            return "nonStorageIntelligenceEntitledProjectNumbers: integer|Long[] expected";
+                                }
+                                if (message.internalErrorCount != null && message.hasOwnProperty("internalErrorCount")) {
+                                    properties._internalErrorCount = 1;
+                                    if (!$util.isInteger(message.internalErrorCount) && !(message.internalErrorCount && $util.isInteger(message.internalErrorCount.low) && $util.isInteger(message.internalErrorCount.high)))
+                                        return "internalErrorCount: integer|Long expected";
+                                }
+                                if (message.destinationProjectOrgError != null && message.hasOwnProperty("destinationProjectOrgError")) {
+                                    properties.destinationProjectCheckResult = 1;
+                                    if (typeof message.destinationProjectOrgError !== "boolean")
+                                        return "destinationProjectOrgError: boolean expected";
+                                }
+                                if (message.destinationProjectCheckHasInternalError != null && message.hasOwnProperty("destinationProjectCheckHasInternalError")) {
+                                    if (properties.destinationProjectCheckResult === 1)
+                                        return "destinationProjectCheckResult: multiple values";
+                                    properties.destinationProjectCheckResult = 1;
+                                    if (typeof message.destinationProjectCheckHasInternalError !== "boolean")
+                                        return "destinationProjectCheckHasInternalError: boolean expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ProjectErrors message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors} ProjectErrors
+                             */
+                            ProjectErrors.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors)
+                                    return object;
+                                var message = new $root.google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors();
+                                if (object.validatedCount != null)
+                                    if ($util.Long)
+                                        (message.validatedCount = $util.Long.fromValue(object.validatedCount)).unsigned = false;
+                                    else if (typeof object.validatedCount === "string")
+                                        message.validatedCount = parseInt(object.validatedCount, 10);
+                                    else if (typeof object.validatedCount === "number")
+                                        message.validatedCount = object.validatedCount;
+                                    else if (typeof object.validatedCount === "object")
+                                        message.validatedCount = new $util.LongBits(object.validatedCount.low >>> 0, object.validatedCount.high >>> 0).toNumber();
+                                if (object.outsideOrgErrorCount != null)
+                                    if ($util.Long)
+                                        (message.outsideOrgErrorCount = $util.Long.fromValue(object.outsideOrgErrorCount)).unsigned = false;
+                                    else if (typeof object.outsideOrgErrorCount === "string")
+                                        message.outsideOrgErrorCount = parseInt(object.outsideOrgErrorCount, 10);
+                                    else if (typeof object.outsideOrgErrorCount === "number")
+                                        message.outsideOrgErrorCount = object.outsideOrgErrorCount;
+                                    else if (typeof object.outsideOrgErrorCount === "object")
+                                        message.outsideOrgErrorCount = new $util.LongBits(object.outsideOrgErrorCount.low >>> 0, object.outsideOrgErrorCount.high >>> 0).toNumber();
+                                if (object.outsideOrgProjectNumbers) {
+                                    if (!Array.isArray(object.outsideOrgProjectNumbers))
+                                        throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors.outsideOrgProjectNumbers: array expected");
+                                    message.outsideOrgProjectNumbers = [];
+                                    for (var i = 0; i < object.outsideOrgProjectNumbers.length; ++i)
+                                        if ($util.Long)
+                                            (message.outsideOrgProjectNumbers[i] = $util.Long.fromValue(object.outsideOrgProjectNumbers[i])).unsigned = false;
+                                        else if (typeof object.outsideOrgProjectNumbers[i] === "string")
+                                            message.outsideOrgProjectNumbers[i] = parseInt(object.outsideOrgProjectNumbers[i], 10);
+                                        else if (typeof object.outsideOrgProjectNumbers[i] === "number")
+                                            message.outsideOrgProjectNumbers[i] = object.outsideOrgProjectNumbers[i];
+                                        else if (typeof object.outsideOrgProjectNumbers[i] === "object")
+                                            message.outsideOrgProjectNumbers[i] = new $util.LongBits(object.outsideOrgProjectNumbers[i].low >>> 0, object.outsideOrgProjectNumbers[i].high >>> 0).toNumber();
+                                }
+                                if (object.nonManagementHubEntitledErrorCount != null)
+                                    if ($util.Long)
+                                        (message.nonManagementHubEntitledErrorCount = $util.Long.fromValue(object.nonManagementHubEntitledErrorCount)).unsigned = false;
+                                    else if (typeof object.nonManagementHubEntitledErrorCount === "string")
+                                        message.nonManagementHubEntitledErrorCount = parseInt(object.nonManagementHubEntitledErrorCount, 10);
+                                    else if (typeof object.nonManagementHubEntitledErrorCount === "number")
+                                        message.nonManagementHubEntitledErrorCount = object.nonManagementHubEntitledErrorCount;
+                                    else if (typeof object.nonManagementHubEntitledErrorCount === "object")
+                                        message.nonManagementHubEntitledErrorCount = new $util.LongBits(object.nonManagementHubEntitledErrorCount.low >>> 0, object.nonManagementHubEntitledErrorCount.high >>> 0).toNumber();
+                                if (object.nonManagementHubEntitledProjectNumbers) {
+                                    if (!Array.isArray(object.nonManagementHubEntitledProjectNumbers))
+                                        throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors.nonManagementHubEntitledProjectNumbers: array expected");
+                                    message.nonManagementHubEntitledProjectNumbers = [];
+                                    for (var i = 0; i < object.nonManagementHubEntitledProjectNumbers.length; ++i)
+                                        if ($util.Long)
+                                            (message.nonManagementHubEntitledProjectNumbers[i] = $util.Long.fromValue(object.nonManagementHubEntitledProjectNumbers[i])).unsigned = false;
+                                        else if (typeof object.nonManagementHubEntitledProjectNumbers[i] === "string")
+                                            message.nonManagementHubEntitledProjectNumbers[i] = parseInt(object.nonManagementHubEntitledProjectNumbers[i], 10);
+                                        else if (typeof object.nonManagementHubEntitledProjectNumbers[i] === "number")
+                                            message.nonManagementHubEntitledProjectNumbers[i] = object.nonManagementHubEntitledProjectNumbers[i];
+                                        else if (typeof object.nonManagementHubEntitledProjectNumbers[i] === "object")
+                                            message.nonManagementHubEntitledProjectNumbers[i] = new $util.LongBits(object.nonManagementHubEntitledProjectNumbers[i].low >>> 0, object.nonManagementHubEntitledProjectNumbers[i].high >>> 0).toNumber();
+                                }
+                                if (object.nonStorageIntelligenceEntitledErrorCount != null)
+                                    if ($util.Long)
+                                        (message.nonStorageIntelligenceEntitledErrorCount = $util.Long.fromValue(object.nonStorageIntelligenceEntitledErrorCount)).unsigned = false;
+                                    else if (typeof object.nonStorageIntelligenceEntitledErrorCount === "string")
+                                        message.nonStorageIntelligenceEntitledErrorCount = parseInt(object.nonStorageIntelligenceEntitledErrorCount, 10);
+                                    else if (typeof object.nonStorageIntelligenceEntitledErrorCount === "number")
+                                        message.nonStorageIntelligenceEntitledErrorCount = object.nonStorageIntelligenceEntitledErrorCount;
+                                    else if (typeof object.nonStorageIntelligenceEntitledErrorCount === "object")
+                                        message.nonStorageIntelligenceEntitledErrorCount = new $util.LongBits(object.nonStorageIntelligenceEntitledErrorCount.low >>> 0, object.nonStorageIntelligenceEntitledErrorCount.high >>> 0).toNumber();
+                                if (object.nonStorageIntelligenceEntitledProjectNumbers) {
+                                    if (!Array.isArray(object.nonStorageIntelligenceEntitledProjectNumbers))
+                                        throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors.nonStorageIntelligenceEntitledProjectNumbers: array expected");
+                                    message.nonStorageIntelligenceEntitledProjectNumbers = [];
+                                    for (var i = 0; i < object.nonStorageIntelligenceEntitledProjectNumbers.length; ++i)
+                                        if ($util.Long)
+                                            (message.nonStorageIntelligenceEntitledProjectNumbers[i] = $util.Long.fromValue(object.nonStorageIntelligenceEntitledProjectNumbers[i])).unsigned = false;
+                                        else if (typeof object.nonStorageIntelligenceEntitledProjectNumbers[i] === "string")
+                                            message.nonStorageIntelligenceEntitledProjectNumbers[i] = parseInt(object.nonStorageIntelligenceEntitledProjectNumbers[i], 10);
+                                        else if (typeof object.nonStorageIntelligenceEntitledProjectNumbers[i] === "number")
+                                            message.nonStorageIntelligenceEntitledProjectNumbers[i] = object.nonStorageIntelligenceEntitledProjectNumbers[i];
+                                        else if (typeof object.nonStorageIntelligenceEntitledProjectNumbers[i] === "object")
+                                            message.nonStorageIntelligenceEntitledProjectNumbers[i] = new $util.LongBits(object.nonStorageIntelligenceEntitledProjectNumbers[i].low >>> 0, object.nonStorageIntelligenceEntitledProjectNumbers[i].high >>> 0).toNumber();
+                                }
+                                if (object.internalErrorCount != null)
+                                    if ($util.Long)
+                                        (message.internalErrorCount = $util.Long.fromValue(object.internalErrorCount)).unsigned = false;
+                                    else if (typeof object.internalErrorCount === "string")
+                                        message.internalErrorCount = parseInt(object.internalErrorCount, 10);
+                                    else if (typeof object.internalErrorCount === "number")
+                                        message.internalErrorCount = object.internalErrorCount;
+                                    else if (typeof object.internalErrorCount === "object")
+                                        message.internalErrorCount = new $util.LongBits(object.internalErrorCount.low >>> 0, object.internalErrorCount.high >>> 0).toNumber();
+                                if (object.destinationProjectOrgError != null)
+                                    message.destinationProjectOrgError = Boolean(object.destinationProjectOrgError);
+                                if (object.destinationProjectCheckHasInternalError != null)
+                                    message.destinationProjectCheckHasInternalError = Boolean(object.destinationProjectCheckHasInternalError);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ProjectErrors message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors} message ProjectErrors
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ProjectErrors.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.outsideOrgProjectNumbers = [];
+                                    object.nonManagementHubEntitledProjectNumbers = [];
+                                    object.nonStorageIntelligenceEntitledProjectNumbers = [];
+                                }
+                                if (message.validatedCount != null && message.hasOwnProperty("validatedCount")) {
+                                    if (typeof message.validatedCount === "number")
+                                        object.validatedCount = options.longs === String ? String(message.validatedCount) : message.validatedCount;
+                                    else
+                                        object.validatedCount = options.longs === String ? $util.Long.prototype.toString.call(message.validatedCount) : options.longs === Number ? new $util.LongBits(message.validatedCount.low >>> 0, message.validatedCount.high >>> 0).toNumber() : message.validatedCount;
+                                    if (options.oneofs)
+                                        object._validatedCount = "validatedCount";
+                                }
+                                if (message.outsideOrgErrorCount != null && message.hasOwnProperty("outsideOrgErrorCount")) {
+                                    if (typeof message.outsideOrgErrorCount === "number")
+                                        object.outsideOrgErrorCount = options.longs === String ? String(message.outsideOrgErrorCount) : message.outsideOrgErrorCount;
+                                    else
+                                        object.outsideOrgErrorCount = options.longs === String ? $util.Long.prototype.toString.call(message.outsideOrgErrorCount) : options.longs === Number ? new $util.LongBits(message.outsideOrgErrorCount.low >>> 0, message.outsideOrgErrorCount.high >>> 0).toNumber() : message.outsideOrgErrorCount;
+                                    if (options.oneofs)
+                                        object._outsideOrgErrorCount = "outsideOrgErrorCount";
+                                }
+                                if (message.outsideOrgProjectNumbers && message.outsideOrgProjectNumbers.length) {
+                                    object.outsideOrgProjectNumbers = [];
+                                    for (var j = 0; j < message.outsideOrgProjectNumbers.length; ++j)
+                                        if (typeof message.outsideOrgProjectNumbers[j] === "number")
+                                            object.outsideOrgProjectNumbers[j] = options.longs === String ? String(message.outsideOrgProjectNumbers[j]) : message.outsideOrgProjectNumbers[j];
+                                        else
+                                            object.outsideOrgProjectNumbers[j] = options.longs === String ? $util.Long.prototype.toString.call(message.outsideOrgProjectNumbers[j]) : options.longs === Number ? new $util.LongBits(message.outsideOrgProjectNumbers[j].low >>> 0, message.outsideOrgProjectNumbers[j].high >>> 0).toNumber() : message.outsideOrgProjectNumbers[j];
+                                }
+                                if (message.internalErrorCount != null && message.hasOwnProperty("internalErrorCount")) {
+                                    if (typeof message.internalErrorCount === "number")
+                                        object.internalErrorCount = options.longs === String ? String(message.internalErrorCount) : message.internalErrorCount;
+                                    else
+                                        object.internalErrorCount = options.longs === String ? $util.Long.prototype.toString.call(message.internalErrorCount) : options.longs === Number ? new $util.LongBits(message.internalErrorCount.low >>> 0, message.internalErrorCount.high >>> 0).toNumber() : message.internalErrorCount;
+                                    if (options.oneofs)
+                                        object._internalErrorCount = "internalErrorCount";
+                                }
+                                if (message.destinationProjectOrgError != null && message.hasOwnProperty("destinationProjectOrgError")) {
+                                    object.destinationProjectOrgError = message.destinationProjectOrgError;
+                                    if (options.oneofs)
+                                        object.destinationProjectCheckResult = "destinationProjectOrgError";
+                                }
+                                if (message.destinationProjectCheckHasInternalError != null && message.hasOwnProperty("destinationProjectCheckHasInternalError")) {
+                                    object.destinationProjectCheckHasInternalError = message.destinationProjectCheckHasInternalError;
+                                    if (options.oneofs)
+                                        object.destinationProjectCheckResult = "destinationProjectCheckHasInternalError";
+                                }
+                                if (message.nonManagementHubEntitledErrorCount != null && message.hasOwnProperty("nonManagementHubEntitledErrorCount")) {
+                                    if (typeof message.nonManagementHubEntitledErrorCount === "number")
+                                        object.nonManagementHubEntitledErrorCount = options.longs === String ? String(message.nonManagementHubEntitledErrorCount) : message.nonManagementHubEntitledErrorCount;
+                                    else
+                                        object.nonManagementHubEntitledErrorCount = options.longs === String ? $util.Long.prototype.toString.call(message.nonManagementHubEntitledErrorCount) : options.longs === Number ? new $util.LongBits(message.nonManagementHubEntitledErrorCount.low >>> 0, message.nonManagementHubEntitledErrorCount.high >>> 0).toNumber() : message.nonManagementHubEntitledErrorCount;
+                                    if (options.oneofs)
+                                        object._nonManagementHubEntitledErrorCount = "nonManagementHubEntitledErrorCount";
+                                }
+                                if (message.nonManagementHubEntitledProjectNumbers && message.nonManagementHubEntitledProjectNumbers.length) {
+                                    object.nonManagementHubEntitledProjectNumbers = [];
+                                    for (var j = 0; j < message.nonManagementHubEntitledProjectNumbers.length; ++j)
+                                        if (typeof message.nonManagementHubEntitledProjectNumbers[j] === "number")
+                                            object.nonManagementHubEntitledProjectNumbers[j] = options.longs === String ? String(message.nonManagementHubEntitledProjectNumbers[j]) : message.nonManagementHubEntitledProjectNumbers[j];
+                                        else
+                                            object.nonManagementHubEntitledProjectNumbers[j] = options.longs === String ? $util.Long.prototype.toString.call(message.nonManagementHubEntitledProjectNumbers[j]) : options.longs === Number ? new $util.LongBits(message.nonManagementHubEntitledProjectNumbers[j].low >>> 0, message.nonManagementHubEntitledProjectNumbers[j].high >>> 0).toNumber() : message.nonManagementHubEntitledProjectNumbers[j];
+                                }
+                                if (message.nonStorageIntelligenceEntitledErrorCount != null && message.hasOwnProperty("nonStorageIntelligenceEntitledErrorCount")) {
+                                    if (typeof message.nonStorageIntelligenceEntitledErrorCount === "number")
+                                        object.nonStorageIntelligenceEntitledErrorCount = options.longs === String ? String(message.nonStorageIntelligenceEntitledErrorCount) : message.nonStorageIntelligenceEntitledErrorCount;
+                                    else
+                                        object.nonStorageIntelligenceEntitledErrorCount = options.longs === String ? $util.Long.prototype.toString.call(message.nonStorageIntelligenceEntitledErrorCount) : options.longs === Number ? new $util.LongBits(message.nonStorageIntelligenceEntitledErrorCount.low >>> 0, message.nonStorageIntelligenceEntitledErrorCount.high >>> 0).toNumber() : message.nonStorageIntelligenceEntitledErrorCount;
+                                    if (options.oneofs)
+                                        object._nonStorageIntelligenceEntitledErrorCount = "nonStorageIntelligenceEntitledErrorCount";
+                                }
+                                if (message.nonStorageIntelligenceEntitledProjectNumbers && message.nonStorageIntelligenceEntitledProjectNumbers.length) {
+                                    object.nonStorageIntelligenceEntitledProjectNumbers = [];
+                                    for (var j = 0; j < message.nonStorageIntelligenceEntitledProjectNumbers.length; ++j)
+                                        if (typeof message.nonStorageIntelligenceEntitledProjectNumbers[j] === "number")
+                                            object.nonStorageIntelligenceEntitledProjectNumbers[j] = options.longs === String ? String(message.nonStorageIntelligenceEntitledProjectNumbers[j]) : message.nonStorageIntelligenceEntitledProjectNumbers[j];
+                                        else
+                                            object.nonStorageIntelligenceEntitledProjectNumbers[j] = options.longs === String ? $util.Long.prototype.toString.call(message.nonStorageIntelligenceEntitledProjectNumbers[j]) : options.longs === Number ? new $util.LongBits(message.nonStorageIntelligenceEntitledProjectNumbers[j].low >>> 0, message.nonStorageIntelligenceEntitledProjectNumbers[j].high >>> 0).toNumber() : message.nonStorageIntelligenceEntitledProjectNumbers[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ProjectErrors to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ProjectErrors.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ProjectErrors
+                             * @function getTypeUrl
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ProjectErrors.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors";
+                            };
+    
+                            return ProjectErrors;
+                        })();
+    
+                        DatasetConfig.ValidationErrorsBeforeIngestion = (function() {
+    
+                            /**
+                             * Properties of a ValidationErrorsBeforeIngestion.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @interface IValidationErrorsBeforeIngestion
+                             * @property {google.cloud.storageinsights.v1.DatasetConfig.IBucketErrors|null} [bucketErrors] ValidationErrorsBeforeIngestion bucketErrors
+                             * @property {google.cloud.storageinsights.v1.DatasetConfig.IProjectErrors|null} [projectErrors] ValidationErrorsBeforeIngestion projectErrors
+                             */
+    
+                            /**
+                             * Constructs a new ValidationErrorsBeforeIngestion.
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig
+                             * @classdesc Represents a ValidationErrorsBeforeIngestion.
+                             * @implements IValidationErrorsBeforeIngestion
+                             * @constructor
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.IValidationErrorsBeforeIngestion=} [properties] Properties to set
+                             */
+                            function ValidationErrorsBeforeIngestion(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ValidationErrorsBeforeIngestion bucketErrors.
+                             * @member {google.cloud.storageinsights.v1.DatasetConfig.IBucketErrors|null|undefined} bucketErrors
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion
+                             * @instance
+                             */
+                            ValidationErrorsBeforeIngestion.prototype.bucketErrors = null;
+    
+                            /**
+                             * ValidationErrorsBeforeIngestion projectErrors.
+                             * @member {google.cloud.storageinsights.v1.DatasetConfig.IProjectErrors|null|undefined} projectErrors
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion
+                             * @instance
+                             */
+                            ValidationErrorsBeforeIngestion.prototype.projectErrors = null;
+    
+                            /**
+                             * Creates a new ValidationErrorsBeforeIngestion instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.IValidationErrorsBeforeIngestion=} [properties] Properties to set
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion} ValidationErrorsBeforeIngestion instance
+                             */
+                            ValidationErrorsBeforeIngestion.create = function create(properties) {
+                                return new ValidationErrorsBeforeIngestion(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ValidationErrorsBeforeIngestion message. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.IValidationErrorsBeforeIngestion} message ValidationErrorsBeforeIngestion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ValidationErrorsBeforeIngestion.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.bucketErrors != null && Object.hasOwnProperty.call(message, "bucketErrors"))
+                                    $root.google.cloud.storageinsights.v1.DatasetConfig.BucketErrors.encode(message.bucketErrors, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.projectErrors != null && Object.hasOwnProperty.call(message, "projectErrors"))
+                                    $root.google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors.encode(message.projectErrors, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ValidationErrorsBeforeIngestion message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.IValidationErrorsBeforeIngestion} message ValidationErrorsBeforeIngestion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ValidationErrorsBeforeIngestion.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ValidationErrorsBeforeIngestion message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion} ValidationErrorsBeforeIngestion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ValidationErrorsBeforeIngestion.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.bucketErrors = $root.google.cloud.storageinsights.v1.DatasetConfig.BucketErrors.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.projectErrors = $root.google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ValidationErrorsBeforeIngestion message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion} ValidationErrorsBeforeIngestion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ValidationErrorsBeforeIngestion.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ValidationErrorsBeforeIngestion message.
+                             * @function verify
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ValidationErrorsBeforeIngestion.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.bucketErrors != null && message.hasOwnProperty("bucketErrors")) {
+                                    var error = $root.google.cloud.storageinsights.v1.DatasetConfig.BucketErrors.verify(message.bucketErrors);
+                                    if (error)
+                                        return "bucketErrors." + error;
+                                }
+                                if (message.projectErrors != null && message.hasOwnProperty("projectErrors")) {
+                                    var error = $root.google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors.verify(message.projectErrors);
+                                    if (error)
+                                        return "projectErrors." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ValidationErrorsBeforeIngestion message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion} ValidationErrorsBeforeIngestion
+                             */
+                            ValidationErrorsBeforeIngestion.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion)
+                                    return object;
+                                var message = new $root.google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion();
+                                if (object.bucketErrors != null) {
+                                    if (typeof object.bucketErrors !== "object")
+                                        throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion.bucketErrors: object expected");
+                                    message.bucketErrors = $root.google.cloud.storageinsights.v1.DatasetConfig.BucketErrors.fromObject(object.bucketErrors);
+                                }
+                                if (object.projectErrors != null) {
+                                    if (typeof object.projectErrors !== "object")
+                                        throw TypeError(".google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion.projectErrors: object expected");
+                                    message.projectErrors = $root.google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors.fromObject(object.projectErrors);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ValidationErrorsBeforeIngestion message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion
+                             * @static
+                             * @param {google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion} message ValidationErrorsBeforeIngestion
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ValidationErrorsBeforeIngestion.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.bucketErrors = null;
+                                    object.projectErrors = null;
+                                }
+                                if (message.bucketErrors != null && message.hasOwnProperty("bucketErrors"))
+                                    object.bucketErrors = $root.google.cloud.storageinsights.v1.DatasetConfig.BucketErrors.toObject(message.bucketErrors, options);
+                                if (message.projectErrors != null && message.hasOwnProperty("projectErrors"))
+                                    object.projectErrors = $root.google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors.toObject(message.projectErrors, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ValidationErrorsBeforeIngestion to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ValidationErrorsBeforeIngestion.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ValidationErrorsBeforeIngestion
+                             * @function getTypeUrl
+                             * @memberof google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ValidationErrorsBeforeIngestion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion";
+                            };
+    
+                            return ValidationErrorsBeforeIngestion;
+                        })();
+    
+                        return DatasetConfig;
+                    })();
+    
+                    v1.ListDatasetConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDatasetConfigsRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @interface IListDatasetConfigsRequest
+                         * @property {string|null} [parent] ListDatasetConfigsRequest parent
+                         * @property {number|null} [pageSize] ListDatasetConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListDatasetConfigsRequest pageToken
+                         * @property {string|null} [filter] ListDatasetConfigsRequest filter
+                         * @property {string|null} [orderBy] ListDatasetConfigsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListDatasetConfigsRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @classdesc Represents a ListDatasetConfigsRequest.
+                         * @implements IListDatasetConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.storageinsights.v1.IListDatasetConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListDatasetConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDatasetConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @instance
+                         */
+                        ListDatasetConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDatasetConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @instance
+                         */
+                        ListDatasetConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDatasetConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @instance
+                         */
+                        ListDatasetConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListDatasetConfigsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @instance
+                         */
+                        ListDatasetConfigsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListDatasetConfigsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @instance
+                         */
+                        ListDatasetConfigsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListDatasetConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IListDatasetConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.storageinsights.v1.ListDatasetConfigsRequest} ListDatasetConfigsRequest instance
+                         */
+                        ListDatasetConfigsRequest.create = function create(properties) {
+                            return new ListDatasetConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetConfigsRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.ListDatasetConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IListDatasetConfigsRequest} message ListDatasetConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.ListDatasetConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IListDatasetConfigsRequest} message ListDatasetConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storageinsights.v1.ListDatasetConfigsRequest} ListDatasetConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetConfigsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.ListDatasetConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storageinsights.v1.ListDatasetConfigsRequest} ListDatasetConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDatasetConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDatasetConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDatasetConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storageinsights.v1.ListDatasetConfigsRequest} ListDatasetConfigsRequest
+                         */
+                        ListDatasetConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storageinsights.v1.ListDatasetConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.storageinsights.v1.ListDatasetConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDatasetConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ListDatasetConfigsRequest} message ListDatasetConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDatasetConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDatasetConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDatasetConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDatasetConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDatasetConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storageinsights.v1.ListDatasetConfigsRequest";
+                        };
+    
+                        return ListDatasetConfigsRequest;
+                    })();
+    
+                    v1.ListDatasetConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDatasetConfigsResponse.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @interface IListDatasetConfigsResponse
+                         * @property {Array.<google.cloud.storageinsights.v1.IDatasetConfig>|null} [datasetConfigs] ListDatasetConfigsResponse datasetConfigs
+                         * @property {string|null} [nextPageToken] ListDatasetConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListDatasetConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListDatasetConfigsResponse.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @classdesc Represents a ListDatasetConfigsResponse.
+                         * @implements IListDatasetConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.storageinsights.v1.IListDatasetConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListDatasetConfigsResponse(properties) {
+                            this.datasetConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDatasetConfigsResponse datasetConfigs.
+                         * @member {Array.<google.cloud.storageinsights.v1.IDatasetConfig>} datasetConfigs
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @instance
+                         */
+                        ListDatasetConfigsResponse.prototype.datasetConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListDatasetConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @instance
+                         */
+                        ListDatasetConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListDatasetConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @instance
+                         */
+                        ListDatasetConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListDatasetConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IListDatasetConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.storageinsights.v1.ListDatasetConfigsResponse} ListDatasetConfigsResponse instance
+                         */
+                        ListDatasetConfigsResponse.create = function create(properties) {
+                            return new ListDatasetConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetConfigsResponse message. Does not implicitly {@link google.cloud.storageinsights.v1.ListDatasetConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IListDatasetConfigsResponse} message ListDatasetConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.datasetConfigs != null && message.datasetConfigs.length)
+                                for (var i = 0; i < message.datasetConfigs.length; ++i)
+                                    $root.google.cloud.storageinsights.v1.DatasetConfig.encode(message.datasetConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.ListDatasetConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IListDatasetConfigsResponse} message ListDatasetConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storageinsights.v1.ListDatasetConfigsResponse} ListDatasetConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetConfigsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.ListDatasetConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.datasetConfigs && message.datasetConfigs.length))
+                                            message.datasetConfigs = [];
+                                        message.datasetConfigs.push($root.google.cloud.storageinsights.v1.DatasetConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storageinsights.v1.ListDatasetConfigsResponse} ListDatasetConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDatasetConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDatasetConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.datasetConfigs != null && message.hasOwnProperty("datasetConfigs")) {
+                                if (!Array.isArray(message.datasetConfigs))
+                                    return "datasetConfigs: array expected";
+                                for (var i = 0; i < message.datasetConfigs.length; ++i) {
+                                    var error = $root.google.cloud.storageinsights.v1.DatasetConfig.verify(message.datasetConfigs[i]);
+                                    if (error)
+                                        return "datasetConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDatasetConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storageinsights.v1.ListDatasetConfigsResponse} ListDatasetConfigsResponse
+                         */
+                        ListDatasetConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storageinsights.v1.ListDatasetConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.storageinsights.v1.ListDatasetConfigsResponse();
+                            if (object.datasetConfigs) {
+                                if (!Array.isArray(object.datasetConfigs))
+                                    throw TypeError(".google.cloud.storageinsights.v1.ListDatasetConfigsResponse.datasetConfigs: array expected");
+                                message.datasetConfigs = [];
+                                for (var i = 0; i < object.datasetConfigs.length; ++i) {
+                                    if (typeof object.datasetConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.storageinsights.v1.ListDatasetConfigsResponse.datasetConfigs: object expected");
+                                    message.datasetConfigs[i] = $root.google.cloud.storageinsights.v1.DatasetConfig.fromObject(object.datasetConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.storageinsights.v1.ListDatasetConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDatasetConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ListDatasetConfigsResponse} message ListDatasetConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDatasetConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.datasetConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.datasetConfigs && message.datasetConfigs.length) {
+                                object.datasetConfigs = [];
+                                for (var j = 0; j < message.datasetConfigs.length; ++j)
+                                    object.datasetConfigs[j] = $root.google.cloud.storageinsights.v1.DatasetConfig.toObject(message.datasetConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDatasetConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDatasetConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDatasetConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storageinsights.v1.ListDatasetConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDatasetConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storageinsights.v1.ListDatasetConfigsResponse";
+                        };
+    
+                        return ListDatasetConfigsResponse;
+                    })();
+    
+                    v1.GetDatasetConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDatasetConfigRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @interface IGetDatasetConfigRequest
+                         * @property {string|null} [name] GetDatasetConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDatasetConfigRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @classdesc Represents a GetDatasetConfigRequest.
+                         * @implements IGetDatasetConfigRequest
+                         * @constructor
+                         * @param {google.cloud.storageinsights.v1.IGetDatasetConfigRequest=} [properties] Properties to set
+                         */
+                        function GetDatasetConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDatasetConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.storageinsights.v1.GetDatasetConfigRequest
+                         * @instance
+                         */
+                        GetDatasetConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDatasetConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storageinsights.v1.GetDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IGetDatasetConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.storageinsights.v1.GetDatasetConfigRequest} GetDatasetConfigRequest instance
+                         */
+                        GetDatasetConfigRequest.create = function create(properties) {
+                            return new GetDatasetConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDatasetConfigRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.GetDatasetConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storageinsights.v1.GetDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IGetDatasetConfigRequest} message GetDatasetConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDatasetConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDatasetConfigRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.GetDatasetConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.GetDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IGetDatasetConfigRequest} message GetDatasetConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDatasetConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDatasetConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storageinsights.v1.GetDatasetConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storageinsights.v1.GetDatasetConfigRequest} GetDatasetConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDatasetConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.GetDatasetConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDatasetConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.GetDatasetConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storageinsights.v1.GetDatasetConfigRequest} GetDatasetConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDatasetConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDatasetConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.storageinsights.v1.GetDatasetConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDatasetConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDatasetConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storageinsights.v1.GetDatasetConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storageinsights.v1.GetDatasetConfigRequest} GetDatasetConfigRequest
+                         */
+                        GetDatasetConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storageinsights.v1.GetDatasetConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.storageinsights.v1.GetDatasetConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDatasetConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storageinsights.v1.GetDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.GetDatasetConfigRequest} message GetDatasetConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDatasetConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDatasetConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storageinsights.v1.GetDatasetConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDatasetConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetDatasetConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storageinsights.v1.GetDatasetConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetDatasetConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storageinsights.v1.GetDatasetConfigRequest";
+                        };
+    
+                        return GetDatasetConfigRequest;
+                    })();
+    
+                    v1.CreateDatasetConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateDatasetConfigRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @interface ICreateDatasetConfigRequest
+                         * @property {string|null} [parent] CreateDatasetConfigRequest parent
+                         * @property {string|null} [datasetConfigId] CreateDatasetConfigRequest datasetConfigId
+                         * @property {google.cloud.storageinsights.v1.IDatasetConfig|null} [datasetConfig] CreateDatasetConfigRequest datasetConfig
+                         * @property {string|null} [requestId] CreateDatasetConfigRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateDatasetConfigRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @classdesc Represents a CreateDatasetConfigRequest.
+                         * @implements ICreateDatasetConfigRequest
+                         * @constructor
+                         * @param {google.cloud.storageinsights.v1.ICreateDatasetConfigRequest=} [properties] Properties to set
+                         */
+                        function CreateDatasetConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDatasetConfigRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @instance
+                         */
+                        CreateDatasetConfigRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateDatasetConfigRequest datasetConfigId.
+                         * @member {string} datasetConfigId
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @instance
+                         */
+                        CreateDatasetConfigRequest.prototype.datasetConfigId = "";
+    
+                        /**
+                         * CreateDatasetConfigRequest datasetConfig.
+                         * @member {google.cloud.storageinsights.v1.IDatasetConfig|null|undefined} datasetConfig
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @instance
+                         */
+                        CreateDatasetConfigRequest.prototype.datasetConfig = null;
+    
+                        /**
+                         * CreateDatasetConfigRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @instance
+                         */
+                        CreateDatasetConfigRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateDatasetConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ICreateDatasetConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.storageinsights.v1.CreateDatasetConfigRequest} CreateDatasetConfigRequest instance
+                         */
+                        CreateDatasetConfigRequest.create = function create(properties) {
+                            return new CreateDatasetConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatasetConfigRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.CreateDatasetConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ICreateDatasetConfigRequest} message CreateDatasetConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatasetConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.datasetConfigId != null && Object.hasOwnProperty.call(message, "datasetConfigId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.datasetConfigId);
+                            if (message.datasetConfig != null && Object.hasOwnProperty.call(message, "datasetConfig"))
+                                $root.google.cloud.storageinsights.v1.DatasetConfig.encode(message.datasetConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatasetConfigRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.CreateDatasetConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ICreateDatasetConfigRequest} message CreateDatasetConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatasetConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDatasetConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storageinsights.v1.CreateDatasetConfigRequest} CreateDatasetConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatasetConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.CreateDatasetConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.datasetConfigId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.datasetConfig = $root.google.cloud.storageinsights.v1.DatasetConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDatasetConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storageinsights.v1.CreateDatasetConfigRequest} CreateDatasetConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatasetConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDatasetConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDatasetConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.datasetConfigId != null && message.hasOwnProperty("datasetConfigId"))
+                                if (!$util.isString(message.datasetConfigId))
+                                    return "datasetConfigId: string expected";
+                            if (message.datasetConfig != null && message.hasOwnProperty("datasetConfig")) {
+                                var error = $root.google.cloud.storageinsights.v1.DatasetConfig.verify(message.datasetConfig);
+                                if (error)
+                                    return "datasetConfig." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDatasetConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storageinsights.v1.CreateDatasetConfigRequest} CreateDatasetConfigRequest
+                         */
+                        CreateDatasetConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storageinsights.v1.CreateDatasetConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.storageinsights.v1.CreateDatasetConfigRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.datasetConfigId != null)
+                                message.datasetConfigId = String(object.datasetConfigId);
+                            if (object.datasetConfig != null) {
+                                if (typeof object.datasetConfig !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.CreateDatasetConfigRequest.datasetConfig: object expected");
+                                message.datasetConfig = $root.google.cloud.storageinsights.v1.DatasetConfig.fromObject(object.datasetConfig);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDatasetConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.CreateDatasetConfigRequest} message CreateDatasetConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDatasetConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.datasetConfigId = "";
+                                object.datasetConfig = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.datasetConfigId != null && message.hasOwnProperty("datasetConfigId"))
+                                object.datasetConfigId = message.datasetConfigId;
+                            if (message.datasetConfig != null && message.hasOwnProperty("datasetConfig"))
+                                object.datasetConfig = $root.google.cloud.storageinsights.v1.DatasetConfig.toObject(message.datasetConfig, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDatasetConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDatasetConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateDatasetConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storageinsights.v1.CreateDatasetConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateDatasetConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storageinsights.v1.CreateDatasetConfigRequest";
+                        };
+    
+                        return CreateDatasetConfigRequest;
+                    })();
+    
+                    v1.UpdateDatasetConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateDatasetConfigRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @interface IUpdateDatasetConfigRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateDatasetConfigRequest updateMask
+                         * @property {google.cloud.storageinsights.v1.IDatasetConfig|null} [datasetConfig] UpdateDatasetConfigRequest datasetConfig
+                         * @property {string|null} [requestId] UpdateDatasetConfigRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateDatasetConfigRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @classdesc Represents an UpdateDatasetConfigRequest.
+                         * @implements IUpdateDatasetConfigRequest
+                         * @constructor
+                         * @param {google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateDatasetConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateDatasetConfigRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @instance
+                         */
+                        UpdateDatasetConfigRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateDatasetConfigRequest datasetConfig.
+                         * @member {google.cloud.storageinsights.v1.IDatasetConfig|null|undefined} datasetConfig
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @instance
+                         */
+                        UpdateDatasetConfigRequest.prototype.datasetConfig = null;
+    
+                        /**
+                         * UpdateDatasetConfigRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @instance
+                         */
+                        UpdateDatasetConfigRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateDatasetConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.storageinsights.v1.UpdateDatasetConfigRequest} UpdateDatasetConfigRequest instance
+                         */
+                        UpdateDatasetConfigRequest.create = function create(properties) {
+                            return new UpdateDatasetConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDatasetConfigRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.UpdateDatasetConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest} message UpdateDatasetConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDatasetConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.datasetConfig != null && Object.hasOwnProperty.call(message, "datasetConfig"))
+                                $root.google.cloud.storageinsights.v1.DatasetConfig.encode(message.datasetConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDatasetConfigRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.UpdateDatasetConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest} message UpdateDatasetConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDatasetConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateDatasetConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storageinsights.v1.UpdateDatasetConfigRequest} UpdateDatasetConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDatasetConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.UpdateDatasetConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.datasetConfig = $root.google.cloud.storageinsights.v1.DatasetConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateDatasetConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storageinsights.v1.UpdateDatasetConfigRequest} UpdateDatasetConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDatasetConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateDatasetConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateDatasetConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.datasetConfig != null && message.hasOwnProperty("datasetConfig")) {
+                                var error = $root.google.cloud.storageinsights.v1.DatasetConfig.verify(message.datasetConfig);
+                                if (error)
+                                    return "datasetConfig." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateDatasetConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storageinsights.v1.UpdateDatasetConfigRequest} UpdateDatasetConfigRequest
+                         */
+                        UpdateDatasetConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storageinsights.v1.UpdateDatasetConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.storageinsights.v1.UpdateDatasetConfigRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.UpdateDatasetConfigRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.datasetConfig != null) {
+                                if (typeof object.datasetConfig !== "object")
+                                    throw TypeError(".google.cloud.storageinsights.v1.UpdateDatasetConfigRequest.datasetConfig: object expected");
+                                message.datasetConfig = $root.google.cloud.storageinsights.v1.DatasetConfig.fromObject(object.datasetConfig);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateDatasetConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.UpdateDatasetConfigRequest} message UpdateDatasetConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateDatasetConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.datasetConfig = null;
+                                object.requestId = "";
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.datasetConfig != null && message.hasOwnProperty("datasetConfig"))
+                                object.datasetConfig = $root.google.cloud.storageinsights.v1.DatasetConfig.toObject(message.datasetConfig, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateDatasetConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateDatasetConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateDatasetConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storageinsights.v1.UpdateDatasetConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateDatasetConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storageinsights.v1.UpdateDatasetConfigRequest";
+                        };
+    
+                        return UpdateDatasetConfigRequest;
+                    })();
+    
+                    v1.DeleteDatasetConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteDatasetConfigRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @interface IDeleteDatasetConfigRequest
+                         * @property {string|null} [name] DeleteDatasetConfigRequest name
+                         * @property {string|null} [requestId] DeleteDatasetConfigRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteDatasetConfigRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @classdesc Represents a DeleteDatasetConfigRequest.
+                         * @implements IDeleteDatasetConfigRequest
+                         * @constructor
+                         * @param {google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest=} [properties] Properties to set
+                         */
+                        function DeleteDatasetConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteDatasetConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.storageinsights.v1.DeleteDatasetConfigRequest
+                         * @instance
+                         */
+                        DeleteDatasetConfigRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteDatasetConfigRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.storageinsights.v1.DeleteDatasetConfigRequest
+                         * @instance
+                         */
+                        DeleteDatasetConfigRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteDatasetConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storageinsights.v1.DeleteDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.storageinsights.v1.DeleteDatasetConfigRequest} DeleteDatasetConfigRequest instance
+                         */
+                        DeleteDatasetConfigRequest.create = function create(properties) {
+                            return new DeleteDatasetConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDatasetConfigRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.DeleteDatasetConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storageinsights.v1.DeleteDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest} message DeleteDatasetConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDatasetConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDatasetConfigRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.DeleteDatasetConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.DeleteDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest} message DeleteDatasetConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDatasetConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteDatasetConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storageinsights.v1.DeleteDatasetConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storageinsights.v1.DeleteDatasetConfigRequest} DeleteDatasetConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDatasetConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.DeleteDatasetConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteDatasetConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.DeleteDatasetConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storageinsights.v1.DeleteDatasetConfigRequest} DeleteDatasetConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDatasetConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteDatasetConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.storageinsights.v1.DeleteDatasetConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteDatasetConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteDatasetConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storageinsights.v1.DeleteDatasetConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storageinsights.v1.DeleteDatasetConfigRequest} DeleteDatasetConfigRequest
+                         */
+                        DeleteDatasetConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storageinsights.v1.DeleteDatasetConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.storageinsights.v1.DeleteDatasetConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteDatasetConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storageinsights.v1.DeleteDatasetConfigRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.DeleteDatasetConfigRequest} message DeleteDatasetConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteDatasetConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteDatasetConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storageinsights.v1.DeleteDatasetConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteDatasetConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteDatasetConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storageinsights.v1.DeleteDatasetConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteDatasetConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storageinsights.v1.DeleteDatasetConfigRequest";
+                        };
+    
+                        return DeleteDatasetConfigRequest;
+                    })();
+    
+                    v1.LinkDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a LinkDatasetRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @interface ILinkDatasetRequest
+                         * @property {string|null} [name] LinkDatasetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new LinkDatasetRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @classdesc Represents a LinkDatasetRequest.
+                         * @implements ILinkDatasetRequest
+                         * @constructor
+                         * @param {google.cloud.storageinsights.v1.ILinkDatasetRequest=} [properties] Properties to set
+                         */
+                        function LinkDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LinkDatasetRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetRequest
+                         * @instance
+                         */
+                        LinkDatasetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new LinkDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ILinkDatasetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.storageinsights.v1.LinkDatasetRequest} LinkDatasetRequest instance
+                         */
+                        LinkDatasetRequest.create = function create(properties) {
+                            return new LinkDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LinkDatasetRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.LinkDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ILinkDatasetRequest} message LinkDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LinkDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LinkDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.LinkDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ILinkDatasetRequest} message LinkDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LinkDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LinkDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storageinsights.v1.LinkDatasetRequest} LinkDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LinkDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.LinkDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LinkDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storageinsights.v1.LinkDatasetRequest} LinkDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LinkDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LinkDatasetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LinkDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LinkDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storageinsights.v1.LinkDatasetRequest} LinkDatasetRequest
+                         */
+                        LinkDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storageinsights.v1.LinkDatasetRequest)
+                                return object;
+                            var message = new $root.google.cloud.storageinsights.v1.LinkDatasetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LinkDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.LinkDatasetRequest} message LinkDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LinkDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LinkDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LinkDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LinkDatasetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LinkDatasetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storageinsights.v1.LinkDatasetRequest";
+                        };
+    
+                        return LinkDatasetRequest;
+                    })();
+    
+                    v1.LinkDatasetResponse = (function() {
+    
+                        /**
+                         * Properties of a LinkDatasetResponse.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @interface ILinkDatasetResponse
+                         */
+    
+                        /**
+                         * Constructs a new LinkDatasetResponse.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @classdesc Represents a LinkDatasetResponse.
+                         * @implements ILinkDatasetResponse
+                         * @constructor
+                         * @param {google.cloud.storageinsights.v1.ILinkDatasetResponse=} [properties] Properties to set
+                         */
+                        function LinkDatasetResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new LinkDatasetResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetResponse
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ILinkDatasetResponse=} [properties] Properties to set
+                         * @returns {google.cloud.storageinsights.v1.LinkDatasetResponse} LinkDatasetResponse instance
+                         */
+                        LinkDatasetResponse.create = function create(properties) {
+                            return new LinkDatasetResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LinkDatasetResponse message. Does not implicitly {@link google.cloud.storageinsights.v1.LinkDatasetResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetResponse
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ILinkDatasetResponse} message LinkDatasetResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LinkDatasetResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LinkDatasetResponse message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.LinkDatasetResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetResponse
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ILinkDatasetResponse} message LinkDatasetResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LinkDatasetResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LinkDatasetResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storageinsights.v1.LinkDatasetResponse} LinkDatasetResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LinkDatasetResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.LinkDatasetResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LinkDatasetResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storageinsights.v1.LinkDatasetResponse} LinkDatasetResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LinkDatasetResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LinkDatasetResponse message.
+                         * @function verify
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LinkDatasetResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LinkDatasetResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storageinsights.v1.LinkDatasetResponse} LinkDatasetResponse
+                         */
+                        LinkDatasetResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storageinsights.v1.LinkDatasetResponse)
+                                return object;
+                            return new $root.google.cloud.storageinsights.v1.LinkDatasetResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a LinkDatasetResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetResponse
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.LinkDatasetResponse} message LinkDatasetResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LinkDatasetResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this LinkDatasetResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LinkDatasetResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LinkDatasetResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storageinsights.v1.LinkDatasetResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LinkDatasetResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storageinsights.v1.LinkDatasetResponse";
+                        };
+    
+                        return LinkDatasetResponse;
+                    })();
+    
+                    v1.UnlinkDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of an UnlinkDatasetRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @interface IUnlinkDatasetRequest
+                         * @property {string|null} [name] UnlinkDatasetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new UnlinkDatasetRequest.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @classdesc Represents an UnlinkDatasetRequest.
+                         * @implements IUnlinkDatasetRequest
+                         * @constructor
+                         * @param {google.cloud.storageinsights.v1.IUnlinkDatasetRequest=} [properties] Properties to set
+                         */
+                        function UnlinkDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UnlinkDatasetRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.storageinsights.v1.UnlinkDatasetRequest
+                         * @instance
+                         */
+                        UnlinkDatasetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new UnlinkDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storageinsights.v1.UnlinkDatasetRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IUnlinkDatasetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.storageinsights.v1.UnlinkDatasetRequest} UnlinkDatasetRequest instance
+                         */
+                        UnlinkDatasetRequest.create = function create(properties) {
+                            return new UnlinkDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UnlinkDatasetRequest message. Does not implicitly {@link google.cloud.storageinsights.v1.UnlinkDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storageinsights.v1.UnlinkDatasetRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IUnlinkDatasetRequest} message UnlinkDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UnlinkDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UnlinkDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.UnlinkDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.UnlinkDatasetRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.IUnlinkDatasetRequest} message UnlinkDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UnlinkDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UnlinkDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storageinsights.v1.UnlinkDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storageinsights.v1.UnlinkDatasetRequest} UnlinkDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UnlinkDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.UnlinkDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UnlinkDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.UnlinkDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storageinsights.v1.UnlinkDatasetRequest} UnlinkDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UnlinkDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UnlinkDatasetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.storageinsights.v1.UnlinkDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UnlinkDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UnlinkDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storageinsights.v1.UnlinkDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storageinsights.v1.UnlinkDatasetRequest} UnlinkDatasetRequest
+                         */
+                        UnlinkDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storageinsights.v1.UnlinkDatasetRequest)
+                                return object;
+                            var message = new $root.google.cloud.storageinsights.v1.UnlinkDatasetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UnlinkDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storageinsights.v1.UnlinkDatasetRequest
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.UnlinkDatasetRequest} message UnlinkDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UnlinkDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UnlinkDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storageinsights.v1.UnlinkDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UnlinkDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UnlinkDatasetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storageinsights.v1.UnlinkDatasetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UnlinkDatasetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storageinsights.v1.UnlinkDatasetRequest";
+                        };
+    
+                        return UnlinkDatasetRequest;
+                    })();
+    
+                    v1.LocationMetadata = (function() {
+    
+                        /**
+                         * Properties of a LocationMetadata.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @interface ILocationMetadata
+                         * @property {boolean|null} [reportConfigAvailable] LocationMetadata reportConfigAvailable
+                         * @property {boolean|null} [datasetConfigAvailable] LocationMetadata datasetConfigAvailable
+                         */
+    
+                        /**
+                         * Constructs a new LocationMetadata.
+                         * @memberof google.cloud.storageinsights.v1
+                         * @classdesc Represents a LocationMetadata.
+                         * @implements ILocationMetadata
+                         * @constructor
+                         * @param {google.cloud.storageinsights.v1.ILocationMetadata=} [properties] Properties to set
+                         */
+                        function LocationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationMetadata reportConfigAvailable.
+                         * @member {boolean} reportConfigAvailable
+                         * @memberof google.cloud.storageinsights.v1.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.reportConfigAvailable = false;
+    
+                        /**
+                         * LocationMetadata datasetConfigAvailable.
+                         * @member {boolean} datasetConfigAvailable
+                         * @memberof google.cloud.storageinsights.v1.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.datasetConfigAvailable = false;
+    
+                        /**
+                         * Creates a new LocationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storageinsights.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ILocationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.storageinsights.v1.LocationMetadata} LocationMetadata instance
+                         */
+                        LocationMetadata.create = function create(properties) {
+                            return new LocationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message. Does not implicitly {@link google.cloud.storageinsights.v1.LocationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storageinsights.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reportConfigAvailable != null && Object.hasOwnProperty.call(message, "reportConfigAvailable"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.reportConfigAvailable);
+                            if (message.datasetConfigAvailable != null && Object.hasOwnProperty.call(message, "datasetConfigAvailable"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.datasetConfigAvailable);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationMetadata message, length delimited. Does not implicitly {@link google.cloud.storageinsights.v1.LocationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.ILocationMetadata} message LocationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storageinsights.v1.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storageinsights.v1.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storageinsights.v1.LocationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.reportConfigAvailable = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.datasetConfigAvailable = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storageinsights.v1.LocationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storageinsights.v1.LocationMetadata} LocationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.storageinsights.v1.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reportConfigAvailable != null && message.hasOwnProperty("reportConfigAvailable"))
+                                if (typeof message.reportConfigAvailable !== "boolean")
+                                    return "reportConfigAvailable: boolean expected";
+                            if (message.datasetConfigAvailable != null && message.hasOwnProperty("datasetConfigAvailable"))
+                                if (typeof message.datasetConfigAvailable !== "boolean")
+                                    return "datasetConfigAvailable: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storageinsights.v1.LocationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storageinsights.v1.LocationMetadata} LocationMetadata
+                         */
+                        LocationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storageinsights.v1.LocationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.storageinsights.v1.LocationMetadata();
+                            if (object.reportConfigAvailable != null)
+                                message.reportConfigAvailable = Boolean(object.reportConfigAvailable);
+                            if (object.datasetConfigAvailable != null)
+                                message.datasetConfigAvailable = Boolean(object.datasetConfigAvailable);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storageinsights.v1.LocationMetadata
+                         * @static
+                         * @param {google.cloud.storageinsights.v1.LocationMetadata} message LocationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.reportConfigAvailable = false;
+                                object.datasetConfigAvailable = false;
+                            }
+                            if (message.reportConfigAvailable != null && message.hasOwnProperty("reportConfigAvailable"))
+                                object.reportConfigAvailable = message.reportConfigAvailable;
+                            if (message.datasetConfigAvailable != null && message.hasOwnProperty("datasetConfigAvailable"))
+                                object.datasetConfigAvailable = message.datasetConfigAvailable;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storageinsights.v1.LocationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LocationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storageinsights.v1.LocationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storageinsights.v1.LocationMetadata";
+                        };
+    
+                        return LocationMetadata;
                     })();
     
                     return v1;
@@ -19803,6 +26332,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
+                 * @property {google.longrunning.IOperationInfo|null} [".google.longrunning.operationInfo"] MethodOptions .google.longrunning.operationInfo
                  */
     
                 /**
@@ -19871,6 +26401,14 @@
                 MethodOptions.prototype[".google.api.methodSignature"] = $util.emptyArray;
     
                 /**
+                 * MethodOptions .google.longrunning.operationInfo.
+                 * @member {google.longrunning.IOperationInfo|null|undefined} .google.longrunning.operationInfo
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype[".google.longrunning.operationInfo"] = null;
+    
+                /**
                  * Creates a new MethodOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MethodOptions
@@ -19903,6 +26441,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.longrunning.operationInfo"] != null && Object.hasOwnProperty.call(message, ".google.longrunning.operationInfo"))
+                        $root.google.longrunning.OperationInfo.encode(message[".google.longrunning.operationInfo"], writer.uint32(/* id 1049, wireType 2 =*/8394).fork()).ldelim();
                     if (message[".google.api.methodSignature"] != null && message[".google.api.methodSignature"].length)
                         for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
                             writer.uint32(/* id 1051, wireType 2 =*/8410).string(message[".google.api.methodSignature"][i]);
@@ -19968,6 +26508,10 @@
                                 if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
                                     message[".google.api.methodSignature"] = [];
                                 message[".google.api.methodSignature"].push(reader.string());
+                                break;
+                            }
+                        case 1049: {
+                                message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -20043,6 +26587,11 @@
                             if (!$util.isString(message[".google.api.methodSignature"][i]))
                                 return ".google.api.methodSignature: string[] expected";
                     }
+                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo")) {
+                        var error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"]);
+                        if (error)
+                            return ".google.longrunning.operationInfo." + error;
+                    }
                     return null;
                 };
     
@@ -20107,6 +26656,11 @@
                         for (var i = 0; i < object[".google.api.methodSignature"].length; ++i)
                             message[".google.api.methodSignature"][i] = String(object[".google.api.methodSignature"][i]);
                     }
+                    if (object[".google.longrunning.operationInfo"] != null) {
+                        if (typeof object[".google.longrunning.operationInfo"] !== "object")
+                            throw TypeError(".google.protobuf.MethodOptions..google.longrunning.operationInfo: object expected");
+                        message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.fromObject(object[".google.longrunning.operationInfo"]);
+                    }
                     return message;
                 };
     
@@ -20131,6 +26685,7 @@
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
                         object.features = null;
+                        object[".google.longrunning.operationInfo"] = null;
                         object[".google.api.http"] = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -20144,6 +26699,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo"))
+                        object[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.toObject(message[".google.longrunning.operationInfo"], options);
                     if (message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length) {
                         object[".google.api.methodSignature"] = [];
                         for (var j = 0; j < message[".google.api.methodSignature"].length; ++j)
@@ -23501,6 +30058,242 @@
                 return Duration;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
+            })();
+    
             protobuf.Empty = (function() {
     
                 /**
@@ -24136,25 +30929,240 @@
                 return Timestamp;
             })();
     
-            protobuf.Any = (function() {
+            return protobuf;
+        })();
+    
+        google.longrunning = (function() {
+    
+            /**
+             * Namespace longrunning.
+             * @memberof google
+             * @namespace
+             */
+            var longrunning = {};
+    
+            longrunning.Operations = (function() {
     
                 /**
-                 * Properties of an Any.
-                 * @memberof google.protobuf
-                 * @interface IAny
-                 * @property {string|null} [type_url] Any type_url
-                 * @property {Uint8Array|null} [value] Any value
-                 */
-    
-                /**
-                 * Constructs a new Any.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Any.
-                 * @implements IAny
+                 * Constructs a new Operations service.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an Operations
+                 * @extends $protobuf.rpc.Service
                  * @constructor
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                 * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                 * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
                  */
-                function Any(properties) {
+                function Operations(rpcImpl, requestDelimited, responseDelimited) {
+                    $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                }
+    
+                (Operations.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Operations;
+    
+                /**
+                 * Creates new Operations service using the specified rpc implementation.
+                 * @function create
+                 * @memberof google.longrunning.Operations
+                 * @static
+                 * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                 * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                 * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                 * @returns {Operations} RPC service. Useful where requests and/or responses are streamed.
+                 */
+                Operations.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                    return new this(rpcImpl, requestDelimited, responseDelimited);
+                };
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|listOperations}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef ListOperationsCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.ListOperationsResponse} [response] ListOperationsResponse
+                 */
+    
+                /**
+                 * Calls ListOperations.
+                 * @function listOperations
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IListOperationsRequest} request ListOperationsRequest message or plain object
+                 * @param {google.longrunning.Operations.ListOperationsCallback} callback Node-style callback called with the error, if any, and ListOperationsResponse
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.listOperations = function listOperations(request, callback) {
+                    return this.rpcCall(listOperations, $root.google.longrunning.ListOperationsRequest, $root.google.longrunning.ListOperationsResponse, request, callback);
+                }, "name", { value: "ListOperations" });
+    
+                /**
+                 * Calls ListOperations.
+                 * @function listOperations
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IListOperationsRequest} request ListOperationsRequest message or plain object
+                 * @returns {Promise<google.longrunning.ListOperationsResponse>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|getOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef GetOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.Operation} [response] Operation
+                 */
+    
+                /**
+                 * Calls GetOperation.
+                 * @function getOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IGetOperationRequest} request GetOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.GetOperationCallback} callback Node-style callback called with the error, if any, and Operation
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.getOperation = function getOperation(request, callback) {
+                    return this.rpcCall(getOperation, $root.google.longrunning.GetOperationRequest, $root.google.longrunning.Operation, request, callback);
+                }, "name", { value: "GetOperation" });
+    
+                /**
+                 * Calls GetOperation.
+                 * @function getOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IGetOperationRequest} request GetOperationRequest message or plain object
+                 * @returns {Promise<google.longrunning.Operation>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef DeleteOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.protobuf.Empty} [response] Empty
+                 */
+    
+                /**
+                 * Calls DeleteOperation.
+                 * @function deleteOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IDeleteOperationRequest} request DeleteOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.DeleteOperationCallback} callback Node-style callback called with the error, if any, and Empty
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.deleteOperation = function deleteOperation(request, callback) {
+                    return this.rpcCall(deleteOperation, $root.google.longrunning.DeleteOperationRequest, $root.google.protobuf.Empty, request, callback);
+                }, "name", { value: "DeleteOperation" });
+    
+                /**
+                 * Calls DeleteOperation.
+                 * @function deleteOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IDeleteOperationRequest} request DeleteOperationRequest message or plain object
+                 * @returns {Promise<google.protobuf.Empty>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef CancelOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.protobuf.Empty} [response] Empty
+                 */
+    
+                /**
+                 * Calls CancelOperation.
+                 * @function cancelOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.ICancelOperationRequest} request CancelOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.CancelOperationCallback} callback Node-style callback called with the error, if any, and Empty
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.cancelOperation = function cancelOperation(request, callback) {
+                    return this.rpcCall(cancelOperation, $root.google.longrunning.CancelOperationRequest, $root.google.protobuf.Empty, request, callback);
+                }, "name", { value: "CancelOperation" });
+    
+                /**
+                 * Calls CancelOperation.
+                 * @function cancelOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.ICancelOperationRequest} request CancelOperationRequest message or plain object
+                 * @returns {Promise<google.protobuf.Empty>} Promise
+                 * @variation 2
+                 */
+    
+                /**
+                 * Callback as used by {@link google.longrunning.Operations|waitOperation}.
+                 * @memberof google.longrunning.Operations
+                 * @typedef WaitOperationCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {google.longrunning.Operation} [response] Operation
+                 */
+    
+                /**
+                 * Calls WaitOperation.
+                 * @function waitOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IWaitOperationRequest} request WaitOperationRequest message or plain object
+                 * @param {google.longrunning.Operations.WaitOperationCallback} callback Node-style callback called with the error, if any, and Operation
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(Operations.prototype.waitOperation = function waitOperation(request, callback) {
+                    return this.rpcCall(waitOperation, $root.google.longrunning.WaitOperationRequest, $root.google.longrunning.Operation, request, callback);
+                }, "name", { value: "WaitOperation" });
+    
+                /**
+                 * Calls WaitOperation.
+                 * @function waitOperation
+                 * @memberof google.longrunning.Operations
+                 * @instance
+                 * @param {google.longrunning.IWaitOperationRequest} request WaitOperationRequest message or plain object
+                 * @returns {Promise<google.longrunning.Operation>} Promise
+                 * @variation 2
+                 */
+    
+                return Operations;
+            })();
+    
+            longrunning.Operation = (function() {
+    
+                /**
+                 * Properties of an Operation.
+                 * @memberof google.longrunning
+                 * @interface IOperation
+                 * @property {string|null} [name] Operation name
+                 * @property {google.protobuf.IAny|null} [metadata] Operation metadata
+                 * @property {boolean|null} [done] Operation done
+                 * @property {google.rpc.IStatus|null} [error] Operation error
+                 * @property {google.protobuf.IAny|null} [response] Operation response
+                 */
+    
+                /**
+                 * Constructs a new Operation.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an Operation.
+                 * @implements IOperation
+                 * @constructor
+                 * @param {google.longrunning.IOperation=} [properties] Properties to set
+                 */
+                function Operation(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -24162,89 +31170,145 @@
                 }
     
                 /**
-                 * Any type_url.
-                 * @member {string} type_url
-                 * @memberof google.protobuf.Any
+                 * Operation name.
+                 * @member {string} name
+                 * @memberof google.longrunning.Operation
                  * @instance
                  */
-                Any.prototype.type_url = "";
+                Operation.prototype.name = "";
     
                 /**
-                 * Any value.
-                 * @member {Uint8Array} value
-                 * @memberof google.protobuf.Any
+                 * Operation metadata.
+                 * @member {google.protobuf.IAny|null|undefined} metadata
+                 * @memberof google.longrunning.Operation
                  * @instance
                  */
-                Any.prototype.value = $util.newBuffer([]);
+                Operation.prototype.metadata = null;
     
                 /**
-                 * Creates a new Any instance using the specified properties.
+                 * Operation done.
+                 * @member {boolean} done
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.done = false;
+    
+                /**
+                 * Operation error.
+                 * @member {google.rpc.IStatus|null|undefined} error
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.error = null;
+    
+                /**
+                 * Operation response.
+                 * @member {google.protobuf.IAny|null|undefined} response
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Operation.prototype.response = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * Operation result.
+                 * @member {"error"|"response"|undefined} result
+                 * @memberof google.longrunning.Operation
+                 * @instance
+                 */
+                Object.defineProperty(Operation.prototype, "result", {
+                    get: $util.oneOfGetter($oneOfFields = ["error", "response"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new Operation instance using the specified properties.
                  * @function create
-                 * @memberof google.protobuf.Any
+                 * @memberof google.longrunning.Operation
                  * @static
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 * @returns {google.protobuf.Any} Any instance
+                 * @param {google.longrunning.IOperation=} [properties] Properties to set
+                 * @returns {google.longrunning.Operation} Operation instance
                  */
-                Any.create = function create(properties) {
-                    return new Any(properties);
+                Operation.create = function create(properties) {
+                    return new Operation(properties);
                 };
     
                 /**
-                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
                  * @function encode
-                 * @memberof google.protobuf.Any
+                 * @memberof google.longrunning.Operation
                  * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {google.longrunning.IOperation} message Operation message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Any.encode = function encode(message, writer) {
+                Operation.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
-                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                        $root.google.protobuf.Any.encode(message.metadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.done != null && Object.hasOwnProperty.call(message, "done"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.done);
+                    if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                        $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.response != null && Object.hasOwnProperty.call(message, "response"))
+                        $root.google.protobuf.Any.encode(message.response, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     return writer;
                 };
     
                 /**
-                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
                  * @function encodeDelimited
-                 * @memberof google.protobuf.Any
+                 * @memberof google.longrunning.Operation
                  * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {google.longrunning.IOperation} message Operation message or plain object to encode
                  * @param {$protobuf.Writer} [writer] Writer to encode to
                  * @returns {$protobuf.Writer} Writer
                  */
-                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                Operation.encodeDelimited = function encodeDelimited(message, writer) {
                     return this.encode(message, writer).ldelim();
                 };
     
                 /**
-                 * Decodes an Any message from the specified reader or buffer.
+                 * Decodes an Operation message from the specified reader or buffer.
                  * @function decode
-                 * @memberof google.protobuf.Any
+                 * @memberof google.longrunning.Operation
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                  * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Any} Any
+                 * @returns {google.longrunning.Operation} Operation
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Operation.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1: {
-                                message.type_url = reader.string();
+                                message.name = reader.string();
                                 break;
                             }
                         case 2: {
-                                message.value = reader.bytes();
+                                message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.done = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.response = $root.google.protobuf.Any.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -24256,123 +31320,1755 @@
                 };
     
                 /**
-                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * Decodes an Operation message from the specified reader or buffer, length delimited.
                  * @function decodeDelimited
-                 * @memberof google.protobuf.Any
+                 * @memberof google.longrunning.Operation
                  * @static
                  * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Any} Any
+                 * @returns {google.longrunning.Operation} Operation
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decodeDelimited = function decodeDelimited(reader) {
+                Operation.decodeDelimited = function decodeDelimited(reader) {
                     if (!(reader instanceof $Reader))
                         reader = new $Reader(reader);
                     return this.decode(reader, reader.uint32());
                 };
     
                 /**
-                 * Verifies an Any message.
+                 * Verifies an Operation message.
                  * @function verify
-                 * @memberof google.protobuf.Any
+                 * @memberof google.longrunning.Operation
                  * @static
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Any.verify = function verify(message) {
+                Operation.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        if (!$util.isString(message.type_url))
-                            return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
-                            return "value: buffer expected";
+                    var properties = {};
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                        var error = $root.google.protobuf.Any.verify(message.metadata);
+                        if (error)
+                            return "metadata." + error;
+                    }
+                    if (message.done != null && message.hasOwnProperty("done"))
+                        if (typeof message.done !== "boolean")
+                            return "done: boolean expected";
+                    if (message.error != null && message.hasOwnProperty("error")) {
+                        properties.result = 1;
+                        {
+                            var error = $root.google.rpc.Status.verify(message.error);
+                            if (error)
+                                return "error." + error;
+                        }
+                    }
+                    if (message.response != null && message.hasOwnProperty("response")) {
+                        if (properties.result === 1)
+                            return "result: multiple values";
+                        properties.result = 1;
+                        {
+                            var error = $root.google.protobuf.Any.verify(message.response);
+                            if (error)
+                                return "response." + error;
+                        }
+                    }
                     return null;
                 };
     
                 /**
-                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * Creates an Operation message from a plain object. Also converts values to their respective internal types.
                  * @function fromObject
-                 * @memberof google.protobuf.Any
+                 * @memberof google.longrunning.Operation
                  * @static
                  * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Any} Any
+                 * @returns {google.longrunning.Operation} Operation
                  */
-                Any.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Any)
+                Operation.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.Operation)
                         return object;
-                    var message = new $root.google.protobuf.Any();
-                    if (object.type_url != null)
-                        message.type_url = String(object.type_url);
-                    if (object.value != null)
-                        if (typeof object.value === "string")
-                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length >= 0)
-                            message.value = object.value;
+                    var message = new $root.google.longrunning.Operation();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.metadata != null) {
+                        if (typeof object.metadata !== "object")
+                            throw TypeError(".google.longrunning.Operation.metadata: object expected");
+                        message.metadata = $root.google.protobuf.Any.fromObject(object.metadata);
+                    }
+                    if (object.done != null)
+                        message.done = Boolean(object.done);
+                    if (object.error != null) {
+                        if (typeof object.error !== "object")
+                            throw TypeError(".google.longrunning.Operation.error: object expected");
+                        message.error = $root.google.rpc.Status.fromObject(object.error);
+                    }
+                    if (object.response != null) {
+                        if (typeof object.response !== "object")
+                            throw TypeError(".google.longrunning.Operation.response: object expected");
+                        message.response = $root.google.protobuf.Any.fromObject(object.response);
+                    }
                     return message;
                 };
     
                 /**
-                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * Creates a plain object from an Operation message. Also converts values to other types if specified.
                  * @function toObject
-                 * @memberof google.protobuf.Any
+                 * @memberof google.longrunning.Operation
                  * @static
-                 * @param {google.protobuf.Any} message Any
+                 * @param {google.longrunning.Operation} message Operation
                  * @param {$protobuf.IConversionOptions} [options] Conversion options
                  * @returns {Object.<string,*>} Plain object
                  */
-                Any.toObject = function toObject(message, options) {
+                Operation.toObject = function toObject(message, options) {
                     if (!options)
                         options = {};
                     var object = {};
                     if (options.defaults) {
-                        object.type_url = "";
-                        if (options.bytes === String)
-                            object.value = "";
-                        else {
-                            object.value = [];
-                            if (options.bytes !== Array)
-                                object.value = $util.newBuffer(object.value);
-                        }
+                        object.name = "";
+                        object.metadata = null;
+                        object.done = false;
                     }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.metadata != null && message.hasOwnProperty("metadata"))
+                        object.metadata = $root.google.protobuf.Any.toObject(message.metadata, options);
+                    if (message.done != null && message.hasOwnProperty("done"))
+                        object.done = message.done;
+                    if (message.error != null && message.hasOwnProperty("error")) {
+                        object.error = $root.google.rpc.Status.toObject(message.error, options);
+                        if (options.oneofs)
+                            object.result = "error";
+                    }
+                    if (message.response != null && message.hasOwnProperty("response")) {
+                        object.response = $root.google.protobuf.Any.toObject(message.response, options);
+                        if (options.oneofs)
+                            object.result = "response";
+                    }
                     return object;
                 };
     
                 /**
-                 * Converts this Any to JSON.
+                 * Converts this Operation to JSON.
                  * @function toJSON
-                 * @memberof google.protobuf.Any
+                 * @memberof google.longrunning.Operation
                  * @instance
                  * @returns {Object.<string,*>} JSON object
                  */
-                Any.prototype.toJSON = function toJSON() {
+                Operation.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
     
                 /**
-                 * Gets the default type url for Any
+                 * Gets the default type url for Operation
                  * @function getTypeUrl
-                 * @memberof google.protobuf.Any
+                 * @memberof google.longrunning.Operation
                  * @static
                  * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns {string} The default type url
                  */
-                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                Operation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                     if (typeUrlPrefix === undefined) {
                         typeUrlPrefix = "type.googleapis.com";
                     }
-                    return typeUrlPrefix + "/google.protobuf.Any";
+                    return typeUrlPrefix + "/google.longrunning.Operation";
                 };
     
-                return Any;
+                return Operation;
             })();
     
-            return protobuf;
+            longrunning.GetOperationRequest = (function() {
+    
+                /**
+                 * Properties of a GetOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IGetOperationRequest
+                 * @property {string|null} [name] GetOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new GetOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a GetOperationRequest.
+                 * @implements IGetOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IGetOperationRequest=} [properties] Properties to set
+                 */
+                function GetOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * GetOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @instance
+                 */
+                GetOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new GetOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest instance
+                 */
+                GetOperationRequest.create = function create(properties) {
+                    return new GetOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest} message GetOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GetOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.IGetOperationRequest} message GetOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                GetOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a GetOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GetOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                GetOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a GetOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                GetOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+                 */
+                GetOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.GetOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.GetOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {google.longrunning.GetOperationRequest} message GetOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                GetOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this GetOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                GetOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for GetOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.GetOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                GetOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.GetOperationRequest";
+                };
+    
+                return GetOperationRequest;
+            })();
+    
+            longrunning.ListOperationsRequest = (function() {
+    
+                /**
+                 * Properties of a ListOperationsRequest.
+                 * @memberof google.longrunning
+                 * @interface IListOperationsRequest
+                 * @property {string|null} [name] ListOperationsRequest name
+                 * @property {string|null} [filter] ListOperationsRequest filter
+                 * @property {number|null} [pageSize] ListOperationsRequest pageSize
+                 * @property {string|null} [pageToken] ListOperationsRequest pageToken
+                 */
+    
+                /**
+                 * Constructs a new ListOperationsRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a ListOperationsRequest.
+                 * @implements IListOperationsRequest
+                 * @constructor
+                 * @param {google.longrunning.IListOperationsRequest=} [properties] Properties to set
+                 */
+                function ListOperationsRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListOperationsRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.name = "";
+    
+                /**
+                 * ListOperationsRequest filter.
+                 * @member {string} filter
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.filter = "";
+    
+                /**
+                 * ListOperationsRequest pageSize.
+                 * @member {number} pageSize
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.pageSize = 0;
+    
+                /**
+                 * ListOperationsRequest pageToken.
+                 * @member {string} pageToken
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.pageToken = "";
+    
+                /**
+                 * Creates a new ListOperationsRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest instance
+                 */
+                ListOperationsRequest.create = function create(properties) {
+                    return new ListOperationsRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest} message ListOperationsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.filter);
+                    if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                    if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.IListOperationsRequest} message ListOperationsRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListOperationsRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 4: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 1: {
+                                message.filter = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.pageSize = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.pageToken = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListOperationsRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListOperationsRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.filter != null && message.hasOwnProperty("filter"))
+                        if (!$util.isString(message.filter))
+                            return "filter: string expected";
+                    if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        if (!$util.isInteger(message.pageSize))
+                            return "pageSize: integer expected";
+                    if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        if (!$util.isString(message.pageToken))
+                            return "pageToken: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+                 */
+                ListOperationsRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.ListOperationsRequest)
+                        return object;
+                    var message = new $root.google.longrunning.ListOperationsRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.filter != null)
+                        message.filter = String(object.filter);
+                    if (object.pageSize != null)
+                        message.pageSize = object.pageSize | 0;
+                    if (object.pageToken != null)
+                        message.pageToken = String(object.pageToken);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {google.longrunning.ListOperationsRequest} message ListOperationsRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListOperationsRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.filter = "";
+                        object.pageSize = 0;
+                        object.pageToken = "";
+                        object.name = "";
+                    }
+                    if (message.filter != null && message.hasOwnProperty("filter"))
+                        object.filter = message.filter;
+                    if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        object.pageSize = message.pageSize;
+                    if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        object.pageToken = message.pageToken;
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListOperationsRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListOperationsRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListOperationsRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsRequest";
+                };
+    
+                return ListOperationsRequest;
+            })();
+    
+            longrunning.ListOperationsResponse = (function() {
+    
+                /**
+                 * Properties of a ListOperationsResponse.
+                 * @memberof google.longrunning
+                 * @interface IListOperationsResponse
+                 * @property {Array.<google.longrunning.IOperation>|null} [operations] ListOperationsResponse operations
+                 * @property {string|null} [nextPageToken] ListOperationsResponse nextPageToken
+                 */
+    
+                /**
+                 * Constructs a new ListOperationsResponse.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a ListOperationsResponse.
+                 * @implements IListOperationsResponse
+                 * @constructor
+                 * @param {google.longrunning.IListOperationsResponse=} [properties] Properties to set
+                 */
+                function ListOperationsResponse(properties) {
+                    this.operations = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ListOperationsResponse operations.
+                 * @member {Array.<google.longrunning.IOperation>} operations
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 */
+                ListOperationsResponse.prototype.operations = $util.emptyArray;
+    
+                /**
+                 * ListOperationsResponse nextPageToken.
+                 * @member {string} nextPageToken
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 */
+                ListOperationsResponse.prototype.nextPageToken = "";
+    
+                /**
+                 * Creates a new ListOperationsResponse instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse=} [properties] Properties to set
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse instance
+                 */
+                ListOperationsResponse.create = function create(properties) {
+                    return new ListOperationsResponse(properties);
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse} message ListOperationsResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsResponse.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.operations != null && message.operations.length)
+                        for (var i = 0; i < message.operations.length; ++i)
+                            $root.google.longrunning.Operation.encode(message.operations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.IListOperationsResponse} message ListOperationsResponse message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ListOperationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ListOperationsResponse message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsResponse.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.operations && message.operations.length))
+                                    message.operations = [];
+                                message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                message.nextPageToken = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ListOperationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ListOperationsResponse message.
+                 * @function verify
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ListOperationsResponse.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.operations != null && message.hasOwnProperty("operations")) {
+                        if (!Array.isArray(message.operations))
+                            return "operations: array expected";
+                        for (var i = 0; i < message.operations.length; ++i) {
+                            var error = $root.google.longrunning.Operation.verify(message.operations[i]);
+                            if (error)
+                                return "operations." + error;
+                        }
+                    }
+                    if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        if (!$util.isString(message.nextPageToken))
+                            return "nextPageToken: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+                 */
+                ListOperationsResponse.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.ListOperationsResponse)
+                        return object;
+                    var message = new $root.google.longrunning.ListOperationsResponse();
+                    if (object.operations) {
+                        if (!Array.isArray(object.operations))
+                            throw TypeError(".google.longrunning.ListOperationsResponse.operations: array expected");
+                        message.operations = [];
+                        for (var i = 0; i < object.operations.length; ++i) {
+                            if (typeof object.operations[i] !== "object")
+                                throw TypeError(".google.longrunning.ListOperationsResponse.operations: object expected");
+                            message.operations[i] = $root.google.longrunning.Operation.fromObject(object.operations[i]);
+                        }
+                    }
+                    if (object.nextPageToken != null)
+                        message.nextPageToken = String(object.nextPageToken);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {google.longrunning.ListOperationsResponse} message ListOperationsResponse
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ListOperationsResponse.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.operations = [];
+                    if (options.defaults)
+                        object.nextPageToken = "";
+                    if (message.operations && message.operations.length) {
+                        object.operations = [];
+                        for (var j = 0; j < message.operations.length; ++j)
+                            object.operations[j] = $root.google.longrunning.Operation.toObject(message.operations[j], options);
+                    }
+                    if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        object.nextPageToken = message.nextPageToken;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ListOperationsResponse to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ListOperationsResponse.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ListOperationsResponse
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ListOperationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.ListOperationsResponse";
+                };
+    
+                return ListOperationsResponse;
+            })();
+    
+            longrunning.CancelOperationRequest = (function() {
+    
+                /**
+                 * Properties of a CancelOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface ICancelOperationRequest
+                 * @property {string|null} [name] CancelOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new CancelOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a CancelOperationRequest.
+                 * @implements ICancelOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.ICancelOperationRequest=} [properties] Properties to set
+                 */
+                function CancelOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * CancelOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @instance
+                 */
+                CancelOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new CancelOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest instance
+                 */
+                CancelOperationRequest.create = function create(properties) {
+                    return new CancelOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest} message CancelOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CancelOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.ICancelOperationRequest} message CancelOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                CancelOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a CancelOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CancelOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                CancelOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a CancelOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                CancelOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+                 */
+                CancelOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.CancelOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.CancelOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {google.longrunning.CancelOperationRequest} message CancelOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                CancelOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this CancelOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                CancelOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for CancelOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.CancelOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                CancelOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.CancelOperationRequest";
+                };
+    
+                return CancelOperationRequest;
+            })();
+    
+            longrunning.DeleteOperationRequest = (function() {
+    
+                /**
+                 * Properties of a DeleteOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IDeleteOperationRequest
+                 * @property {string|null} [name] DeleteOperationRequest name
+                 */
+    
+                /**
+                 * Constructs a new DeleteOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a DeleteOperationRequest.
+                 * @implements IDeleteOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IDeleteOperationRequest=} [properties] Properties to set
+                 */
+                function DeleteOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DeleteOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @instance
+                 */
+                DeleteOperationRequest.prototype.name = "";
+    
+                /**
+                 * Creates a new DeleteOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest instance
+                 */
+                DeleteOperationRequest.create = function create(properties) {
+                    return new DeleteOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest} message DeleteOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DeleteOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.IDeleteOperationRequest} message DeleteOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DeleteOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DeleteOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DeleteOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DeleteOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DeleteOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+                 */
+                DeleteOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.DeleteOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.DeleteOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {google.longrunning.DeleteOperationRequest} message DeleteOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DeleteOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+    
+                /**
+                 * Converts this DeleteOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DeleteOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DeleteOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.DeleteOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DeleteOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.DeleteOperationRequest";
+                };
+    
+                return DeleteOperationRequest;
+            })();
+    
+            longrunning.WaitOperationRequest = (function() {
+    
+                /**
+                 * Properties of a WaitOperationRequest.
+                 * @memberof google.longrunning
+                 * @interface IWaitOperationRequest
+                 * @property {string|null} [name] WaitOperationRequest name
+                 * @property {google.protobuf.IDuration|null} [timeout] WaitOperationRequest timeout
+                 */
+    
+                /**
+                 * Constructs a new WaitOperationRequest.
+                 * @memberof google.longrunning
+                 * @classdesc Represents a WaitOperationRequest.
+                 * @implements IWaitOperationRequest
+                 * @constructor
+                 * @param {google.longrunning.IWaitOperationRequest=} [properties] Properties to set
+                 */
+                function WaitOperationRequest(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * WaitOperationRequest name.
+                 * @member {string} name
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 */
+                WaitOperationRequest.prototype.name = "";
+    
+                /**
+                 * WaitOperationRequest timeout.
+                 * @member {google.protobuf.IDuration|null|undefined} timeout
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 */
+                WaitOperationRequest.prototype.timeout = null;
+    
+                /**
+                 * Creates a new WaitOperationRequest instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest=} [properties] Properties to set
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest instance
+                 */
+                WaitOperationRequest.create = function create(properties) {
+                    return new WaitOperationRequest(properties);
+                };
+    
+                /**
+                 * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest} message WaitOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WaitOperationRequest.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
+                        $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.IWaitOperationRequest} message WaitOperationRequest message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WaitOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a WaitOperationRequest message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WaitOperationRequest.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WaitOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a WaitOperationRequest message.
+                 * @function verify
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                WaitOperationRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.timeout != null && message.hasOwnProperty("timeout")) {
+                        var error = $root.google.protobuf.Duration.verify(message.timeout);
+                        if (error)
+                            return "timeout." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+                 */
+                WaitOperationRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.WaitOperationRequest)
+                        return object;
+                    var message = new $root.google.longrunning.WaitOperationRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.timeout != null) {
+                        if (typeof object.timeout !== "object")
+                            throw TypeError(".google.longrunning.WaitOperationRequest.timeout: object expected");
+                        message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {google.longrunning.WaitOperationRequest} message WaitOperationRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                WaitOperationRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.name = "";
+                        object.timeout = null;
+                    }
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.timeout != null && message.hasOwnProperty("timeout"))
+                        object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this WaitOperationRequest to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                WaitOperationRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for WaitOperationRequest
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.WaitOperationRequest
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                WaitOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.WaitOperationRequest";
+                };
+    
+                return WaitOperationRequest;
+            })();
+    
+            longrunning.OperationInfo = (function() {
+    
+                /**
+                 * Properties of an OperationInfo.
+                 * @memberof google.longrunning
+                 * @interface IOperationInfo
+                 * @property {string|null} [responseType] OperationInfo responseType
+                 * @property {string|null} [metadataType] OperationInfo metadataType
+                 */
+    
+                /**
+                 * Constructs a new OperationInfo.
+                 * @memberof google.longrunning
+                 * @classdesc Represents an OperationInfo.
+                 * @implements IOperationInfo
+                 * @constructor
+                 * @param {google.longrunning.IOperationInfo=} [properties] Properties to set
+                 */
+                function OperationInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * OperationInfo responseType.
+                 * @member {string} responseType
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 */
+                OperationInfo.prototype.responseType = "";
+    
+                /**
+                 * OperationInfo metadataType.
+                 * @member {string} metadataType
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 */
+                OperationInfo.prototype.metadataType = "";
+    
+                /**
+                 * Creates a new OperationInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo=} [properties] Properties to set
+                 * @returns {google.longrunning.OperationInfo} OperationInfo instance
+                 */
+                OperationInfo.create = function create(properties) {
+                    return new OperationInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo} message OperationInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OperationInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.responseType != null && Object.hasOwnProperty.call(message, "responseType"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.responseType);
+                    if (message.metadataType != null && Object.hasOwnProperty.call(message, "metadataType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.metadataType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.IOperationInfo} message OperationInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                OperationInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an OperationInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OperationInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.responseType = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.metadataType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                OperationInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an OperationInfo message.
+                 * @function verify
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                OperationInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.responseType != null && message.hasOwnProperty("responseType"))
+                        if (!$util.isString(message.responseType))
+                            return "responseType: string expected";
+                    if (message.metadataType != null && message.hasOwnProperty("metadataType"))
+                        if (!$util.isString(message.metadataType))
+                            return "metadataType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.longrunning.OperationInfo} OperationInfo
+                 */
+                OperationInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.longrunning.OperationInfo)
+                        return object;
+                    var message = new $root.google.longrunning.OperationInfo();
+                    if (object.responseType != null)
+                        message.responseType = String(object.responseType);
+                    if (object.metadataType != null)
+                        message.metadataType = String(object.metadataType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {google.longrunning.OperationInfo} message OperationInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                OperationInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.responseType = "";
+                        object.metadataType = "";
+                    }
+                    if (message.responseType != null && message.hasOwnProperty("responseType"))
+                        object.responseType = message.responseType;
+                    if (message.metadataType != null && message.hasOwnProperty("metadataType"))
+                        object.metadataType = message.metadataType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this OperationInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.longrunning.OperationInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                OperationInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for OperationInfo
+                 * @function getTypeUrl
+                 * @memberof google.longrunning.OperationInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                OperationInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.longrunning.OperationInfo";
+                };
+    
+                return OperationInfo;
+            })();
+    
+            return longrunning;
         })();
     
         google.rpc = (function() {

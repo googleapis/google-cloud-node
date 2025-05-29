@@ -206,9 +206,14 @@ describe('v1beta.ProductInputsServiceClient', () => {
         throw err;
       });
       assert(client.productInputsServiceStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has close method for the non-initialized client', done => {
@@ -218,9 +223,14 @@ describe('v1beta.ProductInputsServiceClient', () => {
           projectId: 'bogus',
         });
       assert.strictEqual(client.productInputsServiceStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
@@ -390,7 +400,9 @@ describe('v1beta.ProductInputsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.insertProductInput(request), expectedError);
     });
   });
@@ -529,7 +541,9 @@ describe('v1beta.ProductInputsServiceClient', () => {
       );
       request.productInput.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.updateProductInput(request), expectedError);
     });
   });
@@ -664,7 +678,9 @@ describe('v1beta.ProductInputsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch(err => {
+        throw err;
+      });
       await assert.rejects(client.deleteProductInput(request), expectedError);
     });
   });

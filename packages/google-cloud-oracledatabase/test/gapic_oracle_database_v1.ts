@@ -20,13 +20,12 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it, beforeEach, afterEach} from 'mocha';
+import {describe, it} from 'mocha';
 import * as oracledatabaseModule from '../src';
 
 import {PassThrough} from 'stream';
 
 import {
-  GoogleAuth,
   protobuf,
   LROperation,
   operationsProtos,
@@ -166,19 +165,6 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v1.OracleDatabaseClient', () => {
-  let googleAuth: GoogleAuth;
-  beforeEach(() => {
-    googleAuth = {
-      getClient: sinon.stub().resolves({
-        getRequestHeaders: sinon
-          .stub()
-          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
-      }),
-    } as unknown as GoogleAuth;
-  });
-  afterEach(() => {
-    sinon.restore();
-  });
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient();
@@ -293,7 +279,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.oracleDatabaseStub, undefined);
@@ -303,7 +289,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('has close method for the initialized client', done => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize().catch(err => {
@@ -322,7 +308,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.oracleDatabaseStub, undefined);
@@ -339,7 +325,7 @@ describe('v1.OracleDatabaseClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -351,7 +337,7 @@ describe('v1.OracleDatabaseClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -374,7 +360,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('getCloudExadataInfrastructure', () => {
     it('invokes getCloudExadataInfrastructure without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -406,7 +392,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes getCloudExadataInfrastructure without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -453,7 +439,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes getCloudExadataInfrastructure with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -487,7 +473,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes getCloudExadataInfrastructure with closed client', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -513,7 +499,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('getCloudVmCluster', () => {
     it('invokes getCloudVmCluster without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -544,7 +530,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes getCloudVmCluster without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -591,7 +577,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes getCloudVmCluster with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -622,7 +608,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes getCloudVmCluster with closed client', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -645,7 +631,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('getAutonomousDatabase', () => {
     it('invokes getAutonomousDatabase without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -677,7 +663,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes getAutonomousDatabase without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -724,7 +710,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes getAutonomousDatabase with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -758,7 +744,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes getAutonomousDatabase with closed client', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +770,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('generateAutonomousDatabaseWallet', () => {
     it('invokes generateAutonomousDatabaseWallet without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -816,7 +802,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes generateAutonomousDatabaseWallet without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -863,7 +849,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes generateAutonomousDatabaseWallet with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -897,7 +883,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes generateAutonomousDatabaseWallet with closed client', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -923,7 +909,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('createCloudExadataInfrastructure', () => {
     it('invokes createCloudExadataInfrastructure without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -957,7 +943,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes createCloudExadataInfrastructure without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1011,7 +997,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes createCloudExadataInfrastructure with call error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1043,7 +1029,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes createCloudExadataInfrastructure with LRO error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1074,7 +1060,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkCreateCloudExadataInfrastructureProgress without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1097,7 +1083,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkCreateCloudExadataInfrastructureProgress with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1118,7 +1104,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('deleteCloudExadataInfrastructure', () => {
     it('invokes deleteCloudExadataInfrastructure without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1152,7 +1138,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes deleteCloudExadataInfrastructure without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1206,7 +1192,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes deleteCloudExadataInfrastructure with call error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1238,7 +1224,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes deleteCloudExadataInfrastructure with LRO error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1269,7 +1255,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkDeleteCloudExadataInfrastructureProgress without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1292,7 +1278,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkDeleteCloudExadataInfrastructureProgress with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1313,7 +1299,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('createCloudVmCluster', () => {
     it('invokes createCloudVmCluster without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1346,7 +1332,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes createCloudVmCluster without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1400,7 +1386,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes createCloudVmCluster with call error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1431,7 +1417,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes createCloudVmCluster with LRO error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1464,7 +1450,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkCreateCloudVmClusterProgress without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1486,7 +1472,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkCreateCloudVmClusterProgress with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1507,7 +1493,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('deleteCloudVmCluster', () => {
     it('invokes deleteCloudVmCluster without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1540,7 +1526,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes deleteCloudVmCluster without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1594,7 +1580,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes deleteCloudVmCluster with call error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1625,7 +1611,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes deleteCloudVmCluster with LRO error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1658,7 +1644,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkDeleteCloudVmClusterProgress without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1680,7 +1666,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkDeleteCloudVmClusterProgress with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1701,7 +1687,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('createAutonomousDatabase', () => {
     it('invokes createAutonomousDatabase without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1734,7 +1720,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes createAutonomousDatabase without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1788,7 +1774,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes createAutonomousDatabase with call error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1822,7 +1808,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes createAutonomousDatabase with LRO error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1855,7 +1841,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkCreateAutonomousDatabaseProgress without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1878,7 +1864,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkCreateAutonomousDatabaseProgress with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1899,7 +1885,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('deleteAutonomousDatabase', () => {
     it('invokes deleteAutonomousDatabase without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1932,7 +1918,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes deleteAutonomousDatabase without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1986,7 +1972,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes deleteAutonomousDatabase with call error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2020,7 +2006,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes deleteAutonomousDatabase with LRO error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2053,7 +2039,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkDeleteAutonomousDatabaseProgress without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2076,7 +2062,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkDeleteAutonomousDatabaseProgress with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2097,7 +2083,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('restoreAutonomousDatabase', () => {
     it('invokes restoreAutonomousDatabase without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2130,7 +2116,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes restoreAutonomousDatabase without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2184,7 +2170,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes restoreAutonomousDatabase with call error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2218,7 +2204,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes restoreAutonomousDatabase with LRO error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2251,7 +2237,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkRestoreAutonomousDatabaseProgress without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2274,7 +2260,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkRestoreAutonomousDatabaseProgress with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2295,7 +2281,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('stopAutonomousDatabase', () => {
     it('invokes stopAutonomousDatabase without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2328,7 +2314,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes stopAutonomousDatabase without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2382,7 +2368,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes stopAutonomousDatabase with call error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,7 +2402,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes stopAutonomousDatabase with LRO error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2449,7 +2435,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkStopAutonomousDatabaseProgress without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2471,7 +2457,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkStopAutonomousDatabaseProgress with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2492,7 +2478,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('startAutonomousDatabase', () => {
     it('invokes startAutonomousDatabase without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2525,7 +2511,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes startAutonomousDatabase without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2579,7 +2565,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes startAutonomousDatabase with call error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2613,7 +2599,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes startAutonomousDatabase with LRO error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2646,7 +2632,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkStartAutonomousDatabaseProgress without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2669,7 +2655,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkStartAutonomousDatabaseProgress with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2690,7 +2676,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('restartAutonomousDatabase', () => {
     it('invokes restartAutonomousDatabase without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2723,7 +2709,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes restartAutonomousDatabase without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2777,7 +2763,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes restartAutonomousDatabase with call error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2811,7 +2797,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes restartAutonomousDatabase with LRO error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2844,7 +2830,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkRestartAutonomousDatabaseProgress without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2867,7 +2853,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('invokes checkRestartAutonomousDatabaseProgress with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3152,7 +3138,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('uses async iteration with listCloudExadataInfrastructures without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3492,7 +3478,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('uses async iteration with listCloudVmClusters without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3821,7 +3807,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('uses async iteration with listEntitlements without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4148,7 +4134,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('uses async iteration with listDbServers without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4475,7 +4461,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('uses async iteration with listDbNodes without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4802,7 +4788,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('uses async iteration with listGiVersions without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5133,7 +5119,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('uses async iteration with listDbSystemShapes without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5484,7 +5470,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('uses async iteration with listAutonomousDatabases without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5843,7 +5829,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('uses async iteration with listAutonomousDbVersions without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6209,7 +6195,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('uses async iteration with listAutonomousDatabaseCharacterSets without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6574,7 +6560,7 @@ describe('v1.OracleDatabaseClient', () => {
 
     it('uses async iteration with listAutonomousDatabaseBackups without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6674,7 +6660,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6704,7 +6690,7 @@ describe('v1.OracleDatabaseClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6748,7 +6734,7 @@ describe('v1.OracleDatabaseClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6783,7 +6769,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6872,7 +6858,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6893,7 +6879,7 @@ describe('v1.OracleDatabaseClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6931,7 +6917,7 @@ describe('v1.OracleDatabaseClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6955,7 +6941,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6977,7 +6963,7 @@ describe('v1.OracleDatabaseClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7015,7 +7001,7 @@ describe('v1.OracleDatabaseClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7039,7 +7025,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7061,7 +7047,7 @@ describe('v1.OracleDatabaseClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7099,7 +7085,7 @@ describe('v1.OracleDatabaseClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7123,7 +7109,7 @@ describe('v1.OracleDatabaseClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
